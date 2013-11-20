@@ -3,35 +3,38 @@
 public class Option1Handler : MonoBehaviour
 {
 
-    public int status = 0;
-    private dfRichTextLabel label;
+    public int Status = 0;
+    private int saveStatus = 0;
+    private dfLabel _label;
 
     void Awake()
     {
-        label = GetComponent<dfRichTextLabel>();
+        _label = GetComponent<dfLabel>();
     }
 
     public void incStatus()
     {
-        status++;
-        if (status > 2) status = 0;
+        Status++;
+        if (Status > 2) Status = 0;
     }
 
     void Update()
     {
-        switch (status)
+        if (Status == saveStatus) return;
+        switch (Status)
         {
             case 0:
-                label.Text = "One";
+                _label.Text = "One";
                 break;
 
             case 1:
-                label.Text = "Two";
+                _label.Text = "Two";
                 break;
 
             case 2:
-                label.Text = "Three";
+                _label.Text = "Three";
                 break;
         }
+        saveStatus = Status;
     }
 }
