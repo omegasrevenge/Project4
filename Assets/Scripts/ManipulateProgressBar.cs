@@ -3,20 +3,22 @@ using System.Collections;
 
 public class ManipulateProgressBar : MonoBehaviour {
 
-    public dfProgressBar content;
+    public GameObject content;
+	private dfProgressBar bar;
 
     void Awake()
     {
-        content = GetComponent<dfProgressBar>();
+		if(content == null) content = gameObject;
+        bar = content.GetComponent<dfProgressBar>();
     }
 
     public void IncProgressBar()
     {
-        content.Value += 0.2f;
+        bar.Value += 0.2f;
     }
 
     public void DecProgressBar()
     {
-        content.Value -= 0.2f;
+        bar.Value -= 0.2f;
     }
 }

@@ -2,14 +2,14 @@
 
 public class Option1Handler : MonoBehaviour
 {
-
-    public int Status = 0;
+	public GameObject GObjOfTheManipulatedLabel;
+    private int Status = 0;
     private int saveStatus = 0;
     private dfLabel _label;
 
     void Awake()
     {
-        _label = GetComponent<dfLabel>();
+		_label = GObjOfTheManipulatedLabel.GetComponent<dfLabel>();
     }
 
     public void incStatus()
