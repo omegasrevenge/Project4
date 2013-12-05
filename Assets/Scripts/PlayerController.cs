@@ -6,7 +6,22 @@ public class PlayerController : MonoBehaviour {
 
 	public int MovementSpeed = 10;
 	public int JumpForce = 3;
-	public int HealthPoints = 100;
+
+	private int _healthPoints = 100;
+	private Transform _healthBar;
+
+	public int HealthPoints
+	{
+		get
+		{
+			return _healthPoints;
+		}
+		set
+		{
+			_healthPoints = value;
+			networkView.RPC("SyncInfo", RPCMode.OthersBuffered, _healthPoints);
+		}
+	}
 
 	private bool _isDead
 	{
@@ -33,6 +48,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		_healthBar = transform.FindChild("Health");
 		_push = GetComponent<ConstantForce>();
 		if(networkView.isMine)
 		{
@@ -58,10 +74,15 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if(!_isDead)
+		{
+			_healthBar.localScale = new Vector3(_healthBar.localScale.x, HealthPoints/50f, _healthBar.localScale.z);
+		}
+
 		if(_isDead && _color.a > 0)
 		{
 			_color = new Color(_color.r, _color.g, _color.b, _color.a-0.005f);
+			_healthBar.localScale = new Vector3(_healthBar.localScale.x, 0f, _healthBar.localScale.z);
 		}
 
 		if(!networkView.isMine) return;
@@ -105,5 +126,11 @@ public class PlayerController : MonoBehaviour {
 	private void Jump()
 	{
 		GetComponent<Rigidbody>().AddForce(Vector3.up*JumpForce - new Vector3(0, GetComponent<Rigidbody>().velocity.y,0));
+	}
+
+	[RPC]
+	public void SyncInfo(int health)
+	{
+		_healthPoints = health;
 	}
 }

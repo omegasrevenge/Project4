@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{73501C0F-CB93-894A-B770-240602E9874C}</ProjectGuid>
+	<ProjectGuid>{587982FE-DD50-7361-408B-2BFCE197AA8D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -184,6 +184,7 @@
      <Compile Include="Assets\Daikon Forge\Tweening\Scripts\dfTweenVector2.cs" />
      <Compile Include="Assets\Daikon Forge\Tweening\Scripts\dfTweenVector3.cs" />
      <Compile Include="Assets\Daikon Forge\Tweening\Scripts\dfTweenVector4.cs" />
+     <Compile Include="Assets\Scripts\DebugStreamer.cs" />
      <Compile Include="Assets\Scripts\Network\GameController.cs" />
      <Compile Include="Assets\Scripts\Network\LanBroadcastService.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkCharacter.cs" />
@@ -191,9 +192,9 @@
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Skills\AxeControl.cs" />
      <Compile Include="Assets\Scripts\Skills\CircleRotation.cs" />
-     <Compile Include="Assets\Scripts\Skills\CylinderRotation.cs" />
      <Compile Include="Assets\Scripts\Skills\FireballControl.cs" />
      <Compile Include="Assets\Scripts\Skills\LaserControl.cs" />
+     <Compile Include="Assets\Scripts\Skills\LaserCylinderControl.cs" />
      <Compile Include="Assets\Scripts\Skills\SkillController.cs" />
      <None Include="Assets\Daikon Forge\Examples\Skins\Fantasy\Fonts\Open Sans\Heiro-OpenSans-Regular-24px.fnt" />
      <None Include="Assets\Daikon Forge\Examples\Labels\Atlas\Huggable32.fnt" />
@@ -221,7 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{823A1221-247D-2543-1FCC-A27382272FED}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+      <Project>{E08E274E-A6F2-DA52-B477-F7937F4011B6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

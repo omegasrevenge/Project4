@@ -6,9 +6,11 @@ public class AxeControl : MonoBehaviour {
 	public float RotationSpeed = 500f;
 	public float SwingTime = 0.75f;
 	public float LifeTime = 4f;
+	public int Damage = 20;
 
 	private float _counter = 0f;
 	private bool _axeLookingRight;
+	private bool _canDamage = true;
 
 	private Transform _emitters
 	{
@@ -22,6 +24,13 @@ public class AxeControl : MonoBehaviour {
 	{
 		get
 		{
+			foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player") )
+			{
+				if(player.networkView.isMine == networkView.isMine)
+				{
+					return (player.transform.localEulerAngles.y < 50f && player.transform.localEulerAngles.y > -50f);
+				}
+			}
 			return (GameObject.Find("Player(Clone)").transform.localEulerAngles.y < 50f && GameObject.Find("Player(Clone)").transform.localEulerAngles.y > -50f);
 		}
 	}
@@ -37,7 +46,8 @@ public class AxeControl : MonoBehaviour {
 
 	void Update () 
 	{
-		if(networkView.isMine) transform.Rotate(Vector3.right*(RotationSpeed*Time.deltaTime), Space.Self);
+		transform.Rotate(Vector3.right*(RotationSpeed*Time.deltaTime), Space.Self);
+		//GetComponent<Rigidbody>().MoveRotation(rigidbody.rotation * Quaternion.Euler(Vector3.right*(RotationSpeed*Time.deltaTime)));
 		HandleTime();
 	}
 
@@ -62,5 +72,15 @@ public class AxeControl : MonoBehaviour {
 		transform.FindChild("Axe").FindChild("Head").GetComponent<MeshRenderer>().material.color = new Color(0f,0f,0f,0f);
 		_emitters.FindChild("SparkleParticles").GetComponent<ParticleEmitter>().emit = false;
 		_emitters.FindChild("SparkleParticlesSecondary").GetComponent<ParticleEmitter>().emit = false;
+	}
+
+	void OnTriggerEnter(Collider collider)
+	{
+		if(!networkView.isMine) return;
+		if(collider.tag == "Player" && collider.networkView.isMine != networkView.isMine && _canDamage)
+		{
+			_canDamage = false;
+			collider.GetComponent<PlayerController>().HealthPoints -= Damage;
+		}
 	}
 }

@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\LaserControl.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Skills\AxeControl.cs" Line="15" Column="29" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="131" Column="1" />
+      <File FileName="Assets\Scripts\Skills\FireballControl.cs" Line="53" Column="3" />
+      <File FileName="Assets\Scripts\Skills\LaserControl.cs" Line="7" Column="37" />
+      <File FileName="Assets\Scripts\Skills\LaserCylinderControl.cs" Line="18" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

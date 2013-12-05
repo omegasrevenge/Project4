@@ -140,7 +140,7 @@ public class LanBroadcastService : MonoBehaviour
         {
             _udpClient = new UdpClient(NetworkConfiguration.LAN_UDP_PORT2);
 
-            Debug.Log("Nimm halt Nummer 2");
+            //Debug.Log("Nimm halt Nummer 2");
         }
         _udpClient.EnableBroadcast = true;
         _timeLastMessageSent = Time.time;

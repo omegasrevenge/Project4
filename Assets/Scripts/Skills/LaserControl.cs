@@ -7,10 +7,12 @@ public class LaserControl : MonoBehaviour {
 	public float HeadScalingSpeed = 3f;
 	public float FadeOutTime = 2f;
 	public float LifeTime = 5f;
+	public int Damage = 80;
 
 	private float _counter;
 	private Transform _head;
 	private Transform _beam;
+	private bool _canDamage = true;
 
 	// Use this for initialization
 	void Start () 
@@ -52,6 +54,16 @@ public class LaserControl : MonoBehaviour {
 		if(_counter >= LifeTime)
 		{
 			Destroy(gameObject);
+		}
+	}
+
+	public void Collided(Collider collider)
+	{
+		if(!networkView.isMine) return;
+		if(collider.tag == "Player" && collider.networkView.isMine != networkView.isMine && _canDamage)
+		{
+			_canDamage = false;
+			collider.GetComponent<PlayerController>().HealthPoints -= Damage;
 		}
 	}
 }
