@@ -6,10 +6,12 @@ public class SkillController : MonoBehaviour {
 	public float FireballCooldown = 5f;
 	public float AxeCooldown = 1f;
 	public float LaserCooldown = 10f;
+	public float NoCooldownsLength = 3f;
 	
 	private float _fireballCooldownTimer = 0f;
 	private float _axeCooldownTimer = 0f;
 	private float _laserCooldownTimer = 0f;
+	private float _noCooldownTimer = 0f;
 	
 	private dfRadialSprite _cooldownFireball;
 	private dfRadialSprite _cooldownAxe;
@@ -19,8 +21,8 @@ public class SkillController : MonoBehaviour {
 	private dfLabel _cooldownTimerAxe;
 	private dfLabel _cooldownTimerLaser;
 
-
-	private Transform _pos;
+	public bool NoCooldowns = false;
+	public Transform Pos;
 
 	void Start()
 	{
@@ -35,29 +37,30 @@ public class SkillController : MonoBehaviour {
 
 	void Update () 
 	{
-		HandleSkillCooldowns ();
+		if(Pos == null) return;
 
-		if(_pos != null) return;
-		InitPos ();
-	}
-
-	private void InitPos()
-	{
-		if(GameObject.Find("Player(Clone)") != null)
+		if(NoCooldowns)
 		{
-			foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-			{
-				if(player.networkView.isMine)
-				{
-					_pos = GameObject.Find("Player(Clone)").transform;
-					return;
-				}
-			}
+			NoCooldowns = false;
+			_noCooldownTimer = NoCooldownsLength;
 		}
+
+		HandleSkillCooldowns ();
 	}
 
 	private void HandleSkillCooldowns()
 	{
+		if(_noCooldownTimer > 0f)
+		{
+			_noCooldownTimer -= Time.deltaTime;
+			_fireballCooldownTimer = 0f;
+			_cooldownFireball.FillAmount = _fireballCooldownTimer / FireballCooldown;
+			_axeCooldownTimer = 0f;
+			_cooldownAxe.FillAmount = _axeCooldownTimer / AxeCooldown;
+			_laserCooldownTimer = 0f;
+			_cooldownLaser.FillAmount = _laserCooldownTimer / LaserCooldown;
+		}
+
 		if (_fireballCooldownTimer > 0f) 
 		{
 			_fireballCooldownTimer -= Time.deltaTime;
@@ -84,28 +87,28 @@ public class SkillController : MonoBehaviour {
 
 	public void CreateFireball()
 	{
-		if (_fireballCooldownTimer > 0f) return;
+		if (_fireballCooldownTimer > 0f || Pos == null) return;
 		_fireballCooldownTimer = FireballCooldown;
 
 		Object FireballPrefab = Resources.Load("Fireball");
-		GameObject Fireball = (GameObject)Network.Instantiate(FireballPrefab, _pos.localPosition, _pos.localRotation, 1);
+		GameObject Fireball = (GameObject)Network.Instantiate(FireballPrefab, Pos.localPosition, Pos.localRotation, 1);
 	}
 	
 	public void CreateAxe()
 	{
-		if (_axeCooldownTimer > 0f) return;
+		if (_axeCooldownTimer > 0f || Pos == null) return;
 		_axeCooldownTimer = AxeCooldown;
 
 		Object AxePrefab = Resources.Load("SeverReality");
-		GameObject Axe = (GameObject)Network.Instantiate(AxePrefab, _pos.localPosition, _pos.localRotation, 1);
+		GameObject Axe = (GameObject)Network.Instantiate(AxePrefab, Pos.localPosition, Pos.localRotation, 1);
 	}
 	
 	public void CreateLaser()
 	{
-		if (_laserCooldownTimer > 0f) return;
+		if (_laserCooldownTimer > 0f || Pos == null) return;
 		_laserCooldownTimer = LaserCooldown;
 
 		Object LaserPrefab = Resources.Load("Laser");
-		GameObject Laser = (GameObject)Network.Instantiate(LaserPrefab, _pos.localPosition, _pos.localRotation, 1);
+		GameObject Laser = (GameObject)Network.Instantiate(LaserPrefab, Pos.localPosition, Pos.localRotation, 1);
 	}
 }

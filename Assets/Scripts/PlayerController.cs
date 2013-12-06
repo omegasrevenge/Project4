@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 [RequireComponent(typeof(NetworkView))]
 public class PlayerController : MonoBehaviour {
 
 	public int MovementSpeed = 10;
 	public int JumpForce = 3;
+	[HideInInspector]
+	public Transform SpawnBase;
 
 	private int _healthPoints = 100;
 	private Transform _healthBar;
+	private float _constantX;
+	private bool _hasCountedDeath = false;
+
+	private SkillController _skillController;
 
 	public int HealthPoints
 	{
@@ -23,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private bool _isDead
+	public bool IsDead
 	{
 		get
 		{
@@ -42,16 +47,27 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<MeshRenderer>().material.color = value;
 		}
 	}
+	
+	public bool DyingAnimationFinished
+	{
+		get
+		{
+			return _color.a <= 0f;
+		}
+	}
 
 	private ConstantForce _push;
 
 	// Use this for initialization
 	void Start () 
 	{
+		_skillController = GameObject.Find ("Content").GetComponent<SkillController>();
+		_constantX = transform.localPosition.x;
 		_healthBar = transform.FindChild("Health");
 		_push = GetComponent<ConstantForce>();
 		if(networkView.isMine)
 		{
+			_skillController.Pos = transform;
 			_color = new Color(_color.r, _color.g, _color.b+200, _color.a);
 		}
 		else
@@ -74,26 +90,64 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!_isDead)
-		{
-			_healthBar.localScale = new Vector3(_healthBar.localScale.x, HealthPoints/50f, _healthBar.localScale.z);
-		}
+		UpdateScore();
+		KeepGameTwoD();
+		UpdateHealthBar();
+		DeathAnimation();
 
-		if(_isDead && _color.a > 0)
+		if(!networkView.isMine) return;
+
+		if(IsDead) _skillController.Pos = null;
+
+		HandleInput();
+	}
+
+	private void DeathAnimation()
+	{
+		if(IsDead && !DyingAnimationFinished)
 		{
 			_color = new Color(_color.r, _color.g, _color.b, _color.a-0.005f);
 			_healthBar.localScale = new Vector3(_healthBar.localScale.x, 0f, _healthBar.localScale.z);
 		}
+	}
 
-		if(!networkView.isMine) return;
+	private void KeepGameTwoD()
+	{
+		if(_constantX != transform.localPosition.x)
+		{
+			transform.localPosition = new Vector3(_constantX, transform.localPosition.y, transform.localPosition.z);
+		}
+	}
 
-		HandleInput();
+	private void UpdateHealthBar()
+	{
+		if(!IsDead)
+		{
+			_healthBar.localScale = new Vector3(_healthBar.localScale.x, HealthPoints/50f, _healthBar.localScale.z);
+		}
+	}
 
+	private void UpdateScore()
+	{
+		if(IsDead && !_hasCountedDeath)
+		{
+			_hasCountedDeath = true;
+			if(networkView.isMine)
+			{
+				GameObject.Find ("DeathsLabel").GetComponent<dfLabel>().Text = 
+					(int.Parse(GameObject.Find ("DeathsLabel").GetComponent<dfLabel>().Text)+1).ToString();
+			}
+			else
+			{
+				GameObject.Find ("KillsLabel").GetComponent<dfLabel>().Text = 
+					(int.Parse(GameObject.Find ("KillsLabel").GetComponent<dfLabel>().Text)+1).ToString();
+			}
+		}
 	}
 
 	public void HandleInput()
 	{
-		if(_isDead) return;
+		if(IsDead) return;
 
 		if(Input.GetKey(KeyCode.D) && _push.force.z <= 0)
 		{
@@ -132,5 +186,16 @@ public class PlayerController : MonoBehaviour {
 	public void SyncInfo(int health)
 	{
 		_healthPoints = health;
+	}
+	
+	void OnTriggerEnter(Collider collider)
+	{
+		if(!networkView.isMine) return;
+		
+		if (collider.tag == "NoCdBuff")
+		{
+			GameObject.Find("Content").GetComponent<SkillController>().NoCooldowns = true;
+			collider.GetComponent<BuffControl>().DestroyThis();
+		}
 	}
 }

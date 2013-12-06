@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour {
 			return _broadcastService.ReceivedMessages.Select(rm => rm.Value.ServerInfo).ToList(); 
 		}
 	}
+
+	public enum SpawnAt{Base1, Base2, BaseSpecific}
+	private GameObject _player;
 	
 	// Use this for initialization
 	void Start () 
@@ -29,15 +32,54 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if(   _player != null
+		   && _player.networkView.isMine
+		   && _player.GetComponent<PlayerController>().IsDead 
+		   && _player.GetComponent<PlayerController>().DyingAnimationFinished)
+		{
+			SpawnPlayer(SpawnAt.BaseSpecific);
+		}
+		if(GameObject.Find ("New Game Object") != null) Destroy (GameObject.Find ("New Game Object"));
 	}
 	
-	private void SpawnPlayer(bool value=false)
+	private void SpawnPlayer(SpawnAt value)
 	{
-		Transform target = value ? GameObject.Find("Base2").transform : GameObject.Find("Base1").transform;
-		
-		Object PlayerPrefab = Resources.Load("Player");
-		GameObject Player = (GameObject)Network.Instantiate(PlayerPrefab, target.position, target.localRotation, 1);
+		Transform target = new GameObject().transform;
+		switch(value)
+		{
+		case SpawnAt.Base1:
+			target = GameObject.Find("Base1").transform;
+			break;
+		case SpawnAt.Base2:
+			target = GameObject.Find("Base2").transform;
+			break;
+		case SpawnAt.BaseSpecific:
+			target = _player.GetComponent<PlayerController>().SpawnBase;
+			break;
+		}
+		GameObject player = new GameObject();
+		if(value == SpawnAt.BaseSpecific)
+		{
+			networkView.RPC("DestroyEnemyPlayer", RPCMode.OthersBuffered);
+			player = _player;
+		}
+
+		_player = (GameObject)Network.Instantiate(Resources.Load("Player"), target.position, target.localRotation, 1);
+		_player.GetComponent<PlayerController>().SpawnBase = target;
+
+		if(value == SpawnAt.BaseSpecific) Destroy (player.gameObject);
+	}
+
+	[RPC]
+	public void DestroyEnemyPlayer()
+	{
+		foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+		{
+			if(!player.networkView.isMine)
+			{
+				Destroy(player.gameObject);
+			}
+		}
 	}
 	
 	private void OnServerListUpdated()
@@ -76,7 +118,7 @@ public class GameController : MonoBehaviour {
 	void OnServerInitialized()
 	{
 		_broadcastService.StartAnnounceBroadCasting(PlayerName, 2);
-		SpawnPlayer();
+		SpawnPlayer(SpawnAt.Base1);
 	}
 	
 	private void OnPlayerConnected(NetworkPlayer player)
@@ -92,7 +134,7 @@ public class GameController : MonoBehaviour {
 	
 	void OnConnectedToServer()
 	{
-		SpawnPlayer(true);
+		SpawnPlayer(SpawnAt.Base2);
 	}
 	
 	public static bool isNetwork
