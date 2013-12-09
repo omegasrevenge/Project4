@@ -3,6 +3,8 @@
 public class LocationManager : MonoBehaviour {
 
     private static LocationManager _instance;
+    //Latitude = 52.50451
+    //Longitude = 13.39699
     public float Latitude = 52f;
     public float Longitude = 13f;
 
