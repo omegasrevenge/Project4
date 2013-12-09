@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
             Lat = lat;
         }
     }
-    public const string ServerURL = "http://172.21.66.4:7774/rpc/";
+    public const string ServerURL = "http://pixeltamer.net:7774/rpc/";
     private const float OwnUpdateFreq = 60*3;
     private const float PositionUpdateFreq = 60*1;
     private const float PlayerQueryFreq = 60*2;
@@ -132,7 +132,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator CLogin(string token)
     {
         WWW request = new WWW(ServerURL + "login_google?token=" + token);
-
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);

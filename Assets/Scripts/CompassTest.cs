@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class CompassTest : MonoBehaviour
 {
-    public float Latitude;
-    public float Longitude;
+
     public MapGrid Grid;
     public GameObject CameraRig;
 
@@ -12,48 +11,27 @@ public class CompassTest : MonoBehaviour
     public const float MoveRadius = 1f;
 
 
-    void Awake()
-    {
-        Latitude = 52.50451f;
-        Longitude = 13.39699f;
-
-        Input.location.Start();
-        Input.compass.enabled = true;
-
-        StartCoroutine(RequestLocations(Latitude, Longitude));
-
-    }
-
     void Update()
     {
         //Rotation:
         Vector3 cameraRot = CameraRig.transform.eulerAngles;
         CameraRig.transform.eulerAngles = new Vector3(cameraRot.x, TouchInput.Singleton.GetRotation(cameraRot.y, CameraRig.transform.position, true), cameraRot.z);
 
-        //Activate Location Service:
-#if UNITY_EDITOR
-
-#else
-
-        if (Input.location.status != LocationServiceStatus.Running) return;
-        SetLocation();
-#endif
+        
 
         //New Position:
-        MapUtils.ProjectedPos newPosition = MapUtils.GeographicToProjection(new Vector2(Longitude, Latitude), Grid.ZoomLevel);
+        MapUtils.ProjectedPos newPosition = LocationManager.Singleton.GetCurrentProjectedPos(Grid.ZoomLevel);
         if ((newPosition - Grid.CurrentPosition).Magnitude < MoveRadius)
             Grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(Grid.CurrentPosition, newPosition,
-                                                              Time.deltaTime * MoveSpeed);
+                Time.deltaTime*MoveSpeed);
         else
+        {
             Grid.CurrentPosition = newPosition;
+            StartCoroutine(RequestLocations(LocationManager.Singleton.GetCurrentPosition()));
+        }
     }
 
 
-    private void SetLocation()
-    {
-        Longitude = Input.location.lastData.longitude;
-        Latitude = Input.location.lastData.latitude;
-    }
 
 
 
@@ -79,12 +57,12 @@ public class CompassTest : MonoBehaviour
         }
     }
 
-    private IEnumerator RequestLocations(float lat, float lon)
+    private IEnumerator RequestLocations(Vector2 pos)
     {
         string url =
             string.Format(
                 "https://maps.googleapis.com/maps/api/place/search/json?location={0},{1}&radius=1000&sensor=true&key=AIzaSyD3jfeMZK1SWfRFDgMfxn_zrGRSjE7S8Vg&language=de",
-                lat, lon);
+                pos.y, pos.x);
         WWW www = new WWW(url);
         yield return www;
         JSONObject json = JSONParser.parse(www.text);
