@@ -37,12 +37,10 @@ public class CompassTest : MonoBehaviour
 
     private void CreateMediadesignHochschule(JSONObject json)
     {
-        Debug.Log("1");
         for (int i = 0; i < json.Count; i++)
         {
             if ((string)json[i]["name"] == "Mediadesign Hochschule")
             {
-                Debug.Log("2");
                 GameObject obj = new GameObject();
                 SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
                 renderer.sprite = Resources.Load<Sprite>("mark");

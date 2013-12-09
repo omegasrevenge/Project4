@@ -12,7 +12,7 @@ public class RenderCell : MonoBehaviour, ICell<RefCountedSprite>
         if (!_renderer)
             _renderer = gameObject.AddComponent<SpriteRenderer>();
         if (_defaultSprite == null)
-            _defaultSprite = (Sprite)Resources.Load("Materials/DefaultTile", typeof(Sprite));
+            _defaultSprite = (Sprite)Resources.Load("DefaultTile", typeof(Sprite));
         _renderer.sprite = _defaultSprite;
     }
 

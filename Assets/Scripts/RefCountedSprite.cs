@@ -17,7 +17,6 @@ public class RefCountedSprite : RefCounted
 
     public override void Destroy()
     {
-        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if (Sprite != null && Sprite.texture != null)
             Object.DestroyImmediate(Sprite.texture);
         if (Sprite)
