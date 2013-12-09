@@ -26,6 +26,7 @@ public class LocationManager : MonoBehaviour {
         else if (_instance != this)
         {
             Debug.LogError("Second instance of LocationManager.");
+            Destroy(this);
             return;
         }
         Init();
@@ -54,12 +55,12 @@ public class LocationManager : MonoBehaviour {
         Latitude = Input.location.lastData.latitude;
     }
 
-    public Vector2 GetCurrentPosition()
+    public static Vector2 GetCurrentPosition()
     {
-        return new Vector2(Longitude, Latitude);
+        return new Vector2(Singleton.Longitude, Singleton.Latitude);
     }
 
-    public MapUtils.ProjectedPos GetCurrentProjectedPos(int zoomLevel)
+    public static MapUtils.ProjectedPos GetCurrentProjectedPos(int zoomLevel)
     {
         return MapUtils.GeographicToProjection(GetCurrentPosition(), zoomLevel);
     }

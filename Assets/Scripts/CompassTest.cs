@@ -20,14 +20,14 @@ public class CompassTest : MonoBehaviour
         
 
         //New Position:
-        MapUtils.ProjectedPos newPosition = LocationManager.Singleton.GetCurrentProjectedPos(Grid.ZoomLevel);
+        MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(Grid.ZoomLevel);
         if ((newPosition - Grid.CurrentPosition).Magnitude < MoveRadius)
             Grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(Grid.CurrentPosition, newPosition,
                 Time.deltaTime*MoveSpeed);
         else
         {
             Grid.CurrentPosition = newPosition;
-            StartCoroutine(RequestLocations(LocationManager.Singleton.GetCurrentPosition()));
+            StartCoroutine(RequestLocations(LocationManager.GetCurrentPosition()));
         }
     }
 

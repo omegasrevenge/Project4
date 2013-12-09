@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CSendPosition()
     {
-        Vector2 pos = LocationManager.Singleton.GetCurrentPosition();
+        Vector2 pos = LocationManager.GetCurrentPosition();
         WWW request = new WWW(GetSessionURL("setpos")+"&lon="+pos.x+"&lat="+pos.y);
 
         yield return request;
