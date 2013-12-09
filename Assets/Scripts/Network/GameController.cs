@@ -1,34 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-[RequireComponent(typeof(NetworkView))]
-public class GameController : MonoBehaviour {
-	
-	private LanBroadcastService _broadcastService;
-	[SerializeField]
-	public ServerInfo TargetServer;
-	public string PlayerName = "Underlord";
-	public List<ServerInfo> ServerList
-	{
-		get 
-		{ 
-			return _broadcastService.ReceivedMessages.Select(rm => rm.Value.ServerInfo).ToList(); 
-		}
-	}
+
+public class GameController : MonoBehaviour
+{
+    public const string GameType = "PrototypeBattle.Project4.MDH2013";
+    public const int Port = 23466;
+
+    public string GameName = "Uns_geht_ein_Licht_auf";
 
 	public enum SpawnAt{Base1, Base2, BaseSpecific}
 	private GameObject _player;
+	private bool _tryingToConnect = false;
 	
 	// Use this for initialization
 	void Start () 
 	{
-		_broadcastService = gameObject.AddComponent<LanBroadcastService>();
-		_broadcastService.ServerListUpdated += OnServerListUpdated;
 		Application.runInBackground = true;
-		_broadcastService.StartSearching();
 	}
-
+	
 	// Update is called once per frame
 	void Update () 
 	{
@@ -39,7 +27,10 @@ public class GameController : MonoBehaviour {
 		{
 			SpawnPlayer(SpawnAt.BaseSpecific);
 		}
-		if(GameObject.Find ("New Game Object") != null) Destroy (GameObject.Find ("New Game Object"));
+		if(GameObject.Find("New Game Object") != null)
+		{
+			Destroy(GameObject.Find("New Game Object"));
+		}
 	}
 	
 	private void SpawnPlayer(SpawnAt value)
@@ -63,13 +54,13 @@ public class GameController : MonoBehaviour {
 			networkView.RPC("DestroyEnemyPlayer", RPCMode.OthersBuffered);
 			player = _player;
 		}
-
+		
 		_player = (GameObject)Network.Instantiate(Resources.Load("Player"), target.position, target.localRotation, 1);
 		_player.GetComponent<PlayerController>().SpawnBase = target;
-
+		
 		if(value == SpawnAt.BaseSpecific) Destroy (player.gameObject);
 	}
-
+	
 	[RPC]
 	public void DestroyEnemyPlayer()
 	{
@@ -81,65 +72,39 @@ public class GameController : MonoBehaviour {
 			}
 		}
 	}
-	
-	private void OnServerListUpdated()
-	{
-		if(ServerList.Count >= 1)
-		{
-			TargetServer = ServerList[0];
-			ConnectToServer();
-		}
-	}
 
-	
-	//########### Below is copied ####################//
-	public void StartServer()
+    public void CreateGame()
 	{
+		_tryingToConnect = false;
 		Network.Disconnect();
-		Network.InitializeServer(1, NetworkConfiguration.LAN_TCP_PORT, !Network.HavePublicAddress());
-	}
-	
-	public void StartSearching()
+        Network.InitializeServer(4, Port, !Network.HavePublicAddress());
+        MasterServer.RegisterHost(GameType, GameName);
+    }
+
+    public void RequestHosts()
 	{
-		_broadcastService.StartSearching();
-	}
-	
-	public void StopBroadcastSession()
+		_tryingToConnect = true;
+		MasterServer.RequestHostList(GameType);
+    }
+
+
+    private void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
-		_broadcastService.StopSession();
-	}
-	
-	public void ConnectToServer()
-	{
-		StopBroadcastSession();
-		Network.Connect(TargetServer.IP, NetworkConfiguration.LAN_TCP_PORT);
-	}
-	
-	void OnServerInitialized()
-	{
-		_broadcastService.StartAnnounceBroadCasting(PlayerName, 2);
-		SpawnPlayer(SpawnAt.Base1);
-	}
-	
-	private void OnPlayerConnected(NetworkPlayer player)
-	{
-		StopBroadcastSession();
-	}
-	
-	public void CloseConnection()
-	{
-		Network.Disconnect();
-		StopBroadcastSession();
-	}
-	
-	void OnConnectedToServer()
+		if(msEvent == MasterServerEvent.HostListReceived && _tryingToConnect)
+		{
+			HostData[] data = MasterServer.PollHostList();
+			if(data.Length>0) Network.Connect(data[0]);
+		}
+    }
+
+    private void OnConnectedToServer()
 	{
 		SpawnPlayer(SpawnAt.Base2);
 	}
 	
-	public static bool isNetwork
+	void OnServerInitialized()
 	{
-		get { return Network.isServer || Network.isClient; }
+		SpawnPlayer(SpawnAt.Base1);
 	}
-
 }
+

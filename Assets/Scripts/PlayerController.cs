@@ -56,11 +56,17 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private ConstantForce _push;
+	public ConstantForce _push;
+
+	private dfButton _rightArrow;
+	private dfButton _leftArrow;
+
 
 	// Use this for initialization
 	void Start () 
 	{
+		_rightArrow = GameObject.Find("Right").GetComponent<dfButton>();
+		_leftArrow = GameObject.Find("Left").GetComponent<dfButton>();
 		_skillController = GameObject.Find ("Content").GetComponent<SkillController>();
 		_constantX = transform.localPosition.x;
 		_healthBar = transform.FindChild("Health");
@@ -147,37 +153,34 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput()
 	{
-		if(IsDead) return;
+		//DebugStreamer.message = "RightArrowState: "+_rightArrow.State.ToString()+", LeftArrowState: "+_leftArrow.State.ToString();
 
-		if(Input.GetKey(KeyCode.D) && _push.force.z <= 0)
-		{
-			MoveRight();
-		}
+		if(IsDead) return;
+		// The Inputs usually handled by the GUI; in this case I tested with a mobile device and a computer
+		if(Input.GetKey(KeyCode.D)) MoveRight();
 		
-		if(Input.GetKey(KeyCode.A) && _push.force.z >= 0)
-		{
-			MoveLeft();
-		}
+		if(Input.GetKey(KeyCode.A)) MoveLeft();
 		
-		if(!Input.anyKey)
-		{
-			_push.force = Vector3.zero;
-		}
+		if(!Input.anyKey 
+		   && (_rightArrow.State != dfButton.ButtonState.Pressed)
+		   && (_leftArrow.State != dfButton.ButtonState.Pressed)) _push.force = Vector3.zero;
 	}
 
-	private void MoveRight()
+	public void MoveRight()
 	{
+		if(_push.force.z > 0) return;
 		transform.localEulerAngles = Vector3.zero;
 		_push.force = Vector3.forward*MovementSpeed;
 	}
 
-	private void MoveLeft()
+	public void MoveLeft()
 	{
+		if(_push.force.z < 0) return;
 		transform.localEulerAngles = Vector3.up*180;
 		_push.force = Vector3.back*MovementSpeed;
 	}
 
-	private void Jump()
+	public void Jump()
 	{
 		GetComponent<Rigidbody>().AddForce(Vector3.up*JumpForce - new Vector3(0, GetComponent<Rigidbody>().velocity.y,0));
 	}

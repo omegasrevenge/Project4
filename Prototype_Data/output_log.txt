@@ -19,7 +19,33 @@ Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\
 Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll (this message is harmless)
 Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll into Unity Child Domain
-- Completed reload, in  0.055 seconds
-desktop: 1920x1200 59Hz; virtual: 3600x1200 at 0,0
+- Completed reload, in  0.042 seconds
+desktop: 1920x1200 59Hz; virtual: 3600x1200 at -1680,0
 <RI> Initializing input.
 <RI> Input initialized.
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\System.dll (this message is harmless)
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+
+Receiving state for an object whose network view exists but the observed object no longer exists
+ 
+(Filename:  Line: 315)
+

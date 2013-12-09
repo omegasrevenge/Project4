@@ -111,4 +111,10 @@ public class SkillController : MonoBehaviour {
 		Object LaserPrefab = Resources.Load("Laser");
 		GameObject Laser = (GameObject)Network.Instantiate(LaserPrefab, Pos.localPosition, Pos.localRotation, 1);
 	}
+
+	public void Jump()
+	{
+		if(Pos == null) return;
+		Pos.GetComponent<PlayerController>().Jump();
+	}
 }
