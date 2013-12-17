@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
     public const string ServerURL = "http://pixeltamer.net:7774/rpc/";
     private const float OwnUpdateFreq = 60*3;
     private const float PositionUpdateFreq = 60*1;
+    private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60*2;
 
 	private static GameManager _instance;
-	
+
     [SerializeField]
 	public Player Player = new Player();
 	public string SessionID = "";
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     private float _lastOwnPlayerUpdate;
     [SerializeField]
     private float _lastPositionUpdate = -1000;
+    private Vector2 _lastPosition = new Vector2();
     [SerializeField]
     private float _lastPlayerQuery = -1000;
 
@@ -79,7 +81,10 @@ public class GameManager : MonoBehaviour
         if (CurrentGameMode == GameMode.Map)
         {
             //Send player position to server
-            if (Time.time >= PositionUpdateFreq + _lastPositionUpdate)
+            float updatefrequency = PositionUpdateFreq;
+            if (MapUtils.DistanceInKm(_lastPosition, LocationManager.GetCurrentPosition()) > 0.025)
+                updatefrequency = PositionUpdateFreqMove;
+            if (Time.time >= updatefrequency + _lastPositionUpdate)
                 SendPosition();
             //Request players around you
             if (Time.time >= PlayerQueryFreq + _lastPlayerQuery)
@@ -89,8 +94,8 @@ public class GameManager : MonoBehaviour
         //Load queued players
         if (!_playerQueryActive && _playerQueue.Count > 0)
             StartCoroutine(CGetPlayers());
-
     }
+
 
     //DEBUG
     public void Test()
@@ -193,6 +198,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator CSendPosition()
     {
         Vector2 pos = LocationManager.GetCurrentPosition();
+        _lastPosition = pos;
         WWW request = new WWW(GetSessionURL("setpos")+"&lon="+pos.x+"&lat="+pos.y);
 
         yield return request;

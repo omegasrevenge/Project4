@@ -5,8 +5,8 @@ public class LocationManager : MonoBehaviour {
     private static LocationManager _instance;
     //Latitude = 52.50451
     //Longitude = 13.39699
-    public float Latitude = 52f;
-    public float Longitude = 13f;
+    public float Latitude = 52.50451f;
+    public float Longitude = 13.39699f;
 
     public static LocationManager Singleton
     {
@@ -47,6 +47,9 @@ public class LocationManager : MonoBehaviour {
 #if !UNITY_EDITOR
         if (Input.location.status != LocationServiceStatus.Running) return;
             SetLocation();
+#else
+        Longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
+        Latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
 #endif
     }
 

@@ -104,7 +104,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/anlicht/Documents/GitHub/Project4/user.keystore
+  AndroidKeystoreName: C:/Users/maxfrank/Documents/GitHub/Project4/user.keystore
   AndroidKeyaliasName: test
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:

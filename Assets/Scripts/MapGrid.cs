@@ -18,6 +18,8 @@ public class MapGrid : MonoBehaviour
 
     private Vector3 _position;
 
+    public bool pois_valid = false;
+
     public float Width { get; set; }
     public float Height { get; set; }
 
@@ -80,6 +82,7 @@ public class MapGrid : MonoBehaviour
                 }
             }
         }
+        pois_valid = false;
     }
 
     private void MoveToCenter()

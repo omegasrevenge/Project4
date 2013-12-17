@@ -84,6 +84,7 @@ GameObject:
   - 4: {fileID: 120960991}
   - 114: {fileID: 120960990}
   - 114: {fileID: 120960989}
+  - 114: {fileID: 120960992}
   m_Layer: 0
   m_Name: LoginTest
   m_TagString: Untagged
@@ -127,9 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dd16556b59797408bfbf6dcc13b4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerID: PlayerID
-  PlayerName: PlayerName
-  Password: Password
+  PlayerID: 111130753357680043998
+  PlayerName: peter
+  Password: mueller
   XP: 10
   Enemy: Enemy
   Register: 0
@@ -144,6 +145,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &120960992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120960988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec967ce2e49bcde448021aa395b0b264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XP: 0
+  level: 15
 --- !u!1 &344512731
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Grid: {fileID: 1787781471}
   CameraRig: {fileID: 730788163}
+  pois_timeQ: 0
 --- !u!4 &344512733
 Transform:
   m_ObjectHideFlags: 0
@@ -474,6 +489,7 @@ MonoBehaviour:
   Root: {fileID: 1635283350}
   Cells: []
   ZoomLevel: 17
+  pois_valid: 0
 --- !u!114 &1787781472
 MonoBehaviour:
   m_ObjectHideFlags: 0

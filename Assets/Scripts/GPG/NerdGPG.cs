@@ -82,6 +82,8 @@ public class NerdGPG : MonoBehaviour
         }
         else
             return false;
+#else
+        return false;
 #endif
     }
 

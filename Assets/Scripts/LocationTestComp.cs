@@ -7,7 +7,7 @@ public class LocationTestComp : MonoBehaviour
     public MapGrid Grid;
     void Awake()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = 1;
+        //GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
     void Update()
     {
@@ -16,6 +16,14 @@ public class LocationTestComp : MonoBehaviour
     }
     void LateUpdate()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        //transform.rotation = Camera.main.transform.rotation;
+        transform.GetChild(1).rotation = Camera.main.transform.rotation;
+    }
+    public void setText(string text)
+    {
+        GameObject textObj = (GameObject)Instantiate(Resources.Load("Text"));
+        textObj.transform.parent = transform;
+        textObj.transform.localPosition = new Vector3(0,0.5f,0);
+        textObj.GetComponent<TextMesh>().text = text;
     }
 }

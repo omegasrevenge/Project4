@@ -111,4 +111,21 @@ public class MapUtils
     {
         return Math.Pow(2.0, zoomLevel);
     }
+
+    public static double DistanceInKm(Vector2 geo1, Vector2 geo2)
+    {
+        double lat1 = geo1.y;
+        double lat2 = geo2.y;
+        double lon1 = geo1.x;
+        double lon2 = geo2.x;
+
+        double R = 6371.0;                     // Radius of the earth in km
+        double dLat = Mathf.Deg2Rad*(lat2 - lat1); // deg2rad below
+        double dLon = Mathf.Deg2Rad*(lon2 - lon1);
+        double a = Math.Sin(dLat/2)*Math.Sin(dLat/2) + Math.Cos(Mathf.Deg2Rad*lat1)*Math.Cos(Mathf.Deg2Rad*lat2)*Math.Sin(dLon/2)*Math.Sin(dLon/2);
+        var c = 2*Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        var d = R*c; // Distance in km
+
+        return d;
+    }
 }
