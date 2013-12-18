@@ -47,6 +47,18 @@ public class Localization
 
     public static string Get(string textKey)
     {
+        if (Singleton._strings[textKey] == null)
+        {
+            Debug.LogError("Missing textkey for "+textKey+".");
+            return textKey;
+        }
+        if (Singleton._langID >= Singleton._strings[textKey].Count)
+        {
+            Debug.LogError("Missing translation for " + textKey + ".");
+            if (Singleton._strings[textKey].Count == 0)
+                return textKey;
+            return (string)Singleton._strings[textKey][0];
+        }
         return (string)Singleton._strings[textKey][Singleton._langID];
     }
 }
