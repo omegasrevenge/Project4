@@ -1,0 +1,5 @@
+{
+	lang:["German","English","French"],
+	hello:["hello-de","hello-en","hello-fr"],
+	pling:["plingpling"]
+}

@@ -5,7 +5,9 @@ public class Localization
 {
     private static Localization _instance;
     private JSONObject _strings;
-    private int _langID;
+    private JSONObject _sounds;
+    private int _textID;
+    private int _soundID;
 
     public static Localization Singleton
     {
@@ -36,29 +38,65 @@ public class Localization
         JSONObject languages =  _strings["lang"];
         for (int i = 0; i < languages.Count; i++)
         {
-            string language = (string) languages[i];
+            string language = (string)languages[i];
             if (language == Application.systemLanguage.ToString())
             {
-                _langID = i;
+                _textID = i;
                 break;
             }
         }
+
+        asset = Resources.Load<TextAsset>("sounds");
+        _sounds = JSONParser.parse(asset.text);
+        languages = _sounds["lang"];
+        for (int i = 0; i < languages.Count; i++)
+        {
+            string language = (string)languages[i];
+            if (language == Application.systemLanguage.ToString())
+            {
+                _soundID = i;
+                break;
+            }
+        }
+
     }
 
-    public static string Get(string textKey)
+    public static string GetText(string textKey)
     {
         if (Singleton._strings[textKey] == null)
         {
             Debug.LogError("Missing textkey for "+textKey+".");
             return textKey;
         }
-        if (Singleton._langID >= Singleton._strings[textKey].Count)
+        if (Singleton._textID >= Singleton._strings[textKey].Count)
         {
             Debug.LogError("Missing translation for " + textKey + ".");
             if (Singleton._strings[textKey].Count == 0)
                 return textKey;
             return (string)Singleton._strings[textKey][0];
         }
-        return (string)Singleton._strings[textKey][Singleton._langID];
+        return (string)Singleton._strings[textKey][Singleton._textID];
+    }
+
+    public static AudioClip GetSound(string soundKey)
+    {
+        if (Singleton._sounds[soundKey] == null)
+        {
+            Debug.LogError("Missing sound for " + soundKey + ".");
+            return null;
+        }
+        if (Singleton._soundID >= Singleton._sounds[soundKey].Count)
+        {
+            if (Singleton._sounds[soundKey].Count == 0)
+            {
+                Debug.LogError("Missing sound for " + soundKey + ".");
+                return null;
+            }      
+            return Resources.Load<AudioClip>("Sounds/" + (string)Singleton._sounds[soundKey][0]);
+
+        }
+        Debug.Log(Resources.Load<AudioClip>("Sounds/hello-de"));
+        Debug.Log("Sounds/" + (string)Singleton._sounds[soundKey][Singleton._soundID]);
+        return Resources.Load<AudioClip>("Sounds/" + (string)Singleton._sounds[soundKey][Singleton._soundID]);
     }
 }
