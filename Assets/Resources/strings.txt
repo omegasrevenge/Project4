@@ -1,0 +1,4 @@
+{
+	lang:["English","German"], //Required!!!
+	test:["test","Test"],
+}
