@@ -1,4 +1,4 @@
 Project4
 ========
 
-Der Schäfer führt seine Schäfchen zum Licht
+GD1011 MDH 2014 Projektarbeit
