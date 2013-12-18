@@ -6,7 +6,7 @@ public class BuffControl : MonoBehaviour {
 
 	public void DestroyThis()
 	{
-		networkView.RPC("Die", RPCMode.All);
+		networkView.RPC("Die", RPCMode.AllBuffered);
 	}
 
 	[RPC]

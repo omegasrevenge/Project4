@@ -8,7 +8,7 @@ Direct3D:
     Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
 Default GameObject Tag: Player already registered
  
-(Filename:  Line: 68)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/BaseClasses/Tags.cpp Line: 68)
 
 Begin MonoManager ReloadAssembly
 Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\UnityEngine.dll (this message is harmless)
@@ -19,7 +19,7 @@ Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\
 Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll (this message is harmless)
 Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll into Unity Child Domain
-- Completed reload, in  0.042 seconds
+- Completed reload, in  0.060 seconds
 desktop: 1920x1200 59Hz; virtual: 3600x1200 at -1680,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -27,25 +27,152 @@ Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\
 Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\System.dll (this message is harmless)
 Receiving state for an object whose network view exists but the observed object no longer exists
  
-(Filename:  Line: 315)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkView.cpp Line: 315)
 
 Receiving state for an object whose network view exists but the observed object no longer exists
  
-(Filename:  Line: 315)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkView.cpp Line: 315)
+
+View ID AllocatedID: 8 not found during lookup. Strange behaviour may occur
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1676] 
+(Filename: C Line: 0)
+
+Couldn't destroy object because the associate network view was not found
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1384] 
+(Filename: C Line: 0)
+
+Initialize engine version: 4.3.0f4 (e01000627d60)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.3158]
+    Renderer: NVIDIA GeForce GTX 560 Ti  
+    Vendor:   NVIDIA
+    VRAM:     978 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Default GameObject Tag: Player already registered
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/BaseClasses/Tags.cpp Line: 68)
+
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll (this message is harmless)
+Loading C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\dfScriptLite.dll into Unity Child Domain
+- Completed reload, in  0.047 seconds
+desktop: 1920x1200 59Hz; virtual: 3600x1200 at -1680,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\kisalzmann\Documents\GitHub\Project4\Prototype_Data\Managed\System.dll (this message is harmless)
+View ID AllocatedID: 5 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 5' could not be located.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2458)
+
+View ID AllocatedID: 3 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 3' could not be located.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2458)
+
+View ID AllocatedID: 14 not found during lookup. Strange behaviour may occur
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1676] 
+(Filename: C Line: 0)
+
+Couldn't destroy object because the associate network view was not found
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1384] 
+(Filename: C Line: 0)
+
+View ID AllocatedID: 12 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Received state update for view id' AllocatedID: 12' but the NetworkView doesn't exist
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2469)
+
+View ID AllocatedID: 7 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Received state update for view id' AllocatedID: 7' but the NetworkView doesn't exist
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2469)
+
+View ID AllocatedID: 8 not found during lookup. Strange behaviour may occur
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1676] 
+(Filename: C Line: 0)
+
+Couldn't destroy object because the associate network view was not found
+UnityEngine.Network:INTERNAL_CALL_Destroy(NetworkViewID&)
+UnityEngine.Network:Destroy(NetworkViewID)
+UnityEngine.Network:Destroy(GameObject)
+PlayerController:OnTriggerEnter(Collider) (at C:\Users\kisalzmann\Documents\GitHub\Project4\Assets\Scripts\PlayerController.cs:204)
+
+[C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp line 1384] 
+(Filename: C Line: 0)
+
+View ID AllocatedID: 8 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 8' could not be located.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2458)
+
+View ID AllocatedID: 2 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Couldn't perform remote Network.Destroy because the network view 'AllocatedID: 2' could not be located.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2458)
+
+View ID AllocatedID: 17 not found during lookup. Strange behaviour may occur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 1676)
+
+Received state update for view id' AllocatedID: 17' but the NetworkView doesn't exist
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkManager.cpp Line: 2469)
 
 Receiving state for an object whose network view exists but the observed object no longer exists
  
-(Filename:  Line: 315)
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/Runtime/Network/NetworkView.cpp Line: 315)
 
-Receiving state for an object whose network view exists but the observed object no longer exists
- 
-(Filename:  Line: 315)
-
-Receiving state for an object whose network view exists but the observed object no longer exists
- 
-(Filename:  Line: 315)
-
-Receiving state for an object whose network view exists but the observed object no longer exists
- 
-(Filename:  Line: 315)
-
+Waiting for finish
+Waiting for finish

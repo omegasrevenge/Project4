@@ -3,10 +3,13 @@ using System.Collections;
 [RequireComponent(typeof(NetworkView))]
 public class PlayerController : MonoBehaviour {
 
+	[HideInInspector]
+	public int PlayerID;
+	[SerializeField]
+	public string PlayerName = "GD1011";
+
 	public int MovementSpeed = 10;
 	public int JumpForce = 3;
-	[HideInInspector]
-	public Transform SpawnBase;
 
 	private int _healthPoints = 100;
 	private Transform _healthBar;
@@ -100,11 +103,11 @@ public class PlayerController : MonoBehaviour {
 		KeepGameTwoD();
 		UpdateHealthBar();
 		DeathAnimation();
+		if(DyingAnimationFinished) Destroy(gameObject);
 
 		if(!networkView.isMine) return;
 
 		if(IsDead) _skillController.Pos = null;
-
 		HandleInput();
 	}
 
@@ -198,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 		if (collider.tag == "NoCdBuff")
 		{
 			GameObject.Find("Content").GetComponent<SkillController>().NoCooldowns = true;
-			collider.GetComponent<BuffControl>().DestroyThis();
+			Network.Destroy(collider.gameObject);
 		}
 	}
 }

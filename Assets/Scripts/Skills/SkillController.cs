@@ -44,8 +44,16 @@ public class SkillController : MonoBehaviour {
 			NoCooldowns = false;
 			_noCooldownTimer = NoCooldownsLength;
 		}
-
+		HandleInput();
 		HandleSkillCooldowns ();
+	}
+
+	private void HandleInput()
+	{
+		if(!Input.anyKeyDown) return;
+		if(Input.GetKeyDown(KeyCode.Keypad1)) CreateFireball();
+		if(Input.GetKeyDown(KeyCode.Keypad2)) CreateLaser();
+		if(Input.GetKeyDown(KeyCode.Keypad3)) CreateAxe();
 	}
 
 	private void HandleSkillCooldowns()

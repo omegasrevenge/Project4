@@ -42,14 +42,20 @@ public class FireballControl : MonoBehaviour {
 	void Update () 
 	{
 		counter += Time.deltaTime;
-		if(counter >= LifeTimeSeconds)
+		if(networkView.isMine && counter >= LifeTimeSeconds)
 		{
-			Destroy(gameObject);
+			networkView.RPC("Die", RPCMode.AllBuffered);
 		}
 
 		if(!networkView.isMine) return;
 		GetComponent<Rigidbody>().AddForce(_direction);
 		transform.FindChild("Content").Rotate(new Vector3(RotationSpeed*Time.deltaTime,0,0), Space.Self);
+	}
+
+	[RPC]
+	public void Die()
+	{
+		Destroy(gameObject);
 	}
 	
 	void OnTriggerEnter(Collider collider)

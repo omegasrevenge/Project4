@@ -60,10 +60,16 @@ public class AxeControl : MonoBehaviour {
 			StopActing();
 		}
 
-		if(_counter >= LifeTime)
+		if(networkView.isMine && _counter >= LifeTime)
 		{
-			Destroy(gameObject);
+			networkView.RPC("Die", RPCMode.AllBuffered);
 		}
+	}
+
+	[RPC]
+	public void Die()
+	{
+		Destroy(gameObject);
 	}
 
 	private void StopActing()

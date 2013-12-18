@@ -1,10 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network\GameController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Network\GameController.cs" Line="6" Column="34" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="170" Column="3" />
-      <File FileName="Assets\Scripts\Move.cs" Line="19" Column="5" />
+      <File FileName="Assets\Scripts\Network\GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skills\SkillController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Network\GameController.cs" Line="81" Column="6" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Move.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skills\AxeControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Buffs\BuffControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skills\LaserControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skills\FireballControl.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

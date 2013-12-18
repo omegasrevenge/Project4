@@ -51,10 +51,16 @@ public class LaserControl : MonoBehaviour {
 		}
 
 		_counter += Time.deltaTime;
-		if(_counter >= LifeTime)
+		if(networkView.isMine && _counter >= LifeTime)
 		{
-			Destroy(gameObject);
+			networkView.RPC("Die", RPCMode.AllBuffered);
 		}
+	}
+
+	[RPC]
+	public void Die()
+	{
+		Destroy(gameObject);
 	}
 
 	public void Collided(Collider collider)

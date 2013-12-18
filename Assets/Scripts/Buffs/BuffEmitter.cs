@@ -26,12 +26,14 @@ public class BuffEmitter : MonoBehaviour {
 		}
 	}
 
+
 	private void SpawnBuff()
 	{
 		Vector3 spawnPos = new Vector3(GameObject.Find("Player(Clone)").transform.localPosition.x, 
 		                               30f, 
 		                               Random.Range(GameObject.Find("Base1").transform.localPosition.z, 
 		             								GameObject.Find("Base2").transform.localPosition.z));
+
 		GameObject Buff = (GameObject)Network.Instantiate(Resources.Load("NoCdBuff"), spawnPos, Quaternion.identity, 1);
 	}
 }

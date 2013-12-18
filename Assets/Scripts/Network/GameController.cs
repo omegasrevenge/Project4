@@ -7,90 +7,73 @@ public class GameController : MonoBehaviour
 
     public string GameName = "Uns_geht_ein_Licht_auf";
 
-	public enum SpawnAt{Base1, Base2, BaseSpecific}
+	public float PlayerSpawnHeight = 30f;
+
 	private GameObject _player;
-	private bool _tryingToConnect = false;
-	
+	private Vector3 _spawnPos;
+	private Transform _baseOne;
+	private Transform _baseTwo;
+
+	public bool HasNetworkConnection
+	{
+		get
+		{
+			return Network.connections.Length > 0;
+		}
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
+		_baseOne = GameObject.Find("Base1").transform;
+		_baseTwo = GameObject.Find("Base2").transform;
+		_spawnPos = new Vector3(_baseOne.localPosition.x, 
+		                        PlayerSpawnHeight, 
+		                        0f);
 		Application.runInBackground = true;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(   _player != null
-		   && _player.networkView.isMine
-		   && _player.GetComponent<PlayerController>().IsDead 
-		   && _player.GetComponent<PlayerController>().DyingAnimationFinished)
-		{
-			SpawnPlayer(SpawnAt.BaseSpecific);
-		}
-		if(GameObject.Find("New Game Object") != null)
-		{
-			Destroy(GameObject.Find("New Game Object"));
-		}
+		if(_player == null && HasNetworkConnection) SpawnPlayer();
+		CleanHierarchy();
+	}
+
+	private void CleanHierarchy()
+	{
+		GameObject target = GameObject.Find("New Game Object");
+		if(target != null) Destroy(target);
 	}
 	
-	private void SpawnPlayer(SpawnAt value)
+	private void SpawnPlayer()
 	{
-		Transform target = new GameObject().transform;
-		switch(value)
-		{
-		case SpawnAt.Base1:
-			target = GameObject.Find("Base1").transform;
-			break;
-		case SpawnAt.Base2:
-			target = GameObject.Find("Base2").transform;
-			break;
-		case SpawnAt.BaseSpecific:
-			target = _player.GetComponent<PlayerController>().SpawnBase;
-			break;
-		}
-		GameObject player = new GameObject();
-		if(value == SpawnAt.BaseSpecific)
-		{
-			networkView.RPC("DestroyEnemyPlayer", RPCMode.OthersBuffered);
-			player = _player;
-		}
-		
-		_player = (GameObject)Network.Instantiate(Resources.Load("Player"), target.position, target.localRotation, 1);
-		_player.GetComponent<PlayerController>().SpawnBase = target;
-		
-		if(value == SpawnAt.BaseSpecific) Destroy (player.gameObject);
-	}
-	
-	[RPC]
-	public void DestroyEnemyPlayer()
-	{
-		foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-		{
-			if(!player.networkView.isMine)
-			{
-				Destroy(player.gameObject);
-			}
-		}
+		_spawnPos.z = Random.Range(_baseOne.localPosition.z, 
+		                           _baseTwo.localPosition.z);
+		_player = (GameObject)Network.Instantiate(Resources.Load("Player"), 
+		                                          _spawnPos, 
+		                                          Quaternion.identity, 
+		                                          1);
 	}
 
     public void CreateGame()
 	{
-		_tryingToConnect = false;
 		Network.Disconnect();
+		ResetLevel();
         Network.InitializeServer(4, Port, !Network.HavePublicAddress());
         MasterServer.RegisterHost(GameType, GameName);
     }
 
     public void RequestHosts()
 	{
-		_tryingToConnect = true;
+		if(HasNetworkConnection) return;
 		MasterServer.RequestHostList(GameType);
     }
 
 
     private void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
-		if(msEvent == MasterServerEvent.HostListReceived && _tryingToConnect)
+		if(msEvent == MasterServerEvent.HostListReceived)
 		{
 			HostData[] data = MasterServer.PollHostList();
 			if(data.Length>0) Network.Connect(data[0]);
@@ -99,12 +82,43 @@ public class GameController : MonoBehaviour
 
     private void OnConnectedToServer()
 	{
-		SpawnPlayer(SpawnAt.Base2);
+		SpawnPlayer();
 	}
 	
 	void OnServerInitialized()
 	{
-		SpawnPlayer(SpawnAt.Base1);
+		SpawnPlayer();
+	}
+
+	void OnPlayerDisconnected(NetworkPlayer player) 
+	{
+		if(!networkView.isMine) return;
+		//Baustelle
+	}
+
+	[RPC]
+	public void CleanUpAfterPlayer(NetworkPlayer player)
+	{
+		Network.DestroyPlayerObjects(player);
+	}
+
+	void OnDisconnectedFromServer(NetworkDisconnection info)
+	{
+		ResetLevel();
+	}
+
+	private void ResetLevel()
+	{
+		foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")) Destroy(player);
+		foreach(GameObject buff in GameObject.FindGameObjectsWithTag("NoCdBuff")) Destroy(buff);
+		foreach(GameObject fireball in GameObject.FindGameObjectsWithTag("Fireball")) Destroy(fireball);
+		foreach(GameObject laser in GameObject.FindGameObjectsWithTag("Laser")) Destroy(laser);
+		foreach(GameObject axe in GameObject.FindGameObjectsWithTag("Axe")) Destroy(axe);
+	}
+
+	public void DisconnectNow()
+	{
+		Network.Disconnect();
 	}
 }
 
