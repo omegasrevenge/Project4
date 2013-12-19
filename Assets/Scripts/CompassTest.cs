@@ -6,12 +6,11 @@ public class CompassTest : MonoBehaviour
     public MapGrid Grid;
     public GameObject CameraRig;
 
+	private int pois_version = 0;
+	public int grid_version = 0;
+
     public const float MoveSpeed = 1f;
     public const float MoveRadius = 1f;
-
-    private POI[] POIs = new POI[0];
-
-    public float pois_timeQ;
 
     void Update()
     {
@@ -30,57 +29,20 @@ public class CompassTest : MonoBehaviour
             StartCoroutine(RequestLocations(LocationManager.GetCurrentPosition()));
         }
 
-        if (!GameManager.Singleton.LoggedIn) return;
+	    if (pois_version != GameManager.Singleton.pois_version)
+	    {
+		    pois_version = GameManager.Singleton.pois_version;
+			CreatePOIs();
+	    }
 
-        if (!Grid.pois_valid && pois_timeQ <= 0)
-            StartCoroutine(GetPois());
-
-        pois_timeQ -= Time.deltaTime;
+	    if (grid_version != Grid.grid_version)
+	    {
+		    grid_version = Grid.grid_version;
+		    GameManager.Singleton.pois_valid = false;
+	    }
     }
 
-    private IEnumerator GetPois()
-    {
-        pois_timeQ = 3;
-        Grid.pois_valid = true;
-        Vector2 pos = LocationManager.GetCurrentPosition();
-        WWW request = new WWW(GameManager.Singleton.GetSessionURL("getpois") + "&lon=" + pos.x + "&lat=" + pos.y);
-
-        yield return request;
-
-        JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
-        JSONObject data = json["data"];
-        JSONObject pois = data["POIs"];
-        POI[] tmpPOIs = new POI[pois.Count];
-        Debug.Log(pois.Count);
-        for (int i = 0; i < tmpPOIs.Length; i++)
-        {
-            tmpPOIs[i] = new POI();
-            tmpPOIs[i].ReadJson(pois[i]);
-        }
-
-        for (int i = 0; i < POIs.Length; i++)
-        {
-            bool found = false;
-            for (int j = 0; j < tmpPOIs.Length; j++)
-            {
-                if (POIs[i].POI_ID == tmpPOIs[j].POI_ID)
-                {
-                    tmpPOIs[j] = POIs[i];
-                    found = true;
-                    break;
-                }
-            }
-            if (!found && POIs[i].instance!=null)
-            {
-                //Debug.Log("kaputt");
-                Destroy(POIs[i].instance);
-            }
-        }
-
-        POIs = tmpPOIs;
-        CreatePOIs();
-    }
+    
 
     public bool CheckResult(JSONObject json)
     {
@@ -95,7 +57,7 @@ public class CompassTest : MonoBehaviour
     private void CreatePOIs()
     {
         string path = "Prefabs/POIs/";
-        foreach (POI poi in POIs)
+        foreach (POI poi in GameManager.Singleton.POIs)
         {
             if (poi.instance != null) continue;
             GameObject obj = Resources.Load<GameObject>(path+poi.Type);
