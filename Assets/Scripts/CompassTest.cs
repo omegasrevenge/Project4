@@ -12,6 +12,8 @@ public class CompassTest : MonoBehaviour
     public const float MoveSpeed = 1f;
     public const float MoveRadius = 1f;
 
+	public const float RangeRadius = 0.188f/2f;
+
     void Update()
     {
         //Rotation:
@@ -42,9 +44,34 @@ public class CompassTest : MonoBehaviour
 	    }
     }
 
-    
+	void OnGUI()
+	{
+		POIsInRange();
+	}
 
-    public bool CheckResult(JSONObject json)
+	private void POIsInRange()
+	{
+		int inRange = 0;
+
+		GUI.Label(new Rect(400, 10, 200, 20), GameManager.Singleton.lastFarmResult);
+
+		foreach (POI poi in GameManager.Singleton.POIs)
+		{
+			if (MapUtils.DistanceInKm(poi.Position,LocationManager.GetCurrentPosition()) <= RangeRadius)
+			{
+				GUI.Label(new Rect(400, 40 + inRange * 40, 200, 20), poi.Name);
+
+				if (GUI.Button(new Rect(400, 60 + inRange * 40, 100, 20), "Farm"))
+				{
+					GameManager.Singleton.PoiFarm(poi);
+				}
+				inRange++;
+			}
+		}
+	}
+
+
+	public bool CheckResult(JSONObject json)
     {
         if (!(bool)json["result"])
         {
@@ -63,6 +90,7 @@ public class CompassTest : MonoBehaviour
             GameObject obj = Resources.Load<GameObject>(path+poi.Type);
             if (obj == null) obj = Resources.Load<GameObject>(path+"Default");
             poi.instance = (GameObject)Instantiate(obj);
+	        poi.instance.transform.parent = transform;
             float lon = poi.Position.x;
             float lat = poi.Position.y;
             MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), Grid.ZoomLevel);

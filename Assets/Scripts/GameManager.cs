@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 	public int pois_version = 0;
 	public float pois_timeQ;
 	public bool pois_valid = false;
+	public string lastFarmResult = "";
 
     [SerializeField]
 	public Player Player = new Player();
@@ -218,6 +219,23 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) yield break;
         Player.Position = pos;
     }
+
+	public void PoiFarm(POI poi)
+	{
+		if (!LoggedIn) return;
+		StartCoroutine(CPoiFarm(poi));
+	}
+
+	private IEnumerator CPoiFarm(POI poi)
+	{
+		WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos() + "&poiid=" + poi.POI_ID);
+		Debug.Log(request.url);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		//if (!CheckResult(json)) yield break;
+		lastFarmResult = (string) json["data"];
+	}
 
     /// <summary>
     /// Requests all playerIDs around your position

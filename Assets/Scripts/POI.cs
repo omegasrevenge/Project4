@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class POI 
@@ -21,4 +22,10 @@ public class POI
         Rsc = (string)json["Rsc"];
         Type = (string)json["Type"];
     }
+
+	public string MapPos()
+	{
+		MapUtils.ProjectedPos curProjectedPos = MapUtils.GeographicToProjection(Position, 17);
+		return ("" + curProjectedPos.X + "," + curProjectedPos.Y);
+	}
 }

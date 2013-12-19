@@ -103,14 +103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f543c9fa50e16749a50292573e79b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pois_version: 0
+  pois_timeQ: 0
+  pois_valid: 0
+  lastFarmResult: 
   Player:
     PlayerID: 
     Name: 
     Position: {x: 0, y: 0}
-    HP: 0
-    HPMax: 0
-    XP: 0
-    Level: 0
     Fighting: 0
   SessionID: 
   CurrentGameMode: 0
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dd16556b59797408bfbf6dcc13b4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerID: 111130753357680043998
-  PlayerName: peter
-  Password: mueller
+  PlayerID: 106042726566859206842
+  PlayerName: Sadarian
+  Password: 123
   XP: 10
   Enemy: Enemy
   Register: 0
@@ -156,8 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec967ce2e49bcde448021aa395b0b264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XP: 0
-  level: 15
 --- !u!1 &344512731
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Grid: {fileID: 1787781471}
   CameraRig: {fileID: 730788163}
-  pois_timeQ: 0
+  grid_version: 0
 --- !u!4 &344512733
 Transform:
   m_ObjectHideFlags: 0
@@ -338,6 +336,7 @@ Transform:
   m_Children:
   - {fileID: 1084884588}
   - {fileID: 373906083}
+  - {fileID: 1922326201}
   m_Father: {fileID: 0}
 --- !u!1 &1084884583
 GameObject:
@@ -489,7 +488,7 @@ MonoBehaviour:
   Root: {fileID: 1635283350}
   Cells: []
   ZoomLevel: 17
-  pois_valid: 0
+  grid_version: 0
 --- !u!114 &1787781472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,3 +502,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PixelsToUnit: 100
   Pivot: {x: 0, y: 1}
+--- !u!1 &1922326199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1922326201}
+  - 212: {fileID: 1922326200}
+  m_Layer: 0
+  m_Name: marker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1922326200
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922326199}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_Sprite: {fileID: 21300000, guid: 2dc06a3c9e99da548b6b3872cd17e60d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &1922326201
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922326199}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: -.707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 730788164}
