@@ -104,7 +104,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/maxfrank/Documents/GitHub/Project4/user.keystore
+  AndroidKeystoreName: D:/Projekte/Project4/user.keystore
   AndroidKeyaliasName: test
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
@@ -112,7 +112,10 @@ PlayerSettings:
     m_Icons:
     - m_Icon: {fileID: 0}
       m_Size: 128
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   wiiRegion: 1

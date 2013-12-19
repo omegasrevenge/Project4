@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
 		yield return request;
 
 		JSONObject json = JSONParser.parse(request.text);
-		//if (!CheckResult(json)) yield break;
+		if (CheckResult(json)) _lastOwnPlayerUpdate = -1000;
 		lastFarmResult = (string) json["data"];
 	}
 

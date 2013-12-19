@@ -47,6 +47,18 @@ public class CompassTest : MonoBehaviour
 	void OnGUI()
 	{
 		POIsInRange();
+
+		if (GameManager.Singleton.Player.Resources == null)return;
+
+		for (int i = 0; i < 7; i++)
+		{
+			string z = "" + i + ":";
+			for (int j = 0; j < 5; j++)
+			{
+				z += GameManager.Singleton.Player.Resources[i, j] + " ";
+			}
+			GUI.Label(new Rect(250, 40+i*20, 200, 20), z);
+		}
 	}
 
 	private void POIsInRange()
