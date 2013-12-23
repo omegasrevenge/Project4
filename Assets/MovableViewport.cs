@@ -16,7 +16,6 @@ public class MovableViewport : MonoBehaviour
         Vector3 camoffset = new Vector3(translation, 0, 0);
 	    Matrix4x4 m = Matrix4x4.TRS(camoffset, Quaternion.identity, new Vector3(1, 1, 1));
         camera.ResetProjectionMatrix();      
-        Debug.Log(phase);
 	    camera.projectionMatrix = m*camera.projectionMatrix;
 
 
