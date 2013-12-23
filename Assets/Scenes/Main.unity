@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase: 0
-  pinned: 1
+  pinned: 0
 --- !u!114 &763005990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 885975197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.30509949, y: 0, z: 2}
+  m_LocalPosition: {x: -3.33333325, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 694187855}
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase: 0
-  pinned: 0
+  pinned: 1
 --- !u!124 &1084884585
 Behaviour:
   m_ObjectHideFlags: 0
