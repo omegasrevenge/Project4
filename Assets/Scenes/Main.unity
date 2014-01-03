@@ -12,12 +12,12 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 1
   m_FogDensity: .159999996
-  m_LinearFogStart: 6.38000011
-  m_LinearFogEnd: 12.7399998
+  m_LinearFogStart: 8.80000019
+  m_LinearFogEnd: 11.3999996
   m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
@@ -408,7 +408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &763005984
 AudioListener:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 763005983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87602cb24f846234c8125dd59baf71ea, type: 3}
   m_Name: 
@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86a5147d84b9f945a6fa50192dac233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapRadius: 2
+  MapRadius: 3
   Root: {fileID: 1635283350}
   Cells: []
   ZoomLevel: 17
@@ -730,7 +730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1922326200
 SpriteRenderer:
   m_ObjectHideFlags: 0
