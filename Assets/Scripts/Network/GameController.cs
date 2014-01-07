@@ -68,7 +68,6 @@ public class GameController : MonoBehaviour
 	{
 		if(HasNetworkConnection) return;
 		MasterServer.RequestHostList(GameType);
-		MasterServer.UnregisterHost();
     }
 
 

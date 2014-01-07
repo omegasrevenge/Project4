@@ -96,18 +96,19 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
 	void Update () 
 	{
 		UpdateScore();
-		KeepGameTwoD();
+		KeepGameTwoD();		//It is possible for the physics engine to manipulate the 
+							//depth axis even though it is frozen in the inspector, this fixes it
 		UpdateHealthBar();
 		DeathAnimation();
 		if(DyingAnimationFinished) Destroy(gameObject);
 
 		if(!networkView.isMine) return;
 
-		if(IsDead) _skillController.Pos = null;
+		if(IsDead) _skillController.Pos = null; //skillcontroller creates the skilleffects on 
+												//player position, while it is null it knows the player is dead
 		HandleInput();
 	}
 
@@ -156,10 +157,8 @@ public class PlayerController : MonoBehaviour {
 
 	public void HandleInput()
 	{
-		//DebugStreamer.message = "RightArrowState: "+_rightArrow.State.ToString()+", LeftArrowState: "+_leftArrow.State.ToString();
-
 		if(IsDead) return;
-		// The Inputs usually handled by the GUI; in this case I tested with a mobile device and a computer
+
 		if(Input.GetKey(KeyCode.D)) MoveRight();
 		
 		if(Input.GetKey(KeyCode.A)) MoveLeft();
