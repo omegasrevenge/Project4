@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreatureControlls : MonoBehaviour {
+public class ActorControlls : MonoBehaviour {
 
 	public enum Phase{None, Attack, Wait, Back}
 
 	public int Health = 100;
 	public bool Hit = false;
-	public Transform StartPosition;
+	public Vector3 StartPosition;
 	public int AttackSpeed = 5;
 	public bool Projectile = false;
 	public BattleEngine Owner;
 
-	public Phase CurrentPhase{get;}
-	private Transform _target;
+	public Phase CurrentPhase;
+	private Vector3 _target;
 
 	void Start()
 	{
 		CurrentPhase = Phase.None;
 	}
 
-	public void Attack(Transform target)
+	public void Attack(Vector3 target)
 	{
 		CurrentPhase = Phase.Attack;
 		_target = target;
@@ -34,29 +34,44 @@ public class CreatureControlls : MonoBehaviour {
 			//you are hit. react somehow.
 			Hit = false;
 		}
+		if(!Projectile && CurrentPhase == Phase.None)
+		{
+			//do idle animation or smth
+		}
 		if(CurrentPhase == Phase.Attack)
 		{
-			transform.position = Vector3.Lerp(transform.position, _target.position, AttackSpeed/100f);
+			transform.position = Vector3.Lerp(transform.position, _target, AttackSpeed/100f);
 			if(HaveReached(_target)) CurrentPhase = Phase.Wait;
 		}
 		if(CurrentPhase == Phase.Wait)
 		{
 			if(Projectile)
 			{
+				Owner.Actors.Remove(this);
 				Destroy(gameObject);
 			}
-			//if not projectile, wait for result
+			else
+			{
+				if(Owner.Result == null) //server did not send result yet
+				{
+					//just do nothing and wait
+				}
+				else
+				{
+					CurrentPhase = Phase.Back;
+				}
+			}
 		}
 		if(CurrentPhase == Phase.Back)
 		{
-			transform.position = Vector3.Lerp(transform.position, StartPosition.position, AttackSpeed/100f);
+			transform.position = Vector3.Lerp(transform.position, StartPosition, AttackSpeed/100f);
 			if(HaveReached(StartPosition)) CurrentPhase = Phase.None;
 		}
 	}
 
-	private bool HaveReached(Transform target)
+	private bool HaveReached(Vector3 target)
 	{
-		return Mathf.Abs((transform.position-target.position).magnitude)<0.1f ? true : false;
+		return Mathf.Abs((transform.position-target).magnitude)<0.1f ? true : false;
 	}
 
 }
