@@ -6,7 +6,7 @@ public class BattleEngine : MonoBehaviour
 
 	public FightRoundResult Result;
 	public List<ActorControlls> Actors;
-	public int Turn = 1;
+	public int Turn = 0;
 
 	private GameObject _friendlyCreature;
 	private GameObject _enemyCreature;
@@ -29,7 +29,6 @@ public class BattleEngine : MonoBehaviour
 	{
 		if(Result != null)
 		{
-
 			if(!_resultEvaluated)
 			{
 				_nextPlayer = Result.PlayerTurn;
