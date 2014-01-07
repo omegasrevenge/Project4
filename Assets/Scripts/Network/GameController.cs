@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour
 	{
 		if(HasNetworkConnection) return;
 		MasterServer.RequestHostList(GameType);
+		MasterServer.UnregisterHost();
     }
 
 
@@ -90,10 +91,15 @@ public class GameController : MonoBehaviour
 		SpawnPlayer();
 	}
 
+	void OnPlayerConnected(NetworkPlayer player)
+	{
+		MasterServer.UnregisterHost();
+	}
+
 	void OnPlayerDisconnected(NetworkPlayer player) 
 	{
-		if(!networkView.isMine) return;
-		//Baustelle
+		Network.Disconnect();
+		ResetLevel();
 	}
 
 	[RPC]
