@@ -1,0 +1,61 @@
+Daikon Forge GUI v1.0.12 Changelog
+
+PLEASE NOTE: If you have compile errors after upgrading, you should delete the [Assets/Daikon Forge] folder and re-import the package.
+
+* No longer attempts to apply "half pixel offset" when using DirectX 11
+* dfGUIManager no longer tries to render controls whose dfControl component or GameObject is disabled 
+* Added a simple Touch-screen Joystick example
+* Added a simple Radial Menu example
+* Assigning a value to dfSprite.SpriteName at runtime will auto-set control size to image size if control size is (0,0)
+* Added "Force Layout" button to dfFlowLayout inspector
+* Added MaxLayoutSize property to dfFlowLayout component to allow wrapping within predefined area and "Fit to Contents" after layout
+* Fixed an issue with changing sprite type after initial assignment
+* Added dfButton.NormalBackgroundColor property to allow opacity for default state background to be defined independently
+* Dropdown list's popup now correctly displays on top (some edge cases were previously problematic)
+* Added dfControl.AddPrefab() and dfGUIManager.AddPrefab() methods to simplify instantiating and adding prefabs to UI
+* dfGUIManager.UIScale property now works when using Pixel Perfect and Perspective Mode together
+* Added AutoStart property to the dfTweenGroup component - automatically calls Play at startup
+* Added font preview when selecting Default Font for Rich Text Label control
+* "Select Control" option in SceneView context menu now correctly displays objects with duplicate names
+* Selecting control with RenderOrder = 0 in Scene View is now consistent
+* Adding a prefab to the UI Root via the context menu now works correctly
+* Resolved issues with horizontal alignment of dynamic font text
+* Resolved exception when using dfGUIManager.RefreshAll() ("Force Refresh") when scene contains uninitialized instances
+* Integrated user-supplied (Mistale/Anders) sprite edge extrusion code for Texture Atlas
+* Exposed dfControl.IsLocalized in inspector, necessary to allow localization
+* Tween events (TweenStarted, TweenCompleted, etc) now include a reference to the sender
+* Resolved issue with dfTextureSprite class leaking Materials if not explicitly assigned before Texture
+* Added background color options to all controls, added Cursor Color option to dfTextbox
+* Created "Daikon Forge/Dynamic Font Shader" to resolve render-order issues with dynamic fonts
+* Consecutive down/mouseup events in same frame now processed correctly
+* dfDynamicFont class now compiles for Windows Phone
+* Vertical sliders with negative min value now calculate correct value on user mouse actions
+* Added "Force Square" and "Max Size" options to texture atlas editor
+* When button's OnClick or OnMouseDown event causes ancestor to be disabled, button now switches to Disabled state
+* Panel now uses correct color to render background sprite when disabled
+* Fixed minor Undo issues in Unity 4.3+
+* Fixed dfControl.GetCenter() to work properly when control is rotated
+* Added design-time guides - Create, Edit, and Move guides that help with control alignment and snapping (use SHIFT-CTRL-G to toggle guides)
+* Added design-time ability to move control with mouse drag
+* Completely reworked how resizing controls works in the editor
+* Added design-time visualization of control extents when resizing
+* Assigning dfControl.Color no longer overwrites Opacity value
+* Fixed dfGUIManager.ScreenToGUI() to always return correct value for current "virtual screen resolution"
+* Texture atlases now created with "Alpha is Transparency" by default. User-defined setting is retained when rebuilding.
+* Fixed dfTextbox.CursorIndex property
+* dfSlider.MinValue and .MaxValue now immediately refresh the control when assigned
+* Modified dfDynamicFont to use fully-qualified type name for UnityEngine.CharacterInfo to avoid naming collisions
+* dfDropdownList.SelectedValue now refreshes the control when a new selected value is assigned
+* Implemented several more workarounds for Mac-specific Unity bugs
+* Removed locking of Transform.localScale at design time (expert mode)
+* Added ability for Property Binding to bind to string regardless of source data type
+* Event Binding component can now call coroutine-style event handlers 
+* Property Binding can now specify a format string when binding to string target property
+* Added dfEventDrivenPropertyBinding - Allows event-driven (rather than polled) property binding
+* You can now select dynamic fonts from the Select Font dialog
+* You can now assign a dynamic font as the Default Font in the UI Root
+* Remove AOT-only exception in dfPoolManager class 
+* Text rendering now correctly respects CharacterSpacing parameter
+* Fixed cursor blink rate in Textbox control
+* Removed GetProperty/SetProperty extension methods that were contaminating global name space
+* Many Daikon Forge GUI menu options now found under the "Tools/Daikon Forge" menu
