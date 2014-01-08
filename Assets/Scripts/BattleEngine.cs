@@ -15,10 +15,9 @@ public class BattleEngine : MonoBehaviour
 	private bool _resultEvaluated = false;
 	
 	public const string DefaultArena			 = "DefaultArena";
-	public const string DefaultFriendly 		 = "DefaultFriendly";
-	public const string DefaultEnemy 			 = "DefaultEnemy";
 	public const string DefaultFriendlySpawnPos  = "FriendlySpawnPos";
 	public const string DefaultEnemySpawnPos	 = "EnemySpawnPos";
+	public const string DefaultMonster	 		 = "DefaultMonster";
 
 	void Awake()
 	{
@@ -108,7 +107,7 @@ public class BattleEngine : MonoBehaviour
 			if(_arena == null) 
 			{
 				Debug.Log("Arena request, return null.");
-				CreateArena();
+				CreateBattle(new BattleInit());
 			}
 			return _arena;
 		}
@@ -119,19 +118,19 @@ public class BattleEngine : MonoBehaviour
 		}
 	}
 
-	public void CreateArena(string arenaName = DefaultArena, string friendlyCreature = DefaultFriendly, string enemyCreature = DefaultEnemy)
+	public void CreateBattle(BattleInit serverInfo)
 	{
 		//////////////////////////////
-		_arena = Create(arenaName, Vector3.zero, Quaternion.identity);
+		_arena = Create(DefaultArena, Vector3.zero, Quaternion.identity);
 		//////////////////////////////
-		_friendlyCreature = Create(friendlyCreature, 
+		_friendlyCreature = Create(DefaultMonster, 
 		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
 		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
 		_friendlyCreature.GetComponent<ActorControlls>().StartPosition = _arena.transform.FindChild(DefaultFriendlySpawnPos).position;
 		_friendlyCreature.GetComponent<ActorControlls>().Owner = this;
 		//////////////////////////////
-		_enemyCreature = Create(enemyCreature, 
+		_enemyCreature = Create(DefaultMonster, 
 		                        _arena.transform.FindChild(DefaultEnemySpawnPos).position, 
 		                        _arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
 

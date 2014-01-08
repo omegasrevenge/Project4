@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 	void Start()
 	{
 		_battleEngine = GetComponent<BattleEngine>();
-		_battleEngine.CreateArena();
+		_battleEngine.CreateBattle(new BattleInit());
 		_battleEngine.ExecuteAttack(_battleEngine.FriendlyCreature, _battleEngine.EnemyCreature);
 	}
 
