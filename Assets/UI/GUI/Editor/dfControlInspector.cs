@@ -981,8 +981,10 @@ public class dfControlInspector : Editor
 					dfEditorUtil.LabelWidth = OPTION_WIDTH;
 
 					var proportional = EditorGUILayout.Toggle( "Proportional", retVal.IsFlagSet( dfAnchorStyle.Proportional ) );
-					retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
+                    var aspect = EditorGUILayout.Toggle("Keep Aspect", retVal.IsFlagSet(dfAnchorStyle.KeepProportions));
 
+					retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
+                    retVal = retVal.SetFlag(dfAnchorStyle.KeepProportions, aspect);
 				}
 				GUILayout.EndVertical();
 

@@ -4512,7 +4512,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 
 			if( anchorStyle.IsFlagSet( dfAnchorStyle.Proportional ) )
 				resetLayoutProportional();
-			else
+            else
 				resetLayoutAbsolute();
 
 		}
@@ -4536,7 +4536,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 			margins.top = top / parentSize.y;
 			margins.bottom = bottom / parentSize.y;
 
-		}
+		}		
 
 		private void resetLayoutAbsolute()
 		{
@@ -4667,6 +4667,10 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 				newPosition.y = ( parentSize.y - controlSize.y ) * 0.5f;
 			}
 
+            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportions))
+            {
+                KeepProportions(ref controlSize, ref newSize, ref newPosition.x, ref newPosition.y);
+            }
 			// NOTE: It is very important to set Size before setting Position,
 			// since the Position property relies on the value of the Size
 			// property when calculating the transform position based on the 
@@ -4747,6 +4751,12 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 				Mathf.Max( 0, bottom - top )
 				);
 
+
+            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportions))
+            {
+                KeepProportions(ref controlSize, ref newSize, ref left, ref top);
+            }
+
 			// NOTE: It is very important to set Size before setting Position,
 			// since the Position property relies on the value of the Size
 			// property when calculating the transform position based on the 
@@ -4755,6 +4765,42 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 			owner.setRelativePosition( new Vector3( left, top ) );
 
 		}
+
+	    private void KeepProportions(ref Vector2 controlSize, ref Vector2 newSize, ref float left, ref float top)
+	    {
+	        if (newSize.x == 0)
+	        {
+	            newSize.y = 0;
+	            return;
+	        }
+	        if (newSize.y == 0)
+	        {
+	            newSize.x = 0;
+	            return;
+	        }
+
+            //Debug.Log(string.Format("Old values ({0}|{1}) => new values ({2}|{3})", controlSize.x, controlSize.y, newSize.x, newSize.y));
+
+            var scaleX = newSize.x / controlSize.x;
+            var scaleY = newSize.y / controlSize.y;
+            //Debug.Log("Scale("+scaleX + "," + scaleY+")");
+            if (scaleX < scaleY)
+            {
+                var deltaY = newSize.y;
+                newSize.y = Mathf.RoundToInt(controlSize.y * scaleX);
+                deltaY -= newSize.y;
+                //Debug.Log("DeltaY = "+deltaY);
+                top += Mathf.RoundToInt(deltaY*0.5f);
+            }
+            else
+            {
+                var deltaX = newSize.x;
+                newSize.x = Mathf.RoundToInt(controlSize.x * scaleY);
+                deltaX -= newSize.x;
+                //Debug.Log("DeltaX = " + deltaX);
+                left += Mathf.RoundToInt(deltaX * 0.5f);
+            }
+	    }
 
 		private Vector2 getParentSize()
 		{
