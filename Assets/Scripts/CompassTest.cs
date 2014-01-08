@@ -71,9 +71,9 @@ public class CompassTest : MonoBehaviour
 		{
 			if (MapUtils.DistanceInKm(poi.Position,LocationManager.GetCurrentPosition()) <= RangeRadius)
 			{
-				GUI.Label(new Rect(400, 40 + inRange * 40, 200, 20), poi.Name);
-
-				if (GUI.Button(new Rect(400, 60 + inRange * 40, 100, 20), "Farm"))
+                GUI.Label(new Rect(400, 40 + inRange * 40, 200, 20), poi.Name);
+			    string btnString = poi.Rsc == "Fight" ? "Fight" : "Farm";
+                if (GUI.Button(new Rect(400, 60 + inRange * 40, 100, 20), btnString))
 				{
 					GameManager.Singleton.PoiFarm(poi);
 				}

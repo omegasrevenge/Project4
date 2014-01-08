@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
             Lat = lat;
         }
     }
-    public const string ServerURL = "http://pixeltamer.net:7774/rpc/";
+    public string ServerURL = "http://pixeltamer.net:7774/rpc/";
     private const float OwnUpdateFreq = 60*3;
     private const float PositionUpdateFreq = 60*1;
     private const float PositionUpdateFreqMove = 5;
@@ -141,9 +141,10 @@ public class GameManager : MonoBehaviour
     /// Gets SessionID by PlayerID (Get from OAuth).
     /// </summary>
     /// <param name="playerID"></param>
-	public void Login(string playerID, string password)
+	public void Login(string playerID, string password, bool local)
 	{
-		StartCoroutine(CLogin(playerID, password));
+        if (local) ServerURL = "http://localhost:7774/rpc/";
+        StartCoroutine(CLogin(playerID, password));
 	}
 
     private IEnumerator CLogin(string token)
@@ -359,7 +360,7 @@ public class GameManager : MonoBehaviour
 			JSONObject json = JSONParser.parse(request.text);
 			if (!CheckResult(json)){ yield break;}
 
-		Login(playerid,password);
+		Login(playerid,password, false);
 	}
 
 	private IEnumerator GetPois()
