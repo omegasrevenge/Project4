@@ -1,4 +1,6 @@
 /* Copyright 2013 Daikon Forge */
+
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEditor;
 
@@ -885,6 +887,8 @@ public class dfControlInspector : Editor
 		return property.GetValue( control, null );
 	}
 
+    enum FillMode {IgnoreAspect, ScaleToFill, ScaleToFit }
+
 	private dfAnchorStyle EditAnchor( dfAnchorStyle value )
 	{
 
@@ -980,11 +984,8 @@ public class dfControlInspector : Editor
 
 					dfEditorUtil.LabelWidth = OPTION_WIDTH;
 
-					var proportional = EditorGUILayout.Toggle( "Proportional", retVal.IsFlagSet( dfAnchorStyle.Proportional ) );
-                    var aspect = EditorGUILayout.Toggle("Keep Aspect", retVal.IsFlagSet(dfAnchorStyle.KeepProportions));
-
-					retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
-                    retVal = retVal.SetFlag(dfAnchorStyle.KeepProportions, aspect);
+					var proportional = EditorGUILayout.Toggle( "Scale To Parent", retVal.IsFlagSet( dfAnchorStyle.Proportional ) );
+                    retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
 				}
 				GUILayout.EndVertical();
 
@@ -993,11 +994,56 @@ public class dfControlInspector : Editor
 			}
 			GUILayout.EndHorizontal();
 
+            GUILayout.BeginHorizontal();
+            {
+
+                EditorGUILayout.LabelField("Scaling", "", GUILayout.Width(labelWidth));
+
+                GUILayout.BeginVertical();
+                {
+
+                    //dfEditorUtil.LabelWidth = OPTION_WIDTH;
+
+                    FillMode fillMode = FillMode.IgnoreAspect;
+                    if (retVal.IsFlagSet(dfAnchorStyle.KeepProportionsFill))
+                        fillMode = FillMode.ScaleToFill;
+                    else if (retVal.IsFlagSet(dfAnchorStyle.KeepProportionsFit))
+                        fillMode = FillMode.ScaleToFit;
+
+
+                    FillMode newFillMode = (FillMode)EditorGUILayout.EnumPopup("", fillMode);
+                    if (newFillMode != fillMode)
+                    {
+                        if (newFillMode == FillMode.IgnoreAspect)
+                        {
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFit, false);
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFill, false);
+                        }
+                        else if (newFillMode == FillMode.ScaleToFill)
+                        {
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFit, false);
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFill, true);
+                        }
+                        else
+                        {
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFit, true);
+                            retVal = retVal.SetFlag(dfAnchorStyle.KeepProportionsFill, false);
+                        }
+                    }
+                }
+                GUILayout.EndVertical();
+
+                GUILayout.FlexibleSpace();
+
+            }
+            GUILayout.EndHorizontal();
 		}
 
 		return retVal;
 
 	}
+
+
 
 	/// <summary>
 	/// Hook to allow custom dfControl inspectors to perform a "default" action

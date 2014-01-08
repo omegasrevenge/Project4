@@ -4667,9 +4667,13 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 				newPosition.y = ( parentSize.y - controlSize.y ) * 0.5f;
 			}
 
-            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportions))
+            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportionsFit))
             {
-                KeepProportions(ref controlSize, ref newSize, ref newPosition.x, ref newPosition.y);
+                KeepProportions(ref controlSize, ref newSize, ref newPosition.x, ref newPosition.y, false);
+            }
+            else if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportionsFill))
+            {
+                KeepProportions(ref controlSize, ref newSize, ref newPosition.x, ref newPosition.y, true);
             }
 			// NOTE: It is very important to set Size before setting Position,
 			// since the Position property relies on the value of the Size
@@ -4752,9 +4756,13 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 				);
 
 
-            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportions))
+            if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportionsFit))
             {
-                KeepProportions(ref controlSize, ref newSize, ref left, ref top);
+                KeepProportions(ref controlSize, ref newSize, ref left, ref top, false);
+            }
+            else if (anchorStyle.IsFlagSet(dfAnchorStyle.KeepProportionsFill))
+            {
+                KeepProportions(ref controlSize, ref newSize, ref left, ref top, true);
             }
 
 			// NOTE: It is very important to set Size before setting Position,
@@ -4766,7 +4774,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 
 		}
 
-	    private void KeepProportions(ref Vector2 controlSize, ref Vector2 newSize, ref float left, ref float top)
+	    private void KeepProportions(ref Vector2 controlSize, ref Vector2 newSize, ref float left, ref float top, bool fill)
 	    {
 	        if (newSize.x == 0)
 	        {
@@ -4784,7 +4792,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
             var scaleX = newSize.x / controlSize.x;
             var scaleY = newSize.y / controlSize.y;
             //Debug.Log("Scale("+scaleX + "," + scaleY+")");
-            if (scaleX < scaleY)
+            if ((scaleX > scaleY && fill)||(scaleX < scaleY && !fill))
             {
                 var deltaY = newSize.y;
                 newSize.y = Mathf.RoundToInt(controlSize.y * scaleX);
