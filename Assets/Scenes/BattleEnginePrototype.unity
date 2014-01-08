@@ -162,7 +162,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 921887297}
-  - 114: {fileID: 921887298}
   - 114: {fileID: 921887299}
   m_Layer: 0
   m_Name: GameController
@@ -182,20 +181,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &921887298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 921887296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1579e7a3e560954dbd3aeb43125049a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Result: {fileID: 0}
-  Actors: []
-  Turn: 1
 --- !u!114 &921887299
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class MonsterInit : MonoBehaviour
 		Level = level;
 		HP = hp;
 
-		Color color;
+		Color color = Color.grey;
 		switch(Element)
 		{
 		case BattleInit.Element.Fire:
@@ -35,7 +35,7 @@ public class MonsterInit : MonoBehaviour
 			color = Color.white;
 			break;
 		}
-		transform.FindChild("model").GetComponent<Material>().color = color;
+		transform.FindChild("model").GetComponent<MeshRenderer>().material.color = color;
 
 
 	}

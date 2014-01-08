@@ -19,26 +19,30 @@ public class BattleEngine : MonoBehaviour
 	public const string DefaultEnemySpawnPos	 = "EnemySpawnPos";
 	public const string DefaultMonster	 		 = "DefaultMonster";
 
+	public static BattleEngine Current;
+
 	void Awake()
 	{
 		Actors = new List<ActorControlls>();
 	}
+	
+	public static void CreateBattle(BattleInit serverInfo)
+	{
+		Current = new BattleEngine(serverInfo); // <----------- this starts the battle
+	}
 
 	void Update()
 	{
-		if(Result != null)
+		if(Result != null && Turn != Result.Turn && !_resultEvaluated)
 		{
-			if(!_resultEvaluated)
-			{
-				_nextPlayer = Result.PlayerTurn;
+			_nextPlayer = Result.PlayerTurn;
 
-				int changeA = FriendlyCreature.GetComponent<ActorControlls>().Health-Result.PlayerAHealth;
-				int changeB = EnemyCreature   .GetComponent<ActorControlls>().Health-Result.PlayerBHealth;
-				
-				FriendlyCreature.GetComponent<ActorControlls>().Health = Result.PlayerAHealth; // has to be changed in the future, your creature doesnt have to belong to playerA
-				EnemyCreature.GetComponent<ActorControlls>().Health    = Result.PlayerBHealth;
-				_resultEvaluated = true;
-			}
+			int changeA = FriendlyCreature.GetComponent<ActorControlls>().Health-Result.PlayerAHealth;
+			int changeB = EnemyCreature   .GetComponent<ActorControlls>().Health-Result.PlayerBHealth;
+			
+			FriendlyCreature.GetComponent<ActorControlls>().Health = Result.PlayerAHealth; // has to be changed in the future, your creature doesnt have to belong to playerA
+			EnemyCreature.GetComponent<ActorControlls>().Health    = Result.PlayerBHealth;
+			_resultEvaluated = true;
 
 			bool allDone = true;
 			foreach(ActorControlls actor in Actors)
@@ -62,6 +66,48 @@ public class BattleEngine : MonoBehaviour
 				_resultEvaluated = false;
 			}
 		}
+	}
+
+	public BattleEngine(BattleInit serverInfo)
+	{
+		//////////////////////////////
+		_arena = Create(DefaultArena, Vector3.zero, Quaternion.identity);
+		//////////////////////////////
+		_friendlyCreature = Create(DefaultMonster, 
+		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
+		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
+		
+		_friendlyCreature.GetComponent<ActorControlls>().StartPosition = _arena.transform.FindChild(DefaultFriendlySpawnPos).position;
+		_friendlyCreature.GetComponent<ActorControlls>().Owner = this;
+		_friendlyCreature.GetComponent<MonsterInit>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAHealth);
+		//////////////////////////////
+		_enemyCreature = Create(DefaultMonster, 
+		                        _arena.transform.FindChild(DefaultEnemySpawnPos).position, 
+		                        _arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
+		
+		_enemyCreature.GetComponent<ActorControlls>().StartPosition = _arena.transform.FindChild(DefaultEnemySpawnPos).position;
+		_enemyCreature.GetComponent<ActorControlls>().Owner = this;
+		_enemyCreature.GetComponent<MonsterInit>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBHealth);
+		//////////////////////////////
+	}
+
+	public void DestroyBattle()
+	{
+		Destroy(_friendlyCreature);
+		Destroy(_enemyCreature);
+		Destroy(_arena);
+		Destroy(this);
+	}
+
+	private GameObject Create(string value, Vector3 pos, Quaternion rot)
+	{
+		return (GameObject)Instantiate(Resources.Load(value), pos, rot);
+	}
+
+	public void ExecuteAttack(GameObject source, GameObject target)
+	{
+		Actors.Add(source.GetComponent<ActorControlls>());
+		source.GetComponent<ActorControlls>().Attack(target.transform.position);
 	}
 
 	public GameObject FriendlyCreature
@@ -99,7 +145,7 @@ public class BattleEngine : MonoBehaviour
 			_enemyCreature = value;
 		}
 	}
-
+	
 	public GameObject Arena
 	{
 		get
@@ -118,35 +164,4 @@ public class BattleEngine : MonoBehaviour
 		}
 	}
 
-	public void CreateBattle(BattleInit serverInfo)
-	{
-		//////////////////////////////
-		_arena = Create(DefaultArena, Vector3.zero, Quaternion.identity);
-		//////////////////////////////
-		_friendlyCreature = Create(DefaultMonster, 
-		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
-		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
-
-		_friendlyCreature.GetComponent<ActorControlls>().StartPosition = _arena.transform.FindChild(DefaultFriendlySpawnPos).position;
-		_friendlyCreature.GetComponent<ActorControlls>().Owner = this;
-		//////////////////////////////
-		_enemyCreature = Create(DefaultMonster, 
-		                        _arena.transform.FindChild(DefaultEnemySpawnPos).position, 
-		                        _arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
-
-		_enemyCreature.GetComponent<ActorControlls>().StartPosition = _arena.transform.FindChild(DefaultEnemySpawnPos).position;
-		_enemyCreature.GetComponent<ActorControlls>().Owner = this;
-		//////////////////////////////
-	}
-
-	private GameObject Create(string value, Vector3 pos, Quaternion rot)
-	{
-		return (GameObject)Instantiate(Resources.Load(value), pos, rot);
-	}
-
-	public void ExecuteAttack(GameObject source, GameObject target)
-	{
-		Actors.Add(source.GetComponent<ActorControlls>());
-		source.GetComponent<ActorControlls>().Attack(target.transform.position);
-	}
 }

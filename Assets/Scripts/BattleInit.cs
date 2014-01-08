@@ -5,16 +5,16 @@ public class BattleInit : MonoBehaviour
 {
 	public enum Element{Fire, Technology, Nature, Water, Wind}
 	
-	public Element MonsterAElement = Element.Fire; //dirty testing method
-	public Element MonsterBElement = Element.Water;
+	public Element MonsterAElement = Element.Nature; //dirty testing method
+	public Element MonsterBElement = Element.Fire;
 	
-	public string MonsterAName;
-	public string MonsterBName;
+	public string MonsterAName = "Cthulhu";
+	public string MonsterBName = "Ragnaros";
 	
-	public int MonsterAHealth;
-	public int MonsterBHealth;
+	public int MonsterAHealth = 300;
+	public int MonsterBHealth = 500;
 	
-	public int MonsterALevel;
-	public int MonsterBLevel;
+	public int MonsterALevel = 20;
+	public int MonsterBLevel = 19;
 
 }

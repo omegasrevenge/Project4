@@ -9,8 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: DefaultEnemy
+  m_Name: DefaultMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +111,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Hit: 0
-  StartPosition: {fileID: 0}
+  StartPosition: {x: 0, y: 0, z: 0}
+  AttackSpeed: 5
+  Projectile: 0
+  Owner: {fileID: 0}
+  CurrentPhase: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bf332aa99585d4db51d7898580427f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Element: 0
+  Name: 
+  Level: 0
+  HP: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
