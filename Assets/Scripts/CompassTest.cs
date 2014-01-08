@@ -50,6 +50,9 @@ public class CompassTest : MonoBehaviour
 
 		if (GameManager.Singleton.Player.Resources == null)return;
 
+		GUIStyle curGuiStyle = new GUIStyle { fontSize = 30};
+		curGuiStyle.normal.textColor = Color.white;
+
 		for (int i = 0; i < 7; i++)
 		{
 			string z = "" + i + ":";
@@ -57,7 +60,7 @@ public class CompassTest : MonoBehaviour
 			{
 				z += GameManager.Singleton.Player.Resources[i, j] + " ";
 			}
-			GUI.Label(new Rect(250, 40+i*20, 200, 20), z);
+			GUI.Label(new Rect(300, 40+i*40, 200, 20), z, curGuiStyle);
 		}
 	}
 
@@ -65,15 +68,18 @@ public class CompassTest : MonoBehaviour
 	{
 		int inRange = 0;
 
-		GUI.Label(new Rect(400, 10, 200, 20), GameManager.Singleton.lastFarmResult);
+		GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
+		curGuiStyle.normal.textColor = Color.white;
+
+		GUI.Label(new Rect(500, 10, 200, 20), GameManager.Singleton.lastFarmResult, curGuiStyle);
 
 		foreach (POI poi in GameManager.Singleton.POIs)
 		{
 			if (MapUtils.DistanceInKm(poi.Position,LocationManager.GetCurrentPosition()) <= RangeRadius)
 			{
-                GUI.Label(new Rect(400, 40 + inRange * 40, 200, 20), poi.Name);
+				GUI.Label(new Rect(500, 40 + inRange * 60, 200, 20), poi.Name, curGuiStyle);
 			    string btnString = poi.Rsc == "Fight" ? "Fight" : "Farm";
-                if (GUI.Button(new Rect(400, 60 + inRange * 40, 100, 20), btnString))
+                if (GUI.Button(new Rect(500, 80 + inRange * 60, 120, 50), btnString))
 				{
 					GameManager.Singleton.PoiFarm(poi);
 				}
