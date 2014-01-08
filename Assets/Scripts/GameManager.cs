@@ -428,6 +428,19 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-
-
+	private void OnApplicationPause(bool paused)
+	{
+		if (paused)
+		{
+			Debug.Log("Pause App.");
+			Input.location.Stop();
+			Input.compass.enabled = false;
+		}
+		else
+		{
+			Debug.Log("Resume App.");
+			Input.location.Start();
+			Input.compass.enabled = true;
+		}
+	}
 }

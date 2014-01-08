@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f543c9fa50e16749a50292573e79b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ServerURL: http://pixeltamer.net:7774/rpc/
   pois_version: 0
   pois_timeQ: 0
   pois_valid: 0
@@ -164,7 +165,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 344512733}
-  - 114: {fileID: 344512732}
+  - 114: {fileID: 344512735}
+  - 114: {fileID: 344512734}
   m_Layer: 0
   m_Name: MapTest
   m_TagString: Untagged
@@ -172,20 +174,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &344512732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 344512731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70530b5c188ab4f4ea62058a02554f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Grid: {fileID: 1787781471}
-  CameraRig: {fileID: 730788163}
-  grid_version: 0
 --- !u!4 &344512733
 Transform:
   m_ObjectHideFlags: 0
@@ -197,6 +185,33 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &344512734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 344512731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79697014cffd23c41815248bb09146d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Grid: {fileID: 0}
+  RangeRadius: 0
+--- !u!114 &344512735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 344512731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09ea7cbcab091645b2cb2e791110da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRig: {fileID: 730788163}
+  Grid: {fileID: 1787781471}
+  grid_version: 0
 --- !u!1 &373906082
 GameObject:
   m_ObjectHideFlags: 0
