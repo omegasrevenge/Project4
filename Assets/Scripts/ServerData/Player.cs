@@ -7,7 +7,9 @@ public class Player
 {
     public string PlayerID;
     public string Name;
-    public Vector2 Position;
+	public Vector2 Position;
+	public Vector2 BasePosition;
+	public Int64 BaseTime;
     public int[,] Resources;
     //public int XP;
     //public int Level;
@@ -17,7 +19,9 @@ public class Player
     {
         PlayerID = (string)json["PId"];
         Name = (string)json["Name"];
-        Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
+		Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
+		BasePosition = new Vector2((float)json["BaseLon"], (float)json["BaseLat"]);
+	    BaseTime = (Int64) json["TimeBase"];
         Resources = new int[7,5];
         JSONObject res = json["Resources"];
         for (int i = 0; i < res.Count; i++)

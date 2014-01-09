@@ -20,7 +20,7 @@ public class Login : MonoBehaviour
     void OnGUI()
     {
 #if UNITY_EDITOR
-		if (GameManager.Singleton.LoggedIn == false && Register == false)
+		if (!GameManager.Singleton.LoggedIn && !Register)
 		{
 	        PlayerID = GUI.TextField(new Rect(10, 10, 200, 20), PlayerID, 100);
 	        Password = GUI.TextField(new Rect(10, 40, 200, 20), Password, 100);
@@ -57,7 +57,7 @@ public class Login : MonoBehaviour
 
         //}
 
-		if (GameManager.Singleton.LoggedIn == true)
+		if (GameManager.Singleton.LoggedIn)
 		{
 			Enemy = GUI.TextField(new Rect(10, 100, 200, 20), Enemy, 100);
 

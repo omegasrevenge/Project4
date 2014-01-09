@@ -221,6 +221,24 @@ public class GameManager : MonoBehaviour
         Player.Position = pos;
     }
 
+	public void SendBasePosition()
+	{
+		if (!LoggedIn) return;
+		StartCoroutine(CSendBasePosition());
+	}
+
+	private IEnumerator CSendBasePosition()
+	{
+		Vector2 pos = LocationManager.GetCurrentPosition();
+		WWW request = new WWW(GetSessionURL("setbasepos") + "&lon=" + pos.x + "&lat=" + pos.y);
+
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json)) yield break;
+		Player.BasePosition = pos;
+	}
+
 	public void PoiFarm(POI poi)
 	{
 		if (!LoggedIn) return;
