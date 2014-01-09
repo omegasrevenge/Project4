@@ -13,7 +13,9 @@ public class Player
     public int[,] Resources;
     //public int XP;
     //public int Level;
-    public bool Fighting;
+	public bool Fighting;
+
+	public GameObject baseInstance;
 
     public void ReadJson(JSONObject json)
     {
