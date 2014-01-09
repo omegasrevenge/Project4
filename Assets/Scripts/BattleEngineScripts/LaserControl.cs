@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LaserControl : MonoBehaviour {
+public class LaserControl : ActorControlls {
 
 	public float FinalHeadScale = 3f;
 	public float HeadScalingSpeed = 3f;
 	public float FadeOutTime = 2f;
 	public float LifeTime = 5f;
-	public int Damage = 80;
 
-	private float _counter;
+	private float _counter = 0f;
 	private Transform _head;
 	private Transform _beam;
-	private bool _canDamage = true;
 
 	// Use this for initialization
 	void Start () 
 	{
+		AnimationFinished = false;
 		_head = transform.FindChild("Head");
 		_beam = transform.FindChild("Beam");
 	}
@@ -33,7 +32,7 @@ public class LaserControl : MonoBehaviour {
 			if(!_beam.gameObject.activeSelf)
 			{
 				_beam.gameObject.SetActive(true);
-				//damageinstance happens now
+				CanShowDamage = true;
 			}
 		}
 
@@ -51,8 +50,9 @@ public class LaserControl : MonoBehaviour {
 		}
 
 		_counter += Time.deltaTime;
-		if(networkView.isMine && _counter >= LifeTime)
+		if(_counter >= LifeTime)
 		{
+			Owner.Actor = null;
 			Destroy(gameObject);
 		}
 	}

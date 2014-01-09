@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonsterInit : MonoBehaviour 
+public class MonsterStats : MonoBehaviour 
 {
 
 	public BattleInit.Element Element;

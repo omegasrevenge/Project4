@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BattleInit : MonoBehaviour 
+public class BattleInit
 {
 	public enum Element{Fire, Technology, Nature, Water, Wind}
 	
-	public Element MonsterAElement = Element.Nature; //dirty testing method
-	public Element MonsterBElement = Element.Fire;
+	public Element MonsterAElement = Element.Nature; //default values. also used as a dirty testing method
+	public Element MonsterBElement = Element.Fire;	 //you can put in different values, but there HAVE to be default values
 	
 	public string MonsterAName = "Cthulhu";
 	public string MonsterBName = "Ragnaros";
