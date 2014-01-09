@@ -136,6 +136,7 @@ MonoBehaviour:
   XP: 10
   Enemy: Enemy
   Register: 0
+  AnimationTest: {fileID: 377485136}
 --- !u!4 &120960991
 Transform:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &235913491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235913490}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -367,6 +368,7 @@ GameObject:
   - 4: {fileID: 377485133}
   - 65: {fileID: 377485135}
   - 114: {fileID: 377485134}
+  - 114: {fileID: 377485136}
   m_Layer: 8
   m_Name: panel_loadingscreen
   m_TagString: Untagged
@@ -449,6 +451,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.125, y: 2, z: .00100000005}
   m_Center: {x: .5625, y: -1, z: 0}
+--- !u!114 &377485136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 377485132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e386ea79e43a647877871c0d227710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playing: 0
 --- !u!1 &435784087
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +825,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1514476888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .000781250012, y: 0, z: 0}
+  m_LocalPosition: {x: .000781250012, y: .000781250012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235913496}

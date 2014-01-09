@@ -9,6 +9,8 @@ public class Login : MonoBehaviour
 	public string Enemy = "Enemy";
 	public bool Register = false;
 
+    public DFPanelAnimation AnimationTest;
+
     void Start()
     {
 #if !UNITY_EDITOR
@@ -83,6 +85,9 @@ public class Login : MonoBehaviour
         {
             //@To-do: Do something!
         }
+
+        AnimationTest.Scroll(-1f,0);
+
         string token = NerdGPG.Instance().GetToken();
         if (string.IsNullOrEmpty(token))
         {
