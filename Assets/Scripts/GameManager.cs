@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-	private void Start()
+	private void Awake()
 	{
         //Check for Singleton
 		if (_instance == null)
@@ -461,4 +461,16 @@ public class GameManager : MonoBehaviour
 			Input.compass.enabled = true;
 		}
 	}
+
+    void OnApplicationFocus(bool focusStatus)
+    {
+        
+        if (focusStatus)
+        {
+            Debug.Log("FOCUS CHANGED => HIDE NAVIGATION BAR!");
+#if !UNITY_EDITOR
+            (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
+#endif
+        }
+    }
 }

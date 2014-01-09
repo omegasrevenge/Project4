@@ -29,8 +29,8 @@ PlayerSettings:
   displayResolutionDialog: 1
   allowedAutorotateToPortrait: 1
   allowedAutorotateToPortraitUpsideDown: 1
-  allowedAutorotateToLandscapeRight: 1
-  allowedAutorotateToLandscapeLeft: 1
+  allowedAutorotateToLandscapeRight: 0
+  allowedAutorotateToLandscapeLeft: 0
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   use24BitDepthBuffer: 1
@@ -104,7 +104,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 2
-  AndroidKeystoreName: D:/Projekte/Project4/user.keystore
+  AndroidKeystoreName: C:/Users/anlicht/Documents/GitHub/Project4/user.keystore
   AndroidKeyaliasName: test
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
