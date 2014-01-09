@@ -9,6 +9,9 @@ public class GUIMap : MonoBehaviour {
 	private int pois_version = 0;
 	public int grid_version = 0;
 
+	public const float MoveSpeed = 1f;
+	public const float MoveRadius = 1f;
+
 	public const float RangeRadius = 0.188f / 2f;
 
 	void OnGUI()
@@ -53,6 +56,15 @@ public class GUIMap : MonoBehaviour {
 				inRange++;
 			}
 		}
+		if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
+		{
+			GUI.Label(new Rect(500, 40 + inRange * 60, 200, 20), "Base", curGuiStyle);
+			if (GUI.Button(new Rect(500, 80 + inRange * 60, 120, 50), "Visit Base"))
+			{
+				Debug.Log("is now visiting the Base!");
+			}
+			inRange++;
+		}
 	}
 
 	public void CreatePOIs()
@@ -80,6 +92,15 @@ public class GUIMap : MonoBehaviour {
 		//Rotation:
 		Vector3 cameraRot = CameraRig.transform.eulerAngles;
 		CameraRig.transform.eulerAngles = new Vector3(cameraRot.x, TouchInput.Singleton.GetRotation(cameraRot.y, CameraRig.transform.position, true), cameraRot.z);
+
+		MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(Grid.ZoomLevel);
+		if ((newPosition - Grid.CurrentPosition).Magnitude < MoveRadius)
+			Grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(Grid.CurrentPosition, newPosition,
+				Time.deltaTime * MoveSpeed);
+		else
+		{
+			Grid.CurrentPosition = newPosition;
+		}
 
 		if (grid_version != Grid.grid_version)
 		{
