@@ -11,7 +11,7 @@ public class Login : MonoBehaviour
 
     public DFPanelAnimation AnimationTest;
 
-    void Start()
+    void Awake()
     {
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
@@ -28,12 +28,12 @@ public class Login : MonoBehaviour
 	        Password = GUI.TextField(new Rect(10, 40, 200, 20), Password, 100);
 	        if (GUI.Button(new Rect(10, 70, 100, 20), "Login"))
 	        {
-	            GameManager.Singleton.Login(PlayerID, Password, false);
+	            GameManager.Singleton.Login(PlayerID, Password, false, OnPlayerLoaded);
 	        }
 
             if (GUI.Button(new Rect(210, 70, 100, 20), " >>> Local <<<"))
             {
-                GameManager.Singleton.Login(PlayerID, Password, true);
+                GameManager.Singleton.Login(PlayerID, Password, true, OnPlayerLoaded);
             }
 
             //if (GUI.Button(new Rect(120, 70, 100, 20), "Register"))
@@ -86,15 +86,27 @@ public class Login : MonoBehaviour
             //@To-do: Do something!
         }
 
-        AnimationTest.Scroll(-1f,0);
-
         string token = NerdGPG.Instance().GetToken();
         if (string.IsNullOrEmpty(token))
         {
             //@To-do: Do something!
+            return;
         }
         Debug.Log("GPGUI: Got Login Response: " + result);
-        Debug.Log("!!!!!!!!!!" + NerdGPG.Instance().GetToken());
-        GameManager.Singleton.Login(token);
+        Debug.Log("Token: " + NerdGPG.Instance().GetToken());
+        GameManager.Singleton.Login(token, OnPlayerLoaded);
+        
+    }
+
+    private void OnPlayerLoaded(bool result)
+    {
+        if (!result)
+        {
+            Debug.LogError("Couldn't load Player Data!");
+            return;
+        }
+
+        AnimationTest.Scroll(-1f, 0);
+
     }
 }

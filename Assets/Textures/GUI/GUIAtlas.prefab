@@ -44,7 +44,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: .751953125
+      y: .890625
       width: .015625
       height: .015625
     border:
@@ -89,6 +89,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 512, y: 512}
     textureGUID: 0e6994846c6a5354db413ddc5a2610c4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: gui_login_loadingbar
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .751953125
+      width: .203613281
+      height: .137695312
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 417, y: 282}
+    textureGUID: 0e9699ec18479d24abf775e2a835a851
     deleted: 0
     texture: {fileID: 0}
   - name: gui_login_logo

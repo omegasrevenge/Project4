@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -132,22 +133,22 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Login(string token)
+    public void Login(string token, Action<bool> callback = null)
     {
-        StartCoroutine(CLogin(token));
+        StartCoroutine(CLogin(token, callback));
     }
 
     /// <summary>
     /// Gets SessionID by PlayerID (Get from OAuth).
     /// </summary>
     /// <param name="playerID"></param>
-	public void Login(string playerID, string password, bool local)
+    public void Login(string playerID, string password, bool local, Action<bool> callback = null)
 	{
         if (local) ServerURL = "http://localhost:7774/rpc/";
-        StartCoroutine(CLogin(playerID, password));
+        StartCoroutine(CLogin(playerID, password, callback));
 	}
 
-    private IEnumerator CLogin(string token)
+    private IEnumerator CLogin(string token, Action<bool> callback = null)
     {
         WWW request = new WWW(ServerURL + "login_google?token=" + token);
         yield return request;
@@ -156,10 +157,10 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) yield break;
         SessionID = (string)json["data"]["sid"];
         Player.PlayerID = (string)json["data"]["pid"]; 
-        GetOwnPlayer();
+        GetOwnPlayer(callback);
     }
 
-	private IEnumerator CLogin(string playerID, string password)
+    private IEnumerator CLogin(string playerID, string password, Action<bool> callback = null)
 	{
 	    string url = ServerURL + "login_password?pid=" + playerID + "&pass=" + password;
         Debug.Log("URL: "+url);
@@ -171,31 +172,37 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) yield break;
 		SessionID = (string)json["data"];
 		Player.PlayerID = playerID;
-        GetOwnPlayer();
+        GetOwnPlayer(callback);
 
 	}
 
     /// <summary>
     /// Loads own Player Data (First login with playerID).
     /// </summary>
-	public void GetOwnPlayer()
+	public void GetOwnPlayer(Action<bool> callback = null)
 	{
         if (!LoggedIn) return;
 		_lastOwnPlayerUpdate = Time.time;
-		StartCoroutine(CGetOwnPlayer());
+		StartCoroutine(CGetOwnPlayer(callback));
 	}
 
-	private IEnumerator CGetOwnPlayer()
+	private IEnumerator CGetOwnPlayer(Action<bool> callback = null)
 	{
 		WWW request = new WWW(GetSessionURL("pinfo"));
 
 		yield return request;
 
 		JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+	    if (!CheckResult(json))
+	    {
+	        callback(false);
+	        yield break;
+	    }
 		Player.ReadJson(json["data"]);
 	    if (CurrentGameMode == GameMode.Login)
 	        CurrentGameMode = GameMode.Map;
+	    if (callback != null)
+	        callback(true);
 	}
 
     /// <summary>
