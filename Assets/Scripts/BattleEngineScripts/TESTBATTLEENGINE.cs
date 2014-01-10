@@ -9,7 +9,16 @@ public class TESTBATTLEENGINE : MonoBehaviour {
 		
 		if(Input.GetKeyDown(KeyCode.A))
 		{
-			BattleEngine.CreateBattle(new BattleInit());
+			if(BattleEngine.Current == null)
+			{
+				BattleEngine.CreateBattle(new BattleInit());
+				Debug.Log("BattleEngine Created");
+			}
+			else
+			{
+				BattleEngine.Current.DestroyBattle();
+				Debug.Log("BattleEngine Destroyed");
+			}
 		}
 
 		if(Input.GetKeyDown(KeyCode.Space))

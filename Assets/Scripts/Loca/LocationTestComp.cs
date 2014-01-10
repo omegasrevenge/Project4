@@ -5,8 +5,11 @@ public class LocationTestComp : MonoBehaviour
 
     public MapUtils.ProjectedPos ProjPos;
     public MapGrid Grid;
+	public GameObject MainCamera;
+
     void Awake()
     {
+		MainCamera = GameObject.Find("Main Camera");
         //GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
     void Update()
@@ -17,7 +20,7 @@ public class LocationTestComp : MonoBehaviour
     void LateUpdate()
     {
         //transform.rotation = Camera.main.transform.rotation;
-        transform.GetChild(1).rotation = Camera.main.transform.rotation;
+        transform.GetChild(1).rotation = MainCamera.transform.rotation;
     }
     public void setText(string text)
     {

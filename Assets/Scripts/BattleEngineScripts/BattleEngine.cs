@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class BattleEngine : MonoBehaviour 
 {
 	//########## public #########
+	public GameObject BattleCam;
+	public GameObject MainCam;
 	public FightRoundResult Result;
 	public ActorControlls Actor;
 	public int Turn = 0;
@@ -32,12 +34,27 @@ public class BattleEngine : MonoBehaviour
 	private GameObject _damageIndicator;
 	private bool _damageIndicatorInitialized = false;
 	//########## private #########
+
+	//########## getter #########
+	public GameObject Arena
+	{
+		get
+		{
+			return _arena;
+		}
+	}
+	//########## getter #########
 	
 	public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
 	{
 		CurrentGameObject = new GameObject("BattleEngine");
 		Current = CurrentGameObject.AddComponent<BattleEngine>();
 		Current.Init(serverInfo);
+		Current.BattleCam = Current.Arena.transform.FindChild("CameraPivot").FindChild("BattleCamera").gameObject;
+		Current.BattleCam.SetActive(true);
+		Current.MainCam = GameObject.Find("Main Camera");
+		Current.MainCam.SetActive(false);
+		Destroy(Current.MainCam.GetComponent<AudioListener>());
 	}
 
 	void Update()
@@ -91,23 +108,20 @@ public class BattleEngine : MonoBehaviour
 
 	private void executeSkill()
 	{
-		if(Actor.CanShowDamage)
+		if(Actor.CanShowDamage && _damageIndicator == null && !_damageIndicatorInitialized)
 		{
-			if(_damageIndicator == null && !_damageIndicatorInitialized)
+			_damageIndicatorInitialized = true;
+			_damageIndicator = (GameObject)Instantiate(Resources.Load("Damage"),Vector3.zero,Quaternion.identity);
+			switch(_currentPlayer)
 			{
-				_damageIndicatorInitialized = true;
-				_damageIndicator = (GameObject)Instantiate(Resources.Load("Damage"),Vector3.zero,Quaternion.identity);
-				switch(_currentPlayer)
-				{
-				case FightRoundResult.Player.A:
-					_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
-					_damageIndicator.transform.rotation = _enemyCreature.transform.rotation;
-					break;
-				case FightRoundResult.Player.B:
-					_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
-					_damageIndicator.transform.rotation = _friendlyCreature.transform.rotation;
-					break;
-				}
+			case FightRoundResult.Player.A:
+				_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
+				_damageIndicator.transform.rotation = _enemyCreature.transform.rotation;
+				break;
+			case FightRoundResult.Player.B:
+				_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
+				_damageIndicator.transform.rotation = _friendlyCreature.transform.rotation;
+				break;
 			}
 			_friendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
 			_enemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
@@ -117,7 +131,7 @@ public class BattleEngine : MonoBehaviour
 	public void Init(BattleInit serverInfo)
 	{
 		//////////////////////////////          init Arena          //////////////////////////////////////////////////////////////////////////////////////////
-		_arena = Create(DefaultArena, new Vector3(0f,-6.462654f,9.857271f), Quaternion.identity);
+		_arena = Create(DefaultArena, new Vector3(0f,1000f,1000f), Quaternion.identity);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Friendly Creature ////////////////////////////////////////////////////////////
@@ -143,17 +157,22 @@ public class BattleEngine : MonoBehaviour
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
-	private void destroyBattle()
+	public void DestroyBattle()
 	{
+		MainCam.SetActive(true);
+		BattleCam.SetActive(false);
+		MainCam.AddComponent<AudioListener>();
 		Destroy(_friendlyCreature);
 		Destroy(_enemyCreature);
 		Destroy(_arena);
 		Destroy(Current);
+		Destroy(CurrentGameObject);
 		Current = null;
+		CurrentGameObject = null;
 	}
 	
-	public GameObject Create(string value, Vector3 pos, Quaternion rot)
+	public GameObject Create(string name, Vector3 pos, Quaternion rot)
 	{
-		return (GameObject)Instantiate(Resources.Load(value), pos, rot);
+		return (GameObject)Instantiate(Resources.Load(name), pos, rot);
 	}
 }
