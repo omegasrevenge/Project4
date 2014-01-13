@@ -17,4 +17,6 @@ public class BattleInit
 	public int MonsterALevel = 20;
 	public int MonsterBLevel = 19;
 
+	public FightRoundResult.Player FirstTurnIsPlayer = FightRoundResult.Player.A;
+
 }

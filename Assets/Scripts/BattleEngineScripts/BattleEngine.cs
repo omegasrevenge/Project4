@@ -4,11 +4,14 @@ using System.Collections.Generic;
 public class BattleEngine : MonoBehaviour 
 {
 	//########## public #########
+	public enum TurnState{Wait, Rotate, Execute, Hit}
 	public GameObject BattleCam;
 	public GameObject MainCam;
-	public FightRoundResult Result;
 	public ActorControlls Actor;
 	public int Turn = 0;
+	public FightRoundResult.Player CurrentPlayer; // whose player's turn is it going to be now
+	public BattleInit ServerInfo;
+	public List<string> TEST;
 	//########## public #########
 	
 	//########## static #########
@@ -24,18 +27,41 @@ public class BattleEngine : MonoBehaviour
 	//########## const #########
 
 	//########## private #########
+	private TurnState _currentStatus = TurnState.Wait;
+	private List<FightRoundResult> _results;
 	private GameObject _friendlyCreature;
 	private GameObject _enemyCreature;
 	private GameObject _arena;
-	private FightRoundResult.Player _currentPlayer; // whose player's turn is it going to be now
 	private int _changeA;
 	private int _changeB;
-	public GameObject _actor;
+	private GameObject _actor;
 	private GameObject _damageIndicator;
-	private bool _damageIndicatorInitialized = false;
+	private int _newAHealth;
+	private int _newBHealth;
 	//########## private #########
 
 	//########## getter #########
+	public List<FightRoundResult> Results
+	{
+		get
+		{
+			return _results;
+		}
+	}
+
+	public FightRoundResult Result
+	{
+		get
+		{
+			if(_results.Count < 1) return null;
+			return _results[0];
+		}
+		set
+		{
+			_results.Add(value);
+		}
+	}
+
 	public GameObject Arena
 	{
 		get
@@ -43,8 +69,66 @@ public class BattleEngine : MonoBehaviour
 			return _arena;
 		}
 	}
-	//########## getter #########
-	
+
+	public bool TurnIsDone
+	{
+		get
+		{
+			return (Actor == null || Actor.AnimationFinished); 
+		}
+	}
+
+	public bool IsResultForNextTurnThere
+	{
+		get
+		{
+			if(Result == null) return false;
+			return Turn < Result.Turn;
+		}
+	}
+
+	public bool IsItTheOtherPlayersTurnNow
+	{
+		get
+		{
+			if(Result == null) return false;
+			return CurrentPlayer != Result.PlayerTurn;
+		}
+	}
+
+	public bool IsBattleCamRotating
+	{
+		get
+		{
+			return BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation;
+		}
+	}
+
+	public TurnState GetTurnState
+	{
+		get
+		{
+			if(TurnIsDone && !BattleCamInPosition(CurrentPlayer)) return TurnState.Rotate;
+			if(_results.Count == 0 && (Actor == null || Actor.AnimationFinished)) return TurnState.Wait;
+			if(Actor != null && Actor.CanShowDamage) return TurnState.Hit;
+			return TurnState.Execute;
+		}
+	}
+
+	public bool BattleCamInPosition(FightRoundResult.Player value)
+	{
+		if(value == FightRoundResult.Player.A && BattleCam.transform.parent.GetComponent<RotateBattleCam>().CameraInAPosition) return true;
+		if(value == FightRoundResult.Player.B && BattleCam.transform.parent.GetComponent<RotateBattleCam>().CameraInBPosition) return true;
+		return false;
+	}
+	//########## getter ##################################################################
+
+	void Awake()
+	{
+		_results = new List<FightRoundResult>();
+		TEST = new List<string>();
+	}
+
 	public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
 	{
 		CurrentGameObject = new GameObject("BattleEngine");
@@ -55,30 +139,45 @@ public class BattleEngine : MonoBehaviour
 		Current.MainCam = GameObject.Find("Main Camera");
 		Current.MainCam.SetActive(false);
 		Destroy(Current.MainCam.GetComponent<AudioListener>());
+		Current.CurrentPlayer = serverInfo.FirstTurnIsPlayer;
+		Current.ServerInfo = serverInfo;
 	}
 
 	void Update()
 	{
-		evaluateResult();
+		if(GetTurnState != _currentStatus)
+		{
+			_currentStatus = GetTurnState;
+			switch(GetTurnState)
+			{
+			case TurnState.Wait:
+				break;
+			case TurnState.Rotate:
+				rotateBattleCam();
+				break;
+			case TurnState.Execute:
+				turnInit();
+				break;
+			case TurnState.Hit:
+				executeSkill();
+				break;
+			}
+		}
 	}
 
-	private void evaluateResult()
+	private void rotateBattleCam()
 	{
-		
-		if(Result != null && Turn < Result.Turn && (Actor == null || Actor.AnimationFinished))
-		{
-			// init new turn NOW.
-			_currentPlayer = Result.PlayerTurn;
-			_damageIndicatorInitialized = false;
-			Turn = Result.Turn;
-			initSkill();
-			_changeA = _friendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
-			_changeB = _enemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
-		}
-		if(Actor != null && !Actor.AnimationFinished)
-		{
-			executeSkill();
-		}
+		BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation = true;
+	}
+
+	private void turnInit()
+	{
+		Turn = Result.Turn;
+		initSkill();
+		_changeA = _friendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
+		_changeB = _enemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
+		_newAHealth = Result.PlayerAHealth;
+		_newBHealth = Result.PlayerBHealth;
 	}
 
 	private void initSkill()
@@ -92,7 +191,7 @@ public class BattleEngine : MonoBehaviour
 			_actor = (GameObject)Instantiate(Resources.Load("Laser"),Vector3.zero,Quaternion.identity);
 			Actor = _actor.GetComponent<ActorControlls>();
 			Actor.Owner = this;
-			switch(_currentPlayer)
+			switch(CurrentPlayer)
 			{
 			case FightRoundResult.Player.A:
 				_actor.transform.localPosition = _friendlyCreature.transform.position;
@@ -108,24 +207,22 @@ public class BattleEngine : MonoBehaviour
 
 	private void executeSkill()
 	{
-		if(Actor.CanShowDamage && _damageIndicator == null && !_damageIndicatorInitialized)
+		_damageIndicator = (GameObject)Instantiate(Resources.Load("Damage"),Vector3.zero,Quaternion.identity);
+		switch(CurrentPlayer)
 		{
-			_damageIndicatorInitialized = true;
-			_damageIndicator = (GameObject)Instantiate(Resources.Load("Damage"),Vector3.zero,Quaternion.identity);
-			switch(_currentPlayer)
-			{
-			case FightRoundResult.Player.A:
-				_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
-				_damageIndicator.transform.rotation = _enemyCreature.transform.rotation;
-				break;
-			case FightRoundResult.Player.B:
-				_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
-				_damageIndicator.transform.rotation = _friendlyCreature.transform.rotation;
-				break;
-			}
-			_friendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
-			_enemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
+		case FightRoundResult.Player.A:
+			_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
+			_damageIndicator.transform.rotation = _enemyCreature.transform.rotation;
+			break;
+		case FightRoundResult.Player.B:
+			_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
+			_damageIndicator.transform.rotation = _friendlyCreature.transform.rotation;
+			break;
 		}
+		_friendlyCreature.GetComponent<MonsterController>().Health = _newAHealth;
+		_enemyCreature.GetComponent<MonsterController>().Health    = _newBHealth;
+		CurrentPlayer = Result.PlayerTurn;
+		_results.Remove(Result);
 	}
 
 	public void Init(BattleInit serverInfo)
