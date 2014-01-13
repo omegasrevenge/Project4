@@ -2,8 +2,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class GUIBase : MonoBehaviour {
-
+public class GUIBase : MonoBehaviour
+{
+	public bool init = false;
 	public MapGrid Grid;
 
 	void OnGUI()
@@ -21,12 +22,23 @@ public class GUIBase : MonoBehaviour {
 
 	private void MoveBase()
 	{
+		MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos;
+
+		if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
+		{
+			GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, Grid.ZoomLevel);
+		}
+	}
+
+	private void CreateBase()
+	{
 		string path = "Prefabs/";
 
 		if (GameManager.Singleton.Player.baseInstance == null)
 		{
 			GameObject obj = Resources.Load<GameObject>(path + "Base");
 			GameObject curGameObject = (GameObject)Instantiate(obj);
+			GameManager.Singleton.Player.baseInstance = curGameObject;
 			curGameObject.transform.parent = transform;
 			float lon = GameManager.Singleton.Player.BasePosition.x;
 			float lat = GameManager.Singleton.Player.BasePosition.y;
@@ -35,13 +47,20 @@ public class GUIBase : MonoBehaviour {
 			comp.setText("Base");
 			comp.ProjPos = projPos;
 			comp.Grid = Grid;
-			GameManager.Singleton.Player.baseInstance = curGameObject;
 			return;
 		}
-
 	}
 
 	void Update () {
-	
+		if (GameManager.Singleton.LoggedIn)
+		{
+			if (!init)
+			{
+				CreateBase();
+				init = true;
+			}
+
+			MoveBase();
+		}
 	}
 }
