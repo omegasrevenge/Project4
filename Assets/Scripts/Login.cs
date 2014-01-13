@@ -59,24 +59,22 @@ public class Login : MonoBehaviour
 
         //}
 
-		if (GameManager.Singleton.LoggedIn)
-		{
-			Enemy = GUI.TextField(new Rect(10, 100, 200, 20), Enemy, 100);
+		//if (GameManager.Singleton.LoggedIn)
+		//{
+		//	Enemy = GUI.TextField(new Rect(10, 100, 200, 20), Enemy, 100);
 
-	        if (GUI.Button(new Rect(10, 130, 100, 20), "Attack"))
-	        {
-	            GameManager.Singleton.Attack(Enemy);
-	        }
+		//	if (GUI.Button(new Rect(10, 130, 100, 20), "Attack"))
+		//	{
+		//		GameManager.Singleton.Attack(Enemy);
+		//	}
 
-			XP = GUI.TextField(new Rect(10, 40, 200, 20), XP, 100);
+		//	XP = GUI.TextField(new Rect(10, 40, 200, 20), XP, 100);
 
-			if (GUI.Button(new Rect(10, 70, 100, 20), "AddXP"))
-			{
-				GameManager.Singleton.AddXP(XP);
-			}
-
-		}
-
+		//	if (GUI.Button(new Rect(10, 70, 100, 20), "AddXP"))
+		//	{
+		//		GameManager.Singleton.AddXP(XP);
+		//	}
+		//}
     }
 
     void OnAuthCB(bool result)
@@ -106,7 +104,7 @@ public class Login : MonoBehaviour
             return;
         }
 
-        AnimationTest.Scroll(-1f, 0);
+		//AnimationTest.Scroll(-1f, 0);
 
     }
 }

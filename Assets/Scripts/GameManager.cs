@@ -109,6 +109,30 @@ public class GameManager : MonoBehaviour
 		pois_timeQ -= Time.deltaTime;
     }
 
+	public void SwitchGameMode(GameMode newGameMode)
+	{
+		switch (newGameMode)
+		{
+			case GameMode.Map:
+			{
+				GameObject.Find("MapTest").SetActive(true);
+				CurrentGameMode = newGameMode;
+				break;
+			}
+			case GameMode.Base:
+			{
+
+				GameObject.Find("MapTest").SetActive(false);
+				CurrentGameMode = newGameMode;
+				break;
+			}
+			case GameMode.Login:
+			{
+				CurrentGameMode = newGameMode;
+				break;
+			}
+		}
+	}
 
     //DEBUG
     public void Test()
@@ -200,7 +224,7 @@ public class GameManager : MonoBehaviour
 	    }
 		Player.ReadJson(json["data"]);
 	    if (CurrentGameMode == GameMode.Login)
-	        CurrentGameMode = GameMode.Map;
+	        SwitchGameMode(GameMode.Map);
 	    if (callback != null)
 	        callback(true);
 	}
@@ -402,7 +426,6 @@ public class GameManager : MonoBehaviour
 		JSONObject data = json["data"];
 		JSONObject pois = data["POIs"];
 		POI[] tmpPOIs = new POI[pois.Count];
-		Debug.Log(pois.Count);
 		for (int i = 0; i < tmpPOIs.Length; i++)
 		{
 			tmpPOIs[i] = new POI();
@@ -446,7 +469,7 @@ public class GameManager : MonoBehaviour
             if ((string) json["error"] == "invalid_session")
             {
                 SessionID = "";
-                CurrentGameMode = GameMode.Login;
+                SwitchGameMode(GameMode.Login);
             }
             return false;
         }

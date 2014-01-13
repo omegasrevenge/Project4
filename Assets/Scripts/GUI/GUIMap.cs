@@ -6,6 +6,8 @@ public class GUIMap : MonoBehaviour {
 	public GameObject CameraRig;
 	public MapGrid Grid;
 
+	public bool init = false;
+
 	private int pois_version = 0;
 	public int grid_version = 0;
 
@@ -16,8 +18,24 @@ public class GUIMap : MonoBehaviour {
 
 	void OnGUI()
 	{
-		POIsInRange();
+		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
 
+		POIsInRange();
+		ShowResouces();
+
+		if (GameManager.Singleton.LoggedIn)
+		{
+			if (GUI.Button(new Rect(270, 40, 120, 50), "Place Base here!"))
+			{
+				GameManager.Singleton.SendBasePosition();
+				Debug.Log("Current Base Poition: " + LocationManager.GetCurrentPosition());
+				MoveBase();
+			}
+		}
+	}
+
+	private void ShowResouces()
+	{
 		if (GameManager.Singleton.Player.Resources == null) return;
 
 		GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
@@ -30,7 +48,7 @@ public class GUIMap : MonoBehaviour {
 			{
 				z += GameManager.Singleton.Player.Resources[i, j] + " ";
 			}
-			GUI.Label(new Rect(300, 40 + i * 40, 200, 20), z, curGuiStyle);
+			GUI.Label(new Rect(20, 40 + i * 40, 200, 20), z, curGuiStyle);
 		}
 	}
 
@@ -47,9 +65,9 @@ public class GUIMap : MonoBehaviour {
 		{
 			if (MapUtils.DistanceInKm(poi.Position, LocationManager.GetCurrentPosition()) <= RangeRadius)
 			{
-				GUI.Label(new Rect(500, 40 + inRange * 60, 200, 20), poi.Name, curGuiStyle);
+				GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), poi.Name, curGuiStyle);
 				string btnString = poi.Rsc == "Fight" ? "Fight" : "Farm";
-				if (GUI.Button(new Rect(500, 80 + inRange * 60, 120, 50), btnString))
+				if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), btnString))
 				{
 					GameManager.Singleton.PoiFarm(poi);
 				}
@@ -58,10 +76,11 @@ public class GUIMap : MonoBehaviour {
 		}
 		if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
 		{
-			GUI.Label(new Rect(500, 40 + inRange * 60, 200, 20), "Base", curGuiStyle);
-			if (GUI.Button(new Rect(500, 80 + inRange * 60, 120, 50), "Visit Base"))
+			GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
+			if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), "Visit Base"))
 			{
 				Debug.Log("is now visiting the Base!");
+				GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
 			}
 			inRange++;
 		}
@@ -87,8 +106,41 @@ public class GUIMap : MonoBehaviour {
 		}
 	}
 
+	private void CreateBase()
+	{
+		string path = "Prefabs/";
+
+		if (GameManager.Singleton.Player.baseInstance == null)
+		{
+			GameObject obj = Resources.Load<GameObject>(path + "Base");
+			GameObject curGameObject = (GameObject)Instantiate(obj);
+			GameManager.Singleton.Player.baseInstance = curGameObject;
+			curGameObject.transform.parent = transform;
+			float lon = GameManager.Singleton.Player.BasePosition.x;
+			float lat = GameManager.Singleton.Player.BasePosition.y;
+			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), Grid.ZoomLevel);
+			LocationTestComp comp = curGameObject.AddComponent<LocationTestComp>();
+			comp.setText("Base");
+			comp.ProjPos = projPos;
+			comp.Grid = Grid;
+			return;
+		}
+	}
+
+	private void MoveBase()
+	{
+		MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos;
+
+		if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
+		{
+			GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, Grid.ZoomLevel);
+		}
+	}
+
 	void Update()
 	{
+		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
+
 		//Rotation:
 		Vector3 cameraRot = CameraRig.transform.eulerAngles;
 		CameraRig.transform.eulerAngles = new Vector3(cameraRot.x, TouchInput.Singleton.GetRotation(cameraRot.y, CameraRig.transform.position, true), cameraRot.z);
@@ -112,6 +164,17 @@ public class GUIMap : MonoBehaviour {
 		{
 			pois_version = GameManager.Singleton.pois_version;
 			CreatePOIs();
+		}
+
+		if (GameManager.Singleton.LoggedIn)
+		{
+			if (!init)
+			{
+				CreateBase();
+				init = true;
+			}
+
+			MoveBase();
 		}
 	}
 }
