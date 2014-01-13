@@ -95,7 +95,7 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 2800000, guid: 3bf60903ff3785c47a7a690c5103cfff, type: 3}
+  iPhoneSplashScreen: {fileID: 2800000, guid: f0ec1ca5ba1f9cf40b5a1ce2bb3b0732, type: 3}
   iPhoneHighResSplashScreen: {fileID: 0}
   iPhoneTallHighResSplashScreen: {fileID: 0}
   iPadPortraitSplashScreen: {fileID: 0}
@@ -104,7 +104,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 2
-  AndroidKeystoreName: D:/Projekte/Project4/user.keystore
+  AndroidKeystoreName: C:/Users/anlicht/Documents/GitHub/Project4/user.keystore
   AndroidKeyaliasName: test
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
