@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private const float PlayerQueryFreq = 60*2;
 
 	private static GameManager _instance;
+	public GameObject MapGui;
 
 	public POI[] POIs = new POI[0];
 	public int pois_version = 0;
@@ -115,14 +116,14 @@ public class GameManager : MonoBehaviour
 		{
 			case GameMode.Map:
 			{
-				GameObject.Find("MapTest").SetActive(true);
+				MapGui.SetActive(true);
 				CurrentGameMode = newGameMode;
 				break;
 			}
 			case GameMode.Base:
 			{
 
-				GameObject.Find("MapTest").SetActive(false);
+				MapGui.SetActive(false);
 				CurrentGameMode = newGameMode;
 				break;
 			}

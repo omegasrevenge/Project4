@@ -16,7 +16,7 @@ public class GUIMap : MonoBehaviour {
 
 	public const float RangeRadius = 0.188f / 2f;
 
-	void OnGUI()
+	private void OnGUI()
 	{
 		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
 
