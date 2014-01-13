@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerURL: http://pixeltamer.net:7774/rpc/
+  MapGui: {fileID: 344512731}
   pois_version: 0
   pois_timeQ: 0
   pois_valid: 0
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7884b16d998ef5244b286109bb41833b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showWindow: 0
 --- !u!4 &396130941
 Transform:
   m_ObjectHideFlags: 0
