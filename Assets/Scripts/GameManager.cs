@@ -19,13 +19,20 @@ public class GameManager : MonoBehaviour
             Lat = lat;
         }
     }
+
+    private static GameManager _instance;
+
+    private ViewController _view;
+
+    public static string DontSaveTag = "DON'T SAVE GAMEOBJECT.";
     public string ServerURL = "http://pixeltamer.net:7774/rpc/";
+
     private const float OwnUpdateFreq = 60*3;
     private const float PositionUpdateFreq = 60*1;
     private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60*2;
 
-	private static GameManager _instance;
+	
 	public GameObject MapGui;
 
 	public POI[] POIs = new POI[0];
@@ -60,7 +67,8 @@ public class GameManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                GameObject obj = new GameObject("GameManager");
+                GameObject obj = new GameObject("controller_gamemanager");
+                obj.hideFlags = HideFlags.DontSave;
                 _instance = obj.AddComponent<GameManager>();
             }
             return _instance; 
@@ -74,8 +82,18 @@ public class GameManager : MonoBehaviour
 		if (_instance == null)
 			_instance = this;
 		else if (_instance != this)
-			Debug.LogError("Second instance of GameManager.");
+		{       
+		    Debug.LogError("Second instance of GameManager.");
+            Destroy(gameObject);
+		    return;
+		}
+	    Init();
 	}
+
+    private void Init()
+    {
+        _view = ViewController.Create();
+    }
 
     private void Update()
     {
@@ -502,6 +520,20 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
             (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
 #endif
+        }
+    }
+
+    void OnDisable()
+    {
+        if (Application.isEditor)
+        {
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(DontSaveTag);
+            foreach (GameObject o in gameObjects)
+            {
+                // Object.Destroy is delayed, and never completes in the editor, so use DestroyImmediate instead.
+                DestroyImmediate(o);
+            }
+            
         }
     }
 }
