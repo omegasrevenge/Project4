@@ -9,18 +9,16 @@ public class ViewController : MonoBehaviour
     public const string CameraStr = "camera";
 
     private static ViewController _instance;
-    [SerializeField]
+
     private GameManager _gameManager;
-    [SerializeField]
+
     private dfControl _gui;
-    [SerializeField]
     private dfControl _menu;
-    [SerializeField]
-    private MovableViewport _guiViewport;
-    [SerializeField]
-    private MovableGUIViewport _menuViewport;
-    [SerializeField]
-    private MovableViewport _3DViewport;
+    private Camera _camera3D;
+
+    private MovableViewport     _guiViewport;
+    private MovableGUIViewport  _menuViewport;
+    private MovableViewport     _3DViewport;
 
     [SerializeField]
     private float _viewportScrollState = 0f;
@@ -34,6 +32,11 @@ public class ViewController : MonoBehaviour
                 return _instance;
             return null;
         }
+    }
+
+    public Camera Camera3D
+    {
+        get { return _camera3D; }
     }
 
     public float ViewportScrollState
@@ -81,9 +84,11 @@ public class ViewController : MonoBehaviour
 
         _gui = GUIRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
         _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
+        _camera3D = GameObject.FindGameObjectWithTag(MainCameraTag).GetComponent<Camera>();
+
         _guiViewport = GUIRoot.transform.FindChild(CameraStr).GetComponent<MovableViewport>();
         _menuViewport = _menu.GetComponent<MovableGUIViewport>();
-        _3DViewport = GameObject.FindGameObjectWithTag(MainCameraTag).GetComponent<MovableViewport>();
+        _3DViewport = _camera3D.GetComponent<MovableViewport>();
 
         ViewportScrollState = 0.9f;
 

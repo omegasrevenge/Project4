@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
     }
 
     private static GameManager _instance;
-
     private ViewController _view;
+    private MapGrid _map;
 
     public static string DontSaveTag = "DontSave";
     public string ServerURL = "http://pixeltamer.net:7774/rpc/";
@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
     private const float PositionUpdateFreq = 60*1;
     private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60*2;
-
-	
-	public GameObject MapGui;
 
 	public POI[] POIs = new POI[0];
 	public int pois_version = 0;
@@ -92,6 +89,16 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _view = ViewController.Create();
+        _map = CreateController<MapGrid>("Map");
+
+        InitializeDummyObjects();
+    }
+
+    private void InitializeDummyObjects()
+    {
+        CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent,_map);
+        CreateController<GUIBase>("dummy_GUIBase");
+        CreateController<TESTBATTLEENGINE>("dummy_Battle");
     }
 
     private void Update()
@@ -127,20 +134,30 @@ public class GameManager : MonoBehaviour
 		pois_timeQ -= Time.deltaTime;
     }
 
+    public static TController CreateController<TController>(string name ="") where TController:MonoBehaviour
+    {
+        if (name == "")
+            name = "controller_" + typeof (TController);
+        GameObject obj = new GameObject(name)
+        {
+            hideFlags = HideFlags.DontSave,
+            tag = GameManager.DontSaveTag
+        };
+        TController instance = obj.AddComponent<TController>();
+        return instance;
+    }
+
 	public void SwitchGameMode(GameMode newGameMode)
 	{
 		switch (newGameMode)
 		{
 			case GameMode.Map:
 			{
-				MapGui.SetActive(true);
 				CurrentGameMode = newGameMode;
 				break;
 			}
 			case GameMode.Base:
 			{
-
-				MapGui.SetActive(false);
 				CurrentGameMode = newGameMode;
 				break;
 			}

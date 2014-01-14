@@ -4,7 +4,7 @@ using UnityEngine;
 public class MapGrid : MonoBehaviour
 {
     public const int TileSize = 256;
-    public int MapRadius = 2;
+    public int MapRadius = 3;
     public const int PixelsToUnit = 100;
     public static readonly float UnitsPerTile = (float)TileSize / PixelsToUnit;
 
@@ -14,7 +14,7 @@ public class MapGrid : MonoBehaviour
     public LRUSpriteDictionary Dict;
     public MapUtils.ProjectedPos CurrentPosition;
     private MapUtils.ProjectedPos _loadedPosition;
-    public int ZoomLevel = 18;
+    public int ZoomLevel = 17;
 
     private Vector3 _position;
 
@@ -26,7 +26,14 @@ public class MapGrid : MonoBehaviour
     void Awake()
     {
         if (Root == null)
-            Root = transform;
+        {
+            GameObject obj = new GameObject("root");
+            obj.transform.parent = transform;
+            Root = obj.transform;
+        }
+        GameManager.CreateController<AssetLoader>();
+        transform.localEulerAngles = new Vector3(90f,0f,0f);
+
         int dim = 2 * MapRadius + 1;
         InitCells(dim, dim);
         Width = dim * UnitsPerTile;

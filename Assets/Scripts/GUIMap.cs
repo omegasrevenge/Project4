@@ -3,18 +3,24 @@ using System.Collections;
 
 public class GUIMap : MonoBehaviour {
 
-	public GameObject CameraRig;
-	public MapGrid Grid;
+	private Transform _cameraRig;
+	private MapGrid _grid;
 
 	public bool init = false;
 
 	private int pois_version = 0;
-	public int grid_version = 0;
+	private int grid_version = 0;
 
 	public const float MoveSpeed = 1f;
 	public const float MoveRadius = 1f;
 
 	public const float RangeRadius = 0.188f / 2f;
+
+    public void Init(Transform cameraRig, MapGrid mapGrid)
+    {
+        _cameraRig = cameraRig;
+        _grid = mapGrid;
+    }
 
 	private void OnGUI()
 	{
@@ -98,11 +104,11 @@ public class GUIMap : MonoBehaviour {
 			poi.instance.transform.parent = transform;
 			float lon = poi.Position.x;
 			float lat = poi.Position.y;
-			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), Grid.ZoomLevel);
+			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
 			LocationTestComp comp = poi.instance.AddComponent<LocationTestComp>();
 			comp.setText(poi.Name);
 			comp.ProjPos = projPos;
-			comp.Grid = Grid;
+			comp.Grid = _grid;
 		}
 	}
 
@@ -118,11 +124,11 @@ public class GUIMap : MonoBehaviour {
 			curGameObject.transform.parent = transform;
 			float lon = GameManager.Singleton.Player.BasePosition.x;
 			float lat = GameManager.Singleton.Player.BasePosition.y;
-			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), Grid.ZoomLevel);
+			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
 			LocationTestComp comp = curGameObject.AddComponent<LocationTestComp>();
 			comp.setText("Base");
 			comp.ProjPos = projPos;
-			comp.Grid = Grid;
+			comp.Grid = _grid;
 			return;
 		}
 	}
@@ -133,7 +139,7 @@ public class GUIMap : MonoBehaviour {
 
 		if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
 		{
-			GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, Grid.ZoomLevel);
+			GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
 		}
 	}
 
@@ -142,21 +148,21 @@ public class GUIMap : MonoBehaviour {
 		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
 
 		//Rotation:
-		Vector3 cameraRot = CameraRig.transform.eulerAngles;
-		CameraRig.transform.eulerAngles = new Vector3(cameraRot.x, TouchInput.Singleton.GetRotation(cameraRot.y, CameraRig.transform.position, true), cameraRot.z);
+		Vector3 cameraRot = _cameraRig.eulerAngles;
+		_cameraRig.eulerAngles = new Vector3(cameraRot.x, TouchInput.Singleton.GetRotation(cameraRot.y, _cameraRig.position, true), cameraRot.z);
 
-		MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(Grid.ZoomLevel);
-		if ((newPosition - Grid.CurrentPosition).Magnitude < MoveRadius)
-			Grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(Grid.CurrentPosition, newPosition,
+		MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(_grid.ZoomLevel);
+		if ((newPosition - _grid.CurrentPosition).Magnitude < MoveRadius)
+			_grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(_grid.CurrentPosition, newPosition,
 				Time.deltaTime * MoveSpeed);
 		else
 		{
-			Grid.CurrentPosition = newPosition;
+			_grid.CurrentPosition = newPosition;
 		}
 
-		if (grid_version != Grid.grid_version)
+		if (grid_version != _grid.grid_version)
 		{
-			grid_version = Grid.grid_version;
+			grid_version = _grid.grid_version;
 			GameManager.Singleton.pois_valid = false;
 		}
 

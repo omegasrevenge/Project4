@@ -5,11 +5,11 @@ public class LocationTestComp : MonoBehaviour
 
     public MapUtils.ProjectedPos ProjPos;
     public MapGrid Grid;
-	public GameObject MainCamera;
+	public Transform MainCamera;
 
     void Awake()
     {
-		MainCamera = GameObject.Find("Main Camera");
+		MainCamera = ViewController.Singleton.Camera3D.transform.parent;
         //GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
     void Update()
