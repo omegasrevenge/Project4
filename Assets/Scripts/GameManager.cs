@@ -6,7 +6,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public enum GameMode { Login, Map, Fight, Base };
-    public struct ObjectPos
+
+	public enum ExchangeMode { Up, Down, Cricle };
+    
+	public struct ObjectPos
     {
         public string ID;
         public float Lon;
@@ -246,6 +249,26 @@ public class GameManager : MonoBehaviour
 	        SwitchGameMode(GameMode.Map);
 	    if (callback != null)
 	        callback(true);
+	}
+
+	///<summary>
+	/// Exchange of resources.
+	/// </summary>
+
+	public void Exchange(int element, int level, int count, ExchangeMode exchangeMode)
+	{
+		StartCoroutine(CExchange(element, level, count, (int)exchangeMode));
+	}
+
+	private IEnumerator CExchange(int element, int level, int count, int exchangeMode)
+	{
+		WWW request = new WWW(GetSessionURL("exchange") + "&element=" + element + "&level=" + level + "&count=" + count + "&exchangeMode=" + exchangeMode);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json)) yield break;
+
+		GetOwnPlayer();
 	}
 
     /// <summary>
