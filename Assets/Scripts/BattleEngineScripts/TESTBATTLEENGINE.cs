@@ -4,7 +4,9 @@ using System.Collections;
 public class TESTBATTLEENGINE : MonoBehaviour {
 
 	private int _counter = 0;
-	
+	private int _AHP;
+	private int _BHP;
+
 	void Update()
 	{
 		
@@ -12,6 +14,8 @@ public class TESTBATTLEENGINE : MonoBehaviour {
 		{
 			if(BattleEngine.Current == null)
 			{
+				_AHP = new BattleInit().MonsterAHealth;
+				_BHP = new BattleInit().MonsterBHealth;
 				BattleEngine.CreateBattle(new BattleInit());
 			}
 			else
@@ -47,7 +51,20 @@ public class TESTBATTLEENGINE : MonoBehaviour {
 				}
 			}
 			_counter++;
-			BattleEngine.Current.Result.Turn = _counter;
+			BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].Turn = _counter;
+			switch(BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].PlayerTurn)
+			{
+			case FightRoundResult.Player.A:
+				_AHP -= 50;
+				BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].PlayerAHealth =  _AHP;
+				BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].PlayerBHealth = _BHP;
+				break;
+			case FightRoundResult.Player.B:
+				_BHP -= 50;
+				BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].PlayerAHealth =  _AHP;
+				BattleEngine.Current.Results[BattleEngine.Current.Results.Count-1].PlayerBHealth = _BHP;
+				break;
+			}
 		}
 	}
 }

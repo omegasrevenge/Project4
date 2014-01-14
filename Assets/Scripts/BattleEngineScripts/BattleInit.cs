@@ -12,7 +12,7 @@ public class BattleInit
 	public string MonsterBName = "Ragnaros";
 	
 	public int MonsterAHealth = 300;
-	public int MonsterBHealth = 500;
+	public int MonsterBHealth = 300;
 	
 	public int MonsterALevel = 20;
 	public int MonsterBLevel = 19;

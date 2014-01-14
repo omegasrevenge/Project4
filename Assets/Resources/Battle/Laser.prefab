@@ -188,11 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6188748f9094e0340a38c171057202fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanShowDamage: 0
+  AnimationFinished: 1
+  Owner: {fileID: 0}
   FinalHeadScale: 3
   HeadScalingSpeed: 3
   FadeOutTime: 2
   LifeTime: 5
-  Damage: 80
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

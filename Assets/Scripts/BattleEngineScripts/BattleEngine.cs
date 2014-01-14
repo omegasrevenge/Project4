@@ -20,10 +20,10 @@ public class BattleEngine : MonoBehaviour
 	//########## static #########
 	
 	//########## const #########
-	public const string DefaultArena			 = "DefaultArena";
+	public const string DefaultArena			 = "Battle/DefaultArena";
 	public const string DefaultFriendlySpawnPos  = "FriendlySpawnPos";
 	public const string DefaultEnemySpawnPos	 = "EnemySpawnPos";
-	public const string DefaultMonster	 		 = "DefaultMonster";
+	public const string DefaultMonster	 		 = "Battle/DefaultMonster";
 	//########## const #########
 
 	//########## private #########
@@ -36,8 +36,8 @@ public class BattleEngine : MonoBehaviour
 	private int _changeB;
 	private GameObject _actor;
 	private GameObject _damageIndicator;
-	private int _newAHealth;
-	private int _newBHealth;
+	private float _counter = 0f;
+	private GameObject _gg;
 	//########## private #########
 
 	//########## getter #########
@@ -61,12 +61,28 @@ public class BattleEngine : MonoBehaviour
 			_results.Add(value);
 		}
 	}
-
+	
 	public GameObject Arena
 	{
 		get
 		{
 			return _arena;
+		}
+	}
+	
+	public GameObject Friendly
+	{
+		get
+		{
+			return _friendlyCreature;
+		}
+	}
+	
+	public GameObject Enemy
+	{
+		get
+		{
+			return _enemyCreature;
 		}
 	}
 
@@ -145,6 +161,14 @@ public class BattleEngine : MonoBehaviour
 
 	void Update()
 	{
+		if(Friendly.GetComponent<MonsterController>().Health <= 0 || Enemy.GetComponent<MonsterController>().Health <= 0)
+		{
+			if(_gg == null) _gg = Create("Battle/GGScreen", GameObject.Find("GGScreenPos").transform.position, GameObject.Find("GGScreenPos").transform.rotation);
+			_counter += Time.deltaTime;
+			if(_counter >= 3f) { Destroy(_gg); DestroyBattle(); }
+			return;
+		}
+
 		if(GetTurnState != _currentStatus)
 		{
 			_currentStatus = GetTurnState;
@@ -176,8 +200,6 @@ public class BattleEngine : MonoBehaviour
 		initSkill();
 		_changeA = _friendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
 		_changeB = _enemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
-		_newAHealth = Result.PlayerAHealth;
-		_newBHealth = Result.PlayerBHealth;
 	}
 
 	private void initSkill()
@@ -188,7 +210,7 @@ public class BattleEngine : MonoBehaviour
 		//evalute which skill was used by Result.SkillID
 		if(Result.SkillID == 1)
 		{
-			_actor = (GameObject)Instantiate(Resources.Load("Laser"),Vector3.zero,Quaternion.identity);
+			_actor = (GameObject)Instantiate(Resources.Load("Battle/Laser"),Vector3.zero,Quaternion.identity);
 			Actor = _actor.GetComponent<ActorControlls>();
 			Actor.Owner = this;
 			switch(CurrentPlayer)
@@ -207,20 +229,18 @@ public class BattleEngine : MonoBehaviour
 
 	private void executeSkill()
 	{
-		_damageIndicator = (GameObject)Instantiate(Resources.Load("Damage"),Vector3.zero,Quaternion.identity);
+		_damageIndicator = (GameObject)Instantiate(Resources.Load("Battle/Damage"),Vector3.zero,Quaternion.identity);
 		switch(CurrentPlayer)
 		{
 		case FightRoundResult.Player.A:
 			_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
-			_damageIndicator.transform.rotation = _enemyCreature.transform.rotation;
 			break;
 		case FightRoundResult.Player.B:
 			_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
-			_damageIndicator.transform.rotation = _friendlyCreature.transform.rotation;
 			break;
 		}
-		_friendlyCreature.GetComponent<MonsterController>().Health = _newAHealth;
-		_enemyCreature.GetComponent<MonsterController>().Health    = _newBHealth;
+		_friendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
+		_enemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
 		_results.Remove(Result);
 	}
