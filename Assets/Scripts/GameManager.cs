@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private ViewController _view;
 
-    public static string DontSaveTag = "DON'T SAVE GAMEOBJECT.";
+    public static string DontSaveTag = "DontSave";
     public string ServerURL = "http://pixeltamer.net:7774/rpc/";
 
     private const float OwnUpdateFreq = 60*3;
@@ -68,13 +68,9 @@ public class GameManager : MonoBehaviour
     {
         get 
         {
-            if (_instance == null)
-            {
-                GameObject obj = new GameObject("controller_gamemanager");
-                obj.hideFlags = HideFlags.DontSave;
-                _instance = obj.AddComponent<GameManager>();
-            }
-            return _instance; 
+            if (_instance != null)
+                return _instance;
+            return null;
         }
     }
 

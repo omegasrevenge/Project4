@@ -3,8 +3,15 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - DON'T SAVE GAMEOBJECT.
+  - DontSave
+  - GUI
+  - Menu
+  - 
+  - 
+  - 
   - Laser
+  - Fireball
+  - Axe
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -15,9 +22,9 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: GUI
-  User Layer 9: Map
-  User Layer 10: Combat
-  User Layer 11: Base
+  User Layer 9: Menu
+  User Layer 10: 
+  User Layer 11: 
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 

@@ -1113,8 +1113,12 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost
 
 		if( returnActualScreenSize )
 		{
-			var uiScale = PixelPerfectMode ? 1 : ( camera.pixelHeight / (float)fixedHeight ) * this.uiScale;
-			return ( new Vector2( camera.pixelWidth, camera.pixelHeight ) / uiScale ).CeilToInt();
+            if (Mathf.Abs(camera.rect.x) >= 1 || Mathf.Abs(camera.rect.y) >= 1)
+                return new Vector2(FixedWidth, FixedHeight);
+		    float Height = camera.pixelHeight /(1 - Mathf.Abs(camera.rect.y));
+            float Width = camera.pixelWidth/ (1 - Mathf.Abs(camera.rect.x));
+            var uiScale = PixelPerfectMode ? 1 : (Height / (float)fixedHeight) * this.uiScale;
+            return (new Vector2(Width, Height) / uiScale).CeilToInt();
 		}
 
 		return new Vector2( FixedWidth, FixedHeight );

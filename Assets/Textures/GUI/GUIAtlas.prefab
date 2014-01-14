@@ -40,89 +40,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 66a1e34b3e7cf9d4ea8a799cce9231ca, type: 2}
   items:
-  - name: gui_blank
+  - name: bg
     region:
       serializedVersion: 2
       x: 0
-      y: .890625
-      width: .015625
-      height: .015625
+      y: .2578125
+      width: .125
+      height: .25
+    border:
+      m_Left: 15
+      m_Right: 15
+      m_Top: 15
+      m_Bottom: 15
+    rotated: 0
+    sizeInPixels: {x: 32, y: 32}
+    textureGUID: 0400c27d9362e9f46a3c86ad3de6b906
+    deleted: 0
+    texture: {fileID: 0}
+  - name: bg-menu
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .25
+      height: .25
+    border:
+      m_Left: 2
+      m_Right: 40
+      m_Top: 2
+      m_Bottom: 2
+    rotated: 0
+    sizeInPixels: {x: 64, y: 32}
+    textureGUID: cd10ad1463b7dfd419be6db2eaa79e13
+    deleted: 0
+    texture: {fileID: 0}
+  - name: bg-transparent
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .515625
+      width: .125
+      height: .25
+    border:
+      m_Left: 15
+      m_Right: 15
+      m_Top: 15
+      m_Bottom: 15
+    rotated: 0
+    sizeInPixels: {x: 32, y: 32}
+    textureGUID: 5d7f073f47c440846ac3af55a5f04b66
+    deleted: 0
+    texture: {fileID: 0}
+  - name: BLANK_TEXTURE
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .7734375
+      width: .0390625
+      height: .078125
     border:
       m_Left: 2
       m_Right: 2
       m_Top: 2
       m_Bottom: 2
     rotated: 0
-    sizeInPixels: {x: 32, y: 32}
-    textureGUID: 1639247b1eaf234458186f53eaf33c78
-    deleted: 0
-    texture: {fileID: 0}
-  - name: gui_login_bgmap
-    region:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: .25
-      height: .5
-    border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    rotated: 0
-    sizeInPixels: {x: 512, y: 1024}
-    textureGUID: 5f66a5b870f7bd54a8411443c331b5a8
-    deleted: 0
-    texture: {fileID: 0}
-  - name: gui_login_circlemask
-    region:
-      serializedVersion: 2
-      x: 0
-      y: .500976562
-      width: .25
-      height: .25
-    border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    rotated: 0
-    sizeInPixels: {x: 512, y: 512}
-    textureGUID: 0e6994846c6a5354db413ddc5a2610c4
-    deleted: 0
-    texture: {fileID: 0}
-  - name: gui_login_loadingbar
-    region:
-      serializedVersion: 2
-      x: 0
-      y: .751953125
-      width: .203613281
-      height: .137695312
-    border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    rotated: 0
-    sizeInPixels: {x: 417, y: 282}
-    textureGUID: 0e9699ec18479d24abf775e2a835a851
-    deleted: 0
-    texture: {fileID: 0}
-  - name: gui_login_logo
-    region:
-      serializedVersion: 2
-      x: .250976562
-      y: 0
-      width: .25
-      height: .25
-    border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    rotated: 0
-    sizeInPixels: {x: 512, y: 512}
-    textureGUID: e69e85d52a659284ebd63d11de14d27c
+    sizeInPixels: {x: 10, y: 10}
+    textureGUID: c6f073cf28c1dfd449b8a2a0ae985a99
     deleted: 0
     texture: {fileID: 0}
   generator: 0
