@@ -160,6 +160,8 @@ GameObject:
   - 114: {fileID: 347023047}
   - 114: {fileID: 347023050}
   - 114: {fileID: 347023049}
+  - 82: {fileID: 347023052}
+  - 114: {fileID: 347023051}
   m_Layer: 0
   m_Name: controller_animation
   m_TagString: Untagged
@@ -267,7 +269,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  length: 1.5
+  length: 1.35000002
   syncStartWhenRun: 1
   startValueIsOffset: 0
   syncEndWhenRun: 0
@@ -438,6 +440,81 @@ MonoBehaviour:
   DataTarget:
     Component: {fileID: 347023049}
     MemberName: SwitchScene
+--- !u!114 &347023051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347023039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4b6d41893ad6e499d2ffcefa532575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataSource:
+    Component: {fileID: 347023042}
+    MemberName: TweenCompleted
+  DataTarget:
+    Component: {fileID: 347023049}
+    MemberName: PlaySound
+--- !u!82 &347023052
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347023039}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: a1f43eb19267efa478a7f1fc3ee3cab6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 1
+  BypassListenerEffects: 1
+  BypassReverbZones: 1
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &357731955
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +615,7 @@ GameObject:
   - 23: {fileID: 431674831}
   - 33: {fileID: 431674830}
   - 114: {fileID: 431674829}
+  - 81: {fileID: 431674834}
   m_Layer: 0
   m_Name: UI Root
   m_TagString: Untagged
@@ -647,6 +725,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.125, y: 2, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!81 &431674834
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431674827}
+  m_Enabled: 1
 --- !u!1 &1018290741
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +778,7 @@ MonoBehaviour:
     Component: {fileID: 1018290744}
     MemberName: SpriteName
   loopType: 0
-  length: 1.5
+  length: 1.29999995
   autoStart: 0
   skipToEndOnStop: 0
   playDirection: 0
