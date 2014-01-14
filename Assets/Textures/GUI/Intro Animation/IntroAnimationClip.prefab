@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: IntroAnimationClip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbee5ef5e9b6a184db183d1b0b7f3216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 11400000, guid: 7512546dfb81bb440897d5da1661d3a2, type: 2}
+  sprites:
+  - Logo0001
+  - Logo0003
+  - Logo0005
+  - Logo0007
+  - Logo0009
+  - Logo0011
+  - Logo0013
+  - Logo0015
+  - Logo0017
+  - Logo0019
+  - Logo0021
+  - Logo0023
+  - Logo0025
+  - Logo0027
+  - Logo0029
+  - Logo0031
+  - Logo0033
+  - Logo0035
+  - Logo0037
+  - Logo0039
+  - Logo0041
+  - Logo0043
+  - Logo0045
+  - Logo0047
+  - Logo0049
+  - Logo0051
+  - Logo0053
+  - Logo0055
+  - Logo0057
+  - Logo0059
+  - Logo0061
+  - Logo0063
+  - Logo0065
+  - Logo0067
+  - Logo0069
+  - Logo0071
+  - Logo0073
+  - Logo0075
+  - Logo0077
+  - Logo0079
+  - Logo0081
+  - Logo0083
+  - Logo0085
+  - Logo0087
+  - Logo0089
+  - Logo0091
+  - Logo0093
+  - Logo0095
+  - Logo0097
+  - Logo0099
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

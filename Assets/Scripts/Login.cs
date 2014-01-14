@@ -9,8 +9,6 @@ public class Login : MonoBehaviour
 	public string Enemy = "Enemy";
 	public bool Register = false;
 
-    public DFPanelAnimation AnimationTest;
-
     void Awake()
     {
 #if !UNITY_EDITOR
@@ -104,7 +102,6 @@ public class Login : MonoBehaviour
             return;
         }
 
-		//AnimationTest.Scroll(-1f, 0);
 
     }
 }

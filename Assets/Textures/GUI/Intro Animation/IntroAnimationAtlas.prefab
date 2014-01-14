@@ -1,0 +1,941 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: IntroAnimationAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f514313262e3d141ad017b60809752a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 131fc05e559cf194f974b3affd244721, type: 2}
+  items:
+  - name: BG
+    region:
+      serializedVersion: 2
+      x: .812988281
+      y: .541992188
+      width: .0078125
+      height: .015625
+    border:
+      m_Left: 15
+      m_Right: 15
+      m_Top: 15
+      m_Bottom: 15
+    rotated: 0
+    sizeInPixels: {x: 32, y: 32}
+    textureGUID: 2a75482b456159849845fea6979ab8c9
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0000
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 6c5825edb6959a443be9bbc4fa3622dd
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0001
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: d2a8d32fc35b2054bbd28030bbd782f9
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0003
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 2338816d396401b4ca93ea5485f8dafc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0005
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 9c6135fce04a1ed458399763e35696fb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0007
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 374896fca2aeb2c4e92bb9b6c66b55b4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0009
+    region:
+      serializedVersion: 2
+      x: .0903320312
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c3bfdc7b22596c448bdae2fadd4734a8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0011
+    region:
+      serializedVersion: 2
+      x: .0903320312
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c1b072c4e4fb89e41ad1898084ae246b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0013
+    region:
+      serializedVersion: 2
+      x: .0903320312
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 7dfda56e472559741934170815f9892d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0015
+    region:
+      serializedVersion: 2
+      x: .0903320312
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c0af2df5ba09bc34a8ebe3e5a2d106f2
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0017
+    region:
+      serializedVersion: 2
+      x: .0903320312
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 767a9820ede71d142af0607fd342d92b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0019
+    region:
+      serializedVersion: 2
+      x: .180664062
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: a6b4a7b08b59e354e98acfb550521fa4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0021
+    region:
+      serializedVersion: 2
+      x: .180664062
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: a8d0d473fae494a41aa064c531621287
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0023
+    region:
+      serializedVersion: 2
+      x: .180664062
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: a2bbf1910b203c848a68fa96fc861a85
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0025
+    region:
+      serializedVersion: 2
+      x: .180664062
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 7fbe5e6a7bef5ab4886ebab0b95003c5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0027
+    region:
+      serializedVersion: 2
+      x: .180664062
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 0090e05c90c63cb49aaaa65e66975119
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0029
+    region:
+      serializedVersion: 2
+      x: .270996094
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: f1b84178c7c973f48b32d12b61a1c34a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0031
+    region:
+      serializedVersion: 2
+      x: .270996094
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: f8d347ffadec402448686c45e72ec0b7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0033
+    region:
+      serializedVersion: 2
+      x: .270996094
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 3e0d45d1af465d34598f33da898b0079
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0035
+    region:
+      serializedVersion: 2
+      x: .270996094
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: bb0bd58be828cf2448ecb1806624059b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0037
+    region:
+      serializedVersion: 2
+      x: .270996094
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 9378a069d170d224d929b6fd03d8a44a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0039
+    region:
+      serializedVersion: 2
+      x: .361328125
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: fba7d75e8b7fdf04887d4a6a6c93c6d1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0041
+    region:
+      serializedVersion: 2
+      x: .361328125
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 1c0ef176378fcf3429c6c932df4a4a26
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0043
+    region:
+      serializedVersion: 2
+      x: .361328125
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 01f4a832f5c18c84ca9182eb85de7670
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0045
+    region:
+      serializedVersion: 2
+      x: .361328125
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: dcc560ff706e8674790f6accf4750bc2
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0047
+    region:
+      serializedVersion: 2
+      x: .361328125
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: af2b9dd4564993b4d9119f1bc25009cc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0049
+    region:
+      serializedVersion: 2
+      x: .451660156
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 9fc40192276db5c428d0b91f5b477623
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0051
+    region:
+      serializedVersion: 2
+      x: .451660156
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 2495609f6bbbcaf4d805cf396c4c02af
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0053
+    region:
+      serializedVersion: 2
+      x: .451660156
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 41ff169594e87a84897c0604b32268d0
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0055
+    region:
+      serializedVersion: 2
+      x: .451660156
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: cd0deaa189b371c4e8e46c3210e8da5a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0057
+    region:
+      serializedVersion: 2
+      x: .451660156
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 5f6654eac30d19d4ab8526cdf94ee908
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0059
+    region:
+      serializedVersion: 2
+      x: .541992188
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 47902da9c3cda274d95855c8e749eb74
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0061
+    region:
+      serializedVersion: 2
+      x: .632324219
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: ede36d39b07504c41bcd89ba4b6e9e7d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0063
+    region:
+      serializedVersion: 2
+      x: .72265625
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 396481349e813e74086d3fe41ebba1c6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0065
+    region:
+      serializedVersion: 2
+      x: .812988281
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: d4f1ea29a825a7b49a61f7a0f5405e62
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0067
+    region:
+      serializedVersion: 2
+      x: .903320312
+      y: 0
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: d452c950331257d46a5ca578cd7b3cec
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0069
+    region:
+      serializedVersion: 2
+      x: .541992188
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c166156fad182e64694441f88a73bc8a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0071
+    region:
+      serializedVersion: 2
+      x: .541992188
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 8c595652f55ad0b45b490c7f339405d7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0073
+    region:
+      serializedVersion: 2
+      x: .541992188
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c0db36f35e3df1a4aa0b656f0803cf9d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0075
+    region:
+      serializedVersion: 2
+      x: .541992188
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: e1cafd706a8fef644a13033e7367913b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0077
+    region:
+      serializedVersion: 2
+      x: .632324219
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 2c8c8f97d8cc7704a933d228c05f45d1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0079
+    region:
+      serializedVersion: 2
+      x: .72265625
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 747a2f0f781fe624691743f8bfe10919
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0081
+    region:
+      serializedVersion: 2
+      x: .812988281
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: c578f1d252dc8f945803ee4295825d5a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0083
+    region:
+      serializedVersion: 2
+      x: .903320312
+      y: .180664062
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: ef51d191674ea39408afeded215bc6fb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0085
+    region:
+      serializedVersion: 2
+      x: .632324219
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 1134f5387c11f2b4d96224974b53de67
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0087
+    region:
+      serializedVersion: 2
+      x: .632324219
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: ce80593ee38aad94ca5eb0b185289ffc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0089
+    region:
+      serializedVersion: 2
+      x: .632324219
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: ed8180da1a2b1b749980ec4bbfe32981
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0091
+    region:
+      serializedVersion: 2
+      x: .72265625
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 9411325b2233d0449abae49beb3ebbdf
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0093
+    region:
+      serializedVersion: 2
+      x: .812988281
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: b8097de5a7a914c47815602d31e40cd4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0095
+    region:
+      serializedVersion: 2
+      x: .903320312
+      y: .361328125
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 7ec5563dce0435b4b8caf30df4a5e01b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0097
+    region:
+      serializedVersion: 2
+      x: .72265625
+      y: .541992188
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 162a5242f72eb0940a8535c06988cd98
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Logo0099
+    region:
+      serializedVersion: 2
+      x: .72265625
+      y: .72265625
+      width: .0903320312
+      height: .180664062
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 370, y: 370}
+    textureGUID: 9f742bae24c818049b416028d197f129
+    deleted: 0
+    texture: {fileID: 0}
+  generator: 0
+  imageFileGUID: 
+  dataFileGUID: 
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
