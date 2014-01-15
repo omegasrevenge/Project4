@@ -11,6 +11,9 @@ public class GUIBase : MonoBehaviour
 	public enum ResourceElement { Fire, Tech, Nature, Water, Storm };
 	public ResourceElement CuResourceElement;
 
+	private enum Windows { Crafting, Creature };
+	private Windows curWindow;
+
 	public bool showWindow = false;
 	private Rect windowRect;
 	private GUIStyle textGuiStyle;
@@ -31,9 +34,7 @@ public class GUIBase : MonoBehaviour
 
 		if (showWindow)
 		{
-			windowRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
-			GUI.color = Color.black;
-			GUI.Window(0, windowRect, DoWindow, "Crafting");
+			ShowWindow(curWindow);
 			return;
 		}
 
@@ -42,13 +43,51 @@ public class GUIBase : MonoBehaviour
 			GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 		}
 
-		if (GUI.Button(new Rect(330, 500, 120, 50), "<color=white><size=20>Crafting</size></color>"))
+		if (GUI.Button(new Rect(30, 380, 120, 50), "<color=white><size=20>" + "Crafting" + "</size></color>"))
 		{
-			showWindow = true;
+			ShowWindow(Windows.Crafting);
+		}
+
+		if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
+		{
+			ShowWindow(Windows.Creature);
 		}
 	}
 
-	void DoWindow(int windowID)
+	private void ShowWindow(Windows windowName)
+	{
+		showWindow = true;
+		curWindow = windowName;
+		windowRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
+		GUI.color = Color.black;
+		switch (windowName)
+		{
+			case Windows.Crafting:
+			{
+				GUI.Window(0, windowRect, CraftingWindow, windowName.ToString());
+				break;
+			}
+			case Windows.Creature:
+			{
+				GUI.Window(1, windowRect, CreatureWindow, windowName.ToString());
+				break;
+			}
+		}
+	}
+
+	private void CreatureWindow(int windowID)
+	{
+		GUI.Label(new Rect(20, 30, 200, 50), "Here you will see your AWESOME Monster!!!", textGuiStyle);
+
+		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
+		{
+			showWindow = false;
+		}
+	}
+
+	#region Crafting
+
+	private void CraftingWindow(int windowID)
 	{
 		GUI.Label(new Rect(70, 30, 200, 50), curResourceLevel.ToString(), textGuiStyle);
 
@@ -136,11 +175,12 @@ public class GUIBase : MonoBehaviour
 			string z = "" + i + ": ";
 			for (int j = 0; j < 5; j++)
 			{
-				z += GameManager.Singleton.Player.Resources[i, j] + " ";
+				z += GameManager.Singleton.Player.Resources[i, j] + "| ";
 			}
 			GUI.Label(new Rect((windowRect.width / 2) - 100, (windowRect.height - 100 - 40 * 7) + i * 40, 200, 20), z, textGuiStyle);
 		}
 	}
+	#endregion
 
 	void Update () {
 		
