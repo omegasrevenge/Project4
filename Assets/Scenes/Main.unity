@@ -83,7 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 373906083}
   - 212: {fileID: 373906084}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 66a1e34b3e7cf9d4ea8a799cce9231ca, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -317,7 +317,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 730788164}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: root_3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   - 124: {fileID: 1084884585}
   - 81: {fileID: 1084884584}
   - 114: {fileID: 1084884589}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -793,45 +793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phase: 0
   pinned: 1
---- !u!1 &1132500536
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1132500538}
-  - 114: {fileID: 1132500537}
-  m_Layer: 0
-  m_Name: controller_viewcontroller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1132500537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1132500536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6db26c2bfb9284094d82041115ae87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _viewportScrollState: 0
---- !u!4 &1132500538
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1132500536}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -102.5625, y: 101, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &1304823710
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +886,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1316429730}
   - 114: {fileID: 1316429729}
-  - 114: {fileID: 1316429731}
   m_Layer: 0
   m_Name: controller_gamemanager
   m_TagString: Untagged
@@ -944,7 +904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f543c9fa50e16749a50292573e79b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ServerURL: http://pixeltamer.net:7774/rpc/
   pois_version: 0
   pois_timeQ: 0
   pois_valid: 0
@@ -956,11 +915,14 @@ MonoBehaviour:
     BasePosition: {x: 0, y: 0}
     Fighting: 0
     baseInstance: {fileID: 0}
+  ServerURL: http://pixeltamer.net:7774/rpc/
   SessionID: 
   CurrentGameMode: 0
   _lastOwnPlayerUpdate: 0
   _lastPositionUpdate: -1000
   _lastPlayerQuery: -1000
+  PlayerID: 111130753357680043998
+  Password: mueller
 --- !u!4 &1316429730
 Transform:
   m_ObjectHideFlags: 0
@@ -972,23 +934,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1316429731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1316429728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08dd16556b59797408bfbf6dcc13b4f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerID: 106042726566859206842
-  PlayerName: Sadarian
-  Password: 123
-  XP: 10
-  Enemy: Enemy
-  Register: 0
 --- !u!1 &1347554402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +962,6 @@ Transform:
   m_LocalPosition: {x: -.5625, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2139245372}
   - {fileID: 938869517}
   - {fileID: 887397807}
   m_Father: {fileID: 1859583930}
@@ -1263,7 +1207,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 0}
-  - {fileID: 2100000, guid: c7f5af03ff8fa76409366b3b58567bcb, type: 3}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1313,7 +1257,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1922326201}
   - 212: {fileID: 1922326200}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1354,71 +1298,3 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 730788164}
---- !u!1 &2139245371
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2139245372}
-  - 114: {fileID: 2139245373}
-  m_Layer: 0
-  m_Name: controller_animations
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2139245372
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2139245371}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1347554403}
---- !u!114 &2139245373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2139245371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40737631a52c0dd43acadc8db26d00ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: Hide
-  target:
-    Component: {fileID: 1132500537}
-    MemberName: ViewportScrollState
-  easingType: 1
-  animCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  length: 5
-  syncStartWhenRun: 1
-  startValueIsOffset: 0
-  syncEndWhenRun: 0
-  endValueIsOffset: 0
-  loopType: 0
-  autoRun: 1
-  skipToEndOnStop: 0
-  startValue: 0
-  endValue: 0

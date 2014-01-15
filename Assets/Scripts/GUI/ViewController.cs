@@ -90,9 +90,7 @@ public class ViewController : MonoBehaviour
         _menuViewport = _menu.GetComponent<MovableGUIViewport>();
         _3DViewport = _camera3D.GetComponent<MovableViewport>();
 
-        ViewportScrollState = 0.9f;
-
-
+        ViewportScrollState = 0f;
     }
 
     void Update () 

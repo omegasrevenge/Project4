@@ -6,8 +6,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public enum GameMode { Login, Map, Fight, Base };
-
 	public enum ExchangeMode { Up, Down, Cricle };
+
+    public static string DontSaveTag = "DontSave";
     
 	public struct ObjectPos
     {
@@ -27,9 +28,9 @@ public class GameManager : MonoBehaviour
     private ViewController _view;
     private MapGrid _map;
 
-    public static string DontSaveTag = "DontSave";
-    public string ServerURL = "http://pixeltamer.net:7774/rpc/";
 
+    private const string Server = "http://pixeltamer.net:7774/rpc/";
+    private const string Localhost = "http://localhost:7774/rpc/";
     private const float OwnUpdateFreq = 60*3;
     private const float PositionUpdateFreq = 60*1;
     private const float PositionUpdateFreqMove = 5;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
 	public Player Player = new Player();
+    public string ServerURL = Server;
 	public string SessionID = "";
     public GameMode CurrentGameMode = GameMode.Login;
 
@@ -90,6 +92,11 @@ public class GameManager : MonoBehaviour
     {
         _view = ViewController.Create();
         _map = CreateController<MapGrid>("Map");
+
+#if !UNITY_EDITOR
+        Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
+        Social.localUser.Authenticate(OnAuthCB);
+#endif
 
         InitializeDummyObjects();
     }
@@ -169,18 +176,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    //DEBUG
-    public void Test()
-    {
-        foreach (ObjectPos objectPos in PlayersOnMap)
-        {
-            Player player = GetPlayer(objectPos.ID);
-            if(player != null)
-                Debug.Log(player.Name);
-
-        }
-    }
-
     /// <summary>
     /// Returns a valid URL for the current session to use RPC functions.
     /// </summary>
@@ -203,7 +198,7 @@ public class GameManager : MonoBehaviour
     /// <param name="playerID"></param>
     public void Login(string playerID, string password, bool local, Action<bool> callback = null)
 	{
-        if (local) ServerURL = "http://localhost:7774/rpc/";
+        ServerURL = local ? Localhost : Server;
         StartCoroutine(CLogin(playerID, password, callback));
 	}
 
@@ -547,17 +542,14 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+#if !UNITY_EDITOR
     void OnApplicationFocus(bool focusStatus)
     {
-        
         if (focusStatus)
-        {
-            Debug.Log("FOCUS CHANGED => HIDE NAVIGATION BAR!");
-#if !UNITY_EDITOR
             (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
-#endif
-        }
     }
+#endif
+
 
     void OnDisable()
     {
@@ -572,4 +564,61 @@ public class GameManager : MonoBehaviour
             
         }
     }
+
+    void OnAuthCB(bool result)
+    {
+        if (!result)
+        {
+            //@To-do: Do something!
+        }
+
+        string token = NerdGPG.Instance().GetToken();
+        if (string.IsNullOrEmpty(token))
+        {
+            //@To-do: Do something!
+            return;
+        }
+        Debug.Log("GPGUI: Got Login Response: " + result);
+        Debug.Log("Token: " + NerdGPG.Instance().GetToken());
+        Login(token, OnPlayerLoaded);
+
+    }
+
+    private void OnPlayerLoaded(bool result)
+    {
+        if (!result)
+        {
+            Debug.LogError("Couldn't load Player Data!");
+            return;
+        }
+
+
+    }
+
+    //####################################  Editor Login ###################################
+#if UNITY_EDITOR
+    public string PlayerID = "PlayerID";
+    public string Password = "Password";
+
+    void OnGUI()
+    {
+
+
+        if (!LoggedIn)
+        {
+            PlayerID = GUI.TextField(new Rect(10, 10, 200, 20), PlayerID, 100);
+            Password = GUI.TextField(new Rect(10, 40, 200, 20), Password, 100);
+            if (GUI.Button(new Rect(10, 70, 100, 20), "Login"))
+            {
+                Login(PlayerID, Password, false, OnPlayerLoaded);
+            }
+
+            if (GUI.Button(new Rect(210, 70, 100, 20), " >>> Local <<<"))
+            {
+                Login(PlayerID, Password, true, OnPlayerLoaded);
+            }
+        }
+
+    }
+#endif
 }
