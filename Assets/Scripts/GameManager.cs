@@ -91,7 +91,8 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _view = ViewController.Create();
-        _map = CreateController<MapGrid>("Map");
+        _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
+        _map.name = "Map";
 
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();

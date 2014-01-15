@@ -105,8 +105,7 @@ public class GUIMap : MonoBehaviour {
 			float lon = poi.Position.x;
 			float lat = poi.Position.y;
 			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
-			LocationTestComp comp = poi.instance.AddComponent<LocationTestComp>();
-			comp.setText(poi.Name);
+			PointOfInterest comp = poi.instance.AddComponent<PointOfInterest>();
 			comp.ProjPos = projPos;
 			comp.Grid = _grid;
 		}
@@ -125,8 +124,7 @@ public class GUIMap : MonoBehaviour {
 			float lon = GameManager.Singleton.Player.BasePosition.x;
 			float lat = GameManager.Singleton.Player.BasePosition.y;
 			MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
-			LocationTestComp comp = curGameObject.AddComponent<LocationTestComp>();
-			comp.setText("Base");
+			PointOfInterest comp = curGameObject.AddComponent<PointOfInterest>();
 			comp.ProjPos = projPos;
 			comp.Grid = _grid;
 			return;
@@ -135,11 +133,11 @@ public class GUIMap : MonoBehaviour {
 
 	private void MoveBase()
 	{
-		MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos;
+		MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos;
 
 		if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
 		{
-			GameManager.Singleton.Player.baseInstance.GetComponent<LocationTestComp>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
+			GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
 		}
 	}
 

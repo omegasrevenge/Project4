@@ -30,9 +30,10 @@ public class MapGrid : MonoBehaviour
             GameObject obj = new GameObject("root");
             obj.transform.parent = transform;
             Root = obj.transform;
+            Root.localRotation = Quaternion.identity;
         }
-        GameManager.CreateController<AssetLoader>();
-        transform.localEulerAngles = new Vector3(90f,0f,0f);
+        GameManager.CreateController<AssetLoader>("controller_assetloader");
+        //transform.localEulerAngles = new Vector3(90f,0f,0f);
 
         int dim = 2 * MapRadius + 1;
         InitCells(dim, dim);
