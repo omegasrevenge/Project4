@@ -446,22 +446,22 @@ public class GameManager : MonoBehaviour
 		
 	}
 
-	public void CreatePlayer(string playerid,string playername,string password)
-	{
-		StartCoroutine(CCreatePlayer(playerid, playername, password));
-	}
-
-    public IEnumerator CCreatePlayer(string playerid,string playername,string password)
+    public void SetInitSteps(int steps)
     {
-			WWW request = new WWW(ServerURL+"createplayer"+ "?pid="+playerid + "&name="+playername + "&pass="+password);
 
-			yield return request;
-			
-			JSONObject json = JSONParser.parse(request.text);
-			if (!CheckResult(json)){ yield break;}
+        StartCoroutine(CSetInitSteps(steps));
+    }
 
-		Login(playerid,password, false);
-	}
+    public IEnumerator CSetInitSteps(int steps)
+    {
+        WWW request = new WWW(GetSessionURL("setinitsteps") + "&v=" + steps);
+        Player.InitSteps = steps;
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+    }
 
 	private IEnumerator GetPois()
 	{
@@ -592,7 +592,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Couldn't load Player Data!");
             return;
         }
-
 
     }
 

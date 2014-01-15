@@ -16,6 +16,7 @@ public class Player
 	public bool Fighting;
 
 	public GameObject baseInstance;
+    public int InitSteps;
 
     public void ReadJson(JSONObject json)
     {
@@ -37,6 +38,7 @@ public class Player
         //XP = (int)json["XP"];
         //Level = (int)json["Level"];
         Fighting = (bool)json["Fighting"];
-       
+        InitSteps = (int) json["InitSteps"];
+
     }
 }
