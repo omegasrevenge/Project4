@@ -31,7 +31,7 @@ public class GUIMap : MonoBehaviour {
 
 		if (GameManager.Singleton.LoggedIn)
 		{
-			if (GUI.Button(new Rect(270, 40, 120, 50), "Place Base here!"))
+			if (GUI.Button(new Rect(270, 40, 120, 50), "<color=white><size=20>Set Base</size></color>"))
 			{
 				GameManager.Singleton.SendBasePosition();
 				Debug.Log("Current Base Poition: " + LocationManager.GetCurrentPosition());
@@ -72,7 +72,7 @@ public class GUIMap : MonoBehaviour {
 			if (MapUtils.DistanceInKm(poi.Position, LocationManager.GetCurrentPosition()) <= RangeRadius)
 			{
 				GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), poi.Name, curGuiStyle);
-				string btnString = poi.Rsc == "Fight" ? "Fight" : "Farm";
+				string btnString = poi.Rsc == "Fight" ? "<color=white><size=20>Fight</size></color>" : "<color=white><size=20>Farm</size></color>";
 				if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), btnString))
 				{
 					GameManager.Singleton.PoiFarm(poi);
@@ -83,9 +83,8 @@ public class GUIMap : MonoBehaviour {
 		if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
 		{
 			GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
-			if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), "Visit Base"))
+			if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), "<color=white><size=20>Visit Base</size></color>"))
 			{
-				Debug.Log("is now visiting the Base!");
 				GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
 			}
 			inRange++;

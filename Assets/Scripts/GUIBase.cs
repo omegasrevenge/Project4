@@ -14,7 +14,8 @@ public class GUIBase : MonoBehaviour
 	public bool showWindow = false;
 	private Rect windowRect;
 	private GUIStyle textGuiStyle;
-	private string curInput = "1";	
+	private string curInput = "1";
+	private int curInputAsInt = -1;
 
 	void Awake()
 	{
@@ -35,14 +36,13 @@ public class GUIBase : MonoBehaviour
 			GUI.Window(0, windowRect, DoWindow, "Crafting");
 			return;
 		}
-		
-		if (GUI.Button(new Rect(320, 220, 120, 50), "Leave Base"))
+
+		if (GUI.Button(new Rect(320, 220, 120, 50), "<color=white><size=20>Leave Base</size></color>"))
 		{
 			GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
-			Debug.Log("Leaving Base!");
 		}
 
-		if (GUI.Button(new Rect(330, 500, 120, 50), "Crafting"))
+		if (GUI.Button(new Rect(330, 500, 120, 50), "<color=white><size=20>Crafting</size></color>"))
 		{
 			showWindow = true;
 		}
@@ -67,7 +67,7 @@ public class GUIBase : MonoBehaviour
 
 		ShowChart();
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "Close Window"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
 		{
 			showWindow = false;
 		}
@@ -75,52 +75,56 @@ public class GUIBase : MonoBehaviour
 
 	private void ResourcesExchange()
 	{
-		curInput = GUI.TextField(new Rect((windowRect.width/2) - 50, 270, 100, 50), curInput);
+		GUIStyle textFieldStyle = textGuiStyle;
 
-		if (GUI.Button(new Rect((windowRect.width/2) - 50, 120, 100, 50), ResourceElement.Fire.ToString()))
+		curInput = GUI.TextField(new Rect((windowRect.width / 2) - 20, 270, 50, 50), curInput, 3, textFieldStyle);
+
+		if (Int32.TryParse(curInput, out curInputAsInt))
+		{
+			if (GUI.Button(new Rect((windowRect.width / 2) - 70, 270, 40, 40), "<color=white><size=30>-</size></color>"))
+			{
+				curInputAsInt = curInputAsInt == 1 ? 1 : curInputAsInt - 1;
+			}
+			if (GUI.Button(new Rect((windowRect.width / 2) + 40, 270, 40, 40), "<color=white><size=30>+</size></color>"))
+			{
+				curInputAsInt++;
+			}
+
+			curInput = curInputAsInt.ToString();
+		}
+
+		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + ResourceElement.Fire.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Fire;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), ResourceElement.Tech.ToString()))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Tech.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Tech;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), ResourceElement.Nature.ToString()))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Nature.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Nature;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), ResourceElement.Water.ToString()))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Water.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Water;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), ResourceElement.Storm.ToString()))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Storm.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Storm;
 		}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "Circle"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))
 		{
-			int input = -1;
-			if (Int32.TryParse(curInput, out input))
-			{
-				GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, input*2, GameManager.ExchangeMode.Cricle);
-			}
+			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * 2, GameManager.ExchangeMode.Cricle);
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 190, 500, 100, 50), "Up"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 190, 500, 100, 50), "<color=white><size=20>Up</size></color>"))
 		{
-			int input = -1;
-			if (Int32.TryParse(curInput, out input))
-			{
-				GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, input*(curResourceLevel == ResourceLevel.Bioden?10:3), GameManager.ExchangeMode.Up);
-			}
+			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * (curResourceLevel == ResourceLevel.Bioden ? 10 : 3), GameManager.ExchangeMode.Up);
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 90, 500, 100, 50), "Down"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 90, 500, 100, 50), "<color=white><size=20>Down</size></color>"))
 		{
-			int input = -1;
-			if (Int32.TryParse(curInput, out input))
-			{
-				GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, input, GameManager.ExchangeMode.Down);
-			}
+			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt, GameManager.ExchangeMode.Down);
 		}
 	}
 
