@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private ViewController _view;
     private MapGrid _map;
 
+    public bool DummyUI = true;
 
     private const string Server = "http://pixeltamer.net:7774/rpc/";
     private const string Localhost = "http://localhost:7774/rpc/";
@@ -98,8 +99,8 @@ public class GameManager : MonoBehaviour
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
         Social.localUser.Authenticate(OnAuthCB);
 #endif
-
-        InitializeDummyObjects();
+        if(DummyUI)
+            InitializeDummyObjects();
     }
 
     private void InitializeDummyObjects()
@@ -579,8 +580,8 @@ public class GameManager : MonoBehaviour
             //@To-do: Do something!
             return;
         }
-        Debug.Log("GPGUI: Got Login Response: " + result);
-        Debug.Log("Token: " + NerdGPG.Instance().GetToken());
+        Debug.Log("GPG: Got Login Response: " + result);
+        Debug.Log("Token: " + token);
         Login(token, OnPlayerLoaded);
 
     }

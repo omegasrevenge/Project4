@@ -43,10 +43,10 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: 0
-      y: .2578125
-      width: .125
-      height: .25
+      x: .0634765625
+      y: .948242188
+      width: .03125
+      height: .03125
     border:
       m_Left: 15
       m_Right: 15
@@ -57,13 +57,30 @@ MonoBehaviour:
     textureGUID: 0400c27d9362e9f46a3c86ad3de6b906
     deleted: 0
     texture: {fileID: 0}
-  - name: bg-menu
+  - name: bg-maxscreen
     region:
       serializedVersion: 2
       x: 0
       y: 0
-      width: .25
-      height: .25
+      width: .703125
+      height: .947265625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 720, y: 970}
+    textureGUID: dbfa6688f1bb0f64788000942b7785a3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: bg-menu
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .948242188
+      width: .0625
+      height: .03125
     border:
       m_Left: 2
       m_Right: 40
@@ -77,10 +94,10 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: 0
-      y: .515625
-      width: .125
-      height: .25
+      x: .095703125
+      y: .948242188
+      width: .03125
+      height: .03125
     border:
       m_Left: 15
       m_Right: 15
@@ -95,9 +112,9 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: .7734375
-      width: .0390625
-      height: .078125
+      y: .98046875
+      width: .009765625
+      height: .009765625
     border:
       m_Left: 2
       m_Right: 2

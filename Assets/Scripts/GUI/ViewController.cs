@@ -79,16 +79,21 @@ public class ViewController : MonoBehaviour
     private void Init()
     {
         _gameManager = GameManager.Singleton;
+        _camera3D = GameObject.FindGameObjectWithTag(MainCameraTag).GetComponent<Camera>();
+        _3DViewport = _camera3D.GetComponent<MovableViewport>();
+
+        if (_gameManager.DummyUI)
+            return;
+        
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(UIRootTag);
         GameObject MenuRoot = GameObject.FindGameObjectWithTag(MenuRootTag);
 
         _gui = GUIRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
-        _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
-        _camera3D = GameObject.FindGameObjectWithTag(MainCameraTag).GetComponent<Camera>();
+        _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>(); 
 
         _guiViewport = GUIRoot.transform.FindChild(CameraStr).GetComponent<MovableViewport>();
         _menuViewport = _menu.GetComponent<MovableGUIViewport>();
-        _3DViewport = _camera3D.GetComponent<MovableViewport>();
+        
 
         ViewportScrollState = 0f;
     }
