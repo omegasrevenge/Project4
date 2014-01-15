@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ViewController : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class ViewController : MonoBehaviour
     public const string MainCameraTag = "MainCamera";
     public const string RootPanelStr = "panel_root";
     public const string CameraStr = "camera";
+
+    public const string Blindtext = "blindtext";
+
+    public const string PanelMaxScreenStr = "GUI/panel_maxscreen";
 
     private static ViewController _instance;
 
@@ -96,12 +101,25 @@ public class ViewController : MonoBehaviour
         
 
         ViewportScrollState = 0f;
+
+        AddMaxScreen("iris_01_a_title", "iris_01_a_text");
     }
 
     void Update () 
     {
 	
 	}
+
+
+    public void AddMaxScreen(string textKeyTitle = Blindtext, string textKeyText = Blindtext, dfButton button = null, Action callback = null)
+    {
+        dfControl cntrl = _gui.AddPrefab(Resources.Load<GameObject>(PanelMaxScreenStr));
+        cntrl.Size = cntrl.Parent.Size;
+        cntrl.RelativePosition = Vector2.zero;
+        GUIObjectMaxScreen obj = cntrl.GetComponent<GUIObjectMaxScreen>();
+        obj.Text = textKeyText;
+        obj.Title = textKeyTitle;
+    }
 
 
 }

@@ -577,7 +577,7 @@ public class JSONParser
 
 			if(!bQuoted)
 			{
-				if(!char.IsLetterOrDigit(c))
+                if (!char.IsLetterOrDigit(c) && c != '_' && c != '-')
 				{
 					complete=true;
 					index--;

@@ -125,6 +125,23 @@ MonoBehaviour:
     textureGUID: c6f073cf28c1dfd449b8a2a0ae985a99
     deleted: 0
     texture: {fileID: 0}
+  - name: button
+    region:
+      serializedVersion: 2
+      x: .127929688
+      y: .948242188
+      width: .03125
+      height: .03125
+    border:
+      m_Left: 15
+      m_Right: 15
+      m_Top: 15
+      m_Bottom: 15
+    rotated: 0
+    sizeInPixels: {x: 32, y: 32}
+    textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
+    deleted: 0
+    texture: {fileID: 0}
   generator: 0
   imageFileGUID: 
   dataFileGUID: 

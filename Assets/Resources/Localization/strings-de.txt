@@ -1,3 +1,5 @@
 {
-	hello:"Hallo Welt!"
+	blindtext: 			"Das ist ein Blindtext. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
+	iris_01_a_title: 	"Willkommen Agent,",
+	iris_01_a_text: 	"Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten."
 }

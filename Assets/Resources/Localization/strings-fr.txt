@@ -1,3 +1,4 @@
 {
+	blindtext: 			"Das ist ein Blindtext fürs Französische. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
 	hello:"Bonjour Baguette!"
 }

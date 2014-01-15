@@ -1,3 +1,4 @@
 {
+	blindtext: 			"Das ist ein Blindtext fürs Englische. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
 	hello:"Hello World!"
 }
