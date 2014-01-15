@@ -115,6 +115,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400014}
+  m_Layer: 0
+  m_Name: NamePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -144,13 +159,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.32933426, y: 9.58055496, z: 1.23760533}
+  m_LocalPosition: {x: 5.02036238, y: 8.14559937, z: -16.2789116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
   - {fileID: 400010}
   - {fileID: 400000}
   - {fileID: 400002}
+  - {fileID: 400014}
   m_Father: {fileID: 0}
 --- !u!4 &400006
 Transform:
@@ -197,6 +213,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
+  m_Father: {fileID: 400004}
+--- !u!4 &400014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0640850067, y: 1.8389492, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 400004}
 --- !u!23 &2300000
 Renderer:
@@ -310,6 +337,8 @@ MonoBehaviour:
   Owner: {fileID: 0}
   AttackSpeed: 5
   Health: 100
+  BgHealthbar: {fileID: 0}
+  Healthbar: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:

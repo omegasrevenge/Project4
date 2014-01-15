@@ -194,7 +194,7 @@ MonoBehaviour:
   FinalHeadScale: 3
   HeadScalingSpeed: 3
   FadeOutTime: 2
-  LifeTime: 5
+  LifeTime: 3.5
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

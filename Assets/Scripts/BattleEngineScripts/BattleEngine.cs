@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BattleEngine : MonoBehaviour 
 {
@@ -11,7 +12,6 @@ public class BattleEngine : MonoBehaviour
 	public int Turn = 0;
 	public FightRoundResult.Player CurrentPlayer; // whose player's turn is it going to be now
 	public BattleInit ServerInfo;
-	public List<string> TEST;
 	//########## public #########
 	
 	//########## static #########
@@ -35,9 +35,14 @@ public class BattleEngine : MonoBehaviour
 	private int _changeA;
 	private int _changeB;
 	private GameObject _actor;
-	private GameObject _damageIndicator;
+	private List<GameObject> _damageIndicator;
 	private float _counter = 0f;
 	private GameObject _gg;
+	private GameObject _monsterAName;
+	private GameObject _monsterBName;
+	private GameObject _monsterAHealth;
+	private GameObject _monsterBHealth;
+	private List<GameObject> _damageGUI;
 	//########## private #########
 
 	//########## getter #########
@@ -86,45 +91,11 @@ public class BattleEngine : MonoBehaviour
 		}
 	}
 
-	public bool TurnIsDone
-	{
-		get
-		{
-			return (Actor == null || Actor.AnimationFinished); 
-		}
-	}
-
-	public bool IsResultForNextTurnThere
-	{
-		get
-		{
-			if(Result == null) return false;
-			return Turn < Result.Turn;
-		}
-	}
-
-	public bool IsItTheOtherPlayersTurnNow
-	{
-		get
-		{
-			if(Result == null) return false;
-			return CurrentPlayer != Result.PlayerTurn;
-		}
-	}
-
-	public bool IsBattleCamRotating
-	{
-		get
-		{
-			return BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation;
-		}
-	}
-
 	public TurnState GetTurnState
 	{
 		get
 		{
-			if(TurnIsDone && !BattleCamInPosition(CurrentPlayer)) return TurnState.Rotate;
+			if((Actor == null || Actor.AnimationFinished) && !BattleCamInPosition(CurrentPlayer)) return TurnState.Rotate;
 			if(_results.Count == 0 && (Actor == null || Actor.AnimationFinished)) return TurnState.Wait;
 			if(Actor != null && Actor.CanShowDamage) return TurnState.Hit;
 			return TurnState.Execute;
@@ -142,7 +113,8 @@ public class BattleEngine : MonoBehaviour
 	void Awake()
 	{
 		_results = new List<FightRoundResult>();
-		TEST = new List<string>();
+		_damageGUI = new List<GameObject>();
+		_damageIndicator = new List<GameObject>();
 	}
 
 	public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
@@ -152,20 +124,20 @@ public class BattleEngine : MonoBehaviour
 		Current.Init(serverInfo);
 		Current.BattleCam = Current.Arena.transform.FindChild("CameraPivot").FindChild("BattleCamera").gameObject;
 		Current.BattleCam.SetActive(true);
-		Current.MainCam = GameObject.Find("Main Camera");
+		Current.MainCam = Camera.main.gameObject;
 		Current.MainCam.SetActive(false);
-		Destroy(Current.MainCam.GetComponent<AudioListener>());
 		Current.CurrentPlayer = serverInfo.FirstTurnIsPlayer;
 		Current.ServerInfo = serverInfo;
 	}
 
 	void Update()
 	{
-		if(Friendly.GetComponent<MonsterController>().Health <= 0 || Enemy.GetComponent<MonsterController>().Health <= 0)
+		positionGUI();
+
+		if(Friendly.GetComponent<MonsterController>().Health <= 0 
+		   || Enemy.GetComponent<MonsterController>().Health <= 0) // This part belongs to the dirty test version. Needs to be changed upon backend implementation
 		{
-			if(_gg == null) _gg = Create("Battle/GGScreen", GameObject.Find("GGScreenPos").transform.position, GameObject.Find("GGScreenPos").transform.rotation);
-			_counter += Time.deltaTime;
-			if(_counter >= 3f) { Destroy(_gg); DestroyBattle(); }
+			enforceEnd();
 			return;
 		}
 
@@ -187,6 +159,34 @@ public class BattleEngine : MonoBehaviour
 				break;
 			}
 		}
+	}
+
+	private void positionGUI()
+	{
+		_damageGUI.RemoveAll(item => item == null);
+		_damageIndicator.RemoveAll(item => item == null);
+		_monsterAName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Friendly.transform.FindChild("NamePos").transform.position); 
+		_monsterBName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Enemy.transform.FindChild("NamePos").transform.position); 
+		_monsterAHealth.GetComponent<GUIText>().text = Friendly.GetComponent<MonsterController>().Health.ToString()+"/"+Friendly.GetComponent<MonsterStats>().HP;
+		_monsterBHealth.GetComponent<GUIText>().text = Enemy.GetComponent<MonsterController>().Health.ToString()+"/"+Enemy.GetComponent<MonsterStats>().HP;
+		_monsterAHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Friendly.GetComponent<MonsterController>().BgHealthbar.position); 
+		_monsterBHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Enemy.GetComponent<MonsterController>().BgHealthbar.position); 
+		if(_damageGUI.Count > 0 && _damageIndicator.Count == _damageGUI.Count)
+		{
+			for(int i = 0; i<_damageGUI.Count; i++)
+			{
+				_damageGUI[i].transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (_damageIndicator[i].transform.position); 
+			}
+		}
+	}
+
+	private void enforceEnd()
+	{
+		if(_gg == null) _gg = Create("Battle/GGScreen", 
+		                             GameObject.Find("GGScreenPos").transform.position, 
+		                             GameObject.Find("GGScreenPos").transform.rotation);
+		_counter += Time.deltaTime;
+		if(_counter >= 3f) { Destroy(_gg); DestroyBattle(); }
 	}
 
 	private void rotateBattleCam()
@@ -229,16 +229,26 @@ public class BattleEngine : MonoBehaviour
 
 	private void executeSkill()
 	{
-		_damageIndicator = (GameObject)Instantiate(Resources.Load("Battle/Damage"),Vector3.zero,Quaternion.identity);
-		switch(CurrentPlayer)
+		if(_changeA != 0)
 		{
-		case FightRoundResult.Player.A:
-			_damageIndicator.transform.localPosition = _enemyCreature.transform.position;
-			break;
-		case FightRoundResult.Player.B:
-			_damageIndicator.transform.localPosition = _friendlyCreature.transform.position;
-			break;
+			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
+			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = _friendlyCreature.transform.position;
+			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
+			_damageGUI.Add(new GameObject("GUI Damage Indicator Player A"));
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeA.ToString();
+			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 		}
+
+		if(_changeB != 0)
+		{
+			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
+			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = _enemyCreature.transform.position;
+			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
+			_damageGUI.Add(new GameObject("GUI Damage Indicator Player B"));
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeB.ToString();
+			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
+		}
+
 		_friendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
 		_enemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
@@ -272,16 +282,29 @@ public class BattleEngine : MonoBehaviour
 		_enemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
 		_enemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBHealth);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/// 
+		/// 
+		_monsterAName = new GameObject("Monster A Name");
+		_monsterBName = new GameObject("Monster B Name");
+		_monsterAName.AddComponent<GUIText>().text = "Lv."+serverInfo.MonsterALevel+" "+serverInfo.MonsterAName;
+		_monsterBName.AddComponent<GUIText>().text = "Lv."+serverInfo.MonsterBLevel+" "+serverInfo.MonsterBName;
+		_monsterAHealth = new GameObject("Monster A Health");
+		_monsterBHealth = new GameObject("Monster B Health");
+		_monsterAHealth.AddComponent<GUIText>();
+		_monsterBHealth.AddComponent<GUIText>();
 	}
 
 	public void DestroyBattle()
 	{
 		MainCam.SetActive(true);
 		BattleCam.SetActive(false);
-		MainCam.AddComponent<AudioListener>();
 		Destroy(_friendlyCreature);
 		Destroy(_enemyCreature);
 		Destroy(_arena);
+		Destroy(_monsterAName);
+		Destroy(_monsterBName);
+		Destroy(_monsterAHealth);
+		Destroy(_monsterBHealth);
 		Destroy(Current);
 		Destroy(CurrentGameObject);
 		Current = null;
