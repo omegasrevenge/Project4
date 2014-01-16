@@ -11,12 +11,13 @@ public class Player
 	public Vector2 BasePosition;
 	public Int64 BaseTime;
     public int[,] Resources;
-    //public int XP;
-    //public int Level;
+
 	public bool Fighting;
 
 	public GameObject baseInstance;
     public int InitSteps;
+
+	public Creature CurCreature;
 
     public void ReadJson(JSONObject json)
     {
@@ -35,8 +36,8 @@ public class Player
                 Resources[i, j] = (int) element[j];
             }
         }
-        //XP = (int)json["XP"];
-        //Level = (int)json["Level"];
+
+		CurCreature.ReadJson(json["CurrentCreature"]);
         Fighting = (bool)json["Fighting"];
         InitSteps = (int) json["InitSteps"];
 

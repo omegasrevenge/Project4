@@ -43,7 +43,9 @@ public class GameManager : MonoBehaviour
 	public bool pois_valid = false;
 	public string lastFarmResult = "";
 
-    [SerializeField]
+	public List<Creature> AllOwnCreatures;
+		
+	[SerializeField]
 	public Player Player = new Player();
     public string ServerURL = Server;
 	public string SessionID = "";
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
         _view = ViewController.Create();
         _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
         _map.name = "Map";
+	    AllOwnCreatures = null;
 
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
@@ -131,6 +134,13 @@ public class GameManager : MonoBehaviour
             if (Time.time >= PlayerQueryFreq + _lastPlayerQuery)
                 SearchForPlayers();
         }
+		else if (CurrentGameMode == GameMode.Base)
+		{
+			if (AllOwnCreatures == null)
+			{
+				GetCreatures();
+			}
+		}
 
         //Load queued players
         if (!_playerQueryActive && _playerQueue.Count > 0)
@@ -255,10 +265,53 @@ public class GameManager : MonoBehaviour
 	        yield break;
 	    }
 		Player.ReadJson(json["data"]);
+		if (Player.CurCreature != null && AllOwnCreatures != null)
+		{
+			for(int i = 0; i < AllOwnCreatures.Count; i++)
+			{
+				if (Player.CurCreature.CreatureID == AllOwnCreatures[i].CreatureID)
+				{
+					AllOwnCreatures[i] = Player.CurCreature;
+				}
+			}
+		}
 	    if (CurrentGameMode == GameMode.Login)
 	        SwitchGameMode(GameMode.Map);
 	    if (callback != null)
 	        callback(true);
+	}
+
+	public void GetCreatures()
+	{
+		if (AllOwnCreatures == null)
+		{
+			AllOwnCreatures = new List<Creature>();
+
+		}
+		StartCoroutine(CGetCreatures());
+	}
+
+	private IEnumerator CGetCreatures()
+	{
+		WWW request = new WWW(GetSessionURL("getcrs"));
+
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json))
+		{
+			AllOwnCreatures = null;
+			yield break;
+		}
+
+		JSONObject creatureJson = json["data"];
+
+		for (int i = 0; i < creatureJson.Count; i++)
+		{
+			Creature curCreature = new Creature();
+			curCreature.ReadJson(creatureJson[i]);
+			AllOwnCreatures.Add(curCreature);
+		}
 	}
 
 	///<summary>
