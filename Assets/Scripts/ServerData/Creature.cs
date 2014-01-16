@@ -31,6 +31,11 @@ public class Creature
 
     public void ReadJson(JSONObject json)
     {
+        if (json == null)
+        {
+            Debug.LogError("No JSON for Creature.cs! Please check, what's wrong. Cheers, Anton.");
+            return;
+        }
 		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];
 		XP = (int)json["XP"];

@@ -88,7 +88,11 @@ public class ViewController : MonoBehaviour
         _3DViewport = _camera3D.GetComponent<MovableViewport>();
 
         if (_gameManager.DummyUI)
+        {
+            GameObject.FindGameObjectWithTag(UIRootTag).SetActive(false);
+            GameObject.FindGameObjectWithTag(MenuRootTag).SetActive(false);
             return;
+        }
         
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(UIRootTag);
         GameObject MenuRoot = GameObject.FindGameObjectWithTag(MenuRootTag);
