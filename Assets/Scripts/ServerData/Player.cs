@@ -16,7 +16,7 @@ public class Player
 
 	public GameObject baseInstance;
     public int InitSteps;
-
+	public int[] creatureIDs;
 	public Creature CurCreature;
 
     public void ReadJson(JSONObject json)
@@ -36,6 +36,13 @@ public class Player
                 Resources[i, j] = (int) element[j];
             }
         }
+	    
+		JSONObject jcids = json["CreatureIds"];
+		creatureIDs = new int[jcids.Count];
+	    for (int i = 0; i < jcids.Count; i++)
+		{
+			creatureIDs[i] = (int)jcids[i];
+	    }
 
 		CurCreature.ReadJson(json["CurrentCreature"]);
         Fighting = (bool)json["Fighting"];

@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Creature
 {
-    public string CreatureID;
+    public int CreatureID;
     public string Name;
     public int XP;
 	public int Level;
@@ -31,7 +31,7 @@ public class Creature
 
     public void ReadJson(JSONObject json)
     {
-		CreatureID = (string)json["CId"];
+		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];
 		XP = (int)json["XP"];
         Level = (int)json["Level"];

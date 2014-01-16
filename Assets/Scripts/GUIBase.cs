@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using System.Collections;
@@ -20,15 +21,23 @@ public class GUIBase : MonoBehaviour
 	private string curInput = "1";
 	private int curInputAsInt = -1;
 
+	private Creature equiptCreature;
+	private List<Creature> allOwnCreatures;
+	private int creatureInex = 1;
+
 	void Awake()
 	{
 		textGuiStyle = new GUIStyle { fontSize = 30 };
 		textGuiStyle.normal.textColor = Color.white;
+		textGuiStyle.alignment = TextAnchor.MiddleCenter;
 	}
 	
 	void OnGUI()
 	{
 		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Base) return;
+
+		equiptCreature = GameManager.Singleton.Player.CurCreature;
+		allOwnCreatures = GameManager.Singleton.AllOwnCreatures;
 
 		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Resources.Load<Texture>("GUITextures/Background"));
 
@@ -50,6 +59,7 @@ public class GUIBase : MonoBehaviour
 
 		if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
 		{
+			creatureInex = equiptCreature.CreatureID;
 			ShowWindow(Windows.Creature);
 		}
 	}
@@ -77,7 +87,16 @@ public class GUIBase : MonoBehaviour
 
 	private void CreatureWindow(int windowID)
 	{
-		GUI.Label(new Rect(20, 30, 200, 50), "Here you will see your AWESOME Monster!!!", textGuiStyle);
+		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 30, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
+		{
+			creatureInex = creatureInex <= 1 ? GameManager.Singleton.Player.creatureIDs.Length : creatureInex - 1;
+		}
+		if (GUI.Button(new Rect((windowRect.width / 2) + 100, 30, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
+		{
+			creatureInex = creatureInex >= GameManager.Singleton.Player.creatureIDs.Length ? 1 : creatureInex + 1;
+		}
+
+		ShowCreature(creatureInex);
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
 		{
@@ -85,11 +104,39 @@ public class GUIBase : MonoBehaviour
 		}
 	}
 
+	private void ShowCreature(int creatureInex)
+	{
+		Creature curCreature = null;
+
+		foreach (Creature creature in allOwnCreatures)
+		{
+			if (creature.CreatureID == creatureInex)
+			{
+				curCreature = creature;
+
+				if (creature.CreatureID == equiptCreature.CreatureID)
+				{
+					GUIStyle curStyle = new GUIStyle(textGuiStyle);
+					curStyle.fontSize = 20;
+					GUI.Label(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equipped", curStyle);
+				}
+			}
+		}
+
+		if (curCreature == null)
+		{
+			Debug.LogError("No Creature Found!");
+			return;
+		}
+
+		GUI.Label(new Rect((windowRect.width / 2) - 100, 30, 200, 50), curCreature.Name, textGuiStyle);
+	}
+
 	#region Crafting
 
 	private void CraftingWindow(int windowID)
 	{
-		GUI.Label(new Rect(70, 30, 200, 50), curResourceLevel.ToString(), textGuiStyle);
+		GUI.Label(new Rect(60, 30, 200, 50), curResourceLevel.ToString(), textGuiStyle);
 
 		GUI.Label(new Rect((windowRect.width-220), 30, 200, 50), CuResourceElement.ToString(), textGuiStyle);
 		

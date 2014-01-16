@@ -43,8 +43,13 @@ public class GameManager : MonoBehaviour
 	public bool pois_valid = false;
 	public string lastFarmResult = "";
 
-	public List<Creature> AllOwnCreatures;
-		
+	private List<Creature> _allOwnCreatures;
+
+	public List<Creature> AllOwnCreatures
+	{
+		get { return _allOwnCreatures; }
+	}
+	
 	[SerializeField]
 	public Player Player = new Player();
     public string ServerURL = Server;
@@ -95,8 +100,8 @@ public class GameManager : MonoBehaviour
     {
         _view = ViewController.Create();
         _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
-        _map.name = "Map";
-	    AllOwnCreatures = null;
+		_map.name = "Map";
+		_allOwnCreatures = null;
 
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
@@ -136,7 +141,7 @@ public class GameManager : MonoBehaviour
         }
 		else if (CurrentGameMode == GameMode.Base)
 		{
-			if (AllOwnCreatures == null)
+			if (_allOwnCreatures == null)
 			{
 				GetCreatures();
 			}
@@ -263,15 +268,16 @@ public class GameManager : MonoBehaviour
 	    {
 	        callback(false);
 	        yield break;
-	    }
+		}
+		//Debug.Log(json["data"]);
 		Player.ReadJson(json["data"]);
-		if (Player.CurCreature != null && AllOwnCreatures != null)
+		if (Player.CurCreature != null && _allOwnCreatures != null)
 		{
-			for(int i = 0; i < AllOwnCreatures.Count; i++)
+			for(int i = 0; i < _allOwnCreatures.Count; i++)
 			{
-				if (Player.CurCreature.CreatureID == AllOwnCreatures[i].CreatureID)
+				if (Player.CurCreature.CreatureID == _allOwnCreatures[i].CreatureID)
 				{
-					AllOwnCreatures[i] = Player.CurCreature;
+					_allOwnCreatures[i] = Player.CurCreature;
 				}
 			}
 		}
@@ -283,9 +289,9 @@ public class GameManager : MonoBehaviour
 
 	public void GetCreatures()
 	{
-		if (AllOwnCreatures == null)
+		if (_allOwnCreatures == null)
 		{
-			AllOwnCreatures = new List<Creature>();
+			_allOwnCreatures = new List<Creature>();
 
 		}
 		StartCoroutine(CGetCreatures());
@@ -300,17 +306,18 @@ public class GameManager : MonoBehaviour
 		JSONObject json = JSONParser.parse(request.text);
 		if (!CheckResult(json))
 		{
-			AllOwnCreatures = null;
+			_allOwnCreatures = null;
 			yield break;
 		}
 
 		JSONObject creatureJson = json["data"];
 
+
 		for (int i = 0; i < creatureJson.Count; i++)
 		{
 			Creature curCreature = new Creature();
 			curCreature.ReadJson(creatureJson[i]);
-			AllOwnCreatures.Add(curCreature);
+			_allOwnCreatures.Add(curCreature);
 		}
 	}
 
