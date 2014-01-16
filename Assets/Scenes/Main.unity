@@ -111,7 +111,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
       propertyPath: zindex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -139,7 +139,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
       propertyPath: renderOrder
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
+      propertyPath: zindex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
+      propertyPath: renderOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94571dce9a92d3c4a87ac6e43947bce8, type: 2}
@@ -263,7 +271,7 @@ MonoBehaviour:
       right: 1
       bottom: .853128076
     owner: {fileID: 378756739}
-  renderOrder: 5
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -341,7 +349,7 @@ MonoBehaviour:
       right: .923611104
       bottom: .670312524
     owner: {fileID: 494752957}
-  renderOrder: 6
+  renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -426,7 +434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &517981207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +453,7 @@ MonoBehaviour:
   fixedHeight: 1280
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
   defaultFont: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
-  mergeMaterials: 1
+  mergeMaterials: 0
   pixelPerfectMode: 1
   renderCamera: {fileID: 1304823711}
   generateNormals: 0
@@ -481,7 +489,7 @@ Renderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517981206}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -490,6 +498,9 @@ Renderer:
   - {fileID: 2100000, guid: 66a1e34b3e7cf9d4ea8a799cce9231ca, type: 2}
   - {fileID: 2100000, guid: f0fd5ed6e4606cb4fbd82eaed863576b, type: 3}
   - {fileID: 2100000, guid: c7f5af03ff8fa76409366b3b58567bcb, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -599,7 +610,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 710164218}
-  renderOrder: 4
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -717,7 +728,7 @@ MonoBehaviour:
       right: .884716809
       bottom: .334503174
     owner: {fileID: 802895146}
-  renderOrder: 7
+  renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -824,7 +835,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841321359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .000781250012, y: .000781250012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1859583930}
@@ -884,7 +895,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 0
+  zindex: 1
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -905,7 +916,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 882079324}
-  renderOrder: 2
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -1278,7 +1289,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4282861383
-  size: {x: 203, y: 80}
+  size: {x: 190, y: 80}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -1289,10 +1300,10 @@ MonoBehaviour:
     margins:
       left: 348.019531
       top: 860.363281
-      right: 168.980469
+      right: 181.980469
       bottom: 339.636719
     owner: {fileID: 1300513733}
-  renderOrder: 8
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -1358,8 +1369,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .317187518, y: .125, z: .00100000005}
-  m_Center: {x: .158593759, y: -.0625, z: 0}
+  m_Size: {x: .296875, y: .125, z: .00100000005}
+  m_Center: {x: .1484375, y: -.0625, z: 0}
 --- !u!1 &1304823710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1426,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1304823710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .000781250012, y: .000781250012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 517981212}
@@ -1471,7 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f543c9fa50e16749a50292573e79b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DummyUI: 1
+  DummyUI: 0
   pois_version: 0
   pois_timeQ: 0
   pois_valid: 0
@@ -1671,7 +1682,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 1
+  zindex: 0
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1692,7 +1703,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 1484016862}
-  renderOrder: 3
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -1826,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1859583925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,14 +1889,14 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1859583924}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 66a1e34b3e7cf9d4ea8a799cce9231ca, type: 2}
-  - {fileID: 2100000, guid: c7f5af03ff8fa76409366b3b58567bcb, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

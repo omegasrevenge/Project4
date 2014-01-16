@@ -1,5 +1,0 @@
-{
-	blindtext: 			"Das ist ein Blindtext fürs Englische. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
-	iris_01_a_title: 	"Greetings Agent,",
-	iris_01_a_text: 	"You are in the verge of becoming a part of VENGEA. I am I.R.I.S., the virtual intelligence of VENGEA, and I will guide you on your way."
-}

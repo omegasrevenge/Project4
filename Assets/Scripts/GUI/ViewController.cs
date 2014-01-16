@@ -12,6 +12,7 @@ public class ViewController : MonoBehaviour
     public const string Blindtext = "blindtext";
 
     public const string PanelMaxScreenStr = "GUI/panel_maxscreen";
+    public const string PanelIrisPopupStr = "GUI/panel_irispopup";
 
     private static ViewController _instance;
 
@@ -73,7 +74,6 @@ public class ViewController : MonoBehaviour
 
 	void Awake ()
 	{
-        Init();
         if (_instance == null) 
             _instance = this;
         else if (_instance != this) 
@@ -102,7 +102,8 @@ public class ViewController : MonoBehaviour
 
         ViewportScrollState = 0f;
 
-        AddMaxScreen("iris_01_a_title", "iris_01_a_text");
+        //AddMaxScreen("iris_01_a_title", "iris_01_a_text");
+        //AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab-de");
     }
 
     void Update () 
@@ -121,5 +122,14 @@ public class ViewController : MonoBehaviour
         obj.Title = textKeyTitle;
     }
 
+    public void AddIrisPopup(string textKeyText = Blindtext, string audio = "")
+    {
+        dfControl cntrl = _gui.AddPrefab(Resources.Load<GameObject>(PanelIrisPopupStr));
+        cntrl.Size = cntrl.Parent.Size;
+        cntrl.RelativePosition = Vector2.zero;
+        GUIObjectIrisPopup obj = cntrl.GetComponent<GUIObjectIrisPopup>();
+        obj.Text = textKeyText;
+        obj.Audio = audio;
+    }
 
 }

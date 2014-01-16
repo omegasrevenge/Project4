@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Localization
 {
+    public const string Fallback = "de";
+
     private static Localization _instance;
     private string _language = "de";
     private JSONObject _strings;
@@ -40,7 +42,7 @@ public class Localization
         TextAsset asset = Resources.Load<TextAsset>("Localization/strings-" + _language);
         if (asset == null)
         {
-            asset = Resources.Load<TextAsset>("Localization/strings-en");
+            asset = Resources.Load<TextAsset>("Localization/strings-"+Fallback);
             if (asset == null)
             {
                 Debug.LogError("No localization file.");
@@ -58,7 +60,7 @@ public class Localization
     {
         if (Singleton._strings[textKey] == null)
         {
-            Debug.LogError("Missing textkey for "+textKey+".");
+            Debug.LogError("Missing textkey for " + textKey + ".");
             return textKey;
         }
         return (string)Singleton._strings[textKey];

@@ -653,7 +653,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Couldn't load Player Data!");
             return;
         }
-
+        _view.AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab");
     }
 
     //####################################  Editor Login ###################################

@@ -74,6 +74,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   iPhoneBundleIdentifier: de.mediadesign.gd1011.project4
+  metroEnableIndependentInputSource: 0
+  metroEnableLowLatencyPresentationAPI: 0
   productGUID: 48665cde600226645911bb99e907a876
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
@@ -103,7 +105,7 @@ PlayerSettings:
   iPadLandscapeSplashScreen: {fileID: 0}
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
-  AndroidSplashScreenScale: 2
+  AndroidSplashScreenScale: 1
   AndroidKeystoreName: C:/Users/anlicht/Documents/GitHub/Project4/user.keystore
   AndroidKeyaliasName: test
   resolutionDialogBanner: {fileID: 0}
@@ -187,6 +189,7 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   metroSplashScreenUseBackgroundColor: 0
   metroCapabilities: {}
+  metroUnprocessedPlugins: []
   metroCompilationOverrides: 1
   blackberryDeviceAddress: 
   blackberryDevicePassword: 
