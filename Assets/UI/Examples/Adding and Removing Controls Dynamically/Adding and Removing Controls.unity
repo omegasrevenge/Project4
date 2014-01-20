@@ -115,7 +115,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 241, y: 286}
+  size: {x: 240, y: 286}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 1
@@ -126,7 +126,7 @@ MonoBehaviour:
     margins:
       left: .0274999999
       top: .0450000018
-      right: .328750014
+      right: .327499986
       bottom: .521666646
     owner: {fileID: 630121286}
   renderOrder: 2
@@ -168,8 +168,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .803333342, y: .953333378, z: .00100000005}
-  m_Center: {x: .401666671, y: -.476666689, z: 0}
+  m_Size: {x: .800000012, y: .953333378, z: .00100000005}
+  m_Center: {x: .400000006, y: -.476666689, z: 0}
 --- !u!4 &630121288
 Transform:
   m_ObjectHideFlags: 0
@@ -304,6 +304,7 @@ MonoBehaviour:
     rgba: 4278190080
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
+  clickWhenSpacePressed: 1
 --- !u!65 &1033541546
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -522,8 +523,8 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: e773281c06b5e024db5e1a4f549afe5d, type: 2}
+  - {fileID: 2100000, guid: 15ec4961902cc5e41bf37d7b73a08882, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -811,6 +812,7 @@ MonoBehaviour:
     rgba: 4278190080
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
+  clickWhenSpacePressed: 1
 --- !u!65 &1311435063
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -887,7 +889,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 241, y: 286}
+  size: {x: 240, y: 286}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 1
@@ -898,7 +900,7 @@ MonoBehaviour:
     margins:
       left: .533749998
       top: .0450000018
-      right: .834999979
+      right: .83375001
       bottom: .521666646
     owner: {fileID: 1480887203}
   renderOrder: 1
@@ -940,8 +942,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .803333342, y: .953333378, z: .00100000005}
-  m_Center: {x: .401666671, y: -.476666689, z: 0}
+  m_Size: {x: .800000012, y: .953333378, z: .00100000005}
+  m_Center: {x: .400000006, y: -.476666689, z: 0}
 --- !u!4 &1480887205
 Transform:
   m_ObjectHideFlags: 0

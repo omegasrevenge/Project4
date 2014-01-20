@@ -40,9 +40,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseFont: {fileID: 12800000, guid: a403437547fda5d42b9a50d87a3a1ccd, type: 3}
   material: {fileID: 2100000, guid: 6bf7b526a3da9a144824a3377bb9f6b7, type: 3}
-  shader: {fileID: 4800000, guid: 781ab50a0a53b45439da46fe4c9a2f17, type: 3}
+  shader: {fileID: 4800000, guid: 3eb3461345a050741a39216b0a4e7868, type: 3}
   baseFontSize: 24
-  baseline: 25
+  baseline: 23
   lineHeight: 30
 --- !u!1001 &100100000
 Prefab:

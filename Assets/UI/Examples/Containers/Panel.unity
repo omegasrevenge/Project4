@@ -432,7 +432,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 397608919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 925009150}
@@ -882,8 +882,8 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e773281c06b5e024db5e1a4f549afe5d, type: 2}
-  - {fileID: 2100000, guid: 15ec4961902cc5e41bf37d7b73a08882, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -1173,6 +1173,7 @@ MonoBehaviour:
     rgba: 4278190080
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
+  clickWhenSpacePressed: 1
 --- !u!65 &1071680758
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -1797,6 +1798,9 @@ MonoBehaviour:
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: window-normal
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -1853,6 +1857,7 @@ MonoBehaviour:
   loopType: 0
   autoRun: 1
   skipToEndOnStop: 0
+  delayBeforeStarting: 0
   startValue: 0
   endValue: 1
 --- !u!114 &1556756391
@@ -2059,6 +2064,7 @@ MonoBehaviour:
   loopType: 0
   autoRun: 1
   skipToEndOnStop: 0
+  delayBeforeStarting: 0
   startValue: {x: 0, y: 100, z: 0}
   endValue: {x: 0, y: 0, z: 0}
 --- !u!114 &1928488474

@@ -1,6 +1,4 @@
 /* Copyright 2013 Daikon Forge */
-
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEditor;
 
@@ -34,7 +32,7 @@ public class dfControlInspector : Editor
 	private Vector2 dragCursorOffset = Vector2.zero;
 	private Vector3 dragCursorOffset3 = Vector2.zero;
 	private Vector2 dragStartSize = Vector2.zero;
-	private Vector3 dragStartPivot = Vector3.zero;
+	private Vector3 dragAnchorPoint = Vector3.zero;
 	private float dragStartAngle = 0f;
 
 	private List<EditorHandle> handles = new List<EditorHandle>();
@@ -303,26 +301,27 @@ public class dfControlInspector : Editor
 
 		}
 
-		using( dfEditorUtil.BeginGroup( "Appearance" ) )
+		using( dfEditorUtil.BeginGroup( "Other" ) )
 		{
 
-			var color = EditorGUILayout.ColorField( "Color", control.Color );
-			if( color != control.Color )
-			{
-				dfEditorUtil.MarkUndo( control, "Change control Color" );
-				control.Color = color;
-			}
+			//var color = EditorGUILayout.ColorField( "Color", control.Color );
+			//if( color != control.Color )
+			//{
+			//	dfEditorUtil.MarkUndo( control, "Change control Color" );
+			//	control.Color = color;
+			//}
 
-			var disabledColor = EditorGUILayout.ColorField( "Disabled Color", control.DisabledColor );
-			if( disabledColor != control.DisabledColor )
-			{
-				dfEditorUtil.MarkUndo( control, "Change control Disabled Color" );
-				control.DisabledColor = disabledColor;
-			}
+			//var disabledColor = EditorGUILayout.ColorField( "Disabled Color", control.DisabledColor );
+			//if( disabledColor != control.DisabledColor )
+			//{
+			//	dfEditorUtil.MarkUndo( control, "Change control Disabled Color" );
+			//	control.DisabledColor = disabledColor;
+			//}
 
 			// NOTE: dfControl.Opacity is quantized to 255 levels
+			EditorGUI.BeginChangeCheck();
 			var opacity = EditorGUILayout.Slider( "Opacity", control.Opacity, 0, 1 );
-			if( Mathf.Abs( opacity - control.Opacity ) > ( 1f / 255f ) )
+			if( EditorGUI.EndChangeCheck() )
 			{
 				dfEditorUtil.MarkUndo( control, "Change control Opacity" );
 				control.Opacity = opacity;
@@ -887,7 +886,9 @@ public class dfControlInspector : Editor
 		return property.GetValue( control, null );
 	}
 
-    enum FillMode {IgnoreAspect, ScaleToFill, ScaleToFit }
+    //#vlab start
+    enum FillMode { IgnoreAspect, ScaleToFill, ScaleToFit }
+    //#vlab end
 
 	private dfAnchorStyle EditAnchor( dfAnchorStyle value )
 	{
@@ -984,8 +985,9 @@ public class dfControlInspector : Editor
 
 					dfEditorUtil.LabelWidth = OPTION_WIDTH;
 
-					var proportional = EditorGUILayout.Toggle( "Scale To Parent", retVal.IsFlagSet( dfAnchorStyle.Proportional ) );
-                    retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
+                    var proportional = EditorGUILayout.Toggle("Scale To Parent", retVal.IsFlagSet(dfAnchorStyle.Proportional));
+					retVal = retVal.SetFlag( dfAnchorStyle.Proportional, proportional );
+
 				}
 				GUILayout.EndVertical();
 
@@ -994,6 +996,7 @@ public class dfControlInspector : Editor
 			}
 			GUILayout.EndHorizontal();
 
+            //#vlab start
             GUILayout.BeginHorizontal();
             {
 
@@ -1037,13 +1040,12 @@ public class dfControlInspector : Editor
 
             }
             GUILayout.EndHorizontal();
+            //#vlab end
 		}
 
 		return retVal;
 
 	}
-
-
 
 	/// <summary>
 	/// Hook to allow custom dfControl inspectors to perform a "default" action
@@ -1205,7 +1207,7 @@ public class dfControlInspector : Editor
 				if( evt.button != 0 )
 				{
 
-					if( evt.button == 1 && Selection.activeGameObject == control.gameObject && !modifierKeyPressed )
+					if( evt.button == 1 && !modifierKeyPressed )
 					{
 						displayContextMenu();
 						evt.Use();
@@ -1256,7 +1258,7 @@ public class dfControlInspector : Editor
 
 					dragStartPosition = raycast( evt.mousePosition );
 					dragStartSize = control.Size;
-					dragStartPivot = handleLocations[ (int)getResizeAnchor( activeResizeHandle ) ];
+					dragAnchorPoint = handleLocations[ (int)getResizeAnchor( activeResizeHandle ) ];
 
 					prepareEditAction( id );
 					saveControlUndoInfo();
@@ -1371,9 +1373,21 @@ public class dfControlInspector : Editor
 				}
 				if( currentAction != EditorAction.None )
 				{
+
 					GUIUtility.hotControl = GUIUtility.keyboardControl = 0;
 					resetSelectionLayouts();
 					evt.Use();
+
+					var virtualScreenPos = getVirtualScreenPosition( evt.mousePosition );
+					if( Vector2.Distance( dragStartPosition, virtualScreenPos ) <= 5 )
+					{
+						selectObjectUnderMouse();
+					}
+
+				}
+				else
+				{
+					resetSelectionLayouts();
 				}
 
 				activeResizeHandle = dfPivotPoint.MiddleCenter;
@@ -1774,76 +1788,75 @@ public class dfControlInspector : Editor
 	private void doControlMoveAction( dfControl control, Event evt )
 	{
 
-		if( control.transform.localEulerAngles.ClampRotation().magnitude <= float.Epsilon )
-		{
-
-			var guiMousePos = getVirtualScreenPosition( evt.mousePosition, false );
-			var controlPosition = guiMousePos - dragCursorOffset;
-
-			if( evt.control )
-			{
-
-				var verticalGuideLeft = getGuideSnapPosition( controlPosition.x, dfControlOrientation.Vertical );
-				if( verticalGuideLeft > -1 )
-				{
-					controlPosition.x = verticalGuideLeft;
-				}
-				else
-				{
-					var verticalGuideRight = getGuideSnapPosition( controlPosition.x + control.Width, dfControlOrientation.Vertical );
-					if( verticalGuideRight > -1 )
-					{
-						controlPosition.x = verticalGuideRight - control.Width;
-					}
-					else
-					{
-						var verticalGuideCenter = getGuideSnapPosition( controlPosition.x + control.Width * 0.5f, dfControlOrientation.Vertical );
-						if( verticalGuideCenter > -1 )
-						{
-							controlPosition.x = verticalGuideCenter - control.Width * 0.5f;
-						}
-					}
-				}
-
-				var horizontalGuideTop = getGuideSnapPosition( controlPosition.y, dfControlOrientation.Horizontal );
-				if( horizontalGuideTop > -1 )
-				{
-					controlPosition.y = horizontalGuideTop;
-				}
-				else
-				{
-					var horizontalGuideBottom = getGuideSnapPosition( controlPosition.y + control.Height, dfControlOrientation.Horizontal );
-					if( horizontalGuideBottom > -1 )
-					{
-						controlPosition.y = horizontalGuideBottom - control.Height;
-					}
-					else
-					{
-						var horizontalGuideCenter = getGuideSnapPosition( controlPosition.y + control.Height * 0.5f, dfControlOrientation.Horizontal );
-						if( horizontalGuideCenter > -1 )
-						{
-							controlPosition.y = horizontalGuideCenter - control.Height * 0.5f;
-						}
-					}
-				}
-
-			}
-			else if( evt.shift )
-			{
-				var gridSize = EditorPrefs.GetInt( "dfGUIManager.GridSize", 25 );
-				controlPosition = controlPosition.Quantize( gridSize );
-			}
-
-			Vector3 offset = ( control.Parent == null ) ? Vector3.zero : control.Parent.GetAbsolutePosition();
-			control.RelativePosition = (Vector3)controlPosition - offset;
-
-		}
-		else
+		if( control.transform.localEulerAngles.ClampRotation().magnitude > float.Epsilon )
 		{
 			var current = raycast( evt.mousePosition );
 			control.transform.position = current - dragCursorOffset3;
 			control.Invalidate();
+
+			return;
+
 		}
+
+		var guiMousePos = getVirtualScreenPosition( evt.mousePosition, false );
+		var controlPosition = guiMousePos - dragCursorOffset;
+
+		if( evt.control )
+		{
+
+			var verticalGuideLeft = getGuideSnapPosition( controlPosition.x, dfControlOrientation.Vertical );
+			if( verticalGuideLeft > -1 )
+			{
+				controlPosition.x = verticalGuideLeft;
+			}
+			else
+			{
+				var verticalGuideRight = getGuideSnapPosition( controlPosition.x + control.Width, dfControlOrientation.Vertical );
+				if( verticalGuideRight > -1 )
+				{
+					controlPosition.x = verticalGuideRight - control.Width;
+				}
+				else
+				{
+					var verticalGuideCenter = getGuideSnapPosition( controlPosition.x + control.Width * 0.5f, dfControlOrientation.Vertical );
+					if( verticalGuideCenter > -1 )
+					{
+						controlPosition.x = verticalGuideCenter - control.Width * 0.5f;
+					}
+				}
+			}
+
+			var horizontalGuideTop = getGuideSnapPosition( controlPosition.y, dfControlOrientation.Horizontal );
+			if( horizontalGuideTop > -1 )
+			{
+				controlPosition.y = horizontalGuideTop;
+			}
+			else
+			{
+				var horizontalGuideBottom = getGuideSnapPosition( controlPosition.y + control.Height, dfControlOrientation.Horizontal );
+				if( horizontalGuideBottom > -1 )
+				{
+					controlPosition.y = horizontalGuideBottom - control.Height;
+				}
+				else
+				{
+					var horizontalGuideCenter = getGuideSnapPosition( controlPosition.y + control.Height * 0.5f, dfControlOrientation.Horizontal );
+					if( horizontalGuideCenter > -1 )
+					{
+						controlPosition.y = horizontalGuideCenter - control.Height * 0.5f;
+					}
+				}
+			}
+
+		}
+		else if( evt.shift )
+		{
+			var gridSize = EditorPrefs.GetInt( "dfGUIManager.GridSize", 25 );
+			controlPosition = controlPosition.Quantize( gridSize );
+		}
+
+		Vector3 offset = ( control.Parent == null ) ? Vector3.zero : control.Parent.GetAbsolutePosition();
+		control.RelativePosition = (Vector3)controlPosition - offset;
 
 	}
 
@@ -2012,23 +2025,24 @@ public class dfControlInspector : Editor
 		var plane = new Plane( manager.transform.TransformDirection( Vector3.forward ), corner );
 
 		var distance = 0f;
-		plane.Raycast( ray, out distance );
+		if( !plane.Raycast( ray, out distance ) )
+			return position;
 
 		var hit = ray.GetPoint( distance );
 
-		var offset = ( ( hit - corner ) / manager.PixelsToUnits() ).RoundToInt();
+		var virtualScreenPos = ( ( hit - corner ) / manager.PixelsToUnits() );
 
 		if( clamp )
 		{
-			offset.y = Mathf.Min( manager.FixedHeight, Mathf.Max( 0, -offset.y ) );
-			offset.x = Mathf.Min( manager.FixedWidth, Mathf.Max( 0, offset.x ) );
+			virtualScreenPos.y = Mathf.Min( manager.FixedHeight, Mathf.Max( 0, -virtualScreenPos.y ) );
+			virtualScreenPos.x = Mathf.Min( manager.FixedWidth, Mathf.Max( 0, virtualScreenPos.x ) );
 		}
 		else
 		{
-			offset.y *= -1;
+			virtualScreenPos.y *= -1;
 		}
 
-		return offset;
+		return virtualScreenPos;
 
 	}
 
@@ -2063,6 +2077,25 @@ public class dfControlInspector : Editor
 
 	}
 
+	private void selectObjectUnderMouse()
+	{
+
+		var ray = HandleUtility.GUIPointToWorldRay( Event.current.mousePosition );
+
+		var hits = Physics.RaycastAll( ray, 1000f, 1 << ( (dfControl)target ).gameObject.layer );
+		var controlClicked = hits
+			.Select( h => h.collider.GetComponent<dfControl>() )
+			.Where( c => c != null )
+			.OrderByDescending( c => c.RenderOrder )
+			.FirstOrDefault();
+
+		if( controlClicked == null )
+			return;
+
+		Selection.activeGameObject = controlClicked.gameObject;
+
+	}
+
 	private void doMultiSelectRaycast()
 	{
 
@@ -2072,7 +2105,7 @@ public class dfControlInspector : Editor
 		var controlClicked = hits
 			.Select( h => h.collider.GetComponent<dfControl>() )
 			.Where( c => c != null )
-			.OrderBy( c => c.RenderOrder )
+			.OrderByDescending( c => c.RenderOrder )
 			.FirstOrDefault();
 
 		if( controlClicked == null )
@@ -2097,12 +2130,7 @@ public class dfControlInspector : Editor
 		if( gameObj == null )
 			return false;
 
-		// If the mouse is over a prefab's child object, then treat entire
-		// prefab as a single object and return TRUE
-		if( PrefabUtility.GetPrefabType( control ) != PrefabType.None )
-			return gameObj.transform.IsChildOf( control.transform );
-
-		return ( gameObj == control.gameObject );
+		return gameObj.transform.IsChildOf( control.transform );
 
 	}
 
@@ -2112,51 +2140,51 @@ public class dfControlInspector : Editor
 		var mousePosition = evt.mousePosition;
 		var anchor = getResizeAnchor( activeResizeHandle );
 
-		//var mouseGUIPos = getVirtualScreenPosition( mousePosition, false ).Quantize( 20 );
-		//mousePosition = virtualScreenToSceneView( mouseGUIPos );
+		var mouseGUIPos = getVirtualScreenPosition( mousePosition, false );
+		mousePosition = virtualScreenToSceneView( mouseGUIPos );
 
-		var worldToLocal = control.transform.worldToLocalMatrix;
 		var p2u = control.GetManager().PixelsToUnits();
+		var worldToLocal = control.transform.worldToLocalMatrix;
 		var mouseWorldPos = raycast( mousePosition );
 
-		var delta = ( 
-			worldToLocal.MultiplyPoint( mouseWorldPos ) - 
-			worldToLocal.MultiplyPoint( dragStartPosition ) 
+		var localDelta = (
+			worldToLocal.MultiplyPoint( mouseWorldPos ) -
+			worldToLocal.MultiplyPoint( dragStartPosition )
 		).Scale( 1, -1, 1 ) / p2u;
 
 		var size = control.Size;
 
-		delta = delta.RoundToInt();
+		localDelta = localDelta.RoundToInt();
 
 		switch( activeResizeHandle )
 		{
 			case dfPivotPoint.TopLeft:
-				size.x = dragStartSize.x - delta.x;
-				size.y = dragStartSize.y - delta.y;
+				size.x = dragStartSize.x - localDelta.x;
+				size.y = dragStartSize.y - localDelta.y;
 				break;
 			case dfPivotPoint.TopCenter:
-				size.y = dragStartSize.y - delta.y;
+				size.y = dragStartSize.y - localDelta.y;
 				break;
 			case dfPivotPoint.TopRight:
-				size.x = dragStartSize.x + delta.x;
-				size.y = dragStartSize.y - delta.y;
+				size.x = dragStartSize.x + localDelta.x;
+				size.y = dragStartSize.y - localDelta.y;
 				break;
 			case dfPivotPoint.MiddleLeft:
-				size.x = dragStartSize.x - delta.x;
+				size.x = dragStartSize.x - localDelta.x;
 				break;
 			case dfPivotPoint.MiddleRight:
-				size.x = dragStartSize.x + delta.x;
+				size.x = dragStartSize.x + localDelta.x;
 				break;
 			case dfPivotPoint.BottomLeft:
-				size.x = dragStartSize.x - delta.x;
-				size.y = dragStartSize.y + delta.y;
+				size.x = dragStartSize.x - localDelta.x;
+				size.y = dragStartSize.y + localDelta.y;
 				break;
 			case dfPivotPoint.BottomCenter:
-				size.y = dragStartSize.y + delta.y;
+				size.y = dragStartSize.y + localDelta.y;
 				break;
 			case dfPivotPoint.BottomRight:
-				size.x = dragStartSize.x + delta.x;
-				size.y = dragStartSize.y + delta.y;
+				size.x = dragStartSize.x + localDelta.x;
+				size.y = dragStartSize.y + localDelta.y;
 				break;
 			default:
 				return;
@@ -2214,7 +2242,7 @@ public class dfControlInspector : Editor
 		var relativeOffset = anchorOffset.Scale( size.x, -size.y ) - pivot.AsOffset().Scale( size.x, -size.y );
 
 		var rotation = control.transform.rotation;
-		var controlPosition = dragStartPivot - rotation * relativeOffset * p2u;
+		var controlPosition = dragAnchorPoint - rotation * relativeOffset * p2u;
 
 		Vector3 offset = Vector3.zero;
 		switch( activeResizeHandle )
@@ -2254,6 +2282,10 @@ public class dfControlInspector : Editor
 
 	}
 
+	/// <summary>
+	/// Returns the pivot point that is *opposite* of the value passed in <paramref name="point"/>,
+	/// which is used as the "anchor" point during control resizing
+	/// </summary>
 	private dfPivotPoint getResizeAnchor( dfPivotPoint pivot )
 	{
 
@@ -2286,16 +2318,12 @@ public class dfControlInspector : Editor
 	private Vector2 snapToNearestGridPosition( Vector2 point )
 	{
 
-		point = point.CeilToInt();
-
 		var gridSize = EditorPrefs.GetInt( "dfGUIManager.GridSize", 25 );
 
 		var guiPosition = getVirtualScreenPosition( point );
 		var difference = point - guiPosition;
 
-		guiPosition = roundToNearest( guiPosition, gridSize );
-
-		return guiPosition + difference;
+		return roundToNearest( guiPosition + difference, gridSize );
 
 	}
 
@@ -2319,7 +2347,7 @@ public class dfControlInspector : Editor
 		if( !showHints )
 			return;
 
-		var showExtents = UnityEditor.EditorPrefs.GetBool( "dfGUIManager.ShowControlExtents", false );
+		var showExtents = EditorPrefs.GetBool( "dfGUIManager.ShowControlExtents", true );
 		if( !showExtents )
 			return;
 
@@ -2722,7 +2750,7 @@ public class dfControlInspector : Editor
 		var controlTypes = types
 			.Where( t =>
 				typeof( IDataBindingComponent ).IsAssignableFrom( t ) &&
-				t.IsDefined( typeof( AddComponentMenu ), true )
+				t.IsDefined( typeof( AddComponentMenu ), false )
 			).ToList();
 
 		var options = new List<ContextMenuItem>();
@@ -2730,7 +2758,7 @@ public class dfControlInspector : Editor
 		for( int i = 0; i < controlTypes.Count; i++ )
 		{
 			var type = controlTypes[ i ];
-			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), true ).First() as AddComponentMenu;
+			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), false ).First() as AddComponentMenu;
 			var optionText = componentMenuAttribute.componentMenu.Replace( "Daikon Forge/Data Binding/", "" );
 			options.Add( new ContextMenuItem()
 			{
@@ -2759,7 +2787,7 @@ public class dfControlInspector : Editor
 		var controlTypes = types
 			.Where( t =>
 				typeof( dfTweenPlayableBase ).IsAssignableFrom( t ) &&
-				t.IsDefined( typeof( AddComponentMenu ), true )
+				t.IsDefined( typeof( AddComponentMenu ), false )
 			).ToList();
 
 		var options = new List<ContextMenuItem>();
@@ -2767,7 +2795,7 @@ public class dfControlInspector : Editor
 		for( int i = 0; i < controlTypes.Count; i++ )
 		{
 			var type = controlTypes[ i ];
-			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), true ).First() as AddComponentMenu;
+			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), false ).First() as AddComponentMenu;
 			var optionText = componentMenuAttribute.componentMenu.Replace( "Daikon Forge/Tweens/", "" );
 			options.Add( new ContextMenuItem()
 			{
@@ -2796,7 +2824,7 @@ public class dfControlInspector : Editor
 		var controlTypes = types
 			.Where( t => 
 				typeof( dfControl ).IsAssignableFrom( t ) &&
-				t.IsDefined( typeof( AddComponentMenu ), true )
+				t.IsDefined( typeof( AddComponentMenu ), false )
 			).ToList();
 
 		var options = new List<ContextMenuItem>();
@@ -2804,7 +2832,7 @@ public class dfControlInspector : Editor
 		for( int i = 0; i < controlTypes.Count; i++ )
 		{
 			var type = controlTypes[i];
-			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), true ).First() as AddComponentMenu;
+			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), false ).First() as AddComponentMenu;
 			var optionText = componentMenuAttribute.componentMenu.Replace( "Daikon Forge/User Interface/", "" );
 			options.Add( buildAddChildMenuItem( optionText, type ) );
 		}

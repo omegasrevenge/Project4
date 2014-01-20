@@ -160,8 +160,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .466666728, y: .466666728, z: .00100000005}
-  m_Center: {x: .233333364, y: -.233333364, z: 0}
+  m_Size: {x: .466666669, y: .466666669, z: .00100000005}
+  m_Center: {x: .233333334, y: -.233333334, z: 0}
 --- !u!1 &109767013
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ MonoBehaviour:
     margins:
       left: 6
       top: 6
-      right: 5.99960327
-      bottom: 5.99960327
+      right: 5.99958801
+      bottom: 5.99958801
     owner: {fileID: 109767015}
   renderOrder: 7
   isLocalized: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
       left: 5.99804688
       top: 6
       right: 6.00195312
-      bottom: 5.99960327
+      bottom: 5.99958801
     owner: {fileID: 245940505}
   renderOrder: 3
   isLocalized: 0
@@ -337,51 +337,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .426666677, y: .426668048, z: .00100000005}
   m_Center: {x: .213333338, y: -.213334024, z: 0}
---- !u!21 &253645379
-Material:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Fantasy Skin Atlas
-  m_Shader: {fileID: 4800000, guid: f0158d23026963f4ba301b99ab9b050a, type: 3}
-  m_ShaderKeywords: []
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 74d749882c2b9ec4aa3a232662d4ac76, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _Shininess
-        second: .699999988
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _Emission
-        second: {r: 0, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: CameraPos
-        second: {r: 0, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: ClipInfo
-        second: {r: 1610612740, g: 1601664900, b: 0, a: 0}
 --- !u!1 &353729643
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,8 +423,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .466666728, y: .466666728, z: .00100000005}
-  m_Center: {x: .233333364, y: -.233333364, z: 0}
+  m_Size: {x: .466666669, y: .466666669, z: .00100000005}
+  m_Center: {x: .233333334, y: -.233333334, z: 0}
 --- !u!1 &388864953
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,33 +511,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .466666669, y: .466666728, z: .00100000005}
-  m_Center: {x: .233333334, y: -.233333364, z: 0}
---- !u!21 &572496749
-Material:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Font Material
-  m_Shader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
-  m_ShaderKeywords: []
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 15ec4961902cc5e41bf37d7b73a08882, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats: {}
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+  m_Size: {x: .466666669, y: .466666669, z: .00100000005}
+  m_Center: {x: .233333334, y: -.233333334, z: 0}
 --- !u!1 &642165062
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,53 +687,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .466666728, y: .466666728, z: .00100000005}
-  m_Center: {x: .233333364, y: -.233333364, z: 0}
---- !u!21 &823861005
-Material:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Fantasy Skin Atlas
-  m_Shader: {fileID: 4800000, guid: f0158d23026963f4ba301b99ab9b050a, type: 3}
-  m_ShaderKeywords: []
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 74d749882c2b9ec4aa3a232662d4ac76, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _Shininess
-        second: .699999988
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _Emission
-        second: {r: 0, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: CameraPos
-        second: {r: 0, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: ClipInfo
-        second: {r: 1610612740, g: 1601664900, b: 0, a: 0}
+  m_Size: {x: .466666669, y: .466666669, z: .00100000005}
+  m_Center: {x: .233333334, y: -.233333334, z: 0}
 --- !u!1 &955071214
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,8 +753,8 @@ MonoBehaviour:
     margins:
       left: 6
       top: 6
-      right: 6.00039673
-      bottom: 5.99960327
+      right: 6.00041199
+      bottom: 5.99958801
     owner: {fileID: 955071216}
   renderOrder: 9
   isLocalized: 0
@@ -955,7 +840,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1168177408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1749834127}
@@ -1063,31 +948,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1749834127}
---- !u!21 &1539834776
-Material:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Font Material
-  m_Shader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
-  m_ShaderKeywords: []
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 15ec4961902cc5e41bf37d7b73a08882, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats: {}
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1749834126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,10 +1028,10 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 253645379}
-  - {fileID: 1539834776}
-  - {fileID: 823861005}
-  - {fileID: 572496749}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1350,7 +1210,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 366, y: 59}
+  size: {x: 360, y: 59}
   minSize: {x: 0, y: 0}
   maxSize: {x: 350, y: 0}
   clipChildren: 0
@@ -1361,7 +1221,7 @@ MonoBehaviour:
     margins:
       left: -222
       top: -110
-      right: 656
+      right: 662
       bottom: 651
     owner: {fileID: 2011515452}
   renderOrder: 1
@@ -1415,8 +1275,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.16666675, y: .196666673, z: .00100000005}
-  m_Center: {x: .583333373, y: -.0983333364, z: 0}
+  m_Size: {x: 1.20000005, y: .196666673, z: .00100000005}
+  m_Center: {x: .600000024, y: -.0983333364, z: 0}
 --- !u!114 &2011515454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,6 +1333,7 @@ MonoBehaviour:
   loopType: 0
   autoRun: 0
   skipToEndOnStop: 0
+  delayBeforeStarting: 0
   startValue: 0
   endValue: 1
 --- !u!114 &2011515456
@@ -1666,5 +1527,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .466666639, y: .466666728, z: .00100000005}
-  m_Center: {x: .233333319, y: -.233333364, z: 0}
+  m_Size: {x: .466666669, y: .466666669, z: .00100000005}
+  m_Center: {x: .233333334, y: -.233333334, z: 0}

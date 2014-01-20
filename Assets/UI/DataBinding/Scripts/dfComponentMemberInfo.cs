@@ -85,7 +85,7 @@ public class dfComponentMemberInfo
 		if( member is EventInfo )
 			return ( (EventInfo)member ).EventHandlerType;
 
-		throw new InvalidCastException( "Invalid member type: " + member.MemberType );
+		throw new InvalidCastException( "Invalid member type: " + member.GetMemberType() );
 
 	}
 

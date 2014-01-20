@@ -20,10 +20,18 @@ public class Gravatar : MonoBehaviour
 
 	void OnEnable()
 	{
+
+#if UNITY_WP8 || UNITY_METRO
+		Debug.LogError( "The " + this.GetType().Name + " example class does not work on the target platform" );
+		this.enabled = false;
+		return;
+#else
 		if( validator.IsMatch( this.email ) && this.Sprite != null )
 		{
 			updateImage();
 		}
+#endif
+
 	}
 
 	public string EmailAddress
@@ -60,7 +68,9 @@ public class Gravatar : MonoBehaviour
 	public string MD5( string strToEncrypt )
 	{
 
-#if !UNITY_WP8
+#if UNITY_WP8 ||  UNITY_METRO
+		return string.Empty;
+#else
 
 		System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
 		byte[] bytes = ue.GetBytes( strToEncrypt );
@@ -78,9 +88,6 @@ public class Gravatar : MonoBehaviour
 		}
 
 		return hashString.PadLeft( 32, '0' );
-
-#else
-		throw new Exception( "This example class does not work on Windows Phone 8" );
 #endif
 
 	}

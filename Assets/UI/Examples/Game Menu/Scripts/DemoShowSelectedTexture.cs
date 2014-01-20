@@ -11,7 +11,7 @@ public class DemoShowSelectedTexture : MonoBehaviour
 	{
 		if( Sprite != null )
 		{
-			Sprite.Texture = Resources.Load( field.ItemData[ field.SelectedIndex ] ) as Texture2D;
+			Sprite.Texture = Resources.Load( field.SelectedItemData ) as Texture2D;
 		}
 	}
 

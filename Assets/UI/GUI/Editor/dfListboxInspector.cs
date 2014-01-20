@@ -34,7 +34,14 @@ public class dfListboxInspector : dfControlInspector
 		using( dfEditorUtil.BeginGroup( "Listbox" ) )
 		{
 
-			SelectSprite( "Background", control.Atlas, control, "BackgroundSprite", false );
+			SelectSprite( "Back Sprite", control.Atlas, control, "BackgroundSprite", false );
+
+			var backColor = EditorGUILayout.ColorField( "Back Color", control.Color );
+			if( backColor != control.Color )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Background Color" );
+				control.Color = backColor;
+			}
 
 			var listPadding = dfEditorUtil.EditPadding( "Padding", control.ListPadding );
 			if( !listPadding.Equals( control.ListPadding ) )
@@ -71,31 +78,14 @@ public class dfListboxInspector : dfControlInspector
 				control.ItemTextColor = textColor;
 			}
 
-			//var dynamicFont = control.Font as dfDynamicFont;
-			//if( dynamicFont != null )
-			//{
-
-			//    var effectiveFontSize = Mathf.CeilToInt( dynamicFont.FontSize * control.TextScale );
-			//    EditorGUI.BeginChangeCheck();
-			//    effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
-			//    if( EditorGUI.EndChangeCheck() )
-			//    {
-			//        control.TextScale = (float)effectiveFontSize / (float)dynamicFont.FontSize;
-			//        control.Invalidate();		
-			//    }
-
-			//}
-			//else
-			//{
-
-				var textScale = EditorGUILayout.FloatField( "Text Scale", control.ItemTextScale );
-				if( textScale != control.ItemTextScale )
-				{
-					dfEditorUtil.MarkUndo( control, "Change Text Scale" );
-					control.ItemTextScale = textScale;
-				}
-
-			//}
+			var effectiveFontSize = Mathf.CeilToInt( control.Font.FontSize * control.ItemTextScale );
+			EditorGUI.BeginChangeCheck();
+			effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Font Size" );
+				control.ItemTextScale = (float)effectiveFontSize / (float)control.Font.FontSize;
+			}
 
 			//var scaleMode = (dfTextScaleMode)EditorGUILayout.EnumPopup( "Auto Scale", control.TextScaleMode );
 			//if( scaleMode != control.TextScaleMode )

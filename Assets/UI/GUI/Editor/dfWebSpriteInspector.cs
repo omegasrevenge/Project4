@@ -46,6 +46,13 @@ public class dfWebSpriteInspector : dfControlInspector
 				control.Material = material;
 			}
 
+			var backColor = EditorGUILayout.ColorField( "Color", control.Color );
+			if( backColor != control.Color )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Sprite Color" );
+				control.Color = backColor;
+			}
+
 		}
 
 		using( dfEditorUtil.BeginGroup( "Web" ) )

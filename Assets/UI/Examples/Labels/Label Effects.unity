@@ -161,7 +161,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 1
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 1
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
@@ -379,7 +379,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 433850704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1233449932}
@@ -470,7 +470,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 1
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
@@ -591,7 +591,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 1
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 3
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   align: 1
   vertAlign: 0
   textScale: 1
-  textScaleMode: 2
+  textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0

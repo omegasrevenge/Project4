@@ -42,7 +42,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 02253e4da6363e747b265af6bbd1a954, type: 3}
   shader: {fileID: 4800000, guid: 781ab50a0a53b45439da46fe4c9a2f17, type: 3}
   baseFontSize: 24
-  baseline: 20
+  baseline: 25
   lineHeight: 25
 --- !u!1001 &100100000
 Prefab:

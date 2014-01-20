@@ -51,6 +51,14 @@ public class dfSpriteInspector : dfControlInspector
 
 			SelectSprite( "Sprite", control.Atlas, control, "SpriteName" );
 
+			EditorGUI.BeginChangeCheck();
+			var color = EditorGUILayout.ColorField( "Color", control.Color );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				dfEditorUtil.MarkUndo( control, "Assign color" );
+				control.Color = color;
+			}
+
 		}
 
 		using( dfEditorUtil.BeginGroup( "Flip" ) )

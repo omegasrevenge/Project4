@@ -47,6 +47,14 @@ public class dfDropdownListInspector : dfControlInspector
 				control.OpenOnMouseDown = triggerOnMouse;
 			}
 
+			EditorGUI.BeginChangeCheck();
+			var useSpacebarToClick = EditorGUILayout.Toggle( "Space to Click", control.ClickWhenSpacePressed );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				dfEditorUtil.MarkUndo( control, "Change ClickWhenSpacePressed property" );
+				control.ClickWhenSpacePressed = useSpacebarToClick;
+			}
+
 			var index = EditorGUILayout.IntSlider( "Selected Index", control.SelectedIndex, -1, control.Items.Length - 1 );
 			if( index != control.SelectedIndex )
 			{
@@ -56,7 +64,7 @@ public class dfDropdownListInspector : dfControlInspector
 
 		}
 
-		using( dfEditorUtil.BeginGroup( "Images" ) )
+		using( dfEditorUtil.BeginGroup( "Images And Colors" ) )
 		{
 
 			SelectTextureAtlas( "Atlas", control, "Atlas", false, true );
@@ -65,6 +73,20 @@ public class dfDropdownListInspector : dfControlInspector
 			SelectSprite( "Focus", control.Atlas, control, "FocusSprite", false );
 			SelectSprite( "Hover", control.Atlas, control, "HoverSprite", false );
 			SelectSprite( "Disabled", control.Atlas, control, "DisabledSprite", false );
+
+			var backColor = EditorGUILayout.ColorField( "Normal Back", control.Color );
+			if( backColor != control.Color )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Background Color" );
+				control.Color = backColor;
+			}
+
+			backColor = EditorGUILayout.ColorField( "Disabled Back", control.DisabledColor );
+			if( backColor != control.DisabledColor )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Background Color" );
+				control.DisabledColor = backColor;
+			}
 
 		}
 
@@ -76,37 +98,27 @@ public class dfDropdownListInspector : dfControlInspector
 			if( control.Font == null )
 				return false;
 
-			var textColor = EditorGUILayout.ColorField( "Text Color", control.TextColor );
+			var textColor = EditorGUILayout.ColorField( "Normal Text", control.TextColor );
 			if( textColor != control.TextColor )
 			{
 				dfEditorUtil.MarkUndo( control, "Change Text Color" );
 				control.TextColor = textColor;
 			}
 
-			var dynamicFont = control.Font as dfDynamicFont;
-			if( dynamicFont != null )
+			var disabledTextColor = EditorGUILayout.ColorField( "Disabled", control.DisabledTextColor );
+			if( disabledTextColor != control.DisabledTextColor )
 			{
-
-				var effectiveFontSize = Mathf.CeilToInt( dynamicFont.FontSize * control.TextScale );
-				EditorGUI.BeginChangeCheck();
-				effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
-				if( EditorGUI.EndChangeCheck() )
-				{
-					control.TextScale = (float)effectiveFontSize / (float)dynamicFont.FontSize;
-					control.Invalidate();
-				}
-
+				dfEditorUtil.MarkUndo( control, "Change Text Color" );
+				control.DisabledTextColor = disabledTextColor;
 			}
-			else
+
+			var effectiveFontSize = Mathf.CeilToInt( control.Font.FontSize * control.TextScale );
+			EditorGUI.BeginChangeCheck();
+			effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
+			if( EditorGUI.EndChangeCheck() )
 			{
-
-				var textScale = EditorGUILayout.FloatField( "Text Scale", control.TextScale );
-				if( textScale != control.TextScale )
-				{
-					dfEditorUtil.MarkUndo( control, "Change Text Scale" );
-					control.TextScale = textScale;
-				}
-
+				dfEditorUtil.MarkUndo( control, "Change Font Size" );
+				control.TextScale = (float)effectiveFontSize / (float)control.Font.FontSize;
 			}
 
 			var padding = dfEditorUtil.EditPadding( "Padding", control.TextFieldPadding );

@@ -15,6 +15,7 @@ public class dfRadialMenu : MonoBehaviour
 
 	public delegate void CircularMenuEventHandler( dfRadialMenu sender );
 
+	public event CircularMenuEventHandler BeforeMenuOpened;
 	public event CircularMenuEventHandler MenuOpened;
 	public event CircularMenuEventHandler MenuClosed;
 
@@ -196,6 +197,9 @@ public class dfRadialMenu : MonoBehaviour
 
 	private IEnumerator openMenu()
 	{
+
+		if( BeforeMenuOpened != null ) BeforeMenuOpened( this );
+		host.Signal( "OnBeforeMenuOpened", this );
 
 		isAnimating = true;
 

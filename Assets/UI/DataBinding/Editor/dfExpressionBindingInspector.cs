@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 
+#pragma warning disable 0618
+
 [CustomEditor( typeof( dfExpressionPropertyBinding ) )]
 public class dfExpressionBindingInspector : Editor
 {
@@ -261,3 +263,5 @@ public class dfExpressionBindingInspector : Editor
 	#endregion
 
 }
+
+#pragma warning restore 0618

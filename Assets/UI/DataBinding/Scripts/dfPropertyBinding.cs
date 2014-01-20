@@ -49,8 +49,8 @@ public class dfPropertyBinding : MonoBehaviour, IDataBindingComponent
 
 	#region Private fields 
 
-	private dfObservableProperty sourceProperty;
-	private dfObservableProperty targetProperty;
+	protected dfObservableProperty sourceProperty;
+	protected dfObservableProperty targetProperty;
 
 	protected bool isBound = false;
 	protected bool useFormatString = false;
@@ -61,18 +61,28 @@ public class dfPropertyBinding : MonoBehaviour, IDataBindingComponent
 
 	public virtual void OnEnable()
 	{
+		
+		if( DataSource == null || DataTarget == null )
+			return;
+
 		if( !isBound && DataSource.IsValid && DataTarget.IsValid )
 		{
 			Bind();
 		}
+
 	}
 
 	public virtual void Start()
 	{
+
+		if( DataSource == null || DataTarget == null )
+			return;
+
 		if( !isBound && DataSource.IsValid && DataTarget.IsValid )
 		{
 			Bind();
 		}
+
 	}
 
 	public virtual void OnDisable()

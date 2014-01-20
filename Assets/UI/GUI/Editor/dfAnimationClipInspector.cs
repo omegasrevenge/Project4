@@ -177,28 +177,6 @@ public class dfAnimationClipInspector : Editor
 		using( dfEditorUtil.BeginGroup( "Frames", 80 ) )
 		{
 
-			//EditorGUILayout.HelpBox( "\n\nDrag and drop textures here to add them to the list of animation frames\n\n", MessageType.Info );
-			//var rect = GUILayoutUtility.GetLastRect();
-			//var evt = Event.current;
-			//if( evt != null )
-			//{
-
-			//    if( evt.type == EventType.DragUpdated || evt.type == EventType.DragPerform )
-			//    {
-			//        if( rect.Contains( evt.mousePosition ) )
-			//        {
-			//            var draggedObjects = DragAndDrop.objectReferences;
-			//            DragAndDrop.visualMode = draggedObjects.Any( x => x is Texture2D ) ? DragAndDropVisualMode.Copy : DragAndDropVisualMode.None;
-			//            if( evt.type == EventType.DragPerform )
-			//            {
-			//                doDragDrop( clip );
-			//            }
-			//            evt.Use();
-			//        }
-			//    }
-
-			//}
-
 			editFrames( clip );
 
 			EditorGUILayout.Separator();
@@ -331,7 +309,7 @@ public class dfAnimationClipInspector : Editor
 		for( int i = 0; i < animation.Atlas.Items.Count; i++ )
 		{
 			var item = animation.Atlas.Items[ i ].name;
-			if( item.StartsWith( prefix, StringComparison.InvariantCultureIgnoreCase ) )
+			if( item.StartsWith( prefix, StringComparison.OrdinalIgnoreCase ) )
 			{
 				if( !animation.Sprites.Contains( item ) )
 				{

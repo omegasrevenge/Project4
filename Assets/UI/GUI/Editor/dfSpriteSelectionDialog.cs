@@ -118,7 +118,7 @@ public class dfSpriteSelectionDialog : ScriptableWizard
 
 		var filteredItems =
 			!string.IsNullOrEmpty( searchFilter )
-			? atlas.Items.Where( i => i.name.IndexOf( searchFilter, StringComparison.InvariantCultureIgnoreCase ) != -1 ).ToList()
+			? atlas.Items.Where( i => i.name.IndexOf( searchFilter, StringComparison.OrdinalIgnoreCase ) != -1 ).ToList()
 			: atlas.Items;
 
 		var previewSize = 100f;

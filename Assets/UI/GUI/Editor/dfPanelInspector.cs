@@ -36,11 +36,11 @@ public class dfPanelInspector : dfControlInspector
 
 			SelectSprite( "Background", control.Atlas, control, "BackgroundSprite", false );
 
-			var backgroundColor = EditorGUILayout.ColorField( "Back Color", control.Color );
-			if( backgroundColor != control.Color )
+			var backgroundColor = EditorGUILayout.ColorField( "Back Color", control.BackgroundColor );
+			if( backgroundColor != control.BackgroundColor )
 			{
 				dfEditorUtil.MarkUndo( control, "Change background color" );
-				control.Color = backgroundColor;
+				control.BackgroundColor = backgroundColor;
 			}
 
 			var clientPadding = dfEditorUtil.EditPadding( "Padding", control.Padding );

@@ -367,7 +367,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 449201581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1269087303}
@@ -577,8 +577,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.00000024, z: .00100000005}
-  m_Center: {x: 1, y: -1.00000012, z: 0}
+  m_Size: {x: 2, y: 2, z: .00100000005}
+  m_Center: {x: 1, y: -1, z: 0}
 --- !u!114 &716952214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1291,9 @@ MonoBehaviour:
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: BLANK_TEXTURE
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4278190080
   padding:
     m_Left: 0
     m_Right: 0
@@ -1347,6 +1350,7 @@ MonoBehaviour:
   loopType: 0
   autoRun: 1
   skipToEndOnStop: 0
+  delayBeforeStarting: 0
   startValue: 0
   endValue: 1
 --- !u!1 &1898638786

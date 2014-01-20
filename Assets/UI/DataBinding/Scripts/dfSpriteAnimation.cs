@@ -11,7 +11,6 @@ using UnityEngine;
 /// such as dfSprite, dfTextureSprite, dfButton, dfPanel, etc.
 /// </summary>
 [Serializable]
-[RequireComponent( typeof( BoxCollider ) )]
 [AddComponentMenu( "Daikon Forge/Tweens/Sprite Animator" )]
 public class dfSpriteAnimation : dfTweenPlayableBase
 {
@@ -378,7 +377,7 @@ public class dfSpriteAnimation : dfTweenPlayableBase
 			return;
 		}
 
-		throw new InvalidOperationException( "Member type not supported: " + member.MemberType );
+		throw new InvalidOperationException( "Member type not supported: " + member.GetMemberType() );
 
 	}
 

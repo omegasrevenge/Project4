@@ -46,7 +46,6 @@ public class dfLabelInspector : dfControlInspector
 			}
 
 			SelectFontDefinition( "Font", control.Atlas, control, "Font", true, true );
-			SelectSprite( "Background", control.Atlas, control, "BackgroundSprite", false );
 
 		}
 
@@ -77,30 +76,13 @@ public class dfLabelInspector : dfControlInspector
 
 			}
 
-			var dynamicFont = control.Font as dfDynamicFont;
-			if( dynamicFont != null )
+			var effectiveFontSize = Mathf.CeilToInt( control.Font.FontSize * control.TextScale );
+			EditorGUI.BeginChangeCheck();
+			effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
+			if( EditorGUI.EndChangeCheck() )
 			{
-
-				var effectiveFontSize = Mathf.CeilToInt( dynamicFont.FontSize * control.TextScale );
-				EditorGUI.BeginChangeCheck();
-				effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
-				if( EditorGUI.EndChangeCheck() )
-				{
-					control.TextScale = (float)effectiveFontSize / (float)dynamicFont.FontSize;
-					control.Invalidate();
-				}
-
-			}
-			else 
-			{
-
-				var scale = EditorGUILayout.FloatField( "Text Scale", control.TextScale );
-				if( !Mathf.Approximately( scale, control.TextScale ) )
-				{
-					dfEditorUtil.MarkUndo( control, "Change Text Scale" );
-					control.TextScale = scale;
-				}
-
+				dfEditorUtil.MarkUndo( control, "Change Font Size" );
+				control.TextScale = (float)effectiveFontSize / (float)control.Font.FontSize;
 			}
 
 			var scaleMode = (dfTextScaleMode)EditorGUILayout.EnumPopup( "Auto Scale", control.TextScaleMode );
@@ -119,21 +101,23 @@ public class dfLabelInspector : dfControlInspector
 
 		}
 
-		using( dfEditorUtil.BeginGroup( "Colors" ) )
+		using( dfEditorUtil.BeginGroup( "Background and Colors" ) )
 		{
 
-			var textColor = EditorGUILayout.ColorField( "Text Color", control.Color );
-			if( textColor != control.Color )
-			{
-				dfEditorUtil.MarkUndo( control, "Change Text Color" );
-				control.Color = textColor;
-			}
+			SelectSprite( "Background", control.Atlas, control, "BackgroundSprite", false );
 
 			var backColor = EditorGUILayout.ColorField( "Back Color", control.BackgroundColor );
 			if( backColor != control.BackgroundColor )
 			{
 				dfEditorUtil.MarkUndo( control, "Change Background Color" );
 				control.BackgroundColor = backColor;
+			}
+
+			var textColor = EditorGUILayout.ColorField( "Text Color", control.Color );
+			if( textColor != control.Color )
+			{
+				dfEditorUtil.MarkUndo( control, "Change Text Color" );
+				control.Color = textColor;
 			}
 
 		}

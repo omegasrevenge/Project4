@@ -30,6 +30,10 @@ public class DndExample_InventoryItem : MonoBehaviour
 
 	public void OnClick( dfControl source, dfMouseEventArgs args )
 	{
+
+		if( string.IsNullOrEmpty( ItemName ) )
+			return;
+
 		if( args.Buttons == dfMouseButtons.Left )
 		{
 			Count += 1;
@@ -38,7 +42,9 @@ public class DndExample_InventoryItem : MonoBehaviour
 		{
 			Count = Mathf.Max( Count - 1, 1 );
 		}
+
 		Refresh();
+
 	}
 
 	public void OnDragStart( dfControl source, dfDragEventArgs args )

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 292cc5efb8e911044acdc0f0d23d4938
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Axe
     100002: BaseHuman
@@ -118,4 +118,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  additionalBone: 1
   userData: 

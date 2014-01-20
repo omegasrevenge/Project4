@@ -1,61 +1,41 @@
-Daikon Forge GUI v1.0.12 Changelog
+Daikon Forge GUI v1.0.13 Changelog
 
-PLEASE NOTE: If you have compile errors after upgrading, you should delete the [Assets/Daikon Forge] folder and re-import the package.
+NOTICE: The DFGUI folder structure has changed. If upgrading, you will need to delete the existing [Assets/Daikon Forge] folder before importing this new version.
 
-* No longer attempts to apply "half pixel offset" when using DirectX 11
-* dfGUIManager no longer tries to render controls whose dfControl component or GameObject is disabled 
-* Added a simple Touch-screen Joystick example
-* Added a simple Radial Menu example
-* Assigning a value to dfSprite.SpriteName at runtime will auto-set control size to image size if control size is (0,0)
-* Added "Force Layout" button to dfFlowLayout inspector
-* Added MaxLayoutSize property to dfFlowLayout component to allow wrapping within predefined area and "Fit to Contents" after layout
-* Fixed an issue with changing sprite type after initial assignment
-* Added dfButton.NormalBackgroundColor property to allow opacity for default state background to be defined independently
-* Dropdown list's popup now correctly displays on top (some edge cases were previously problematic)
-* Added dfControl.AddPrefab() and dfGUIManager.AddPrefab() methods to simplify instantiating and adding prefabs to UI
-* dfGUIManager.UIScale property now works when using Pixel Perfect and Perspective Mode together
-* Added AutoStart property to the dfTweenGroup component - automatically calls Play at startup
-* Added font preview when selecting Default Font for Rich Text Label control
-* "Select Control" option in SceneView context menu now correctly displays objects with duplicate names
-* Selecting control with RenderOrder = 0 in Scene View is now consistent
-* Adding a prefab to the UI Root via the context menu now works correctly
-* Resolved issues with horizontal alignment of dynamic font text
-* Resolved exception when using dfGUIManager.RefreshAll() ("Force Refresh") when scene contains uninitialized instances
-* Integrated user-supplied (Mistale/Anders) sprite edge extrusion code for Texture Atlas
-* Exposed dfControl.IsLocalized in inspector, necessary to allow localization
-* Tween events (TweenStarted, TweenCompleted, etc) now include a reference to the sender
-* Resolved issue with dfTextureSprite class leaking Materials if not explicitly assigned before Texture
-* Added background color options to all controls, added Cursor Color option to dfTextbox
-* Created "Daikon Forge/Dynamic Font Shader" to resolve render-order issues with dynamic fonts
-* Consecutive down/mouseup events in same frame now processed correctly
-* dfDynamicFont class now compiles for Windows Phone
-* Vertical sliders with negative min value now calculate correct value on user mouse actions
-* Added "Force Square" and "Max Size" options to texture atlas editor
-* When button's OnClick or OnMouseDown event causes ancestor to be disabled, button now switches to Disabled state
-* Panel now uses correct color to render background sprite when disabled
-* Fixed minor Undo issues in Unity 4.3+
-* Fixed dfControl.GetCenter() to work properly when control is rotated
-* Added design-time guides - Create, Edit, and Move guides that help with control alignment and snapping (use SHIFT-CTRL-G to toggle guides)
-* Added design-time ability to move control with mouse drag
-* Completely reworked how resizing controls works in the editor
-* Added design-time visualization of control extents when resizing
-* Assigning dfControl.Color no longer overwrites Opacity value
-* Fixed dfGUIManager.ScreenToGUI() to always return correct value for current "virtual screen resolution"
-* Texture atlases now created with "Alpha is Transparency" by default. User-defined setting is retained when rebuilding.
-* Fixed dfTextbox.CursorIndex property
-* dfSlider.MinValue and .MaxValue now immediately refresh the control when assigned
-* Modified dfDynamicFont to use fully-qualified type name for UnityEngine.CharacterInfo to avoid naming collisions
-* dfDropdownList.SelectedValue now refreshes the control when a new selected value is assigned
-* Implemented several more workarounds for Mac-specific Unity bugs
-* Removed locking of Transform.localScale at design time (expert mode)
-* Added ability for Property Binding to bind to string regardless of source data type
-* Event Binding component can now call coroutine-style event handlers 
-* Property Binding can now specify a format string when binding to string target property
-* Added dfEventDrivenPropertyBinding - Allows event-driven (rather than polled) property binding
-* You can now select dynamic fonts from the Select Font dialog
-* You can now assign a dynamic font as the Default Font in the UI Root
-* Remove AOT-only exception in dfPoolManager class 
-* Text rendering now correctly respects CharacterSpacing parameter
-* Fixed cursor blink rate in Textbox control
-* Removed GetProperty/SetProperty extension methods that were contaminating global name space
-* Many Daikon Forge GUI menu options now found under the "Tools/Daikon Forge" menu
+* Editor Scene not automatically marked as "unsaved" when nothing has changed
+* Can now drag container controls in Editor when mouse is over child control on start of drag operation
+* Resolved Editor crash during Editor startup when loaded project contains top-level prefabs with certain conditions
+* dfDropdown and dfListbox now localize item data
+* Added event proxy to dfEventBinding component to allow use of standard .NET events based on System.EventHandler signature
+* Added BeforeMenuOpen event to dfRadialMenu - Convenient hook to hide/show/enable menu items before menu is shown
+* Added dfListbox.AddItem() method to allow adding items at runtime (useful for Playmaker integration, etc)
+* Can now triple-click textbox to select all text
+* Textbox, Button, Label, DropdownList, and Listbox inspectors now always shows font size (internally sets TextScale property to matching calculated value)
+* Fixed how dfDynamicFont.MeasureString() measures the width of spaces
+* dfTextbox control now uses background sprite padding to determine top and bottom of selection rect instead of text padding
+* dfTextbox control no longer throws NullReferenceException when assigning NULL value to Text property (sets Text to empty string)
+* dfAnimatedValue and descendants now report IsDone = true only after timeout is elapsed *and* final value has been queried
+* Prefabs moved in the Editor with the Move gizmo now correctly retain their positions on app startup
+* Resolved Editor crash when assigning a control component to a GameObject that already has a control component assigned (this was never a valid operation, but doesn't crash now)
+* Resolved rare edge case with RequireComponent attribute usage that could result in Unity Editor crashing
+* dfWebSprite now exposes AutoDownload property and LoadImage() method, can now download new images "on demand"
+* Expression binding is deprecated, and may be removed from future versions (If so, will be open-sourced at that point)
+* Added a warning to dfExpressionPropertyBinding about that component not passing Windows Store certification (3rd party API)
+* Fixed fill sprite handling on Right To Left and Vertical sliders
+* Modified the dfTweenEventBinding class to compile and work on iOS, Windows Store, and Windows Phone
+* Added BackgroundColor property to Panel, can now set panel background opacity independently of panel opacity
+* Modified script folder structure (see notice above)
+* Touch now works properly and consistently on Windows 8 mobile devices
+* Support for Windows Store and Windows Phone 8 platforms
+* Refactored touch processing code to allow addition of third-party touch sources (such as TUIO, Windows 7, Windows 8 Standalone, etc)
+* Added components that provide support for simple gestures (Tap, Hold, Flick, Pan)
+* Texture sprite now uses Texture instead of Texture2D, supports render textures and movie texture
+* Resolved an issue with using multiple dfInputManager instances that could cause controls to lose focus unexpectedly
+* Minor improvements to memory usage and performance with message-style event handling code
+* Can now use message-style event handling for SizeChanged event 
+* Minor improvements to text rendering performance
+* Added StartDelay property for tweens
+* dfControl.GetScreenRect() now returns encompassing rect for rotated controls
+* dfPanelFlowLayout now includes support for excluding controls from layout
+* dfPanelFlowLayout now allows controls to reach to exact viewport extents before wrapping
+

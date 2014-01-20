@@ -162,30 +162,13 @@ public class dfTextboxInspector : dfControlInspector
 				control.TextAlignment = align;
 			}
 
-			var dynamicFont = control.Font as dfDynamicFont;
-			if( dynamicFont != null )
+			var effectiveFontSize = Mathf.CeilToInt( control.Font.FontSize * control.TextScale );
+			EditorGUI.BeginChangeCheck();
+			effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
+			if( EditorGUI.EndChangeCheck() )
 			{
-
-				var effectiveFontSize = Mathf.CeilToInt( dynamicFont.FontSize * control.TextScale );
-				EditorGUI.BeginChangeCheck();
-				effectiveFontSize = EditorGUILayout.IntField( "Font Size", effectiveFontSize );
-				if( EditorGUI.EndChangeCheck() )
-				{
-					control.TextScale = (float)effectiveFontSize / (float)dynamicFont.FontSize;
-					control.Invalidate();
-				}
-
-			}
-			else
-			{
-
-				var textScale = EditorGUILayout.FloatField( "Text Scale", control.TextScale );
-				if( textScale != control.TextScale )
-				{
-					dfEditorUtil.MarkUndo( control, "Change Text Scale" );
-					control.TextScale = textScale;
-				}
-
+				dfEditorUtil.MarkUndo( control, "Change Font Size" );
+				control.TextScale = (float)effectiveFontSize / (float)control.Font.FontSize;
 			}
 
 			var scaleMode = (dfTextScaleMode)EditorGUILayout.EnumPopup( "Auto Scale", control.TextScaleMode );
@@ -250,7 +233,7 @@ public class dfTextboxInspector : dfControlInspector
 		using( dfEditorUtil.BeginGroup( "Colors" ) )
 		{
 
-			var backgroundColor = EditorGUILayout.ColorField( "Background Color", control.Color );
+			var backgroundColor = EditorGUILayout.ColorField( "Background", control.Color );
 			if( backgroundColor != control.Color )
 			{
 				dfEditorUtil.MarkUndo( control, "Change Background Color" );

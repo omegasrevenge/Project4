@@ -93,7 +93,7 @@ public class dfPoolManager : MonoBehaviour
 
 		if( dfPoolManager.Pool != null )
 		{
-			throw new InvalidProgramException( "Cannot have more than one instance of the " + GetType().Name + " class" );
+			throw new Exception( "Cannot have more than one instance of the " + GetType().Name + " class" );
 		}
 
 		dfPoolManager.Pool = this;

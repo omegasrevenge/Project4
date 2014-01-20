@@ -5,21 +5,60 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-[AddComponentMenu( "Daikon Forge/Examples/Game Menu/List Field" )]
 [Serializable]
+[AddComponentMenu( "Daikon Forge/Examples/Game Menu/List Field" )]
 public class DemoListField : DemoItemBase
 {
+
+	#region Public events 
+
+	/// <summary>
+	/// Raised whenever the SelectedIndex value is changed
+	/// </summary>
+	public event EventHandler SelectedIndexChanged;
+
+	#endregion 
+
+	#region Public fields
 
 	public List<string> Items = new List<string>();
 	public List<string> ItemData = new List<string>();
 
 	public int SelectedIndex = 0;
 
+	#endregion 
+
+	#region Public properties 
+
+	/// <summary>
+	/// Returns the display text of the current selection
+	/// </summary>
+	public string SelectedItemText
+	{
+		get { return Items[ SelectedIndex ]; }
+	}
+
+	/// <summary>
+	/// Returns the data value of the current selection
+	/// </summary>
+	public string SelectedItemData
+	{
+		get { return ItemData[ SelectedIndex ]; }
+	}
+
+	#endregion 
+
+	#region Monobehavior events
+
 	void Start()
 	{
 		showSelection();
 		updateButtons();
 	}
+
+	#endregion 
+
+	#region dfControl events 
 
 	protected override void OnEnterFocus( dfControl sender, dfFocusEventArgs args )
 	{
@@ -33,7 +72,7 @@ public class DemoListField : DemoItemBase
 		updateButtons();
 	}
 
-	void OnMouseWheel( dfControl sender, dfMouseEventArgs args )
+	private void OnMouseWheel( dfControl sender, dfMouseEventArgs args )
 	{
 
 		if( args.Used )
@@ -48,7 +87,7 @@ public class DemoListField : DemoItemBase
 
 	}
 
-	void OnClick( dfControl sender, dfMouseEventArgs args )
+	private void OnClick( dfControl sender, dfMouseEventArgs args )
 	{
 
 		var prevButton = this.Control.Find( "Prev Button" );
@@ -65,7 +104,7 @@ public class DemoListField : DemoItemBase
 
 	}
 
-	void OnKeyDown( dfControl sender, dfKeyEventArgs args )
+	private void OnKeyDown( dfControl sender, dfKeyEventArgs args )
 	{
 
 		if( args.KeyCode == KeyCode.LeftArrow )
@@ -79,32 +118,37 @@ public class DemoListField : DemoItemBase
 
 	}
 
+	#endregion 
+
+	#region Private utlity methods 
+
 	private void SelectPrevious()
 	{
-
-		var lastSelectedIndex = SelectedIndex;
-
-		SelectedIndex = Mathf.Max( 0, SelectedIndex - 1 );
-
-		if( lastSelectedIndex != SelectedIndex )
-		{
-			showSelection();
-			SendMessage( "OnSelectedItemChanged", this, SendMessageOptions.DontRequireReceiver );
-		}
-
+		selectIndex( Mathf.Max( 0, SelectedIndex - 1 ) );
 	}
 
 	private void SelectNext()
 	{
+		selectIndex( Mathf.Min( SelectedIndex + 1, Items.Count - 1 ) );
+	}
 
-		var lastSelectedIndex = SelectedIndex;
+	private void selectIndex( int index )
+	{
 
-		SelectedIndex = Mathf.Min( SelectedIndex + 1, Items.Count - 1 );
-
-		if( lastSelectedIndex != SelectedIndex )
+		if( index != SelectedIndex )
 		{
+
+			SelectedIndex = index;
+
 			showSelection();
+
+			if( SelectedIndexChanged != null )
+			{
+				SelectedIndexChanged( this, EventArgs.Empty );
+			}
+
 			SendMessage( "OnSelectedItemChanged", this, SendMessageOptions.DontRequireReceiver );
+
 		}
 
 	}
@@ -126,7 +170,7 @@ public class DemoListField : DemoItemBase
 
 	}
 
-	void showSelection()
+	private void showSelection()
 	{
 
 		var label = this.Control.Find( "Item" ) as dfLabel;
@@ -138,5 +182,7 @@ public class DemoListField : DemoItemBase
 		updateButtons();
 
 	}
+
+	#endregion 
 
 }

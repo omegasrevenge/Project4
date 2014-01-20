@@ -408,8 +408,17 @@ public class dfFontDefinitionInspector : Editor
 	private static Texture2D getTexture( dfAtlas atlas, string sprite )
 	{
 
+		var spriteInfo = atlas[ sprite ];
+		if( spriteInfo == null )
+			return null;
+
 		var guid = atlas[ sprite ].textureGUID;
+		if( string.IsNullOrEmpty( guid ) )
+			return null;
+
 		var path = AssetDatabase.GUIDToAssetPath( guid );
+		if( string.IsNullOrEmpty( path ) )
+			return null;
 		
 		return AssetDatabase.LoadAssetAtPath( path, typeof( Texture2D ) ) as Texture2D;
 
@@ -417,18 +426,24 @@ public class dfFontDefinitionInspector : Editor
 
 	private static void setValue( dfFont control, string propertyName, object value )
 	{
+
 		var property = control.GetType().GetProperty( propertyName );
 		if( property == null )
 			throw new ArgumentException( "Property '" + propertyName + "' does not exist on " + control.GetType().Name );
+
 		property.SetValue( control, value, null );
+
 	}
 
 	private static object getValue( dfFont control, string propertyName )
 	{
+
 		var property = control.GetType().GetProperty( propertyName );
 		if( property == null )
 			throw new ArgumentException( "Property '" + propertyName + "' does not exist on " + control.GetType().Name );
+
 		return property.GetValue( control, null );
+
 	}
 
 	protected internal static void SelectTextureAtlas( string label, dfFont view, string propertyName, bool readOnly, bool colorizeIfMissing, int labelWidth = 95 )

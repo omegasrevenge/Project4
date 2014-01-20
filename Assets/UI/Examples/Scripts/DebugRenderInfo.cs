@@ -22,7 +22,7 @@ public class DebugRenderInfo : MonoBehaviour
 		if( info == null )
 		{
 			this.enabled = false;
-			throw new InvalidProgramException( "No Label component found" );
+			throw new Exception( "No Label component found" );
 		}
 
 		info.Text = "";

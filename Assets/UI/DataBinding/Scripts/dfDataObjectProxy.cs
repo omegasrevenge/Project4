@@ -170,7 +170,7 @@ public class dfDataObjectProxy : MonoBehaviour, IDataBindingComponent
 
 		var definedTypes =
 			this.GetType()
-			.Assembly
+			.GetAssembly()
 			.GetTypes();
 
 		var result =
@@ -210,7 +210,7 @@ public class dfDataObjectProxy : MonoBehaviour, IDataBindingComponent
 		var assemblyName = typeName.Substring( 0, typeName.IndexOf( '.' ) );
 
 		// Attempt to load the indicated Assembly
-		var assembly = Assembly.Load( assemblyName );
+		var assembly = Assembly.Load( new AssemblyName( assemblyName ) );
 		if( assembly == null )
 			return null;
 

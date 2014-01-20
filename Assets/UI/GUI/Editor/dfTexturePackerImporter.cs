@@ -149,7 +149,7 @@ public class dfTexturePackerImporter : EditorWindow
 			for( int i = 0; i < oldSprites.Count; i++ )
 			{
 				var old = oldSprites[ i ];
-				if( string.Equals( old.name, spriteName, StringComparison.InvariantCultureIgnoreCase ) )
+				if( string.Equals( old.name, spriteName, StringComparison.OrdinalIgnoreCase ) )
 				{
 					sprite.border = old.border;
 					break;

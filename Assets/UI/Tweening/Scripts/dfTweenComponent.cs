@@ -14,7 +14,7 @@ using System.Collections.Generic;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-public abstract class dfTweenComponent<T> : dfTweenComponentBase
+public abstract class dfTweenComponent<T> : dfTweenComponentBase where T : struct
 {
 
 	#region Events
@@ -130,8 +130,10 @@ public abstract class dfTweenComponent<T> : dfTweenComponentBase
 		if( !target.IsValid )
 			throw new InvalidOperationException( "Invalid property binding configuration on " + getPath( gameObject.transform ) + " - " + target );
 
-		var property = target.GetProperty();
-		StartCoroutine( Execute( property ) );
+		if( boundProperty == null )
+			boundProperty = target.GetProperty();
+
+		StartCoroutine( Execute( boundProperty ) );
 
 	}
 
@@ -210,11 +212,6 @@ public abstract class dfTweenComponent<T> : dfTweenComponentBase
 
 		onStarted();
 
-		var startTime = Time.realtimeSinceStartup;
-		var elapsed = 0f;
-
-		var pingPongDirection = 0f;
-
 		this.actualStartValue = this.startValue;
 		this.actualEndValue = this.endValue;
 
@@ -237,7 +234,22 @@ public abstract class dfTweenComponent<T> : dfTweenComponentBase
 		}
 
 		var currentValue = actualStartValue;
-		
+
+		if( delayBeforeStarting > 0f )
+		{
+			property.Value = currentValue;
+			var timeout = Time.realtimeSinceStartup + delayBeforeStarting;
+			while( Time.realtimeSinceStartup < timeout )
+			{
+				yield return default( T );
+			}
+		}
+
+		var startTime = Time.realtimeSinceStartup;
+		var elapsed = 0f;
+
+		var pingPongDirection = 0f;
+
 		while( true )
 		{
 

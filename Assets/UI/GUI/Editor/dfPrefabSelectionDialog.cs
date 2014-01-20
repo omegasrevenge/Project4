@@ -229,7 +229,7 @@ public class dfPrefabSelectionDialog : ScriptableWizard
 				}
 
 				var path = allAssetPaths[ i ];
-				if( !path.EndsWith( ".prefab", StringComparison.InvariantCultureIgnoreCase ) )
+				if( !path.EndsWith( ".prefab", StringComparison.OrdinalIgnoreCase ) )
 					continue;
 
 				try
@@ -271,7 +271,7 @@ public class dfPrefabSelectionDialog : ScriptableWizard
 			}
 			catch { continue; }
 
-			if( item.name.IndexOf( searchFilter, StringComparison.InvariantCultureIgnoreCase ) != -1 )
+			if( item.name.IndexOf( searchFilter, StringComparison.OrdinalIgnoreCase ) != -1 )
 			{
 				result.Add( item );
 			}

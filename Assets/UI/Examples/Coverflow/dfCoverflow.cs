@@ -41,6 +41,9 @@ public class dfCoverflow : MonoBehaviour
 	[SerializeField]
 	protected AnimationCurve opacityCurve = AnimationCurve.Linear( 0, 0, 1, 1 );
 
+	[SerializeField]
+	protected bool autoSelectOnStart = true;
+
 	#endregion
 
 	#region Private runtime variables 
@@ -72,7 +75,7 @@ public class dfCoverflow : MonoBehaviour
 			rotationCurve.AddKey( 0, 0 );
 			rotationCurve.AddKey( 1, 1 );
 		}
-
+		 
 	}
 
 	public void OnDisable()
@@ -185,7 +188,14 @@ public class dfCoverflow : MonoBehaviour
 
 	void container_ControlCollectionChanged( dfControl container, dfControl child )
 	{
+
 		controls = new dfList<dfControl>( container.Controls );
+
+		if( autoSelectOnStart && Application.isPlaying )
+		{
+			setSelectedIndex( controls.Count / 2 );
+		}
+
 	}
 
 	void OnKeyDown( dfControl sender, dfKeyEventArgs args )
@@ -300,9 +310,11 @@ public class dfCoverflow : MonoBehaviour
 		var controls = container.Controls;
 		var left = 0;
 		var top = ( container.Height - itemSize ) * 0.5f;
+		var size = Vector2.one * itemSize;
 
 		for( int i = 0; i < controls.Count; i++ )
 		{
+			controls[ i ].Size = size;
 			controls[ i ].RelativePosition = new Vector3( left, top );
 			left += itemSize + Mathf.Max( 0, spacing );
 		}
@@ -339,42 +351,31 @@ public class dfCoverflow : MonoBehaviour
 			control.RelativePosition = itemPosition;
 			control.Pivot = dfPivotPoint.MiddleCenter;
 
-			if( Application.isPlaying )
-			{
+			var rot = Quaternion.Euler( 0, calcHorzRotation( itemPosition.x ), 0 );
+			control.transform.localRotation = rot;
 
-				var rot = Quaternion.Euler( 0, calcHorzRotation( itemPosition.x ), 0 );
-				control.transform.localRotation = rot;
+			var scale = calcScale( itemPosition.x );
+			control.transform.localScale = Vector3.one * scale;
 
-				var scale = calcScale( itemPosition.x );
-				control.transform.localScale = Vector3.one * scale;
-
-				control.Opacity = calcItemOpacity( itemPosition.x );
-
-			}
-			else
-			{
-				control.transform.localScale = Vector3.one;
-				control.transform.localRotation = Quaternion.identity;
-			}
+			control.Opacity = calcItemOpacity( itemPosition.x );
 
 			itemPosition.x += itemSize + spacing;
 
 		}
 
-		if( Application.isPlaying )
+		#region Update control ZOrder so that overlapping items are shown correctly 
+
+		var index = 0;
+		for( int i = 0; i < selectedIndex; i++ )
 		{
-
-			var index = 0;
-			for( int i = 0; i < selectedIndex; i++ )
-			{
-				controls[ i ].ZOrder = index++;
-			}
-			for( int i = count - 1; i >= selectedIndex; i-- )
-			{
-				controls[ i ].ZOrder = index++;
-			}
-
+			controls[ i ].ZOrder = index++;
 		}
+		for( int i = count - 1; i >= selectedIndex; i-- )
+		{
+			controls[ i ].ZOrder = index++;
+		}
+
+		#endregion 
 
 	}
 

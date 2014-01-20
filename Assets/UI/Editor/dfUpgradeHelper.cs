@@ -14,7 +14,7 @@ public class dfInstallPostProcessor : AssetPostprocessor
 {
 
 	private const string VERSION_KEY = "DaikonForge.UserInterface.InstalledVersion";
-	private const string CURRENT_VERSION = "1.0.12r1";
+	private const string CURRENT_VERSION = "1.0.13 f1";
 
 	static void OnPostprocessAllAssets( string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths )
 	{
@@ -146,7 +146,7 @@ public class dfUpgradeHelper
 				}
 
 				var path = allAssetPaths[ i ];
-				if( !path.EndsWith( ".prefab", StringComparison.InvariantCultureIgnoreCase ) )
+				if( !path.EndsWith( ".prefab", StringComparison.OrdinalIgnoreCase ) )
 					continue;
 
 				var gameObject = AssetDatabase.LoadMainAssetAtPath( path ) as GameObject;

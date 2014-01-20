@@ -55,9 +55,9 @@ public class dfEditorUtil
 		}
 	}
 
-	public static GUIStyle BoxStyleDark 
-	{ 
-		get 
+	public static GUIStyle BoxStyleDark
+	{
+		get
 		{
 
 			if( backgroundTextureDark == null )
@@ -85,7 +85,7 @@ public class dfEditorUtil
 
 			return backgroundStyleDark;
 
-		} 
+		}
 	}
 
 	public static void DrawHandle( int id, Vector3 point, GUIStyle style )
@@ -311,7 +311,7 @@ public class dfEditorUtil
 	{
 
 		GUILayout.Space( 12f );
-			 
+
 		if( Event.current.type == EventType.Repaint )
 		{
 
@@ -321,7 +321,7 @@ public class dfEditorUtil
 
 			var savedColor = GUI.color;
 			GUI.color = new Color( 0f, 0f, 0f, 0.25f );
-			
+
 			GUI.DrawTexture( new Rect( 0f, rect.yMin + 6f, Screen.width, 4f ), tex );
 			GUI.DrawTexture( new Rect( 0f, rect.yMin + 6f, Screen.width, 1f ), tex );
 			GUI.DrawTexture( new Rect( 0f, rect.yMin + 9f, Screen.width, 1f ), tex );
@@ -475,7 +475,7 @@ public class dfPropertyGroup : IDisposable
 	{
 
 		savedLabelWidth = dfEditorUtil.LabelWidth;
-		
+
 		GUILayout.Label( label, "HeaderLabel" );
 		EditorGUI.indentLevel += 1;
 
@@ -500,7 +500,7 @@ public static class dfEditorExtensions
 {
 
 	private static readonly EditorApplication.HierarchyWindowItemCallback hiearchyItemCallback;
-	
+
 	private static Texture2D hierarchyIcon;
 	private static Texture2D HierarchyIcon
 	{
@@ -542,6 +542,12 @@ public static class dfEditorExtensions
 
 public static class dfMenuExtensions
 {
+
+	[MenuItem( "Tools/Daikon Forge/Help/Getting Started", false, 98 )]
+	public static void ShowDocumentation( MenuCommand command )
+	{
+		Help.BrowseURL( "http://www.daikonforge.com/docs/Getting%20Started%20with%20DFGUI.pdf" );
+	}
 
 	[MenuItem( "Tools/Daikon Forge/Help/Daikon Forge Website" )]
 	public static void ShowHelp( MenuCommand command )

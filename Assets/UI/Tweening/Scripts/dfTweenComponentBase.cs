@@ -52,6 +52,9 @@ public abstract class dfTweenComponentBase : dfTweenPlayableBase
 	[SerializeField]
 	protected bool skipToEndOnStop = false;
 
+	[SerializeField]
+	protected float delayBeforeStarting = 0f;
+
 	#endregion
 
 	#region Private instance variables
@@ -112,6 +115,15 @@ public abstract class dfTweenComponentBase : dfTweenPlayableBase
 		{
 			this.length = Mathf.Max( 0f, value ); ;
 		}
+	}
+
+	/// <summary>
+	/// The amount of time in seconds before the tween will start
+	/// </summary>
+	public float StartDelay
+	{
+		get { return this.delayBeforeStarting; }
+		set { this.delayBeforeStarting = value; }
 	}
 
 	/// <summary>

@@ -238,6 +238,7 @@ public abstract class dfAnimatedValue<T> where T: struct
 
 	private float animLength = 1f;
 	private float startTime;
+	private bool isDone = false;
 
 	private dfEasingType easingType = dfEasingType.Linear;
 	private dfEasingFunctions.EasingFunction easingFunction;
@@ -269,7 +270,7 @@ public abstract class dfAnimatedValue<T> where T: struct
 	/// </summary>
 	public bool IsDone
 	{
-		get { return ( Time.realtimeSinceStartup - this.startTime ) >= this.Length; }
+		get { return isDone; }
 	}
 
 	/// <summary>
@@ -282,6 +283,7 @@ public abstract class dfAnimatedValue<T> where T: struct
 		{
 			this.animLength = value;
 			startTime = Time.realtimeSinceStartup;
+			isDone = false;
 		}
 	}
 
@@ -295,6 +297,7 @@ public abstract class dfAnimatedValue<T> where T: struct
 		{
 			this.startValue = value;
 			startTime = Time.realtimeSinceStartup;
+			isDone = false;
 		}
 	}
 
@@ -308,6 +311,7 @@ public abstract class dfAnimatedValue<T> where T: struct
 		{
 			this.endValue = value;
 			startTime = Time.realtimeSinceStartup;
+			isDone = false;
 		}
 	}
 
@@ -325,7 +329,10 @@ public abstract class dfAnimatedValue<T> where T: struct
 			// Determine how much time has elapsed
 			var elapsed = Time.realtimeSinceStartup - startTime;
 			if( elapsed >= animLength )
+			{
+				isDone = true;
 				return endValue;
+			}
 
 			// Normalize time elapsed to 0..1 range
 			var time = Mathf.Clamp01( elapsed / animLength );

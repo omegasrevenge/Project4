@@ -50,12 +50,12 @@ public class dfGUIManagerInspector : Editor
 				.Length;
 
 			var statusFormat = @"
-Screen size: {4}
-Total draw calls: {0}
-Total triangles: {1}
-Controls rendered: {2}
-Total controls: {3}
-";
+	Screen size: {4}
+	Total draw calls: {0}
+	Total triangles: {1}
+	Controls rendered: {2}
+	Total controls: {3}
+	";
 
 			var status = string.Format(
 				statusFormat.Trim(),
@@ -180,7 +180,7 @@ Total controls: {3}
 		using( dfEditorUtil.BeginGroup( "Target Resolution" ) )
 		{
 
-			#region Force user to apply changes to scale 
+			#region Force user to apply changes to scale
 
 			lastScale = EditorGUILayout.FloatField( "UI Scale", lastScale );
 			GUI.enabled = !Mathf.Approximately( lastScale, view.UIScale );
@@ -251,8 +251,8 @@ Total controls: {3}
 					var newHeight = PlayerSettings.defaultScreenHeight;
 
 #if UNITY_WEBPLAYER
-					newWidth = PlayerSettings.defaultWebScreenWidth;
-					newHeight = PlayerSettings.defaultWebScreenHeight;
+						newWidth = PlayerSettings.defaultWebScreenWidth;
+						newHeight = PlayerSettings.defaultWebScreenHeight;
 #endif
 
 					view.FixedWidth = newWidth;
@@ -497,7 +497,7 @@ Total controls: {3}
 		}
 
 		return buffer.ToString();
-		
+
 	}
 
 	public void OnSceneGUI()
@@ -641,7 +641,7 @@ Total controls: {3}
 			var showGuides = EditorPrefs.GetBool( "dfGUIManager.ShowGuides", true );
 			EditorPrefs.SetBool( "dfGUIManager.ShowGuides", !showGuides );
 			SceneView.RepaintAll();
-		} 
+		}
 
 	}
 
@@ -794,18 +794,18 @@ Total controls: {3}
 
 			var actionRect = new Rect( 5, 2, 85, 20 );
 			EditorGUI.DropShadowLabel( actionRect, "Guide", (GUIStyle)"GUIEditor.BreadcrumbLeft" );
-			
+
 			statusMessage = "CTRL - Snap to every 5 pixels, SHIFT - Snap to grid, ALT - Hide info, Right click to edit";
-		
+
 		}
 		else if( currentAction == EditorAction.None )
 		{
-			
+
 			statusMessage = "Right-click " + target.name + " for context menu";
-			
+
 			if( showGuides )
 				statusMessage = append( statusMessage, "Drag mouse from ruler area to create guide" );
-			
+
 			statusMessage = append( statusMessage, "CTRL-SHIFT-G toggles guides" );
 
 		}
@@ -1054,10 +1054,10 @@ Total controls: {3}
 			MenuText = "Guide/New Vertical Guide",
 			Handler = () =>
 			{
-				view.guides.Add( new dfDesignGuide() 
-				{ 
-					orientation = dfControlOrientation.Vertical, 
-					position = (int)mousePosition.x 
+				view.guides.Add( new dfDesignGuide()
+				{
+					orientation = dfControlOrientation.Vertical,
+					position = (int)mousePosition.x
 				} );
 			}
 		} );
@@ -1186,7 +1186,7 @@ Total controls: {3}
 		var controlTypes = types
 			.Where( t =>
 				typeof( dfControl ).IsAssignableFrom( t ) &&
-				t.IsDefined( typeof( AddComponentMenu ), true )
+				t.IsDefined( typeof( AddComponentMenu ), false )
 			).ToList();
 
 		// Look for user-defined types to add to the list
@@ -1200,10 +1200,10 @@ Total controls: {3}
 				userTypes
 				.Where( t =>
 					typeof( dfControl ).IsAssignableFrom( t ) &&
-					t.IsDefined( typeof( AddComponentMenu ), true )
+					t.IsDefined( typeof( AddComponentMenu ), false )
 				).ToList();
 
-			controlTypes.AddRange( assemblyTypes  );
+			controlTypes.AddRange( assemblyTypes );
 
 		}
 
@@ -1212,7 +1212,7 @@ Total controls: {3}
 		for( int i = 0; i < controlTypes.Count; i++ )
 		{
 			var type = controlTypes[ i ];
-			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), true ).First() as AddComponentMenu;
+			var componentMenuAttribute = type.GetCustomAttributes( typeof( AddComponentMenu ), false ).First() as AddComponentMenu;
 			var optionText = componentMenuAttribute.componentMenu.Replace( "Daikon Forge/User Interface/", "" );
 			options.Add( buildAddChildMenuItem( optionText, type ) );
 		}
@@ -1244,7 +1244,7 @@ Total controls: {3}
 			}
 
 			var path = AssetDatabase.GetAssetPath( scriptTypes[ i ] );
-			if( string.IsNullOrEmpty( path ) || path.Contains( "editor", true ) || !path.EndsWith( ".cs", StringComparison.InvariantCultureIgnoreCase ) )
+			if( string.IsNullOrEmpty( path ) || path.Contains( "editor", true ) || !path.EndsWith( ".cs", StringComparison.OrdinalIgnoreCase ) )
 				continue;
 
 			var scriptClass = scriptTypes[ i ].GetClass();
@@ -1507,10 +1507,10 @@ Total controls: {3}
 
 			dfPrefabSelectionDialog.FilterCallback filterCallback = delegate( GameObject item )
 			{
-				
+
 				if( atlas == null )
 					return false;
-				
+
 				var font = item.GetComponent<dfFontBase>();
 				if( font == null )
 					return false;
@@ -1603,12 +1603,12 @@ Total controls: {3}
 			{
 				dfEditorUtil.DelayedInvoke( (System.Action)( () =>
 				{
-					dfPrefabSelectionDialog.Show( 
-						"Select Font", 
-						typeof( dfFontBase ), 
-						selectionCallback, 
-						dfFontDefinitionInspector.DrawFontPreview, 
-						filterCallback 
+					dfPrefabSelectionDialog.Show(
+						"Select Font",
+						typeof( dfFontBase ),
+						selectionCallback,
+						dfFontDefinitionInspector.DrawFontPreview,
+						filterCallback
 					);
 				} ) );
 			}
@@ -1646,7 +1646,7 @@ Total controls: {3}
 
 	}
 
-	#region Private nested types 
+	#region Private nested types
 
 	private enum EditorAction
 	{

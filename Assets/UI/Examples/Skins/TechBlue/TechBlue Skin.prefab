@@ -167,10 +167,10 @@ MonoBehaviour:
       width: .09765625
       height: .09765625
     border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
+      m_Left: 1
+      m_Right: 1
+      m_Top: 1
+      m_Bottom: 1
     rotated: 0
     sizeInPixels: {x: 100, y: 100}
     textureGUID: 6b804adeaacee2949afc6b2e6a485ce9

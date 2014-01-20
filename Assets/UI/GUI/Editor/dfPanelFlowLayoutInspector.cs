@@ -75,6 +75,65 @@ public class dfPanelFlowLayoutInspector : Editor
 
 		}
 
+		using( dfEditorUtil.BeginGroup( "Excluded controls" ) )
+		{
+			editExcludedControls( control );
+		}
+
+	}
+
+	private void editExcludedControls( dfPanelFlowLayout control )
+	{
+
+		EditorGUILayout.Separator();
+
+		var collectionModified = false;
+
+		var excluded = control.ExcludedControls;
+		for( int i = 0; i < excluded.Count && !collectionModified; i++ )
+		{
+
+			EditorGUILayout.BeginHorizontal();
+			{
+
+				EditorGUI.BeginChangeCheck();
+				excluded[ i ] = EditorGUILayout.ObjectField( excluded[ i ], typeof( dfControl ), true ) as dfControl;
+				if( EditorGUI.EndChangeCheck() )
+				{
+					EditorUtility.SetDirty( control );
+					control.PerformLayout();
+				}
+
+				if( GUILayout.Button( "x", "minibutton", GUILayout.Width( 20 ) ) )
+				{
+					dfEditorUtil.MarkUndo( control, "Remove excluded control" );
+					excluded.RemoveAt( i );
+					collectionModified = true;
+					control.PerformLayout();
+				}
+
+			}
+			EditorGUILayout.EndHorizontal();
+
+		}
+
+		EditorGUILayout.Separator();
+
+		GUILayout.BeginHorizontal();
+		{
+
+			GUILayout.FlexibleSpace();
+
+			if( GUILayout.Button( "Add To List", GUILayout.Width( 150 ) ) )
+			{
+				excluded.Add( null );
+			}
+
+			GUILayout.FlexibleSpace();
+
+		}
+		GUILayout.EndHorizontal();
+
 	}
 
 }

@@ -37,6 +37,13 @@ public class dfResizeHandleInspector : dfControlInspector
 
 			SelectSprite( "Background", handle.Atlas, handle, "BackgroundSprite", false );
 
+			var backColor = EditorGUILayout.ColorField( "Back Color", handle.Color );
+			if( backColor != handle.Color )
+			{
+				dfEditorUtil.MarkUndo( handle, "Change Background Color" );
+				handle.Color = backColor;
+			}
+
 		}
 
 		using( dfEditorUtil.BeginGroup( "Edges" ) )

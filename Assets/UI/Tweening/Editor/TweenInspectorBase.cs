@@ -112,6 +112,14 @@ public class TweenInspectorBase : Editor
 				tween.Length = length;
 			}
 
+			EditorGUI.BeginChangeCheck();
+			var delay = EditorGUILayout.FloatField( "Delay", tween.StartDelay );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				dfEditorUtil.MarkUndo( target, "Modify Tween Delay" );
+				tween.StartDelay = Mathf.Max( delay, 0 );
+			}
+
 		}
 
 		var serialized = new SerializedObject( target );

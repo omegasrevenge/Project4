@@ -1,4 +1,5 @@
-﻿/* Copyright 2013 Daikon Forge */
+﻿// @cond DOXY_IGNORE
+/* Copyright 2013 Daikon Forge */
 
 using UnityEngine;
 
@@ -12,7 +13,8 @@ using System.Collections.Generic;
 /// </summary>
 [Serializable]
 #if !UNITY_IPHONE
-[AddComponentMenu( "Daikon Forge/Data Binding/Expression Binding" )]
+//[AddComponentMenu( "Daikon Forge/Data Binding/Expression Binding" )]
+[Obsolete( "The expression binding functionality is no longer supported and may be removed in future versions of DFGUI" )]
 #endif
 public class dfExpressionPropertyBinding : MonoBehaviour, IDataBindingComponent
 {
@@ -72,6 +74,16 @@ public class dfExpressionPropertyBinding : MonoBehaviour, IDataBindingComponent
 	public void Start()
 	{
 		Debug.LogError( "Dynamic expression evaluation is not supported on iOS targets", this.gameObject );
+	}
+#elif UNITY_METRO
+	private static bool _WACKWarningIssued = false;
+	public void Start()
+	{
+		if( !_WACKWarningIssued )
+		{
+			_WACKWarningIssued = true;
+			Debug.LogWarning( "WARNING: Dynamic expression evaluation does not pass WACK certification due to use of unapproved API", this.gameObject );
+		}
 	}
 #endif
 
@@ -241,3 +253,5 @@ public class dfExpressionPropertyBinding : MonoBehaviour, IDataBindingComponent
 	#endregion
 
 }
+
+// @endcond DOXY_IGNORE

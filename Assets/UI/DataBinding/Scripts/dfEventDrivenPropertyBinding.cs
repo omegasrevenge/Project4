@@ -43,11 +43,8 @@ public class dfEventDrivenPropertyBinding : dfPropertyBinding
 
 	#region Private runtime variables 
 
-	private dfObservableProperty sourceProperty;
-	private dfEventBinding sourceEventBinding;
-
-	private dfObservableProperty targetProperty;
-	private dfEventBinding targetEventBinding;
+	protected dfEventBinding sourceEventBinding;
+	protected dfEventBinding targetEventBinding;
 
 	#endregion
 

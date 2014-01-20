@@ -929,8 +929,8 @@ public class dfTextureAtlasInspector : Editor
 
 					dfEditorUtil.LabelWidth = 50f;
 
-					var x = EditorGUILayout.IntField( label1, (int)Math.Truncate( value.x ) );
-					var y = EditorGUILayout.IntField( label2, (int)Math.Truncate( value.y ) );
+					var x = EditorGUILayout.IntField( label1, Mathf.FloorToInt( value.x ) );
+					var y = EditorGUILayout.IntField( label2, Mathf.FloorToInt( value.y ) );
 
 					retVal.x = x;
 					retVal.y = y;

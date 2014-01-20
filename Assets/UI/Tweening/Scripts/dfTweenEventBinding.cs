@@ -54,13 +54,9 @@ public class dfTweenEventBinding : MonoBehaviour
 
 	private bool isBound = false;
 
-	private FieldInfo startEventField;
-	private FieldInfo stopEventField;
-	private FieldInfo resetEventField;
-
-	private Delegate startEventHandler;
-	private Delegate stopEventHandler;
-	private Delegate resetEventHandler;
+	private dfEventBinding startEventBinding;
+	private dfEventBinding stopEventBinding;
+	private dfEventBinding resetEventBinding;
 
 	#endregion
 
@@ -104,17 +100,17 @@ public class dfTweenEventBinding : MonoBehaviour
 
 		if( !string.IsNullOrEmpty( StartEvent ) )
 		{
-			bindEvent( StartEvent, "Play", out startEventField, out startEventHandler );
+			startEventBinding = bindEvent( StartEvent, "Play" );
 		}
 
 		if( !string.IsNullOrEmpty( StopEvent ) )
 		{
-			bindEvent( StopEvent, "Stop", out stopEventField, out stopEventHandler );
+			stopEventBinding = bindEvent( StopEvent, "Stop" );
 		}
 
 		if( !string.IsNullOrEmpty( ResetEvent ) )
 		{
-			bindEvent( ResetEvent, "Reset", out resetEventField, out resetEventHandler );
+			resetEventBinding = bindEvent( ResetEvent, "Reset" );
 		}
 
 	}
@@ -130,25 +126,22 @@ public class dfTweenEventBinding : MonoBehaviour
 
 		isBound = false;
 
-		if( startEventField != null )
+		if( startEventBinding != null )
 		{
-			unbindEvent( startEventField, startEventHandler );
-			startEventField = null;
-			startEventHandler = null;
+			startEventBinding.Unbind();
+			startEventBinding = null;
 		}
 
-		if( stopEventField != null )
+		if( stopEventBinding != null )
 		{
-			unbindEvent( stopEventField, stopEventHandler );
-			stopEventField = null;
-			stopEventHandler = null;
+			stopEventBinding.Unbind();
+			stopEventBinding = null;
 		}
 
-		if( resetEventField != null )
+		if( resetEventBinding != null )
 		{
-			unbindEvent( resetEventField, resetEventHandler );
-			resetEventField = null;
-			resetEventHandler = null;
+			resetEventBinding.Unbind();
+			resetEventBinding = null;
 		}
 
 	}
@@ -189,75 +182,6 @@ public class dfTweenEventBinding : MonoBehaviour
 
 	}
 
-	private void unbindEvent( FieldInfo eventField, Delegate eventDelegate )
-	{
-		var currentDelegate = (Delegate)eventField.GetValue( EventSource );
-		var newDelegate = Delegate.Remove( currentDelegate, eventDelegate );
-		eventField.SetValue( EventSource, newDelegate );
-	}
-
-	private void bindEvent( string eventName, string handlerName, out FieldInfo eventField, out Delegate eventHandler )
-	{
-
-		eventField = null;
-		eventHandler = null;
-
-		var method = Tween.GetType().GetMethod( handlerName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
-		if( method == null )
-		{
-			throw new MissingMemberException( "Method not found: " + handlerName );
-		}
-
-		eventField = getField( EventSource.GetType(), eventName );
-		if( eventField == null )
-		{
-			throw new MissingMemberException( "Event not found: " + eventName );
-		}
-
-		try
-		{
-
-			var invokeMethod = eventField.FieldType.GetMethod( "Invoke" );
-			var invokeParams = invokeMethod.GetParameters();
-			var handlerParams = method.GetParameters();
-
-			if( invokeParams.Length == handlerParams.Length )
-			{
-				eventHandler = Delegate.CreateDelegate( eventField.FieldType, Tween, method, true );
-			}
-			else if( invokeParams.Length > 0 && handlerParams.Length == 0 )
-			{
-#if !UNITY_IPHONE
-				eventHandler = createDynamicWrapper( Tween, eventField.FieldType, invokeParams, method );
-#else	
-				var message = string.Format( 
-					"Dynamic code generation is not supported on IOS, the {0}.{1} method signature must exactly match the event signature for {2}.{3}", 
-					EventSource.GetType().Name,
-					handlerName, 
-					Tween.GetType().Name, 
-					eventName
-					);
-
-				throw new InvalidOperationException( message );
-#endif
-			}
-			else
-			{
-				throw new InvalidCastException( "Event signature mismatch: " + eventHandler );
-			}
-
-		}
-		catch( Exception err )
-		{
-			Debug.LogError( "Event binding failed - Failed to create event handler: " + err.ToString() );
-			return;
-		}
-
-		var combinedDelegate = Delegate.Combine( eventHandler, (Delegate)eventField.GetValue( EventSource ) );
-		eventField.SetValue( EventSource, combinedDelegate );
-
-	}
-
 	private FieldInfo getField( Type type, string fieldName )
 	{
 
@@ -268,37 +192,41 @@ public class dfTweenEventBinding : MonoBehaviour
 
 	}
 
-	/// <summary>
-	/// Creates a Delegate wrapper that allows a parameterless method to be used as 
-	/// an event handler for an event that defines parameters. This enables the use
-	/// of "notification" event handlers - Methods which either cannot make use of
-	/// or don't care about event parameters. 
-	/// </summary>
-	private Delegate createDynamicWrapper( object target, Type delegateType, ParameterInfo[] eventParams, MethodInfo eventHandler )
+	private void unbindEvent( FieldInfo eventField, Delegate eventDelegate )
+	{
+		var currentDelegate = (Delegate)eventField.GetValue( EventSource );
+		var newDelegate = Delegate.Remove( currentDelegate, eventDelegate );
+		eventField.SetValue( EventSource, newDelegate );
+	}
+
+	private dfEventBinding bindEvent( string eventName, string handlerName )
 	{
 
-#if UNITY_IPHONE
-		throw new InvalidOperationException( "Dynamic code generation is not supported on iOS devices" );
-#else
-		var paramTypes =
-			new Type[] { target.GetType() }
-			.Concat( eventParams.Select( p => p.ParameterType ) )
-			.ToArray();
+		var method = Tween.GetType().GetMethod( handlerName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
+		if( method == null )
+		{
+			throw new MissingMemberException( "Method not found: " + handlerName );
+		}
 
-		var handler = new DynamicMethod(
-			"DynamicEventWrapper_" + eventHandler.Name,
-			typeof( void ),
-			paramTypes
-			);
+		var eventBinding = gameObject.AddComponent<dfEventBinding>();
+		eventBinding.hideFlags = HideFlags.HideAndDontSave | HideFlags.HideInInspector;
 
-		var il = handler.GetILGenerator();
+		eventBinding.DataSource = new dfComponentMemberInfo()
+		{
+			Component = EventSource,
+			MemberName = eventName
+		};
 
-		il.Emit( OpCodes.Ldarg_0 );
-		il.EmitCall( OpCodes.Callvirt, eventHandler, Type.EmptyTypes );
-		il.Emit( OpCodes.Ret );
+		eventBinding.DataTarget = new dfComponentMemberInfo()
+		{
+			Component = Tween,
+			MemberName = handlerName
+		};
 
-		return handler.CreateDelegate( delegateType, target );
-#endif
+		eventBinding.Bind();
+
+		return eventBinding;
+
 
 	}
 

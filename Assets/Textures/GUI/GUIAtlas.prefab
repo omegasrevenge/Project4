@@ -43,8 +43,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .064453125
-      y: .94921875
+      x: .0634765625
+      y: .948242188
       width: .03125
       height: .03125
     border:
@@ -78,7 +78,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: .94921875
+      y: .948242188
       width: .0625
       height: .03125
     border:
@@ -94,8 +94,8 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .09765625
-      y: .94921875
+      x: .095703125
+      y: .948242188
       width: .03125
       height: .03125
     border:
@@ -112,7 +112,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: .982421875
+      y: .98046875
       width: .009765625
       height: .009765625
     border:
@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .130859375
-      y: .94921875
+      x: .127929688
+      y: .948242188
       width: .03125
       height: .03125
     border:
@@ -145,7 +145,7 @@ MonoBehaviour:
   - name: iris-logo
     region:
       serializedVersion: 2
-      x: .705078125
+      x: .704101562
       y: 0
       width: .09765625
       height: .09765625
@@ -162,7 +162,7 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .8046875
+      x: .802734375
       y: 0
       width: .0615234375
       height: .0537109375

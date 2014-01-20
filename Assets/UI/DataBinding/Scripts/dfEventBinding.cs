@@ -118,7 +118,11 @@ public class dfEventBinding : MonoBehaviour, IDataBindingComponent
 
 			if( !needProxyDelegate )
 			{
+#if !UNITY_EDITOR && UNITY_METRO
+				eventDelegate = eventHandler.CreateDelegate( eventField.FieldType, targetComponent );
+#else
 				eventDelegate = Delegate.CreateDelegate( eventField.FieldType, targetComponent, eventHandler, true );
+#endif
 			}
 			else 
 			{
@@ -129,7 +133,8 @@ public class dfEventBinding : MonoBehaviour, IDataBindingComponent
 		catch( Exception err )
 		{
 			this.enabled = false;
-			Debug.LogError( "Event binding failed - Failed to create event handler: " + err.ToString() );
+			var errMessage = string.Format( "Event binding failed - Failed to create event handler for {0} ({1}) - {2}", DataSource, eventHandler, err.ToString() );
+			Debug.LogError( errMessage, this );
 			return;
 		}
 
@@ -387,6 +392,18 @@ public class dfEventBinding : MonoBehaviour, IDataBindingComponent
 	/// <param name="control">The <see cref="dfControl"/> instance for which the event was generated</param>
 	/// <param name="value">The new value of the associated property</param>
 	[dfEventProxy]
+	private void PropertyChangedProxy( dfControl control, Texture value )
+	{
+		callProxyEventHandler( control, value );
+	}
+
+	/// <summary>
+	/// Delegate definition for control property change events
+	/// </summary>
+	/// <typeparam name="T">The data type of the property that has changed</typeparam>
+	/// <param name="control">The <see cref="dfControl"/> instance for which the event was generated</param>
+	/// <param name="value">The new value of the associated property</param>
+	[dfEventProxy]
 	private void PropertyChangedProxy( dfControl control, Texture2D value )
 	{
 		callProxyEventHandler( control, value );
@@ -402,6 +419,17 @@ public class dfEventBinding : MonoBehaviour, IDataBindingComponent
 	private void PropertyChangedProxy( dfControl control, Material value )
 	{
 		callProxyEventHandler( control, value );
+	}
+
+	/// <summary>
+	/// Delegate definition for standard .NET event handlers
+	/// </summary>
+	/// <param name="sender">Should contain a reference to the object which raised the event</param>
+	/// <param name="args">The EventArgs (or descendent type) that contains information about the specific event</param>
+	[dfEventProxy]
+	private void SystemEventHandlerProxy( object sender, EventArgs args )
+	{
+		callProxyEventHandler( sender, args );
 	}
 
 	#endregion
@@ -464,7 +492,13 @@ public class dfEventBinding : MonoBehaviour, IDataBindingComponent
 		this.handlerProxy = eventHandler;
 		this.handlerParameters = eventHandler.GetParameters();
 
-		var eventDelegate = Delegate.CreateDelegate( delegateType, this, proxyMethod, true );
+		Delegate eventDelegate;
+#if !UNITY_EDITOR && UNITY_METRO
+		eventDelegate = proxyMethod.CreateDelegate( delegateType, this );
+#else
+		eventDelegate = Delegate.CreateDelegate( delegateType, this, proxyMethod, true );
+#endif
+
 		return eventDelegate;
 
 	}

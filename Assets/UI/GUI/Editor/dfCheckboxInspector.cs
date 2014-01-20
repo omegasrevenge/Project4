@@ -36,6 +36,14 @@ public class dfCheckboxInspector : dfControlInspector
 			control.IsChecked = isChecked;
 		}
 
+		EditorGUI.BeginChangeCheck();
+		var useSpacebarToClick = EditorGUILayout.Toggle( "Space to Click", control.ClickWhenSpacePressed );
+		if( EditorGUI.EndChangeCheck() )
+		{
+			dfEditorUtil.MarkUndo( control, "Change ClickWhenSpacePressed property" );
+			control.ClickWhenSpacePressed = useSpacebarToClick;
+		}
+
 		var text = EditorGUILayout.TextField( "Text", control.Text );
 		if( text != control.Text )
 		{
