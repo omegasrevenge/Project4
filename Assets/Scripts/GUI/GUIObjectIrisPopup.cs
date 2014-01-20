@@ -35,6 +35,9 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private AudioSource _audio;
     private bool _startedPlaying = false;
 
+
+    public event Action ShowPopup;
+    public event Action HidePopup;
     public event Action ShowButtons;
     public event Action HideButtons;
 
@@ -94,8 +97,9 @@ public class GUIObjectIrisPopup : MonoBehaviour
                 {
                     if (mouseEvent.Used) return;
                     mouseEvent.Use();
-                   
-                    //ON-CLICK
+
+                    if (HidePopup != null)
+                        HidePopup();
 
                 };
             }            
@@ -105,32 +109,46 @@ public class GUIObjectIrisPopup : MonoBehaviour
 
     }
 
+    public void Show()
+    {
+        if (ShowPopup != null)
+            ShowPopup();
+    }
+
     void Update()
     {
         if (_audio == null || _audio.clip == null)
             return;
         if (!_startedPlaying && _audio.isPlaying)
         {
-            Debug.Log(1);
             _startedPlaying = true;
         }
         
         else if (_startedPlaying && !_audio.isPlaying && !_repeat.IsEnabled)
         {
-            Debug.Log(2);
             OnShowButtons();
 
         }
     }
 
-    public void PlaySound()
+    public void OnPopupStart()
+    {
+        PlaySound();
+    }
+
+    public void OnPopupEnd()
+    {
+        Destroy(gameObject);
+    }
+
+    private void PlaySound()
     {
         
         _audio.PlayDelayed(Delay);
         //StartCoroutine(LoadAndPlay());
     }
 
-    public void OnHideButtons()
+    private void OnHideButtons()
     {
         _repeat.Disable();
         _ok.Disable();
@@ -138,14 +156,12 @@ public class GUIObjectIrisPopup : MonoBehaviour
             HideButtons();
     }
 
-    public void OnShowButtons()
+    private void OnShowButtons()
     {
         _repeat.Enable();
         _ok.Enable();
-        Debug.Log("OK");
         if (ShowButtons != null)
         {
-            Debug.Log("Zeig die Sch!");
             ShowButtons();
         }
     }

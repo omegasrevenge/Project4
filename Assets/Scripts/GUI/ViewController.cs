@@ -134,6 +134,7 @@ public class ViewController : MonoBehaviour
         GUIObjectIrisPopup obj = cntrl.GetComponent<GUIObjectIrisPopup>();
         obj.Text = textKeyText;
         obj.Audio = audio;
+        obj.Show();
     }
 
 }
