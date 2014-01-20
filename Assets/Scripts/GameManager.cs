@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public enum GameMode { Login, Map, Fight, Base };
-	public enum ExchangeMode { Up, Down, Cricle };
+    public enum ExchangeMode { Up, Down, Cricle };
 
     public static string DontSaveTag = "DontSave";
-    
-	public struct ObjectPos
+
+    public struct ObjectPos
     {
         public string ID;
         public float Lon;
@@ -32,35 +32,35 @@ public class GameManager : MonoBehaviour
 
     private const string Server = "http://pixeltamer.net:7774/rpc/";
     private const string Localhost = "http://localhost:7774/rpc/";
-    private const float OwnUpdateFreq = 60*3;
-    private const float PositionUpdateFreq = 60*1;
+    private const float OwnUpdateFreq = 60 * 3;
+    private const float PositionUpdateFreq = 60 * 1;
     private const float PositionUpdateFreqMove = 5;
-    private const float PlayerQueryFreq = 60*2;
+    private const float PlayerQueryFreq = 60 * 2;
 
-	public POI[] POIs = new POI[0];
-	public int pois_version = 0;
-	public float pois_timeQ;
-	public bool pois_valid = false;
-	public string lastFarmResult = "";
+    public POI[] POIs = new POI[0];
+    public int pois_version = 0;
+    public float pois_timeQ;
+    public bool pois_valid = false;
+    public string lastFarmResult = "";
 
-	private List<Creature> _allOwnCreatures;
+    private List<Creature> _allOwnCreatures;
 
-	public List<Creature> AllOwnCreatures
-	{
-		get { return _allOwnCreatures; }
-	}
-	
-	[SerializeField]
-	public Player Player = new Player();
+    public List<Creature> AllOwnCreatures
+    {
+        get { return _allOwnCreatures; }
+    }
+
+    [SerializeField]
+    public Player Player = new Player();
     public string ServerURL = Server;
-	public string SessionID = "";
+    public string SessionID = "";
     public GameMode CurrentGameMode = GameMode.Login;
 
     public ObjectPos[] PlayersOnMap;
     private Dictionary<string, Player> _playerCache = new Dictionary<string, Player>();
     private List<string> _playerQueue = new List<string>();
     private bool _playerQueryActive;
-        
+
     [SerializeField]
     private float _lastOwnPlayerUpdate;
     [SerializeField]
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Singleton
     {
-        get 
+        get
         {
             if (_instance != null)
                 return _instance;
@@ -82,40 +82,39 @@ public class GameManager : MonoBehaviour
     }
 
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         //Check for Singleton
-		if (_instance == null)
-			_instance = this;
-		else if (_instance != this)
-		{       
-		    Debug.LogError("Second instance of GameManager.");
+        if (_instance == null)
+            _instance = this;
+        else if (_instance != this)
+        {
+            Debug.LogError("Second instance of GameManager.");
             Destroy(gameObject);
-		    return;
-		}
-	    Init();
-	}
+            return;
+        }
+        Init();
+    }
 
     private void Init()
     {
         _view = ViewController.Create();
         _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
-		_map.name = "Map";
-		_allOwnCreatures = null;
+        _map.name = "Map";
+        _allOwnCreatures = null;
 
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
         Social.localUser.Authenticate(OnAuthCB);
 #endif
-        if(DummyUI)
+        if (DummyUI)
             InitializeDummyObjects();
     }
 
     private void InitializeDummyObjects()
     {
-        CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent,_map);
+        CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent, _map);
         CreateController<GUIBase>("dummy_GUIBase");
-        CreateController<TESTBATTLEENGINE>("dummy_Battle");
     }
 
     private void Update()
@@ -139,29 +138,29 @@ public class GameManager : MonoBehaviour
             if (Time.time >= PlayerQueryFreq + _lastPlayerQuery)
                 SearchForPlayers();
         }
-		else if (CurrentGameMode == GameMode.Base)
-		{
-			if (_allOwnCreatures == null)
-			{
-				GetCreatures();
-			}
-		}
+        else if (CurrentGameMode == GameMode.Base)
+        {
+            if (_allOwnCreatures == null)
+            {
+                GetCreatures();
+            }
+        }
 
         //Load queued players
         if (!_playerQueryActive && _playerQueue.Count > 0)
             StartCoroutine(CGetPlayers());
 
 
-		if (!pois_valid && pois_timeQ <= 0)
-			StartCoroutine(GetPois());
+        if (!pois_valid && pois_timeQ <= 0)
+            StartCoroutine(GetPois());
 
-		pois_timeQ -= Time.deltaTime;
+        pois_timeQ -= Time.deltaTime;
     }
 
-    public static TController CreateController<TController>(string name ="") where TController:MonoBehaviour
+    public static TController CreateController<TController>(string name = "") where TController : MonoBehaviour
     {
         if (name == "")
-            name = "controller_" + typeof (TController);
+            name = "controller_" + typeof(TController);
         GameObject obj = new GameObject(name)
         {
             hideFlags = HideFlags.DontSave,
@@ -171,27 +170,27 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
-	public void SwitchGameMode(GameMode newGameMode)
-	{
-		switch (newGameMode)
-		{
-			case GameMode.Map:
-			{
-				CurrentGameMode = newGameMode;
-				break;
-			}
-			case GameMode.Base:
-			{
-				CurrentGameMode = newGameMode;
-				break;
-			}
-			case GameMode.Login:
-			{
-				CurrentGameMode = newGameMode;
-				break;
-			}
-		}
-	}
+    public void SwitchGameMode(GameMode newGameMode)
+    {
+        switch (newGameMode)
+        {
+            case GameMode.Map:
+                {
+                    CurrentGameMode = newGameMode;
+                    break;
+                }
+            case GameMode.Base:
+                {
+                    CurrentGameMode = newGameMode;
+                    break;
+                }
+            case GameMode.Login:
+                {
+                    CurrentGameMode = newGameMode;
+                    break;
+                }
+        }
+    }
 
     /// <summary>
     /// Returns a valid URL for the current session to use RPC functions.
@@ -214,10 +213,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="playerID"></param>
     public void Login(string playerID, string password, bool local, Action<bool> callback = null)
-	{
+    {
         ServerURL = local ? Localhost : Server;
         StartCoroutine(CLogin(playerID, password, callback));
-	}
+    }
 
     private IEnumerator CLogin(string token, Action<bool> callback = null)
     {
@@ -227,119 +226,119 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) yield break;
         SessionID = (string)json["data"]["sid"];
-        Player.PlayerID = (string)json["data"]["pid"]; 
+        Player.PlayerID = (string)json["data"]["pid"];
         GetOwnPlayer(callback);
     }
 
     private IEnumerator CLogin(string playerID, string password, Action<bool> callback = null)
-	{
-	    string url = ServerURL + "login_password?pid=" + playerID + "&pass=" + password;
-        Debug.Log("URL: "+url);
+    {
+        string url = ServerURL + "login_password?pid=" + playerID + "&pass=" + password;
+        Debug.Log("URL: " + url);
         WWW request = new WWW(url);
 
-		yield return request;
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
+        JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) yield break;
-		SessionID = (string)json["data"];
-		Player.PlayerID = playerID;
+        SessionID = (string)json["data"];
+        Player.PlayerID = playerID;
         GetOwnPlayer(callback);
 
-	}
+    }
 
     /// <summary>
     /// Loads own Player Data (First login with playerID).
     /// </summary>
-	public void GetOwnPlayer(Action<bool> callback = null)
-	{
+    public void GetOwnPlayer(Action<bool> callback = null)
+    {
         if (!LoggedIn) return;
-		_lastOwnPlayerUpdate = Time.time;
-		StartCoroutine(CGetOwnPlayer(callback));
-	}
+        _lastOwnPlayerUpdate = Time.time;
+        StartCoroutine(CGetOwnPlayer(callback));
+    }
 
-	private IEnumerator CGetOwnPlayer(Action<bool> callback = null)
-	{
-		WWW request = new WWW(GetSessionURL("pinfo"));
+    private IEnumerator CGetOwnPlayer(Action<bool> callback = null)
+    {
+        WWW request = new WWW(GetSessionURL("pinfo"));
 
-		yield return request;
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-	    if (!CheckResult(json))
-	    {
-	        callback(false);
-	        yield break;
-		}
-		//Debug.Log(json["data"]);
-		Player.ReadJson(json["data"]);
-		if (Player.CurCreature != null && _allOwnCreatures != null)
-		{
-			for(int i = 0; i < _allOwnCreatures.Count; i++)
-			{
-				if (Player.CurCreature.CreatureID == _allOwnCreatures[i].CreatureID)
-				{
-					_allOwnCreatures[i] = Player.CurCreature;
-				}
-			}
-		}
-	    if (CurrentGameMode == GameMode.Login)
-	        SwitchGameMode(GameMode.Map);
-	    if (callback != null)
-	        callback(true);
-	}
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json))
+        {
+            callback(false);
+            yield break;
+        }
+        //Debug.Log(json["data"]);
+        Player.ReadJson(json["data"]);
+        if (Player.CurCreature != null && _allOwnCreatures != null)
+        {
+            for (int i = 0; i < _allOwnCreatures.Count; i++)
+            {
+                if (Player.CurCreature.CreatureID == _allOwnCreatures[i].CreatureID)
+                {
+                    _allOwnCreatures[i] = Player.CurCreature;
+                }
+            }
+        }
+        if (CurrentGameMode == GameMode.Login)
+            SwitchGameMode(GameMode.Map);
+        if (callback != null)
+            callback(true);
+    }
 
-	public void GetCreatures()
-	{
-		if (_allOwnCreatures == null)
-		{
-			_allOwnCreatures = new List<Creature>();
+    public void GetCreatures()
+    {
+        if (_allOwnCreatures == null)
+        {
+            _allOwnCreatures = new List<Creature>();
 
-		}
-		StartCoroutine(CGetCreatures());
-	}
+        }
+        StartCoroutine(CGetCreatures());
+    }
 
-	private IEnumerator CGetCreatures()
-	{
-		WWW request = new WWW(GetSessionURL("getcrs"));
+    private IEnumerator CGetCreatures()
+    {
+        WWW request = new WWW(GetSessionURL("getcrs"));
 
-		yield return request;
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json))
-		{
-			_allOwnCreatures = null;
-			yield break;
-		}
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json))
+        {
+            _allOwnCreatures = null;
+            yield break;
+        }
 
-		JSONObject creatureJson = json["data"];
+        JSONObject creatureJson = json["data"];
 
 
-		for (int i = 0; i < creatureJson.Count; i++)
-		{
-			Creature curCreature = new Creature();
-			curCreature.ReadJson(creatureJson[i]);
-			_allOwnCreatures.Add(curCreature);
-		}
-	}
+        for (int i = 0; i < creatureJson.Count; i++)
+        {
+            Creature curCreature = new Creature();
+            curCreature.ReadJson(creatureJson[i]);
+            _allOwnCreatures.Add(curCreature);
+        }
+    }
 
-	///<summary>
-	/// Exchange of resources.
-	/// </summary>
+    ///<summary>
+    /// Exchange of resources.
+    /// </summary>
 
-	public void Exchange(int element, int level, int count, ExchangeMode exchangeMode)
-	{
-		StartCoroutine(CExchange(element, level, count, (int)exchangeMode));
-	}
+    public void Exchange(int element, int level, int count, ExchangeMode exchangeMode)
+    {
+        StartCoroutine(CExchange(element, level, count, (int)exchangeMode));
+    }
 
-	private IEnumerator CExchange(int element, int level, int count, int exchangeMode)
-	{
-		WWW request = new WWW(GetSessionURL("exchange") + "&element=" + element + "&level=" + level + "&count=" + count + "&exchangeMode=" + exchangeMode);
-		yield return request;
+    private IEnumerator CExchange(int element, int level, int count, int exchangeMode)
+    {
+        WWW request = new WWW(GetSessionURL("exchange") + "&element=" + element + "&level=" + level + "&count=" + count + "&exchangeMode=" + exchangeMode);
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)) yield break;
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) yield break;
 
-		GetOwnPlayer();
-	}
+        GetOwnPlayer();
+    }
 
     /// <summary>
     /// Updates the player's position on the server.
@@ -347,15 +346,15 @@ public class GameManager : MonoBehaviour
     public void SendPosition()
     {
         if (!LoggedIn) return;
-		_lastPositionUpdate = Time.time;
-		StartCoroutine(CSendPosition());
+        _lastPositionUpdate = Time.time;
+        StartCoroutine(CSendPosition());
     }
 
     private IEnumerator CSendPosition()
     {
         Vector2 pos = LocationManager.GetCurrentPosition();
         _lastPosition = pos;
-        WWW request = new WWW(GetSessionURL("setpos")+"&lon="+pos.x+"&lat="+pos.y);
+        WWW request = new WWW(GetSessionURL("setpos") + "&lon=" + pos.x + "&lat=" + pos.y);
 
         yield return request;
 
@@ -364,40 +363,43 @@ public class GameManager : MonoBehaviour
         Player.Position = pos;
     }
 
-	public void SendBasePosition()
-	{
-		if (!LoggedIn) return;
-		StartCoroutine(CSendBasePosition());
-	}
+    public void SendBasePosition()
+    {
+        if (!LoggedIn) return;
+        StartCoroutine(CSendBasePosition());
+    }
 
-	private IEnumerator CSendBasePosition()
-	{
-		Vector2 pos = LocationManager.GetCurrentPosition();
-		WWW request = new WWW(GetSessionURL("setbasepos") + "&lon=" + pos.x + "&lat=" + pos.y);
+    private IEnumerator CSendBasePosition()
+    {
+        Vector2 pos = LocationManager.GetCurrentPosition();
+        WWW request = new WWW(GetSessionURL("setbasepos") + "&lon=" + pos.x + "&lat=" + pos.y);
 
-		yield return request;
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)) yield break;
-		Player.BasePosition = pos;
-	}
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) yield break;
+        Player.BasePosition = pos;
+    }
 
-	public void PoiFarm(POI poi)
-	{
-		if (!LoggedIn) return;
-		StartCoroutine(CPoiFarm(poi));
-	}
+    public void PoiFarm(POI poi)
+    {
+        if (!LoggedIn) return;
+        StartCoroutine(CPoiFarm(poi));
+    }
 
-	private IEnumerator CPoiFarm(POI poi)
-	{
-		WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos() + "&poiid=" + poi.POI_ID);
-		Debug.Log(request.url);
-		yield return request;
+    private IEnumerator CPoiFarm(POI poi)
+    {
+        WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos() + "&poiid=" + poi.POI_ID);
+        Debug.Log(request.url);
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (CheckResult(json)) _lastOwnPlayerUpdate = -1000;
-		lastFarmResult = (string) json["data"];
-	}
+        JSONObject json = JSONParser.parse(request.text);
+        if (CheckResult(json)) _lastOwnPlayerUpdate = -1000;
+        if ((string)json["data"] == "fight")
+		{
+			CreateController<BattleManager>("BattleManager");
+        }
+    }
 
     /// <summary>
     /// Requests all playerIDs around your position
@@ -405,8 +407,8 @@ public class GameManager : MonoBehaviour
     public void SearchForPlayers()
     {
         if (!LoggedIn) return;
-		_lastPlayerQuery = Time.time;
-		StartCoroutine(CSearchForPlayers());
+        _lastPlayerQuery = Time.time;
+        StartCoroutine(CSearchForPlayers());
     }
 
     private IEnumerator CSearchForPlayers()
@@ -416,7 +418,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)){ yield break;}
+        if (!CheckResult(json)) { yield break; }
         JSONObject playersJSON = json["data"];
         PlayersOnMap = new ObjectPos[playersJSON.Count];
         for (int i = 0; i < PlayersOnMap.Length; i++)
@@ -445,17 +447,17 @@ public class GameManager : MonoBehaviour
     {
         _playerQueryActive = true;
         string[] requestedPIDs = _playerQueue.ToArray();
-        Debug.Log("Get Players: "+string.Join(",", requestedPIDs));
+        Debug.Log("Get Players: " + string.Join(",", requestedPIDs));
         WWW request = new WWW(GetSessionURL("pinfo") + "&pinfo=" + string.Join(",", requestedPIDs));
 
         yield return request;
         _playerQueryActive = false;
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) {yield break;}
+        if (!CheckResult(json)) { yield break; }
         JSONObject playersJSON = json["data"];
         for (int i = 0; i < playersJSON.Count; i++)
         {
-            if (!(bool) playersJSON[i])
+            if (!(bool)playersJSON[i])
             {
                 _playerCache[requestedPIDs[i]] = null;
                 continue;
@@ -465,47 +467,47 @@ public class GameManager : MonoBehaviour
             _playerCache[requestedPIDs[i]] = player;
             _playerQueue.Remove(requestedPIDs[i]);
         }
-        
+
 
     }
 
-	public void AddXP( string xp)
-	{
-		StartCoroutine(CAddXP(xp));
-	}
+    public void AddXP(string xp)
+    {
+        StartCoroutine(CAddXP(xp));
+    }
 
-	public IEnumerator CAddXP( string xp)
-	{
-		
-		WWW request = new WWW(GetSessionURL("addxp") + "&xp="+ xp);
-		
-		yield return request;
-		
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)){ yield break;}
+    public IEnumerator CAddXP(string xp)
+    {
 
-		GetOwnPlayer();
-		
-	}
+        WWW request = new WWW(GetSessionURL("addxp") + "&xp=" + xp);
 
-	public void Attack(string enemy )
-	{
-		StartCoroutine(CAttack(enemy));
-	}
-	
-	public IEnumerator CAttack(string enemy)
-	{
-		
-		WWW request = new WWW(GetSessionURL("attack") + "&enemy="+enemy);
-		
-		yield return request;
-		
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)){ yield break;}
-		
-		GetOwnPlayer();
-		
-	}
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+
+        GetOwnPlayer();
+
+    }
+
+    public void Attack(string enemy)
+    {
+        StartCoroutine(CAttack(enemy));
+    }
+
+    public IEnumerator CAttack(string enemy)
+    {
+
+        WWW request = new WWW(GetSessionURL("attack") + "&enemy=" + enemy);
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+
+        GetOwnPlayer();
+
+    }
 
     public void SetInitSteps(int steps)
     {
@@ -524,49 +526,49 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) { yield break; }
     }
 
-	private IEnumerator GetPois()
-	{
-		pois_timeQ = 3;
-		pois_valid = true;
-		Vector2 pos = LocationManager.GetCurrentPosition();
-		WWW request = new WWW(GameManager.Singleton.GetSessionURL("getpois") + "&lon=" + pos.x + "&lat=" + pos.y);
+    private IEnumerator GetPois()
+    {
+        pois_timeQ = 3;
+        pois_valid = true;
+        Vector2 pos = LocationManager.GetCurrentPosition();
+        WWW request = new WWW(GameManager.Singleton.GetSessionURL("getpois") + "&lon=" + pos.x + "&lat=" + pos.y);
 
-		yield return request;
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)) yield break;
-		JSONObject data = json["data"];
-		JSONObject pois = data["POIs"];
-		POI[] tmpPOIs = new POI[pois.Count];
-		for (int i = 0; i < tmpPOIs.Length; i++)
-		{
-			tmpPOIs[i] = new POI();
-			tmpPOIs[i].ReadJson(pois[i]);
-		}
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) yield break;
+        JSONObject data = json["data"];
+        JSONObject pois = data["POIs"];
+        POI[] tmpPOIs = new POI[pois.Count];
+        for (int i = 0; i < tmpPOIs.Length; i++)
+        {
+            tmpPOIs[i] = new POI();
+            tmpPOIs[i].ReadJson(pois[i]);
+        }
 
-		for (int i = 0; i < POIs.Length; i++)
-		{
-			bool found = false;
-			for (int j = 0; j < tmpPOIs.Length; j++)
-			{
-				if (POIs[i].POI_ID == tmpPOIs[j].POI_ID)
-				{
-					tmpPOIs[j] = POIs[i];
-					found = true;
-					break;
-				}
-			}
-			if (!found && POIs[i].instance != null)
-			{
-				//Debug.Log("kaputt");
-				Destroy(POIs[i].instance);
-			}
-		}
+        for (int i = 0; i < POIs.Length; i++)
+        {
+            bool found = false;
+            for (int j = 0; j < tmpPOIs.Length; j++)
+            {
+                if (POIs[i].POI_ID == tmpPOIs[j].POI_ID)
+                {
+                    tmpPOIs[j] = POIs[i];
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && POIs[i].instance != null)
+            {
+                //Debug.Log("kaputt");
+                Destroy(POIs[i].instance);
+            }
+        }
 
-		POIs = tmpPOIs;
-		pois_version++;
-		//CreatePOIs();
-	}
+        POIs = tmpPOIs;
+        pois_version++;
+        //CreatePOIs();
+    }
 
     /// <summary>
     /// Checks if the request was successful.
@@ -578,7 +580,7 @@ public class GameManager : MonoBehaviour
         if (!(bool)json["result"])
         {
             Debug.LogError("RPC Fail: " + json["error"]);
-            if ((string) json["error"] == "invalid_session")
+            if ((string)json["error"] == "invalid_session")
             {
                 SessionID = "";
                 SwitchGameMode(GameMode.Login);
@@ -588,21 +590,21 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-	private void OnApplicationPause(bool paused)
-	{
-		if (paused)
-		{
-			Debug.Log("Pause App.");
-			Input.location.Stop();
-			Input.compass.enabled = false;
-		}
-		else
-		{
-			Debug.Log("Resume App.");
-			Input.location.Start();
-			Input.compass.enabled = true;
-		}
-	}
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused)
+        {
+            Debug.Log("Pause App.");
+            Input.location.Stop();
+            Input.compass.enabled = false;
+        }
+        else
+        {
+            Debug.Log("Resume App.");
+            Input.location.Start();
+            Input.compass.enabled = true;
+        }
+    }
 
 #if !UNITY_EDITOR
     void OnApplicationFocus(bool focusStatus)
@@ -623,7 +625,7 @@ public class GameManager : MonoBehaviour
                 // Object.Destroy is delayed, and never completes in the editor, so use DestroyImmediate instead.
                 DestroyImmediate(o);
             }
-            
+
         }
     }
 

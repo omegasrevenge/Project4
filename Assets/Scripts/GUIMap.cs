@@ -24,7 +24,7 @@ public class GUIMap : MonoBehaviour {
 
 	private void OnGUI()
 	{
-		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
+		if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map || BattleEngine.Current != null) return;
 
 		POIsInRange();
 		ShowResouces();
