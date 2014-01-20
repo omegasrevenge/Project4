@@ -7,6 +7,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private const string PopupStr = "sprite_popup";
     private const string VisualizerStr = "panel_visualizer";
     private const string RepeatButtonStr = "button_repeat";
+    private const string OKButtonStr = "button_ok";
     private const string TextLabelStr = "label_text";
 
     private const float Delay = 1f;
@@ -29,6 +30,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
 
     private dfLabel _textLabel;
     private dfButton _repeat;
+    private dfButton _ok;
     private AudioSource _messageSound;
     private AudioSource _audio;
     private bool _startedPlaying = false;
@@ -72,17 +74,32 @@ public class GUIObjectIrisPopup : MonoBehaviour
             if (obj)
             {
                 _repeat = obj.GetComponent<dfButton>();
-                _repeat.Disable();
                 _repeat.Click += (dfControl control, dfMouseEventArgs mouseEvent) =>
                 {
                     if (mouseEvent.Used) return;
                     mouseEvent.Use();
+                   
                     PlaySound();
-                    _repeat.Disable();
-                    if (HideButtons != null)
-                        HideButtons();
+                    
+                    OnHideButtons();
+
                 };
-            }
+            }    
+
+            obj = popUpTrnsf.FindChild(OKButtonStr).gameObject;
+            if (obj)
+            {
+                _ok = obj.GetComponent<dfButton>();
+                _ok.Click += (dfControl control, dfMouseEventArgs mouseEvent) =>
+                {
+                    if (mouseEvent.Used) return;
+                    mouseEvent.Use();
+                   
+                    //ON-CLICK
+
+                };
+            }            
+            
         }
         
 
@@ -93,13 +110,16 @@ public class GUIObjectIrisPopup : MonoBehaviour
         if (_audio == null || _audio.clip == null)
             return;
         if (!_startedPlaying && _audio.isPlaying)
+        {
+            Debug.Log(1);
             _startedPlaying = true;
+        }
         
         else if (_startedPlaying && !_audio.isPlaying && !_repeat.IsEnabled)
         {
-            _repeat.Enable();
-            if (ShowButtons != null)
-                ShowButtons();
+            Debug.Log(2);
+            OnShowButtons();
+
         }
     }
 
@@ -108,6 +128,26 @@ public class GUIObjectIrisPopup : MonoBehaviour
         
         _audio.PlayDelayed(Delay);
         //StartCoroutine(LoadAndPlay());
+    }
+
+    public void OnHideButtons()
+    {
+        _repeat.Disable();
+        _ok.Disable();
+        if (HideButtons != null)
+            HideButtons();
+    }
+
+    public void OnShowButtons()
+    {
+        _repeat.Enable();
+        _ok.Enable();
+        Debug.Log("OK");
+        if (ShowButtons != null)
+        {
+            Debug.Log("Zeig die Sch!");
+            ShowButtons();
+        }
     }
 
     //private IEnumerator LoadAndPlay()
