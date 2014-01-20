@@ -354,7 +354,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .442192078, y: -.431251526, z: 0}
+  m_LocalPosition: {x: .412498474, y: -.4765625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -390,7 +390,7 @@ BoxCollider:
   m_GameObject: {fileID: 100006}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.015625, y: 1.140625, z: .00100000005}
   m_Center: {x: 0, y: 0, z: 0}
@@ -402,7 +402,7 @@ BoxCollider:
   m_GameObject: {fileID: 100008}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: .015625, y: .546875, z: .00100000005}
   m_Center: {x: 0, y: 0, z: 0}
@@ -414,7 +414,7 @@ BoxCollider:
   m_GameObject: {fileID: 100010}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.015625, y: .546875, z: .00100000005}
   m_Center: {x: .5078125, y: 0, z: 0}
@@ -428,8 +428,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .109039485, y: .109375, z: .00100000005}
-  m_Center: {x: .0545197427, y: -.0546875, z: 0}
+  m_Size: {x: .109375, y: .109375, z: .00100000005}
+  m_Center: {x: .0546875, y: -.0546875, z: 0}
 --- !u!65 &6500012
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -450,7 +450,7 @@ BoxCollider:
   m_GameObject: {fileID: 100016}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.13125002, y: 2.00625014, z: .00100000005}
   m_Center: {x: .565625012, y: -1.00312507, z: 0}
@@ -462,7 +462,7 @@ BoxCollider:
   m_GameObject: {fileID: 100018}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: .167343765, y: .146093756, z: .00100000005}
   m_Center: {x: 0, y: 0, z: 0}
@@ -474,10 +474,10 @@ BoxCollider:
   m_GameObject: {fileID: 100022}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .106250003, y: .078125, z: .00100000005}
-  m_Center: {x: -.0531250015, y: -.0390625, z: 0}
+  m_Size: {x: .0859375, y: .0892857164, z: .00100000005}
+  m_Center: {x: -.04296875, y: 0, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataSource:
     Component: {fileID: 11400010}
-    MemberName: HideRepeat
+    MemberName: HideButtons
   DataTarget:
     Component: {fileID: 11400032}
     MemberName: Play
@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataSource:
     Component: {fileID: 11400010}
-    MemberName: ShowRepeat
+    MemberName: ShowButtons
   DataTarget:
     Component: {fileID: 11400034}
     MemberName: Play
@@ -1476,12 +1476,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 267
+  anchorStyle: 779
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
-  pivot: 2
+  pivot: 5
   zindex: 5
   color:
     serializedVersion: 2
@@ -1489,19 +1489,19 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 68, y: 50}
+  size: {x: 55, y: 57.1428566}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 267
+    anchorStyle: 779
     margins:
-      left: .830769241
-      top: .878082216
-      right: .935384631
-      bottom: .946575344
+      left: .821532428
+      top: .878670812
+      right: .906147838
+      bottom: .956948698
     owner: {fileID: 11400046}
   renderOrder: 11
   isLocalized: 0
@@ -1511,12 +1511,12 @@ MonoBehaviour:
   hoverSprite: 
   disabledSprite: 
   focusSprite: 
-  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  font: {fileID: 11400000, guid: 69db42bbef4cd21449a67a8fce39d0c8, type: 2}
   pressedSprite: 
   state: 0
   group: {fileID: 0}
   text: OK
-  textAlign: 0
+  textAlign: 2
   vertAlign: 1
   normalColor:
     serializedVersion: 2
@@ -1545,9 +1545,9 @@ MonoBehaviour:
   focusColor:
     serializedVersion: 2
     rgba: 4294967295
-  textScale: 3.125
+  textScale: 3.57142854
   textScaleMode: 2
-  wordWrap: 0
+  wordWrap: 1
   padding:
     m_Left: 0
     m_Right: 0

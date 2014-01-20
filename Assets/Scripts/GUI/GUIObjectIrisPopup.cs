@@ -31,10 +31,10 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private dfButton _repeat;
     private AudioSource _messageSound;
     private AudioSource _audio;
-    private bool _repeatEnabled = false;
+    private bool _startedPlaying = false;
 
-    public event Action ShowRepeat;
-    public event Action HideRepeat;
+    public event Action ShowButtons;
+    public event Action HideButtons;
 
     public string Text
     {
@@ -79,8 +79,8 @@ public class GUIObjectIrisPopup : MonoBehaviour
                     mouseEvent.Use();
                     PlaySound();
                     _repeat.Disable();
-                    if (HideRepeat != null)
-                        HideRepeat();
+                    if (HideButtons != null)
+                        HideButtons();
                 };
             }
         }
@@ -92,14 +92,14 @@ public class GUIObjectIrisPopup : MonoBehaviour
     {
         if (_audio == null || _audio.clip == null)
             return;
-        if (!_repeatEnabled && _audio.isPlaying)
-            _repeatEnabled = true;
+        if (!_startedPlaying && _audio.isPlaying)
+            _startedPlaying = true;
         
-        else if (_repeatEnabled && !_audio.isPlaying && !_repeat.IsEnabled)
+        else if (_startedPlaying && !_audio.isPlaying && !_repeat.IsEnabled)
         {
             _repeat.Enable();
-            if (ShowRepeat != null)
-                ShowRepeat();
+            if (ShowButtons != null)
+                ShowButtons();
         }
     }
 
