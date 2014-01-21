@@ -1,6 +1,21 @@
 {
 	blindtext: 			"Das ist ein Blindtext. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
-	iris_01_text: 	
+	
+	ok:					"OK",
+	
+	continue:			"Weiter",
+	
+iris_01_text: 	
 "Willkommen Agent,
-Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten."
+Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",
+
+iris_02_01_text:
+"Um die Registrierung in unserem System abzuschließen, erstellen Sie sich bitte einen Nutzernamen. Dieser wird auch für andere VENGEA Agents angezeigt.",
+
+iris_02_02_text:
+"Vielen Dank. Die Registrierung wird abgeschlossen."	
+
+
+
+
 }

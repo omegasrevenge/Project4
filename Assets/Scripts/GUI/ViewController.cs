@@ -12,7 +12,6 @@ public class ViewController : MonoBehaviour
     public const string Blindtext = "blindtext";
 
     public const string PanelMaxScreenStr = "GUI/panel_maxscreen";
-    public const string PanelIrisPopupStr = "GUI/panel_irispopup";
 
     private static ViewController _instance;
 
@@ -126,15 +125,9 @@ public class ViewController : MonoBehaviour
         obj.Title = textKeyTitle;
     }
 
-    public void AddIrisPopup(string textKeyText = Blindtext, string audio = "")
+    public GUIObjectIrisPopup AddIrisPopup(string textKeyText = Blindtext, string audio = "")
     {
-        dfControl cntrl = _gui.AddPrefab(Resources.Load<GameObject>(PanelIrisPopupStr));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
-        GUIObjectIrisPopup obj = cntrl.GetComponent<GUIObjectIrisPopup>();
-        obj.Text = textKeyText;
-        obj.Audio = audio;
-        obj.Show();
+        return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();
     }
 
 }

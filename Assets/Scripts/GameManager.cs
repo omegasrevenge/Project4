@@ -661,7 +661,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Be aware, that you disabled the real view \nby enabling DummyUI in the GameManager.\nIf you have further Questions, please contact Anton.");
             return;
         }
-        _view.AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab");
+        _view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test");
     }
 
     //####################################  Editor Login ###################################
