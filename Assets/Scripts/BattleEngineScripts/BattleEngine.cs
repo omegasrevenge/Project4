@@ -12,6 +12,7 @@ public class BattleEngine : MonoBehaviour
 	public int Turn = 0;
 	public FightRoundResult.Player CurrentPlayer; // whose player's turn is it going to be now
 	public BattleInit ServerInfo;
+	public string InputText = "";
 	//########## public #########
 	
 	//########## static #########
@@ -63,7 +64,8 @@ public class BattleEngine : MonoBehaviour
 		}
 		set
 		{
-			_results.Add(value);
+			_results.Add(value); //nur falls es ein result ist ansonsten return
+								 //TODO falls result schon vorhanden ignoriere
 		}
 	}
 	
@@ -158,6 +160,39 @@ public class BattleEngine : MonoBehaviour
 				executeSkill();
 				break;
 			}
+		}
+	}
+	
+	void OnGUI()
+	{
+		if (GUI.Button(new Rect(0, Screen.height-100, 200, 100), "Driode_1"))
+		{
+			InputText += "1";
+		}
+		if (GUI.Button(new Rect(200, Screen.height-100, 200, 100), "Driode_2"))
+		{
+			InputText += "2";
+		}
+		if (GUI.Button(new Rect(400, Screen.height-100, 200, 100), "Driode_3"))
+		{
+			InputText += "3";
+		}
+		if (GUI.Button(new Rect(600, Screen.height-100, 200, 100), "Driode_4"))
+		{
+			InputText += "4";
+		}
+		
+		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Execute!"))
+		{
+			//sende an server info
+			InputText = "";
+		}
+		
+		GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), InputText);
+		
+		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
+		{
+			InputText = "";
 		}
 	}
 

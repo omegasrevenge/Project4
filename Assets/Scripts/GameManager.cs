@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     private const float PositionUpdateFreq = 60 * 1;
     private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60 * 2;
+	private const float EnemyTurnFreq = 3f;
 
     public POI[] POIs = new POI[0];
     public int pois_version = 0;
@@ -65,9 +66,11 @@ public class GameManager : MonoBehaviour
     private float _lastOwnPlayerUpdate;
     [SerializeField]
     private float _lastPositionUpdate = -1000;
-    private Vector2 _lastPosition = new Vector2();
-    [SerializeField]
-    private float _lastPlayerQuery = -1000;
+	private Vector2 _lastPosition = new Vector2();
+	[SerializeField]
+	private float _lastPlayerQuery = -1000;
+	[SerializeField]
+	private float _lastEnemyTurn = -1000;
 
     public bool LoggedIn { get { return SessionID.Length != 0; } }
 
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
         CreateController<GUIBase>("dummy_GUIBase");
     }
 
-    private void Update()
+    private void Update() //<-------------------------------------------------------------------------------------------------------
     {
         if (!LoggedIn) return;
 
@@ -144,7 +147,15 @@ public class GameManager : MonoBehaviour
             {
                 GetCreatures();
             }
-        }
+        } 
+		else if (CurrentGameMode == GameMode.Fight)
+		{
+			if(Player.Fighting && Player.CurFight != null && !Player.CurFight.Turn)
+			{
+				if(Time.time >= EnemyTurnFreq + _lastEnemyTurn)
+					FightEnemyTurn();
+			}
+		}
 
         //Load queued players
         if (!_playerQueryActive && _playerQueue.Count > 0)
@@ -280,8 +291,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+		Player.UpdateBattle();
         if (CurrentGameMode == GameMode.Login)
             SwitchGameMode(GameMode.Map);
+		if (Player.Fighting && CurrentGameMode != GameMode.Fight)
+			SwitchGameMode(GameMode.Fight);
         if (callback != null)
             callback(true);
     }
@@ -395,10 +409,6 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         if (CheckResult(json)) _lastOwnPlayerUpdate = -1000;
-        if ((string)json["data"] == "fight")
-		{
-			CreateController<BattleManager>("BattleManager");
-        }
     }
 
     /// <summary>
@@ -427,6 +437,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+	
+	
+	/// <summary>
+	/// blah
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	public void FightEnemyTurn()
+	{
+		if (!LoggedIn) return;
+		_lastEnemyTurn = Time.time;
+		StartCoroutine(CFightEnemyTurn());
+	}
+
+	private IEnumerator CFightEnemyTurn()
+	{
+		WWW request = new WWW(GetSessionURL("fightenemyturn"));
+		
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json)) { yield break; }
+		JSONObject turnJSON = json["data"];
+		if(!(bool)turnJSON) yield break;
+		Player.CurFight.ReadJson(turnJSON);
+		Player.UpdateBattle();
+	}
     /// <summary>
     /// Loads player data by passing the playerID.
     /// </summary>

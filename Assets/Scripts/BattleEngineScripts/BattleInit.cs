@@ -3,16 +3,17 @@ using System.Collections;
 
 public class BattleInit
 {
-	public enum Element{Fire, Technology, Nature, Water, Wind}
-	
-	public Element MonsterAElement = Element.Nature; //default values. also used as a dirty testing method
-	public Element MonsterBElement = Element.Fire;	 //you can put in different values, but there HAVE to be default values
+	public GUIBase.ResourceElement MonsterAElement = GUIBase.ResourceElement.Nature; //default values. also used as a dirty testing method
+	public GUIBase.ResourceElement MonsterBElement = GUIBase.ResourceElement.Fire;	 //you can put in different values, but there HAVE to be default values
 	
 	public string MonsterAName = "Cthulhu";
 	public string MonsterBName = "Ragnaros";
 	
 	public int MonsterAHealth = 300;
 	public int MonsterBHealth = 300;
+
+	public int MonsterAMaxHealth = 300;
+	public int MonsterBMaxHealth = 300;
 	
 	public int MonsterALevel = 20;
 	public int MonsterBLevel = 19;

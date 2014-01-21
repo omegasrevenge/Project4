@@ -15,6 +15,7 @@ public class Creature
 	public int Defense;
 	public int Dexterity;
 	public int Skillpoints;
+	public GUIBase.ResourceElement BaseElement;
 	public Slot[] slots = new Slot[4];
 
 	public struct Slot
@@ -36,6 +37,7 @@ public class Creature
             Debug.LogError("No JSON for Creature.cs! Please check, what's wrong. Cheers, Anton.");
             return;
         }
+		BaseElement = (GUIBase.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];
 		XP = (int)json["XP"];

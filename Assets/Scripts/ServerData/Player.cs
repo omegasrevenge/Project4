@@ -13,6 +13,7 @@ public class Player
     public int[,] Resources;
 
 	public bool Fighting;
+	public Fight CurFight;
 
 	public GameObject baseInstance;
     public int InitSteps;
@@ -47,6 +48,79 @@ public class Player
 		CurCreature.ReadJson(json["CurrentCreature"]);
         Fighting = (bool)json["Fighting"];
         InitSteps = (int) json["InitSteps"];
-
+		if(Fighting)
+		{
+			JSONObject curF = json["Fight"];
+			if(curF.type == JSONObject.Type.OBJECT) 
+			{
+				CurFight = new Fight();
+				CurFight.ReadJson(curF);
+			}
+		}
+		else
+		{
+			CurFight = null;
+		}
     }
+
+	public void UpdateBattle()
+	{
+		if(!Fighting)
+		{
+			if(BattleEngine.Current != null)
+				BattleEngine.Current.DestroyBattle(); //TODO falls gg screen dann nicht
+			return; 
+		}
+
+		if(BattleEngine.Current == null)
+		{
+			BattleInit newBattle = new BattleInit();
+			
+			newBattle.MonsterAElement = CurCreature.BaseElement;
+			newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
+			
+			newBattle.MonsterAName = CurCreature.Name;
+			newBattle.MonsterBName = CurFight.EnemyCreature.Name;
+			
+			newBattle.MonsterAHealth = CurCreature.HP;
+			newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
+			
+			newBattle.MonsterAMaxHealth = CurCreature.HPMax;
+			newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
+			
+			newBattle.MonsterALevel = CurCreature.Level;
+			newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
+			
+			if(CurFight.Turn) 
+			{
+				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
+			}
+			else
+			{
+				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
+			}
+			
+			BattleEngine.CreateBattle(newBattle);
+		}
+		else
+		{
+			FightRoundResult newResult = new FightRoundResult();
+			
+			if(CurFight.Turn) 
+			{
+				newResult.PlayerTurn = FightRoundResult.Player.A;
+			}
+			else
+			{
+				newResult.PlayerTurn = FightRoundResult.Player.B;
+			}
+			
+			//newResult.PlayerAHealth = player.;
+			//newResult.PlayerBHealth;
+			//newResult.SkillID = 1;
+			//newResult.Turn = 1;
+			//TODO senden result an BE
+			//TODO falls selbes result mehrmals vorhanden lösche neues result
+		}
+	}
 }

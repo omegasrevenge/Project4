@@ -4,12 +4,12 @@ using System.Collections;
 public class MonsterStats : MonoBehaviour 
 {
 
-	public BattleInit.Element Element;
+	public GUIBase.ResourceElement Element;
 	public string Name;
 	public int Level;
 	public int HP;
 
-	public void Init(BattleInit.Element element, string name, int level, int hp)
+	public void Init(GUIBase.ResourceElement element, string name, int level, int hp)
 	{
 		Element = element;
 		Name = name;
@@ -19,19 +19,19 @@ public class MonsterStats : MonoBehaviour
 		Color color = Color.grey;
 		switch(Element)
 		{
-		case BattleInit.Element.Fire:
+		case GUIBase.ResourceElement.Fire:
 			color = Color.red;
 			break;
-		case BattleInit.Element.Technology:
+		case GUIBase.ResourceElement.Tech:
 			color = Color.black;
 			break;
-		case BattleInit.Element.Nature:
+		case GUIBase.ResourceElement.Nature:
 			color = Color.green;
 			break;
-		case BattleInit.Element.Water:
+		case GUIBase.ResourceElement.Water:
 			color = Color.blue;
 			break;
-		case BattleInit.Element.Wind:
+		case GUIBase.ResourceElement.Storm:
 			color = Color.white;
 			break;
 		}
