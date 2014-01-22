@@ -260,7 +260,7 @@ public class BattleEngine : MonoBehaviour
 			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = FriendlyCreature.transform.position;
 			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
 			_damageGUI.Add(new GameObject("GUI Damage Indicator Player A"));
-			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeA.ToString();
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(_changeA).ToString();
 			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 		}
 
@@ -270,7 +270,7 @@ public class BattleEngine : MonoBehaviour
 			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = EnemyCreature.transform.position;
 			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
 			_damageGUI.Add(new GameObject("GUI Damage Indicator Player B"));
-			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeB.ToString();
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(_changeB).ToString();
 			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 		}
 
