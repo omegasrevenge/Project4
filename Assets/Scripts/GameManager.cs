@@ -186,8 +186,9 @@ public class GameManager : MonoBehaviour
     {
         if (newGameMode == CurrentGameMode) {return;};
         Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
+        GameMode oldMode = CurrentGameMode;
         CurrentGameMode = newGameMode;
-        switch (newGameMode)
+        /*switch (newGameMode)
         {
             case GameMode.Map:
                 {
@@ -201,6 +202,10 @@ public class GameManager : MonoBehaviour
                 {
                     break;
                 }
+        }*/
+        if (oldMode == GameMode.Fight)
+        {
+            FightDelete();
         }
     }
 
@@ -281,7 +286,18 @@ public class GameManager : MonoBehaviour
             yield break;
         }
         //Debug.Log(json["data"]);
-        Player.ReadJson(json["data"]);
+        ReadPlayerJSON(json["data"]);
+        if (CurrentGameMode == GameMode.Login)
+            SwitchGameMode(GameMode.Map);
+		if (Player.Fighting && CurrentGameMode != GameMode.Fight)
+			SwitchGameMode(GameMode.Fight);
+        if (callback != null)
+            callback(true);
+    }
+
+    public void ReadPlayerJSON(JSONObject jsonPlayer)
+    {
+        Player.ReadJson(jsonPlayer);
         if (Player.CurCreature != null && _allOwnCreatures != null)
         {
             for (int i = 0; i < _allOwnCreatures.Count; i++)
@@ -292,13 +308,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-		Player.UpdateBattle();
-        if (CurrentGameMode == GameMode.Login)
-            SwitchGameMode(GameMode.Map);
-		if (Player.Fighting && CurrentGameMode != GameMode.Fight)
-			SwitchGameMode(GameMode.Fight);
-        if (callback != null)
-            callback(true);
+        Player.UpdateBattle();
     }
 
     public void GetCreatures()
@@ -459,8 +469,8 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) { yield break; }
         JSONObject turnJSON = json["data"];
         if (!(bool)turnJSON) yield break;
-        Player.CurFight.ReadJson(turnJSON);
-        Player.UpdateBattle();
+        ReadPlayerJSON(turnJSON);
+        Debug.Log("!!!!!!!!!!!!!!a " + request.text);
     }
 	
 	/// <summary>
@@ -485,9 +495,24 @@ public class GameManager : MonoBehaviour
 		if (!CheckResult(json)) { yield break; }
 		JSONObject turnJSON = json["data"];
 		if(!(bool)turnJSON) yield break;
-		Player.CurFight.ReadJson(turnJSON);
-		Player.UpdateBattle();
+        ReadPlayerJSON(turnJSON);
+        Debug.Log("!!!!!!!!!!!!!!b " + request.text);
+
 	}
+
+    public void FightDelete()
+    {
+        if (!LoggedIn) return;
+        StartCoroutine(CFightDelete());
+    }
+    private IEnumerator CFightDelete()
+    {
+        WWW request = new WWW(GetSessionURL("fightdelete"));
+        yield return request;
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+    }
+   
     /// <summary>
     /// Loads player data by passing the playerID.
     /// </summary>

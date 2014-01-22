@@ -101,6 +101,7 @@ public class Player
 			}
 			
 			BattleEngine.CreateBattle(newBattle);
+            BattleEngine.Current.Fighting = !CurFight.Finished;
 		}
 		else
 		{
@@ -120,6 +121,7 @@ public class Player
 			//newResult.SkillID = 1; <--------------------------------TODO NOT YET IMPLEMENTED
 			newResult.Turn = CurFight.Round;
 			BattleEngine.Current.Result = newResult;
+		    BattleEngine.Current.Fighting = !CurFight.Finished;
 		}
 	}
 }

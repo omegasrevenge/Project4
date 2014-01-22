@@ -10,6 +10,7 @@ public class Fight
 	public string LastResult;
 	public Creature EnemyCreature;
 	public bool Turn;
+	public bool Finished;
 	
 	public void ReadJson(JSONObject json)
 	{
@@ -18,5 +19,6 @@ public class Fight
 		EnemyCreature = new Creature();
 		EnemyCreature.ReadJson(json["EnemyCreature"]);
 		Turn = (bool)json["Turn"];
+		Finished = (bool)json["Finished"];
 	}
 }
