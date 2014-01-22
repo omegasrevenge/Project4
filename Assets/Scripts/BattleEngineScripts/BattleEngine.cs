@@ -230,20 +230,25 @@ public class BattleEngine : MonoBehaviour
 		//evalute which skill was used by Result.SkillID
 		if(Result.SkillID == 1)
 		{
-			_actor = (GameObject)Instantiate(Resources.Load("Battle/Laser"),Vector3.zero,Quaternion.identity);
-			Actor = _actor.GetComponent<ActorControlls>();
-			Actor.Owner = this;
-			switch(CurrentPlayer)
-			{
-			case FightRoundResult.Player.A:
-				_actor.transform.localPosition = FriendlyCreature.transform.position;
-				_actor.transform.LookAt(EnemyCreature.transform);
-				break;
-			case FightRoundResult.Player.B:
-				_actor.transform.localPosition = EnemyCreature.transform.position;
-				_actor.transform.LookAt(FriendlyCreature.transform);
-				break;
-			}
+			createSkillVisuals("Laser");
+		}
+	}
+
+	private void createSkillVisuals(string name)
+	{
+		_actor = (GameObject)Instantiate(Resources.Load("Battle/"+name),Vector3.zero,Quaternion.identity);
+		Actor = _actor.GetComponent<ActorControlls>();
+		Actor.Owner = this;
+		switch(CurrentPlayer)
+		{
+		case FightRoundResult.Player.A:
+			_actor.transform.localPosition = FriendlyCreature.transform.position;
+			_actor.transform.LookAt(EnemyCreature.transform);
+			break;
+		case FightRoundResult.Player.B:
+			_actor.transform.localPosition = EnemyCreature.transform.position;
+			_actor.transform.LookAt(FriendlyCreature.transform);
+			break;
 		}
 	}
 
@@ -289,7 +294,7 @@ public class BattleEngine : MonoBehaviour
 		FriendlyCreature.GetComponent<MonsterController>().StartPosition = Arena.transform.FindChild(DefaultFriendlySpawnPos).position;
 		FriendlyCreature.GetComponent<MonsterController>().Owner = this;
 		FriendlyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterAHealth;
-		FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAHealth);
+		FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAMaxHealth);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
@@ -300,7 +305,7 @@ public class BattleEngine : MonoBehaviour
 		EnemyCreature.GetComponent<MonsterController>().StartPosition = Arena.transform.FindChild(DefaultEnemySpawnPos).position;
 		EnemyCreature.GetComponent<MonsterController>().Owner = this;
 		EnemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
-		EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBHealth);
+		EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBMaxHealth);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		/// 
