@@ -152,7 +152,8 @@ public class GameManager : MonoBehaviour
 		{
 			if(Player.Fighting && Player.CurFight != null && !Player.CurFight.Turn)
 			{
-				if(Time.time >= EnemyTurnFreq + _lastEnemyTurn)
+                //Debug.Log("F:" + Player.CurFight.Turn);
+                if (Time.time >= EnemyTurnFreq + _lastEnemyTurn)
 					FightEnemyTurn();
 			}
 		}
@@ -183,21 +184,21 @@ public class GameManager : MonoBehaviour
 
     public void SwitchGameMode(GameMode newGameMode)
     {
+        if (newGameMode == CurrentGameMode) {return;};
+        Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
+        CurrentGameMode = newGameMode;
         switch (newGameMode)
         {
             case GameMode.Map:
                 {
-                    CurrentGameMode = newGameMode;
                     break;
                 }
             case GameMode.Base:
                 {
-                    CurrentGameMode = newGameMode;
                     break;
                 }
             case GameMode.Login:
                 {
-                    CurrentGameMode = newGameMode;
                     break;
                 }
         }
@@ -437,7 +438,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	
+    /// <summary>
+    /// blah
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    public void FightPlayerTurn(int s0, int s1, int s2, int s3)
+    {
+        if (!LoggedIn) return;
+        _lastEnemyTurn = Time.time;
+        StartCoroutine(CFightPlayerTurn(s0,s1,s2,s3));
+    }
+
+    private IEnumerator CFightPlayerTurn(int s0, int s1, int s2, int s3)
+    {
+        WWW request = new WWW(GetSessionURL("fightplayerturn") + "&s0=" + s0 + "&s1=" + s1 + "&s2=" + s2 + "&s3=" + s3);
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+        JSONObject turnJSON = json["data"];
+        if (!(bool)turnJSON) yield break;
+        Player.CurFight.ReadJson(turnJSON);
+        Player.UpdateBattle();
+    }
 	
 	/// <summary>
 	/// blah
@@ -614,17 +638,22 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckResult(JSONObject json)
     {
-        if (!(bool)json["result"])
+        if ((bool) json["result"]) return true;
+        string sErr = (string) json["error"];
+        Debug.LogError("RPC Fail: " + sErr);
+        if (sErr == "invalid_session")
         {
-            Debug.LogError("RPC Fail: " + json["error"]);
-            if ((string)json["error"] == "invalid_session")
-            {
-                SessionID = "";
-                SwitchGameMode(GameMode.Login);
-            }
+            SessionID = "";
+            SwitchGameMode(GameMode.Login);
             return false;
         }
-        return true;
+        if (sErr == "invalid_fight")
+        {
+            SwitchGameMode(GameMode.Map);
+            return false;
+        }
+
+        return false;
     }
 
     private void OnApplicationPause(bool paused)

@@ -186,6 +186,7 @@ public class BattleEngine : MonoBehaviour
 		{
 			//sende an server info
 			InputText = "";
+            GameManager.Singleton.FightPlayerTurn(0,1,2,3);
 		}
 		
 		GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), InputText);
