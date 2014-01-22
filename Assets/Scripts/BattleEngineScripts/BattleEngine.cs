@@ -6,13 +6,23 @@ public class BattleEngine : MonoBehaviour
 {
 	//########## public #########
 	public enum TurnState{Wait, Rotate, Execute, Hit}
+
+
+	public ActorControlls Actor;
+	public FightRoundResult.Player CurrentPlayer;
+	public BattleInit ServerInfo;
+
+
+	public string InputText = "";
+	public int Turn = 0;
+	public bool Fighting = true;
+
+
 	public GameObject BattleCam;
 	public GameObject MainCam;
-	public ActorControlls Actor;
-	public int Turn = 0;
-	public FightRoundResult.Player CurrentPlayer; // whose player's turn is it going to be now
-	public BattleInit ServerInfo;
-	public string InputText = "";
+	public GameObject FriendlyCreature;
+	public GameObject EnemyCreature;
+	public GameObject Arena;
 	//########## public #########
 	
 	//########## static #########
@@ -30,9 +40,6 @@ public class BattleEngine : MonoBehaviour
 	//########## private #########
 	private TurnState _currentStatus = TurnState.Wait;
 	private List<FightRoundResult> _results;
-	private GameObject _friendlyCreature;
-	private GameObject _enemyCreature;
-	private GameObject _arena;
 	private int _changeA;
 	private int _changeB;
 	private GameObject _actor;
@@ -64,32 +71,10 @@ public class BattleEngine : MonoBehaviour
 		}
 		set
 		{
-			_results.Add(value); //nur falls es ein result ist ansonsten return
-								 //TODO falls result schon vorhanden ignoriere
-		}
-	}
-	
-	public GameObject Arena
-	{
-		get
-		{
-			return _arena;
-		}
-	}
-	
-	public GameObject Friendly
-	{
-		get
-		{
-			return _friendlyCreature;
-		}
-	}
-	
-	public GameObject Enemy
-	{
-		get
-		{
-			return _enemyCreature;
+			if(!typeof(FightRoundResult).IsInstanceOfType(value)) return;
+			if((_results.Count > 1 && _results[_results.Count-2].Turn >= _results[_results.Count-1].Turn)) return;
+			if(value.Turn <= Turn) return;
+			_results.Add(value);
 		}
 	}
 
@@ -136,8 +121,7 @@ public class BattleEngine : MonoBehaviour
 	{
 		positionGUI();
 
-		if(Friendly.GetComponent<MonsterController>().Health <= 0 
-		   || Enemy.GetComponent<MonsterController>().Health <= 0) // This part belongs to the dirty test version. Needs to be changed upon backend implementation
+		if(!Fighting)
 		{
 			enforceEnd();
 			return;
@@ -201,12 +185,12 @@ public class BattleEngine : MonoBehaviour
 	{
 		_damageGUI.RemoveAll(item => item == null);
 		_damageIndicator.RemoveAll(item => item == null);
-		_monsterAName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Friendly.transform.FindChild("NamePos").transform.position); 
-		_monsterBName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Enemy.transform.FindChild("NamePos").transform.position); 
-		_monsterAHealth.GetComponent<GUIText>().text = Friendly.GetComponent<MonsterController>().Health.ToString()+"/"+Friendly.GetComponent<MonsterStats>().HP;
-		_monsterBHealth.GetComponent<GUIText>().text = Enemy.GetComponent<MonsterController>().Health.ToString()+"/"+Enemy.GetComponent<MonsterStats>().HP;
-		_monsterAHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Friendly.GetComponent<MonsterController>().BgHealthbar.position); 
-		_monsterBHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (Enemy.GetComponent<MonsterController>().BgHealthbar.position); 
+		_monsterAName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (FriendlyCreature.transform.FindChild("NamePos").transform.position); 
+		_monsterBName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (EnemyCreature.transform.FindChild("NamePos").transform.position); 
+		_monsterAHealth.GetComponent<GUIText>().text = FriendlyCreature.GetComponent<MonsterController>().Health.ToString()+"/"+FriendlyCreature.GetComponent<MonsterStats>().HP;
+		_monsterBHealth.GetComponent<GUIText>().text = EnemyCreature.GetComponent<MonsterController>().Health.ToString()+"/"+EnemyCreature.GetComponent<MonsterStats>().HP;
+		_monsterAHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (FriendlyCreature.GetComponent<MonsterController>().BgHealthbar.position); 
+		_monsterBHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (EnemyCreature.GetComponent<MonsterController>().BgHealthbar.position); 
 		if(_damageGUI.Count > 0 && _damageIndicator.Count == _damageGUI.Count)
 		{
 			for(int i = 0; i<_damageGUI.Count; i++)
@@ -234,8 +218,8 @@ public class BattleEngine : MonoBehaviour
 	{
 		Turn = Result.Turn;
 		initSkill();
-		_changeA = _friendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
-		_changeB = _enemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
+		_changeA = FriendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
+		_changeB = EnemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
 	}
 
 	private void initSkill()
@@ -252,12 +236,12 @@ public class BattleEngine : MonoBehaviour
 			switch(CurrentPlayer)
 			{
 			case FightRoundResult.Player.A:
-				_actor.transform.localPosition = _friendlyCreature.transform.position;
-				_actor.transform.LookAt(_enemyCreature.transform);
+				_actor.transform.localPosition = FriendlyCreature.transform.position;
+				_actor.transform.LookAt(EnemyCreature.transform);
 				break;
 			case FightRoundResult.Player.B:
-				_actor.transform.localPosition = _enemyCreature.transform.position;
-				_actor.transform.LookAt(_friendlyCreature.transform);
+				_actor.transform.localPosition = EnemyCreature.transform.position;
+				_actor.transform.LookAt(FriendlyCreature.transform);
 				break;
 			}
 		}
@@ -268,7 +252,7 @@ public class BattleEngine : MonoBehaviour
 		if(_changeA != 0)
 		{
 			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
-			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = _friendlyCreature.transform.position;
+			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = FriendlyCreature.transform.position;
 			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
 			_damageGUI.Add(new GameObject("GUI Damage Indicator Player A"));
 			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeA.ToString();
@@ -278,15 +262,15 @@ public class BattleEngine : MonoBehaviour
 		if(_changeB != 0)
 		{
 			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
-			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = _enemyCreature.transform.position;
+			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = EnemyCreature.transform.position;
 			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
 			_damageGUI.Add(new GameObject("GUI Damage Indicator Player B"));
 			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = _changeB.ToString();
 			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 		}
 
-		_friendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
-		_enemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
+		FriendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
+		EnemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
 		_results.Remove(Result);
 	}
@@ -294,29 +278,29 @@ public class BattleEngine : MonoBehaviour
 	public void Init(BattleInit serverInfo)
 	{
 		//////////////////////////////          init Arena          //////////////////////////////////////////////////////////////////////////////////////////
-		_arena = Create(DefaultArena, new Vector3(0f,1000f,1000f), Quaternion.identity);
+		Arena = Create(DefaultArena, new Vector3(0f,1000f,1000f), Quaternion.identity);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Friendly Creature ////////////////////////////////////////////////////////////
-		_friendlyCreature = Create(DefaultMonster, 
-		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
-		                           _arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
+		FriendlyCreature = Create(DefaultMonster, 
+		                           Arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
+		                           Arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
 		
-		_friendlyCreature.GetComponent<MonsterController>().StartPosition = _arena.transform.FindChild(DefaultFriendlySpawnPos).position;
-		_friendlyCreature.GetComponent<MonsterController>().Owner = this;
-		_friendlyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterAHealth;
-		_friendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAHealth);
+		FriendlyCreature.GetComponent<MonsterController>().StartPosition = Arena.transform.FindChild(DefaultFriendlySpawnPos).position;
+		FriendlyCreature.GetComponent<MonsterController>().Owner = this;
+		FriendlyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterAHealth;
+		FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAHealth);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
-		_enemyCreature = Create(DefaultMonster, 
-		                        _arena.transform.FindChild(DefaultEnemySpawnPos).position, 
-		                        _arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
+		EnemyCreature = Create(DefaultMonster, 
+		                        Arena.transform.FindChild(DefaultEnemySpawnPos).position, 
+		                        Arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
 		
-		_enemyCreature.GetComponent<MonsterController>().StartPosition = _arena.transform.FindChild(DefaultEnemySpawnPos).position;
-		_enemyCreature.GetComponent<MonsterController>().Owner = this;
-		_enemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
-		_enemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBHealth);
+		EnemyCreature.GetComponent<MonsterController>().StartPosition = Arena.transform.FindChild(DefaultEnemySpawnPos).position;
+		EnemyCreature.GetComponent<MonsterController>().Owner = this;
+		EnemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
+		EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBHealth);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		/// 
@@ -334,15 +318,16 @@ public class BattleEngine : MonoBehaviour
 	{
 		MainCam.SetActive(true);
 		BattleCam.SetActive(false);
-		Destroy(_friendlyCreature);
-		Destroy(_enemyCreature);
-		Destroy(_arena);
+		Destroy(FriendlyCreature);
+		Destroy(EnemyCreature);
+		Destroy(Arena);
 		Destroy(_monsterAName);
 		Destroy(_monsterBName);
 		Destroy(_monsterAHealth);
 		Destroy(_monsterBHealth);
 		Destroy(Current);
 		Destroy(CurrentGameObject);
+		GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 		Current = null;
 		CurrentGameObject = null;
 	}

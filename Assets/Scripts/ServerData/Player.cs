@@ -68,7 +68,7 @@ public class Player
 		if(!Fighting)
 		{
 			if(BattleEngine.Current != null)
-				BattleEngine.Current.DestroyBattle(); //TODO falls gg screen dann nicht
+				BattleEngine.Current.Fighting = false;
 			return; 
 		}
 
@@ -115,12 +115,11 @@ public class Player
 				newResult.PlayerTurn = FightRoundResult.Player.B;
 			}
 			
-			//newResult.PlayerAHealth = player.;
-			//newResult.PlayerBHealth;
-			//newResult.SkillID = 1;
-			//newResult.Turn = 1;
-			//TODO senden result an BE
-			//TODO falls selbes result mehrmals vorhanden lösche neues result
+			newResult.PlayerAHealth = CurCreature.HP;
+			newResult.PlayerBHealth = CurFight.EnemyCreature.HP;
+			//newResult.SkillID = 1; <--------------------------------TODO NOT YET IMPLEMENTED
+			newResult.Turn = CurFight.Round;
+			BattleEngine.Current.Result = newResult;
 		}
 	}
 }
