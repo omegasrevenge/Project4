@@ -137,8 +137,6 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 
 	#region Private unserialized fields 
 
-	private Vector2 startSize = Vector2.zero;
-
 	private int selectionStart = 0;
 	private int selectionEnd = 0;
 	private int mouseSelectionAnchor = 0;
@@ -843,7 +841,6 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 	public override void Awake()
 	{
 		base.Awake();
-		startSize = this.Size;
 	}
 
 #if ( UNITY_IPHONE || UNITY_ANDROID || UNITY_BLACKBERRY || UNITY_WP8 ) && !UNITY_EDITOR
@@ -1774,7 +1771,7 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 		}
 
 		// Return scale based on control size
-		return Size.y / startSize.y;
+		return Size.y / StartSize.y;
 
 	}
 

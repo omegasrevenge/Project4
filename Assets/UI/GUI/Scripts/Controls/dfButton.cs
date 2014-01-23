@@ -555,8 +555,6 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 
 	#region Private runtime variables
 
-	private Vector2 startSize = Vector2.zero;
-
 	#endregion
 
 	#region Overrides and event handling
@@ -581,6 +579,7 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 
 	public override void OnEnable()
 	{
+		//Debug.Log ("btn enable:"+Size);
 
 		base.OnEnable();
 
@@ -601,8 +600,8 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 
 	public override void Awake()
 	{
+		//Debug.Log ("btn awake:"+StartSize+" -> "+Size);
 		base.Awake();
-		startSize = Size;
 	}
 
 	protected internal override void OnEnterFocus( dfFocusEventArgs args )
@@ -931,7 +930,7 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 			return 1f;
 		}
 
-		return Size.y / startSize.y;
+		return Size.y / StartSize.y;
 
 	}
 

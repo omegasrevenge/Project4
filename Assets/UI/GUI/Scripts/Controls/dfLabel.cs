@@ -592,8 +592,6 @@ public class dfLabel : dfControl, IDFMultiRender
 
 	#region Private runtime variables
 
-	private Vector2 startSize = Vector2.zero;
-
 	#endregion
 
 	#region Base class overrides
@@ -666,7 +664,6 @@ public class dfLabel : dfControl, IDFMultiRender
 	public override void Awake()
 	{
 		base.Awake();
-		startSize = Application.isPlaying ? this.Size : Vector2.zero;
 	}
 
 	#endregion
@@ -810,7 +807,7 @@ public class dfLabel : dfControl, IDFMultiRender
 			return 1f;
 		}
 
-		return Size.y / startSize.y;
+		return Size.y / StartSize.y;
 
 	}
 

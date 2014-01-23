@@ -97,7 +97,6 @@ public class dfListbox : dfInteractiveBase, IDFMultiRender
 	private int hoverIndex = -1;
 	private float hoverTweenLocation = 0f;
 	private Vector2 touchStartPosition = Vector2.zero;
-	private Vector2 startSize = Vector2.zero;
 
 	#endregion
 
@@ -474,7 +473,6 @@ public class dfListbox : dfInteractiveBase, IDFMultiRender
 	public override void Awake()
 	{
 		base.Awake();
-		startSize = this.Size;
 	}
 
 	public override void Update()
@@ -881,7 +879,7 @@ public class dfListbox : dfInteractiveBase, IDFMultiRender
 		}
 
 		// Return scale based on control size
-		return Size.y / startSize.y;
+		return Size.y / StartSize.y;
 
 	}
 

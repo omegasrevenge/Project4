@@ -351,6 +351,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 
 	[SerializeField]
 	protected Vector2 size = Vector2.zero;
+	private Vector2 startSize = Vector2.zero;
 
 	[SerializeField]
 	protected Vector2 minSize = Vector2.zero;
@@ -816,6 +817,15 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 		}
 	}
 
+	public Vector2 StartSize
+	{
+		get
+		{
+			if (startSize==Vector2.zero) startSize=size;
+			return this.startSize;
+		}
+	}
+
 	/// <summary>
 	/// Gets or sets the size (in pixels) of the control
 	/// </summary>
@@ -838,6 +848,11 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 				return;
 
 			// Assign the new size value
+			/*if (this is dfButton && Application.isPlaying) {
+				Debug.Log ("set size:"+size+" -> "+value);
+			}*/
+
+			if (startSize==Vector2.zero) {startSize=size;}
 			size = value;
 
 			// Notify any listeners that this control's Size has changed
@@ -2666,7 +2681,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 	public void MakePixelPerfect( bool recursive = true )
 	{
 
-		this.size = this.size.RoundToInt();
+		this.Size = this.size.RoundToInt();
 
 		var p2u = PixelsToUnits();
 		transform.position = ( transform.position / p2u ).RoundToInt() * p2u;
