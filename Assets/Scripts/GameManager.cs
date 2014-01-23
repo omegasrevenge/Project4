@@ -761,7 +761,13 @@ public class GameManager : MonoBehaviour
 
     public void GUIShowNameInput()
     {
-        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
+        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
+    }
+
+    public void GUISubmitName()
+    {
+        //Endless Loop
+        _view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test");
     }
 
     #endregion
