@@ -3,7 +3,6 @@ using System.Collections;
 
 public class GUIObjectMaxScreen : MonoBehaviour
 {
-
     private const string TextLabelStr = "label_text";
     private const string TitleLabelStr = "label_title";
 
@@ -29,7 +28,8 @@ public class GUIObjectMaxScreen : MonoBehaviour
                     _textLabel = obj.GetComponent<dfLabel>();
             }
             _textkeyText = value;
-            _textLabel.Text = Localization.GetText(value);
+            if(_textLabel != null)
+                _textLabel.Text = Localization.GetText(value);
         }
     }
 
@@ -45,11 +45,8 @@ public class GUIObjectMaxScreen : MonoBehaviour
                     _titleLabel = obj.GetComponent<dfLabel>();
             }
             _textkeyTitle = value;
-            _titleLabel.Text = Localization.GetText(value);
+            if (_titleLabel != null)
+                _titleLabel.Text = Localization.GetText(value);
         }
     }
-	
-	void Update () {
-	
-	}
 }

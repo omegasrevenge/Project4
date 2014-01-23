@@ -752,7 +752,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Be aware, that you disabled the real view \nby enabling DummyUI in the GameManager.\nIf you have further Questions, please contact Anton.");
             return;
         }
-        _view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test");
+        //_view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test");
     }
 
     //####################################  Editor Login ###################################
