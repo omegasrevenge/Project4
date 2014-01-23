@@ -5,6 +5,14 @@
 	
 	continue:			"Weiter",
 	
+	default_name:		"Nutzername",
+
+screen_entername_title:
+"Ihr Profil",
+
+screen_entername_text:
+"Bitte wählen Sie einen Nutzernamen. Dieser wird auch anderen VENGEA Agents angezeigt.",
+	
 iris_01_text: 	
 "Willkommen Agent,
 Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",

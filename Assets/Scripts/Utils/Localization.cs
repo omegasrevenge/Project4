@@ -60,8 +60,7 @@ public class Localization
     {
         if (Singleton._strings[textKey] == null)
         {
-            Debug.LogError("Missing textkey for " + textKey + ".");
-            return textKey;
+            return "Missing textkey for " + textKey + ".";
         }
         return (string)Singleton._strings[textKey];
     }
