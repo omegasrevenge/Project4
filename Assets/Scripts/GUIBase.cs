@@ -108,20 +108,9 @@ public class GUIBase : MonoBehaviour
 	{
 		Creature curCreature = null;
 
-		foreach (Creature creature in allOwnCreatures)
-		{
-			if (creature.CreatureID == creatureInex)
-			{
-				curCreature = creature;
+		creatureInex--;
 
-				if (creature.CreatureID == equiptCreature.CreatureID)
-				{
-					GUIStyle curStyle = new GUIStyle(textGuiStyle);
-					curStyle.fontSize = 20;
-					GUI.Label(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equipped", curStyle);
-				}
-			}
-		}
+		curCreature = allOwnCreatures[creatureInex];
 
 		if (curCreature == null)
 		{
@@ -130,6 +119,42 @@ public class GUIBase : MonoBehaviour
 		}
 
 		GUI.Label(new Rect((windowRect.width / 2) - 100, 30, 200, 50), curCreature.Name, textGuiStyle);
+
+		GUIStyle curStyle = new GUIStyle(textGuiStyle);
+		curStyle.fontSize = 20;
+
+		if (allOwnCreatures[creatureInex].CreatureID == equiptCreature.CreatureID)
+		{
+			GUI.Label(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equipped", curStyle);
+		}
+		
+		curStyle.alignment = TextAnchor.MiddleLeft;
+
+		GUI.Label(new Rect(50, 100, 200, 50), "Level:  " + curCreature.Level, curStyle);
+		GUI.Label(new Rect(50, 125, 200, 50), "XP:  " + curCreature.XP, curStyle);
+		GUI.Label(new Rect(50, 150, 200, 50), "HP:  " + curCreature.HP + " / " + curCreature.HPMax, curStyle);
+		GUI.Label(new Rect(50, 175, 200, 50), "Damage:  " + curCreature.Damage, curStyle);
+		GUI.Label(new Rect(50, 200, 200, 50), "Defense:  " + curCreature.Defense, curStyle);
+		GUI.Label(new Rect(50, 225, 200, 50), "Skillpoints:  " + curCreature.Skillpoints, curStyle);
+		GUI.Label(new Rect(50, 250, 200, 50), "Base Element:  " + curCreature.BaseElement, curStyle);
+
+		for (int i = 0; i < 4; i++)
+		{
+			Rect curRect = new Rect(120 + i * 110, 350, 80, 80);
+
+			if (i < curCreature.slots.Length)
+			{
+				if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/Next")))
+				{
+					Debug.Log("oh no he clickt me!!! " + i);
+				}
+
+			}
+			else
+			{
+				GUI.Label(curRect, Resources.Load<Texture>("GUITextures/lock"));
+			}
+		}
 	}
 
 	#region Crafting

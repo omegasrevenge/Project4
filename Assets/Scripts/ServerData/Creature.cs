@@ -16,7 +16,7 @@ public class Creature
 	public int Dexterity;
 	public int Skillpoints;
 	public GUIBase.ResourceElement BaseElement;
-	public Slot[] slots = new Slot[4];
+	public Slot[] slots;
 
 	public struct Slot
 	{
@@ -49,7 +49,9 @@ public class Creature
 		Skillpoints = (int)json["Skillpoints"];
 	   
 		JSONObject jsonSlots = json["slots"];
-	    
+
+	    slots = new Slot[jsonSlots.Count];
+
 		for (int i = 0; i < jsonSlots.Count; i++)
 	    {
 		    slots[i] = new Slot()
