@@ -753,8 +753,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        _view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test").Callback = GUIShowNameInput;
-        
+        var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
+        irisPopUp.StartCallback =
+            delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test").Callback = GUIShowNameInput; };
+
     }
 
     #region GUI methods
@@ -767,7 +769,8 @@ public class GameManager : MonoBehaviour
     public void GUISubmitName()
     {
         //Endless Loop
-        _view.AddIrisPopup("iris_01_text", "test").AddIrisPopup("iris_02_01_text", "test");
+        var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
+        irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
     }
 
     #endregion

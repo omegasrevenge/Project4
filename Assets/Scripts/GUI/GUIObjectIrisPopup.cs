@@ -36,6 +36,9 @@ public class GUIObjectIrisPopup : MonoBehaviour
     public event Action HideButtons;
 
     public Action Callback;
+    public Action StartCallback;
+
+    private float _startTime;
 
     public string Text
     {
@@ -178,6 +181,9 @@ public class GUIObjectIrisPopup : MonoBehaviour
 
     public void OnPopupStart()
     {
+        _startTime = Time.time;
+        if (StartCallback != null)
+            StartCallback();
         PlaySound();
     }
 
@@ -193,7 +199,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private void PlaySound()
     {
         
-        _audio.PlayDelayed(_delay);
+        _audio.PlayDelayed(_delay-(Time.time-_startTime));
         //StartCoroutine(LoadAndPlay());
     }
 
