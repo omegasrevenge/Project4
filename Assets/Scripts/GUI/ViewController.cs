@@ -120,7 +120,7 @@ public class ViewController : MonoBehaviour
         dfControl cntrl = _gui.AddPrefab(Resources.Load<GameObject>(PanelMaxScreenStr));
         cntrl.Size = cntrl.Parent.Size;
         cntrl.RelativePosition = Vector2.zero;
-        GUIObjectMaxScreen obj = cntrl.GetComponent<GUIObjectMaxScreen>();
+        GUIObjectTextPanel obj = cntrl.GetComponent<GUIObjectTextPanel>();
         obj.Text = textKeyText;
         obj.Title = textKeyTitle;
     }
