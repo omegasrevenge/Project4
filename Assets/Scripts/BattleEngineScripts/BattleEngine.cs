@@ -249,19 +249,34 @@ public class BattleEngine : MonoBehaviour
 		if(_changeB != 0)
 			createDamageIndicator(EnemyCreature, _changeB);
 
+		if(_changeA == 0 && _changeB == 0)
+			createDamageIndicator(Arena.transform.FindChild("PlaneDown").gameObject, 0f, true);
+
 		FriendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
 		EnemyCreature   .GetComponent<MonsterController>().Health = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
 		_results.Remove(Result);
 	}
 
-	private void createDamageIndicator(GameObject target, float damage)
+	private void createDamageIndicator(GameObject target, float damage, bool valueZero = false)
 	{
 		_damageGUI.Add(new GameObject("GUI Damage Indicator"));
 		_damageGUI[_damageGUI.Count-1].transform.localPosition = target.transform.position;
 		_damageGUI[_damageGUI.Count-1].AddComponent<DamageIndicator>();
-		_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(damage).ToString();
 		_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
+
+		if(valueZero)
+		{
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = "Health of both mobs does not change.";
+			return;
+		}
+
+		string affix = "";
+		if(damage>0f)
+			affix = "Damage!";
+		else
+			affix = "Heal!";
+		_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(damage).ToString()+" "+affix;
 	}
 
 	public void Init(BattleInit serverInfo)
