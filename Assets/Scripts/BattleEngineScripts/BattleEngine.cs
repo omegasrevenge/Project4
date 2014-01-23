@@ -124,7 +124,7 @@ public class BattleEngine : MonoBehaviour
 		if(!Fighting)
 		{
 			enforceEnd();
-			return;
+			//return;
 		}
 
 		if(GetTurnState != _currentStatus)
@@ -135,7 +135,7 @@ public class BattleEngine : MonoBehaviour
 			case TurnState.Wait:
 				break;
 			case TurnState.Rotate:
-				rotateBattleCam();
+				if(Fighting) rotateBattleCam();
 				break;
 			case TurnState.Execute:
 				turnInit();
@@ -202,11 +202,14 @@ public class BattleEngine : MonoBehaviour
 
 	private void enforceEnd()
 	{
-		if(_gg == null) _gg = Create("Battle/GGScreen", 
-		                             GameObject.Find("GGScreenPos").transform.position, 
-		                             GameObject.Find("GGScreenPos").transform.rotation);
 		_counter += Time.deltaTime;
-		if(_counter >= 3f) { Destroy(_gg); DestroyBattle(); }
+		if(_counter >= 3f) 
+		{ 
+			if(_gg == null) _gg = Create("Battle/GGScreen", 
+			                             GameObject.Find("GGScreenPos").transform.position, 
+			                             GameObject.Find("GGScreenPos").transform.rotation);  
+		}
+		if(_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
 	}
 
 	private void rotateBattleCam()
