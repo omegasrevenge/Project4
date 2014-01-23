@@ -119,13 +119,10 @@ public class BattleEngine : MonoBehaviour
 
 	void Update()
 	{
-		positionGUI();
+		updateGUI();
 
 		if(!Fighting)
-		{
 			enforceEnd();
-			//return;
-		}
 
 		if(GetTurnState != _currentStatus)
 		{
@@ -133,9 +130,11 @@ public class BattleEngine : MonoBehaviour
 			switch(GetTurnState)
 			{
 			case TurnState.Wait:
+				//
 				break;
 			case TurnState.Rotate:
-				if(Fighting) rotateBattleCam();
+				if(Fighting) 
+					BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation = true;
 				break;
 			case TurnState.Execute:
 				turnInit();
@@ -149,55 +148,47 @@ public class BattleEngine : MonoBehaviour
 	
 	void OnGUI()
 	{
-		if (GUI.Button(new Rect(0, Screen.height-100, 200, 100), "Driode_1"))
-		{
-			InputText += "1";
-		}
-		if (GUI.Button(new Rect(200, Screen.height-100, 200, 100), "Driode_2"))
-		{
-			InputText += "2";
-		}
-		if (GUI.Button(new Rect(400, Screen.height-100, 200, 100), "Driode_3"))
-		{
-			InputText += "3";
-		}
-		if (GUI.Button(new Rect(600, Screen.height-100, 200, 100), "Driode_4"))
-		{
-			InputText += "4";
-		}
-		
-		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Execute!"))
+		//if (GUI.Button(new Rect(0, Screen.height-100, 200, 100), "Driode_1"))
+		//{
+		//	InputText += "1";
+		//}
+		//if (GUI.Button(new Rect(200, Screen.height-100, 200, 100), "Driode_2"))
+		//{
+		//	InputText += "2";
+		//}
+		//if (GUI.Button(new Rect(400, Screen.height-100, 200, 100), "Driode_3"))
+		//{
+		//	InputText += "3";
+		//}
+		//if (GUI.Button(new Rect(600, Screen.height-100, 200, 100), "Driode_4"))
+		//{
+		//	InputText += "4";
+		//}
+		//
+		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Do Basic Attack"))
 		{
 			//sende an server info
-			InputText = "";
+			//InputText = "";
             GameManager.Singleton.FightPlayerTurn(0,1,2,3);
 		}
-		
-		GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), InputText);
-		
-		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
-		{
-			InputText = "";
-		}
+		//
+		//GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), InputText);
+		//
+		//if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
+		//{
+		//	InputText = "";
+		//}
 	}
 
-	private void positionGUI()
+	private void updateGUI()
 	{
 		_damageGUI.RemoveAll(item => item == null);
-		_damageIndicator.RemoveAll(item => item == null);
 		_monsterAName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (FriendlyCreature.transform.FindChild("NamePos").transform.position); 
 		_monsterBName.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (EnemyCreature.transform.FindChild("NamePos").transform.position); 
 		_monsterAHealth.GetComponent<GUIText>().text = FriendlyCreature.GetComponent<MonsterController>().Health.ToString()+"/"+FriendlyCreature.GetComponent<MonsterStats>().HP;
 		_monsterBHealth.GetComponent<GUIText>().text = EnemyCreature.GetComponent<MonsterController>().Health.ToString()+"/"+EnemyCreature.GetComponent<MonsterStats>().HP;
 		_monsterAHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (FriendlyCreature.GetComponent<MonsterController>().BgHealthbar.position); 
-		_monsterBHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (EnemyCreature.GetComponent<MonsterController>().BgHealthbar.position); 
-		if(_damageGUI.Count > 0 && _damageIndicator.Count == _damageGUI.Count)
-		{
-			for(int i = 0; i<_damageGUI.Count; i++)
-			{
-				_damageGUI[i].transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (_damageIndicator[i].transform.position); 
-			}
-		}
+		_monsterBHealth.transform.position = BattleCam.GetComponent<Camera>().WorldToViewportPoint (EnemyCreature.GetComponent<MonsterController>().BgHealthbar.position);
 	}
 
 	private void enforceEnd()
@@ -210,11 +201,6 @@ public class BattleEngine : MonoBehaviour
 			                             GameObject.Find("GGScreenPos").transform.rotation);  
 		}
 		if(_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
-	}
-
-	private void rotateBattleCam()
-	{
-		BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation = true;
 	}
 
 	private void turnInit()
@@ -258,29 +244,24 @@ public class BattleEngine : MonoBehaviour
 	private void executeSkill()
 	{
 		if(_changeA != 0)
-		{
-			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
-			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = FriendlyCreature.transform.position;
-			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
-			_damageGUI.Add(new GameObject("GUI Damage Indicator Player A"));
-			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(_changeA).ToString();
-			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
-		}
+			createDamageIndicator(FriendlyCreature, _changeA);
 
 		if(_changeB != 0)
-		{
-			_damageIndicator.Add(Create("Battle/Damage",Vector3.zero,Quaternion.identity));
-			_damageIndicator[_damageIndicator.Count-1].transform.localPosition = EnemyCreature.transform.position;
-			_damageIndicator[_damageIndicator.Count-1].AddComponent<SelfDestruct>();
-			_damageGUI.Add(new GameObject("GUI Damage Indicator Player B"));
-			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(_changeB).ToString();
-			_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
-		}
+			createDamageIndicator(EnemyCreature, _changeB);
 
 		FriendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
-		EnemyCreature.GetComponent<MonsterController>().Health    = Result.PlayerBHealth;
+		EnemyCreature   .GetComponent<MonsterController>().Health = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
 		_results.Remove(Result);
+	}
+
+	private void createDamageIndicator(GameObject target, float damage)
+	{
+		_damageGUI.Add(new GameObject("GUI Damage Indicator"));
+		_damageGUI[_damageGUI.Count-1].transform.localPosition = target.transform.position;
+		_damageGUI[_damageGUI.Count-1].AddComponent<DamageIndicator>();
+		_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(damage).ToString();
+		_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 	}
 
 	public void Init(BattleInit serverInfo)
