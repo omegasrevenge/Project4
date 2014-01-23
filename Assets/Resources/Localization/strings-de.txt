@@ -1,4 +1,4 @@
-{
+﻿{
 	blindtext: 			"Das ist ein Blindtext. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
 	
 	ok:					"OK",
@@ -24,11 +24,41 @@ iris_01_text:
 Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",
 
 iris_02_01_text:
-"Um die Registrierung in unserem System abzuschließen, erstellen Sie sich bitte einen Nutzernamen. Dieser wird auch für andere VENGEA Agents angezeigt.",
+"Um die Registrierung in unserem System abzuschließen, erstellen Sie sich bitte einen Nutzernamen. Dieser wird auch anderen VENGEA Agents angezeigt.",
 
 iris_02_02_text:
-"Vielen Dank. Die Registrierung wird abgeschlossen."	
+"Vielen Dank. Die Registrierung wird abgeschlossen.",
 
+iris_03_text:
+"In der Mythologie wurden immer wieder Kreaturen beschrieben, denen man die  Naturgewalten zuschrieb. Die evidenzbasierte Physik stritt jahrelang die Existenz dieser Wesen ab. Doch nun ist es VENGEA gelungen sie durch OCULUS sichtbar zu machen. Wir nennen sie Spectres. 
+Unsere Forschungen haben zudem ergeben, dass sie für die moderne Netzwelt eine reale Bedrohung darstellen.
+Ihre Aufgabe ist es, Spectres in Ihrer Umgebung ausfindig zu machen und auszuschalten.",
+
+iris_04_01_text:
+"Für den Kampf stellt VENGEA Ihnen einen bereits unter Kontrolle gebrachten Spectre zur Verfügung.",
+
+iris_04_02_text:
+"Treffen Sie Ihre Wahl!";
+
+iris_04_03_text:
+"Der Specter wird an Sie übermittelt.",
+
+iris_04_04_text:
+"Übermittlung abgeschlossen.",
+
+iris_05_01_text:
+"Starte nun erste Trainingseinheit.",
+
+iris_05_02_text:
+"Führen Sie einen Angriff aus, indem Sie mit dem Finger von der Driode auf die gegnerische Kreatur wischen.",
+
+iris_05_03_text:
+"Sehr gut!
+Führen Sie nun den Kampf zu ende.",
+
+iris_05_04_text:
+"Ausgezeichnet. Für Ihren Erfolg erhalten Sie von VENGEA Prämien.
+Dies sind Bioden, eine primitive Ressource aus der Sphäre der Spectres. Mit Ihrer Hilfe können Sie Drioden schaffen, die Sie wiederum für die Kontrolle Ihres Spectres nutzen können.",
 
 
 
