@@ -29,6 +29,8 @@ public class ViewController : MonoBehaviour
     private float _viewportScrollState = 0f;
     public const float MaxViewportScroll = 0.7f;
 
+    private GUIObjectMaxScreen _maxScreen;
+
     public static ViewController Singleton
     {
         get
@@ -105,8 +107,9 @@ public class ViewController : MonoBehaviour
 
         ViewportScrollState = 0f;
 
-        //AddMaxScreen("iris_01_a_title", "iris_01_a_text");
         //AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab-de");
+        //AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
+        AddMaxScreen(null);
     }
 
     void Update () 
@@ -115,14 +118,19 @@ public class ViewController : MonoBehaviour
 	}
 
 
-    public void AddMaxScreen(string textKeyTitle = Blindtext, string textKeyText = Blindtext, dfButton button = null, Action callback = null)
+    public GUIObjectMaxScreen AddMaxScreen(GameObject content)
     {
-        dfControl cntrl = _gui.AddPrefab(Resources.Load<GameObject>(PanelMaxScreenStr));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
-        GUIObjectTextPanel obj = cntrl.GetComponent<GUIObjectTextPanel>();
-        obj.Text = textKeyText;
-        obj.Title = textKeyTitle;
+        if (_maxScreen == null)
+            _maxScreen = GUIObjectMaxScreen.Create(_gui, content);
+        else
+            _maxScreen.AddMaxScreen(content);
+        return _maxScreen;
+    }
+
+    public void RemoveMaxScreen()
+    {
+        if(_maxScreen != null)
+            _maxScreen.Remove();
     }
 
     public GUIObjectIrisPopup AddIrisPopup(string textKeyText = Blindtext, string audio = "")

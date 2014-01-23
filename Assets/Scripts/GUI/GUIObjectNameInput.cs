@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class GUIObjectNameInput : MonoBehaviour 
 {
+    private const string Prefab = "GUI/panel_nameinput";
     private const string ButtonStr = "button_submit";
 
     [SerializeField]
@@ -42,5 +44,21 @@ public class GUIObjectNameInput : MonoBehaviour
             if (_button != null)
                 _button.Text = Localization.GetText(value);
         }
+    }
+
+    public static GameObject Create(string textKeyTitle, string textKeyText, string textKeyButton, string textKeyUsername, Action callback)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
+        GUIObjectNameInput input = go.GetComponent<GUIObjectNameInput>();
+        input.Button = textKeyButton;
+        if(callback != null)
+            input._button.Click += (control, @event) => callback();
+        input.Default = textKeyUsername;
+
+        GUIObjectTextPanel panel = go.GetComponent<GUIObjectTextPanel>();
+        panel.Title = textKeyTitle;
+        panel.Text = textKeyText;
+
+        return go;
     }
 }

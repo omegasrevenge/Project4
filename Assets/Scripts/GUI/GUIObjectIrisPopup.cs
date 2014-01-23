@@ -35,6 +35,8 @@ public class GUIObjectIrisPopup : MonoBehaviour
     public event Action ShowButtons;
     public event Action HideButtons;
 
+    public Action Callback;
+
     public string Text
     {
         get { return _textkeyText; }
@@ -184,6 +186,8 @@ public class GUIObjectIrisPopup : MonoBehaviour
         Destroy(gameObject);
         if(_nextPopup != null)
             _nextPopup.Show();
+        if (Callback != null)
+            Callback();
     }
 
     private void PlaySound()
