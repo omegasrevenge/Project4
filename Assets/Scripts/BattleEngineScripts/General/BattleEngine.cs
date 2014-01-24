@@ -40,10 +40,7 @@ public class BattleEngine : MonoBehaviour
 	//########## private #########
 	private TurnState _currentStatus = TurnState.Wait;
 	private List<FightRoundResult> _results;
-	private int _changeA;
-	private int _changeB;
 	private GameObject _actor;
-	private List<GameObject> _damageIndicator;
 	private float _counter = 0f;
 	private GameObject _gg;
 	private GameObject _monsterAName;
@@ -101,7 +98,6 @@ public class BattleEngine : MonoBehaviour
 	{
 		_results = new List<FightRoundResult>();
 		_damageGUI = new List<GameObject>();
-		_damageIndicator = new List<GameObject>();
 	}
 
 	public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
@@ -207,8 +203,6 @@ public class BattleEngine : MonoBehaviour
 	{
 		Turn = Result.Turn;
 		initSkill();
-		_changeA = FriendlyCreature.GetComponent<MonsterController>().Health-Result.PlayerAHealth;
-		_changeB = EnemyCreature   .GetComponent<MonsterController>().Health-Result.PlayerBHealth;
 	}
 
 	private void initSkill()
@@ -217,7 +211,7 @@ public class BattleEngine : MonoBehaviour
 		//Execute casting animation
 		//when done do
 		//evalute which skill was used by Result.SkillID
-		if(Result.SkillID == 1)
+		if(Result.SkillName.Equals("Laser"))
 		{
 			createSkillVisuals("Laser");
 		}
@@ -243,40 +237,42 @@ public class BattleEngine : MonoBehaviour
 
 	private void executeSkill()
 	{
-		if(_changeA != 0)
-			createDamageIndicator(FriendlyCreature, _changeA);
+		if (CurrentPlayer == FightRoundResult.Player.A) 
+		{
+			createDamageIndicator (EnemyCreature, Result.Damage, Result.DoT);
+			if (Result.HoT > 0)
+				createDamageIndicator (FriendlyCreature, Result.HoT, 0, true);
+			
+			FriendlyCreature.GetComponent<MonsterController>().Health += Result.HoT;
+			EnemyCreature   .GetComponent<MonsterController>().Health += -Result.Damage-Result.DoT;
 
-		if(_changeB != 0)
-			createDamageIndicator(EnemyCreature, _changeB);
+		} 
+		else 
+		{
+			createDamageIndicator (FriendlyCreature, Result.Damage, Result.DoT);
+			if (Result.HoT > 0)
+				createDamageIndicator (EnemyCreature, Result.HoT, 0, true);
+			
+			FriendlyCreature.GetComponent<MonsterController>().Health += -Result.Damage-Result.DoT;
+			EnemyCreature   .GetComponent<MonsterController>().Health += Result.HoT;
+		}
 
-		if(_changeA == 0 && _changeB == 0)
-			createDamageIndicator(Arena.transform.FindChild("PlaneDown").gameObject, 0f, true);
-
-		FriendlyCreature.GetComponent<MonsterController>().Health = Result.PlayerAHealth;
-		EnemyCreature   .GetComponent<MonsterController>().Health = Result.PlayerBHealth;
 		CurrentPlayer = Result.PlayerTurn;
 		_results.Remove(Result);
 	}
 
-	private void createDamageIndicator(GameObject target, float damage, bool valueZero = false)
+	private void createDamageIndicator(GameObject target, int damage, int dot, bool heal=false)
 	{
 		_damageGUI.Add(new GameObject("GUI Damage Indicator"));
 		_damageGUI[_damageGUI.Count-1].transform.localPosition = target.transform.position;
 		_damageGUI[_damageGUI.Count-1].AddComponent<DamageIndicator>();
 		_damageGUI[_damageGUI.Count-1].AddComponent<SelfDestruct>();
 
-		if(valueZero)
-		{
-			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = "Health of both mobs does not change.";
-			return;
-		}
-
-		string affix = "";
-		if(damage>0f)
-			affix = "Damage!";
+		if(!heal)
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = damage.ToString()+"DMG "+Result.SkillName+" & "+dot.ToString()+"DoT";
 		else
-			affix = "Heal!";
-		_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = Mathf.Abs(damage).ToString()+" "+affix;
+			_damageGUI[_damageGUI.Count-1].AddComponent<GUIText>().text = damage.ToString()+"HoT";
+
 	}
 
 	public void Init(BattleInit serverInfo)

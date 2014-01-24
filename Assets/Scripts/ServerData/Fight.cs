@@ -14,7 +14,7 @@ public class Fight
 	
 	public void ReadJson(JSONObject json)
 	{
-		LastResult = (string)json["LastResult"]; //TODO aus lastresult wird skillid ausgelesen
+		LastResult = (string)json["LastResult"];
 		Round = (int)json["Round"];
 		EnemyCreature = new Creature();
 		EnemyCreature.ReadJson(json["EnemyCreature"]);

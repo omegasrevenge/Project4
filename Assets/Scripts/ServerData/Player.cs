@@ -92,13 +92,9 @@ public class Player
 			newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
 			
 			if(CurFight.Turn) 
-			{
 				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
-			}
 			else
-			{
 				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
-			}
 			
 			BattleEngine.CreateBattle(newBattle);
             BattleEngine.Current.Fighting = !CurFight.Finished;
@@ -108,17 +104,15 @@ public class Player
 			FightRoundResult newResult = new FightRoundResult();
 			
 			if(CurFight.Turn) 
-			{
 				newResult.PlayerTurn = FightRoundResult.Player.A;
-			}
 			else
-			{
 				newResult.PlayerTurn = FightRoundResult.Player.B;
-			}
 			
-			newResult.PlayerAHealth = CurCreature.HP;
-			newResult.PlayerBHealth = CurFight.EnemyCreature.HP;
-			//newResult.SkillID = 1; <--------------------------------TODO NOT YET IMPLEMENTED
+			string[] lastResult = CurFight.LastResult.Split(' ');
+			newResult.SkillName = lastResult[0];
+			newResult.Damage = Convert.ToInt32(lastResult[1]);
+			newResult.DoT = Convert.ToInt32(lastResult[2]);
+			newResult.HoT = Convert.ToInt32(lastResult[3]);
 			newResult.Turn = CurFight.Round;
 			BattleEngine.Current.Result = newResult;
 		    BattleEngine.Current.Fighting = !CurFight.Finished;
