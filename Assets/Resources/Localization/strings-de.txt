@@ -6,6 +6,12 @@
 	continue:			"Weiter",
 	
 	default_name:		"Nutzername",
+	
+loadingscreen_login:
+"Verbinde mit Server ...",
+
+loadingscreen_submitName:
+"Sende Profildaten an Server ...",
 
 screen_entername_title:
 "Ihr Profil",

@@ -30,6 +30,7 @@ public class ViewController : MonoBehaviour
     public const float MaxViewportScroll = 0.7f;
 
     private GUIObjectMaxScreen _maxScreen;
+    private GUIObjectLoadingScreen _loadingScreen;
 
     public static ViewController Singleton
     {
@@ -109,7 +110,8 @@ public class ViewController : MonoBehaviour
 
         //AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab-de");
         //AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
-        AddMaxScreen(null);
+        //AddMaxScreen(null);
+        ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
     }
 
     void Update () 
@@ -136,6 +138,20 @@ public class ViewController : MonoBehaviour
     public GUIObjectIrisPopup AddIrisPopup(string textKeyText = Blindtext, string audio = "")
     {
         return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();
+    }
+
+    public void ShowLoadingScreen(string text)
+    {
+        if (_loadingScreen == null)
+            _loadingScreen = GUIObjectLoadingScreen.Create(text);
+        else
+            _loadingScreen.Show(text);
+    }
+
+    public void HideLoadingScreen()
+    {
+        if(_loadingScreen)
+            _loadingScreen.Hide();
     }
 
 }
