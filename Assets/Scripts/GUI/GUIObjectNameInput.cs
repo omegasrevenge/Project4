@@ -46,13 +46,13 @@ public class GUIObjectNameInput : MonoBehaviour
         }
     }
 
-    public static GameObject Create(string textKeyTitle, string textKeyText, string textKeyButton, string textKeyUsername, Action callback)
+    public static GameObject Create(string textKeyTitle, string textKeyText, string textKeyButton, string textKeyUsername, Action<string> callback)
     {
         GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
         GUIObjectNameInput input = go.GetComponent<GUIObjectNameInput>();
         input.Button = textKeyButton;
         if(callback != null)
-            input._button.Click += (control, @event) => callback();
+            input._button.Click += (control, @event) => { if(callback != null) callback(input.Text); };
         input.Default = textKeyUsername;
 
         GUIObjectTextPanel panel = go.GetComponent<GUIObjectTextPanel>();

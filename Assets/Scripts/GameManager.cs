@@ -610,6 +610,30 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
+    }    
+    
+    public void SubmitPlayerName(string name, Action<bool> callback)
+    {
+
+        StartCoroutine(CSubmitPlayerName(name, callback));
+    }
+
+    public IEnumerator CSubmitPlayerName(string name, Action<bool> callback)
+    {
+        WWW request = new WWW(GetSessionURL("nameplayer") + "&name=" + name);
+        Player.Name = name;
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json))
+        {
+            if(callback != null)
+                callback(false); 
+            yield break; 
+        }
+        if (callback != null)
+            callback(true);
     }
 
     private IEnumerator GetPois()
@@ -754,8 +778,7 @@ public class GameManager : MonoBehaviour
         }
 
         var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
-        irisPopUp.StartCallback =
-            delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test").Callback = GUIShowNameInput; };
+        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test").Callback = GUIShowNameInput; };
 
     }
 
@@ -766,11 +789,20 @@ public class GameManager : MonoBehaviour
         _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
     }
 
-    public void GUISubmitName()
+    public void GUISubmitName(string username)
     {
+        SubmitPlayerName(username,GUINameSubmitted);
         //Endless Loop
-        var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
-        irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
+    }
+
+    public void GUINameSubmitted(bool result)
+    {
+        if (!result)
+        {
+            var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
+            irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
+        }
+
     }
 
     #endregion
