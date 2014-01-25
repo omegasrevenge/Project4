@@ -776,19 +776,14 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Be aware, that you disabled the real view \nby enabling DummyUI in the GameManager.\nIf you have further Questions, please contact Anton.");
             return;
         }
-        _view.AddMaxScreen(null);
+        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
         _view.HideLoadingScreen();
         var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
-        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test").Callback = GUIShowNameInput; };
+        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test"); };
 
     }
 
     #region GUI methods
-
-    public void GUIShowNameInput()
-    {
-        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
-    }
 
     public void GUISubmitName(string username)
     {
