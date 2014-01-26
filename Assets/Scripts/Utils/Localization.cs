@@ -67,13 +67,13 @@ public class Localization
 
     public static AudioClip GetSound(string soundKey)
     {
-        AudioClip clip =  Resources.Load<AudioClip>("Sounds/" + soundKey +"-"+ Singleton._language);
+        AudioClip clip =  Resources.Load<AudioClip>("Sounds/" + soundKey +"_"+ Singleton._language);
         if (clip != null)
             return clip;
-        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "-en");
+        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "_en");
         if (clip != null)
             return clip;
-        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "-de");
+        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "_de");
         if (clip != null)
             return clip;
         return Resources.Load<AudioClip>("Sounds/" + soundKey);

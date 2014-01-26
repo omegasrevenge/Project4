@@ -778,8 +778,8 @@ public class GameManager : MonoBehaviour
         }
         _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
         _view.HideLoadingScreen();
-        var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
-        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "test"); };
+        var irisPopUp = _view.AddIrisPopup("iris_01_text", "iris_01");
+        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "iris_02_01"); };
 
     }
 
@@ -795,9 +795,9 @@ public class GameManager : MonoBehaviour
     public void GUINameSubmitted(bool result)
     {
         _view.HideLoadingScreen();
-        if (!result)
+        if (result)
         {
-
+            _view.AddIrisPopup("iris_02_02_text", "iris_02_02");
             //var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
             //irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
         }
