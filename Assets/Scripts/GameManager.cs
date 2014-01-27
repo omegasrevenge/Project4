@@ -801,8 +801,17 @@ public class GameManager : MonoBehaviour
             _view.AddIrisPopup("iris_02_02_text", "iris_02_02");
             //var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
             //irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
+            return;
         }
 
+        _view.RemoveMaxScreen();
+        _view.Switch3DSceneRoot(SpectresIntro.Create(GUIShowSpectreChoice));
+
+    }
+
+    public void GUIShowSpectreChoice()
+    {
+        
     }
 
     #endregion

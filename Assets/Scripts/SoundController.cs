@@ -5,10 +5,15 @@ using System.Collections;
 public class SoundController : MonoBehaviour
 {
     public const string ChannelSFX = "channelSFX";
+    public const string SoundClick = "Oc_Audio_SFX_Vengea_Click_LAYOUT";
+    public const string SoundChoose = "Oc_Audio_SFX_Vengea_Choose_LAYOUT";
+    public const string SoundLocate = "Oc_Audio_SFX_Vengea_Locate_LAYOUT";
+
 
     private const float LoadTimeOut = 2f;
     private static SoundController _instance;
 
+    [SerializeField]
     private Dictionary<string, AudioSource> _audio; 
 
     public static SoundController Singleton
@@ -47,10 +52,10 @@ public class SoundController : MonoBehaviour
         }
     }
 
-    public static void PlaySound(string filename, bool stream = false, string sharedAudioChannel = "none", float delay=0)
+    public static AudioSource PlaySound(string filename, string sharedAudioChannel = "none", bool stream = false, float delay=0)
     {
         if(!Singleton)
-            return;
+            return null;
 
         bool loadClip = true;
         if (sharedAudioChannel == "none")
@@ -72,8 +77,7 @@ public class SoundController : MonoBehaviour
             else
                 source.Play();
         }
-
-
+        return source;
     }
 
     public static AudioSource LoadAudioClip(string filename, string sharedAudioChannel = "none")
