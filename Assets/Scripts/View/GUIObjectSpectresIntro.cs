@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GUIObjectSpectresIntro : MonoBehaviour {
     private const string Prefab = "GUI/panel_spectresintro";
-
+    private const string VisualizerStr = "panel_visualizer";
+    public GUIObjectVisualizer Visualizer;
 
     public static GUIObjectSpectresIntro Create(dfControl root, string textKeyText)
     {
@@ -14,5 +15,12 @@ public class GUIObjectSpectresIntro : MonoBehaviour {
         GUIObjectTextPanel panel = cntrl.GetComponent<GUIObjectTextPanel>();
         panel.Text = textKeyText;
         return obj;
+    }
+
+    void Awake()
+    {
+        GameObject obj = transform.FindChild(VisualizerStr).gameObject;
+        if (obj)
+            Visualizer = obj.GetComponent<GUIObjectVisualizer>();
     }
 }

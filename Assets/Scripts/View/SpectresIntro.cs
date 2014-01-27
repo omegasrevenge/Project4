@@ -29,18 +29,18 @@ public class SpectresIntro : SceneRoot3D
     {
         _audio = Localization.GetSound(IrisSoundStr);
         _audio.Play();
+        if (_gui && _gui.Visualizer && _audio)
+            _gui.Visualizer.Audio = _audio;
     }
 
     void Update()
     {
         if (!_started && _audio && _audio.isPlaying)
         {
-            Debug.Log("Turn on");
             _started = true;
         }
         if (_started && _audio && !_audio.isPlaying && !Camera.gameObject.activeSelf)
         {
-            Debug.Log("Turn off");
             OnIrisFinished();
         }
     }
@@ -60,5 +60,7 @@ public class SpectresIntro : SceneRoot3D
     public void AttachGUI(GUIObjectSpectresIntro gui)
     {
         _gui = gui;
+        if (_gui.Visualizer && _audio)
+            _gui.Visualizer.Audio = _audio;
     }
 }
