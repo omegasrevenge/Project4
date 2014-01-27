@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Creature
 {
+	public int ModelID;
     public int CreatureID;
     public string Name;
     public int XP;
@@ -37,6 +38,7 @@ public class Creature
             Debug.LogError("No JSON for Creature.cs! Please check, what's wrong. Cheers, Anton.");
             return;
         }
+		ModelID = (int)json["ModelId"];
 		BaseElement = (GUIBase.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];

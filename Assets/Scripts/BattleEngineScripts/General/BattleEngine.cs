@@ -34,7 +34,8 @@ public class BattleEngine : MonoBehaviour
 	public const string DefaultArena			 = "Battle/DefaultArena";
 	public const string DefaultFriendlySpawnPos  = "FriendlySpawnPos";
 	public const string DefaultEnemySpawnPos	 = "EnemySpawnPos";
-	public const string DefaultMonster	 		 = "Battle/DefaultMonster";
+	public const string WolfMonster	 			 = "WolfMonster";
+	public const string GiantMonster			 = "GiantMonster";
 	//########## const #########
 
 	//########## private #########
@@ -212,9 +213,7 @@ public class BattleEngine : MonoBehaviour
 		//when done do
 		//evalute which skill was used by Result.SkillID
 		if(Result.SkillName.Equals("Laser"))
-		{
 			createSkillVisuals("Laser");
-		}
 	}
 
 	private void createSkillVisuals(string name)
@@ -282,9 +281,19 @@ public class BattleEngine : MonoBehaviour
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Friendly Creature ////////////////////////////////////////////////////////////
-		FriendlyCreature = Create(DefaultMonster, 
-		                           Arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
-		                           Arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
+		string prefabName = "";
+		switch(serverInfo.BaseMeshA)
+		{
+		case 0:
+			prefabName = WolfMonster;
+			break;
+		case 1:
+			prefabName = GiantMonster;
+			break;
+		}
+		FriendlyCreature = Create(prefabName, 
+		                          Arena.transform.FindChild(DefaultFriendlySpawnPos).position, 
+		                          Arena.transform.FindChild(DefaultFriendlySpawnPos).rotation);
 		
 		FriendlyCreature.GetComponent<MonsterController>().StartPosition = Arena.transform.FindChild(DefaultFriendlySpawnPos).position;
 		FriendlyCreature.GetComponent<MonsterController>().Owner = this;
@@ -293,7 +302,17 @@ public class BattleEngine : MonoBehaviour
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// 
 		////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
-		EnemyCreature = Create(DefaultMonster, 
+		prefabName = "";
+		switch(serverInfo.BaseMeshB)
+		{
+		case 0:
+			prefabName = WolfMonster;
+			break;
+		case 1:
+			prefabName = GiantMonster;
+			break;
+		}
+		EnemyCreature = Create(prefabName, 
 		                        Arena.transform.FindChild(DefaultEnemySpawnPos).position, 
 		                        Arena.transform.FindChild(DefaultEnemySpawnPos).rotation);
 		
@@ -334,6 +353,6 @@ public class BattleEngine : MonoBehaviour
 	
 	public GameObject Create(string name, Vector3 pos, Quaternion rot)
 	{
-		return (GameObject)Instantiate(Resources.Load(name), pos, rot);
+		return (GameObject)Instantiate(Resources.Load("Battle/"+name), pos, rot);
 	}
 }

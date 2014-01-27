@@ -91,6 +91,9 @@ public class Player
 			newBattle.MonsterALevel = CurCreature.Level;
 			newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
 			
+			newBattle.BaseMeshA = CurCreature.ModelID;
+			newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
+			
 			if(CurFight.Turn) 
 				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
 			else
