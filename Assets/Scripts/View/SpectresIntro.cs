@@ -37,7 +37,7 @@ public class SpectresIntro : SceneRoot3D
             Debug.Log("Turn on");
             _started = true;
         }
-        if (_started && _audio && !_audio.isPlaying)
+        if (_started && _audio && !_audio.isPlaying && !Camera.gameObject.activeSelf)
         {
             Debug.Log("Turn off");
             OnIrisFinished();

@@ -15,9 +15,9 @@ public class SceneRoot3D : MonoBehaviour
         {
             if (_camera == null)
             {
-                _camera = transform.FindChild(CameraStr).GetComponent<Camera>();
+                _camera = transform.Find(CameraStr).GetComponent<Camera>();
             }
-            return camera;
+            return _camera;
         }
     }
 
