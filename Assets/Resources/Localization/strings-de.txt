@@ -60,6 +60,98 @@ iris_05_04_text:
 "Ausgezeichnet. Für Ihren Erfolg erhalten Sie von VENGEA Prämien.
 Dies sind Bioden, eine primitive Ressource aus der Sphäre der Spectres. Mit Ihrer Hilfe können Sie Drioden schaffen, die Sie wiederum für die Kontrolle Ihres Spectres nutzen können.",
 
+iris_06_01_text:
+"Sammeln Sie Bioden in Ihrer Umgebung!",
 
+iris_06_02_text:
+"Behalten Sie Ihre Umgebung immer gründlich im Auge.",
+
+iris_06_03_text:
+"Für die erfolgreiche Arbeit benötigen Sie eine Basis. Dort können Sie Drioden herstellen,  Ihren Spectre regenerieren oder gebändigte Spectres an VENGEA senden.
+Legen Sie nun die Basis an Ihrer aktuellen Position fest. Öffnen Sie dazu das Menü.",
+
+iris_06_04_text:
+"Sehr gut! Betreten Sie nun Ihre Basis.",
+
+iris_06_05_text:
+"Stellen Sie nun eine Wasser-Driode her.",
+
+iris_06_06_text:
+"Stellen Sie nun eine Feuer-Driode her.",
+
+iris_06_07_text:
+"Stellen Sie nun eine Energie-Driode her.",
+
+iris_06_08_text:
+"Stellen Sie nun eine Sturm-Driode her.",
+
+iris_06_09_text:
+"Stellen Sie nun eine Lebens-Driode her.",
+
+iris_06_10_text:
+"Tauschen Sie dazu 10 Feuer-Bioden in 5 Energie-Bioden.",
+
+iris_06_11_text:
+"Tauschen Sie dazu 10 Energie-Bioden in 5 Lebens-Bioden.",
+
+iris_06_12_text:
+"Tauschen Sie dazu 10 Lebens-Bioden in 5 Wasser-Bioden.",
+
+iris_06_13_text:
+"Tauschen Sie dazu 10 Wasser-Bioden in 5 Sturm-Bioden.",
+
+iris_06_14_text:
+"Tauschen Sie dazu 10 Sturm-Bioden in 5 Feuer-Bioden.",
+
+iris_06_15_text:
+"Sehr gut. Nun können Sie die Driode herstellen.",
+
+iris_06_16_text:
+"Ausgezeichnet, Agent.",
+
+iris_06_17_text:
+"Bitte beachten Sie, dass sie den Ort der Basis nur einmal am Tag ändern können.",
+
+iris_07_01_text:
+"Platzieren Sie die Driode auf dem Spectre. Gehen Sie dafür in das Menü und wählen Sie Ihren Spectre aus.",
+
+iris_07_02_text:
+"Hervorragend. Erkunden Sie nun weiter Ihre Umgebung.",
+
+iris_08_01_text:
+"Ihr Spectre besitzt nun zwei Drioden. Wischen Sie mit dem Finger erst über die eine, dann über die andere und zum Abschluss auf den feindlichen Spectre und lassen Sie los.",
+
+iris_08_02_text:
+"Sehr gut. Probieren Sie es nun mit der umgekehrten Reihenfolge.",
+
+iris_08_03_text:
+"Ausgezeichnet. Sie können die erfolgreichen Angriffe jederzeit in der Information über Ihren Spectre nachschauen.",
+
+iris_09_01_text:
+"Glückwunsch, Agent. Ihr Spectre ist eine Stufe aufgestiegen. Sie erhalten dafür eine Prämie.",
+
+iris_09_02_text:
+"Bei jedem Stufenaufstieg können Sie entscheiden, ob Sie einen weiteren Drioden-Slot auf Ihrem Spectre freilegen wollen oder einen vorhanden Slot auf das Element der jeweils eingesetzten Driode prägen möchten. Dadurch werden die entsprechenden Element-Drioden in diesem Slot zusätzlich gestärkt.",
+
+iris_10_01_text:
+"Stellen Sie eine Driode der Stufe 1 her! Kombinieren Sie dafür 3 primitive Drioden.",
+
+iris_10_02_text:
+"Sehr gut! Sie können Drioden bis zur Stufe 5 herstellen.",
+
+iris_11_01_text:
+"Achtung, wir konnten ein humanoides Störobjekt in Ihrer Umgebung lokalisieren. Sie können es zum Kampf herausfordern oder sich zurückziehen.",
+
+iris_12_01_text:
+"Wir konnten einen VENGEA-Agenten in Ihrer Umgebung lokalisieren. Sie können mit Ihm Bioden und Drioden tauschen.",
+
+iris_13_01_text:
+"Achtung, eine Ihrer Drioden ist stark abgenutzt. Bitte tauschen Sie sie bei Gelegenheit aus.",
+
+iris_14_01_text:
+"Gesammelte Daten werden mit VENGEA synchronisiert. Dieser Prozess ist sehr instabil, bitte brechen Sie den Vorgang nicht ab.",
+
+iris_15_01_text:
+"Sie nutzen gerade eine nicht autorisierte Version von OCULUS. Rebooten Sie Ihr System über das Menü neu, um Schadsoftware zu entfernen. Andernfalls bin ich gezwungen Sie dauerhaft als humanoides Störobjekt einzustufen.",
 
 }
