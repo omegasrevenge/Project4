@@ -40,10 +40,17 @@ public class GUIObjectTextPanel : MonoBehaviour
         {
             if (_titleLabel == null)
             {
-                GameObject obj = transform.FindChild(TitleLabelStr).gameObject;
-                if (obj)
+                Transform trans = transform.FindChild(TitleLabelStr);
+                GameObject obj;
+                if (trans)
+                {
+                    obj = trans.gameObject;
+                    if (obj)
                     _titleLabel = obj.GetComponent<dfLabel>();
+                }
+                
             }
+    
             _textkeyTitle = value;
             if (_titleLabel != null)
                 _titleLabel.Text = Localization.GetText(value);

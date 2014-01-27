@@ -174,6 +174,11 @@ public class ViewController : MonoBehaviour
         return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();
     }
 
+    public GUIObjectSpectresIntro AddSpectresIntro(string textKeyText)
+    {
+        return GUIObjectSpectresIntro.Create(_gui, textKeyText);
+    }
+
     public void ShowLoadingScreen(string text)
     {
         if (_loadingScreen == null)

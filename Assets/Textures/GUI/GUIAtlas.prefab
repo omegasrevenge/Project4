@@ -43,8 +43,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .0634765625
-      y: .948242188
+      x: .766601562
+      y: .0986328125
       width: .03125
       height: .03125
     border:
@@ -94,7 +94,7 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .095703125
+      x: .0634765625
       y: .948242188
       width: .03125
       height: .03125
@@ -128,7 +128,7 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .127929688
+      x: .095703125
       y: .948242188
       width: .03125
       height: .03125
@@ -140,6 +140,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 32, y: 32}
     textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: gradient
+    region:
+      serializedVersion: 2
+      x: .802734375
+      y: 0
+      width: .03125
+      height: .123046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 32, y: 126}
+    textureGUID: 4cc5b543fdf016b4d815059794520c54
     deleted: 0
     texture: {fileID: 0}
   - name: iris-logo
@@ -162,8 +179,8 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .802734375
-      y: 0
+      x: .704101562
+      y: .0986328125
       width: .0615234375
       height: .0537109375
     border:

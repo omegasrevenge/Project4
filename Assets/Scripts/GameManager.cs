@@ -805,7 +805,9 @@ public class GameManager : MonoBehaviour
         }
 
         _view.RemoveMaxScreen();
-        _view.Switch3DSceneRoot(SpectresIntro.Create(GUIShowSpectreChoice));
+        SpectresIntro intro = SpectresIntro.Create(GUIShowSpectreChoice);
+        intro.AttachGUI(_view.AddSpectresIntro("iris_03_text"));
+        _view.Switch3DSceneRoot(intro);
 
     }
 

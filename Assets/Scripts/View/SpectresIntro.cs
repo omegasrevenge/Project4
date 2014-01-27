@@ -10,6 +10,7 @@ public class SpectresIntro : SceneRoot3D
     private AudioSource _audio;
     private bool _started = false;
     private Action _callback;
+    private GUIObjectSpectresIntro _gui;
 
     public static SpectresIntro Create(Action callback)
     {
@@ -50,5 +51,14 @@ public class SpectresIntro : SceneRoot3D
         if (_callback != null)
             _callback();
         Destroy(gameObject);
+        if (_gui)
+        {
+            Destroy(_gui.gameObject);
+        }
+    }
+
+    public void AttachGUI(GUIObjectSpectresIntro gui)
+    {
+        _gui = gui;
     }
 }
