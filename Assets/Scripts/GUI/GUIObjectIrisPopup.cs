@@ -12,6 +12,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private const string OKButtonStr = "button_ok";
     private const string TextLabelStr = "label_text";
     private const string ContinueTextkey = "continue";
+    private const string MessageSound = "Oc_Audio_SFX_Vengea_Message_IRIS_LAYOUT";
 
 
 
@@ -21,8 +22,8 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private dfLabel _textLabel;
     private dfButton _repeat;
     private dfButton _ok;
-    private AudioSource _messageSound;
     private AudioSource _audio;
+    private GUIObjectVisualizer _visualizer;
     private dfControl _root;
     private float _delay = 1f;
     private bool _startedPlaying = false;
@@ -59,7 +60,8 @@ public class GUIObjectIrisPopup : MonoBehaviour
         }
         set
         {
-            _audio.clip = Localization.GetSound(value);
+            _audio = Localization.GetSound(value);
+            _visualizer.Audio = _audio;
         }
     }
 
@@ -97,10 +99,6 @@ public class GUIObjectIrisPopup : MonoBehaviour
 
     void Awake()
     {
-        _messageSound = GetComponent<AudioSource>();
-
-        _audio = gameObject.AddComponent<AudioSource>();
-
         Transform popUpTrnsf = transform.FindChild(PopupStr);
 
         if (popUpTrnsf != null)
@@ -114,7 +112,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
 
             obj = popUpTrnsf.FindChild(VisualizerStr).gameObject;
             if (obj)
-                obj.GetComponent<GUIObjectVisualizer>().Audio = _audio;
+                _visualizer = obj.GetComponent<GUIObjectVisualizer>();
 
 
             obj = popUpTrnsf.FindChild(RepeatButtonStr).gameObject;
@@ -157,7 +155,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     public GUIObjectIrisPopup Show()
     {
         if (_playMessageSound)
-            _messageSound.Play();
+            SoundController.PlaySound(MessageSound, false, SoundController.ChannelSFX);
         if (ShowPopup != null)
             ShowPopup();
         return this;
@@ -194,11 +192,11 @@ public class GUIObjectIrisPopup : MonoBehaviour
             _nextPopup.Show();
         if (Callback != null)
             Callback();
+        SoundController.RemoveChannel(Audio);
     }
 
     private void PlaySound()
-    {
-        
+    {       
         _audio.PlayDelayed(_delay-(Time.time-_startTime));
         //StartCoroutine(LoadAndPlay());
     }

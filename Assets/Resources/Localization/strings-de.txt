@@ -38,7 +38,7 @@ iris_04_01_text:
 "Für den Kampf stellt VENGEA Ihnen einen bereits unter Kontrolle gebrachten Spectre zur Verfügung.",
 
 iris_04_02_text:
-"Treffen Sie Ihre Wahl!";
+"Treffen Sie Ihre Wahl!",
 
 iris_04_03_text:
 "Der Specter wird an Sie übermittelt.",

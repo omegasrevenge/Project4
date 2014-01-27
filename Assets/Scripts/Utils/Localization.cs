@@ -65,17 +65,17 @@ public class Localization
         return (string)Singleton._strings[textKey];
     }
 
-    public static AudioClip GetSound(string soundKey)
+    public static AudioSource GetSound(string soundKey, string channel = "none")
     {
-        AudioClip clip =  Resources.Load<AudioClip>("Sounds/" + soundKey +"_"+ Singleton._language);
-        if (clip != null)
-            return clip;
-        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "_en");
-        if (clip != null)
-            return clip;
-        clip = Resources.Load<AudioClip>("Sounds/" + soundKey + "_de");
-        if (clip != null)
-            return clip;
-        return Resources.Load<AudioClip>("Sounds/" + soundKey);
+        AudioSource source = SoundController.LoadAudioClip(soundKey + "_" + Singleton._language, channel);
+        if (source != null)
+            return source;
+        source = SoundController.LoadAudioClip(soundKey + "_en", channel);
+        if (source != null)
+            return source;
+        source = SoundController.LoadAudioClip(soundKey + "_de", channel);
+        if (source != null)
+            return source;
+        return SoundController.LoadAudioClip(soundKey, channel);
     }
 }

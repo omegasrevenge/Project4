@@ -1,5 +1,5 @@
 ﻿{
-	blindtext: 			"This is a blindtext. If you can read this please contact the developers. Contravention will lead to a rain of dead rats.",
+	blindtext: 			"This is a blündtext. If you can read this please contact the developers. Contravention will lead to a rain of dead rats.",
 	
 	ok:					"OK",
 	
@@ -39,7 +39,7 @@ iris_04_01_text:
 "VENGEA prepared an already controlled Spectre for your use in combat.",
 
 iris_04_02_text:
-"Choose one specimen!";
+"Choose one specimen!",
 
 iris_04_03_text:
 "Transfering Spectre.",

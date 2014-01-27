@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _view = ViewController.Create();
+        SoundController.Create().Init();
         _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
         _map.name = "Map";
         _allOwnCreatures = null;
