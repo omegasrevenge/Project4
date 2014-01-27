@@ -63,6 +63,7 @@ public class MonsterController : ActorControlls
 		BgHealthbar.LookAt(_battleCam);
 		Healthbar.LookAt(_battleCam);
 		float a = Health;
+		if (a < 0f) a = 0f;
 		float b = _monsterStats.HP;
 		Healthbar.localScale = new Vector3(a/b, Healthbar.localScale.y, Healthbar.localScale.z);
 	}
