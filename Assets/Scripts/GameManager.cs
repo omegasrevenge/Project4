@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance;
     private ViewController _view;
-    private MapGrid _map;
+    private Map _map;
 
     public bool DummyUI = true;
 
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeDummyObjects()
     {
-        CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent, _map);
+        //CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent, _map);
         CreateController<GUIBase>("dummy_GUIBase");
     }
 
@@ -834,7 +834,7 @@ public class GameManager : MonoBehaviour
 
     public void GUIInitMap()
     {
-        _map = MapGrid.Create();
+        _map = Map.Create();
         _view.Switch3DSceneRoot(_map);
     }
 

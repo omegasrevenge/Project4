@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class MapGrid : SceneRoot3D
 {
-    private const string Prefab = "Scene/map";
-
+    
     public const int TileSize = 256;
     public int MapRadius = 3;
     public const int PixelsToUnit = 100;
@@ -24,18 +23,6 @@ public class MapGrid : SceneRoot3D
 
     public float Width { get; set; }
     public float Height { get; set; }
-
-
-    public static MapGrid Create()
-    {
-        GameObject obj = (GameObject)Instantiate(Resources.Load<GameObject>(Prefab));
-        if (obj)
-        {
-            MapGrid map = obj.GetComponent<MapGrid>();
-            return map;
-        }
-        return null;
-    }
 
     void Awake()
     {
