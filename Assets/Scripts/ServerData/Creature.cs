@@ -38,6 +38,7 @@ public class Creature
             Debug.LogError("No JSON for Creature.cs! Please check, what's wrong. Cheers, Anton.");
             return;
         }
+		Debug.Log(json);
 		ModelID = (int)json["ModelId"];
 		BaseElement = (GUIBase.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
@@ -48,9 +49,10 @@ public class Creature
 		HPMax = (int)json["HPMax"];
 		Damage = (int)json["Damage"];
 		Defense = (int)json["Defense"];
+		Dexterity = (int)json["Dexterity"];
 		Skillpoints = (int)json["Skillpoints"];
 	   
-		JSONObject jsonSlots = json["slots"];
+		JSONObject jsonSlots = json["Slots"];
 
 	    slots = new Slot[jsonSlots.Count];
 

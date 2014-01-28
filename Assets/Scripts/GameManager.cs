@@ -312,6 +312,22 @@ public class GameManager : MonoBehaviour
         Player.UpdateBattle();
     }
 
+	public void AddCreatureEQSlot()
+	{
+		StartCoroutine(CAddCreatureEQSlot());
+	}
+
+	private IEnumerator CAddCreatureEQSlot()
+	{
+		WWW request = new WWW(GetSessionURL("addcrsl"));
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json)) yield break;
+
+		GetOwnPlayer();
+	}
+
     public void GetCreatures()
     {
         if (_allOwnCreatures == null)

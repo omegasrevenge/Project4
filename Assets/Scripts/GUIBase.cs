@@ -9,7 +9,7 @@ public class GUIBase : MonoBehaviour
 	public enum ResourceLevel { Bioden, DriodenLvl0, DriodenLvl1, DriodenLvl2, DriodenLvl3, DriodenLvl4, DriodenLvl5 };
 	public ResourceLevel curResourceLevel = ResourceLevel.Bioden;
 
-	public enum ResourceElement { Fire, Tech, Nature, Water, Storm };
+	public enum ResourceElement { Energy, Fire, Storm, Nature, Water };
 	public ResourceElement CuResourceElement;
 
 	private enum Windows { Crafting, Creature };
@@ -135,8 +135,9 @@ public class GUIBase : MonoBehaviour
 		GUI.Label(new Rect(50, 150, 200, 50), "HP:  " + curCreature.HP + " / " + curCreature.HPMax, curStyle);
 		GUI.Label(new Rect(50, 175, 200, 50), "Damage:  " + curCreature.Damage, curStyle);
 		GUI.Label(new Rect(50, 200, 200, 50), "Defense:  " + curCreature.Defense, curStyle);
-		GUI.Label(new Rect(50, 225, 200, 50), "Skillpoints:  " + curCreature.Skillpoints, curStyle);
-		GUI.Label(new Rect(50, 250, 200, 50), "Base Element:  " + curCreature.BaseElement, curStyle);
+		GUI.Label(new Rect(50, 225, 200, 50), "Dexterity:  " + curCreature.Dexterity, curStyle);
+		GUI.Label(new Rect(50, 250, 200, 50), "Skillpoints:  " + curCreature.Skillpoints, curStyle);
+		GUI.Label(new Rect(50, 275, 200, 50), "Base Element:  " + curCreature.BaseElement, curStyle);
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -144,15 +145,28 @@ public class GUIBase : MonoBehaviour
 
 			if (i < curCreature.slots.Length)
 			{
-				if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/Next")))
+				Creature.Slot curSlot = curCreature.slots[i];
+
+				if (curSlot.driodenElement == -1 && curSlot.driodenLevel == -1)
+				{
+					if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock_open")))
+					{
+						Debug.Log("oh no he clickt me!!! " + i);
+					}
+					continue;
+				}
+
+				if (GUI.Button(curRect, "<color=white><size=20>" + ((ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
 				{
 					Debug.Log("oh no he clickt me!!! " + i);
 				}
-
 			}
 			else
 			{
-				GUI.Label(curRect, Resources.Load<Texture>("GUITextures/lock"));
+				if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock")))
+				{
+					GameManager.Singleton.AddCreatureEQSlot();
+				}
 			}
 		}
 	}
@@ -204,25 +218,25 @@ public class GUIBase : MonoBehaviour
 			curInput = curInputAsInt.ToString();
 		}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + ResourceElement.Fire.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + ResourceElement.Energy.ToString() + "</size></color>"))
+		{
+			CuResourceElement = ResourceElement.Energy;
+		}
+		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Fire.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Fire;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Tech.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50),  "<color=white><size=20>" + ResourceElement.Storm.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Tech;
+			CuResourceElement = ResourceElement.Storm;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Nature.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Nature.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Nature;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Water.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Water.ToString() + "</size></color>"))
 		{
 			CuResourceElement = ResourceElement.Water;
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Storm.ToString() + "</size></color>"))
-		{
-			CuResourceElement = ResourceElement.Storm;
 		}
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))

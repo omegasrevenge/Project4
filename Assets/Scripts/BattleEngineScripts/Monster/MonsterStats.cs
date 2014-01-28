@@ -22,7 +22,7 @@ public class MonsterStats : MonoBehaviour
 		case GUIBase.ResourceElement.Fire:
 			color = Color.red;
 			break;
-		case GUIBase.ResourceElement.Tech:
+		case GUIBase.ResourceElement.Energy:
 			color = Color.black;
 			break;
 		case GUIBase.ResourceElement.Nature:
