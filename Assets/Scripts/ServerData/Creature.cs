@@ -26,9 +26,10 @@ public class Creature
 		public int nature;
 		public int water;
 		public int storm;
-		public int driodenElement;
+		public GUIBase.ResourceElement driodenElement;
 		public int driodenHealth;
 		public int driodenLevel;
+        public int driodenStrength;
 	}
 
     public void ReadJson(JSONObject json)
@@ -65,10 +66,32 @@ public class Creature
 			    nature = (int) jsonSlots[i]["Element2"],
 			    water = (int) jsonSlots[i]["Element3"],
 			    storm = (int) jsonSlots[i]["Element4"],
-			    driodenElement = (int) jsonSlots[i]["EquipElement"],
-			    driodenHealth = (int) jsonSlots[i]["EquipHealth"],
+			    driodenElement = (GUIBase.ResourceElement)(int) jsonSlots[i]["EquipElement"],
+			    driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"]*100),
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"]
 		    };
+            switch(slots[i].driodenElement)
+            {
+                case GUIBase.ResourceElement.Fire:
+                    slots[i].driodenStrength = slots[i].fire;
+                    break;
+
+                case GUIBase.ResourceElement.Nature:
+                    slots[i].driodenStrength = slots[i].nature;
+                    break;
+
+                case GUIBase.ResourceElement.Storm:
+                    slots[i].driodenStrength = slots[i].storm;
+                    break;
+
+                case GUIBase.ResourceElement.Tech:
+                    slots[i].driodenStrength = slots[i].tech;
+                    break;
+
+                case GUIBase.ResourceElement.Water:
+                    slots[i].driodenStrength = slots[i].water;
+                    break;
+            }
 	    }
     }
 }

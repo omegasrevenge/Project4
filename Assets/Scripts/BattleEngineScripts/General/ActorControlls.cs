@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class ActorControlls : MonoBehaviour 
+public abstract class ActorControlls : MonoBehaviour
 {
-	public bool CanShowDamage = false;
-	public bool AnimationFinished = true;
+    [HideInInspector]
+    public bool CanShowDamage = false;
+    [HideInInspector]
+    public bool AnimationFinished = true;
+    [HideInInspector]
 	public BattleEngine Owner;
 }

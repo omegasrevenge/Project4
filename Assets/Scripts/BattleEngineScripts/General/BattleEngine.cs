@@ -13,7 +13,7 @@ public class BattleEngine : MonoBehaviour
 	public BattleInit ServerInfo;
 
 
-	public string InputText = "";
+	public List<int> InputText;
 	public int Turn = 0;
 	public bool Fighting = true;
 
@@ -99,6 +99,7 @@ public class BattleEngine : MonoBehaviour
 	{
 		_results = new List<FightRoundResult>();
 		_damageGUI = new List<GameObject>();
+        InputText = new List<int>();
 	}
 
 	public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
@@ -111,14 +112,16 @@ public class BattleEngine : MonoBehaviour
 		Current.MainCam = Camera.main.gameObject;
 		Current.MainCam.SetActive(false);
 		Current.CurrentPlayer = serverInfo.FirstTurnIsPlayer;
-		Current.ServerInfo = serverInfo;
+        Current.ServerInfo = serverInfo;
+        if (RenderSettings.fog)
+            RenderSettings.fog = false;
 	}
 
 	void Update()
 	{
 		updateGUI();
 
-		if(!Fighting)
+		if(!Fighting && Results.Count == 0)
 			enforceEnd();
 
 		if(GetTurnState != _currentStatus)
@@ -130,7 +133,6 @@ public class BattleEngine : MonoBehaviour
 				//
 				break;
 			case TurnState.Rotate:
-				if(Fighting) 
 					BattleCam.transform.parent.GetComponent<RotateBattleCam>().DoRotation = true;
 				break;
 			case TurnState.Execute:
@@ -145,36 +147,57 @@ public class BattleEngine : MonoBehaviour
 	
 	void OnGUI()
 	{
-		//if (GUI.Button(new Rect(0, Screen.height-100, 200, 100), "Driode_1"))
-		//{
-		//	InputText += "1";
-		//}
-		//if (GUI.Button(new Rect(200, Screen.height-100, 200, 100), "Driode_2"))
-		//{
-		//	InputText += "2";
-		//}
-		//if (GUI.Button(new Rect(400, Screen.height-100, 200, 100), "Driode_3"))
-		//{
-		//	InputText += "3";
-		//}
-		//if (GUI.Button(new Rect(600, Screen.height-100, 200, 100), "Driode_4"))
-		//{
-		//	InputText += "4";
-		//}
-		//
-		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Do Basic Attack"))
+        var current = GameManager.Singleton.Player.CurCreature.slots;
+        for (int i = 0; i < current.Length; i++ )
+        {
+            string element = "";
+            switch (current[i].driodenElement)
+            {
+                case GUIBase.ResourceElement.Fire:
+                    element = "Fire";
+                    break;
+
+                case GUIBase.ResourceElement.Nature:
+                    element = "Nature";
+                    break;
+
+                case GUIBase.ResourceElement.Storm:
+                    element = "Storm";
+                    break;
+
+                case GUIBase.ResourceElement.Tech:
+                    element = "Tech";
+                    break;
+
+                case GUIBase.ResourceElement.Water:
+                    element = "Water";
+                    break;
+            }
+            if (GUI.Button(new Rect(i*200, Screen.height - 100, 200, 100), (i+1).ToString()+". Driode. Element: "+element+". HP: "+current[i].driodenHealth.ToString()))
+            {
+                InputText.Add(i);
+            }
+        }
+		
+		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Execute"))
 		{
-			//sende an server info
-			//InputText = "";
-            GameManager.Singleton.FightPlayerTurn(0,1,2,3);
+            if (InputText.Count == 4)
+            {
+                GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], InputText[3]);
+                InputText.Clear();
+            }
 		}
-		//
-		//GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), InputText);
-		//
-		//if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
-		//{
-		//	InputText = "";
-		//}
+
+        string inpTxt = "";
+        foreach(int number in InputText)
+            inpTxt+=number.ToString();
+
+		GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), inpTxt);
+		
+		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
+		{
+            InputText.Clear();
+		}
 	}
 
 	private void updateGUI()
@@ -192,10 +215,13 @@ public class BattleEngine : MonoBehaviour
 	{
 		_counter += Time.deltaTime;
 		if(_counter >= 3f) 
-		{ 
-			if(_gg == null) _gg = Create("GGScreen", 
-			                             GameObject.Find("GGScreenPos").transform.position,
-                                         GameObject.Find("GGScreenPos").transform.rotation);
+		{
+            if (_gg == null)
+            {
+                _gg = Create("GGScreen", Vector3.zero, Quaternion.identity);
+                _gg.transform.parent = GameObject.Find("GGScreenPos").transform;
+            }
+
             if (_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
 		}
 	}
@@ -344,7 +370,9 @@ public class BattleEngine : MonoBehaviour
 	}
 
 	public void DestroyBattle()
-	{
+    {
+        if (!RenderSettings.fog)
+            RenderSettings.fog = true;
 		MainCam.SetActive(true);
 		BattleCam.SetActive(false);
 		Destroy(FriendlyCreature);
