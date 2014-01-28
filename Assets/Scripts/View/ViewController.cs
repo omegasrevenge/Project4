@@ -93,13 +93,6 @@ public class ViewController : MonoBehaviour
     private void Init()
     {
         _gameManager = GameManager.Singleton;
-
-        if (_gameManager.DummyUI)
-        {
-            GameObject.FindGameObjectWithTag(UIRootTag).SetActive(false);
-            GameObject.FindGameObjectWithTag(MenuRootTag).SetActive(false);
-            return;
-        }
         
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(UIRootTag);
         GameObject MenuRoot = GameObject.FindGameObjectWithTag(MenuRootTag);

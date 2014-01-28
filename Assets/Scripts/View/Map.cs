@@ -38,6 +38,22 @@ public class Map : SceneRoot3D
             _grid = trans.GetComponent<MapGrid>();
     }
 
+    private void OnGUI()
+    {
+        if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map || BattleEngine.Current != null) return;
+        POIsInRange();
+        ShowResouces();
+        if (GameManager.Singleton.LoggedIn && GameManager.Singleton.DummyUI)
+        {
+            if (GUI.Button(new Rect(270, 40, 120, 50), "<color=white><size=20>Set Base</size></color>"))
+            {
+                GameManager.Singleton.SendBasePosition();
+                Debug.Log("Current Base Poition: " + LocationManager.GetCurrentPosition());
+                MoveBase();
+            }
+        }
+    }
+
     private void ShowResouces()
     {
         if (GameManager.Singleton.Player.Resources == null) return;
@@ -141,6 +157,7 @@ public class Map : SceneRoot3D
     void Update()
     {
         if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
+
 
         //Rotation:
         Vector3 gridRot = _grid.transform.eulerAngles;

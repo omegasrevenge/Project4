@@ -772,12 +772,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (DummyUI)
-        {
-            Debug.LogWarning("Be aware, that you disabled the real view \nby enabling DummyUI in the GameManager.\nIf you have further Questions, please contact Anton.");
-            return;
-        }
-
         switch (Player.InitSteps)
         {
             case(0):
