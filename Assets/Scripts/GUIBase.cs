@@ -9,8 +9,7 @@ public class GUIBase : MonoBehaviour
 	public enum ResourceLevel { Bioden, DriodenLvl0, DriodenLvl1, DriodenLvl2, DriodenLvl3, DriodenLvl4, DriodenLvl5 };
 	public ResourceLevel curResourceLevel = ResourceLevel.Bioden;
 
-	public enum ResourceElement { Energy, Fire, Storm, Nature, Water };
-	public ResourceElement CuResourceElement;
+    public BattleEngine.ResourceElement CuResourceElement;
 
 	private enum Windows { Crafting, Creature };
 	private Windows curWindow;
@@ -147,7 +146,7 @@ public class GUIBase : MonoBehaviour
 			{
 				Creature.Slot curSlot = curCreature.slots[i];
 
-				if (curSlot.driodenElement == -1 && curSlot.driodenLevel == -1)
+				if ((int)curSlot.driodenElement == -1 && curSlot.driodenLevel == -1)
 				{
 					if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock_open")))
 					{
@@ -156,7 +155,7 @@ public class GUIBase : MonoBehaviour
 					continue;
 				}
 
-				if (GUI.Button(curRect, "<color=white><size=20>" + ((ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
+                if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
 				{
 					Debug.Log("oh no he clickt me!!! " + i);
 				}
@@ -218,25 +217,25 @@ public class GUIBase : MonoBehaviour
 			curInput = curInputAsInt.ToString();
 		}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + ResourceElement.Energy.ToString() + "</size></color>"))
+        if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Energy.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Energy;
+            CuResourceElement = BattleEngine.ResourceElement.Energy;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Fire.ToString() + "</size></color>"))
+        if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Fire.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Fire;
+            CuResourceElement = BattleEngine.ResourceElement.Fire;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50),  "<color=white><size=20>" + ResourceElement.Storm.ToString() + "</size></color>"))
+        if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Storm.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Storm;
+            CuResourceElement = BattleEngine.ResourceElement.Storm;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + ResourceElement.Nature.ToString() + "</size></color>"))
+        if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Nature.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Nature;
+            CuResourceElement = BattleEngine.ResourceElement.Nature;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + ResourceElement.Water.ToString() + "</size></color>"))
+        if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Water.ToString() + "</size></color>"))
 		{
-			CuResourceElement = ResourceElement.Water;
+            CuResourceElement = BattleEngine.ResourceElement.Water;
 		}
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))

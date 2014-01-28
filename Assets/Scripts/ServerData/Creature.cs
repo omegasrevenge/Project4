@@ -16,17 +16,17 @@ public class Creature
 	public int Defense;
 	public int Dexterity;
 	public int Skillpoints;
-	public GUIBase.ResourceElement BaseElement;
+    public BattleEngine.ResourceElement BaseElement;
 	public Slot[] slots;
 
 	public struct Slot
 	{
 		public int fire;
-		public int tech;
+        public int energy;
 		public int nature;
 		public int water;
 		public int storm;
-		public GUIBase.ResourceElement driodenElement;
+        public BattleEngine.ResourceElement driodenElement;
 		public int driodenHealth;
 		public int driodenLevel;
         public int driodenStrength;
@@ -41,7 +41,7 @@ public class Creature
         }
 		Debug.Log(json);
 		ModelID = (int)json["ModelId"];
-		BaseElement = (GUIBase.ResourceElement)(int)json["Element"];
+        BaseElement = (BattleEngine.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];
 		XP = (int)json["XP"];
@@ -62,33 +62,33 @@ public class Creature
 		    slots[i] = new Slot()
 		    {
 			    fire = (int) jsonSlots[i]["Element0"],
-			    tech = (int) jsonSlots[i]["Element1"],
+			    energy = (int) jsonSlots[i]["Element1"],
 			    nature = (int) jsonSlots[i]["Element2"],
 			    water = (int) jsonSlots[i]["Element3"],
 			    storm = (int) jsonSlots[i]["Element4"],
-			    driodenElement = (GUIBase.ResourceElement)(int) jsonSlots[i]["EquipElement"],
+                driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
 			    driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"]*100),
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"]
 		    };
             switch(slots[i].driodenElement)
             {
-                case GUIBase.ResourceElement.Fire:
+                case BattleEngine.ResourceElement.Fire:
                     slots[i].driodenStrength = slots[i].fire;
                     break;
 
-                case GUIBase.ResourceElement.Nature:
+                case BattleEngine.ResourceElement.Nature:
                     slots[i].driodenStrength = slots[i].nature;
                     break;
 
-                case GUIBase.ResourceElement.Storm:
+                case BattleEngine.ResourceElement.Storm:
                     slots[i].driodenStrength = slots[i].storm;
                     break;
 
-                case GUIBase.ResourceElement.Tech:
-                    slots[i].driodenStrength = slots[i].tech;
+                case BattleEngine.ResourceElement.Energy:
+                    slots[i].driodenStrength = slots[i].energy;
                     break;
 
-                case GUIBase.ResourceElement.Water:
+                case BattleEngine.ResourceElement.Water:
                     slots[i].driodenStrength = slots[i].water;
                     break;
             }

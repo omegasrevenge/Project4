@@ -5,7 +5,8 @@ using System.Linq;
 public class BattleEngine : MonoBehaviour 
 {
 	//########## public #########
-	public enum TurnState{Wait, Rotate, Execute, Hit}
+    public enum TurnState { Wait, Rotate, Execute, Hit }
+    public enum ResourceElement { None = -1, Energy, Fire, Storm, Nature, Water };
 
 
 	public ActorControlls Actor;
@@ -153,27 +154,27 @@ public class BattleEngine : MonoBehaviour
             string element = "";
             switch (current[i].driodenElement)
             {
-                case GUIBase.ResourceElement.Fire:
+                case BattleEngine.ResourceElement.Fire:
                     element = "Fire";
                     break;
 
-                case GUIBase.ResourceElement.Nature:
+                case BattleEngine.ResourceElement.Nature:
                     element = "Nature";
                     break;
 
-                case GUIBase.ResourceElement.Storm:
+                case BattleEngine.ResourceElement.Storm:
                     element = "Storm";
                     break;
 
-                case GUIBase.ResourceElement.Tech:
+                case BattleEngine.ResourceElement.Energy:
                     element = "Tech";
                     break;
 
-                case GUIBase.ResourceElement.Water:
+                case BattleEngine.ResourceElement.Water:
                     element = "Water";
                     break;
             }
-            if (GUI.Button(new Rect(i*200, Screen.height - 100, 200, 100), (i+1).ToString()+". Driode. Element: "+element+". HP: "+current[i].driodenHealth.ToString()))
+            if (GUI.Button(new Rect(i*200, Screen.height - 100, 200, 100), (i+1).ToString()+". Driode. Element: "+element+". HP: "+current[i].driodenHealth.ToString()+"%."))
             {
                 InputText.Add(i);
             }
@@ -181,11 +182,25 @@ public class BattleEngine : MonoBehaviour
 		
 		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Execute"))
 		{
-            if (InputText.Count == 4)
+            switch(InputText.Count)
             {
-                GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], InputText[3]);
-                InputText.Clear();
+                case 0:
+                    GameManager.Singleton.FightPlayerTurn(-1, -1, -1, -1);
+                    break;
+                case 1:
+                    GameManager.Singleton.FightPlayerTurn(InputText[0], -1, -1, -1);
+                    break;
+                case 2:
+                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], -1, -1);
+                    break;
+                case 3:
+                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], -1);
+                    break;
+                case 4:
+                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], InputText[3]);
+                    break;
             }
+            InputText.Clear();
 		}
 
         string inpTxt = "";
@@ -214,16 +229,12 @@ public class BattleEngine : MonoBehaviour
 	private void enforceEnd()
 	{
 		_counter += Time.deltaTime;
-		if(_counter >= 3f) 
-		{
-            if (_gg == null)
-            {
-                _gg = Create("GGScreen", Vector3.zero, Quaternion.identity);
-                _gg.transform.parent = GameObject.Find("GGScreenPos").transform;
-            }
 
-            if (_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
-		}
+		if(_counter >= 3f)
+            Arena.transform.FindChild("CameraPivot").FindChild("BattleCamera").FindChild("GGScreen").gameObject.SetActive(true);
+
+        if (_counter >= 8f) 
+            DestroyBattle();
 	}
 
 	private void turnInit()
