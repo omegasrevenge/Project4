@@ -174,13 +174,13 @@ public class BattleEngine : MonoBehaviour
                     element = "Water";
                     break;
             }
-            if (GUI.Button(new Rect(i*200, Screen.height - 100, 200, 100), (i+1).ToString()+". Driode. Element: "+element+". HP: "+current[i].driodenHealth.ToString()+"%."))
+            if (GUI.Button(new Rect(0, Screen.height - 100*(i+1), 250, 100), (i+1).ToString()+". Driode. Element: "+element+". HP: "+current[i].driodenHealth.ToString()+"%."))
             {
                 InputText.Add(i);
             }
         }
 		
-		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2-100, 200, 200), "Execute"))
+		if (GUI.Button(new Rect(Screen.width-200, 0, 200, 200), "Execute"))
 		{
             switch(InputText.Count)
             {
@@ -207,9 +207,9 @@ public class BattleEngine : MonoBehaviour
         foreach(int number in InputText)
             inpTxt+=number.ToString();
 
-		GUI.TextArea(new Rect(Screen.width-100, Screen.height/2+100, 100, 100), inpTxt);
+		GUI.TextArea(new Rect(Screen.width-100, 200, 100, 100), inpTxt);
 		
-		if (GUI.Button(new Rect(Screen.width-200, Screen.height/2+100, 100, 100), "Delete Selection"))
+		if (GUI.Button(new Rect(Screen.width-200, 200, 100, 100), "Delete Selection"))
 		{
             InputText.Clear();
 		}
