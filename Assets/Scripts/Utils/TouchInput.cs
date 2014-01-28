@@ -44,7 +44,7 @@ public class TouchInput : MonoBehaviour
             Debug.LogError("Second instance of TouchInput.");
     }
 
-    public float GetRotation(float startAngle,Vector3 worldPos = default(Vector3), bool singleTouch = false)
+    public float GetRotation(float startAngle,Vector3 worldPos = default(Vector3), bool singleTouch = false, bool invertRotation = false)
     {
         if (Input.touchCount < 1 || (Input.touchCount == 1 && !singleTouch))
         {
@@ -54,7 +54,8 @@ public class TouchInput : MonoBehaviour
 
             if (_rotationSpeed > MinRotationSpeed || _rotationSpeed < -MinRotationSpeed)
             {
-                startAngle += _rotationSpeed*Time.deltaTime;
+                    startAngle += _rotationSpeed * Time.deltaTime;
+
                 _lastRotation = startAngle;
                 _rotationSpeed = Mathf.Lerp(_rotationSpeed, 0f, Time.deltaTime*RotationDampTime);
             }
@@ -118,7 +119,11 @@ public class TouchInput : MonoBehaviour
             float a1 = Mathf.Atan2(_startInput.normalized.x, _startInput.normalized.y);
             float a2 = Mathf.Atan2(endInput.normalized.x, endInput.normalized.y);
             float a = a1 - a2;
-            float newRotation = _startRotation + Mathf.Rad2Deg*a;
+            float newRotation;
+            if(!invertRotation)
+                newRotation = _startRotation + Mathf.Rad2Deg*a;
+            else
+                newRotation = _startRotation - Mathf.Rad2Deg * a;
             _rotationSpeed = Mathf.Lerp(_rotationSpeed,(newRotation - _lastRotation)/Time.deltaTime,Time.deltaTime*RotationSpeedInterpolation);
             _lastRotation = newRotation;
 

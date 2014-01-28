@@ -5,8 +5,10 @@ public class Map : SceneRoot3D
 {
     private const string Prefab = "Scene/map";
     private const string GridStr = "grid";
+    private const string MapRigStr = "map_rig";
 
     private MapGrid _grid;
+    private Transform _mapRig;
 
     public bool init = false;
 
@@ -33,9 +35,8 @@ public class Map : SceneRoot3D
 
     public void Init()
     {
-        Transform trans = transform.Find(GridStr);
-        if (trans)
-            _grid = trans.GetComponent<MapGrid>();
+        _mapRig = transform.Find(MapRigStr);
+        _grid = _mapRig.Find(GridStr).GetComponent<MapGrid>();
     }
 
     private void OnGUI()
@@ -114,7 +115,7 @@ public class Map : SceneRoot3D
             GameObject obj = Resources.Load<GameObject>(path + poi.Type);
             if (obj == null) obj = Resources.Load<GameObject>(path + "Default");
             poi.instance = (GameObject)Instantiate(obj);
-            poi.instance.transform.parent = transform;
+            poi.instance.transform.parent = _mapRig;
             float lon = poi.Position.x;
             float lat = poi.Position.y;
             MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
@@ -133,7 +134,7 @@ public class Map : SceneRoot3D
             GameObject obj = Resources.Load<GameObject>(path + "Base");
             GameObject curGameObject = (GameObject)Instantiate(obj);
             GameManager.Singleton.Player.baseInstance = curGameObject;
-            curGameObject.transform.parent = transform;
+            curGameObject.transform.parent = _mapRig;
             float lon = GameManager.Singleton.Player.BasePosition.x;
             float lat = GameManager.Singleton.Player.BasePosition.y;
             MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
@@ -160,8 +161,8 @@ public class Map : SceneRoot3D
 
 
         //Rotation:
-        Vector3 gridRot = _grid.transform.eulerAngles;
-        _grid.transform.eulerAngles = new Vector3(gridRot.x, TouchInput.Singleton.GetRotation(gridRot.y, _grid.transform.position, true), gridRot.z);
+        Vector3 gridRot = _mapRig.eulerAngles;
+        _mapRig.eulerAngles = new Vector3(gridRot.x, TouchInput.Singleton.GetRotation(gridRot.y, _mapRig.position, true, true), gridRot.z);
 
         MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(_grid.ZoomLevel);
         if ((newPosition - _grid.CurrentPosition).Magnitude < MoveRadius)

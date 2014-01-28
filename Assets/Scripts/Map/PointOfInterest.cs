@@ -9,6 +9,6 @@ public class PointOfInterest : MonoBehaviour
     void Update()
     {
         Vector2 pos = Grid.GetPosition(ProjPos);
-        transform.position = new Vector3(pos.x, 0.001f, pos.y);
+        transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);
     }
 }
