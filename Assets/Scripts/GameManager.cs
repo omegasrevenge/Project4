@@ -103,8 +103,8 @@ public class GameManager : MonoBehaviour
     {
         _view = ViewController.Create();
         SoundController.Create().Init();
-        _map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
-        _map.name = "Map";
+        //_map = (Instantiate(Resources.Load<GameObject>("Map")) as GameObject).GetComponent<MapGrid>();
+        //_map.name = "Map";
         _allOwnCreatures = null;
 
 #if !UNITY_EDITOR
@@ -613,13 +613,13 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) { yield break; }
     }    
     
-    public void SubmitPlayerName(string name, Action<bool> callback)
+    public void SubmitPlayerName(string name, Action<bool, string> callback)
     {
 
         StartCoroutine(CSubmitPlayerName(name, callback));
     }
 
-    public IEnumerator CSubmitPlayerName(string name, Action<bool> callback)
+    public IEnumerator CSubmitPlayerName(string name, Action<bool, string> callback)
     {
         WWW request = new WWW(GetSessionURL("nameplayer") + "&name=" + name);
         Player.Name = name;
@@ -630,11 +630,11 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json))
         {
             if(callback != null)
-                callback(false); 
+                callback(false, (string)json["error"]); 
             yield break; 
         }
         if (callback != null)
-            callback(true);
+            callback(true, "");
     }
 
     private IEnumerator GetPois()
@@ -777,43 +777,65 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Be aware, that you disabled the real view \nby enabling DummyUI in the GameManager.\nIf you have further Questions, please contact Anton.");
             return;
         }
-        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
+
+        switch (Player.InitSteps)
+        {
+            case(0):
+                GUIStartIRISinstructions();
+                break;
+            default:
+                GUIInitMap();
+                break;
+        }
         _view.HideLoadingScreen();
-        var irisPopUp = _view.AddIrisPopup("iris_01_text", "iris_01");
-        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "iris_02_01"); };
 
     }
 
     #region GUI methods
 
+    public void GUIStartIRISinstructions()
+    {
+        _view.AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", GUISubmitName));
+        var irisPopUp = _view.AddIrisPopup("iris_01_text", "iris_01");
+        irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_02_01_text", "iris_02_01"); };
+    }
+
     public void GUISubmitName(string username)
     {
-        _view.ShowLoadingScreen(Localization.GetText("loadingscreen_submitName"));
+        //_view.ShowLoadingScreen(Localization.GetText("loadingscreen_submitName"));
         SubmitPlayerName(username,GUINameSubmitted);
         //Endless Loop
     }
 
-    public void GUINameSubmitted(bool result)
+    public void GUINameSubmitted(bool result, string error)
     {
-        _view.HideLoadingScreen();
+        //_view.HideLoadingScreen();
         if (result)
         {
-            _view.AddIrisPopup("iris_02_02_text", "iris_02_02");
-            //var irisPopUp = _view.AddIrisPopup("iris_01_text", "test");
-            //irisPopUp.StartCallback = () => irisPopUp.AddIrisPopup("iris_02_01_text", "test");
+            _view.AddIrisPopup("iris_02_02_text", "iris_02_02").Callback = () =>
+            {
+                _view.RemoveMaxScreen();
+                SpectresIntro intro = SpectresIntro.Create(GUIShowSpectreChoice);
+                intro.AttachGUI(_view.AddSpectresIntro("iris_03_text"));
+                _view.Switch3DSceneRoot(intro);
+            };         
             return;
         }
+        Debug.Log(error);
 
-        _view.RemoveMaxScreen();
-        SpectresIntro intro = SpectresIntro.Create(GUIShowSpectreChoice);
-        intro.AttachGUI(_view.AddSpectresIntro("iris_03_text"));
-        _view.Switch3DSceneRoot(intro);
+
 
     }
 
     public void GUIShowSpectreChoice()
     {
-        
+        GUIInitMap();
+    }
+
+    public void GUIInitMap()
+    {
+        _map = MapGrid.Create();
+        _view.Switch3DSceneRoot(_map);
     }
 
     #endregion
