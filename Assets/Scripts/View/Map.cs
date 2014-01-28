@@ -6,9 +6,11 @@ public class Map : SceneRoot3D
     private const string Prefab = "Scene/map";
     private const string GridStr = "grid";
     private const string MapRigStr = "map_rig";
+    private const string ArrowStr = "arrow";
 
     private MapGrid _grid;
     private Transform _mapRig;
+    private Transform _arrow;
 
     public bool init = false;
 
@@ -37,6 +39,7 @@ public class Map : SceneRoot3D
     {
         _mapRig = transform.Find(MapRigStr);
         _grid = _mapRig.Find(GridStr).GetComponent<MapGrid>();
+        _arrow = _mapRig.Find(ArrowStr);
     }
 
     private void OnGUI()
@@ -112,7 +115,7 @@ public class Map : SceneRoot3D
         foreach (POI poi in GameManager.Singleton.POIs)
         {
             if (poi.instance != null) continue;
-            GameObject obj = Resources.Load<GameObject>(path + poi.Type);
+            GameObject obj = Resources.Load<GameObject>(path + "resource");//poi.Type);
             if (obj == null) obj = Resources.Load<GameObject>(path + "Default");
             poi.instance = (GameObject)Instantiate(obj);
             poi.instance.transform.parent = _mapRig;
@@ -127,11 +130,11 @@ public class Map : SceneRoot3D
 
     private void CreateBase()
     {
-        string path = "Prefabs/";
+        string path = "Prefabs/POIs/";
 
         if (GameManager.Singleton.Player.baseInstance == null)
         {
-            GameObject obj = Resources.Load<GameObject>(path + "Base");
+            GameObject obj = Resources.Load<GameObject>(path + "base");
             GameObject curGameObject = (GameObject)Instantiate(obj);
             GameManager.Singleton.Player.baseInstance = curGameObject;
             curGameObject.transform.parent = _mapRig;
@@ -159,6 +162,7 @@ public class Map : SceneRoot3D
     {
         if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
 
+        _arrow.localEulerAngles = new Vector3(90f,LocationManager.GetDirection(),0f);
 
         //Rotation:
         Vector3 gridRot = _mapRig.eulerAngles;

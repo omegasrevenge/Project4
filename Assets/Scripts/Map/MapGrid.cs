@@ -56,6 +56,7 @@ public class MapGrid : SceneRoot3D
                 GameObject obj = new GameObject("tile_" + j + "_" + i);
                 SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
                 renderer.material = (Material)Resources.Load("Materials/MapTile", typeof(Material));
+                renderer.sortingOrder = -1;
                 Cells.Add(obj.AddComponent<RenderCell>());
                 Vector3 position = new Vector3();
                 position.x = j * UnitsPerTile;

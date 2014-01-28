@@ -10,7 +10,7 @@ public class SpectresIntro : SceneRoot3D
     private AudioSource _audio;
     private bool _started = false;
     private Action _callback;
-    private GUIObjectSpectresIntro _gui;
+
 
     public static SpectresIntro Create(Action callback)
     {
@@ -29,8 +29,8 @@ public class SpectresIntro : SceneRoot3D
     {
         _audio = Localization.GetSound(IrisSoundStr);
         _audio.Play();
-        if (_gui && _gui.Visualizer && _audio)
-            _gui.Visualizer.Audio = _audio;
+        if (_gui && (_gui as GUIObjectSpectresIntro).Visualizer && _audio)
+            (_gui as GUIObjectSpectresIntro).Visualizer.Audio = _audio;
     }
 
     void Update()
@@ -47,20 +47,15 @@ public class SpectresIntro : SceneRoot3D
 
     void OnIrisFinished()
     {
-        Debug.Log("Und zum Finish finish");
         if (_callback != null)
             _callback();
         Destroy(gameObject);
-        if (_gui)
-        {
-            Destroy(_gui.gameObject);
-        }
     }
 
-    public void AttachGUI(GUIObjectSpectresIntro gui)
+    public override void AttachGUI(Component gui)
     {
-        _gui = gui;
-        if (_gui.Visualizer && _audio)
-            _gui.Visualizer.Audio = _audio;
+        base.AttachGUI(gui);
+        if ((_gui as GUIObjectSpectresIntro).Visualizer && _audio)
+            (_gui as GUIObjectSpectresIntro).Visualizer.Audio = _audio;
     }
 }

@@ -5,8 +5,11 @@ public class LocationManager : MonoBehaviour {
     private static LocationManager _instance;
     //Latitude = 52.50451
     //Longitude = 13.39699
-    public float Latitude = 52.50451f;
-    public float Longitude = 13.39699f;
+    private float _latitude = 52.50451f;
+    private float _longitude = 13.39699f;
+    private float _direction = 0f;
+
+    public const float MoveSpeed = 3f;
 
     public static LocationManager Singleton
     {
@@ -47,26 +50,37 @@ public class LocationManager : MonoBehaviour {
 #if !UNITY_EDITOR
         if (Input.location.status != LocationServiceStatus.Running) return;
             SetLocation();
+        
+        //if (Mathf.Abs(Mathf.DeltaAngle(_direction, Input.compass.trueHeading)) < 90f)
+        _direction = Mathf.LerpAngle(_direction, Input.compass.trueHeading, Time.deltaTime*MoveSpeed);
+        //else
+          //  _direction = Input.compass.trueHeading;
 #else
-        Longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
-        Latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
+        _longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
+        _latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
 #endif
+        
     }
 
 
     private void SetLocation()
     {
-        Longitude = Input.location.lastData.longitude;
-        Latitude = Input.location.lastData.latitude;
+        _longitude = Input.location.lastData.longitude;
+        _latitude = Input.location.lastData.latitude;
     }
 
     public static Vector2 GetCurrentPosition()
     {
-        return new Vector2(Singleton.Longitude, Singleton.Latitude);
+        return new Vector2(Singleton._longitude, Singleton._latitude);
     }
 
     public static MapUtils.ProjectedPos GetCurrentProjectedPos(int zoomLevel)
     {
         return MapUtils.GeographicToProjection(GetCurrentPosition(), zoomLevel);
+    }
+
+    public static float GetDirection()
+    {
+        return Singleton._direction;
     }
 }
