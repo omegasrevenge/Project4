@@ -31,7 +31,7 @@ public class BattleEngine : MonoBehaviour
 	//########## static #########
 	
 	//########## const #########
-	public const string DefaultArena			 = "Battle/DefaultArena";
+	public const string DefaultArena			 = "DefaultArena";
 	public const string DefaultFriendlySpawnPos  = "FriendlySpawnPos";
 	public const string DefaultEnemySpawnPos	 = "EnemySpawnPos";
 	public const string WolfMonster	 			 = "WolfMonster";
@@ -193,32 +193,38 @@ public class BattleEngine : MonoBehaviour
 		_counter += Time.deltaTime;
 		if(_counter >= 3f) 
 		{ 
-			if(_gg == null) _gg = Create("Battle/GGScreen", 
-			                             GameObject.Find("GGScreenPos").transform.position, 
-			                             GameObject.Find("GGScreenPos").transform.rotation);  
+			if(_gg == null) _gg = Create("GGScreen", 
+			                             GameObject.Find("GGScreenPos").transform.position,
+                                         GameObject.Find("GGScreenPos").transform.rotation);
+            if (_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
 		}
-		if(_counter >= 8f) { Destroy(_gg); DestroyBattle(); }
 	}
 
 	private void turnInit()
-	{
-		Turn = Result.Turn;
-		initSkill();
-	}
+    {
+        Turn = Result.Turn;
 
-	private void initSkill()
-	{
 		//actor -> monster
 		//Execute casting animation
 		//when done do
 		//evalute which skill was used by Result.SkillID
-		if(Result.SkillName.Equals("Laser"))
-			createSkillVisuals("Laser");
+
+        switch(Result.SkillName)
+        {
+            case "Laser":
+                createSkillVisuals("Laser");
+                break;
+            default:
+                Debug.Log("The skill "+Result.SkillName+" does not exist. Casting Laser instead.");
+                createSkillVisuals("Laser");
+                break;
+
+        }
 	}
 
 	private void createSkillVisuals(string name)
 	{
-		_actor = (GameObject)Instantiate(Resources.Load("Battle/"+name),Vector3.zero,Quaternion.identity);
+        _actor = Create(name, Vector3.zero, Quaternion.identity);
 		Actor = _actor.GetComponent<ActorControlls>();
 		Actor.Owner = this;
 		switch(CurrentPlayer)
@@ -244,6 +250,8 @@ public class BattleEngine : MonoBehaviour
 			
 			FriendlyCreature.GetComponent<MonsterController>().Health += Result.HoT;
 			EnemyCreature   .GetComponent<MonsterController>().Health += -Result.Damage-Result.DoT;
+            if (EnemyCreature.GetComponent<MonsterController>().Health < 0)
+                EnemyCreature.GetComponent<MonsterController>().Health = 0;
 
 		} 
 		else 
@@ -253,7 +261,9 @@ public class BattleEngine : MonoBehaviour
 				createDamageIndicator (EnemyCreature, Result.HoT, 0, true);
 			
 			FriendlyCreature.GetComponent<MonsterController>().Health += -Result.Damage-Result.DoT;
-			EnemyCreature   .GetComponent<MonsterController>().Health += Result.HoT;
+            EnemyCreature.GetComponent<MonsterController>().Health += Result.HoT;
+            if (FriendlyCreature.GetComponent<MonsterController>().Health < 0)
+                FriendlyCreature.GetComponent<MonsterController>().Health = 0;
 		}
 
 		CurrentPlayer = Result.PlayerTurn;
