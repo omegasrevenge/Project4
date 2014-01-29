@@ -22,12 +22,14 @@ public class PointOfInterest : MonoBehaviour
         }
     }
 
-    public void Init(POI poi, MapGrid root)
+    public void Init(POI poi, MapGrid grid)
     {
         Poi = poi;
         Poi.View = this;
-        _grid = root;
-        ProjPos = MapUtils.GeographicToProjection(new Vector2(poi.Position.x, poi.Position.y), root.ZoomLevel);
+        _grid = grid;
+        ProjPos = MapUtils.GeographicToProjection(new Vector2(poi.Position.x, poi.Position.y), grid.ZoomLevel);
+        Vector2 pos = _grid.GetPosition(ProjPos);
+        transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);
     }
 
     void Update()

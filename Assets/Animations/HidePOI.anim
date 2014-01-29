@@ -39,48 +39,6 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.r
-    path: point_of_interest
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: point_of_interest
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.b
-    path: point_of_interest
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
         inSlope: -.5
         outSlope: -.5
         tangentMode: 10
@@ -137,48 +95,6 @@ AnimationClip:
     attribute: m_IsActive
     path: Sparkle Rising
     classID: 1
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.r
-    path: point_of_interest
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: point_of_interest
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.b
-    path: point_of_interest
-    classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2

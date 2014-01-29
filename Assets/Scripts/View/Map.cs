@@ -123,9 +123,11 @@ public class Map : SceneRoot3D
         foreach (POI poi in GameManager.Singleton.POIs)
         {
             if(poi.Type == POI.POIType.Resource)
-                Resource.Create(poi, _grid);
-            else
-                Resource.Create(poi, _grid);
+                Resource.Create(poi, _grid, _mapRig);
+            else if (poi.Type == POI.POIType.Fight)
+                Spectre.Create(poi, _grid, _mapRig);
+            else if (poi.Type == POI.POIType.Heal)
+                HealStation.Create(poi, _grid, _mapRig);
         }
     }
 

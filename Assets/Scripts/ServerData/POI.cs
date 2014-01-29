@@ -14,8 +14,8 @@ public class POI
     }
 
     private static readonly string[] ResourceTypes = {"Energy", "Nature", "Fire", "Water", "Storm" };
-    private const string FightStr = "fight";
-    private const string HealStr = "heal";
+    private const string FightStr = "Fight";
+    private const string HealStr = "Heal";
 
 
     public string POI_ID;
@@ -42,7 +42,7 @@ public class POI
     {
         get
         {
-            if(ResourceTypes.Contains(Resource))
+            if (ResourceTypes.Any(t => Resource.Contains(t)))
                 return POIType.Resource;
             if(Resource == FightStr)
                 return POIType.Fight;
