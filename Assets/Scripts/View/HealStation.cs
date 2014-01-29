@@ -4,11 +4,13 @@ using UnityEngine;
 public class HealStation : PointOfInterest
 {
     private const string Prefab = "Prefabs/POIs/healingspot";
-    //private const string HideResourceStr = "HidePOI";
+    private const string HideStr = "HideHeal";
     private const string LightStr = "point_light";
-    private const string InRangeStr = "InRange";
+    private const string ModelStr = "healing_station";
 
     private GameObject _light;
+    private Animator _fadingAnimator;
+
     public static HealStation Create(POI poi, MapGrid grid, Transform root)
     {
         if (poi.View != null)
@@ -19,19 +21,24 @@ public class HealStation : PointOfInterest
         res.transform.parent = root;
         res.Init(poi, grid);
         res._light = res.transform.Find(LightStr).gameObject;
+        res._fadingAnimator = res.transform.Find(ModelStr).GetComponent<Animator>();
+        res.transform.Find(ModelStr).GetComponent<FadeAnimation>().DestroyObject += res.DestroyResource;
         return res;
+    }
+
+    protected override void RemovePOI()
+    {
+        _fadingAnimator.Play(HideStr);
     }
 
     protected override void EnterRange()
     {
         _light.SetActive(true);
-        //_animator.SetBool(InRangeStr, InRange);
     }
 
     protected override void LeaveRange()
     {
         _light.SetActive(false);
-        //_animator.SetBool(InRangeStr, InRange);
     }
 
     public void DestroyResource()
