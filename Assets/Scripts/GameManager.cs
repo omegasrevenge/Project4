@@ -58,7 +58,9 @@ public class GameManager : MonoBehaviour
     public string SessionID = "";
     public GameMode CurrentGameMode = GameMode.Login;
 
-    public ObjectPos[] PlayersOnMap;
+    private ObjectPos[] PlayerPositionsInRange;
+    public List<Player> PlayersOnMap = new List<Player>();
+    private bool _playersUpdated = false;
     private Dictionary<string, Player> _playerCache = new Dictionary<string, Player>();
     private List<string> _playerQueue = new List<string>();
     private bool _playerQueryActive;
@@ -164,11 +166,30 @@ public class GameManager : MonoBehaviour
         if (!_playerQueryActive && _playerQueue.Count > 0)
             StartCoroutine(CGetPlayers());
 
+        if (_playersUpdated)
+        {
+            UpdatePlayersOnMap();
+            
+        }
+
 
         if (!pois_valid && pois_timeQ <= 0)
             StartCoroutine(GetPois());
 
         pois_timeQ -= Time.deltaTime;
+    }
+
+    private void UpdatePlayersOnMap()
+    {
+        List<Player> tempPlayers = new List<Player>();
+        foreach (ObjectPos pos in PlayerPositionsInRange)
+        {
+            Player player = GetPlayer(pos.ID);
+            if (player != null)
+                tempPlayers.Add(player);
+        }
+        PlayersOnMap = tempPlayers;
+        _playersUpdated = false;
     }
 
     public static TController CreateController<TController>(string name = "") where TController : MonoBehaviour
@@ -499,11 +520,12 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
         JSONObject playersJSON = json["data"];
-        PlayersOnMap = new ObjectPos[playersJSON.Count];
-        for (int i = 0; i < PlayersOnMap.Length; i++)
+        PlayerPositionsInRange = new ObjectPos[playersJSON.Count];
+        for (int i = 0; i < PlayerPositionsInRange.Length; i++)
         {
-            PlayersOnMap[i] = new ObjectPos((string)playersJSON[i][2], (float)playersJSON[i][1], (float)playersJSON[i][0]);
+            PlayerPositionsInRange[i] = new ObjectPos((string)playersJSON[i][2], (float)playersJSON[i][1], (float)playersJSON[i][0]);
         }
+        UpdatePlayersOnMap();
     }
 
     /// <summary>
@@ -612,7 +634,7 @@ public class GameManager : MonoBehaviour
             _playerQueue.Remove(requestedPIDs[i]);
         }
 
-
+        _playersUpdated = true;
     }
 
     public void AddXP(string xp)

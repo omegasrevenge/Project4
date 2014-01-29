@@ -1254,6 +1254,7 @@ MonoBehaviour:
   ServerURL: http://pixeltamer.net:7774/rpc/
   SessionID: 
   CurrentGameMode: 0
+  PlayersOnMap: []
   _lastOwnPlayerUpdate: 0
   _lastPositionUpdate: -1000
   _lastPlayerQuery: -1000

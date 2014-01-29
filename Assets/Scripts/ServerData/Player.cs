@@ -28,6 +28,9 @@ public class Player
 		BasePosition = new Vector2((float)json["BaseLon"], (float)json["BaseLat"]);
 	    BaseTime = (Int64) json["TimeBase"];
         Resources = new int[7,5];
+
+        if (GameManager.Singleton.PlayerID != PlayerID)
+            return;
         JSONObject res = json["Resources"];
         for (int i = 0; i < res.Count; i++)
         {
