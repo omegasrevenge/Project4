@@ -29,7 +29,7 @@ public class Player
 	    BaseTime = (Int64) json["TimeBase"];
         Resources = new int[7,5];
 
-        if (GameManager.Singleton.PlayerID != PlayerID)
+        if (GameManager.Singleton.Player.PlayerID != PlayerID)
             return;
         JSONObject res = json["Resources"];
         for (int i = 0; i < res.Count; i++)

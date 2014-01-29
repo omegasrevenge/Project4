@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using System.Collections;
 
 public class Map : SceneRoot3D 
@@ -13,6 +15,7 @@ public class Map : SceneRoot3D
     private Transform _mapRig;
     private Transform _arrow;
     private Animator _radar;
+    private Dictionary<Player, PlayerOnMap> _playersOnMap = new Dictionary<Player, PlayerOnMap>(); 
 
     public bool init = false;
 
@@ -45,48 +48,81 @@ public class Map : SceneRoot3D
         _radar = _mapRig.Find(RadarStr).GetComponent<Animator>();
     }
 
-    private void OnGUI()
+    //private void OnGUI()
+    //{
+    //    if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map || BattleEngine.Current != null) return;
+    //    CheckPOIsInRange();
+    //    ShowResouces();
+    //    if (GameManager.Singleton.LoggedIn && GameManager.Singleton.DummyUI)
+    //    {
+    //        if (GUI.Button(new Rect(270, 40, 120, 50), "<color=white><size=20>Set Base</size></color>"))
+    //        {
+    //            GameManager.Singleton.SendBasePosition();
+    //            Debug.Log("Current Base Poition: " + LocationManager.GetCurrentPosition());
+    //            MoveBase();
+    //        }
+    //    }
+    //}
+
+    //private void ShowResouces()
+    //{
+    //    if (GameManager.Singleton.Player.Resources == null) return;
+
+    //    GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
+    //    curGuiStyle.normal.textColor = Color.white;
+
+    //    for (int i = 0; i < 7; i++)
+    //    {
+    //        string z = "" + i + ":";
+    //        for (int j = 0; j < 5; j++)
+    //        {
+    //            z += GameManager.Singleton.Player.Resources[i, j] + " ";
+    //        }
+    //        GUI.Label(new Rect(20, 40 + i * 40, 200, 20), z, curGuiStyle);
+    //    }
+    //}
+
+    public void UpdatePlayers()
     {
-        if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map || BattleEngine.Current != null) return;
-        POIsInRange();
-        //ShowResouces();
-        if (GameManager.Singleton.LoggedIn && GameManager.Singleton.DummyUI)
+        foreach (Player player in GameManager.Singleton.PlayersOnMap.Where(player => !_playersOnMap.ContainsKey(player)))
         {
-            if (GUI.Button(new Rect(270, 40, 120, 50), "<color=white><size=20>Set Base</size></color>"))
-            {
-                GameManager.Singleton.SendBasePosition();
-                Debug.Log("Current Base Poition: " + LocationManager.GetCurrentPosition());
-                MoveBase();
-            }
+            PlayerOnMap pom = PlayerOnMap.Create(player, _grid, _mapRig);
+            if (pom != null)
+                _playersOnMap.Add(player, pom);
+        }
+        List<Player> oldItems = new List<Player>();
+        foreach (KeyValuePair<Player, PlayerOnMap> p in _playersOnMap.Where(pom => !GameManager.Singleton.PlayersOnMap.Contains(pom.Key)))
+        {
+            p.Value.RemovePlayerFromMap();
+            oldItems.Add(p.Key);
+        }
+        foreach (Player oldItem in oldItems)
+        {
+            _playersOnMap.Remove(oldItem);
         }
     }
 
-    private void ShowResouces()
+    public void UpdatePOIs()
     {
-        if (GameManager.Singleton.Player.Resources == null) return;
-
-        GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
-        curGuiStyle.normal.textColor = Color.white;
-
-        for (int i = 0; i < 7; i++)
+        foreach (POI poi in GameManager.Singleton.POIs)
         {
-            string z = "" + i + ":";
-            for (int j = 0; j < 5; j++)
-            {
-                z += GameManager.Singleton.Player.Resources[i, j] + " ";
-            }
-            GUI.Label(new Rect(20, 40 + i * 40, 200, 20), z, curGuiStyle);
+            if (poi.Type == POI.POIType.Resource)
+                Resource.Create(poi, _grid, _mapRig);
+            else if (poi.Type == POI.POIType.Fight)
+                Spectre.Create(poi, _grid, _mapRig);
+            else if (poi.Type == POI.POIType.Heal)
+                HealStation.Create(poi, _grid, _mapRig);
         }
     }
 
-    private void POIsInRange()
+    private void CheckRadar()
     {
         int inRange = 0;
 
-        GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
-        curGuiStyle.normal.textColor = Color.white;
+        //GUIStyle curGuiStyle = new GUIStyle { fontSize = 30 };
+        //curGuiStyle.normal.textColor = Color.white;
 
-        GUI.Label(new Rect(500, 10, 200, 20), GameManager.Singleton.lastFarmResult, curGuiStyle);
+        //GUI.Label(new Rect(500, 10, 200, 20), GameManager.Singleton.lastFarmResult, curGuiStyle);
 
         foreach (POI poi in GameManager.Singleton.POIs)
         {
@@ -104,6 +140,17 @@ public class Map : SceneRoot3D
                 //    GameManager.Singleton.PoiFarm(poi);
                 //}
         }
+
+        foreach (PlayerOnMap pom in _playersOnMap.Values)
+        {
+            if (pom != null)
+            {
+                pom.InRange = MapUtils.Distance(pom.ProjPos, _grid.CurrentPosition) <= RangeRadius;
+                if (pom.InRange)
+                    inRange++;
+            }
+        }
+
         //if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
         //{
         //    //GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
@@ -115,20 +162,6 @@ public class Map : SceneRoot3D
         //}
 
         _radar.SetBool("Radar", inRange > 0);
-    }
-
-    public void CreatePOIs()
-    {
-        string path = "Prefabs/POIs/";
-        foreach (POI poi in GameManager.Singleton.POIs)
-        {
-            if(poi.Type == POI.POIType.Resource)
-                Resource.Create(poi, _grid, _mapRig);
-            else if (poi.Type == POI.POIType.Fight)
-                Spectre.Create(poi, _grid, _mapRig);
-            else if (poi.Type == POI.POIType.Heal)
-                HealStation.Create(poi, _grid, _mapRig);
-        }
     }
 
     private void CreateBase()
@@ -165,6 +198,10 @@ public class Map : SceneRoot3D
     {
         if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map) return;
 
+        UpdatePlayers();
+        UpdatePOIs();
+        CheckRadar();
+
         _arrow.localEulerAngles = new Vector3(90f,LocationManager.GetDirection(),0f);
 
         //Rotation:
@@ -186,11 +223,7 @@ public class Map : SceneRoot3D
             GameManager.Singleton.pois_valid = false;
         }
 
-        if (pois_version != GameManager.Singleton.pois_version)
-        {
-            pois_version = GameManager.Singleton.pois_version;
-            CreatePOIs();
-        }
+        
 
         if (GameManager.Singleton.LoggedIn)
         {

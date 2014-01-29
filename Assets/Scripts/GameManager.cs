@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 	private const float EnemyTurnFreq = 3f;
 
     public List<POI> POIs = new List<POI>();
-    public int pois_version = 0;
     public float pois_timeQ;
     public bool pois_valid = false;
     public string lastFarmResult = "";
@@ -742,8 +741,6 @@ public class GameManager : MonoBehaviour
         }
 
         POIs = tmpPOIs;
-        pois_version++;
-        //CreatePOIs();
     }
 
     /// <summary>
