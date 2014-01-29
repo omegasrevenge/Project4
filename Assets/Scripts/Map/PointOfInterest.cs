@@ -25,6 +25,9 @@ public class PointOfInterest : MonoBehaviour
     public void Init(POI poi, MapGrid grid)
     {
         Poi = poi;
+        if(Poi.View != null)
+            Destroy(gameObject);
+        gameObject.name = Poi.Type + "_" + Poi.POI_ID;
         Poi.View = this;
         _grid = grid;
         ProjPos = MapUtils.GeographicToProjection(new Vector2(poi.Position.x, poi.Position.y), grid.ZoomLevel);
