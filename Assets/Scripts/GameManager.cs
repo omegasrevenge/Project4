@@ -326,6 +326,46 @@ public class GameManager : MonoBehaviour
 		JSONObject json = JSONParser.parse(request.text);
 		if (!CheckResult(json)) yield break;
 
+		UpdateAllOwnCreatures(json["data"]);
+
+		GetOwnPlayer();
+	}
+
+	public void EquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
+	{
+		StartCoroutine(CEquipCreatureSlot(creatureID, slotId, driodenElement, driodenLevel));
+	}
+
+	private IEnumerator CEquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
+	{
+		WWW request = new WWW(GetSessionURL("equipcrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement + "&level=" + driodenLevel);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		Debug.Log(json);
+		if (!CheckResult(json)) yield break;
+
+		UpdateAllOwnCreatures(json["data"]);
+
+		GetOwnPlayer();
+	}
+
+	public void UpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
+	{
+		StartCoroutine(CUpgradeCreatureSlot(creatureID, slotId, driodenElement));
+	}
+
+	private IEnumerator CUpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
+	{
+		WWW request = new WWW(GetSessionURL("upgradecrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		Debug.Log(json);
+		if (!CheckResult(json)) yield break;
+
+		UpdateAllOwnCreatures(json["data"]);
+
 		GetOwnPlayer();
 	}
 
@@ -787,6 +827,42 @@ public class GameManager : MonoBehaviour
         _view.HideLoadingScreen();
 
     }
+
+	private void UpdateAllOwnCreatures(JSONObject json)
+	{
+		foreach (Creature curCreature in AllOwnCreatures)
+		{
+			if (curCreature.CreatureID == (int) json["CId"])
+			{
+				curCreature.HP = (int) json["HP"];
+				curCreature.HPMax = (int) json["HPMax"];
+				curCreature.Damage = (int) json["Damage"];
+				curCreature.Defense = (int) json["Defense"];
+				curCreature.Dexterity = (int) json["Dexterity"];
+				curCreature.Skillpoints = (int) json["Skillpoints"];
+				curCreature.slots = new Creature.Slot[json["Slots"].Count];
+
+				JSONObject jsonSlots = json["Slots"];
+
+				for (int i = 0; i < json["Slots"].Count; i++)
+				{
+
+					curCreature.slots[i] = new Creature.Slot()
+					{
+						fire = (int)jsonSlots[i]["Element0"],
+						energy = (int)jsonSlots[i]["Element1"],
+						nature = (int)jsonSlots[i]["Element2"],
+						water = (int)jsonSlots[i]["Element3"],
+						storm = (int)jsonSlots[i]["Element4"],
+						driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
+						driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"] * 100),
+						driodenLevel = (int)jsonSlots[i]["EquipLevel"],
+						slotId = (int)jsonSlots[i]["SlotId"]
+					};
+				}
+			}
+		}
+	}
 
     #region GUI methods
 

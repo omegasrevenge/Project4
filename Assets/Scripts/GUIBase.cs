@@ -147,6 +147,12 @@ public class GUIBase : MonoBehaviour
 		GUI.Label(new Rect(50, 250, 200, 50), "Skillpoints:  " + curCreature.Skillpoints, curStyle);
 		GUI.Label(new Rect(50, 275, 200, 50), "Base Element:  " + curCreature.BaseElement, curStyle);
 
+		DriodenSlots(curCreature);
+		ShowChart();
+	}
+
+	private void DriodenSlots(Creature curCreature)
+	{
 		for (int i = 0; i < 4; i++)
 		{
 			Rect curRect = new Rect(120 + i * 110, 350, 80, 80);
@@ -159,15 +165,14 @@ public class GUIBase : MonoBehaviour
 				{
 					if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock_open")))
 					{
-						Debug.Log("oh no he clickt me!!! " + i);
+						GameManager.Singleton.EquipCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement, (int)curResourceLevel);
 					}
 					continue;
 				}
 
-                if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
+				if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
 				{
-					Debug.Log("oh no he clickt me!!! " + i);
-
+					GameManager.Singleton.EquipCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement, (int)curResourceLevel);
 				}
 			}
 			else
@@ -178,6 +183,7 @@ public class GUIBase : MonoBehaviour
 				}
 			}
 		}
+		if (curResourceLevel == ResourceLevel.Bioden) curResourceLevel = ResourceLevel.DriodenLvl0;
 
 		GUI.Label(new Rect(60, 450, 200, 50), curResourceLevel.ToString(), textGuiStyle);
 
@@ -185,11 +191,32 @@ public class GUIBase : MonoBehaviour
 
 		if (GUI.Button(new Rect(20, 450, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
 		{
-			curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == -1 ? 6 : ((int)curResourceLevel - 1));
+			curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == 0 ? 6 : ((int)curResourceLevel - 1));
 		}
 		if (GUI.Button(new Rect(250, 450, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
 		{
 			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
+		}
+
+		if (GUI.Button(new Rect(80, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Energy.ToString() + "</size></color>"))
+		{
+			CuResourceElement = BattleEngine.ResourceElement.Energy;
+		}
+		if (GUI.Button(new Rect(170, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Fire.ToString() + "</size></color>"))
+		{
+			CuResourceElement = BattleEngine.ResourceElement.Fire;
+		}
+		if (GUI.Button(new Rect(260, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Storm.ToString() + "</size></color>"))
+		{
+			CuResourceElement = BattleEngine.ResourceElement.Storm;
+		}
+		if (GUI.Button(new Rect(350, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Nature.ToString() + "</size></color>"))
+		{
+			CuResourceElement = BattleEngine.ResourceElement.Nature;
+		}
+		if (GUI.Button(new Rect(440, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Water.ToString() + "</size></color>"))
+		{
+			CuResourceElement = BattleEngine.ResourceElement.Water;
 		}
 	}
 
@@ -274,6 +301,7 @@ public class GUIBase : MonoBehaviour
 			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt, GameManager.ExchangeMode.Down);
 		}
 	}
+	#endregion
 
 	private void ShowChart()
 	{
@@ -285,10 +313,9 @@ public class GUIBase : MonoBehaviour
 			{
 				z += GameManager.Singleton.Player.Resources[i, j] + "| ";
 			}
-			GUI.Label(new Rect((windowRect.width / 2) - 100, (windowRect.height - 100 - 40 * 7) + i * 40, 200, 20), z, textGuiStyle);
+			GUI.Label(new Rect((windowRect.width / 2) - 100, (windowRect.height - 70 - 40 * 7) + i * 40, 200, 20), z, textGuiStyle);
 		}
 	}
-	#endregion
 
 	void Update () {
 		

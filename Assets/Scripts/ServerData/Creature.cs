@@ -30,6 +30,7 @@ public class Creature
 		public int driodenHealth;
 		public int driodenLevel;
         public int driodenStrength;
+		public int slotId;
 	}
 
     public void ReadJson(JSONObject json)
@@ -39,7 +40,7 @@ public class Creature
             Debug.LogError("No JSON for Creature.cs! Please check, what's wrong. Cheers, Anton.");
             return;
         }
-		Debug.Log(json);
+		//Debug.Log(json);
 		ModelID = (int)json["ModelId"];
         BaseElement = (BattleEngine.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
@@ -68,7 +69,8 @@ public class Creature
 			    storm = (int) jsonSlots[i]["Element4"],
                 driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
 			    driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"]*100),
-			    driodenLevel = (int) jsonSlots[i]["EquipLevel"]
+			    driodenLevel = (int) jsonSlots[i]["EquipLevel"],
+				slotId = (int)jsonSlots[i]["SlotId"]
 		    };
             switch(slots[i].driodenElement)
             {
