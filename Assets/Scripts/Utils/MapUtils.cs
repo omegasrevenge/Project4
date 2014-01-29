@@ -128,4 +128,9 @@ public class MapUtils
 
         return d;
     }
+
+    public static double Distance(Vector2 geo1, Vector2 geo2)
+    {
+        return (geo2 - geo1).magnitude;
+    }
 }

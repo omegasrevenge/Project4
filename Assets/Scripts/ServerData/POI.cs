@@ -1,26 +1,55 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 
 public class POI 
 {
+    public enum POIType
+    {
+        Unexpected,
+        Resource,
+        Fight,
+        Heal
+    }
+
+    private static readonly string[] ResourceTypes = {"Energy", "Nature", "Fire", "Water", "Storm" };
+    private const string FightStr = "fight";
+    private const string HealStr = "heal";
+
+
     public string POI_ID;
     public string Name;
     public Vector2 Position;
     public int Respawn;
-    public string Rsc;
-    public string Type;
+    public string Resource;
+    public string RealType;
+    public PointOfInterest View;
 
-    public GameObject instance;
-
-    public void ReadJson(JSONObject json)
+    public static POI ReadJson(JSONObject json)
     {
-        POI_ID = (string) json["ID"];
-        Name = (string) json["Name"];
-        Position = new Vector2((float) json["Lon"], (float) json["Lat"]);
-        Respawn = (int)json["Respawn"];
-        Rsc = (string)json["Rsc"];
-        Type = (string)json["Type"];
+        POI poi = new POI();
+        poi.POI_ID = (string)json["ID"];
+        poi.Name = (string)json["Name"];
+        poi.Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
+        poi.Respawn = (int)json["Respawn"];
+        poi.Resource = (string)json["Rsc"];
+        poi.RealType = (string)json["Type"];
+        return poi;
+    }
+
+    public POIType Type
+    {
+        get
+        {
+            if(ResourceTypes.Contains(Resource))
+                return POIType.Resource;
+            if(Resource == FightStr)
+                return POIType.Fight;
+            if (Resource == HealStr)
+                return POIType.Heal;
+            return POIType.Unexpected;
+        }
     }
 
 	public string MapPos()

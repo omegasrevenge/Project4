@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     private const float PlayerQueryFreq = 60 * 2;
 	private const float EnemyTurnFreq = 3f;
 
-    public POI[] POIs = new POI[0];
+    public List<POI> POIs = new List<POI>();
     public int pois_version = 0;
     public float pois_timeQ;
     public bool pois_valid = false;
@@ -658,38 +659,24 @@ public class GameManager : MonoBehaviour
         pois_timeQ = 3;
         pois_valid = true;
         Vector2 pos = LocationManager.GetCurrentPosition();
-        WWW request = new WWW(GameManager.Singleton.GetSessionURL("getpois") + "&lon=" + pos.x + "&lat=" + pos.y);
+        WWW request = new WWW(Singleton.GetSessionURL("getpois") + "&lon=" + pos.x + "&lat=" + pos.y);
 
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) yield break;
+
         JSONObject data = json["data"];
         JSONObject pois = data["POIs"];
-        POI[] tmpPOIs = new POI[pois.Count];
-        for (int i = 0; i < tmpPOIs.Length; i++)
+        List<POI> tmpPOIs = new List<POI>();
+        for (int i = 0; i < pois.Count; i++)
         {
-            tmpPOIs[i] = new POI();
-            tmpPOIs[i].ReadJson(pois[i]);
-        }
+            POI tempPOI = POI.ReadJson(pois[i]);
 
-        for (int i = 0; i < POIs.Length; i++)
-        {
-            bool found = false;
-            for (int j = 0; j < tmpPOIs.Length; j++)
-            {
-                if (POIs[i].POI_ID == tmpPOIs[j].POI_ID)
-                {
-                    tmpPOIs[j] = POIs[i];
-                    found = true;
-                    break;
-                }
-            }
-            if (!found && POIs[i].instance != null)
-            {
-                //Debug.Log("kaputt");
-                Destroy(POIs[i].instance);
-            }
+            POI poi = POIs.FirstOrDefault(p => p.POI_ID == tempPOI.POI_ID);
+            if (Equals(poi,default(POI)))        
+                poi = tempPOI;
+            tmpPOIs.Add(poi);
         }
 
         POIs = tmpPOIs;

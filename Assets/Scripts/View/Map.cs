@@ -7,10 +7,12 @@ public class Map : SceneRoot3D
     private const string GridStr = "grid";
     private const string MapRigStr = "map_rig";
     private const string ArrowStr = "arrow";
+    private const string RadarStr = "radar";
 
     private MapGrid _grid;
     private Transform _mapRig;
     private Transform _arrow;
+    private Animator _radar;
 
     public bool init = false;
 
@@ -20,7 +22,7 @@ public class Map : SceneRoot3D
     public const float MoveSpeed = 1f;
     public const float MoveRadius = 1f;
 
-    public const float RangeRadius = 0.188f / 2f;
+    public const float RangeRadius = 0.5f;
 
     public static Map Create()
     {
@@ -40,13 +42,14 @@ public class Map : SceneRoot3D
         _mapRig = transform.Find(MapRigStr);
         _grid = _mapRig.Find(GridStr).GetComponent<MapGrid>();
         _arrow = _mapRig.Find(ArrowStr);
+        _radar = _mapRig.Find(RadarStr).GetComponent<Animator>();
     }
 
     private void OnGUI()
     {
         if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map || BattleEngine.Current != null) return;
         POIsInRange();
-        ShowResouces();
+        //ShowResouces();
         if (GameManager.Singleton.LoggedIn && GameManager.Singleton.DummyUI)
         {
             if (GUI.Button(new Rect(270, 40, 120, 50), "<color=white><size=20>Set Base</size></color>"))
@@ -87,26 +90,31 @@ public class Map : SceneRoot3D
 
         foreach (POI poi in GameManager.Singleton.POIs)
         {
-            if (MapUtils.DistanceInKm(poi.Position, LocationManager.GetCurrentPosition()) <= RangeRadius)
+            if (poi.View)
             {
-                GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), poi.Name, curGuiStyle);
-                string btnString = poi.Rsc == "Fight" ? "<color=white><size=20>Fight</size></color>" : "<color=white><size=20>Farm</size></color>";
-                if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), btnString))
-                {
-                    GameManager.Singleton.PoiFarm(poi);
-                }
-                inRange++;
+                poi.View.InRange = MapUtils.Distance(poi.View.ProjPos, _grid.CurrentPosition) <= RangeRadius;
+                if (poi.View.InRange)
+                    inRange++;      
             }
+  
+                //GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), poi.Name, curGuiStyle);
+                //string btnString = poi.Rsc == "Fight" ? "<color=white><size=20>Fight</size></color>" : "<color=white><size=20>Farm</size></color>";
+                //if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), btnString))
+                //{
+                //    GameManager.Singleton.PoiFarm(poi);
+                //}
         }
-        if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
-        {
-            GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
-            if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), "<color=white><size=20>Visit Base</size></color>"))
-            {
-                GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
-            }
-            inRange++;
-        }
+        //if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
+        //{
+        //    //GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
+        //    //if (GUI.Button(new Rect(450, 80 + inRange * 95, 120, 50), "<color=white><size=20>Visit Base</size></color>"))
+        //    //{
+        //    //    GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
+        //    //}
+        //    inRange++;
+        //}
+
+        _radar.SetBool("Radar", inRange > 0);
     }
 
     public void CreatePOIs()
@@ -114,17 +122,10 @@ public class Map : SceneRoot3D
         string path = "Prefabs/POIs/";
         foreach (POI poi in GameManager.Singleton.POIs)
         {
-            if (poi.instance != null) continue;
-            GameObject obj = Resources.Load<GameObject>(path + "resource");//poi.Type);
-            if (obj == null) obj = Resources.Load<GameObject>(path + "Default");
-            poi.instance = (GameObject)Instantiate(obj);
-            poi.instance.transform.parent = _mapRig;
-            float lon = poi.Position.x;
-            float lat = poi.Position.y;
-            MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
-            PointOfInterest comp = poi.instance.AddComponent<PointOfInterest>();
-            comp.ProjPos = projPos;
-            comp.Grid = _grid;
+            if(poi.Type == POI.POIType.Resource)
+                Resource.Create(poi, _grid);
+            else
+                Resource.Create(poi, _grid);
         }
     }
 
@@ -134,28 +135,28 @@ public class Map : SceneRoot3D
 
         if (GameManager.Singleton.Player.baseInstance == null)
         {
-            GameObject obj = Resources.Load<GameObject>(path + "base");
-            GameObject curGameObject = (GameObject)Instantiate(obj);
-            GameManager.Singleton.Player.baseInstance = curGameObject;
-            curGameObject.transform.parent = _mapRig;
-            float lon = GameManager.Singleton.Player.BasePosition.x;
-            float lat = GameManager.Singleton.Player.BasePosition.y;
-            MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
-            PointOfInterest comp = curGameObject.AddComponent<PointOfInterest>();
-            comp.ProjPos = projPos;
-            comp.Grid = _grid;
+            //GameObject obj = Resources.Load<GameObject>(path + "base");
+            //GameObject curGameObject = (GameObject)Instantiate(obj);
+            //GameManager.Singleton.Player.baseInstance = curGameObject;
+            //curGameObject.transform.parent = _mapRig;
+            //float lon = GameManager.Singleton.Player.BasePosition.x;
+            //float lat = GameManager.Singleton.Player.BasePosition.y;
+            //MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
+            //PointOfInterest comp = curGameObject.AddComponent<PointOfInterest>();
+            //comp.ProjPos = projPos;
+            //comp.Grid = _grid;
             return;
         }
     }
 
     private void MoveBase()
     {
-        MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos;
+        //MapUtils.ProjectedPos curPos = GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos;
 
-        if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
-        {
-            GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
-        }
+        //if (!GameManager.Singleton.Player.BasePosition.Equals(MapUtils.ProjectionToGeographic(curPos)))
+        //{
+        //    GameManager.Singleton.Player.baseInstance.GetComponent<PointOfInterest>().ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
+        //}
     }
 
     void Update()
