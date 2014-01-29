@@ -312,14 +312,14 @@ public class GameManager : MonoBehaviour
         Player.UpdateBattle();
     }
 
-	public void AddCreatureEQSlot()
+	public void AddCreatureEQSlot(int creatureID)
 	{
-		StartCoroutine(CAddCreatureEQSlot());
+		StartCoroutine(CAddCreatureEQSlot(creatureID));
 	}
 
-	private IEnumerator CAddCreatureEQSlot()
+	private IEnumerator CAddCreatureEQSlot(int creatureID)
 	{
-		WWW request = new WWW(GetSessionURL("addcrsl"));
+		WWW request = new WWW(GetSessionURL("addcrsl") + "&cid=" + creatureID);
 		yield return request;
 
 		JSONObject json = JSONParser.parse(request.text);

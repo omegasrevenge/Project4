@@ -22,7 +22,8 @@ public class GUIBase : MonoBehaviour
 
 	private Creature equiptCreature;
 	private List<Creature> allOwnCreatures;
-	private int creatureInex = 1;
+	private int creatureID = 1;
+	private int creatureIndex = 0;
 
 	void Awake()
 	{
@@ -58,7 +59,7 @@ public class GUIBase : MonoBehaviour
 
 		if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
 		{
-			creatureInex = equiptCreature.CreatureID;
+			creatureID = equiptCreature.CreatureID;
 			ShowWindow(Windows.Creature);
 		}
 	}
@@ -86,16 +87,20 @@ public class GUIBase : MonoBehaviour
 
 	private void CreatureWindow(int windowID)
 	{
+		int[] creatureIDs = GameManager.Singleton.Player.creatureIDs;
+
 		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 30, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
 		{
-			creatureInex = creatureInex <= 1 ? GameManager.Singleton.Player.creatureIDs.Length : creatureInex - 1;
+			creatureIndex = creatureIndex <= 0 ? (creatureIDs.Length-1) : creatureIndex- 1;
+			creatureID = creatureIDs[creatureIndex];
 		}
 		if (GUI.Button(new Rect((windowRect.width / 2) + 100, 30, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
 		{
-			creatureInex = creatureInex >= GameManager.Singleton.Player.creatureIDs.Length ? 1 : creatureInex + 1;
+			creatureIndex = creatureIndex >= (creatureIDs.Length-1) ? 0 : creatureIndex + 1;
+			creatureID = creatureIDs[creatureIndex];
 		}
 
-		ShowCreature(creatureInex);
+		ShowCreature(creatureID);
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
 		{
@@ -103,13 +108,17 @@ public class GUIBase : MonoBehaviour
 		}
 	}
 
-	private void ShowCreature(int creatureInex)
+	private void ShowCreature(int creatureID)
 	{
 		Creature curCreature = null;
 
-		creatureInex--;
-
-		curCreature = allOwnCreatures[creatureInex];
+		foreach (Creature ownCreature in allOwnCreatures)
+		{
+			if (ownCreature.CreatureID == creatureID)
+			{
+				curCreature = ownCreature;
+			}
+		}
 
 		if (curCreature == null)
 		{
@@ -122,7 +131,7 @@ public class GUIBase : MonoBehaviour
 		GUIStyle curStyle = new GUIStyle(textGuiStyle);
 		curStyle.fontSize = 20;
 
-		if (allOwnCreatures[creatureInex].CreatureID == equiptCreature.CreatureID)
+		if (curCreature.CreatureID == equiptCreature.CreatureID)
 		{
 			GUI.Label(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equipped", curStyle);
 		}
@@ -158,15 +167,29 @@ public class GUIBase : MonoBehaviour
                 if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
 				{
 					Debug.Log("oh no he clickt me!!! " + i);
+
 				}
 			}
 			else
 			{
 				if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock")))
 				{
-					GameManager.Singleton.AddCreatureEQSlot();
+					GameManager.Singleton.AddCreatureEQSlot(curCreature.CreatureID);
 				}
 			}
+		}
+
+		GUI.Label(new Rect(60, 450, 200, 50), curResourceLevel.ToString(), textGuiStyle);
+
+		GUI.Label(new Rect((windowRect.width - 270), 450, 200, 50), CuResourceElement.ToString(), textGuiStyle);
+
+		if (GUI.Button(new Rect(20, 450, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
+		{
+			curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == -1 ? 6 : ((int)curResourceLevel - 1));
+		}
+		if (GUI.Button(new Rect(250, 450, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
+		{
+			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
 		}
 	}
 
