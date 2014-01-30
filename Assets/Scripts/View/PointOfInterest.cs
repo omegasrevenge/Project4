@@ -36,7 +36,7 @@ public class PointOfInterest : TouchObject
         Enabled = false;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!GameManager.Singleton.POIs.Contains(Poi))
             RemovePOI();

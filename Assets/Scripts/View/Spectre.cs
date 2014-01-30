@@ -22,6 +22,13 @@ public class Spectre : PointOfInterest
         return res;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        if(!Poi.CanFarm)
+            RemovePOI();
+    }
+
     protected override void RemovePOI()
     {
         _animator.Play(HideResourceStr);

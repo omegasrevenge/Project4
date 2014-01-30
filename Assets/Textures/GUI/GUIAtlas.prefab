@@ -43,8 +43,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .766601562
-      y: .0986328125
+      x: .956054688
+      y: .124023438
       width: .03125
       height: .03125
     border:
@@ -77,8 +77,8 @@ MonoBehaviour:
   - name: bg-menu
     region:
       serializedVersion: 2
-      x: 0
-      y: .948242188
+      x: .928710938
+      y: .306640625
       width: .0625
       height: .03125
     border:
@@ -94,8 +94,8 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .0634765625
-      y: .948242188
+      x: .956054688
+      y: .15625
       width: .03125
       height: .03125
     border:
@@ -111,8 +111,8 @@ MonoBehaviour:
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: 0
-      y: .98046875
+      x: .956054688
+      y: .220703125
       width: .009765625
       height: .009765625
     border:
@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .095703125
-      y: .948242188
+      x: .956054688
+      y: .188476562
       width: .03125
       height: .03125
     border:
@@ -142,10 +142,95 @@ MonoBehaviour:
     textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
     deleted: 0
     texture: {fileID: 0}
+  - name: element_energy
+    region:
+      serializedVersion: 2
+      x: .704101562
+      y: 0
+      width: .125
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: d89550a51d587f94a95aecc599423ec7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_fire
+    region:
+      serializedVersion: 2
+      x: .830078125
+      y: 0
+      width: .125
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: 2dec5b91c3a0bfc49a09ecbca9e33c8f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_life
+    region:
+      serializedVersion: 2
+      x: .704101562
+      y: .125976562
+      width: .125
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: 87ed4076d42ca6b4189c04ee34e8a81f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_storm
+    region:
+      serializedVersion: 2
+      x: .830078125
+      y: .125976562
+      width: .125
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: 2b8f419ba459c2440b1c2fe198447548
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_water
+    region:
+      serializedVersion: 2
+      x: .704101562
+      y: .251953125
+      width: .125
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: f9ab59c33e419534fb3275597804debc
+    deleted: 0
+    texture: {fileID: 0}
   - name: gradient
     region:
       serializedVersion: 2
-      x: .802734375
+      x: .956054688
       y: 0
       width: .03125
       height: .123046875
@@ -162,8 +247,8 @@ MonoBehaviour:
   - name: iris-logo
     region:
       serializedVersion: 2
-      x: .704101562
-      y: 0
+      x: .830078125
+      y: .251953125
       width: .09765625
       height: .09765625
     border:
@@ -179,8 +264,8 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .704101562
-      y: .0986328125
+      x: .928710938
+      y: .251953125
       width: .0615234375
       height: .0537109375
     border:
