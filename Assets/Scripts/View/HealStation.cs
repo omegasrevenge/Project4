@@ -33,11 +33,13 @@ public class HealStation : PointOfInterest
 
     protected override void EnterRange()
     {
+        base.EnterRange();
         _light.SetActive(true);
     }
 
     protected override void LeaveRange()
     {
+        base.LeaveRange();
         _light.SetActive(false);
     }
 
@@ -45,5 +47,10 @@ public class HealStation : PointOfInterest
     {
         Poi.View = null;
         Destroy(gameObject);
+    }
+
+    override public void OnTap(TouchInput.Touch2D touch2D)
+    {
+        GameManager.Singleton.PoiFarm(Poi);
     }
 }
