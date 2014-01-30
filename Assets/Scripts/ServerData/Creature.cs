@@ -29,7 +29,6 @@ public class Creature
         public BattleEngine.ResourceElement driodenElement;
 		public int driodenHealth;
 		public int driodenLevel;
-        public int driodenStrength;
 		public int slotId;
 	}
 
@@ -72,28 +71,6 @@ public class Creature
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"],
 				slotId = (int)jsonSlots[i]["SlotId"]
 		    };
-            switch(slots[i].driodenElement)
-            {
-                case BattleEngine.ResourceElement.Fire:
-                    slots[i].driodenStrength = slots[i].fire;
-                    break;
-
-                case BattleEngine.ResourceElement.Nature:
-                    slots[i].driodenStrength = slots[i].nature;
-                    break;
-
-                case BattleEngine.ResourceElement.Storm:
-                    slots[i].driodenStrength = slots[i].storm;
-                    break;
-
-                case BattleEngine.ResourceElement.Energy:
-                    slots[i].driodenStrength = slots[i].energy;
-                    break;
-
-                case BattleEngine.ResourceElement.Water:
-                    slots[i].driodenStrength = slots[i].water;
-                    break;
-            }
 	    }
     }
 }

@@ -210,9 +210,12 @@ public class BattleEngine : MonoBehaviour
 		GUI.TextArea(new Rect(Screen.width-100, 200, 100, 100), inpTxt);
 		
 		if (GUI.Button(new Rect(Screen.width-200, 200, 100, 100), "Delete Selection"))
-		{
             InputText.Clear();
-		}
+
+        if (GameManager.Singleton.Player.CurFight.confused)
+            GUI.Button(new Rect(250, Screen.height - 100, 100, 100), "CONFUSION!");
+        if (GameManager.Singleton.Player.CurFight.defBoosted)
+            GUI.Button(new Rect(250, Screen.height - 200, 100, 100), "DEF BOOSTED!");
 	}
 
 	private void updateGUI()

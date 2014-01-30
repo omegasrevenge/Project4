@@ -10,7 +10,9 @@ public class Fight
 	public string LastResult;
 	public Creature EnemyCreature;
 	public bool Turn;
-	public bool Finished;
+    public bool Finished;
+    public bool confused = false;
+    public bool defBoosted = false;
 	
 	public void ReadJson(JSONObject json)
 	{
@@ -19,6 +21,8 @@ public class Fight
 		EnemyCreature = new Creature();
 		EnemyCreature.ReadJson(json["EnemyCreature"]);
 		Turn = (bool)json["Turn"];
-		Finished = (bool)json["Finished"];
+        Finished = (bool)json["Finished"];
+        confused = (int)json["FighterA"]["Con"] > 0;
+        defBoosted = (int)json["FighterA"]["Def"] > 0;
 	}
 }
