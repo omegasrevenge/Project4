@@ -295,6 +295,7 @@ public class TouchInput : MonoBehaviour
 
     private TouchObject FindObject(Vector2 pos)
     {
+        if (Camera.main == null) return null;
         Ray ray = Camera.main.ScreenPointToRay(pos);
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
