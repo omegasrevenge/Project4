@@ -22,6 +22,8 @@ public class POI
     public string Name;
     public Vector2 Position;
     public int Respawn;
+	public bool CanFarm;
+	public DateTime NextFarm;
     public string Resource;
     public string RealType;
     public PointOfInterest View;
@@ -35,6 +37,9 @@ public class POI
         poi.Respawn = (int)json["Respawn"];
         poi.Resource = (string)json["Rsc"];
         poi.RealType = (string)json["Type"];
+		poi.CanFarm = (bool)json["CanFarm"];
+		poi.NextFarm = (DateTime)json["NextFarm"];
+		//Debug.Log ("CanFarm:"+poi.CanFarm+" NextFarm:"+poi.NextFarm);
         return poi;
     }
 
