@@ -7,26 +7,26 @@ public class Player
 {
     public string PlayerID;
     public string Name;
-	public Vector2 Position;
-	public Vector2 BasePosition;
-	public Int64 BaseTime;
+    public Vector2 Position;
+    public Vector2 BasePosition;
+    public Int64 BaseTime;
     public int[,] Resources;
 
-	public bool Fighting;
-	public Fight CurFight;
+    public bool Fighting;
+    public Fight CurFight;
 
     public int InitSteps;
-	public int[] creatureIDs;
-	public Creature CurCreature;
+    public int[] creatureIDs;
+    public Creature CurCreature;
 
     public void ReadJson(JSONObject json)
     {
         PlayerID = (string)json["PId"];
         Name = (string)json["Name"];
-		Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
-		BasePosition = new Vector2((float)json["BaseLon"], (float)json["BaseLat"]);
-	    BaseTime = (Int64) json["TimeBase"];
-        Resources = new int[7,5];
+        Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
+        BasePosition = new Vector2((float)json["BaseLon"], (float)json["BaseLat"]);
+        BaseTime = (Int64)json["TimeBase"];
+        Resources = new int[7, 5];
 
         if (GameManager.Singleton.Player.PlayerID != PlayerID)
             return;
@@ -36,92 +36,98 @@ public class Player
             JSONObject element = res[i];
             for (int j = 0; j < element.Count; j++)
             {
-                Resources[i, j] = (int) element[j];
+                Resources[i, j] = (int)element[j];
             }
         }
-	    
-		JSONObject jcids = json["CreatureIds"];
-		creatureIDs = new int[jcids.Count];
-	    for (int i = 0; i < jcids.Count; i++)
-		{
-			creatureIDs[i] = (int)jcids[i];
-	    }
+
+        JSONObject jcids = json["CreatureIds"];
+        creatureIDs = new int[jcids.Count];
+        for (int i = 0; i < jcids.Count; i++)
+        {
+            creatureIDs[i] = (int)jcids[i];
+        }
 
 	    CurCreature = new Creature();
-		CurCreature.ReadJson(json["CurrentCreature"]);
+        CurCreature.ReadJson(json["CurrentCreature"]);
         Fighting = (bool)json["Fighting"];
-        InitSteps = (int) json["InitSteps"];
-		if(Fighting)
-		{
-			JSONObject curF = json["Fight"];
-			if(curF.type == JSONObject.Type.OBJECT) 
-			{
-				CurFight = new Fight();
-				CurFight.ReadJson(curF);
-			}
-		}
-		else
-		{
-			CurFight = null;
-		}
+        InitSteps = (int)json["InitSteps"];
+        if (Fighting)
+        {
+            JSONObject curF = json["Fight"];
+            if (curF.type == JSONObject.Type.OBJECT)
+            {
+                CurFight = new Fight();
+                CurFight.ReadJson(curF);
+            }
+        }
+        else
+        {
+            CurFight = null;
+        }
     }
 
-	public void UpdateBattle()
-	{
-		if(!Fighting)
-		{
-			if(BattleEngine.Current != null)
-				BattleEngine.Current.Fighting = false;
-			return; 
-		}
+    public void UpdateBattle()
+    {
+        if (!Fighting)
+        {
+            if (BattleEngine.Current != null)
+                BattleEngine.Current.Fighting = false;
+            return;
+        }
 
-		if(BattleEngine.Current == null)
-		{
-			BattleInit newBattle = new BattleInit();
-			
-			newBattle.MonsterAElement = CurCreature.BaseElement;
-			newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
-			
-			newBattle.MonsterAName = CurCreature.Name;
-			newBattle.MonsterBName = CurFight.EnemyCreature.Name;
-			
-			newBattle.MonsterAHealth = CurCreature.HP;
-			newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
-			
-			newBattle.MonsterAMaxHealth = CurCreature.HPMax;
-			newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
-			
-			newBattle.MonsterALevel = CurCreature.Level;
-			newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
-			
-			newBattle.BaseMeshA = CurCreature.ModelID;
-			newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
-			
-			if(CurFight.Turn) 
-				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
-			else
-				newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
-			
-			BattleEngine.CreateBattle(newBattle);
+        if (BattleEngine.Current == null)
+        {
+            BattleInit newBattle = new BattleInit();
+
+            newBattle.MonsterAElement = CurCreature.BaseElement;
+            newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
+
+            newBattle.MonsterAName = CurCreature.Name;
+            newBattle.MonsterBName = CurFight.EnemyCreature.Name;
+
+            newBattle.MonsterAHealth = CurCreature.HP;
+            newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
+
+            newBattle.MonsterAMaxHealth = CurCreature.HPMax;
+            newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
+
+            newBattle.MonsterALevel = CurCreature.Level;
+            newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
+
+            newBattle.BaseMeshA = CurCreature.ModelID;
+            newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
+
+            if (CurFight.Turn)
+                newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
+            else
+                newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
+
+            BattleEngine.CreateBattle(newBattle);
             BattleEngine.Current.Fighting = !CurFight.Finished;
-		}
-		else
-		{
-			FightRoundResult newResult = new FightRoundResult();
-			
-			if(CurFight.Turn) 
-				newResult.PlayerTurn = FightRoundResult.Player.A;
-			else
-				newResult.PlayerTurn = FightRoundResult.Player.B;
-			
-			string[] lastResult = CurFight.LastResult.Split(' ');
-			newResult.SkillName = lastResult[0];
-			newResult.Damage = Convert.ToInt32(lastResult[1]);
-			newResult.DoT = Convert.ToInt32(lastResult[2]);
-			newResult.HoT = Convert.ToInt32(lastResult[3]);
-			newResult.Turn = CurFight.Round;
-			BattleEngine.Current.Result = newResult;
-		    BattleEngine.Current.Fighting = !CurFight.Finished;
-		}
-	}
+        }
+        else
+        {
+            FightRoundResult newResult = new FightRoundResult();
+
+            if (CurFight.Turn)
+                newResult.PlayerTurn = FightRoundResult.Player.A;
+            else
+                newResult.PlayerTurn = FightRoundResult.Player.B;
+
+            newResult.Turn = CurFight.Round;
+            BattleEngine.Current.Result = newResult;
+            BattleEngine.Current.Fighting = !CurFight.Finished;
+            string[] lastResult = CurFight.LastResult.Split(' ');
+
+            if (lastResult.Length != 4)
+            {
+                Debug.Log("LAST RESULT LENGTH != 4. lastresult = " + CurFight.LastResult);
+                return;
+            }
+            newResult.SkillName = lastResult[0];
+            newResult.Damage = Convert.ToInt32(lastResult[1]);
+            newResult.DoT = Convert.ToInt32(lastResult[2]);
+            newResult.HoT = Convert.ToInt32(lastResult[3]);
+        }
+    }
 }

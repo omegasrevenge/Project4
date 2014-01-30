@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private const float PositionUpdateFreq = 60 * 1;
     private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60 * 2;
-	private const float EnemyTurnFreq = 3f;
+    private const float EnemyTurnFreq = 3f;
 
     public List<POI> POIs = new List<POI>();
     public float pois_timeQ;
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public string ServerURL = Server;
     public string SessionID = "";
     public GameMode CurrentGameMode = GameMode.Login;
+    public JSONObject Techtree;
 
     private ObjectPos[] PlayerPositionsInRange;
     public List<Player> PlayersOnMap = new List<Player>();
@@ -68,11 +69,11 @@ public class GameManager : MonoBehaviour
     private float _lastOwnPlayerUpdate;
     [SerializeField]
     private float _lastPositionUpdate = -1000;
-	private Vector2 _lastPosition = new Vector2();
-	[SerializeField]
-	private float _lastPlayerQuery = -1000;
-	[SerializeField]
-	private float _lastEnemyTurn = -1000;
+    private Vector2 _lastPosition = new Vector2();
+    [SerializeField]
+    private float _lastPlayerQuery = -1000;
+    [SerializeField]
+    private float _lastEnemyTurn = -1000;
 
     public bool LoggedIn { get { return SessionID.Length != 0; } }
 
@@ -150,16 +151,16 @@ public class GameManager : MonoBehaviour
             {
                 GetCreatures();
             }
-        } 
-		else if (CurrentGameMode == GameMode.Fight)
-		{
-			if(Player.Fighting && Player.CurFight != null && !Player.CurFight.Turn)
-			{
+        }
+        else if (CurrentGameMode == GameMode.Fight)
+        {
+            if (Player.Fighting && Player.CurFight != null && !Player.CurFight.Turn)
+            {
                 //Debug.Log("F:" + Player.CurFight.Turn);
                 if (Time.time >= EnemyTurnFreq + _lastEnemyTurn)
-					FightEnemyTurn();
-			}
-		}
+                    FightEnemyTurn();
+            }
+        }
 
         //Load queued players
         if (!_playerQueryActive && _playerQueue.Count > 0)
@@ -168,7 +169,7 @@ public class GameManager : MonoBehaviour
         if (_playersUpdated)
         {
             UpdatePlayersOnMap();
-            
+
         }
 
 
@@ -206,7 +207,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchGameMode(GameMode newGameMode)
     {
-        if (newGameMode == CurrentGameMode) {return;};
+        if (newGameMode == CurrentGameMode) { return; };
         Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
         GameMode oldMode = CurrentGameMode;
         CurrentGameMode = newGameMode;
@@ -289,6 +290,8 @@ public class GameManager : MonoBehaviour
         if (!LoggedIn) return;
         _lastOwnPlayerUpdate = Time.time;
         StartCoroutine(CGetOwnPlayer(callback));
+        if (Techtree == null)
+            StartCoroutine(CRequestTechtree());
     }
 
     private IEnumerator CGetOwnPlayer(Action<bool> callback = null)
@@ -307,8 +310,8 @@ public class GameManager : MonoBehaviour
         ReadPlayerJSON(json["data"]);
         if (CurrentGameMode == GameMode.Login)
             SwitchGameMode(GameMode.Map);
-		if (Player.Fighting && CurrentGameMode != GameMode.Fight)
-			SwitchGameMode(GameMode.Fight);
+        if (Player.Fighting && CurrentGameMode != GameMode.Fight)
+            SwitchGameMode(GameMode.Fight);
         if (callback != null)
             callback(true);
     }
@@ -322,68 +325,68 @@ public class GameManager : MonoBehaviour
             {
                 if (Player.CurCreature.CreatureID == _allOwnCreatures[i].CreatureID)
                 {
-					_allOwnCreatures[i] = Player.CurCreature;
+                    _allOwnCreatures[i] = Player.CurCreature;
                 }
             }
         }
         Player.UpdateBattle();
     }
 
-	public void AddCreatureEQSlot(int creatureID)
-	{
-		StartCoroutine(CAddCreatureEQSlot(creatureID));
-	}
+    public void AddCreatureEQSlot(int creatureID)
+    {
+        StartCoroutine(CAddCreatureEQSlot(creatureID));
+    }
 
-	private IEnumerator CAddCreatureEQSlot(int creatureID)
-	{
-		WWW request = new WWW(GetSessionURL("addcrsl") + "&cid=" + creatureID);
-		yield return request;
+    private IEnumerator CAddCreatureEQSlot(int creatureID)
+    {
+        WWW request = new WWW(GetSessionURL("addcrsl") + "&cid=" + creatureID);
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)) yield break;
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) yield break;
 
-		UpdateAllOwnCreatures(json["data"]);
+        UpdateAllOwnCreatures(json["data"]);
 
-		GetOwnPlayer();
-	}
+        GetOwnPlayer();
+    }
 
-	public void EquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
-	{
-		StartCoroutine(CEquipCreatureSlot(creatureID, slotId, driodenElement, driodenLevel));
-	}
+    public void EquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
+    {
+        StartCoroutine(CEquipCreatureSlot(creatureID, slotId, driodenElement, driodenLevel));
+    }
 
-	private IEnumerator CEquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
-	{
-		WWW request = new WWW(GetSessionURL("equipcrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement + "&level=" + driodenLevel);
-		yield return request;
+    private IEnumerator CEquipCreatureSlot(int creatureID, int slotId, int driodenElement, int driodenLevel)
+    {
+        WWW request = new WWW(GetSessionURL("equipcrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement + "&level=" + driodenLevel);
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		Debug.Log(json);
-		if (!CheckResult(json)) yield break;
+        JSONObject json = JSONParser.parse(request.text);
+        Debug.Log(json);
+        if (!CheckResult(json)) yield break;
 
-		UpdateAllOwnCreatures(json["data"]);
+        UpdateAllOwnCreatures(json["data"]);
 
-		GetOwnPlayer();
-	}
+        GetOwnPlayer();
+    }
 
-	public void UpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
-	{
-		StartCoroutine(CUpgradeCreatureSlot(creatureID, slotId, driodenElement));
-	}
+    public void UpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
+    {
+        StartCoroutine(CUpgradeCreatureSlot(creatureID, slotId, driodenElement));
+    }
 
-	private IEnumerator CUpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
-	{
-		WWW request = new WWW(GetSessionURL("upgradecrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement);
-		yield return request;
+    private IEnumerator CUpgradeCreatureSlot(int creatureID, int slotId, int driodenElement)
+    {
+        WWW request = new WWW(GetSessionURL("upgradecrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement);
+        yield return request;
 
-		JSONObject json = JSONParser.parse(request.text);
-		Debug.Log(json);
-		if (!CheckResult(json)) yield break;
+        JSONObject json = JSONParser.parse(request.text);
+        Debug.Log(json);
+        if (!CheckResult(json)) yield break;
 
-		UpdateAllOwnCreatures(json["data"]);
+        UpdateAllOwnCreatures(json["data"]);
 
-		GetOwnPlayer();
-	}
+        GetOwnPlayer();
+    }
 
     public void GetCreatures()
     {
@@ -479,6 +482,16 @@ public class GameManager : MonoBehaviour
         Player.Position = pos;
     }
 
+    private IEnumerator CRequestTechtree()
+    {
+        WWW request = new WWW(GetSessionURL("gettechtree"));
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) yield break;
+        Techtree = json["data"];
+    }
+
     public void SendBasePosition()
     {
         if (!LoggedIn) return;
@@ -518,10 +531,11 @@ public class GameManager : MonoBehaviour
 			poi.NextFarm=nextFarm;
 			Debug.Log("NextFarm:"+nextFarm.ToLocalTime());
 		}
-		if (!CheckResult(json)) yield break;
-        _lastOwnPlayerUpdate = -1000; //trigger player update
-		lastFarmResult = (string) data["Result"];
-		Debug.Log("Result:"+lastFarmResult);
+        if (!CheckResult(json)) yield break;
+        _lastOwnPlayerUpdate = -1000;
+        Debug.Log(json);
+        lastFarmResult = (string)json["data"];
+
     }
 
     /// <summary>
@@ -560,7 +574,7 @@ public class GameManager : MonoBehaviour
     {
         if (!LoggedIn) return;
         _lastEnemyTurn = Time.time;
-        StartCoroutine(CFightPlayerTurn(s0,s1,s2,s3));
+        StartCoroutine(CFightPlayerTurn(s0, s1, s2, s3));
     }
 
     private IEnumerator CFightPlayerTurn(int s0, int s1, int s2, int s3)
@@ -575,33 +589,50 @@ public class GameManager : MonoBehaviour
         ReadPlayerJSON(turnJSON);
         Debug.Log("!!!!!!!!!!!!!!a " + request.text);
     }
-	
-	/// <summary>
-	/// blah
-	/// </summary>
-	/// <param name=""></param>
-	/// <returns></returns>
-	public void FightEnemyTurn()
-	{
-		if (!LoggedIn) return;
-		_lastEnemyTurn = Time.time;
-		StartCoroutine(CFightEnemyTurn());
-	}
 
-	private IEnumerator CFightEnemyTurn()
-	{
-		WWW request = new WWW(GetSessionURL("fightenemyturn"));
-		
-		yield return request;
+    public void EscapeAttempt()
+    {
+        StartCoroutine(CEscapeAttempt());
+    }
 
-		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json)) { yield break; }
-		JSONObject turnJSON = json["data"];
-		if(!(bool)turnJSON) yield break;
+    private IEnumerator CEscapeAttempt()
+    {
+        Debug.Log("ESCAPE ATTEMPT");
+        WWW request = new WWW(GetSessionURL("escape"));
+        yield return request;
+        Debug.Log("ESCAPE ATTEMPT: " + request.text);
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+        GetOwnPlayer();
+    }
+
+    /// <summary>
+    /// blah
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    public void FightEnemyTurn()
+    {
+        if (!LoggedIn) return;
+        _lastEnemyTurn = Time.time;
+        StartCoroutine(CFightEnemyTurn());
+    }
+
+    private IEnumerator CFightEnemyTurn()
+    {
+        WWW request = new WWW(GetSessionURL("fightenemyturn"));
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+        JSONObject turnJSON = json["data"];
+        if (!(bool)turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
         Debug.Log("!!!!!!!!!!!!!!b " + request.text);
 
-	}
+    }
 
     public void FightDelete()
     {
@@ -615,7 +646,7 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
     }
-   
+
     /// <summary>
     /// Loads player data by passing the playerID.
     /// </summary>
@@ -713,8 +744,8 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
-    }    
-    
+    }
+
     public void SubmitPlayerName(string name, Action<bool, string> callback)
     {
 
@@ -731,9 +762,9 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json))
         {
-            if(callback != null)
-                callback(false, (string)json["error"]); 
-            yield break; 
+            if (callback != null)
+                callback(false, (string)json["error"]);
+            yield break;
         }
         if (callback != null)
             callback(true, "");
@@ -759,7 +790,7 @@ public class GameManager : MonoBehaviour
             POI tempPOI = POI.ReadJson(pois[i]);
 
             POI poi = POIs.FirstOrDefault(p => p.POI_ID == tempPOI.POI_ID);
-            if (Equals(poi,default(POI)))        
+            if (Equals(poi, default(POI)))
                 poi = tempPOI;
             tmpPOIs.Add(poi);
         }
@@ -774,8 +805,8 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckResult(JSONObject json)
     {
-        if ((bool) json["result"]) return true;
-        string sErr = (string) json["error"];
+        if ((bool)json["result"]) return true;
+        string sErr = (string)json["error"];
         Debug.LogError("RPC Fail: " + sErr);
         if (sErr == "invalid_session")
         {
@@ -860,7 +891,7 @@ public class GameManager : MonoBehaviour
 
         switch (Player.InitSteps)
         {
-            case(0):
+            case (0):
                 GUIStartIRISinstructions();
                 break;
             default:
@@ -871,41 +902,41 @@ public class GameManager : MonoBehaviour
 
     }
 
-	private void UpdateAllOwnCreatures(JSONObject json)
-	{
-		foreach (Creature curCreature in AllOwnCreatures)
-		{
-			if (curCreature.CreatureID == (int) json["CId"])
-			{
-				curCreature.HP = (int) json["HP"];
-				curCreature.HPMax = (int) json["HPMax"];
-				curCreature.Damage = (int) json["Damage"];
-				curCreature.Defense = (int) json["Defense"];
-				curCreature.Dexterity = (int) json["Dexterity"];
-				curCreature.Skillpoints = (int) json["Skillpoints"];
-				curCreature.slots = new Creature.Slot[json["Slots"].Count];
+    private void UpdateAllOwnCreatures(JSONObject json)
+    {
+        foreach (Creature curCreature in AllOwnCreatures)
+        {
+            if (curCreature.CreatureID == (int)json["CId"])
+            {
+                curCreature.HP = (int)json["HP"];
+                curCreature.HPMax = (int)json["HPMax"];
+                curCreature.Damage = (int)json["Damage"];
+                curCreature.Defense = (int)json["Defense"];
+                curCreature.Dexterity = (int)json["Dexterity"];
+                curCreature.Skillpoints = (int)json["Skillpoints"];
+                curCreature.slots = new Creature.Slot[json["Slots"].Count];
 
-				JSONObject jsonSlots = json["Slots"];
+                JSONObject jsonSlots = json["Slots"];
 
-				for (int i = 0; i < json["Slots"].Count; i++)
-				{
+                for (int i = 0; i < json["Slots"].Count; i++)
+                {
 
-					curCreature.slots[i] = new Creature.Slot()
-					{
-						fire = (int)jsonSlots[i]["Element0"],
-						energy = (int)jsonSlots[i]["Element1"],
-						nature = (int)jsonSlots[i]["Element2"],
-						water = (int)jsonSlots[i]["Element3"],
-						storm = (int)jsonSlots[i]["Element4"],
-						driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
-						driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"] * 100),
-						driodenLevel = (int)jsonSlots[i]["EquipLevel"],
-						slotId = (int)jsonSlots[i]["SlotId"]
-					};
-				}
-			}
-		}
-	}
+                    curCreature.slots[i] = new Creature.Slot()
+                    {
+                        fire = (int)jsonSlots[i]["Element0"],
+                        energy = (int)jsonSlots[i]["Element1"],
+                        nature = (int)jsonSlots[i]["Element2"],
+                        water = (int)jsonSlots[i]["Element3"],
+                        storm = (int)jsonSlots[i]["Element4"],
+                        driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
+                        driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"] * 100),
+                        driodenLevel = (int)jsonSlots[i]["EquipLevel"],
+                        slotId = (int)jsonSlots[i]["SlotId"]
+                    };
+                }
+            }
+        }
+    }
 
     #region GUI methods
 
@@ -919,7 +950,7 @@ public class GameManager : MonoBehaviour
     public void GUISubmitName(string username)
     {
         //_view.ShowLoadingScreen(Localization.GetText("loadingscreen_submitName"));
-        SubmitPlayerName(username,GUINameSubmitted);
+        SubmitPlayerName(username, GUINameSubmitted);
         //Endless Loop
     }
 
@@ -934,7 +965,7 @@ public class GameManager : MonoBehaviour
                 SpectresIntro intro = SpectresIntro.Create(GUIShowSpectreChoice);
                 intro.AttachGUI(_view.AddSpectresIntro("iris_03_text"));
                 _view.Switch3DSceneRoot(intro);
-            };         
+            };
             return;
         }
         Debug.Log(error);
@@ -974,6 +1005,7 @@ public class GameManager : MonoBehaviour
                 Login(PlayerID, Password, true, OnPlayerLoaded);
             }
         }
+
     }
 #endif
 }
