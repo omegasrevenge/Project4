@@ -47,6 +47,7 @@ public class Player
 			creatureIDs[i] = (int)jcids[i];
 	    }
 
+	    CurCreature = new Creature();
 		CurCreature.ReadJson(json["CurrentCreature"]);
         Fighting = (bool)json["Fighting"];
         InitSteps = (int) json["InitSteps"];

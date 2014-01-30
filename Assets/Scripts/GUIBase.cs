@@ -114,6 +114,7 @@ public class GUIBase : MonoBehaviour
 
 		foreach (Creature ownCreature in allOwnCreatures)
 		{
+			//Debug.Log("ID: " + ownCreature.CreatureID + " Count: " + allOwnCreatures.Count);
 			if (ownCreature.CreatureID == creatureID)
 			{
 				curCreature = ownCreature;
@@ -135,6 +136,13 @@ public class GUIBase : MonoBehaviour
 		{
 			GUI.Label(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equipped", curStyle);
 		}
+		else
+		{
+			if (CreateButton(new Rect((windowRect.width / 2) - 100, 80, 200, 50), "Equip"))
+			{
+				GameManager.Singleton.SwitchCurrentCreature(curCreature.CreatureID);
+			}
+		}
 		
 		curStyle.alignment = TextAnchor.MiddleLeft;
 
@@ -155,12 +163,14 @@ public class GUIBase : MonoBehaviour
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			Rect curRect = new Rect(120 + i * 110, 350, 80, 80);
+			Rect curRect = new Rect(120 + i * 110, 380, 80, 80);
+			//Debug.Log(curRect.x);
+			Rect upgrade = new Rect(135 + i * 110, 320, 50, 50);
 
 			if (i < curCreature.slots.Length)
 			{
 				Creature.Slot curSlot = curCreature.slots[i];
-
+				
 				if ((int)curSlot.driodenElement == -1 && curSlot.driodenLevel == -1)
 				{
 					if (GUI.Button(curRect, Resources.Load<Texture>("GUITextures/lock_open")))
@@ -168,6 +178,11 @@ public class GUIBase : MonoBehaviour
 						GameManager.Singleton.EquipCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement, (int)curResourceLevel);
 					}
 					continue;
+				}
+
+				if (CreateButton(upgrade, "+"))
+				{
+					GameManager.Singleton.UpgradeCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement);
 				}
 
 				if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
@@ -185,15 +200,15 @@ public class GUIBase : MonoBehaviour
 		}
 		if (curResourceLevel == ResourceLevel.Bioden) curResourceLevel = ResourceLevel.DriodenLvl0;
 
-		GUI.Label(new Rect(60, 450, 200, 50), curResourceLevel.ToString(), textGuiStyle);
+		GUI.Label(new Rect(60, 480, 200, 50), curResourceLevel.ToString(), textGuiStyle);
 
-		GUI.Label(new Rect((windowRect.width - 270), 450, 200, 50), CuResourceElement.ToString(), textGuiStyle);
+		GUI.Label(new Rect((windowRect.width - 270), 480, 200, 50), CuResourceElement.ToString(), textGuiStyle);
 
-		if (GUI.Button(new Rect(20, 450, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
+		if (GUI.Button(new Rect(20, 480, 40, 40), Resources.Load<Texture>("GUITextures/Previous")))
 		{
 			curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == 0 ? 6 : ((int)curResourceLevel - 1));
 		}
-		if (GUI.Button(new Rect(250, 450, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
+		if (GUI.Button(new Rect(250, 480, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
 		{
 			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
 		}
@@ -218,6 +233,15 @@ public class GUIBase : MonoBehaviour
 		{
 			CuResourceElement = BattleEngine.ResourceElement.Water;
 		}
+	}
+
+	private bool CreateButton(Rect upgrade, string s)
+	{
+		if (GUI.Button(upgrade, "<color=white><size=20>" + s + "</size></color>"))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	#region Crafting

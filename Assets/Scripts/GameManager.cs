@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
             {
                 if (Player.CurCreature.CreatureID == _allOwnCreatures[i].CreatureID)
                 {
-                    _allOwnCreatures[i] = Player.CurCreature;
+					_allOwnCreatures[i] = Player.CurCreature;
                 }
             }
         }
@@ -418,6 +418,23 @@ public class GameManager : MonoBehaviour
             _allOwnCreatures.Add(curCreature);
         }
     }
+
+	public void SwitchCurrentCreature(int creatureID)
+	{
+		StartCoroutine(CSwitchCurrentCreature(creatureID));
+	}
+
+	private IEnumerator CSwitchCurrentCreature(int creatureID)
+	{
+		WWW request = new WWW(GetSessionURL("switchcurcr") + "&cid=" + creatureID);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		Debug.Log(json);
+		if (!CheckResult(json)) yield break;
+
+		GetOwnPlayer();
+	}
 
     ///<summary>
     /// Exchange of resources.
@@ -950,7 +967,6 @@ public class GameManager : MonoBehaviour
                 Login(PlayerID, Password, true, OnPlayerLoaded);
             }
         }
-
     }
 #endif
 }
