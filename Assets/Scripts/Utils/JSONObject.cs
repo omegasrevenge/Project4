@@ -3,6 +3,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
  
 /*
  * http://www.opensource.org/licenses/lgpl-2.1.php
@@ -123,6 +124,24 @@ public class JSONObject : Nullable {
 		case Type.BOOL: return o.b?1:0;
 		};
 		return 0;
+	}
+	public static explicit operator long(JSONObject o)
+	{
+		if(o==null) return 0;
+		switch(o.type)
+		{
+		case Type.STRING: return long.Parse(o.str);
+		case Type.NUMBER: return (long)o.n;
+		case Type.BOOL: return o.b?1:0;
+		};
+		return 0;
+	}
+	public static explicit operator DateTime(JSONObject o)
+	{
+		System.DateTime dtDateTime = new DateTime(1970,1,1,0,0,0,0);
+		if(o==null) return dtDateTime;
+		long unixTimeStamp=((long)o)/(1000000000);
+		return dtDateTime.AddSeconds(unixTimeStamp);
 	}
 
 	public JSONObject(string s) {type = Type.STRING;str = s;}
