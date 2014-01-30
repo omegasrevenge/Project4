@@ -30,11 +30,13 @@ public class Resource : PointOfInterest
 
     protected override void EnterRange()
     {
+        base.EnterRange();
         _animator.SetBool(InRangeStr, InRange);
     }
 
     protected override void LeaveRange()
     {
+        base.LeaveRange();
         _animator.SetBool(InRangeStr, InRange);
     }
 
@@ -42,5 +44,10 @@ public class Resource : PointOfInterest
     {
         Poi.View = null;
         Destroy(gameObject);
+    }
+
+    override public void OnTap(TouchInput.Touch2D touch2D)
+    {
+        GameManager.Singleton.PoiFarm(Poi);
     }
 }

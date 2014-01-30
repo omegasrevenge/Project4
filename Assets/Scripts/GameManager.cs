@@ -210,21 +210,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
         GameMode oldMode = CurrentGameMode;
         CurrentGameMode = newGameMode;
-        /*switch (newGameMode)
+        switch (newGameMode)
         {
             case GameMode.Map:
+                if (!_map)
                 {
-                    break;
+                    _map = Map.Create();
+                    _map.AttachGUI(_view.AddMapUI());
                 }
-            case GameMode.Base:
-                {
-                    break;
-                }
-            case GameMode.Login:
-                {
-                    break;
-                }
-        }*/
+                _view.Switch3DSceneRoot(_map);
+                break;
+        }
         if (oldMode == GameMode.Fight)
         {
             FightDelete();
@@ -493,11 +489,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator CPoiFarm(POI poi)
     {
         WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos() + "&poiid=" + poi.POI_ID);
-        Debug.Log(request.url);
+        //Debug.Log(request.url);
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (CheckResult(json)) _lastOwnPlayerUpdate = -1000;
+        if (!CheckResult(json)) yield break;
+        _lastOwnPlayerUpdate = -1000;
+        Debug.Log(json);
+        lastFarmResult = (string) json["data"];
+
     }
 
     /// <summary>
@@ -840,7 +840,7 @@ public class GameManager : MonoBehaviour
                 GUIStartIRISinstructions();
                 break;
             default:
-                GUIInitMap();
+                SwitchGameMode(GameMode.Map);
                 break;
         }
         _view.HideLoadingScreen();
@@ -921,14 +921,9 @@ public class GameManager : MonoBehaviour
 
     public void GUIShowSpectreChoice()
     {
-        GUIInitMap();
+        SwitchGameMode(GameMode.Map);
     }
 
-    public void GUIInitMap()
-    {
-        _map = Map.Create();
-        _view.Switch3DSceneRoot(_map);
-    }
 
     #endregion
 

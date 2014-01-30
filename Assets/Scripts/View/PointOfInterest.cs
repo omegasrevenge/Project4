@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PointOfInterest : MonoBehaviour
+public class PointOfInterest : TouchObject
 {
 
     public MapUtils.ProjectedPos ProjPos;
@@ -33,6 +33,7 @@ public class PointOfInterest : MonoBehaviour
         ProjPos = MapUtils.GeographicToProjection(new Vector2(poi.Position.x, poi.Position.y), grid.ZoomLevel);
         Vector2 pos = _grid.GetPosition(ProjPos);
         transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);
+        Enabled = false;
     }
 
     void Update()
@@ -50,11 +51,11 @@ public class PointOfInterest : MonoBehaviour
 
     protected virtual void EnterRange()
     {
-        
+        Enabled = true;
     }
 
     protected virtual void LeaveRange()
     {
-        
+        Enabled = false;
     }
 }

@@ -170,6 +170,11 @@ public class ViewController : MonoBehaviour
     public GUIObjectSpectresIntro AddSpectresIntro(string textKeyText)
     {
         return GUIObjectSpectresIntro.Create(_gui, textKeyText);
+    }    
+    
+    public GUIObjectMapUI AddMapUI()
+    {
+        return GUIObjectMapUI.Create(_gui);
     }
 
     public void ShowLoadingScreen(string text)

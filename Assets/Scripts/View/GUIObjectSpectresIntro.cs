@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GUIObjectSpectresIntro : MonoBehaviour {
     private const string Prefab = "GUI/panel_spectresintro";
