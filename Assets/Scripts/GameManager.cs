@@ -510,11 +510,18 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
-        _lastOwnPlayerUpdate = -1000;
-        Debug.Log(json);
-        lastFarmResult = (string) json["data"];
-
+		//Debug.Log(json);
+		JSONObject data=json["data"];
+		bool bSuccess=(bool) data["Success"];
+		if (data.HasField("NextFarm")) {
+			DateTime nextFarm=(DateTime)data["NextFarm"];
+			poi.NextFarm=nextFarm;
+			Debug.Log("NextFarm:"+nextFarm.ToLocalTime());
+		}
+		if (!CheckResult(json)) yield break;
+        _lastOwnPlayerUpdate = -1000; //trigger player update
+		lastFarmResult = (string) data["Result"];
+		Debug.Log("Result:"+lastFarmResult);
     }
 
     /// <summary>
