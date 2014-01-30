@@ -15,7 +15,6 @@ public class Player
 	public bool Fighting;
 	public Fight CurFight;
 
-	public GameObject baseInstance;
     public int InitSteps;
 	public int[] creatureIDs;
 	public Creature CurCreature;

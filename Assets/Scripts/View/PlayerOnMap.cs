@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOnMap : MonoBehaviour
+public class PlayerOnMap : TouchObject
 {
     private const string PrefabVengea = "Prefabs/POIs/agent";
     private const string PrefabNCE = "Prefabs/POIs/interference";

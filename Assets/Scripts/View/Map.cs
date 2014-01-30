@@ -15,7 +15,8 @@ public class Map : SceneRoot3D
     private Transform _mapRig;
     private Transform _arrow;
     private Animator _radar;
-    private Dictionary<Player, PlayerOnMap> _playersOnMap = new Dictionary<Player, PlayerOnMap>(); 
+    private Dictionary<Player, PlayerOnMap> _playersOnMap = new Dictionary<Player, PlayerOnMap>();
+    private BaseOnMap _base;
 
     public bool init = false;
 
@@ -46,6 +47,7 @@ public class Map : SceneRoot3D
         _grid = _mapRig.Find(GridStr).GetComponent<MapGrid>();
         _arrow = _mapRig.Find(ArrowStr);
         _radar = _mapRig.Find(RadarStr).GetComponent<Animator>();
+        _base = BaseOnMap.Create(_grid, _mapRig);
     }
 
     //private void OnGUI()
@@ -151,6 +153,13 @@ public class Map : SceneRoot3D
             }
         }
 
+        if (_base != null)
+        {
+            _base.InRange = MapUtils.Distance(_base.ProjPos, _grid.CurrentPosition) <= RangeRadius;
+            if (_base.InRange)
+                inRange++;
+        }
+
         //if (MapUtils.DistanceInKm(GameManager.Singleton.Player.BasePosition, LocationManager.GetCurrentPosition()) <= RangeRadius)
         //{
         //    //GUI.Label(new Rect(450, 40 + inRange * 95, 200, 20), "Base", curGuiStyle);
@@ -162,26 +171,6 @@ public class Map : SceneRoot3D
         //}
 
         _radar.SetBool("Radar", inRange > 0);
-    }
-
-    private void CreateBase()
-    {
-        string path = "Prefabs/POIs/";
-
-        if (GameManager.Singleton.Player.baseInstance == null)
-        {
-            //GameObject obj = Resources.Load<GameObject>(path + "base");
-            //GameObject curGameObject = (GameObject)Instantiate(obj);
-            //GameManager.Singleton.Player.baseInstance = curGameObject;
-            //curGameObject.transform.parent = _mapRig;
-            //float lon = GameManager.Singleton.Player.BasePosition.x;
-            //float lat = GameManager.Singleton.Player.BasePosition.y;
-            //MapUtils.ProjectedPos projPos = MapUtils.GeographicToProjection(new Vector2(lon, lat), _grid.ZoomLevel);
-            //PointOfInterest comp = curGameObject.AddComponent<PointOfInterest>();
-            //comp.ProjPos = projPos;
-            //comp.Grid = _grid;
-            return;
-        }
     }
 
     private void MoveBase()
@@ -221,19 +210,6 @@ public class Map : SceneRoot3D
         {
             grid_version = _grid.grid_version;
             GameManager.Singleton.pois_valid = false;
-        }
-
-        
-
-        if (GameManager.Singleton.LoggedIn)
-        {
-            if (!init)
-            {
-                CreateBase();
-                init = true;
-            }
-
-            MoveBase();
         }
     }
 
