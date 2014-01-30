@@ -114,6 +114,7 @@ public class SoundController : MonoBehaviour
         AudioSource source;
         if (Singleton._audio.TryGetValue(audioChannel, out source))
         {
+	        Singleton._audio.Remove(audioChannel);
            Destroy(source);
         }
     }
