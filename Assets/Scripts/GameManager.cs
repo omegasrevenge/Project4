@@ -829,27 +829,10 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private void OnApplicationPause(bool paused)
-    {
-        if (paused)
-        {
-            Debug.Log("Pause App.");
-            Input.location.Stop();
-            Input.compass.enabled = false;
-        }
-        else
-        {
-            Debug.Log("Resume App.");
-            Input.location.Start();
-            Input.compass.enabled = true;
-        }
-    }
-
 #if !UNITY_EDITOR
     void OnApplicationFocus(bool focusStatus)
     {
-        if (focusStatus)
-            (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
+        (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
     }
 #endif
 

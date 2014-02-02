@@ -118,7 +118,7 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_Events:
   - time: 2
-    functionName: DestroyResource
+    functionName: DestroyObject
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

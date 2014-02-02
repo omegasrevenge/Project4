@@ -55,8 +55,6 @@ public class PlayerBase : SceneRoot3D
 		equiptCreature = GameManager.Singleton.Player.CurCreature;
 		allOwnCreatures = GameManager.Singleton.AllOwnCreatures;
 
-		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Resources.Load<Texture>("GUITextures/Background"));
-
 		if (showWindow)
 		{
 			ShowWindow(curWindow);

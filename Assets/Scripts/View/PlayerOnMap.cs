@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayerOnMap : TouchObject
 {
-    private const string PrefabVengea = "Prefabs/POIs/agent";
-    private const string PrefabNCE = "Prefabs/POIs/interference";
-    private const string HideResourceStr = "HidePOI";
+    private const string PrefabVengea = "POIs/agent";
+    private const string PrefabNCE = "POIs/interference";
+    private const string HideStr = "Hide";
     private const string InRangeStr = "InRange";
 
     public Player playerData;
@@ -14,6 +14,7 @@ public class PlayerOnMap : TouchObject
     public MapUtils.ProjectedPos ProjPos;
 
     private Animator _animator;
+    private bool _removing;
 
     public bool InRange
     {
@@ -58,7 +59,10 @@ public class PlayerOnMap : TouchObject
 
     public void RemovePlayerFromMap()
     {
-        _animator.Play(HideResourceStr);
+        if (_removing)
+            return;
+        _animator.SetTrigger(HideStr);
+        _removing = true;
     }
 
     private void EnterRange()
@@ -72,7 +76,7 @@ public class PlayerOnMap : TouchObject
     }
 
     //Don't rename! It shares the animator with resources
-    private void DestroyResource()
+    private void DestroyObject()
     {
         Destroy(gameObject);
     }

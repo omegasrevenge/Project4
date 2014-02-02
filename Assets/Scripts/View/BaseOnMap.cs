@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class BaseOnMap : TouchObject
 {
-    private const string Prefab = "Prefabs/POIs/base";
-    private const string HideResourceStr = "HidePOI";
+    private const string Prefab = "POIs/base";
     private const string InRangeStr = "InRange";
 
     private Animator _animator;
@@ -52,10 +51,6 @@ public class BaseOnMap : TouchObject
         transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);
     }
 
-    protected void RemovePOI()
-    {
-        _animator.Play(HideResourceStr);
-    }
 
     protected void EnterRange()
     {
@@ -68,11 +63,6 @@ public class BaseOnMap : TouchObject
     {
         Enabled = false;
         _animator.SetBool(InRangeStr, InRange);
-    }
-
-    public void DestroyResource()
-    {
-        Destroy(gameObject);
     }
 
     override public void OnTap(TouchInput.Touch2D touch2D)

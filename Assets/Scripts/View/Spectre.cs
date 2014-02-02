@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class Spectre : PointOfInterest
 {
-    private const string Prefab = "Prefabs/POIs/spectre";
-    private const string HideResourceStr = "HidePOI";
+    private const string Prefab = "POIs/spectre";
     private const string InRangeStr = "InRange";
 
-    private Animator _animator;
 
     public static Spectre Create(POI poi, MapGrid grid, Transform root)
     {
@@ -17,8 +15,8 @@ public class Spectre : PointOfInterest
         GameObject obj = (GameObject) Instantiate(Resources.Load<GameObject>(Prefab));
         res = obj.GetComponent<Spectre>();
         res.transform.parent = root;
-        res.Init(poi, grid);
-        res._animator = res.GetComponent<Animator>();
+        Animator animator = res.GetComponent<Animator>();
+        res.Init(poi, grid, animator);
         return res;
     }
 
@@ -29,10 +27,6 @@ public class Spectre : PointOfInterest
             RemovePOI();
     }
 
-    protected override void RemovePOI()
-    {
-        _animator.Play(HideResourceStr);
-    }
 
     protected override void EnterRange()
     {
@@ -44,12 +38,6 @@ public class Spectre : PointOfInterest
     {
         base.LeaveRange();
         _animator.SetBool(InRangeStr, InRange);
-    }
-
-    public void DestroyResource()
-    {
-        Poi.View = null;
-        Destroy(gameObject);
     }
 
     override public void OnTap(TouchInput.Touch2D touch2D)

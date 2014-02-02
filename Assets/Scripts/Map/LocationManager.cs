@@ -51,13 +51,14 @@ public class LocationManager : MonoBehaviour {
     private void Update()
     {
 #if !UNITY_EDITOR
-        if (Input.location.status != LocationServiceStatus.Running) return;
+        if (Input.location.status != LocationServiceStatus.Running)
+        {
+            //Debug.Log("Wrong Locations Status: "+ Input.location.status);
+            return;
+        }   
             SetLocation();
         
-        //if (Mathf.Abs(Mathf.DeltaAngle(_direction, Input.compass.trueHeading)) < 90f)
         _direction = Mathf.LerpAngle(_direction, Input.compass.trueHeading, Time.deltaTime*MoveSpeed);
-        //else
-          //  _direction = Input.compass.trueHeading;
 #else
         _longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
         _latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
