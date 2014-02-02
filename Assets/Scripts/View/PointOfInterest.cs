@@ -38,7 +38,7 @@ public class PointOfInterest : TouchObject
 
     protected virtual void Update()
     {
-        if (!GameManager.Singleton.POIs.Contains(Poi))
+        if (Poi == null || !GameManager.Singleton.POIs.Contains(Poi))
             RemovePOI();
         Vector2 pos = _grid.GetPosition(ProjPos);
         transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);

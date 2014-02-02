@@ -44,12 +44,12 @@ Material:
     m_Floats:
       data:
         first:
-          name: _EmissionLM
-        second: 49.9599991
-      data:
-        first:
           name: _Shininess
         second: 1
+      data:
+        first:
+          name: _EmissionLM
+        second: 49.9599991
       data:
         first:
           name: _Parallax

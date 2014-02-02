@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     private ViewController _view;
     private Map _map;
+    private PlayerBase _base;
 
     public bool DummyUI = true;
 
@@ -114,15 +115,8 @@ public class GameManager : MonoBehaviour
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
         Social.localUser.Authenticate(OnAuthCB);
 #endif
-        if (DummyUI)
-            InitializeDummyObjects();
     }
 
-    private void InitializeDummyObjects()
-    {
-        //CreateController<GUIMap>("dummy_GUIMap").Init(_view.Camera3D.transform.parent, _map);
-        CreateController<GUIBase>("dummy_GUIBase");
-    }
 
     private void Update() //<-------------------------------------------------------------------------------------------------------
     {
@@ -208,9 +202,16 @@ public class GameManager : MonoBehaviour
     public void SwitchGameMode(GameMode newGameMode)
     {
         if (newGameMode == CurrentGameMode) { return; };
+
         Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
-        GameMode oldMode = CurrentGameMode;
+
+        if (CurrentGameMode == GameMode.Fight)
+        {
+            FightDelete();
+        }
+
         CurrentGameMode = newGameMode;
+        
         switch (newGameMode)
         {
             case GameMode.Map:
@@ -221,11 +222,16 @@ public class GameManager : MonoBehaviour
                 }
                 _view.Switch3DSceneRoot(_map);
                 break;
+            case GameMode.Base:
+                if (!_base)
+                {
+                    _base = PlayerBase.Create();
+                    _base.AttachGUI(_view.AddBaseUI());
+                }
+                _view.Switch3DSceneRoot(_base);
+                break;
         }
-        if (oldMode == GameMode.Fight)
-        {
-            FightDelete();
-        }
+
     }
 
     /// <summary>

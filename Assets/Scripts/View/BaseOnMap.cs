@@ -34,7 +34,6 @@ public class BaseOnMap : TouchObject
         baseOnMap.transform.parent = root;
         baseOnMap.gameObject.name = "base";
         baseOnMap._grid = grid;
-        Debug.Log(GameManager.Singleton.Player.BasePosition+ " "+ grid.ZoomLevel);
         baseOnMap.ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, grid.ZoomLevel);
         baseOnMap._animator = baseOnMap.GetComponent<Animator>();
         baseOnMap.Enabled = false;

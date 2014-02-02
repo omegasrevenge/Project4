@@ -177,6 +177,11 @@ public class ViewController : MonoBehaviour
         return GUIObjectMapUI.Create(_gui);
     }
 
+    public GUIObjectBaseUI AddBaseUI()
+    {
+        return GUIObjectBaseUI.Create(_gui);
+    }
+
     public void ShowLoadingScreen(string text)
     {
         if (_loadingScreen == null)

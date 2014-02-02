@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791698fdcdd8bea4d8796ee498703e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _disabledBy: []
   playerData:
     PlayerID: 
     Name: 
@@ -106,7 +107,8 @@ MonoBehaviour:
         BaseElement: 0
       Turn: 0
       Finished: 0
-    baseInstance: {fileID: 0}
+      confused: 0
+      defBoosted: 0
     InitSteps: 0
     creatureIDs: 
     CurCreature:

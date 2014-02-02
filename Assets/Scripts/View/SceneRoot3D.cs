@@ -48,13 +48,13 @@ public class SceneRoot3D : MonoBehaviour
     void OnDisable()
     {
         if(_gui)
-            _gui.GetComponent<dfControl>().Disable();
+            _gui.GetComponent<dfControl>().Hide();
     }
 
     void OnEnable()
     {
         if (_gui)
-            _gui.GetComponent<dfControl>().Enable();
+            _gui.GetComponent<dfControl>().Show();
     }
 
     void OnDestroy()

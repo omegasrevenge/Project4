@@ -132,7 +132,7 @@ public class Map : SceneRoot3D
 
         //Rotation:
         Vector3 gridRot = _mapRig.eulerAngles;
-        _mapRig.eulerAngles = new Vector3(gridRot.x, TouchInput.Singleton.GetRotation(gridRot.y, _mapRig.position, true, true), gridRot.z);
+        _mapRig.eulerAngles = new Vector3(gridRot.x, TouchInput.Singleton.GetRotation(gridRot.y, _mapRig.position, false, true), gridRot.z);
 
         MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(_grid.ZoomLevel);
         if ((newPosition - _grid.CurrentPosition).Magnitude < MoveRadius)

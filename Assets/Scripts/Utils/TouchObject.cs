@@ -42,7 +42,7 @@ public class TouchObject : MonoBehaviour
 
     virtual public void OnTouchEnd(TouchInput.Touch2D touch2D)
     {
-        if(touch2D.Current == this)
+        if(touch2D.Current == this && !TouchInput.Rotating)
             OnTap(touch2D);
     }
 

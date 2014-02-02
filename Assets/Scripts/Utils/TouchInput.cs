@@ -21,6 +21,12 @@ public class TouchInput : MonoBehaviour
     private Vector2 _startInput;
     private float _startRotation;
     private float _lastRotation;
+    private bool _rotating;
+    public static bool Rotating
+    {
+        get { return Singleton._rotating;  }
+        private set { Singleton._rotating = value; }
+    }
     [SerializeField]
     private float _rotationSpeed = 0;
     private float _startScale;
@@ -124,6 +130,7 @@ public class TouchInput : MonoBehaviour
     {
         if (Input.touchCount < 1 || (Input.touchCount == 1 && !singleTouch))
         {
+            if(Input.touchCount == 0) Rotating = false;
             _touch1 = -1;
             _touch2 = -1;
             _singleTouch = -1;
@@ -159,7 +166,7 @@ public class TouchInput : MonoBehaviour
         else
         {
             _singleTouch = -1;
-
+            Rotating = !singleTouch;
             Touch t1 = new Touch();
             Touch t2 = new Touch();
             bool b1 = false;
@@ -200,7 +207,7 @@ public class TouchInput : MonoBehaviour
                 newRotation = _startRotation + Mathf.Rad2Deg*a;
             else
                 newRotation = _startRotation - Mathf.Rad2Deg * a;
-            _rotationSpeed = Mathf.Lerp(_rotationSpeed,(newRotation - _lastRotation)/Time.deltaTime,Time.deltaTime*RotationSpeedInterpolation);
+            _rotationSpeed = Mathf.Lerp(_rotationSpeed, Mathf.DeltaAngle(_lastRotation, newRotation) / Time.deltaTime, Time.deltaTime * RotationSpeedInterpolation);
             _lastRotation = newRotation;
 
             return newRotation;

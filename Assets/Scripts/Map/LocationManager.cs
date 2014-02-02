@@ -5,8 +5,11 @@ public class LocationManager : MonoBehaviour {
     private static LocationManager _instance;
     //Latitude = 52.50451
     //Longitude = 13.39699
-    private float _latitude = 52.50451f;
-    private float _longitude = 13.39699f;
+    [SerializeField]
+    private float _latitude = 52.50648f;
+    [SerializeField]
+    private float _longitude = 13.39403f;
+    [SerializeField]
     private float _direction = 0f;
 
     public const float MoveSpeed = 3f;
