@@ -217,10 +217,10 @@ public class BattleEngine : MonoBehaviour
         if (GameManager.Singleton.Player.CurFight.defBoosted)
             GUI.Button(new Rect(250, Screen.height - 200, 100, 100), "DEF BOOSTED!");
 
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 200, 200, 200), "Fliehen versuchen!"))
-        {
+        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 200, 100), "Fliehen versuchen!"))
             GameManager.Singleton.EscapeAttempt();
-        }
+        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 200, 200, 100), "Fangen versuchen!"))
+            GameManager.Singleton.CatchAttempt();
     }
 
     private void updateGUI()
@@ -256,6 +256,7 @@ public class BattleEngine : MonoBehaviour
         {
             Debug.Log("The skill " + Result.SkillName + " does not exist. Casting Laser instead.");
             createSkillVisuals("Laser");
+            return;
         }
         createSkillVisuals(Result.SkillName);
     }

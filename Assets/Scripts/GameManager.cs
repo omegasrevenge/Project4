@@ -613,6 +613,23 @@ public class GameManager : MonoBehaviour
         GetOwnPlayer();
     }
 
+    public void CatchAttempt()
+    {
+        StartCoroutine(CCatchAttempt());
+    }
+
+    private IEnumerator CCatchAttempt()
+    {
+        Debug.Log("CATCH ATTEMPT");
+        WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + "&element="); //<---------------------------------
+        yield return request;
+        Debug.Log("CATCH ATTEMPT: " + request.text);
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+        GetOwnPlayer();
+    }
+
     /// <summary>
     /// blah
     /// </summary>
