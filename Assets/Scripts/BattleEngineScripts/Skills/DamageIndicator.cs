@@ -8,7 +8,7 @@ public class DamageIndicator : MonoBehaviour
 
 	void Awake()
 	{
-		_battleCam = BattleEngine.Current.BattleCam.GetComponent<Camera>();
+		_battleCam = BattleEngine.Current.Camera.GetComponent<Camera>();
 		_proxyPos = transform.position;
 	}
 

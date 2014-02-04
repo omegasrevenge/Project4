@@ -66,68 +66,57 @@ public class Player
         }
     }
 
-    public void UpdateBattle()
+    public BattleInit GetBattleInit()
     {
-        if (!Fighting)
-        {
-            if (BattleEngine.Current != null)
-                BattleEngine.Current.Fighting = false;
-            return;
-        }
+        BattleInit newBattle = new BattleInit();
 
-        if (BattleEngine.Current == null)
-        {
-            BattleInit newBattle = new BattleInit();
+        newBattle.MonsterAElement = CurCreature.BaseElement;
+        newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
 
-            newBattle.MonsterAElement = CurCreature.BaseElement;
-            newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
+        newBattle.MonsterAName = CurCreature.Name;
+        newBattle.MonsterBName = CurFight.EnemyCreature.Name;
 
-            newBattle.MonsterAName = CurCreature.Name;
-            newBattle.MonsterBName = CurFight.EnemyCreature.Name;
+        newBattle.MonsterAHealth = CurCreature.HP;
+        newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
 
-            newBattle.MonsterAHealth = CurCreature.HP;
-            newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
+        newBattle.MonsterAMaxHealth = CurCreature.HPMax;
+        newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
 
-            newBattle.MonsterAMaxHealth = CurCreature.HPMax;
-            newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
+        newBattle.MonsterALevel = CurCreature.Level;
+        newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
 
-            newBattle.MonsterALevel = CurCreature.Level;
-            newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
+        newBattle.BaseMeshA = CurCreature.ModelID;
+        newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
 
-            newBattle.BaseMeshA = CurCreature.ModelID;
-            newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
-
-            if (CurFight.Turn)
-                newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
-            else
-                newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
-
-            BattleEngine.CreateBattle(newBattle);
-            BattleEngine.Current.Fighting = !CurFight.Finished;
-        }
+        if (CurFight.Turn)
+            newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
         else
+            newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
+        return newBattle;
+    }
+
+    public FightRoundResult GetResult()
+    {
+        FightRoundResult newResult = new FightRoundResult();
+
+        if (CurFight.Turn)
+            newResult.PlayerTurn = FightRoundResult.Player.A;
+        else
+            newResult.PlayerTurn = FightRoundResult.Player.B;
+
+        newResult.Turn = CurFight.Round;
+
+        string[] lastResult = CurFight.LastResult.Split(' ');
+
+        if (lastResult.Length != 4)
         {
-            FightRoundResult newResult = new FightRoundResult();
-
-            if (CurFight.Turn)
-                newResult.PlayerTurn = FightRoundResult.Player.A;
-            else
-                newResult.PlayerTurn = FightRoundResult.Player.B;
-
-            newResult.Turn = CurFight.Round;
-            BattleEngine.Current.Result = newResult;
-            BattleEngine.Current.Fighting = !CurFight.Finished;
-            string[] lastResult = CurFight.LastResult.Split(' ');
-
-            if (lastResult.Length != 4)
-            {
-                Debug.Log("LAST RESULT LENGTH != 4. lastresult = " + CurFight.LastResult);
-                return;
-            }
-            newResult.SkillName = lastResult[0];
-            newResult.Damage = Convert.ToInt32(lastResult[1]);
-            newResult.DoT = Convert.ToInt32(lastResult[2]);
-            newResult.HoT = Convert.ToInt32(lastResult[3]);
+            Debug.Log("LAST RESULT LENGTH != 4. lastresult = " + CurFight.LastResult);
+            return newResult;
         }
+        newResult.SkillName = lastResult[0];
+        newResult.Damage = Convert.ToInt32(lastResult[1]);
+        newResult.DoT = Convert.ToInt32(lastResult[2]);
+        newResult.HoT = Convert.ToInt32(lastResult[3]);
+        return newResult;
     }
 }

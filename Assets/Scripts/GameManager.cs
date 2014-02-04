@@ -230,6 +230,11 @@ public class GameManager : MonoBehaviour
                 }
                 _view.Switch3DSceneRoot(_base);
                 break;
+            case GameMode.Fight:
+                if(BattleEngine.CurrentGameObject == null)
+                    BattleEngine.CreateBattle(Player.GetBattleInit());
+                _view.Switch3DSceneRoot(BattleEngine.Current);
+                break;
         }
 
     }
@@ -335,7 +340,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        Player.UpdateBattle();
+        if (BattleEngine.CurrentGameObject != null && BattleEngine.CurrentGameObject.activeSelf) 
+            BattleEngine.Current.Result = Player.GetResult();
     }
 
     public void AddCreatureEQSlot(int creatureID)
@@ -603,10 +609,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CEscapeAttempt()
     {
-        Debug.Log("ESCAPE ATTEMPT");
         WWW request = new WWW(GetSessionURL("escape"));
         yield return request;
-        Debug.Log("ESCAPE ATTEMPT: " + request.text);
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }

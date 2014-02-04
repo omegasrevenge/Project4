@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: DefaultArena
   m_TagString: Untagged
@@ -185,25 +186,9 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100022
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400022}
-  - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: CameraPivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100024
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -213,7 +198,7 @@ GameObject:
   - 124: {fileID: 12400000}
   - 92: {fileID: 9200000}
   m_Layer: 0
-  m_Name: BattleCamera
+  m_Name: camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,9 +244,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -99.7075424, y: 96.3760681, z: 1.68212986}
+  m_LocalPosition: {x: -88.0938339, y: 107.995293, z: 8.38082886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400024}
   - {fileID: 400016}
   - {fileID: 400014}
   - {fileID: 400020}
@@ -269,7 +255,6 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400012}
   - {fileID: 400010}
-  - {fileID: 400022}
   - {fileID: 400006}
   - {fileID: 400008}
   m_Father: {fileID: 0}
@@ -383,30 +368,18 @@ Transform:
   m_LocalScale: {x: 1, y: 4.95537281, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
---- !u!4 &400022
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100022}
-  m_LocalRotation: {x: -.0740256235, y: 0, z: 0, w: .997256339}
-  m_LocalPosition: {x: 0, y: -1.77050781, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400024}
-  m_Father: {fileID: 400000}
 --- !u!4 &400024
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
-  m_LocalRotation: {x: .0764071867, y: 0, z: 0, w: .99707675}
-  m_LocalPosition: {x: -.646815777, y: 6.58867073, z: -19.9437065}
+  m_LocalRotation: {x: .00238832319, y: 0, z: 0, w: .999997199}
+  m_LocalPosition: {x: -.646812439, y: 1.80136108, z: -20.697916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400028}
-  m_Father: {fileID: 400022}
+  m_Father: {fileID: 400000}
 --- !u!4 &400026
 Transform:
   m_ObjectHideFlags: 1
@@ -777,14 +750,22 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100022}
+  m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e4f768bd68ea3b4e8e59d1ceaddfc2f, type: 3}
+  m_Script: {fileID: 11500000, guid: b1579e7a3e560954dbd3aeb43125049a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 90
-  DoRotation: 0
+  Actor: {fileID: 0}
+  CurrentPlayer: 0
+  InputText: 
+  Turn: 0
+  Fighting: 1
+  BattleCam: {fileID: 0}
+  MainCam: {fileID: 0}
+  FriendlyCreature: {fileID: 0}
+  EnemyCreature: {fileID: 0}
+  Arena: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

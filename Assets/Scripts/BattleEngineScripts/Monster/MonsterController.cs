@@ -22,7 +22,6 @@ public class MonsterController : ActorControlls
 	void Awake()
 	{
 		_monsterStats = GetComponent<MonsterStats>();
-		_battleCam = GameObject.Find("BattleCamera").transform;
 		BgHealthbar = transform.FindChild("Healthbar");
 		Healthbar = transform.FindChild("Health");
 	}
@@ -35,6 +34,8 @@ public class MonsterController : ActorControlls
 
 	void Update () 
 	{
+        if (_battleCam == null)
+            _battleCam = BattleEngine.Current.Camera.transform;
 		UpdateHealthBar();
 
 		if(!AnimationFinished)
