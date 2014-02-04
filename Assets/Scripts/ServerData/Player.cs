@@ -5,6 +5,9 @@ using UnityEngine;
 [Serializable]
 public class Player
 {
+    public enum Faction { VENGEA, NCE}
+
+    public Faction CurrentFaction;
     public string PlayerID;
     public string Name;
     public Vector2 Position;
@@ -21,6 +24,7 @@ public class Player
 
     public void ReadJson(JSONObject json)
     {
+        CurrentFaction = (Faction)(int)json["Faction"];
         PlayerID = (string)json["PId"];
         Name = (string)json["Name"];
         Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
