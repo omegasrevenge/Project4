@@ -30,6 +30,15 @@ public class POI
     public float CooldownInSeconds{get {return Mathf.Max(0f,(float)(NextFarm-DateTime.Now).TotalSeconds);}}
     public float CooldownInPercent{get {return CooldownInSeconds/(RespawnInMinutes*60f);}}
 
+    public string GetCooldownString()
+    {
+        int cd = Mathf.FloorToInt(CooldownInSeconds);
+        int s = Mathf.FloorToInt(cd%60f);
+        int m = Mathf.FloorToInt((cd/60f)%60);
+        int h = Mathf.FloorToInt((cd/3600f)%60);
+        return string.Format("{0:00}:{1:00}:{2:00}", h, m, s);
+    }
+
     public static POI ReadJson(JSONObject json)
     {
         POI poi = new POI();

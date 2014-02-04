@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: 0
-      y: .98046875
+      x: .488769531
+      y: .8515625
       width: .0048828125
       height: .009765625
     border:
@@ -174,6 +174,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 32, y: 32}
     textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: circle
+    region:
+      serializedVersion: 2
+      x: .42578125
+      y: .752929688
+      width: .0625
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: ab46889d7ad27674c9cd1a6162cca398
     deleted: 0
     texture: {fileID: 0}
   - name: element_energy
@@ -264,7 +281,7 @@ MonoBehaviour:
   - name: gradient
     region:
       serializedVersion: 2
-      x: .48046875
+      x: .53515625
       y: .8515625
       width: .015625
       height: .123046875
@@ -282,7 +299,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .42578125
-      y: .752929688
+      y: .87890625
       width: .0541992188
       height: .119140625
     border:
@@ -298,7 +315,7 @@ MonoBehaviour:
   - name: iris-logo
     region:
       serializedVersion: 2
-      x: .48046875
+      x: .488769531
       y: .752929688
       width: .048828125
       height: .09765625
@@ -315,8 +332,8 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .496582031
-      y: .8515625
+      x: .538085938
+      y: .752929688
       width: .0307617188
       height: .0537109375
     border:
@@ -349,8 +366,8 @@ MonoBehaviour:
   - name: vengeaagent
     region:
       serializedVersion: 2
-      x: .42578125
-      y: .873046875
+      x: .48046875
+      y: .87890625
       width: .0541992188
       height: .110351562
     border:
