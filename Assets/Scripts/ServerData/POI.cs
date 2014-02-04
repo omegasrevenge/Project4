@@ -28,6 +28,24 @@ public class POI
     public string RealType;
     public PointOfInterest View;
 
+    public bool FarmAllowed
+    {
+        get
+        {
+            return !(DateTime.Compare(DateTime.Now, NextFarm)<0);
+        }
+    }
+
+    public double GetTimeUntilFarmAllowed
+    {
+        get 
+        {
+            if(FarmAllowed)
+                return 0f;
+            return (NextFarm-DateTime.Now).TotalSeconds;
+        }
+    }
+
     public static POI ReadJson(JSONObject json)
     {
         POI poi = new POI();
