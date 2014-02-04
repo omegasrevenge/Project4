@@ -43,9 +43,9 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .956054688
-      y: .124023438
-      width: .03125
+      x: .0317382812
+      y: .948242188
+      width: .015625
       height: .03125
     border:
       m_Left: 15
@@ -62,7 +62,7 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 0
-      width: .703125
+      width: .3515625
       height: .947265625
     border:
       m_Left: 0
@@ -77,9 +77,9 @@ MonoBehaviour:
   - name: bg-menu
     region:
       serializedVersion: 2
-      x: .928710938
-      y: .306640625
-      width: .0625
+      x: 0
+      y: .948242188
+      width: .03125
       height: .03125
     border:
       m_Left: 2
@@ -94,9 +94,9 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .956054688
-      y: .15625
-      width: .03125
+      x: .0478515625
+      y: .948242188
+      width: .015625
       height: .03125
     border:
       m_Left: 15
@@ -108,12 +108,29 @@ MonoBehaviour:
     textureGUID: 5d7f073f47c440846ac3af55a5f04b66
     deleted: 0
     texture: {fileID: 0}
+  - name: Biod_Frame
+    region:
+      serializedVersion: 2
+      x: .352050781
+      y: 0
+      width: .125
+      height: .25
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 256, y: 256}
+    textureGUID: de506aed09146ec409ead60d91cec8d1
+    deleted: 0
+    texture: {fileID: 0}
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: .956054688
-      y: .220703125
-      width: .009765625
+      x: 0
+      y: .98046875
+      width: .0048828125
       height: .009765625
     border:
       m_Left: 2
@@ -125,12 +142,29 @@ MonoBehaviour:
     textureGUID: c6f073cf28c1dfd449b8a2a0ae985a99
     deleted: 0
     texture: {fileID: 0}
+  - name: bubble
+    region:
+      serializedVersion: 2
+      x: .352050781
+      y: .752929688
+      width: .0732421875
+      height: .1953125
+    border:
+      m_Left: 115
+      m_Right: 15
+      m_Top: 15
+      m_Bottom: 65
+    rotated: 0
+    sizeInPixels: {x: 150, y: 200}
+    textureGUID: 613c4512fca464245ad6f8400ebed451
+    deleted: 0
+    texture: {fileID: 0}
   - name: button
     region:
       serializedVersion: 2
-      x: .956054688
-      y: .188476562
-      width: .03125
+      x: .0639648438
+      y: .948242188
+      width: .015625
       height: .03125
     border:
       m_Left: 15
@@ -145,94 +179,94 @@ MonoBehaviour:
   - name: element_energy
     region:
       serializedVersion: 2
-      x: .704101562
-      y: 0
+      x: .352050781
+      y: .250976562
       width: .125
-      height: .125
+      height: .25
     border:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     rotated: 0
-    sizeInPixels: {x: 128, y: 128}
+    sizeInPixels: {x: 256, y: 256}
     textureGUID: d89550a51d587f94a95aecc599423ec7
     deleted: 0
     texture: {fileID: 0}
   - name: element_fire
     region:
       serializedVersion: 2
-      x: .830078125
-      y: 0
+      x: .352050781
+      y: .501953125
       width: .125
-      height: .125
+      height: .25
     border:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     rotated: 0
-    sizeInPixels: {x: 128, y: 128}
+    sizeInPixels: {x: 256, y: 256}
     textureGUID: 2dec5b91c3a0bfc49a09ecbca9e33c8f
     deleted: 0
     texture: {fileID: 0}
   - name: element_life
     region:
       serializedVersion: 2
-      x: .704101562
-      y: .125976562
+      x: .477539062
+      y: 0
       width: .125
-      height: .125
+      height: .25
     border:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     rotated: 0
-    sizeInPixels: {x: 128, y: 128}
+    sizeInPixels: {x: 256, y: 256}
     textureGUID: 87ed4076d42ca6b4189c04ee34e8a81f
     deleted: 0
     texture: {fileID: 0}
   - name: element_storm
     region:
       serializedVersion: 2
-      x: .830078125
-      y: .125976562
+      x: .477539062
+      y: .250976562
       width: .125
-      height: .125
+      height: .25
     border:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     rotated: 0
-    sizeInPixels: {x: 128, y: 128}
+    sizeInPixels: {x: 256, y: 256}
     textureGUID: 2b8f419ba459c2440b1c2fe198447548
     deleted: 0
     texture: {fileID: 0}
   - name: element_water
     region:
       serializedVersion: 2
-      x: .704101562
-      y: .251953125
+      x: .477539062
+      y: .501953125
       width: .125
-      height: .125
+      height: .25
     border:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     rotated: 0
-    sizeInPixels: {x: 128, y: 128}
+    sizeInPixels: {x: 256, y: 256}
     textureGUID: f9ab59c33e419534fb3275597804debc
     deleted: 0
     texture: {fileID: 0}
   - name: gradient
     region:
       serializedVersion: 2
-      x: .956054688
-      y: 0
-      width: .03125
+      x: .48046875
+      y: .8515625
+      width: .015625
       height: .123046875
     border:
       m_Left: 0
@@ -244,12 +278,29 @@ MonoBehaviour:
     textureGUID: 4cc5b543fdf016b4d815059794520c54
     deleted: 0
     texture: {fileID: 0}
+  - name: interference
+    region:
+      serializedVersion: 2
+      x: .42578125
+      y: .752929688
+      width: .0541992188
+      height: .119140625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 111, y: 122}
+    textureGUID: 5af4f540353ae3f419427deeeda42bac
+    deleted: 0
+    texture: {fileID: 0}
   - name: iris-logo
     region:
       serializedVersion: 2
-      x: .830078125
-      y: .251953125
-      width: .09765625
+      x: .48046875
+      y: .752929688
+      width: .048828125
       height: .09765625
     border:
       m_Left: 0
@@ -264,9 +315,9 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .928710938
-      y: .251953125
-      width: .0615234375
+      x: .496582031
+      y: .8515625
+      width: .0307617188
       height: .0537109375
     border:
       m_Left: 0
@@ -276,6 +327,40 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 63, y: 55}
     textureGUID: 1e46b542a1b64e44eaaea95950212ceb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Specter_Marker
+    region:
+      serializedVersion: 2
+      x: .603027344
+      y: 0
+      width: .101074219
+      height: .25
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 207, y: 256}
+    textureGUID: 271e5598af9aa2443a3fb9195620cb60
+    deleted: 0
+    texture: {fileID: 0}
+  - name: vengeaagent
+    region:
+      serializedVersion: 2
+      x: .42578125
+      y: .873046875
+      width: .0541992188
+      height: .110351562
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 111, y: 113}
+    textureGUID: e37c9ed79fb84cb44b1b2e38b1085be6
     deleted: 0
     texture: {fileID: 0}
   generator: 0

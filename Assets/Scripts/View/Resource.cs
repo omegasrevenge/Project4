@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 public class Resource : PointOfInterest
 {
     private const string Prefab = "POIs/resource";
     private const string InRangeStr = "InRange";
+
+    public static readonly string[] ResourceTypes = { "Default", "Energy", "Nature", "Fire", "Water", "Storm" };
 
     public static Resource Create(POI poi, MapGrid grid, Transform root)
     {
@@ -37,5 +39,12 @@ public class Resource : PointOfInterest
     override public void OnTap(TouchInput.Touch2D touch2D)
     {
         GameManager.Singleton.PoiFarm(Poi);
+    }
+
+    public string GetElement()
+    {
+        if (ResourceTypes.Contains(Poi.ResourceType))
+            return Poi.ResourceType;
+        return ResourceTypes[0];
     }
 }

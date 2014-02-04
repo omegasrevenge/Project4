@@ -12,8 +12,6 @@ public class POI
         Fight,
         Heal
     }
-
-    private static readonly string[] ResourceTypes = {"Energy", "Nature", "Fire", "Water", "Storm" };
     private const string FightStr = "Fight";
     private const string HealStr = "Heal";
 
@@ -21,30 +19,16 @@ public class POI
     public string POI_ID;
     public string Name;
     public Vector2 Position;
-    public int Respawn;
-	public bool CanFarm;
+    public int RespawnInMinutes;
+	private bool _canFarm;
 	public DateTime NextFarm;
-    public string Resource;
+    public string ResourceType;
     public string RealType;
     public PointOfInterest View;
 
-    public bool FarmAllowed
-    {
-        get
-        {
-            return !(DateTime.Compare(DateTime.Now, NextFarm)<0);
-        }
-    }
-
-    public double GetTimeUntilFarmAllowed
-    {
-        get 
-        {
-            if(FarmAllowed)
-                return 0f;
-            return (NextFarm-DateTime.Now).TotalSeconds;
-        }
-    }
+    public bool CanFarm { get{ return _canFarm || DateTime.Now > NextFarm;}}
+    public float CooldownInSeconds{get {return Mathf.Max(0f,(float)(NextFarm-DateTime.Now).TotalSeconds);}}
+    public float CooldownInPercent{get {return CooldownInSeconds/(RespawnInMinutes*60f);}}
 
     public static POI ReadJson(JSONObject json)
     {
@@ -52,10 +36,10 @@ public class POI
         poi.POI_ID = (string)json["ID"];
         poi.Name = (string)json["Name"];
         poi.Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
-        poi.Respawn = (int)json["Respawn"];
-        poi.Resource = (string)json["Rsc"];
+        poi.RespawnInMinutes = (int)json["Respawn"];
+        poi.ResourceType = (string)json["Rsc"];
         poi.RealType = (string)json["Type"];
-		poi.CanFarm = (bool)json["CanFarm"];
+		poi._canFarm = (bool)json["CanFarm"];
 		poi.NextFarm = (DateTime)json["NextFarm"];
 		//Debug.Log ("CanFarm:"+poi.CanFarm+" NextFarm:"+poi.NextFarm);
         return poi;
@@ -65,11 +49,11 @@ public class POI
     {
         get
         {
-            if (ResourceTypes.Any(t => Resource.Contains(t)))
+            if (Resource.ResourceTypes.Any(t => ResourceType.Contains(t)))
                 return POIType.Resource;
-            if(Resource == FightStr)
+            if(ResourceType == FightStr)
                 return POIType.Fight;
-            if (Resource == HealStr)
+            if (ResourceType == HealStr)
                 return POIType.Heal;
             return POIType.Unexpected;
         }
