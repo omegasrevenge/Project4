@@ -54,6 +54,7 @@ public class Map : SceneRoot3D
         _arrow = _mapRig.Find(ArrowStr);
         _radar = _mapRig.Find(RadarStr).GetComponent<Animator>();
         _base = BaseOnMap.Create(_grid, _mapRig);
+        _base.Tap = OnTapShowMarker;
     }
 
     public void UpdatePlayers()
@@ -62,8 +63,13 @@ public class Map : SceneRoot3D
         {
             PlayerOnMap pom = PlayerOnMap.Create(player, _grid, _mapRig);
             if (pom != null)
+            {
                 _playersOnMap.Add(player, pom);
+                pom.Tap = OnTapShowMarker;
+            }
         }
+
+        //RemoveOldPlayers
         List<Player> oldItems = new List<Player>();
         foreach (KeyValuePair<Player, PlayerOnMap> p in _playersOnMap.Where(pom => !GameManager.Singleton.PlayersOnMap.Contains(pom.Key)))
         {
@@ -83,23 +89,27 @@ public class Map : SceneRoot3D
             if (poi.Type == POI.POIType.Resource)
             {
                 Resource res = Resource.Create(poi, _grid, _mapRig);
-                //res.Tap = OnTapShowMarker;
+                res.Tap = OnTapShowMarker;
             }
             else if (poi.Type == POI.POIType.Fight)
             {
-                if(poi.CanFarm)
-                    Spectre.Create(poi, _grid, _mapRig);
+                if (poi.CanFarm)
+                {
+                    Spectre spec = Spectre.Create(poi, _grid, _mapRig);
+                    spec.Tap = OnTapShowMarker;
+                }
             }
             else if (poi.Type == POI.POIType.Heal)
-                HealStation.Create(poi, _grid, _mapRig);
+            {
+                HealStation heal = HealStation.Create(poi, _grid, _mapRig);
+                heal.Tap = OnTapShowMarker;
+            }
         }
     }
 
     public void OnTapShowMarker(TouchInput.Touch2D touches)
     {
-        Debug.Log("---------------------------------------");
-        ObjectOnMap[] objects = Array.ConvertAll(touches.Owner, item => (ObjectOnMap)item);
-        View.AddMarker(objects);
+        View.AddMarker(touches.Owner);
     }
 
     private void CheckRadar()

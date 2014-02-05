@@ -40,9 +40,9 @@ public class Spectre : PointOfInterest
         _animator.SetBool(InRangeStr, InRange);
     }
 
-    override public void OnTap(TouchInput.Touch2D touch2D)
-    {
-        GameManager.Singleton.PoiFarm(Poi);
-    }
+    //override public void OnTap(TouchInput.Touch2D touch2D)
+    //{
+    //    GameManager.Singleton.PoiFarm(Poi);
+    //}
 
 }

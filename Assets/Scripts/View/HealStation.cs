@@ -37,9 +37,9 @@ public class HealStation : PointOfInterest
         _light.SetActive(false);
     }
 
-    override public void OnTap(TouchInput.Touch2D touch2D)
-    {
-        GameManager.Singleton.PoiFarm(Poi);
-    }
+    //override public void OnTap(TouchInput.Touch2D touch2D)
+    //{
+    //    GameManager.Singleton.PoiFarm(Poi);
+    //}
 
 }

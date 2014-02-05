@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .798439026, y: -.5859375, z: 0}
+  m_LocalPosition: {x: .661231995, y: -.20149231, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400028}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.1171875, y: .3125, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400026}
@@ -68,8 +68,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .234375, y: .3125, z: .00100000005}
-  m_Center: {x: 0, y: .15625, z: 0}
+  m_Size: {x: .234375, y: .3359375, z: .00100000005}
+  m_Center: {x: .1171875, y: -.16796875, z: 0}
 --- !u!65 &6500028
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
   isVisible: 1
   isInteractive: 1
   tooltip: 
-  pivot: 7
+  pivot: 0
   zindex: 0
   color:
     serializedVersion: 2
@@ -117,7 +117,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 150, y: 200}
+  size: {x: 150, y: 215}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -126,10 +126,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 521
     margins:
-      left: 436
-      top: 175
-      right: 134
-      bottom: 905
+      left: 423.1875
+      top: 128.957031
+      right: 146.8125
+      bottom: 936.042969
     owner: {fileID: 11400030}
   renderOrder: 2
   isLocalized: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
       left: 0
       top: -0
       right: 0
-      bottom: 0
+      bottom: 15
     owner: {fileID: 11400032}
   renderOrder: 3
   isLocalized: 0

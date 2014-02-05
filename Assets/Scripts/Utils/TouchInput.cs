@@ -37,11 +37,12 @@ public class TouchInput : MonoBehaviour
     [SerializeField]
     private int _singleTouch = -1;
 
-
+    [SerializeField]
     private List<TouchObject> _rigisteredObjects;
     private List<Touch2D> _touches;
     private List<Touch2D> _tempTouches;
     private TouchObject _solo;
+    [SerializeField]
     private bool _enabled = true;
 
     public float ZoomSpeed;
@@ -91,9 +92,10 @@ public class TouchInput : MonoBehaviour
         get { return Singleton._enabled; }
         set
         {
-            if (value == Singleton._enabled) return;
-            if (value) EnableOthers(null);
-            else DisableOthers(null);
+            //if (value == Singleton._enabled) return;
+            //if (value) EnableOthers(null);
+            //else DisableOthers(null);
+            Singleton._enabled = value;
         }
     }
 
@@ -362,6 +364,7 @@ public class TouchInput : MonoBehaviour
     {
         foreach (TouchObject touchObject in Singleton._rigisteredObjects.Where(o => o != obj))
         {
+            Debug.Log("AAAAAAAA");
             touchObject.DisableBy(obj);
         }
     }
@@ -370,6 +373,7 @@ public class TouchInput : MonoBehaviour
     {
         foreach (TouchObject touchObject in Singleton._rigisteredObjects.Where(o => o != obj))
         {
+            Debug.Log("DOOOO");
             touchObject.EnableBy(obj);
         }
     }

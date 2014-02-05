@@ -10,25 +10,11 @@ public class PlayerOnMap : ObjectOnMap
 
     public Player playerData;
     private MapGrid _grid;
-    private bool _inRange;
+
     public MapUtils.ProjectedPos ProjPos;
 
     private Animator _animator;
     private bool _removing;
-
-    public bool InRange
-    {
-        get { return _inRange; }
-        set
-        {
-            if (_inRange == value) return;
-            _inRange = value;
-            if (value)
-                EnterRange();
-            else
-                LeaveRange();
-        }
-    }
 
     public static PlayerOnMap Create(Player player, MapGrid grid, Transform root)
     {
@@ -65,13 +51,15 @@ public class PlayerOnMap : ObjectOnMap
         _removing = true;
     }
 
-    private void EnterRange()
+    protected override void EnterRange()
     {
+        base.EnterRange();
         _animator.SetBool(InRangeStr, InRange);
     }
 
-    private void LeaveRange()
+    protected override void LeaveRange()
     {
+        base.LeaveRange();
         _animator.SetBool(InRangeStr, InRange);
     }
 
@@ -84,10 +72,5 @@ public class PlayerOnMap : ObjectOnMap
     public override void Execute()
     {
         //Do something
-    }
-
-    public override Vector2 GetScreenPosition()
-    {
-        return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }
 }

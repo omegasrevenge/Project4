@@ -15,37 +15,58 @@ public class GUIObjectMarker : MonoBehaviour
     private const string ResourceStr        = "POIs/panel_resource";
     private const string SpectreStr         = "POIs/panel_spectre";
     private const float ReferenceHeight = 1280f;
-    private const float ArrowHeight = 50f;
+    private const float ArrowHeight = 65f; //50f;
     private const float Padding = 11f;
     private const float PanelHeight = 128f;
 
 
     private dfControl _control;
+    private dfControl _root;
     private Vector2 _pos;
-    private ObjectOnMap _first;
+    private Vector3 _scale;
+    private ObjectOnMap[] _objectsOnMap;
+    private bool _untouched;
 
     public static GUIObjectMarker Create(dfControl root, ObjectOnMap[] objects)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        Vector3 scale  = cntrl.transform.localScale;
-        scale *= (Screen.height/ReferenceHeight);
-        cntrl.transform.localScale = scale;
-        Vector3 size = cntrl.Size;
-        size.y = ArrowHeight + objects.Length*(Padding + PanelHeight) + Padding;
-        cntrl.Size = size;
         GUIObjectMarker obj = cntrl.GetComponent<GUIObjectMarker>();
-        obj._control = cntrl;
-        obj._pos = new Vector2(Padding, Padding);
+        obj.Init(root, cntrl, objects);
+        return obj;
+    }
+
+    private void Init(dfControl root, dfControl cntrl, ObjectOnMap[] objects)
+    {
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        _scale = cntrl.transform.localScale;
+        _scale *= (Screen.height / ReferenceHeight);
+        Vector3 size = cntrl.Size;
+        size.y = ArrowHeight + objects.Length * (Padding + PanelHeight) + Padding;
+        cntrl.Size = size;
+        _control = cntrl;
+        _root = root;
+        _root.Click += OnClickParent;
+
+        _pos = new Vector2(Padding, Padding);
 
         foreach (ObjectOnMap objectOnMap in objects)
         {
-            dfControl control = CreateMarkerPanel(objectOnMap);
-            obj.AddMarkerPanel(control);
+            dfControl control = CreateMarkerPanel(objectOnMap, Remove);
+            AddMarkerPanel(control);
         }
-        if (objects.Length > 0)
-            obj._first = objects[0];
+        _objectsOnMap = objects;
 
-        return obj;
+        transform.localScale = _scale;
+
+        TouchInput.Enabled = false;
+    }
+
+    private void OnClickParent(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        if(mouseEvent.Used) return;
+        mouseEvent.Use();
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        Remove();
     }
 
     public void AddMarkerPanel(dfControl obj)
@@ -63,11 +84,11 @@ public class GUIObjectMarker : MonoBehaviour
 
     }
 
-    private static dfControl CreateMarkerPanel(ObjectOnMap obj)
+    private static dfControl CreateMarkerPanel(ObjectOnMap obj, Action hideCalback)
     {
         if (obj is Resource)
         {
-            dfControl control = CreateObjectOnMap(obj, ResourceStr);
+            dfControl control = CreateObjectOnMap(obj, ResourceStr, hideCalback);
             MarkerBiod marker = control.GetComponent<MarkerBiod>();
             marker.SetElementSymbol((obj as Resource).GetElement());
             return control;
@@ -77,24 +98,24 @@ public class GUIObjectMarker : MonoBehaviour
             string path = AgentStr;
             if ((obj as PlayerOnMap).playerData.CurrentFaction == Player.Faction.NCE)
                 path = InterferenceStr;
-            return CreateObjectOnMap(obj, path);
+            return CreateObjectOnMap(obj, path, hideCalback);
         }
         if (obj is BaseOnMap)
         {
-            return CreateObjectOnMap(obj,BaseStr);
+            return CreateObjectOnMap(obj, BaseStr, hideCalback);
         }
         if (obj is Spectre)
         {
-            return CreateObjectOnMap(obj, SpectreStr);
+            return CreateObjectOnMap(obj, SpectreStr, hideCalback);
         }
         if (obj is HealStation)
         {
-            return CreateObjectOnMap(obj, HealStr);
+            return CreateObjectOnMap(obj, HealStr, hideCalback);
         }
         return null;
     }
 
-    private static dfControl CreateObjectOnMap(ObjectOnMap objectOnMap, string path)
+    private static dfControl CreateObjectOnMap(ObjectOnMap objectOnMap, string path, Action hideCallback)
     {
         GameObject go = (GameObject)Instantiate(Resources.Load<GameObject>(path));
         dfControl control = go.GetComponent<dfControl>();
@@ -102,6 +123,9 @@ public class GUIObjectMarker : MonoBehaviour
         {
             if (args.Used) return;
             args.Use();
+            SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
+            if (hideCallback != null)
+                hideCallback();
             objectOnMap.Execute();
         };
 
@@ -110,14 +134,39 @@ public class GUIObjectMarker : MonoBehaviour
 
     public void Update()
     {
-        if (Input.touchCount > 0)
+        ObjectOnMap[] newList = _objectsOnMap.Where(o => o != null && o.Enabled).ToArray();
+        if (newList.Length != _objectsOnMap.Length)
         {
-            //Destroy(gameObject);
+            Remove();
+            if(newList.Length > 0)
+                Create(_root, newList);
             return;
         }
 
-        Vector2 pos = _first.GetScreenPosition();
-        pos.y = Screen.height - pos.y;
+        Vector3 posOnMap = Vector3.zero;
+        if (_objectsOnMap.Length > 0)
+        {
+            foreach (ObjectOnMap objOnMap in _objectsOnMap)
+                posOnMap += objOnMap.transform.position;
+            posOnMap /= _objectsOnMap.Length;
+        }
+
+        Vector2 pos = ViewController.Singleton.Camera3D.WorldToScreenPoint(posOnMap);
+        pos.y = Screen.height - pos.y - (_control.Height) * _scale.y;
+        pos.x -= (_control.Width / 2f) * _scale.x;
         _control.RelativePosition = pos;
+    }
+
+    public void Remove()
+    {
+        _root.Click -= OnClickParent; 
+        StartCoroutine(CRemove());
+    }
+
+    private IEnumerator CRemove()
+    {
+        yield return new WaitForEndOfFrame();
+        TouchInput.Enabled = true;
+        Destroy(gameObject);
     }
 }

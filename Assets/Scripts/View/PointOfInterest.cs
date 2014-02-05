@@ -63,16 +63,6 @@ public class PointOfInterest : ObjectOnMap
     
     }
 
-    protected virtual void EnterRange()
-    {
-        Enabled = true;
-    }
-
-    protected virtual void LeaveRange()
-    {
-        Enabled = false;
-    }
-
     public void DestroyObject()
     {
         Poi.View = null;
@@ -82,10 +72,5 @@ public class PointOfInterest : ObjectOnMap
     public override void Execute()
     {
         GameManager.Singleton.PoiFarm(Poi);
-    }
-
-    public override Vector2 GetScreenPosition()
-    {
-        return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }
 }

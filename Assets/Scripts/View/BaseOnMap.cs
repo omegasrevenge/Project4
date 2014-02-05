@@ -52,31 +52,26 @@ public class BaseOnMap : ObjectOnMap
     }
 
 
-    protected void EnterRange()
+    protected override void EnterRange()
     {
-        Enabled = true;
+        base.EnterRange();
         _animator.SetBool(InRangeStr, InRange);
 
     }
 
-    protected void LeaveRange()
+    protected override void LeaveRange()
     {
-        Enabled = false;
+        base.LeaveRange();
         _animator.SetBool(InRangeStr, InRange);
     }
 
-    override public void OnTap(TouchInput.Touch2D touch2D)
-    {
-        GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
-    }
+    //override public void OnTap(TouchInput.Touch2D touch2D)
+    //{
+    //    GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
+    //}
 
     public override void Execute()
     {
         GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
-    }
-
-    public override Vector2 GetScreenPosition()
-    {
-        return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }
 }

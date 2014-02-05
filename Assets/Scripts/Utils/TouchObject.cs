@@ -44,10 +44,9 @@ public class TouchObject : MonoBehaviour
 
     virtual public void OnTouchEnd(TouchInput.Touch2D touch2D)
     {
-        if (touch2D.Current[0] == this && !TouchInput.Rotating)
+        if (touch2D.Current.Length > 0 && touch2D.Current[0] == this && !TouchInput.Rotating)
         {
             OnTap(touch2D);
-            Debug.Log("##########################################################");
             if (Tap != null)
                 Tap(touch2D);
         }
@@ -93,7 +92,7 @@ public class TouchObject : MonoBehaviour
 
     public void EnableBy(TouchObject obj)
     {
-        _disabledBy.Remove(obj);
+        Debug.Log("Enable"+_disabledBy.Remove(obj));
     }
 
 }

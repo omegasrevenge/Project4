@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GUIObjectMapUI : MonoBehaviour 
 {
@@ -16,13 +17,9 @@ public class GUIObjectMapUI : MonoBehaviour
         return obj;
     }
 
-    public void AddMarker(ObjectOnMap[] objects)
+    public void AddMarker(TouchObject[] touches)
     {
-        Debug.Log("AddMarker");
-        foreach (ObjectOnMap objectOnMap in objects)
-        {
-            Debug.Log(objectOnMap.gameObject.name);
-        }
+        ObjectOnMap[] objects = Array.ConvertAll(touches, item => (ObjectOnMap)item);
         GUIObjectMarker.Create(_root,objects);
     }
 }
