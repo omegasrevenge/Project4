@@ -72,43 +72,33 @@ public class Player
 
     public BattleInit GetBattleInit()
     {
-        BattleInit newBattle = new BattleInit();
+        BattleInit newBattle = new BattleInit
+        {
+            MonsterAElement = CurCreature.BaseElement,
+            MonsterBElement = CurFight.EnemyCreature.BaseElement,
+            MonsterAName = CurCreature.Name,
+            MonsterBName = CurFight.EnemyCreature.Name,
+            MonsterAHealth = CurCreature.HP,
+            MonsterBHealth = CurFight.EnemyCreature.HP,
+            MonsterAMaxHealth = CurCreature.HPMax,
+            MonsterBMaxHealth = CurFight.EnemyCreature.HPMax,
+            MonsterALevel = CurCreature.Level,
+            MonsterBLevel = CurFight.EnemyCreature.Level,
+            BaseMeshA = CurCreature.ModelID,
+            BaseMeshB = CurFight.EnemyCreature.ModelID
+        };
 
-        newBattle.MonsterAElement = CurCreature.BaseElement;
-        newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
-
-        newBattle.MonsterAName = CurCreature.Name;
-        newBattle.MonsterBName = CurFight.EnemyCreature.Name;
-
-        newBattle.MonsterAHealth = CurCreature.HP;
-        newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
-
-        newBattle.MonsterAMaxHealth = CurCreature.HPMax;
-        newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
-
-        newBattle.MonsterALevel = CurCreature.Level;
-        newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
-
-        newBattle.BaseMeshA = CurCreature.ModelID;
-        newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
-
-        if (CurFight.Turn)
-            newBattle.FirstTurnIsPlayer = FightRoundResult.Player.A;
-        else
-            newBattle.FirstTurnIsPlayer = FightRoundResult.Player.B;
+        newBattle.FirstTurnIsPlayer = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B;
         return newBattle;
     }
 
     public FightRoundResult GetResult()
     {
-        FightRoundResult newResult = new FightRoundResult();
-
-        if (CurFight.Turn)
-            newResult.PlayerTurn = FightRoundResult.Player.A;
-        else
-            newResult.PlayerTurn = FightRoundResult.Player.B;
-
-        newResult.Turn = CurFight.Round;
+        FightRoundResult newResult = new FightRoundResult
+        {
+            PlayerTurn = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B,
+            Turn = CurFight.Round
+        };
 
         string[] lastResult = CurFight.LastResult.Split(' ');
 
