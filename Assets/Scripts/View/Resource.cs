@@ -47,4 +47,5 @@ public class Resource : PointOfInterest
             return Poi.ResourceType;
         return ResourceTypes[0];
     }
+
 }

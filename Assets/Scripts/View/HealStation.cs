@@ -41,4 +41,5 @@ public class HealStation : PointOfInterest
     {
         GameManager.Singleton.PoiFarm(Poi);
     }
+
 }

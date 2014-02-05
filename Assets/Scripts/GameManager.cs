@@ -319,8 +319,6 @@ public class GameManager : MonoBehaviour
         }
         //Debug.Log(json["data"]);
         ReadPlayerJSON(json["data"]);
-        if (CurrentGameMode == GameMode.Login)
-            SwitchGameMode(GameMode.Map);
         if (Player.Fighting && CurrentGameMode != GameMode.Fight)
             SwitchGameMode(GameMode.Fight);
         if (callback != null)
@@ -899,14 +897,17 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        switch (Player.InitSteps)
+        if (!Player.Fighting)
         {
-            case (0):
-                GUIStartIRISinstructions();
-                break;
-            default:
-                SwitchGameMode(GameMode.Map);
-                break;
+            switch (Player.InitSteps)
+            {
+                case (0):
+                    GUIStartIRISinstructions();
+                    break;
+                default:
+                    SwitchGameMode(GameMode.Map);
+                    break;
+            }
         }
         _view.HideLoadingScreen();
 

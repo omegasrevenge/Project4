@@ -44,4 +44,5 @@ public class Spectre : PointOfInterest
     {
         GameManager.Singleton.PoiFarm(Poi);
     }
+
 }
