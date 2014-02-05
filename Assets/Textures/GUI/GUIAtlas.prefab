@@ -40,11 +40,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 66a1e34b3e7cf9d4ea8a799cce9231ca, type: 2}
   items:
+  - name: base
+    region:
+      serializedVersion: 2
+      x: .582519531
+      y: .752929688
+      width: .0400390625
+      height: .104492188
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 82, y: 107}
+    textureGUID: dd6cb49aacd4ac04396a12bbac694d7e
+    deleted: 0
+    texture: {fileID: 0}
   - name: bg
     region:
       serializedVersion: 2
-      x: .0317382812
-      y: .948242188
+      x: .53515625
+      y: .946289062
       width: .015625
       height: .03125
     border:
@@ -77,8 +94,8 @@ MonoBehaviour:
   - name: bg-menu
     region:
       serializedVersion: 2
-      x: 0
-      y: .948242188
+      x: .538085938
+      y: .807617188
       width: .03125
       height: .03125
     border:
@@ -94,8 +111,8 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .0478515625
-      y: .948242188
+      x: .551269531
+      y: .946289062
       width: .015625
       height: .03125
     border:
@@ -128,8 +145,8 @@ MonoBehaviour:
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: .488769531
-      y: .8515625
+      x: .538085938
+      y: .83984375
       width: .0048828125
       height: .009765625
     border:
@@ -162,7 +179,7 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .0639648438
+      x: 0
       y: .948242188
       width: .015625
       height: .03125
@@ -193,11 +210,45 @@ MonoBehaviour:
     textureGUID: ab46889d7ad27674c9cd1a6162cca398
     deleted: 0
     texture: {fileID: 0}
-  - name: element_energy
+  - name: cross
+    region:
+      serializedVersion: 2
+      x: .53515625
+      y: .8515625
+      width: .046875
+      height: .09375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 96, y: 96}
+    textureGUID: 599d7a506aff5874aa189cd8c5e8c5d1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_default
     region:
       serializedVersion: 2
       x: .352050781
       y: .250976562
+      width: .125
+      height: .25
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 256, y: 256}
+    textureGUID: bbcd7719856babe42a509d6c3f8da131
+    deleted: 0
+    texture: {fileID: 0}
+  - name: element_energy
+    region:
+      serializedVersion: 2
+      x: .352050781
+      y: .501953125
       width: .125
       height: .25
     border:
@@ -213,8 +264,8 @@ MonoBehaviour:
   - name: element_fire
     region:
       serializedVersion: 2
-      x: .352050781
-      y: .501953125
+      x: .477539062
+      y: 0
       width: .125
       height: .25
     border:
@@ -231,7 +282,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .477539062
-      y: 0
+      y: .250976562
       width: .125
       height: .25
     border:
@@ -248,7 +299,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .477539062
-      y: .250976562
+      y: .501953125
       width: .125
       height: .25
     border:
@@ -264,8 +315,8 @@ MonoBehaviour:
   - name: element_water
     region:
       serializedVersion: 2
-      x: .477539062
-      y: .501953125
+      x: .603027344
+      y: 0
       width: .125
       height: .25
     border:
@@ -281,8 +332,8 @@ MonoBehaviour:
   - name: gradient
     region:
       serializedVersion: 2
-      x: .53515625
-      y: .8515625
+      x: .582519531
+      y: .858398438
       width: .015625
       height: .123046875
     border:
@@ -349,7 +400,7 @@ MonoBehaviour:
   - name: Specter_Marker
     region:
       serializedVersion: 2
-      x: .603027344
+      x: .728515625
       y: 0
       width: .101074219
       height: .25

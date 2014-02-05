@@ -35,7 +35,7 @@ public class POI
         int cd = Mathf.FloorToInt(CooldownInSeconds);
         int s = Mathf.FloorToInt(cd%60f);
         int m = Mathf.FloorToInt((cd/60f)%60);
-        int h = Mathf.FloorToInt((cd/3600f)%60);
+        int h = Mathf.FloorToInt(cd/3600f);
         return string.Format("{0:00}:{1:00}:{2:00}", h, m, s);
     }
 
