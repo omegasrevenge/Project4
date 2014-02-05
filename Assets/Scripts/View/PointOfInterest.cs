@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PointOfInterest : TouchObject, IObjectOnMap
+public class PointOfInterest : ObjectOnMap
 {
     private const string HideStr = "Hide";
 
@@ -79,12 +79,12 @@ public class PointOfInterest : TouchObject, IObjectOnMap
         Destroy(gameObject);
     }
 
-    public void Execute()
+    public override void Execute()
     {
         GameManager.Singleton.PoiFarm(Poi);
     }
 
-    public Vector2 GetScreenPosition()
+    public override Vector2 GetScreenPosition()
     {
         return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }

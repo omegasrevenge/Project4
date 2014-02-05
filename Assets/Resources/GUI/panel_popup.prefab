@@ -38,7 +38,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   m_Layer: 8
-  m_Name: panel_irispopup
+  m_Name: panel_popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

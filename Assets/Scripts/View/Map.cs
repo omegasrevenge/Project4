@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
@@ -27,6 +28,11 @@ public class Map : SceneRoot3D
     public const float MoveRadius = 1f;
 
     public const float RangeRadius = 0.5f;
+
+    public GUIObjectMapUI View
+    {
+        get { return _gui as GUIObjectMapUI; }
+    }
 
     public static Map Create()
     {
@@ -75,7 +81,10 @@ public class Map : SceneRoot3D
         foreach (POI poi in GameManager.Singleton.POIs)
         {
             if (poi.Type == POI.POIType.Resource)
-                Resource.Create(poi, _grid, _mapRig);
+            {
+                Resource res = Resource.Create(poi, _grid, _mapRig);
+                //res.Tap = OnTapShowMarker;
+            }
             else if (poi.Type == POI.POIType.Fight)
             {
                 if(poi.CanFarm)
@@ -84,6 +93,13 @@ public class Map : SceneRoot3D
             else if (poi.Type == POI.POIType.Heal)
                 HealStation.Create(poi, _grid, _mapRig);
         }
+    }
+
+    public void OnTapShowMarker(TouchInput.Touch2D touches)
+    {
+        Debug.Log("---------------------------------------");
+        ObjectOnMap[] objects = Array.ConvertAll(touches.Owner, item => (ObjectOnMap)item);
+        View.AddMarker(objects);
     }
 
     private void CheckRadar()

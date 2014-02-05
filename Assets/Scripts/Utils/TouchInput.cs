@@ -7,8 +7,8 @@ public class TouchInput : MonoBehaviour
 {
     public class Touch2D
     {
-        public TouchObject Owner;
-        public TouchObject Current;
+        public TouchObject[] Owner;
+        public TouchObject[] Current;
         public Touch Touch;
         public object Data;
     }
@@ -232,12 +232,12 @@ public class TouchInput : MonoBehaviour
             //Proof new touches:
             if (touch.phase == TouchPhase.Began)
             {
-                TouchObject obj = FindObject(touch.position);
-                if (obj)
+                TouchObject[] objects = FindObject(touch.position);
+                if (objects.Length > 0)
                 {
-                    _touches.Add(new Touch2D() { Touch = touch, Owner = obj, Current = obj });
-                    obj.OnTouchStart(_touches.Last());
-                    Debug.Log("Started: " + obj.name);
+                    _touches.Add(new Touch2D() { Touch = touch, Owner = objects, Current = objects });
+                    objects[0].OnTouchStart(_touches.Last());
+                    Debug.Log("Started: " + objects[0].name);
                     _tempTouches.RemoveAll(t => t.Touch.fingerId == touch.fingerId);
                 }
                 continue;
@@ -249,13 +249,14 @@ public class TouchInput : MonoBehaviour
             if (!Equals(t2D, default(Touch2D)))
             {
                 t2D.Touch = touch;
-                t2D.Current = FindObject(touch.position);
+                TouchObject[] objects = FindObject(touch.position);
+                t2D.Current = objects;
                 _touches.Add(t2D);
                 _tempTouches.RemoveAll(t => t.Touch.fingerId == touch.fingerId);
-                if (touch.phase == TouchPhase.Ended)
-                    t2D.Owner.OnTouchEnd(t2D);
-                else
-                    t2D.Owner.OnTouchMove(t2D);
+                if (touch.phase == TouchPhase.Ended && t2D.Owner.Length > 0)
+                    t2D.Owner[0].OnTouchEnd(t2D);
+                else if(t2D.Owner.Length > 0)
+                    t2D.Owner[0].OnTouchMove(t2D);
             }
         }
         return true;
@@ -272,11 +273,11 @@ public class TouchInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            TouchObject obj = FindObject(Input.mousePosition);
-            if (obj)
+            TouchObject[] obj = FindObject(Input.mousePosition);
+            if (obj.Length > 0)
             {
                 _touches.Add(new Touch2D() { Owner = obj, Current = obj });
-                obj.OnTouchStart(_touches.Last());
+                obj[0].OnTouchStart(_touches.Last());
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -284,9 +285,11 @@ public class TouchInput : MonoBehaviour
             if (_tempTouches.Count == 0)
                 return;
             Touch2D t2D = _tempTouches[0];
-            t2D.Current = FindObject(Input.mousePosition);
+            TouchObject[] objects = FindObject(Input.mousePosition);
+            t2D.Current = objects;
             _touches.Add(t2D);
-            t2D.Owner.OnTouchEnd(t2D);
+            if(t2D.Owner.Length > 0)
+                t2D.Owner[0].OnTouchEnd(t2D);
 
         }
         else if (Input.GetMouseButton(0))
@@ -294,46 +297,52 @@ public class TouchInput : MonoBehaviour
             if (_tempTouches.Count == 0)
                 return;
             Touch2D t2D = _tempTouches[0];
-            t2D.Current = FindObject(Input.mousePosition);
+            TouchObject[] objects = FindObject(Input.mousePosition);
+            t2D.Current = objects;
             _touches.Add(t2D);
-            t2D.Owner.OnTouchMove(t2D);
+            if (t2D.Owner.Length > 0)
+                t2D.Owner[0].OnTouchMove(t2D);
         }
     }
 
-    private TouchObject FindObject(Vector2 pos)
+    private TouchObject[] FindObject(Vector2 pos)
     {
-        if (Camera.main == null) return null;
+        if (Camera.main == null) return new TouchObject[0];
         Ray ray = Camera.main.ScreenPointToRay(pos);
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
         if (hits.Length > 0)
-        {         
+        {
+            List<TouchObject> touchHits = new List<TouchObject>();
             foreach (RaycastHit hit in hits)
             {
                 Collider collider = hit.collider;
                 TouchObject obj = collider.GetComponent<TouchObject>();
                 if (obj != null && obj.Enabled)
-                    return obj;
-            }    
+                {
+                    touchHits.Add(obj);
+                }
+            }
+            return touchHits.ToArray();
         }
-        return null;
+        return new TouchObject[0];
     }
 
     public static Touch[] GetInitTouches(TouchObject obj)
     {
         //Debug.Log("" + Singleton._touches.Count);
         //if (Singleton._touches.Count > 0) Debug.Log(Singleton._touches[0].Touch.position);
-        return Singleton._touches.Where(t => t.Touch.phase == TouchPhase.Began && t.Owner == obj).Select(t => t.Touch).ToArray();
+        return Singleton._touches.Where(t => t.Touch.phase == TouchPhase.Began && t.Owner[0] == obj).Select(t => t.Touch).ToArray();
     }
 
     public static Touch[] GetEndTouches(TouchObject obj)
     {
-        return Singleton._touches.Where(t => t.Touch.phase == TouchPhase.Ended && t.Owner == obj).Select(t => t.Touch).ToArray();
+        return Singleton._touches.Where(t => t.Touch.phase == TouchPhase.Ended && t.Owner[0] == obj).Select(t => t.Touch).ToArray();
     }
 
     public static Touch[] GetTouches(TouchObject obj)
     {
-        return Singleton._touches.Where(t => t.Owner == obj).Select(t => t.Touch).ToArray();
+        return Singleton._touches.Where(t => t.Owner[0] == obj).Select(t => t.Touch).ToArray();
     }
 
     public static void Register(TouchObject obj)

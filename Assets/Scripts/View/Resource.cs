@@ -39,6 +39,7 @@ public class Resource : PointOfInterest
     override public void OnTap(TouchInput.Touch2D touch2D)
     {
         GameManager.Singleton.PoiFarm(Poi);
+        //GUIObjectMarker.Create()
     }
 
     public string GetElement()

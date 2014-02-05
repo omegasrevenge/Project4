@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOnMap : TouchObject, IObjectOnMap
+public class PlayerOnMap : ObjectOnMap
 {
     private const string PrefabVengea = "POIs/agent";
     private const string PrefabNCE = "POIs/interference";
@@ -81,12 +81,12 @@ public class PlayerOnMap : TouchObject, IObjectOnMap
         Destroy(gameObject);
     }
 
-    public void Execute()
+    public override void Execute()
     {
         //Do something
     }
 
-    public Vector2 GetScreenPosition()
+    public override Vector2 GetScreenPosition()
     {
         return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }

@@ -22,9 +22,9 @@ public class GUIObjectMarker : MonoBehaviour
 
     private dfControl _control;
     private Vector2 _pos;
-    private IObjectOnMap _first;
+    private ObjectOnMap _first;
 
-    public static GUIObjectMarker Create(dfControl root, IObjectOnMap[] objects)
+    public static GUIObjectMarker Create(dfControl root, ObjectOnMap[] objects)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         Vector3 scale  = cntrl.transform.localScale;
@@ -37,7 +37,7 @@ public class GUIObjectMarker : MonoBehaviour
         obj._control = cntrl;
         obj._pos = new Vector2(Padding, Padding);
 
-        foreach (IObjectOnMap objectOnMap in objects)
+        foreach (ObjectOnMap objectOnMap in objects)
         {
             dfControl control = CreateMarkerPanel(objectOnMap);
             obj.AddMarkerPanel(control);
@@ -63,7 +63,7 @@ public class GUIObjectMarker : MonoBehaviour
 
     }
 
-    private static dfControl CreateMarkerPanel(IObjectOnMap obj)
+    private static dfControl CreateMarkerPanel(ObjectOnMap obj)
     {
         if (obj is Resource)
         {
@@ -94,7 +94,7 @@ public class GUIObjectMarker : MonoBehaviour
         return null;
     }
 
-    private static dfControl CreateObjectOnMap(IObjectOnMap objectOnMap, string path)
+    private static dfControl CreateObjectOnMap(ObjectOnMap objectOnMap, string path)
     {
         GameObject go = (GameObject)Instantiate(Resources.Load<GameObject>(path));
         dfControl control = go.GetComponent<dfControl>();
@@ -112,10 +112,12 @@ public class GUIObjectMarker : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             return;
         }
 
-        _control.SetGUIScreenPos(_first.GetScreenPosition());
+        Vector2 pos = _first.GetScreenPosition();
+        pos.y = Screen.height - pos.y;
+        _control.RelativePosition = pos;
     }
 }

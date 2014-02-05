@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseOnMap : TouchObject, IObjectOnMap
+public class BaseOnMap : ObjectOnMap
 {
     private const string Prefab = "POIs/base";
     private const string InRangeStr = "InRange";
@@ -70,12 +70,12 @@ public class BaseOnMap : TouchObject, IObjectOnMap
         GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
     }
 
-    public void Execute()
+    public override void Execute()
     {
         GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Base);
     }
 
-    public Vector2 GetScreenPosition()
+    public override Vector2 GetScreenPosition()
     {
         return ViewController.Singleton.Camera3D.WorldToScreenPoint(transform.position);
     }

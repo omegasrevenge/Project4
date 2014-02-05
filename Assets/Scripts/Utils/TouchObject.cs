@@ -9,6 +9,8 @@ public class TouchObject : MonoBehaviour
     [SerializeField]
     private List<TouchObject> _disabledBy;
 
+    public delegate void OnTapAction(TouchInput.Touch2D touch2D);
+    public OnTapAction Tap;
 
     public bool Enabled
     {
@@ -42,8 +44,13 @@ public class TouchObject : MonoBehaviour
 
     virtual public void OnTouchEnd(TouchInput.Touch2D touch2D)
     {
-        if(touch2D.Current == this && !TouchInput.Rotating)
+        if (touch2D.Current[0] == this && !TouchInput.Rotating)
+        {
             OnTap(touch2D);
+            Debug.Log("##########################################################");
+            if (Tap != null)
+                Tap(touch2D);
+        }
     }
 
     virtual public void OnTap(TouchInput.Touch2D touch2D)
