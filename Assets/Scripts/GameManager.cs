@@ -246,7 +246,8 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public string GetSessionURL(string function)
     {
-        return ServerURL + function + "?pid=" + Player.PlayerID + "&sid=" + SessionID;
+		long tcnow = (long)((DateTime.UtcNow-new DateTime (1970,1,1)).TotalMilliseconds);
+		return ServerURL + function + "?pid=" + Player.PlayerID + "&sid=" + SessionID+"&tc="+tcnow;
     }
 
 
@@ -830,6 +831,17 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckResult(JSONObject json)
     {
+		long tcnow = (long)((DateTime.UtcNow-new DateTime (1970,1,1)).TotalMilliseconds);
+		long tcold=(long)json["tc"];
+		long ts=(long)json["ts"];
+		if(ts!=0&&tcold!=0)
+		{
+			long dur=tcnow-tcold;
+			long tc=(tcold+tcnow)/2;
+			long diff=tc-ts;
+			Debug.Log("dur:"+dur+" diff:"+diff);
+		};
+
         if ((bool)json["result"]) return true;
         string sErr = (string)json["error"];
         Debug.LogError("RPC Fail: " + sErr);

@@ -97,7 +97,7 @@ public class JSONObject : Nullable {
 		if(o==null) return 0;
 		switch(o.type)
 		{
-		case Type.STRING: return double.Parse(o.str);
+		case Type.STRING: double r=0;double.TryParse(o.str,out r);return r;
 		case Type.NUMBER: return o.n;
 		case Type.BOOL: return o.b?1:0;
 		};
@@ -108,7 +108,7 @@ public class JSONObject : Nullable {
 		if(o==null) return 0;
 		switch(o.type)
 		{
-		case Type.STRING: return float.Parse(o.str);
+		case Type.STRING: float r=0;float.TryParse(o.str,out r);return r;
 		case Type.NUMBER: return (float)o.n;
 		case Type.BOOL: return o.b?1:0;
 		};
@@ -119,7 +119,7 @@ public class JSONObject : Nullable {
 		if(o==null) return 0;
 		switch(o.type)
 		{
-		case Type.STRING: return int.Parse(o.str);
+		case Type.STRING: int r=0;int.TryParse(o.str,out r);return r;
 		case Type.NUMBER: return (int)o.n;
 		case Type.BOOL: return o.b?1:0;
 		};
@@ -130,7 +130,7 @@ public class JSONObject : Nullable {
 		if(o==null) return 0;
 		switch(o.type)
 		{
-		case Type.STRING: return long.Parse(o.str);
+		case Type.STRING: long r=0;long.TryParse(o.str,out r);return r;
 		case Type.NUMBER: return (long)o.n;
 		case Type.BOOL: return o.b?1:0;
 		};
