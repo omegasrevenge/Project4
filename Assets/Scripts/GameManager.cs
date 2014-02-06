@@ -542,7 +542,7 @@ public class GameManager : MonoBehaviour
 		if (data.HasField("NextFarm")) {
 			DateTime nextFarm=(DateTime)data["NextFarm"];
 			poi.NextFarm=nextFarm;
-			Debug.Log("NextFarm:"+nextFarm.ToLocalTime());
+			Debug.Log("NextFarm:"+nextFarm.ToLocalTime()+" in "+(nextFarm-GetServerTime()));
 		}
         if (!CheckResult(json)) yield break;
         _lastOwnPlayerUpdate = -1000;
