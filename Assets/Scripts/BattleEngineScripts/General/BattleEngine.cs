@@ -64,7 +64,8 @@ public class BattleEngine : SceneRoot3D
     {
         get
         {
-            System.Diagnostics.Debug.Assert(GameManager.Singleton.Player.CurFight != null, "GameManager.Singleton.Player.CurFight != null");
+            if (GameManager.Singleton.Player.CurFight == null)
+                return false;
             return !GameManager.Singleton.Player.CurFight.Finished;
         }
     }
