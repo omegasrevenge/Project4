@@ -62,7 +62,11 @@ public class BattleEngine : SceneRoot3D
 
     public bool Fighting
     {
-        get { return GameManager.Singleton.Player.Fighting; }
+        get
+        {
+            System.Diagnostics.Debug.Assert(GameManager.Singleton.Player.CurFight != null, "GameManager.Singleton.Player.CurFight != null");
+            return !GameManager.Singleton.Player.CurFight.Finished;
+        }
     }
 
     public static BattleEngine Current 

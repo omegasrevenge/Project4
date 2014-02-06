@@ -94,6 +94,8 @@ public class Player
 
     public FightRoundResult GetResult()
     {
+		if (CurFight == null)
+						return new FightRoundResult ();
         FightRoundResult newResult = new FightRoundResult
         {
             PlayerTurn = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B,

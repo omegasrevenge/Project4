@@ -64,8 +64,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
         if (BattleEngine.CurrentGameObject == null || !BattleEngine.Current.Initialized) return;
         //MonsterAContainer.transform.position = BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position);
         //MonsterBContainer.transform.position = BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.EnemyCreature.transform.FindChild("GUIPos").transform.position);
-        MonsterAHealthText.GetComponent<dfLabel>().Text = BattleEngine.Current.FriendlyCreature.GetComponent<MonsterController>().Health + "/" + BattleEngine.Current.FriendlyCreature.GetComponent<MonsterStats>().HP;
-        MonsterBHealthText.GetComponent<dfLabel>().Text = BattleEngine.Current.EnemyCreature.GetComponent<MonsterController>().Health + "/" + BattleEngine.Current.EnemyCreature.GetComponent<MonsterStats>().HP;
+        MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
+        MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
 	}
 	
 	public void CreateDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
@@ -160,7 +160,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
     }
 
     void OnGUI()
-    {
+	{
+		if (!BattleEngine.Current.Initialized) return;
+		if (GameManager.Singleton.Player.CurFight == null) return;
         //var current = GameManager.Singleton.Player.CurCreature.slots;
         //for (int i = 0; i < current.Length; i++)
         //{
