@@ -20,7 +20,7 @@ public class dfClippingUtil
 
 	static dfClippingUtil()
 	{
-		// Create working buffers that should be large enough to clip 
+		// CreateObject working buffers that should be large enough to clip 
 		// a single triangle against a reasonably large number of 
 		// planes.
 		clipSource = initClipBuffer( 1024 );

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[AddComponentMenu( "Daikon Forge/Examples/Add-Remove Controls/Create Child Control" )]
+[AddComponentMenu( "Daikon Forge/Examples/Add-Remove Controls/CreateObject Child Control" )]
 public class DemoCreateChildControls : MonoBehaviour 
 {
 

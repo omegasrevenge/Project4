@@ -886,7 +886,7 @@ public class dfDropdown : dfInteractiveBase, IDFMultiRender
 
 		var popupSize = calculatePopupSize();
 
-		// Create the popup list and set all necessary properties
+		// CreateObject the popup list and set all necessary properties
 		popup = GetManager().AddControl<dfListbox>();
 		popup.name = this.name + " - Dropdown List";
 		popup.gameObject.hideFlags = HideFlags.DontSave;

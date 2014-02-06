@@ -22,8 +22,6 @@ public class MonsterController : ActorControlls
 	void Awake()
 	{
 		_monsterStats = GetComponent<MonsterStats>();
-		BgHealthbar = transform.FindChild("Healthbar");
-		Healthbar = transform.FindChild("Health");
 	}
 
 	public void Attack(Vector3 target)
@@ -36,7 +34,6 @@ public class MonsterController : ActorControlls
 	{
         if (_battleCam == null)
             _battleCam = BattleEngine.Current.Camera.transform;
-		UpdateHealthBar();
 
 		if(!AnimationFinished)
 		{
@@ -57,15 +54,5 @@ public class MonsterController : ActorControlls
 	private bool HaveReached(Vector3 target)
 	{
 		return Mathf.Abs((transform.position-target).magnitude)<0.1f ? true : false;
-	}
-
-	private void UpdateHealthBar()
-	{
-		BgHealthbar.LookAt(_battleCam);
-		Healthbar.LookAt(_battleCam);
-		float a = Health;
-		if (a < 0f) a = 0f;
-		float b = _monsterStats.HP;
-		Healthbar.localScale = new Vector3(a/b, Healthbar.localScale.y, Healthbar.localScale.z);
 	}
 }

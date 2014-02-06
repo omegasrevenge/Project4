@@ -80,13 +80,13 @@ public class dfEventDrivenPropertyBinding : dfPropertyBinding
 		if( ( sourceProperty != null ) && ( targetProperty != null ) )
 		{
 
-			// Create an EventBinding component to mirror the source property
+			// CreateObject an EventBinding component to mirror the source property
 			if( !string.IsNullOrEmpty( SourceEventName ) && SourceEventName.Trim() != "" )
 			{
 				bindSourceEvent();
 			}
 
-			// Create an EventBinding component to mirror the target property
+			// CreateObject an EventBinding component to mirror the target property
 			if( !string.IsNullOrEmpty( TargetEventName ) && TargetEventName.Trim() != "" )
 			{
 				bindTargetEvent();

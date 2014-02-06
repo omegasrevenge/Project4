@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 public class BattleEngine : SceneRoot3D
 {
@@ -14,9 +14,7 @@ public class BattleEngine : SceneRoot3D
     public BattleInit ServerInfo;
 
 
-    public List<int> InputText;
     public int Turn = 0;
-    public bool Fighting;
 
 
     public GameObject FriendlyCreature;
@@ -39,16 +37,33 @@ public class BattleEngine : SceneRoot3D
     private TurnState _currentStatus = TurnState.Wait;
     private List<FightRoundResult> _results;
     private GameObject _actor;
-    private float _counter = 0f;
+    private float _counter;
     private GameObject _gg;
-    private GameObject _monsterAName;
-    private GameObject _monsterBName;
-    private GameObject _monsterAHealth;
-    private GameObject _monsterBHealth;
-    private List<GameObject> _damageGUI;
+    private bool _initialized = false;
     //########## private #########
 
     //########## getter #########
+
+	public bool Initialized
+	{
+		get
+		{
+			return (FriendlyCreature != null && EnemyCreature != null && _results != null);
+		}
+	}
+
+    public GUIObjectBattleEngine View
+    {
+        get
+        {
+            return _gui as GUIObjectBattleEngine;
+        }
+    }
+
+    public bool Fighting
+    {
+        get { return GameManager.Singleton.Player.Fighting; }
+    }
 
     public static BattleEngine Current 
     {
@@ -76,10 +91,8 @@ public class BattleEngine : SceneRoot3D
         }
         set
         {
-            if (!typeof(FightRoundResult).IsInstanceOfType(value)) return;
+            if (value == null) return;
             if ((_results.Count > 1 && _results[_results.Count - 2].Turn >= _results[_results.Count - 1].Turn)) return;
-            //if (value.Turn <= Turn) return;
-            Debug.Log("Result wird gesetzt. Alter Turn = "+Turn.ToString()+". Neuer Turn = "+value.Turn.ToString());
             _results.Add(value);
         }
     }
@@ -95,48 +108,43 @@ public class BattleEngine : SceneRoot3D
     }
     //########## getter ##################################################################
 
-    public static void CreateBattle(BattleInit serverInfo) // <----------- this starts the battle
+    public static void Create(BattleInit serverInfo) // <----------- this starts the battle
     {
-        CurrentGameObject = Create(DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
+        CurrentGameObject = CreateObject(null, DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
     }
 
     public void StartFight(BattleInit serverInfo)
     {
-        _results = new List<FightRoundResult>();
-        _damageGUI = new List<GameObject>();
-        InputText = new List<int>();
-        Fighting = true;
+		_results = new List<FightRoundResult>();
+		ServerInfo = serverInfo;
+        View.Init();
         InitCreatures(serverInfo);
         CurrentPlayer = serverInfo.FirstTurnIsPlayer;
-        ServerInfo = serverInfo;
         if (RenderSettings.fog) RenderSettings.fog = false;
     }
 
     void Update()
     {
-        updateGUI();
-
+		if(!Initialized) return;
         if (!Fighting)
         {
             enforceEnd();
             return;
         }
 
-        if (GetTurnState != _currentStatus)
+        if (GetTurnState == _currentStatus) return;
+        _currentStatus = GetTurnState;
+        switch (GetTurnState)
         {
-            _currentStatus = GetTurnState;
-            switch (GetTurnState)
-            {
-                case TurnState.Wait:
-                    //
-                    break;
-                case TurnState.Execute:
-                    turnInit();
-                    break;
-                case TurnState.Hit:
-                    executeSkill();
-                    break;
-            }
+            case TurnState.Wait:
+                //
+                break;
+            case TurnState.Execute:
+                turnInit();
+                break;
+            case TurnState.Hit:
+                executeSkill();
+                break;
         }
     }
 
@@ -172,7 +180,7 @@ public class BattleEngine : SceneRoot3D
 
     private void createSkillVisuals(string name)
     {
-        _actor = Create(name, Vector3.zero, Quaternion.identity);
+        _actor = CreateObject(transform, name, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         Actor.Owner = this;
         switch (CurrentPlayer)
@@ -192,9 +200,9 @@ public class BattleEngine : SceneRoot3D
     {
         if (CurrentPlayer == FightRoundResult.Player.A)
         {
-            createDamageIndicator(EnemyCreature, Result.Damage, Result.DoT);
+            View.CreateDamageIndicator(EnemyCreature, Result.Damage, Result.DoT);
             if (Result.HoT > 0)
-                createDamageIndicator(FriendlyCreature, Result.HoT, 0, true);
+                View.CreateDamageIndicator(FriendlyCreature, Result.HoT, 0, true);
 
             FriendlyCreature.GetComponent<MonsterController>().Health += Result.HoT;
             EnemyCreature.GetComponent<MonsterController>().Health += -Result.Damage - Result.DoT;
@@ -204,9 +212,9 @@ public class BattleEngine : SceneRoot3D
         }
         else
         {
-            createDamageIndicator(FriendlyCreature, Result.Damage, Result.DoT);
+            View.CreateDamageIndicator(FriendlyCreature, Result.Damage, Result.DoT);
             if (Result.HoT > 0)
-                createDamageIndicator(EnemyCreature, Result.HoT, 0, true);
+                View.CreateDamageIndicator(EnemyCreature, Result.HoT, 0, true);
 
             FriendlyCreature.GetComponent<MonsterController>().Health += -Result.Damage - Result.DoT;
             EnemyCreature.GetComponent<MonsterController>().Health += Result.HoT;
@@ -230,7 +238,7 @@ public class BattleEngine : SceneRoot3D
                 prefabName = GiantMonster;
                 break;
         }
-        FriendlyCreature = Create(prefabName,
+        FriendlyCreature = CreateObject(transform, prefabName,
                                   transform.FindChild(DefaultFriendlySpawnPos).position,
                                   transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
@@ -239,7 +247,7 @@ public class BattleEngine : SceneRoot3D
         FriendlyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterAHealth;
         FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAMaxHealth);
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// 
+        
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
         prefabName = "";
         switch (serverInfo.BaseMeshB)
@@ -251,7 +259,7 @@ public class BattleEngine : SceneRoot3D
                 prefabName = GiantMonster;
                 break;
         }
-        EnemyCreature = Create(prefabName,
+        EnemyCreature = CreateObject(transform, prefabName,
                                 transform.FindChild(DefaultEnemySpawnPos).position,
                                 transform.FindChild(DefaultEnemySpawnPos).rotation);
 
@@ -259,9 +267,6 @@ public class BattleEngine : SceneRoot3D
         EnemyCreature.GetComponent<MonsterController>().Owner = this;
         EnemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
         EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBMaxHealth);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        _monsterGUI(serverInfo);
     }
 
     public void EndBattle()
@@ -273,164 +278,20 @@ public class BattleEngine : SceneRoot3D
             RenderSettings.fog = true;
         Destroy(FriendlyCreature);
         Destroy(EnemyCreature);
-        Destroy(_monsterAName);
-        Destroy(_monsterBName);
-        Destroy(_monsterAHealth);
-        Destroy(_monsterBHealth);
     }
 
-    public static GameObject Create(string name, Vector3 pos, Quaternion rot)
+    public static GameObject CreateObject(Transform root, string name, Vector3 pos, Quaternion rot)
     {
-        return (GameObject)Instantiate(Resources.Load("Battle/" + name), pos, rot);
+        GameObject obj = (GameObject)Instantiate(Resources.Load("Battle/" + name), pos, rot);
+        if (root)
+            obj.transform.parent = root;
+        return obj;
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        StartFight(GameManager.Singleton.Player.GetBattleInit());
-    }
     protected override void OnDisable()
     {
         base.OnDisable();
         if (FriendlyCreature != null)
             EndBattle();
-    }
-
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-    ///////////////// GUI ///////////////////////////
-
-    private void _monsterGUI(BattleInit serverInfo)
-    {
-        _monsterAName = new GameObject("Monster A Name");
-        _monsterBName = new GameObject("Monster B Name");
-        _monsterAName.AddComponent<GUIText>().text = "Lv." + serverInfo.MonsterALevel + " " + serverInfo.MonsterAName;
-        _monsterBName.AddComponent<GUIText>().text = "Lv." + serverInfo.MonsterBLevel + " " + serverInfo.MonsterBName;
-        _monsterAHealth = new GameObject("Monster A Health");
-        _monsterBHealth = new GameObject("Monster B Health");
-        _monsterAHealth.AddComponent<GUIText>();
-        _monsterBHealth.AddComponent<GUIText>();
-    }
-
-    private void createDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
-    {
-        _damageGUI.Add(new GameObject("GUI Damage Indicator"));
-        _damageGUI[_damageGUI.Count - 1].transform.localPosition = target.transform.position;
-        _damageGUI[_damageGUI.Count - 1].AddComponent<DamageIndicator>();
-        _damageGUI[_damageGUI.Count - 1].AddComponent<SelfDestruct>();
-
-        if (!heal)
-            _damageGUI[_damageGUI.Count - 1].AddComponent<GUIText>().text = damage.ToString() + "DMG " + Result.SkillName + " & " + dot.ToString() + "DoT ->" + Result.SkillName + "<-";
-        else
-            _damageGUI[_damageGUI.Count - 1].AddComponent<GUIText>().text = damage.ToString() + "HoT";
-    }
-
-    void OnGUI()
-    {
-        var current = GameManager.Singleton.Player.CurCreature.slots;
-        for (int i = 0; i < current.Length; i++)
-        {
-            string element = "";
-            switch (current[i].driodenElement)
-            {
-                case BattleEngine.ResourceElement.Fire:
-                    element = "Fire";
-                    break;
-
-                case BattleEngine.ResourceElement.Nature:
-                    element = "Nature";
-                    break;
-
-                case BattleEngine.ResourceElement.Storm:
-                    element = "Storm";
-                    break;
-
-                case BattleEngine.ResourceElement.Energy:
-                    element = "Tech";
-                    break;
-
-                case BattleEngine.ResourceElement.Water:
-                    element = "Water";
-                    break;
-            }
-            if (GUI.Button(new Rect(0, Screen.height - 100 * (i + 1), 250, 100), (i + 1).ToString() + ". Driode. Element: " + element + ". HP: " + current[i].driodenHealth.ToString() + "%."))
-            {
-                InputText.Add(i);
-            }
-        }
-
-        if (GUI.Button(new Rect(Screen.width - 200, 0, 200, 200), "Execute"))
-        {
-            switch (InputText.Count)
-            {
-                case 0:
-                    GameManager.Singleton.FightPlayerTurn(-1, -1, -1, -1);
-                    break;
-                case 1:
-                    GameManager.Singleton.FightPlayerTurn(InputText[0], -1, -1, -1);
-                    break;
-                case 2:
-                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], -1, -1);
-                    break;
-                case 3:
-                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], -1);
-                    break;
-                case 4:
-                    GameManager.Singleton.FightPlayerTurn(InputText[0], InputText[1], InputText[2], InputText[3]);
-                    break;
-            }
-            InputText.Clear();
-        }
-
-        string inpTxt = "";
-        foreach (int number in InputText)
-            inpTxt += number.ToString();
-
-        GUI.TextArea(new Rect(Screen.width - 100, 200, 100, 100), inpTxt);
-
-        if (GUI.Button(new Rect(Screen.width - 200, 200, 100, 100), "Delete Selection"))
-            InputText.Clear();
-
-        if (GameManager.Singleton.Player.CurFight.confused)
-            GUI.Button(new Rect(250, Screen.height - 100, 100, 100), "CONFUSION!");
-        if (GameManager.Singleton.Player.CurFight.defBoosted)
-            GUI.Button(new Rect(250, Screen.height - 200, 100, 100), "DEF BOOSTED!");
-
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 200, 100), "Fliehen versuchen!"))
-            GameManager.Singleton.EscapeAttempt();
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 200, 200, 100), "Fangen versuchen!"))
-            GameManager.Singleton.CatchAttempt();
-    }
-
-    private void updateGUI()
-    {
-        _damageGUI.RemoveAll(item => item == null);
-        _monsterAName.transform.position = Camera.WorldToViewportPoint(FriendlyCreature.transform.FindChild("NamePos").transform.position);
-        _monsterBName.transform.position = Camera.WorldToViewportPoint(EnemyCreature.transform.FindChild("NamePos").transform.position);
-        _monsterAHealth.GetComponent<GUIText>().text = FriendlyCreature.GetComponent<MonsterController>().Health.ToString() + "/" + FriendlyCreature.GetComponent<MonsterStats>().HP;
-        _monsterBHealth.GetComponent<GUIText>().text = EnemyCreature.GetComponent<MonsterController>().Health.ToString() + "/" + EnemyCreature.GetComponent<MonsterStats>().HP;
-        _monsterAHealth.transform.position = Camera.WorldToViewportPoint(FriendlyCreature.GetComponent<MonsterController>().BgHealthbar.position);
-        _monsterBHealth.transform.position = Camera.WorldToViewportPoint(EnemyCreature.GetComponent<MonsterController>().BgHealthbar.position);
     }
 }

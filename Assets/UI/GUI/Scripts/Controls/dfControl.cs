@@ -4230,7 +4230,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 	private void ensureLayoutExists()
 	{
 
-		// Create a new layout, if needed
+		// CreateObject a new layout, if needed
 		if( layout == null )
 		{
 			var anchor = ( this.anchorStyle != dfAnchorStyle.None ) ? this.anchorStyle : dfAnchorStyle.Left | dfAnchorStyle.Top;

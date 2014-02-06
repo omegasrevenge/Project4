@@ -107,7 +107,7 @@ public class ViewController : MonoBehaviour
         ViewportScrollState = 0f;
 
         //AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab-de");
-        //AddMaxScreen(GUIObjectNameInput.Create("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
+        //AddMaxScreen(GUIObjectNameInput.CreateObject("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
         //AddMaxScreen(null);
         ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
     }
@@ -180,6 +180,11 @@ public class ViewController : MonoBehaviour
     public GUIObjectBaseUI AddBaseUI()
     {
         return GUIObjectBaseUI.Create(_gui);
+    }
+
+    public GUIObjectBattleEngine AddBattleUI()
+    {
+        return GUIObjectBattleEngine.Create(_gui);
     }
 
     public void ShowLoadingScreen(string text)

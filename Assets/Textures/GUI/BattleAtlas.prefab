@@ -1,0 +1,1451 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: BattleAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f514313262e3d141ad017b60809752a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 8eaa944dc24ce9b45aab640b0602838b, type: 2}
+  items:
+  - name: combat_catch_nce
+    region:
+      serializedVersion: 2
+      x: .952148438
+      y: .6328125
+      width: .0346679688
+      height: .03515625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 71, y: 72}
+    textureGUID: 43bdd5ac6ad51dc4cb11244b03914967
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_catch_vengea
+    region:
+      serializedVersion: 2
+      x: .952148438
+      y: .668945312
+      width: .0346679688
+      height: .03515625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 71, y: 72}
+    textureGUID: eb7aca8024b734f40be2c074b5e90efe
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_energy
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: 0
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: f5b39b359a4e0a644a86bd0692b4bf34
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_fire
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: .0791015625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 480b262f8cb62d74ea7021b76a79c29c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_level_1
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: .158203125
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: cfe951da5f3b57348b7d86342951dd40
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_level_2
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: .237304688
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 56f667d31f6a5034fb1949a0f40ef254
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_level_3
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: .31640625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: cb57db097618ad34c9fc8395ca47ec0c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_level_4
+    region:
+      serializedVersion: 2
+      x: .897949219
+      y: .395507812
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 7b55c1aff17a64d46a2af0130a3b196b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_level_5
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: .431640625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: f7adb43df6318204380fdcaca1d7bc4d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_life
+    region:
+      serializedVersion: 2
+      x: .671875
+      y: .431640625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: a31f4419911362843bf62889954efc73
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_storm
+    region:
+      serializedVersion: 2
+      x: .745117188
+      y: .431640625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: d9cd88dabba4a1d42b573aea58b2af16
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_driod_water
+    region:
+      serializedVersion: 2
+      x: .818359375
+      y: .431640625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 01080b6180243f846b7cf424a441273f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_flee_nce
+    region:
+      serializedVersion: 2
+      x: .952148438
+      y: .705078125
+      width: .0346679688
+      height: .03515625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 71, y: 72}
+    textureGUID: bc1b6c52de912b647a608504db753033
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_flee_vengea
+    region:
+      serializedVersion: 2
+      x: .952148438
+      y: .741210938
+      width: .0346679688
+      height: .03515625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 71, y: 72}
+    textureGUID: 88deaa094d35575448af17d4cc9b04f3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_panel_nce
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: b1bd64827850f734cac714e37f91779c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_panel_vengea
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: 0
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 20d6feadde5ffe244b4bc46bdf6cf71b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot
+    region:
+      serializedVersion: 2
+      x: .891601562
+      y: .474609375
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 679ad9542ee3fc54db02a91136eac0b3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_active_nce
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: .510742188
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: a7af9a446220ad44ba2bfb3b7e204bfb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_active_vengea
+    region:
+      serializedVersion: 2
+      x: .671875
+      y: .510742188
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 62ae4b8282c784d4e85f57dccaeb1c2d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy01
+    region:
+      serializedVersion: 2
+      x: .745117188
+      y: .510742188
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 68e567ee2e9f56c4badd8b387f72585e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy02
+    region:
+      serializedVersion: 2
+      x: .818359375
+      y: .510742188
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 23b9a3388f2cb244e84fc3e0d2598bcb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy03
+    region:
+      serializedVersion: 2
+      x: .891601562
+      y: .553710938
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 88bd8ee574244494f920c3e9d49e954c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy04
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 1f8a6db1f6f542e45a5796632be56b4c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy05
+    region:
+      serializedVersion: 2
+      x: .0732421875
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 3c821d31865e03b47a3a93700cf5e583
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy06
+    region:
+      serializedVersion: 2
+      x: .146484375
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: cb83b6defba356544a653b7fa8437ed0
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy07
+    region:
+      serializedVersion: 2
+      x: .219726562
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 7769a731fef4b974eaffb560d2b54c2f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy08
+    region:
+      serializedVersion: 2
+      x: .29296875
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: d65543943935ace43a7ee382a762f37e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy09
+    region:
+      serializedVersion: 2
+      x: .366210938
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 2ae9bac9a5895cf46b9d8020c4e024d7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_energy10
+    region:
+      serializedVersion: 2
+      x: .439453125
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 8c7e26c78d6974f43a358ced9d77b142
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire01
+    region:
+      serializedVersion: 2
+      x: .512695312
+      y: .539550781
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: e9f3f789d9842b04983106b73092109a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire02
+    region:
+      serializedVersion: 2
+      x: .5859375
+      y: .58984375
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: b65442c487c0c624bab89970aaec3a51
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire03
+    region:
+      serializedVersion: 2
+      x: .659179688
+      y: .58984375
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 0aba5447d2a40a942a296f0e66ca12cb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire04
+    region:
+      serializedVersion: 2
+      x: .732421875
+      y: .58984375
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: af9a717ec0d84034e9814c68866a4cca
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire05
+    region:
+      serializedVersion: 2
+      x: .805664062
+      y: .58984375
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: e1d9f428279d440459d43e12b788684b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire06
+    region:
+      serializedVersion: 2
+      x: .87890625
+      y: .6328125
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 06936b5c60c0814458fd971a07f8afa5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire07
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: bea1931f86a62eb47a5960f23eec6a74
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire08
+    region:
+      serializedVersion: 2
+      x: .0732421875
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: bb281928972dc764ba976a836d16495c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire09
+    region:
+      serializedVersion: 2
+      x: .146484375
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 3576546b12664fe4595ec99b12cbfc37
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_fire10
+    region:
+      serializedVersion: 2
+      x: .219726562
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 73d666afd69d1ae42b8074587b00c682
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life01
+    region:
+      serializedVersion: 2
+      x: .29296875
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: c451183611716e645a4446476dcc8cc2
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life02
+    region:
+      serializedVersion: 2
+      x: .366210938
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: de5f334d86cadf64f9b0fa6bf01c337f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life03
+    region:
+      serializedVersion: 2
+      x: .439453125
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: e745b4be06a206748aa7730796ffbd11
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life04
+    region:
+      serializedVersion: 2
+      x: .512695312
+      y: .618652344
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 57ba60ccc53329b4abf69364b4974860
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life05
+    region:
+      serializedVersion: 2
+      x: .5859375
+      y: .668945312
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 56bd4123f11638c43aecd8d1759a4fd3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life06
+    region:
+      serializedVersion: 2
+      x: .659179688
+      y: .668945312
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: c85ceaea4483c1d4ea6e613eb6a732ee
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life07
+    region:
+      serializedVersion: 2
+      x: .732421875
+      y: .668945312
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 3b3a34d7f658e2949b93805e8065129c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life08
+    region:
+      serializedVersion: 2
+      x: .805664062
+      y: .668945312
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 10ee1afe0dbab7b468f313c4a5fdfae8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life09
+    region:
+      serializedVersion: 2
+      x: .87890625
+      y: .711914062
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 4ba7e4fca77a72e42bc092fc3bb0c08a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_life10
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 0969e193257b6954183b48288659f278
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm01
+    region:
+      serializedVersion: 2
+      x: .0732421875
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 8a5a024cbbc9a0047b14bdd310627cfd
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm02
+    region:
+      serializedVersion: 2
+      x: .146484375
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: abd6bac04dd2c254d82fcd987ec47dc0
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm03
+    region:
+      serializedVersion: 2
+      x: .219726562
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 8c8344a2c6981564380b9ba0182dbcb0
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm04
+    region:
+      serializedVersion: 2
+      x: .29296875
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 597bed5081fc51142ad3b62b76ea0831
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm05
+    region:
+      serializedVersion: 2
+      x: .366210938
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 9f795c723e6fb4b4dbd64276e33d7417
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm06
+    region:
+      serializedVersion: 2
+      x: .439453125
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: fc8b585aa13e32247899696f62c81f70
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm07
+    region:
+      serializedVersion: 2
+      x: .512695312
+      y: .697753906
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 46e7aa1355ca1b04eb00473f29dd0055
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm08
+    region:
+      serializedVersion: 2
+      x: .5859375
+      y: .748046875
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: bf47782e534afde4a8ff303ccc036bfa
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm09
+    region:
+      serializedVersion: 2
+      x: .659179688
+      y: .748046875
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 1393f4662f88e084398bb2215f203a0d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_storm10
+    region:
+      serializedVersion: 2
+      x: .732421875
+      y: .748046875
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: ec824524af14e7e4e9bac7960da74841
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water01
+    region:
+      serializedVersion: 2
+      x: .805664062
+      y: .748046875
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: c08e6b5387131054cbc0ccfe6cd1a096
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water02
+    region:
+      serializedVersion: 2
+      x: .87890625
+      y: .791015625
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 873a28d335a259543ad0946f6ebb39c5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water03
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .870117188
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: f86cd258a00c21c40b98360d17bb4ae3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water04
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: f07282464bb80c34aa733c736b25da3f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water05
+    region:
+      serializedVersion: 2
+      x: .0732421875
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: d86781b850c075d418879f17964bd57f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water06
+    region:
+      serializedVersion: 2
+      x: .146484375
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 03f62c409c391f443b0c521a7712df7e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water07
+    region:
+      serializedVersion: 2
+      x: .219726562
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: eba8115b67497e640b085b13b642ab54
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water08
+    region:
+      serializedVersion: 2
+      x: .29296875
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 6a229ad7154a5ea47bc1d03db30444bb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water09
+    region:
+      serializedVersion: 2
+      x: .366210938
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 1de914cb019ee644baf6d63add58bce2
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_imprint_water10
+    region:
+      serializedVersion: 2
+      x: .439453125
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: f5aea5b1e78364341905585ebfb106c3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_status
+    region:
+      serializedVersion: 2
+      x: .512695312
+      y: .776855469
+      width: .072265625
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: 45f359e6eb62b3a44a57c3fb70f08f43
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_1to2
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: 0
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: ec21c1a7f6199034c90473a2890e4457
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_1to3
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .107910156
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 15230ecdeb9815a449ee92a50784eb95
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_1to4
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: .107910156
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: f7531b1f26250714e8532fd8c212c21b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_2to3
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: .107910156
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: ef20e1930b64d2940b4cadd88ec042d1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_2to4
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .215820312
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: ae08c870ac4d7af479da0ddaf3ee8c40
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_nce_3to4
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: .215820312
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 76ce102a53368af4da044e29f809a9e5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_1to2
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: .215820312
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 450ad2414d2497e4d9b1ae99ae0f72e1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_1to3
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .323730469
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 93d7c2c324466434680b7705e69a9dd8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_1to4
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: .323730469
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: b2a58a4e0d95f174d82cca737827ae13
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_2to3
+    region:
+      serializedVersion: 2
+      x: .598632812
+      y: .323730469
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 00cda7f37185db948b3454f7e71fbdcc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_2to4
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .431640625
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 2e7b1a4864e3364478a4c40f5be0021a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: connection_vengea_3to4
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: .431640625
+      width: .298339844
+      height: .106933594
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 8fababe5eb7187e498ec630edb027b92
+    deleted: 0
+    texture: {fileID: 0}
+  generator: 0
+  imageFileGUID: 
+  dataFileGUID: 
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
