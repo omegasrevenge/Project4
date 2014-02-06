@@ -268,6 +268,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CLogin(string token, Action<bool> callback = null)
     {
+		NTPEntries.Clear();
         WWW request = new WWW(ServerURL + "login_google?token=" + token);
         yield return request;
 
@@ -280,6 +281,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CLogin(string playerID, string password, Action<bool> callback = null)
     {
+		NTPEntries.Clear();
         string url = ServerURL + "login_password?pid=" + playerID + "&pass=" + password;
         Debug.Log("URL: " + url);
         WWW request = new WWW(url);
@@ -839,7 +841,7 @@ public class GameManager : MonoBehaviour
 			long dur=tcnow-tcold;
 			long tc=(tcold+tcnow)/2;
 			long diff=tc-ts;
-			Debug.Log("dur:"+dur+" diff:"+diff);
+			NTPPush(dur,diff);
 		};
 
         if ((bool)json["result"]) return true;
@@ -859,6 +861,50 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
+
+	struct NTPEntry
+	{
+		public long dur;
+		public long diff;
+	}
+	private List<NTPEntry> NTPEntries=new List<NTPEntry>();
+	private long ServerTimeDiff=0;
+
+	private void NTPPush(long dur,long diff)
+	{
+		//Debug.Log("dur:"+dur+" diff:"+diff);
+		if(dur>1000&&NTPEntries.Count<=0) {return;}; //bad timing, ignore
+		NTPEntry e;e.dur=dur;e.diff=diff;
+		NTPEntries.Add(e);
+		if(NTPEntries.Count>32) {NTPEntries.RemoveAt(0);}; //remove old
+
+		long dSum=0;
+		long dWgh=0;
+		for(int i=0;i<NTPEntries.Count;i++)
+		{
+			diff=NTPEntries[i].diff;
+			dur=NTPEntries[i].dur;
+			long weight=1000-dur;
+			if(weight<1) weight=1; 
+			weight*=weight;
+			dWgh+=weight;
+			dSum+=weight*diff;
+		};
+		ServerTimeDiff=dSum/dWgh;
+		//Debug.Log("Avarage Diff:"+ServerTimeDiff+" c:"+NTPEntries.Count+" s:"+dSum+" w:"+dWgh);
+		//GetServerTime();
+	}
+
+	//returns synchronized server time in UTC
+	public DateTime GetServerTime()
+	{
+		long tcnow = (long)((DateTime.UtcNow-new DateTime (1970,1,1)).TotalMilliseconds);
+		tcnow-=ServerTimeDiff;
+		DateTime UnixStartDate = new DateTime(1970, 1, 1);
+		UnixStartDate=UnixStartDate.AddMilliseconds(tcnow);
+		//Debug.Log(UnixStartDate.ToLocalTime().ToString());
+		return UnixStartDate;
+	}
 
 #if !UNITY_EDITOR
     void OnApplicationFocus(bool focusStatus)
