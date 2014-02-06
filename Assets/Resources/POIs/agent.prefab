@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 135: {fileID: 13500000}
   m_Layer: 1
   m_Name: agent
   m_TagString: Untagged
@@ -83,6 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disabledBy: []
   playerData:
+    CurrentFaction: 0
     PlayerID: 
     Name: 
     Position: {x: 0, y: 0}
@@ -124,6 +126,18 @@ MonoBehaviour:
       Dexterity: 0
       Skillpoints: 0
       BaseElement: 0
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -746,7 +746,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator CAttack(string enemy)
     {
 
-        WWW request = new WWW(GetSessionURL("attack") + "&enemy=" + enemy);
+        WWW request = new WWW(GetSessionURL("fightcreate") + "&enemy=" + enemy);
 
         yield return request;
 

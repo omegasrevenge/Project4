@@ -71,6 +71,6 @@ public class PlayerOnMap : ObjectOnMap
 
     public override void Execute()
     {
-        //Do something
+        GameManager.Singleton.Attack(playerData.PlayerID);
     }
 }
