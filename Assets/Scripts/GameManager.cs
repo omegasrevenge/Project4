@@ -231,9 +231,13 @@ public class GameManager : MonoBehaviour
                 _view.Switch3DSceneRoot(_base);
                 break;
             case GameMode.Fight:
-                if(BattleEngine.CurrentGameObject == null)
-                    BattleEngine.CreateBattle(Player.GetBattleInit());
-                _view.Switch3DSceneRoot(BattleEngine.Current);
+				if(BattleEngine.CurrentGameObject == null)
+				{
+					BattleEngine.Create(Player.GetBattleInit());
+					BattleEngine.Current.AttachGUI(ViewController.Singleton.AddBattleUI());
+				}
+				_view.Switch3DSceneRoot(BattleEngine.Current);
+				BattleEngine.Current.StartFight(Player.GetBattleInit());
                 break;
         }
 
