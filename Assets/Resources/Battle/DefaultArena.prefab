@@ -244,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.0938339, y: 107.995293, z: 8.38082886}
+  m_LocalPosition: {x: -97.3842926, y: 97.5963974, z: 5.38446665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400024}
@@ -287,7 +287,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -4.37113883e-08}
-  m_LocalPosition: {x: -.0113229752, y: 4.57832384, z: .0133838654}
+  m_LocalPosition: {x: -.0113220215, y: 6.8534317, z: .0133838654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -298,7 +298,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0113229752, y: -.00760221481, z: .0133838654}
+  m_LocalPosition: {x: -.0113220215, y: -2.2896347, z: .0133838654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -308,8 +308,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_LocalRotation: {x: 0, y: .395200431, z: 0, w: .918594956}
-  m_LocalPosition: {x: -2.10980511, y: .341152191, z: -2.24226952}
+  m_LocalRotation: {x: -.3111687, y: .371835589, z: .133871853, w: .864286244}
+  m_LocalPosition: {x: -2.10980225, y: -1.77961731, z: -2.24226952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -319,8 +319,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
-  m_LocalRotation: {x: 0, y: -.929823577, z: 0, w: .368005723}
-  m_LocalPosition: {x: 2.93200779, y: .35559082, z: 1.82762718}
+  m_LocalRotation: {x: .126246661, y: -.873397052, z: .318981826, w: .345673233}
+  m_LocalPosition: {x: 2.93200684, y: 3.36254883, z: 1.82762718}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -758,14 +758,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actor: {fileID: 0}
   CurrentPlayer: 0
-  InputText: 
   Turn: 0
-  Fighting: 1
-  BattleCam: {fileID: 0}
-  MainCam: {fileID: 0}
   FriendlyCreature: {fileID: 0}
   EnemyCreature: {fileID: 0}
-  Arena: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

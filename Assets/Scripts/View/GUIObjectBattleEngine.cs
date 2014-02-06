@@ -5,6 +5,7 @@ using UnityEngine;
 public class GUIObjectBattleEngine : MonoBehaviour
 {
     public List<int> InputText;
+    public float GUIDistance = 1.5f;
 
     private const string Prefab = "GUI/panel_battleui";
 
@@ -38,10 +39,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
         InputText = new List<int>();
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
-        IndicatorOne = transform.FindChild("HappenstanceIndicator1").gameObject;
-        IndicatorTwo = transform.FindChild("HappenstanceIndicator2").gameObject;
-        IndicatorThree = transform.FindChild("HappenstanceIndicator3").gameObject;
-        IndicatorFour = transform.FindChild("HappenstanceIndicator4").gameObject;
+        IndicatorOne =      transform.FindChild("HappenstanceIndicator1").gameObject;
+        IndicatorTwo =      transform.FindChild("HappenstanceIndicator2").gameObject;
+        IndicatorThree =    transform.FindChild("HappenstanceIndicator3").gameObject;
+        IndicatorFour =     transform.FindChild("HappenstanceIndicator4").gameObject;
         MonsterAElement = MonsterAContainer.transform.FindChild("MonsterElement").gameObject;
         MonsterBElement = MonsterBContainer.transform.FindChild("MonsterElement").gameObject;
         MonsterALevel = MonsterAContainer.transform.FindChild("MonsterLevel").gameObject;
@@ -52,7 +53,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBHealth = MonsterBContainer.transform.FindChild("MonsterHealthProgress").gameObject;
         MonsterAHealthText = MonsterAHealth.transform.FindChild("MonsterHealthText").gameObject;
 		MonsterBHealthText = MonsterBHealth.transform.FindChild("MonsterHealthText").gameObject;
-		if (BattleEngine.Current.ServerInfo == null) Debug.LogError ("BattleEngine.Current.ServerInfo NULL");
         MonsterALevel.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterALevel.ToString();
         MonsterBLevel.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBLevel.ToString();
         MonsterAName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterAName;
@@ -61,9 +61,12 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Update()
     {
-        if (BattleEngine.CurrentGameObject == null || !BattleEngine.Current.Initialized) return;
-        //MonsterAContainer.transform.position = BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position);
-        //MonsterBContainer.transform.position = BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.EnemyCreature.transform.FindChild("GUIPos").transform.position);
+        if (BattleEngine.CurrentGameObject == null || !BattleEngine.Current.Initialized || !BattleEngine.Current.Fighting) return;
+        Vector3 _camPos = BattleEngine.Current.Camera.transform.position;
+        Vector3 _friendlyPos = BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position;
+        Vector3 _enemyPos = BattleEngine.Current.EnemyCreature.transform.FindChild("GUIPos").transform.position;
+        //MonsterAContainer.transform.position = (_friendlyPos - _camPos).normalized * GUIDistance + _camPos;
+        //MonsterBContainer.transform.position = (_enemyPos - _camPos).normalized * GUIDistance + _camPos;
         MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
         MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
 	}
@@ -78,9 +81,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
             else
                 IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
             IndicatorOne.GetComponent<dfTweenVector3>().StartValue =
-                BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.position);
+                (BattleEngine.Current.FriendlyCreature.transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
             IndicatorOne.GetComponent<dfTweenVector3>().EndValue =
-	            BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").position);
+                (BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
             IndicatorOne.GetComponent<dfTweenVector3>().Start();
 	    }
         else 
