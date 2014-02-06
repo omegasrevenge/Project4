@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private const string Server = "http://pixeltamer.net:7774/rpc/";
     private const string Localhost = "http://localhost:7774/rpc/";
-    private const float OwnUpdateFreq = 60 * 3;
+    private const float OwnUpdateFreq = 5;
     private const float PositionUpdateFreq = 60 * 1;
     private const float PositionUpdateFreqMove = 5;
     private const float PlayerQueryFreq = 60 * 2;
