@@ -30,6 +30,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public GameObject IndicatorFour;
     public GameObject DriodContainer;
     public List<GameObject> ComboIndicators;
+    public List<dfButton> DriodSlots; 
 
     public bool Initialized
     {
@@ -51,7 +52,12 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         InputText = new List<int>();
         ComboIndicators = new List<GameObject>();
+        DriodSlots = new List<dfButton>();
         DriodContainer = transform.FindChild("ButtonContainer").FindChild("BG_Driods").gameObject;
+        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod1").GetComponent<dfButton>());
+        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod2").GetComponent<dfButton>());
+        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod3").GetComponent<dfButton>());
+        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod4").GetComponent<dfButton>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_01").gameObject);
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_02").gameObject);
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_03").gameObject);
@@ -90,6 +96,13 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
         foreach (GameObject comboIndicator in ComboIndicators)
             comboIndicator.GetComponent<dfSprite>().Hide();
+        for (int i = 0; i < DriodSlots.Count; i++)
+        {
+            if (InputText.Contains(i))
+                DriodSlots[i].BackgroundSprite = "combat_slot_active_vengea";
+            else
+                DriodSlots[i].BackgroundSprite = "combat_slot";
+        }
 
         if (InputText.Count < 2) return;
 
