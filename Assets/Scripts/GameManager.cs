@@ -994,7 +994,6 @@ public class GameManager : MonoBehaviour
             }
         }
         _view.HideLoadingScreen();
-
     }
 
 	private void UpdateAllOwnCreatures(JSONObject json)

@@ -167,10 +167,15 @@ public class ViewController : MonoBehaviour
         return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();
     }
 
+    public GUIObjectPopup AddPopup()
+    {
+        return GUIObjectPopup.Create(_gui).Show();
+    }
+
     public GUIObjectSpectresIntro AddSpectresIntro(string textKeyText)
     {
         return GUIObjectSpectresIntro.Create(_gui, textKeyText);
-    }    
+    }
     
     public GUIObjectMapUI AddMapUI()
     {
@@ -185,6 +190,11 @@ public class ViewController : MonoBehaviour
     public GUIObjectBattleEngine AddBattleUI()
     {
         return GUIObjectBattleEngine.Create(_gui);
+    }
+
+    public GUIObjectResourceResult ShowResourceResult(string rsc)
+    {
+        return GUIObjectResourceResult.Create(_gui, "iris_06_16_text", "ok", rsc);
     }
 
     public void ShowLoadingScreen(string text)
