@@ -5,24 +5,11 @@ public class MonsterController : ActorControlls
 {
 	[SerializeField]
 	public int AttackSpeed = 5;
-	[SerializeField]
-	public int Health;
-	
-	[HideInInspector]
-	public Transform BgHealthbar;
-	[HideInInspector]
-	public Transform Healthbar;
+
 	[HideInInspector]
 	public Vector3 StartPosition;
 
 	private Vector3 _target;
-	//private Transform _battleCam;
-	private MonsterStats _monsterStats;
-
-	void Awake()
-	{
-		_monsterStats = GetComponent<MonsterStats>();
-	}
 
 	public void Attack(Vector3 target)
 	{
@@ -32,9 +19,6 @@ public class MonsterController : ActorControlls
 
 	void Update () 
 	{
-        //if (_battleCam == null)
-          //  _battleCam = BattleEngine.Current.Camera.transform;
-
 		if(!AnimationFinished)
 		{
 			transform.position = Vector3.Lerp(transform.position, _target, AttackSpeed/100f);
@@ -53,6 +37,6 @@ public class MonsterController : ActorControlls
 	
 	private bool HaveReached(Vector3 target)
 	{
-		return Mathf.Abs((transform.position-target).magnitude)<0.1f ? true : false;
+		return Mathf.Abs((transform.position-target).magnitude)<0.1f;
 	}
 }

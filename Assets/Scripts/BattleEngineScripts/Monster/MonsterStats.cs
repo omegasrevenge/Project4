@@ -4,20 +4,10 @@ using System.Collections;
 public class MonsterStats : MonoBehaviour 
 {
 
-    public BattleEngine.ResourceElement Element;
-	public string Name;
-	public int Level;
-	public int HP;
-
-    public void Init(BattleEngine.ResourceElement element, string name, int level, int hp)
+    public void Init(BattleEngine.ResourceElement element)
 	{
-		Element = element;
-		Name = name;
-		Level = level;
-		HP = hp;
-
 		Color color = Color.grey;
-		switch(Element)
+		switch(element)
 		{
             case BattleEngine.ResourceElement.Fire:
 			color = Color.red;
@@ -36,7 +26,5 @@ public class MonsterStats : MonoBehaviour
 			break;
 		}
 		transform.FindChild("model").GetComponent<MeshRenderer>().material.color = color;
-
-
 	}
 }

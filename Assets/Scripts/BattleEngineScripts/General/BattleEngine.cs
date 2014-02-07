@@ -122,9 +122,11 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
+        Turn = GameManager.Singleton.Player.CurFight.Round;
 		_results = new List<FightRoundResult>();
 		ServerInfo = serverInfo;
-        View.Init();
+        if (!View.Initialized) 
+            View.Init();
         InitCreatures(serverInfo);
         CurrentPlayer = serverInfo.FirstTurnIsPlayer;
         if (RenderSettings.fog) RenderSettings.fog = false;
@@ -134,10 +136,7 @@ public class BattleEngine : SceneRoot3D
     {
 		if(!Initialized) return;
         if (!Fighting)
-        {
             enforceEnd();
-            return;
-        }
 
         if (GetTurnState == _currentStatus) return;
         _currentStatus = GetTurnState;
@@ -178,7 +177,7 @@ public class BattleEngine : SceneRoot3D
 
         if (Resources.Load("Battle/" + Result.SkillName) == null)
         {
-            Debug.Log("The skill " + Result.SkillName + " does not exist. Casting Laser instead.");
+            Debug.LogError("The skill >" + Result.SkillName + "< does not exist. Casting Laser instead.");
             createSkillVisuals("Laser");
             return;
         }
@@ -193,11 +192,11 @@ public class BattleEngine : SceneRoot3D
         switch (CurrentPlayer)
         {
             case FightRoundResult.Player.A:
-                _actor.transform.localPosition = FriendlyCreature.transform.position;
+                _actor.transform.position = FriendlyCreature.transform.position;
                 _actor.transform.LookAt(EnemyCreature.transform);
                 break;
             case FightRoundResult.Player.B:
-                _actor.transform.localPosition = EnemyCreature.transform.position;
+                _actor.transform.position = EnemyCreature.transform.position;
                 _actor.transform.LookAt(FriendlyCreature.transform);
                 break;
         }
@@ -210,23 +209,12 @@ public class BattleEngine : SceneRoot3D
             View.CreateDamageIndicator(EnemyCreature, Result.Damage, Result.DoT);
             if (Result.HoT > 0)
                 View.CreateDamageIndicator(FriendlyCreature, Result.HoT, 0, true);
-
-            FriendlyCreature.GetComponent<MonsterController>().Health += Result.HoT;
-            EnemyCreature.GetComponent<MonsterController>().Health += -Result.Damage - Result.DoT;
-            if (EnemyCreature.GetComponent<MonsterController>().Health < 0)
-                EnemyCreature.GetComponent<MonsterController>().Health = 0;
-
         }
         else
         {
             View.CreateDamageIndicator(FriendlyCreature, Result.Damage, Result.DoT);
             if (Result.HoT > 0)
                 View.CreateDamageIndicator(EnemyCreature, Result.HoT, 0, true);
-
-            FriendlyCreature.GetComponent<MonsterController>().Health += -Result.Damage - Result.DoT;
-            EnemyCreature.GetComponent<MonsterController>().Health += Result.HoT;
-            if (FriendlyCreature.GetComponent<MonsterController>().Health < 0)
-                FriendlyCreature.GetComponent<MonsterController>().Health = 0;
         }
 
         CurrentPlayer = Result.PlayerTurn;
@@ -251,8 +239,7 @@ public class BattleEngine : SceneRoot3D
 
         FriendlyCreature.GetComponent<MonsterController>().StartPosition = transform.FindChild(DefaultFriendlySpawnPos).position;
         FriendlyCreature.GetComponent<MonsterController>().Owner = this;
-        FriendlyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterAHealth;
-        FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.MonsterAName, serverInfo.MonsterALevel, serverInfo.MonsterAMaxHealth);
+        FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement);
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
@@ -272,13 +259,11 @@ public class BattleEngine : SceneRoot3D
 
         EnemyCreature.GetComponent<MonsterController>().StartPosition = transform.FindChild(DefaultEnemySpawnPos).position;
         EnemyCreature.GetComponent<MonsterController>().Owner = this;
-        EnemyCreature.GetComponent<MonsterController>().Health = serverInfo.MonsterBHealth;
-        EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.MonsterBName, serverInfo.MonsterBLevel, serverInfo.MonsterBMaxHealth);
+        EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement);
     }
 
     public void EndBattle()
     {
-        Turn = 0;
         _results.Clear();
         Camera.transform.FindChild("GGScreen").gameObject.SetActive(false);
         if (!RenderSettings.fog)

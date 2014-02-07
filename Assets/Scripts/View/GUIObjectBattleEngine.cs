@@ -6,6 +6,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 {
     public List<int> InputText;
     public float GUIDistance = 1.5f;
+    public float DamageIndicatorMoveUpSpeed = 0.1f;
 
     private Camera Camera { get { return ViewController.Singleton.Camera3D; } }
 
@@ -27,6 +28,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public GameObject IndicatorTwo;
     public GameObject IndicatorThree;
     public GameObject IndicatorFour;
+    public GameObject DriodContainer;
+    public List<GameObject> ComboIndicators;
+
+    public bool Initialized
+    {
+        get
+        {
+            return MonsterAContainer != null;
+        }
+    }
 
     public static GUIObjectBattleEngine Create(dfControl root)
     {
@@ -39,6 +50,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public void Init()
     {
         InputText = new List<int>();
+        ComboIndicators = new List<GameObject>();
+        DriodContainer = transform.FindChild("ButtonContainer").FindChild("BG_Driods").gameObject;
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_01").gameObject);
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_02").gameObject);
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_03").gameObject);
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_12").gameObject);
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_13").gameObject);
+        ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_23").gameObject);
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
         IndicatorOne =      transform.FindChild("HappenstanceIndicator1").gameObject;
@@ -59,19 +78,42 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBLevel.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBLevel.ToString();
         MonsterAName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterAName;
         MonsterBName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBName;
+        MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
+        MonsterAHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurCreature.HP / GameManager.Singleton.Player.CurCreature.HPMax;
+        MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
+        MonsterBHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurFight.EnemyCreature.HP / GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
     }
 
     void Update()
     {
         if (BattleEngine.CurrentGameObject == null || !BattleEngine.Current.Initialized || !BattleEngine.Current.Fighting) return;
-        Vector3 _camPos = Camera.transform.position;
-        Vector3 _friendlyPos = BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position;
-        Vector3 _enemyPos = BattleEngine.Current.EnemyCreature.transform.FindChild("GUIPos").transform.position;
-        //MonsterAContainer.transform.position = (_friendlyPos - _camPos).normalized * GUIDistance + _camPos;
-        //MonsterBContainer.transform.position = (_enemyPos - _camPos).normalized * GUIDistance + _camPos;
-        MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
-        MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
-	}
+
+        foreach (GameObject comboIndicator in ComboIndicators)
+            comboIndicator.GetComponent<dfSprite>().Hide();
+
+        if (InputText.Count < 2) return;
+
+        for (int i = 0; i < InputText.Count-1; i++)
+        {
+            int s1 = InputText[i];
+            int s2 = InputText[i + 1];
+            if (s1 > s2)
+            {
+                int a = s1;
+                s1 = s2;
+                s2 = a;
+            }
+            int ind = -1;
+            if (s1 == 0 && s2 == 1) ind = 0;
+            if (s1 == 0 && s2 == 2) ind = 1;
+            if (s1 == 0 && s2 == 3) ind = 2;
+            if (s1 == 1 && s2 == 2) ind = 3;
+            if (s1 == 1 && s2 == 3) ind = 4;
+            if (s1 == 2 && s2 == 3) ind = 5;
+            if(ind == -1) continue;
+            ComboIndicators[ind].GetComponent<dfSprite>().Show();
+        }
+    }
 	
 	public void CreateDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
 	{
@@ -82,11 +124,11 @@ public class GUIObjectBattleEngine : MonoBehaviour
                     damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
             else
                 IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
-            IndicatorOne.GetComponent<dfTweenVector3>().StartValue =
-                (BattleEngine.Current.FriendlyCreature.transform.position - Camera.transform.position).normalized * GUIDistance + Camera.transform.position;
-            IndicatorOne.GetComponent<dfTweenVector3>().EndValue =
-                (BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position - Camera.transform.position).normalized * GUIDistance + Camera.transform.position;
-            IndicatorOne.GetComponent<dfTweenVector3>().Start();
+            Vector3 startPos =
+                (BattleEngine.Current.FriendlyCreature.transform.position -
+                 BattleEngine.Current.Camera.transform.position).normalized*GUIDistance +
+                BattleEngine.Current.Camera.transform.position;
+            IndicatorOne.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed*Time.deltaTime, 0f));
 	    }
         else 
         if (target == BattleEngine.Current.EnemyCreature)
@@ -96,12 +138,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
                     damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
             else
                 IndicatorTwo.GetComponent<dfLabel>().Text = damage + "HoT";
-            IndicatorTwo.GetComponent<dfTweenVector3>().StartValue =
-                Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.position);
-            IndicatorTwo.GetComponent<dfTweenVector3>().EndValue =
-                Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").position);
-            IndicatorTwo.GetComponent<dfTweenVector3>().Start();
-	    }
+            Vector3 startPos =
+                (BattleEngine.Current.EnemyCreature.transform.position -
+                 BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
+                BattleEngine.Current.Camera.transform.position;
+            IndicatorTwo.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed*Time.deltaTime, 0f));
+        }
+        MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
+        MonsterAHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurCreature.HP / GameManager.Singleton.Player.CurCreature.HPMax;
+        MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
+        MonsterBHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurFight.EnemyCreature.HP / GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
 	}
 
     public void FirstDriodKlicked()
@@ -168,39 +214,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 	{
 		if (!BattleEngine.Current.Initialized) return;
 		if (GameManager.Singleton.Player.CurFight == null) return;
-        //var current = GameManager.Singleton.Player.CurCreature.slots;
-        //for (int i = 0; i < current.Length; i++)
-        //{
-        //    string element = "";
-        //    switch (current[i].driodenElement)
-        //    {
-        //        case BattleEngine.ResourceElement.Fire:
-        //            element = "Fire";
-        //            break;
-        //
-        //        case BattleEngine.ResourceElement.Nature:
-        //            element = "Nature";
-        //            break;
-        //
-        //        case BattleEngine.ResourceElement.Storm:
-        //            element = "Storm";
-        //            break;
-        //
-        //        case BattleEngine.ResourceElement.Energy:
-        //            element = "Tech";
-        //            break;
-        //
-        //        case BattleEngine.ResourceElement.Water:
-        //            element = "Water";
-        //            break;
-        //    }
-        //    if (GUI.Button(new Rect(0, Screen.height - 100 * (i + 1), 250, 100), (i + 1) + ". Driode. Element: " + element + ". HP: " + current[i].driodenHealth + "%."))
-        //    {
-        //
-        //    }
-        //}
 
-        GUI.TextArea(new Rect(Screen.width - 100, 200, 100, 100), InputText.Aggregate("", (current1, number) => current1 + number));
 
         if (GameManager.Singleton.Player.CurFight.confused)
             GUI.Button(new Rect(0, 0, 100, 100), "CONFUSION!");

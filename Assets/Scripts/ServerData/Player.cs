@@ -107,10 +107,8 @@ public class Player
         string[] lastResult = CurFight.LastResult.Split(' ');
 
         if (lastResult.Length != 4)
-        {
-            Debug.Log("LAST RESULT LENGTH != 4. lastresult = " + CurFight.LastResult);
             return newResult;
-        }
+
         newResult.SkillName = lastResult[0];
         newResult.Damage = Convert.ToInt32(lastResult[1]);
         newResult.DoT = Convert.ToInt32(lastResult[2]);
