@@ -12,8 +12,9 @@ public class Player
     public string Name;
     public Vector2 Position;
     public Vector2 BasePosition;
-    public Int64 BaseTime;
+    public DateTime BaseTime;
     public int[,] Resources;
+	public Int64 Version;
 
     public bool Fighting;
     public Fight CurFight;
@@ -29,7 +30,8 @@ public class Player
         Name = (string)json["Name"];
         Position = new Vector2((float)json["Lon"], (float)json["Lat"]);
         BasePosition = new Vector2((float)json["BaseLon"], (float)json["BaseLat"]);
-        BaseTime = (Int64)json["TimeBase"];
+		BaseTime = (DateTime)json["TimeBase"];
+		Version = (Int64)json["Version"];
         Resources = new int[7, 5];
 
         if (GameManager.Singleton.Player.PlayerID != PlayerID)

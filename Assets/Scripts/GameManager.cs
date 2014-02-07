@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
     private const string Server = "http://pixeltamer.net:7774/rpc/";
     private const string Localhost = "http://localhost:7774/rpc/";
     private const float OwnUpdateFreq = 5;
-    private const float PositionUpdateFreq = 60 * 1;
+    private const float PositionUpdateFreq = 30;
     private const float PositionUpdateFreqMove = 5;
-    private const float PlayerQueryFreq = 60 * 2;
-    private const float EnemyTurnFreq = 3f;
+    private const float PlayerQueryFreq = 10;
+    private const float EnemyTurnFreq = 2;
 
     public List<POI> POIs = new List<POI>();
     public float pois_timeQ;
@@ -123,8 +123,8 @@ public class GameManager : MonoBehaviour
         if (!LoggedIn) return;
 
         //Update own player information
-        if (Time.time >= OwnUpdateFreq + _lastOwnPlayerUpdate)
-            GetOwnPlayer();
+		if (Time.time >= OwnUpdateFreq + _lastOwnPlayerUpdate && CurrentGameMode != GameMode.Fight)
+            GetOwnPlayer(null,true);
 
         //MAP MODE:
         if (CurrentGameMode == GameMode.Map)
@@ -303,18 +303,22 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Loads own Player Data (First login with playerID).
     /// </summary>
-    public void GetOwnPlayer(Action<bool> callback = null)
+    public void GetOwnPlayer(Action<bool> callback = null,bool version=false)
     {
         if (!LoggedIn) return;
         _lastOwnPlayerUpdate = Time.time;
-        StartCoroutine(CGetOwnPlayer(callback));
+		StartCoroutine(CGetOwnPlayer(callback,version));
         if (Techtree == null)
             StartCoroutine(CRequestTechtree());
     }
 
-    private IEnumerator CGetOwnPlayer(Action<bool> callback = null)
+	private IEnumerator CGetOwnPlayer(Action<bool> callback = null,bool version=false)
     {
-        WWW request = new WWW(GetSessionURL("pinfo"));
+		string sSessUrl=GetSessionURL("pinfo");
+		if(version) {
+			sSessUrl+="&v=" + Player.Version;
+		}
+        WWW request = new WWW(sSessUrl);
 
         yield return request;
 
@@ -323,9 +327,14 @@ public class GameManager : MonoBehaviour
         {
             callback(false);
             yield break;
-        }
+		};
+		JSONObject data=json["data"];
+		if((string)data=="nochange")
+		{
+			yield break;
+		};
         //Debug.Log(json["data"]);
-        ReadPlayerJSON(json["data"]);
+		ReadPlayerJSON(data);
         if (Player.Fighting && CurrentGameMode != GameMode.Fight)
             SwitchGameMode(GameMode.Fight);
         if (callback != null)
