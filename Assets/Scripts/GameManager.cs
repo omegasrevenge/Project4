@@ -179,8 +179,10 @@ public class GameManager : MonoBehaviour
         foreach (ObjectPos pos in PlayerPositionsInRange)
         {
             Player player = GetPlayer(pos.ID);
-            if (player != null)
-                tempPlayers.Add(player);
+			if (player == null) continue;
+			player.Position.x=pos.Lon;
+			player.Position.y=pos.Lat;
+            tempPlayers.Add(player);
         }
         PlayersOnMap = tempPlayers;
         _playersUpdated = false;
