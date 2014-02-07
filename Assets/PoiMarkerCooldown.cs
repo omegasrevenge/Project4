@@ -27,9 +27,4 @@ public class PoiMarkerCooldown : MonoBehaviour
 
         _label.Text = time;
     }
-
-    public void HideCooldown()
-    {
-        _control.Hide();
-    }
 }

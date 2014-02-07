@@ -70,7 +70,7 @@ public class BattleEngine : SceneRoot3D
         }
     }
 
-    public static BattleEngine Current 
+    public static BattleEngine Current
     {
         get 
         {
@@ -114,9 +114,10 @@ public class BattleEngine : SceneRoot3D
     }
     //########## getter ##################################################################
 
-    public static void Create(BattleInit serverInfo) // <----------- this starts the battle
+    public static BattleEngine Create(BattleInit serverInfo) // <----------- this starts the battle
     {
         CurrentGameObject = CreateObject(null, DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
+        return CurrentGameObject.GetComponent<BattleEngine>();
     }
 
     public void StartFight(BattleInit serverInfo)

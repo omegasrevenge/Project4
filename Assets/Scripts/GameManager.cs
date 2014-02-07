@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour
     }
 
     private static GameManager _instance;
-    private ViewController _view;
-    private Map _map;
-    private PlayerBase _base;
+    private ViewController  _view;
+    private Map             _map;
+    private PlayerBase      _base;
+    private BattleEngine    _fight;
 
     public bool DummyUI = true;
 
@@ -238,11 +239,11 @@ public class GameManager : MonoBehaviour
             case GameMode.Fight:
 				if(BattleEngine.CurrentGameObject == null)
 				{
-					BattleEngine.Create(Player.GetBattleInit());
-					BattleEngine.Current.AttachGUI(ViewController.Singleton.AddBattleUI());
+                    _fight = BattleEngine.Create(Player.GetBattleInit());
+					_fight.AttachGUI(_view.AddBattleUI());
 				}
-				_view.Switch3DSceneRoot(BattleEngine.Current);
-				BattleEngine.Current.StartFight(Player.GetBattleInit());
+				_view.Switch3DSceneRoot(_fight);
+				_fight.StartFight(Player.GetBattleInit());
                 break;
         }
 
@@ -359,8 +360,9 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if (BattleEngine.CurrentGameObject != null && BattleEngine.CurrentGameObject.activeSelf) 
-            BattleEngine.Current.Result = Player.GetResult();
+        //if (BattleEngine.CurrentGameObject != null && BattleEngine.CurrentGameObject.activeSelf) 
+        if(_fight)
+            _fight.Result = Player.GetResult();
     }
 
     public void AddCreatureEQSlot(int creatureID)

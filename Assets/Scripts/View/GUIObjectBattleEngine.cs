@@ -7,6 +7,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public List<int> InputText;
     public float GUIDistance = 1.5f;
 
+    private Camera Camera { get { return ViewController.Singleton.Camera3D; } }
+
     private const string Prefab = "GUI/panel_battleui";
 
     public GameObject MonsterAContainer;
@@ -62,7 +64,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     void Update()
     {
         if (BattleEngine.CurrentGameObject == null || !BattleEngine.Current.Initialized || !BattleEngine.Current.Fighting) return;
-        Vector3 _camPos = BattleEngine.Current.Camera.transform.position;
+        Vector3 _camPos = Camera.transform.position;
         Vector3 _friendlyPos = BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position;
         Vector3 _enemyPos = BattleEngine.Current.EnemyCreature.transform.FindChild("GUIPos").transform.position;
         //MonsterAContainer.transform.position = (_friendlyPos - _camPos).normalized * GUIDistance + _camPos;
@@ -81,9 +83,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
             else
                 IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
             IndicatorOne.GetComponent<dfTweenVector3>().StartValue =
-                (BattleEngine.Current.FriendlyCreature.transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
+                (BattleEngine.Current.FriendlyCreature.transform.position - Camera.transform.position).normalized * GUIDistance + Camera.transform.position;
             IndicatorOne.GetComponent<dfTweenVector3>().EndValue =
-                (BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
+                (BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").transform.position - Camera.transform.position).normalized * GUIDistance + Camera.transform.position;
             IndicatorOne.GetComponent<dfTweenVector3>().Start();
 	    }
         else 
@@ -95,9 +97,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
             else
                 IndicatorTwo.GetComponent<dfLabel>().Text = damage + "HoT";
             IndicatorTwo.GetComponent<dfTweenVector3>().StartValue =
-                BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.position);
+                Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.position);
             IndicatorTwo.GetComponent<dfTweenVector3>().EndValue =
-                BattleEngine.Current.Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").position);
+                Camera.WorldToViewportPoint(BattleEngine.Current.FriendlyCreature.transform.FindChild("GUIPos").position);
             IndicatorTwo.GetComponent<dfTweenVector3>().Start();
 	    }
 	}

@@ -16,7 +16,7 @@ public class MonsterController : ActorControlls
 	public Vector3 StartPosition;
 
 	private Vector3 _target;
-	private Transform _battleCam;
+	//private Transform _battleCam;
 	private MonsterStats _monsterStats;
 
 	void Awake()
@@ -32,8 +32,8 @@ public class MonsterController : ActorControlls
 
 	void Update () 
 	{
-        if (_battleCam == null)
-            _battleCam = BattleEngine.Current.Camera.transform;
+        //if (_battleCam == null)
+          //  _battleCam = BattleEngine.Current.Camera.transform;
 
 		if(!AnimationFinished)
 		{
