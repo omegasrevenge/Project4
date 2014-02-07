@@ -279,11 +279,4 @@ public class BattleEngine : SceneRoot3D
             obj.transform.parent = root;
         return obj;
     }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        if (FriendlyCreature != null)
-            EndBattle();
-    }
 }
