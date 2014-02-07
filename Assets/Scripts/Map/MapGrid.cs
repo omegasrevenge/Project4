@@ -112,7 +112,15 @@ public class MapGrid : SceneRoot3D
         sprite = new RefCountedSprite();
         Dict.Add(new LRUSpriteDictionary.SpriteID(x, y), sprite);
         //AssetLoader.Loader.Enqueue(string.Format("http://mts1.google.com/vt/lyrs=m@245168067&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cp.il%3Atrue%7Cp.w%3A2.4%7Cp.h%3A%2300f6ff%7Cp.s%3A54%2Cs.t%3A6%7Cp.c%3A%23ff92c2d6&style=47,37%7Csmartmaps%20(256x256)", x, y, ZoomLevel), sprite.SetSprite);
-        AssetLoader.Loader.Enqueue(string.Format("http://mt1.googleapis.com/vt?lyrs=m@248009395&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cs.t%3A2&style=47,37%7Csmartmaps", x, y, ZoomLevel), sprite.SetSprite);
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+        {
+            AssetLoader.Loader.Enqueue(string.Format("http://mt0.googleapis.com/vt?lyrs=m@249474655&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cp.il%3Atrue%7Cp.h%3A%23ff3300%7Cp.l%3A-3%7Cp.g%3A0.88%7Cp.s%3A-49%2Cs.t%3A6%7Cp.c%3A%23ff9fa6b1%7Cp.l%3A19&style=47,37%7Csmartmaps", x, y, ZoomLevel), sprite.SetSprite);
+        }
+        else
+        {
+            AssetLoader.Loader.Enqueue(string.Format("http://mt1.googleapis.com/vt?lyrs=m@248009395&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cs.t%3A2&style=47,37%7Csmartmaps", x, y, ZoomLevel), sprite.SetSprite);
+        }
+        
         return sprite;
     }
 
