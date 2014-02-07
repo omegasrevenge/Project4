@@ -9,7 +9,7 @@ public class GUIObjectMarker : MonoBehaviour
     private const string Prefab = "GUI/panel_marker";
     private const string AgentStr           = "POIs/panel_agent";
     private const string BaseStr            = "POIs/panel_base";
-    private const string CooldownStr        = "POIs/panel_cooldown";
+    private const string CooldownStr        = "panel_cooldown";
     private const string HealStr            = "POIs/panel_healingspot";
     private const string InterferenceStr    = "POIs/panel_interference";
     private const string ResourceStr        = "POIs/panel_resource";
@@ -25,6 +25,8 @@ public class GUIObjectMarker : MonoBehaviour
     private Vector2 _pos;
     private Vector3 _scale;
     private ObjectOnMap[] _objectsOnMap;
+    [SerializeField]
+    private PoiMarkerCooldown[] _cooldowns;
     private bool _untouched;
 
     public static GUIObjectMarker Create(dfControl root, ObjectOnMap[] objects)
@@ -48,11 +50,18 @@ public class GUIObjectMarker : MonoBehaviour
         _root.Click += OnClickParent;
 
         _pos = new Vector2(Padding, Padding);
-
-        foreach (ObjectOnMap objectOnMap in objects)
+        _cooldowns = new PoiMarkerCooldown[objects.Length];
+        for (int i = 0; i < objects.Length; i++)
         {
-            dfControl control = CreateMarkerPanel(objectOnMap, Remove);
+            dfControl control = CreateMarkerPanel(objects[i], Remove);
             AddMarkerPanel(control);
+            Transform trans = control.transform.Find(CooldownStr);
+            Debug.Log(control.name);
+            if (trans)
+            {
+                _cooldowns[i] = trans.GetComponent<PoiMarkerCooldown>();
+            }
+            
         }
         _objectsOnMap = objects;
 
@@ -101,17 +110,14 @@ public class GUIObjectMarker : MonoBehaviour
             return CreateObjectOnMap(obj, path, hideCalback);
         }
         if (obj is BaseOnMap)
-        {
             return CreateObjectOnMap(obj, BaseStr, hideCalback);
-        }
         if (obj is Spectre)
-        {
             return CreateObjectOnMap(obj, SpectreStr, hideCalback);
-        }
         if (obj is HealStation)
-        {
             return CreateObjectOnMap(obj, HealStr, hideCalback);
-        }
+
+
+
         return null;
     }
 
@@ -123,6 +129,14 @@ public class GUIObjectMarker : MonoBehaviour
         {
             if (args.Used) return;
             args.Use();
+            if (objectOnMap.GetCooldownProgress() > 0)
+            {
+                SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                if (hideCallback != null)
+                    hideCallback();
+                return;
+            }
+
             SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
             if (hideCallback != null)
                 hideCallback();
@@ -143,11 +157,19 @@ public class GUIObjectMarker : MonoBehaviour
             return;
         }
 
+
+
         Vector3 posOnMap = Vector3.zero;
         if (_objectsOnMap.Length > 0)
         {
-            foreach (ObjectOnMap objOnMap in _objectsOnMap)
+            for (int i = 0; i < _objectsOnMap.Length; i++)
+            {
+                ObjectOnMap objOnMap = _objectsOnMap[i];
                 posOnMap += objOnMap.transform.position;
+
+                if(_cooldowns[i])
+                    _cooldowns[i].SetCooldown(objOnMap.GetCooldownProgress(),objOnMap.GetCooldownString());
+            }
             posOnMap /= _objectsOnMap.Length;
         }
 

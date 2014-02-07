@@ -20,15 +20,24 @@ public class POI
     public string Name;
     public Vector2 Position;
     public int RespawnInMinutes;
-	private bool _canFarm;
+	//private bool _canFarm;
 	public DateTime NextFarm;
     public string ResourceType;
     public string RealType;
     public PointOfInterest View;
 
-    public bool CanFarm { get{ return _canFarm || DateTime.Now > NextFarm;}}
-    public float CooldownInSeconds{get {return Mathf.Max(0f,(float)(NextFarm-DateTime.Now).TotalSeconds);}}
-    public float CooldownInPercent{get {return CooldownInSeconds/(RespawnInMinutes*60f);}}
+    public bool CanFarm { get { return GameManager.Singleton.GetServerTime() > NextFarm; } }
+    public float CooldownInSeconds{get {return Mathf.Max(0f,(float)(NextFarm-GameManager.Singleton.GetServerTime()).TotalSeconds);}}
+
+    public float CooldownInPercent
+    {
+        get
+        {
+            if (RespawnInMinutes == 0)
+                return 0;
+            return CooldownInSeconds/(RespawnInMinutes*60f);
+        }
+    }
 
     public string GetCooldownString()
     {
@@ -48,7 +57,7 @@ public class POI
         poi.RespawnInMinutes = (int)json["Respawn"];
         poi.ResourceType = (string)json["Rsc"];
         poi.RealType = (string)json["Type"];
-		poi._canFarm = (bool)json["CanFarm"];
+		//poi._canFarm = (bool)json["CanFarm"];
 		poi.NextFarm = (DateTime)json["NextFarm"];
 		//Debug.Log ("CanFarm:"+poi.CanFarm+" NextFarm:"+poi.NextFarm);
         return poi;

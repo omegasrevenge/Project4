@@ -76,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0999984741, y: -.0809707642, z: 0}
+  m_LocalPosition: {x: .100000001, y: -.0809692368, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0172119141, y: -.0179367065, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -202,7 +202,7 @@ MonoBehaviour:
       right: 16
       bottom: 28.1796875
     owner: {fileID: 11400000}
-  renderOrder: 8
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc6262415c18db44bcb28d58fd706ac, type: 3}
+  m_Script: {fileID: 11500000, guid: bf07bde885d14aa47b447b721ee6c9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11400004
@@ -256,12 +256,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 526
     margins:
-      left: 11.015625
-      top: 11.4804688
-      right: 10.984375
-      bottom: 60.5195312
+      left: 0
+      top: -0
+      right: 0
+      bottom: 0
     owner: {fileID: 11400004}
-  renderOrder: 6
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -312,7 +312,7 @@ MonoBehaviour:
       right: 10
       bottom: -3
     owner: {fileID: 11400006}
-  renderOrder: 9
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -393,7 +393,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400008}
-  renderOrder: 7
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}

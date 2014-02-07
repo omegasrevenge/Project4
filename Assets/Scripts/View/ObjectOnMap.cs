@@ -28,4 +28,14 @@ public abstract class ObjectOnMap:TouchObject
     {
         Enabled = false;
     }
+
+    public virtual float GetCooldownProgress()
+    {
+        return 0;
+    }
+
+    public virtual string GetCooldownString()
+    {
+        return "00:00:00";
+    }
 }

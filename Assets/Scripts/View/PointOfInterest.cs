@@ -73,4 +73,14 @@ public class PointOfInterest : ObjectOnMap
     {
         GameManager.Singleton.PoiFarm(Poi);
     }
+
+    public override float GetCooldownProgress()
+    {
+        return Poi.CooldownInPercent;
+    }
+
+    public override string GetCooldownString()
+    {
+        return Poi.GetCooldownString();
+    }
 }
