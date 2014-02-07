@@ -225,6 +225,7 @@ public class GameManager : MonoBehaviour
                 {
                     _map = Map.Create();
                     _map.AttachGUI(_view.AddMapUI());
+                    _map.SetCreatureInfo(Player.CurCreature);
                 }
                 _view.Switch3DSceneRoot(_map);
                 break;
@@ -350,6 +351,11 @@ public class GameManager : MonoBehaviour
     public void ReadPlayerJSON(JSONObject jsonPlayer)
     {
         Player.ReadJson(jsonPlayer);
+        if (Player.CurCreature != null  && _map)
+        {
+            _map.SetCreatureInfo(Player.CurCreature);
+        }
+
         if (Player.CurCreature != null && _allOwnCreatures != null)
         {
             for (int i = 0; i < _allOwnCreatures.Count; i++)

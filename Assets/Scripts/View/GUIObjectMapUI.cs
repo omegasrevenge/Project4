@@ -27,6 +27,8 @@ public class GUIObjectMapUI : MonoBehaviour
     {
         if (!_creatureInfo)
             _creatureInfo = GUIObjectCreatureInfo.Create(_root, creature);
+        else
+            _creatureInfo.SetCreature(creature);
 
     }
 }

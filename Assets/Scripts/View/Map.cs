@@ -176,4 +176,9 @@ public class Map : SceneRoot3D
         }
     }
 
+    public void SetCreatureInfo(Creature creature)
+    {
+        View.SetCreatureInfo(creature);
+    }
+
 }
