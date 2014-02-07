@@ -114,6 +114,9 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
         Social.localUser.Authenticate(OnAuthCB);
+#else
+		PlayerID=PlayerPrefs.GetString("PlayerID");
+		Password=PlayerPrefs.GetString("Password");
 #endif
     }
 
@@ -1073,8 +1076,6 @@ public class GameManager : MonoBehaviour
 
     void OnGUI()
     {
-
-
         if (!LoggedIn)
         {
             PlayerID = GUI.TextField(new Rect(10, 10, 200, 20), PlayerID, 100);
@@ -1082,12 +1083,16 @@ public class GameManager : MonoBehaviour
             if (GUI.Button(new Rect(10, 70, 100, 20), "Login"))
             {
                 Login(PlayerID, Password, false, OnPlayerLoaded);
+				PlayerPrefs.SetString("PlayerID",PlayerID);
+				PlayerPrefs.SetString("Password",Password);
             }
 
             if (GUI.Button(new Rect(210, 70, 100, 20), " >>> Local <<<"))
             {
                 Login(PlayerID, Password, true, OnPlayerLoaded);
-            }
+				PlayerPrefs.SetString("PlayerID",PlayerID);
+				PlayerPrefs.SetString("Password",Password);
+			}
         }
 
     }
