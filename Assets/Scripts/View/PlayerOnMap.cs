@@ -19,7 +19,11 @@ public class PlayerOnMap : ObjectOnMap
     public static PlayerOnMap Create(Player player, MapGrid grid, Transform root)
     {
         PlayerOnMap playerOnMap;
-        GameObject obj = (GameObject)Instantiate(Resources.Load<GameObject>(PrefabVengea));
+        GameObject obj;
+        if (player.CurrentFaction == Player.Faction.NCE)
+            obj = (GameObject)Instantiate(Resources.Load<GameObject>(PrefabNCE));
+        else
+            obj = (GameObject)Instantiate(Resources.Load<GameObject>(PrefabVengea));
         playerOnMap = obj.GetComponent<PlayerOnMap>();
         playerOnMap.transform.parent = root;
         playerOnMap.gameObject.name = "player_" + player.Name;
