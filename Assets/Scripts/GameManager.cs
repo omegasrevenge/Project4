@@ -991,41 +991,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void UpdateAllOwnCreatures(JSONObject json)
-    {
-        foreach (Creature curCreature in AllOwnCreatures)
-        {
-            if (curCreature.CreatureID == (int)json["CId"])
-            {
-                curCreature.HP = (int)json["HP"];
-                curCreature.HPMax = (int)json["HPMax"];
-                curCreature.Damage = (int)json["Damage"];
-                curCreature.Defense = (int)json["Defense"];
-                curCreature.Dexterity = (int)json["Dexterity"];
-                curCreature.Skillpoints = (int)json["Skillpoints"];
-                curCreature.slots = new Creature.Slot[json["Slots"].Count];
-
-                JSONObject jsonSlots = json["Slots"];
-
-                for (int i = 0; i < json["Slots"].Count; i++)
-                {
-
-                    curCreature.slots[i] = new Creature.Slot()
-                    {
-                        fire = (int)jsonSlots[i]["Element0"],
-                        energy = (int)jsonSlots[i]["Element1"],
-                        nature = (int)jsonSlots[i]["Element2"],
-                        water = (int)jsonSlots[i]["Element3"],
-                        storm = (int)jsonSlots[i]["Element4"],
-                        driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
-                        driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"] * 100),
-                        driodenLevel = (int)jsonSlots[i]["EquipLevel"],
-                        slotId = (int)jsonSlots[i]["SlotId"]
-                    };
-                }
-            }
-        }
-    }
+	private void UpdateAllOwnCreatures(JSONObject json)
+	{
+		int CId=(int)json["CId"];
+		if (Player.CurCreature.CreatureID==CId) {Player.CurCreature.ReadJson(json);};
+		
+		foreach (Creature curCreature in AllOwnCreatures)
+		{
+			if (curCreature.CreatureID == CId) curCreature.ReadJson(json);
+		}
+	}
 
     #region GUI methods
 
