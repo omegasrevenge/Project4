@@ -38,6 +38,7 @@ public class BattleEngine : SceneRoot3D
     private List<FightRoundResult> _results;
     private GameObject _actor;
     private float _counter;
+    private bool _enactEndScreen = false;
     private GameObject _gg;
     private bool _initialized = false;
     //########## private #########
@@ -114,7 +115,7 @@ public class BattleEngine : SceneRoot3D
     }
     //########## getter ##################################################################
 
-    public static BattleEngine Create(BattleInit serverInfo) // <----------- this starts the battle
+    public static BattleEngine Create(BattleInit serverInfo)
     {
         CurrentGameObject = CreateObject(null, DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
         return CurrentGameObject.GetComponent<BattleEngine>();
@@ -122,11 +123,11 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
+        _counter = 0f;
         Turn = GameManager.Singleton.Player.CurFight.Round;
 		_results = new List<FightRoundResult>();
 		ServerInfo = serverInfo;
-        if (!View.Initialized) 
-            View.Init();
+        View.Init();
         InitCreatures(serverInfo);
         CurrentPlayer = serverInfo.FirstTurnIsPlayer;
         if (RenderSettings.fog) RenderSettings.fog = false;
@@ -138,8 +139,8 @@ public class BattleEngine : SceneRoot3D
         if (!Fighting)
             enforceEnd();
 
-        if (GetTurnState == _currentStatus) return;
-        _currentStatus = GetTurnState;
+        if (GetTurnState == _currentStatus || _enactEndScreen) return;
+        _currentStatus = GetTurnState; 
         switch (GetTurnState)
         {
             case TurnState.Wait:
@@ -150,8 +151,11 @@ public class BattleEngine : SceneRoot3D
                 break;
             case TurnState.Hit:
                 executeSkill();
+                if (!Fighting)
+                    _enactEndScreen = true;
                 break;
         }
+
     }
 
     private void enforceEnd()
@@ -159,13 +163,7 @@ public class BattleEngine : SceneRoot3D
         _counter += Time.deltaTime;
 
         if (_counter >= 3f)
-            Camera.transform.FindChild("GGScreen").gameObject.SetActive(true);
-
-        if (_counter >= 8f)
-        {
-            EndBattle();
-            GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
-        }
+            View.GGContainer.Show();
     }
 
     private void turnInit()
@@ -264,8 +262,9 @@ public class BattleEngine : SceneRoot3D
 
     public void EndBattle()
     {
+        _enactEndScreen = false;
         _results.Clear();
-        Camera.transform.FindChild("GGScreen").gameObject.SetActive(false);
+        View.GGContainer.Hide();
         if (!RenderSettings.fog)
             RenderSettings.fog = true;
         Destroy(FriendlyCreature);
