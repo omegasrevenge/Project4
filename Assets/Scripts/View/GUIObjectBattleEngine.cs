@@ -14,8 +14,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public GameObject MonsterAContainer;
     public GameObject MonsterBContainer;
-    public GameObject MonsterAElement;
-    public GameObject MonsterBElement;
     public GameObject MonsterALevel;
     public GameObject MonsterBLevel;
     public GameObject MonsterAName;
@@ -38,8 +36,11 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public dfSprite MonsterBHot;
     public dfSprite MonsterABuff;
     public dfSprite MonsterBBuff;
+    public dfSprite MonsterAElement;
+    public dfSprite MonsterBElement;
     public List<dfSprite> ComboIndicators;
-    public List<dfButton> DriodSlots; 
+    public List<dfButton> DriodSlots;
+    public List<dfButton> Driods; 
 
     public bool Initialized
     {
@@ -79,14 +80,18 @@ public class GUIObjectBattleEngine : MonoBehaviour
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_12").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_13").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_23").GetComponent<dfSprite>());
+        Driods.Add(DriodContainer.transform.FindChild("Driod1").GetComponent<dfButton>());
+        Driods.Add(DriodContainer.transform.FindChild("Driod2").GetComponent<dfButton>());
+        Driods.Add(DriodContainer.transform.FindChild("Driod3").GetComponent<dfButton>());
+        Driods.Add(DriodContainer.transform.FindChild("Driod4").GetComponent<dfButton>());
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
         IndicatorOne = transform.FindChild("HappenstanceIndicator1").gameObject;
         IndicatorTwo = transform.FindChild("HappenstanceIndicator2").gameObject;
         IndicatorThree = transform.FindChild("HappenstanceIndicator3").gameObject;
         IndicatorFour = transform.FindChild("HappenstanceIndicator4").gameObject;
-        MonsterAElement = MonsterAContainer.transform.FindChild("MonsterElement").gameObject;
-        MonsterBElement = MonsterBContainer.transform.FindChild("MonsterElement").gameObject;
+        MonsterAElement = MonsterAContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
+        MonsterBElement = MonsterBContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
         MonsterALevel = MonsterAContainer.transform.FindChild("BG_MonsterLevel").FindChild("MonsterLevel").gameObject;
         MonsterBLevel = MonsterBContainer.transform.FindChild("BG_MonsterLevel").FindChild("MonsterLevel").gameObject;
         MonsterAName = MonsterAContainer.transform.FindChild("MonsterName").gameObject;
@@ -107,6 +112,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void Init()
     {
+        UpdateStatusAilments();
+        UpdateMonsterElements();
+        UpdateButtons();
         UpdateFaction();
         GGContainer.Hide();
         DeleteSelection();
@@ -125,6 +133,134 @@ public class GUIObjectBattleEngine : MonoBehaviour
             return;
 
         UpdateSelection();
+    }
+
+    public void CreateDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
+    {
+        if (target == BattleEngine.Current.FriendlyCreature)
+        {
+            if (!heal)
+                IndicatorOne.GetComponent<dfLabel>().Text =
+                    damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
+            else
+                IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
+            Vector3 startPos =
+                (BattleEngine.Current.FriendlyCreature.transform.position -
+                 BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
+                BattleEngine.Current.Camera.transform.position;
+            IndicatorOne.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f));
+        }
+        else
+            if (target == BattleEngine.Current.EnemyCreature)
+            {
+                if (!heal)
+                    IndicatorTwo.GetComponent<dfLabel>().Text =
+                        damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
+                else
+                    IndicatorTwo.GetComponent<dfLabel>().Text = damage + "HoT";
+                Vector3 startPos =
+                    (BattleEngine.Current.EnemyCreature.transform.position -
+                     BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
+                    BattleEngine.Current.Camera.transform.position;
+                IndicatorTwo.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f));
+            }
+        UpdateHealth();
+        UpdateStatusAilments();
+        UpdateButtons();
+    }
+
+    public void UpdateMonsterElements()
+    {
+        switch (GameManager.Singleton.Player.CurCreature.BaseElement)
+        {
+            case BattleEngine.ResourceElement.None:
+                MonsterAElement.Hide();
+                break;
+
+            case BattleEngine.ResourceElement.Energy:
+                MonsterAElement.SpriteName = "spectre_stats_element_energy";
+                break;
+
+            case BattleEngine.ResourceElement.Fire:
+                MonsterAElement.SpriteName = "spectre_stats_element_fire";
+                break;
+
+            case BattleEngine.ResourceElement.Nature:
+                MonsterAElement.SpriteName = "spectre_stats_element_life";
+                break;
+
+            case BattleEngine.ResourceElement.Storm:
+                MonsterAElement.SpriteName = "spectre_stats_element_storm";
+                break;
+
+            case BattleEngine.ResourceElement.Water:
+                MonsterAElement.SpriteName = "spectre_stats_element_water";
+                break;
+        }
+        switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
+        {
+            case BattleEngine.ResourceElement.None:
+                MonsterBElement.Hide();
+                break;
+
+            case BattleEngine.ResourceElement.Energy:
+                MonsterBElement.SpriteName = "spectre_stats_element_energy";
+                break;
+
+            case BattleEngine.ResourceElement.Fire:
+                MonsterBElement.SpriteName = "spectre_stats_element_fire";
+                break;
+
+            case BattleEngine.ResourceElement.Nature:
+                MonsterBElement.SpriteName = "spectre_stats_element_life";
+                break;
+
+            case BattleEngine.ResourceElement.Storm:
+                MonsterBElement.SpriteName = "spectre_stats_element_storm";
+                break;
+
+            case BattleEngine.ResourceElement.Water:
+                MonsterBElement.SpriteName = "spectre_stats_element_water";
+                break;
+        }
+    }
+
+    public void UpdateButtons()
+    {
+        for (int i = 0; i < Driods.Count; i++)
+        {
+            if (GameManager.Singleton.Player.CurCreature.slots.Length > i)
+            {
+                Driods[i].Show();
+                switch (GameManager.Singleton.Player.CurCreature.slots[i].driodenElement)
+                {
+                    case BattleEngine.ResourceElement.None:
+                        Driods[i].Hide();
+                        break;
+
+                    case BattleEngine.ResourceElement.Energy:
+                        Driods[i].BackgroundSprite = "combat_driod_energy";
+                        break;
+
+                    case BattleEngine.ResourceElement.Fire:
+                        Driods[i].BackgroundSprite = "combat_driod_fire";
+                        break;
+
+                    case BattleEngine.ResourceElement.Nature:
+                        Driods[i].BackgroundSprite = "combat_driod_life";
+                        break;
+
+                    case BattleEngine.ResourceElement.Storm:
+                        Driods[i].BackgroundSprite = "combat_driod_storm";
+                        break;
+
+                    case BattleEngine.ResourceElement.Water:
+                        Driods[i].BackgroundSprite = "combat_driod_water";
+                        break;
+                }
+            }
+            else Driods[i].Hide();
+        }
     }
 
     public void KillBattle()
@@ -212,49 +348,45 @@ public class GUIObjectBattleEngine : MonoBehaviour
         else MonsterBBuff.Hide();
     }
 
-    public void CreateDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
-	{
-	    if (target == BattleEngine.Current.FriendlyCreature)
-        {
-            if (!heal)
-                IndicatorOne.GetComponent<dfLabel>().Text =
-                    damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
-            else
-                IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
-            Vector3 startPos =
-                (BattleEngine.Current.FriendlyCreature.transform.position -
-                 BattleEngine.Current.Camera.transform.position).normalized*GUIDistance +
-                BattleEngine.Current.Camera.transform.position;
-            IndicatorOne.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed*Time.deltaTime, 0f));
-	    }
-        else 
-        if (target == BattleEngine.Current.EnemyCreature)
-        {
-            if (!heal)
-                IndicatorTwo.GetComponent<dfLabel>().Text =
-                    damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
-            else
-                IndicatorTwo.GetComponent<dfLabel>().Text = damage + "HoT";
-            Vector3 startPos =
-                (BattleEngine.Current.EnemyCreature.transform.position -
-                 BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
-                BattleEngine.Current.Camera.transform.position;
-            IndicatorTwo.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed*Time.deltaTime, 0f));
-        }
-        UpdateHealth();
-        UpdateStatusAilments();
-    }
-
     public void UpdateHealth()
     {
-        MonsterAHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurCreature.HP + "/" + GameManager.Singleton.Player.CurCreature.HPMax;
-        MonsterAHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurCreature.HP / GameManager.Singleton.Player.CurCreature.HPMax;
-        MonsterBHealthText.GetComponent<dfLabel>().Text = GameManager.Singleton.Player.CurFight.EnemyCreature.HP + "/" + GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
-        MonsterBHealth.GetComponent<dfProgressBar>().Value = (float)GameManager.Singleton.Player.CurFight.EnemyCreature.HP / GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
+        int friendlyHP = GameManager.Singleton.Player.CurCreature.HP;
+        int friendlyMaxHP = GameManager.Singleton.Player.CurCreature.HPMax;
+        int enemyHP = GameManager.Singleton.Player.CurFight.EnemyCreature.HP;
+        int enemyMaxHP = GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
+
+        if (friendlyHP > 0)
+        {
+            MonsterAHealthText.GetComponent<dfLabel>().Text =
+                friendlyHP + "/" + friendlyMaxHP;
+            MonsterAHealth.GetComponent<dfProgressBar>().Value = 
+                (float)friendlyHP / friendlyMaxHP;
+        }
+        else
+        {
+            MonsterAHealthText.GetComponent<dfLabel>().Text = "0/" + friendlyMaxHP;
+            MonsterAHealth.GetComponent<dfProgressBar>().Value = 0;
+        }
+
+        if (enemyHP > 0)
+        {
+            MonsterBHealthText.GetComponent<dfLabel>().Text =
+                enemyHP + "/" + enemyMaxHP;
+            MonsterBHealth.GetComponent<dfProgressBar>().Value =
+                (float)enemyHP / enemyMaxHP;
+        }
+        else
+        {
+            MonsterBHealthText.GetComponent<dfLabel>().Text = "0/" + enemyMaxHP;
+            MonsterBHealth.GetComponent<dfProgressBar>().Value = 0;
+        }
+
     }
 
     private void buttonKlick(int driod)
     {
+        if (GameManager.Singleton.Player.CurCreature.slots.Length-1 < driod) return;
+
         if (InputText.Count > 0 && InputText[InputText.Count - 1] == driod)
         {
             InputText.Remove(driod);
