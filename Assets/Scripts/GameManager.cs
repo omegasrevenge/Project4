@@ -370,6 +370,53 @@ public class GameManager : MonoBehaviour
         if(_fight)
             _fight.Result = Player.GetResult();
     }
+	public void CreateCreature(int element, Action<bool, string> callback)
+	{
+		StartCoroutine(CCreateCreature(element, callback));
+	}
+
+	private IEnumerator CCreateCreature(int element, Action<bool, string> callback)
+	{
+		WWW request = new WWW(GetSessionURL("crcr") + "&element=" + element);
+
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json))
+		{
+			if (callback != null)
+				callback(false, (string)json["error"]);
+			yield break;
+		}
+		if (callback != null)
+			callback(true, "");
+
+		GetOwnPlayer();
+	}
+
+	public void NameCreature(int creatureID, string name, Action<bool, string> callback)
+	{
+		StartCoroutine(CNameCreature(creatureID, name, callback));
+	}
+
+	private IEnumerator CNameCreature(int creatureID, string name, Action<bool, string> callback)
+	{
+		WWW request = new WWW(GetSessionURL("namecr") + "&cid=" + creatureID + "&name=" + name);
+
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		if (!CheckResult(json))
+		{
+			if (callback != null)
+				callback(false, (string)json["error"]);
+			yield break;
+		}
+		if (callback != null)
+			callback(true, "");
+
+		GetOwnPlayer();
+	}
 
     public void AddCreatureEQSlot(int creatureID)
     {
@@ -982,6 +1029,12 @@ public class GameManager : MonoBehaviour
                 case (0):
                     GUIStartIRISinstructions();
                     break;
+				case(1):
+					GUIShowSpectreChoice();
+					break;
+				case (2):
+					GUIShowSpectreName();
+					break;
                 default:
                     SwitchGameMode(GameMode.Map);
                     break;
@@ -1032,16 +1085,61 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log(error);
-
-
-
     }
 
     public void GUIShowSpectreChoice()
     {
-        SwitchGameMode(GameMode.Map);
+		_view.AddMaxScreen(GUIObjectChooseElement.Create("screen_chooseelement_title", "screen_chooseelement_text", GUISubmitElement));
+		var irisPopUp = _view.AddIrisPopup("iris_04_01_text", "iris_04_01");
+		irisPopUp.StartCallback = delegate { irisPopUp.AddIrisPopup("iris_04_02_text", "iris_04_02"); };
     }
 
+	public void GUISubmitElement(int element)
+	{
+		CreateCreature(element, GUIElementSubmitted);
+	}
+
+	public void GUIElementSubmitted(bool result, string error)
+	{
+		if (result)
+		{
+			SetInitSteps(2);
+			_view.AddIrisPopup("iris_04_03_text", "iris_04_03").Callback = GUIShowSpectreName;
+			return;
+		}
+		Debug.Log(error);
+	}
+
+	public void GUIShowSpectreName()
+	{
+		_view.AddMaxScreen(GUIObjectMonsterNameInput.Create(
+					"screen_monsterentername_title",
+					"screen_monsterentername_text",
+					"continue", "default_monstername",
+					Player.CurCreature,
+					GUISubmitSpectreName));
+	}
+
+	public void GUISubmitSpectreName(string monsterName)
+	{
+		NameCreature(Player.CurCreature.CreatureID, monsterName, GUISpectreNameSubmitted);
+		
+	}
+
+	public void GUISpectreNameSubmitted(bool result, string error)
+	{
+		if (result)
+		{
+			_view.AddIrisPopup("iris_04_04_text", "iris_04_04").Callback = () =>
+			{
+				SetInitSteps(3);
+				_view.RemoveMaxScreen();
+				SwitchGameMode(GameMode.Map);
+			};
+			return;
+		}
+		Debug.Log(error);
+	}
 
     #endregion
 

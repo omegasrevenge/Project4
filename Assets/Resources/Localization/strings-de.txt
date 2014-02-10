@@ -6,6 +6,8 @@
 	continue:			"Weiter",
 	
 	default_name:		"Nutzername",
+
+	default_monstername:		"Specter",
 	
 loadingscreen_login:
 "Verbinde mit Server ...",
@@ -18,7 +20,19 @@ screen_entername_title:
 
 screen_entername_text:
 "Bitte wählen Sie einen Nutzernamen. Dieser wird auch anderen VENGEA Agents angezeigt.",
+
+screen_chooseelement_title:
+"Element",
+
+screen_chooseelement_text:
+"Bitte wählen Sie das Element ihres Specters.",
 	
+screen_monsterentername_title:
+"Ihr Specter",
+
+screen_monsterentername_text:
+"Bitte wählen Sie eine Namen fuer ihrne Specter.",
+
 iris_01_text: 	
 "Willkommen Agent,
 Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",

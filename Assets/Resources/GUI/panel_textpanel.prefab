@@ -11,6 +11,7 @@ GameObject:
   - 65: {fileID: 6500004}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: panel_textpanel
   m_TagString: Untagged
@@ -123,6 +124,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .859375, y: .201562509, z: .00100000005}
   m_Center: {x: .4296875, y: -.100781254, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd31c80e0a242804ba3c8d52c61a1e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Buttons: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

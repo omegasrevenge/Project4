@@ -6,6 +6,8 @@
 	continue:			"Continue",
 	
 	default_name:		"Username",
+
+	default_monstername:		"Specter",
 	
 loadingscreen_login:
 "Connecting to server ...",
@@ -15,6 +17,18 @@ loadingscreen_submitName:
 
 screen_entername_title:
 "Your profile",
+
+screen_chooseelement_title:
+"Element",
+
+screen_chooseelement_text:
+"Choose the Elemten of your Specter.",
+
+screen_monsterentername_title:
+"Your Specter",
+
+screen_monsterentername_text:
+"",
 
 screen_entername_text:
 "Please choose a username. It will be visible for other VENGEA agents.",
