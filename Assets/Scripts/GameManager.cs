@@ -879,12 +879,6 @@ public class GameManager : MonoBehaviour
             SwitchGameMode(GameMode.Login);
             return false;
         }
-        if (sErr == "invalid_fight")
-        {
-            SwitchGameMode(GameMode.Map);
-            return false;
-        }
-
         return false;
     }
 
