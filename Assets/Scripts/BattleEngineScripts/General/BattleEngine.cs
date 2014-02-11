@@ -202,7 +202,6 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
-        //txtIndicator.Text = damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
         GameObject target = FriendlyCreature;
         GameObject caster = EnemyCreature;
         if (CurrentPlayer == FightRoundResult.Player.A)
@@ -236,8 +235,6 @@ public class BattleEngine : SceneRoot3D
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Confusion!", 0));
         if (Result.BuffA && !View.MonsterABuff.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Buffed!", 0));
-        if (Result.BuffB && !View.MonsterBBuff.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Buffed!", 0));
         if (Result.BuffB && !View.MonsterBBuff.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Buffed!", 0));
 

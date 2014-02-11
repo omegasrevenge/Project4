@@ -27,7 +27,7 @@ public class Creature
 		public int water;
 		public int storm;
         public BattleEngine.ResourceElement driodenElement;
-		public int driodenHealth;
+		public float driodenHealth;
 		public int driodenLevel;
 		public int slotId;
 	}
@@ -67,7 +67,7 @@ public class Creature
 			    water = (int) jsonSlots[i]["Element3"],
 			    storm = (int) jsonSlots[i]["Element4"],
                 driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
-			    driodenHealth = (int)((float)jsonSlots[i]["EquipHealth"]*100),
+			    driodenHealth = (float)jsonSlots[i]["EquipHealth"],
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"],
 				slotId = (int)jsonSlots[i]["SlotId"]
 		    };

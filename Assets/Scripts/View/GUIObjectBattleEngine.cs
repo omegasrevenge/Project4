@@ -38,7 +38,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public List<dfSprite> ComboIndicators;
     public List<dfButton> DriodSlots;
     public List<dfButton> Driods;
-    public List<dfLabel> TxtIndicators; 
+    public List<dfLabel> TxtIndicators;
+    public List<dfSprite> DriodsHealth; 
 
     public bool Initialized
     {
@@ -85,6 +86,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Awake()
     {
+        DriodsHealth = new List<dfSprite>();
         TxtIndicators = new List<dfLabel>();
         InputText = new List<int>();
         ComboIndicators = new List<dfSprite>();
@@ -105,6 +107,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
         Driods.Add(DriodContainer.transform.FindChild("Driod2").GetComponent<dfButton>());
         Driods.Add(DriodContainer.transform.FindChild("Driod3").GetComponent<dfButton>());
         Driods.Add(DriodContainer.transform.FindChild("Driod4").GetComponent<dfButton>());
+        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod1").GetComponent<dfSprite>());
+        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod2").GetComponent<dfSprite>());
+        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod3").GetComponent<dfSprite>());
+        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod4").GetComponent<dfSprite>());
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
         TxtIndicators.Add(transform.FindChild("HappenstanceIndicator1").GetComponent<dfLabel>());
@@ -135,9 +141,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void Init()
     {
-        UpdateStatusAilments();
         UpdateMonsterElements();
-        UpdateButtons();
         UpdateFaction();
         GGContainer.Hide();
         DeleteSelection();
@@ -145,7 +149,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBLevel.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBLevel.ToString();
         MonsterAName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterAName;
         MonsterBName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBName;
-        UpdateHealth();
+		UpdateVisualsOnSkillHit ();
     }
 
     void Update()
@@ -160,7 +164,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void ShowDamageIndicators(List<IndicatorContent> info)
     {
-
         if (info.Count > TxtIndicators.Count)
         {
             Debug.LogError("More than " + TxtIndicators.Count + " Happenstance Indicators? " + info.Count + " are too many.");
@@ -188,9 +191,20 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateVisualsOnSkillHit()
     {
+        UpdateDriodHealth();
         UpdateHealth();
         UpdateStatusAilments();
         UpdateButtons();
+    }
+
+    public void UpdateDriodHealth()
+    {
+        for (int i = 0; i < DriodsHealth.Count; i++)
+        {
+            if (!Driods[i].IsVisible) continue;
+
+            DriodsHealth[i].FillAmount = 0.57f + GameManager.Singleton.Player.CurCreature.slots[i].driodenHealth * 0.36f;
+        }
     }
 
     public void UpdateMonsterElements()
@@ -346,28 +360,29 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateStatusAilments()
     {
-        if (GameManager.Singleton.Player.CurFight.FighterAConfused)
+        if (BattleEngine.Current.Result == null) return;
+        if (BattleEngine.Current.Result.ConA)
             MonsterACon.Show();
         else MonsterACon.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterBConfused)
+        if (BattleEngine.Current.Result.ConB)
             MonsterBCon.Show();
         else MonsterBCon.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterABurning)
+        if (BattleEngine.Current.Result.DotA)
             MonsterADot.Show();
         else MonsterADot.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterBBurning)
+        if (BattleEngine.Current.Result.DotB)
             MonsterBDot.Show();
         else MonsterBDot.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterARegen)
+        if (BattleEngine.Current.Result.HotA)
             MonsterAHot.Show();
         else MonsterAHot.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterBRegen)
+        if (BattleEngine.Current.Result.HotB)
             MonsterBHot.Show();
         else MonsterBHot.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterABuffed)
+        if (BattleEngine.Current.Result.BuffA)
             MonsterABuff.Show();
         else MonsterABuff.Hide();
-        if (GameManager.Singleton.Player.CurFight.FighterBBuffed)
+        if (BattleEngine.Current.Result.BuffB)
             MonsterBBuff.Show();
         else MonsterBBuff.Hide();
     }

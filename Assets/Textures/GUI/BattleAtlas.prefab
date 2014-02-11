@@ -43,7 +43,7 @@ MonoBehaviour:
   - name: combat_catch_nce
     region:
       serializedVersion: 2
-      x: .183105469
+      x: .219726562
       y: .481933594
       width: .0173339844
       height: .03515625
@@ -60,7 +60,7 @@ MonoBehaviour:
   - name: combat_catch_vengea
     region:
       serializedVersion: 2
-      x: .200927734
+      x: .237548828
       y: .481933594
       width: .0173339844
       height: .03515625
@@ -247,7 +247,7 @@ MonoBehaviour:
   - name: combat_flee_nce
     region:
       serializedVersion: 2
-      x: .21875
+      x: .255371094
       y: .481933594
       width: .0173339844
       height: .03515625
@@ -264,7 +264,7 @@ MonoBehaviour:
   - name: combat_flee_vengea
     region:
       serializedVersion: 2
-      x: .236572266
+      x: .273193359
       y: .481933594
       width: .0173339844
       height: .03515625
@@ -1228,6 +1228,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 148, y: 160}
     textureGUID: 45f359e6eb62b3a44a57c3fb70f08f43
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_slot_status_filled
+    region:
+      serializedVersion: 2
+      x: .183105469
+      y: .481933594
+      width: .0361328125
+      height: .078125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 148, y: 160}
+    textureGUID: abe3ce9c2afcca3429a93705cbf3c1ee
     deleted: 0
     texture: {fileID: 0}
   - name: connection_nce_1to2
