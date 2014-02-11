@@ -39,7 +39,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public List<dfButton> DriodSlots;
     public List<dfButton> Driods;
     public List<dfLabel> TxtIndicators;
-    public List<dfSprite> DriodsHealth; 
+    public List<dfSprite> DriodsHealth;
+    public List<List<BattleEngine.ResourceElement>> DriodImprint;
+    public List<List<dfPanel>> DriodImprintVisuals;
 
     public bool Initialized
     {
@@ -86,6 +88,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Awake()
     {
+        DriodImprint = new List<List<BattleEngine.ResourceElement>>();
+        DriodImprintVisuals = new List<List<dfPanel>>();
         DriodsHealth = new List<dfSprite>();
         TxtIndicators = new List<dfLabel>();
         InputText = new List<int>();
@@ -137,6 +141,17 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBHot = MonsterBContainer.transform.FindChild("HotIndicator").GetComponent<dfSprite>();
         MonsterABuff = MonsterAContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
         MonsterBBuff = MonsterBContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
+        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+            DriodImprint.Add(new List<BattleEngine.ResourceElement>());
+        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+        {
+            DriodImprintVisuals.Add(new List<dfPanel>());
+            for (int j = 0; j < 10; j++)
+            {
+                DriodImprintVisuals[i].Add(DriodSlots[i].transform.FindChild("Imprint" + (j + 1)).GetComponent<dfPanel>());
+                DriodImprintVisuals[i][j].Hide();
+            }
+        }
     }
 
     public void Init()
@@ -150,6 +165,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterAName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterAName;
         MonsterBName.GetComponent<dfLabel>().Text = BattleEngine.Current.ServerInfo.MonsterBName;
 		UpdateVisualsOnSkillHit ();
+        UpdateImprints();
     }
 
     void Update()
@@ -197,9 +213,63 @@ public class GUIObjectBattleEngine : MonoBehaviour
         UpdateButtons();
     }
 
+    public void UpdateImprints()
+    {
+
+        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+        {
+            DriodImprint[i].Clear();
+            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].fire; j++)
+                DriodImprint[i].Add(BattleEngine.ResourceElement.Fire);
+            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].energy; j++)
+                DriodImprint[i].Add(BattleEngine.ResourceElement.Energy);
+            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].nature; j++)
+                DriodImprint[i].Add(BattleEngine.ResourceElement.Nature);
+            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].water; j++)
+                DriodImprint[i].Add(BattleEngine.ResourceElement.Water);
+            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].storm; j++)
+                DriodImprint[i].Add(BattleEngine.ResourceElement.Storm);
+        }
+
+        for (int i = 0; i < DriodImprint.Count; i++)
+        {
+            for (int j = 0; j < DriodImprint[i].Count; j++)
+            {
+                DriodImprintVisuals[i][j].Show();
+                string element = "";
+                string number;
+                if (j == 9)
+                    number = "10";
+                else
+                    number = "0" + (j + 1);
+                switch (DriodImprint[i][j])
+                {
+                    case BattleEngine.ResourceElement.Energy:
+                        element = "energy";
+                        break;
+                    case BattleEngine.ResourceElement.Fire:
+                        element = "fire";
+                        break;
+                    case BattleEngine.ResourceElement.Nature:
+                        element = "life";
+                        break;
+                    case BattleEngine.ResourceElement.Storm:
+                        element = "storm";
+                        break;
+                    case BattleEngine.ResourceElement.Water:
+                        element = "water";
+                        break;
+                }
+                DriodImprintVisuals[i][j].BackgroundSprite = "combat_slot_imprint_" + element + number;
+            }
+            for (int j = DriodImprint[i].Count; j < 10; j++)
+                DriodImprintVisuals[i][j].Hide();
+        }
+    }
+
     public void UpdateDriodHealth()
     {
-        for (int i = 0; i < DriodsHealth.Count; i++)
+        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
         {
             if (!Driods[i].IsVisible) continue;
 
@@ -360,31 +430,31 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateStatusAilments()
     {
+            MonsterACon.Hide();
+            MonsterBCon.Hide();
+            MonsterADot.Hide();
+            MonsterBDot.Hide();
+            MonsterAHot.Hide();
+            MonsterBHot.Hide();
+            MonsterABuff.Hide();
+            MonsterBBuff.Hide();
         if (BattleEngine.Current.Result == null) return;
         if (BattleEngine.Current.Result.ConA)
             MonsterACon.Show();
-        else MonsterACon.Hide();
         if (BattleEngine.Current.Result.ConB)
             MonsterBCon.Show();
-        else MonsterBCon.Hide();
         if (BattleEngine.Current.Result.DotA)
             MonsterADot.Show();
-        else MonsterADot.Hide();
         if (BattleEngine.Current.Result.DotB)
             MonsterBDot.Show();
-        else MonsterBDot.Hide();
         if (BattleEngine.Current.Result.HotA)
             MonsterAHot.Show();
-        else MonsterAHot.Hide();
         if (BattleEngine.Current.Result.HotB)
             MonsterBHot.Show();
-        else MonsterBHot.Hide();
         if (BattleEngine.Current.Result.BuffA)
             MonsterABuff.Show();
-        else MonsterABuff.Hide();
         if (BattleEngine.Current.Result.BuffB)
             MonsterBBuff.Show();
-        else MonsterBBuff.Hide();
     }
 
     public void UpdateHealth()
