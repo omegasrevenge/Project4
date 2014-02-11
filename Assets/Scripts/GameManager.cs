@@ -1041,6 +1041,9 @@ public class GameManager : MonoBehaviour
             }
         }
         _view.HideLoadingScreen();
+
+        //_view.AddPopup();
+        //_view.ShowResourceResult("water", "1", "water");
     }
 
 	private void UpdateAllOwnCreatures(JSONObject json)

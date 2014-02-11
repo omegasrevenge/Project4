@@ -39,7 +39,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, string rsc)
+    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, string rsc, string count, string element)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
@@ -49,7 +49,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 
         obj.Button = textKeyButton;
         GUIObjectTextPanel panel = obj.GetComponent<GUIObjectTextPanel>();
-        panel.Text = textKeyText;
+        panel.Text = textKeyText+"#"+count+"#"+element;
 
         obj._rsc.SpriteName = Prefix + rsc.ToLower();
         return obj;

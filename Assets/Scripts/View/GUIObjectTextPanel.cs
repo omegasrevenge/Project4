@@ -27,9 +27,24 @@ public class GUIObjectTextPanel : MonoBehaviour
                 if (obj)
                     _textLabel = obj.GetComponent<dfLabel>();
             }
-            _textkeyText = value;
-            if(_textLabel != null)
-                _textLabel.Text = Localization.GetText(value);
+            string[] text = new string[] {value};
+           
+            if (value.Contains("#"))
+                text = value.Split('#');
+            _textkeyText = text[0];
+            if (_textLabel != null)
+            {              
+                string textinfo = Localization.GetText(text[0]);
+                _textLabel.Text = textinfo;
+                string[] newText = new string[text.Length-1];
+                if (text.Length > 1)
+                {
+                    for (int i = 0; i < newText.Length; i++)
+                        newText[i] = text[i + 1];
+                    _textLabel.Text = string.Format(textinfo, newText);
+                }        
+            }
+
         }
     }
 

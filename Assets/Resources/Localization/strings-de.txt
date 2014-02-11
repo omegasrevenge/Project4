@@ -168,4 +168,6 @@ iris_14_01_text:
 iris_15_01_text:
 "Sie nutzen gerade eine nicht autorisierte Version von OCULUS. Rebooten Sie Ihr System über das Menü neu, um Schadsoftware zu entfernen. Andernfalls bin ich gezwungen Sie dauerhaft als humanoides Störobjekt einzustufen.",
 
+test_rsc_text:
+"Sie haben {0} von {1} gefunden."
 }
