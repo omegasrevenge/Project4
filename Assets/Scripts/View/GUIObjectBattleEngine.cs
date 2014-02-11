@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class GUIObjectBattleEngine : MonoBehaviour
@@ -22,10 +23,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public GameObject MonsterBHealth;
     public GameObject MonsterAHealthText;
     public GameObject MonsterBHealthText;
-    public GameObject IndicatorOne;
-    public GameObject IndicatorTwo;
-    public GameObject IndicatorThree;
-    public GameObject IndicatorFour;
     public GameObject DriodContainer;
     public dfPanel GGContainer;
     public dfSprite MonsterACon;
@@ -40,7 +37,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public dfSprite MonsterBElement;
     public List<dfSprite> ComboIndicators;
     public List<dfButton> DriodSlots;
-    public List<dfButton> Driods; 
+    public List<dfButton> Driods;
+    public List<dfLabel> TxtIndicators; 
 
     public bool Initialized
     {
@@ -55,6 +53,28 @@ public class GUIObjectBattleEngine : MonoBehaviour
         get { return GameManager.Singleton.Player.CurrentFaction; }
     }
 
+    public bool IndsArePlaying
+    {
+        get
+        {
+            return TxtIndicators.Any(txtIndicator => txtIndicator.GetComponent<IndicatorController>().IsPlaying);
+        }
+    }
+
+    public struct IndicatorContent
+    {
+        public GameObject target;
+        public string name;
+        public int value;
+
+        public IndicatorContent(GameObject t, string n, int v)
+        {
+            target = t;
+            name = n;
+            value = v;
+        }
+    }
+
     public static GUIObjectBattleEngine Create(dfControl root)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
@@ -65,6 +85,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Awake()
     {
+        TxtIndicators = new List<dfLabel>();
         InputText = new List<int>();
         ComboIndicators = new List<dfSprite>();
         DriodSlots = new List<dfButton>();
@@ -86,10 +107,12 @@ public class GUIObjectBattleEngine : MonoBehaviour
         Driods.Add(DriodContainer.transform.FindChild("Driod4").GetComponent<dfButton>());
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
-        IndicatorOne = transform.FindChild("HappenstanceIndicator1").gameObject;
-        IndicatorTwo = transform.FindChild("HappenstanceIndicator2").gameObject;
-        IndicatorThree = transform.FindChild("HappenstanceIndicator3").gameObject;
-        IndicatorFour = transform.FindChild("HappenstanceIndicator4").gameObject;
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator1").GetComponent<dfLabel>());
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator2").GetComponent<dfLabel>());
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator3").GetComponent<dfLabel>());
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator4").GetComponent<dfLabel>());
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator5").GetComponent<dfLabel>());
+        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator6").GetComponent<dfLabel>());
         MonsterAElement = MonsterAContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
         MonsterBElement = MonsterBContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
         MonsterALevel = MonsterAContainer.transform.FindChild("BG_MonsterLevel").FindChild("MonsterLevel").gameObject;
@@ -135,35 +158,36 @@ public class GUIObjectBattleEngine : MonoBehaviour
         UpdateSelection();
     }
 
-    public void CreateDamageIndicator(GameObject target, int damage, int dot, bool heal = false)
+    public void ShowDamageIndicators(List<IndicatorContent> info)
     {
-        if (target == BattleEngine.Current.FriendlyCreature)
+
+        if (info.Count > TxtIndicators.Count)
         {
-            if (!heal)
-                IndicatorOne.GetComponent<dfLabel>().Text =
-                    damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
-            else
-                IndicatorOne.GetComponent<dfLabel>().Text = damage + "HoT";
-            Vector3 startPos =
-                (BattleEngine.Current.FriendlyCreature.transform.position -
-                 BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
-                BattleEngine.Current.Camera.transform.position;
-            IndicatorOne.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f));
+            Debug.LogError("More than " + TxtIndicators.Count + " Happenstance Indicators? " + info.Count + " are too many.");
+            return;
         }
-        else
-            if (target == BattleEngine.Current.EnemyCreature)
-            {
-                if (!heal)
-                    IndicatorTwo.GetComponent<dfLabel>().Text =
-                        damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
-                else
-                    IndicatorTwo.GetComponent<dfLabel>().Text = damage + "HoT";
-                Vector3 startPos =
-                    (BattleEngine.Current.EnemyCreature.transform.position -
-                     BattleEngine.Current.Camera.transform.position).normalized * GUIDistance +
-                    BattleEngine.Current.Camera.transform.position;
-                IndicatorTwo.GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f));
-            }
+
+        for (int i = 0; i < info.Count; i++)
+        {
+            string content = "";
+
+            if (info[i].value > 0)
+                content = info[i].value + " ";
+
+            if (info[i].name.Length > 0)
+                content += info[i].name + "!";
+
+            TxtIndicators[i].Text = content;
+
+            Vector3 startPos =
+                (info[i].target.transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
+
+            TxtIndicators[i].GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f), 1f*i);
+        }
+    }
+
+    public void UpdateVisualsOnSkillHit()
+    {
         UpdateHealth();
         UpdateStatusAilments();
         UpdateButtons();
@@ -422,6 +446,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void ExecuteKlicked()
     {
+        if (BattleEngine.Current.GetTurnState != BattleEngine.TurnState.Wait)
+            return;
         switch (InputText.Count)
         {
             case 0:

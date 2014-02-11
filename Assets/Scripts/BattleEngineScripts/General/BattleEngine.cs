@@ -136,10 +136,10 @@ public class BattleEngine : SceneRoot3D
     void Update()
     {
 		if(!Initialized) return;
-        if (!Fighting)
+        if (!Fighting && !View.IndsArePlaying)
             enforceEnd();
 
-        if (GetTurnState == _currentStatus || _enactEndScreen) return;
+        if (GetTurnState == _currentStatus || _enactEndScreen || View.IndsArePlaying) return;
         _currentStatus = GetTurnState; 
         switch (GetTurnState)
         {
@@ -162,7 +162,7 @@ public class BattleEngine : SceneRoot3D
     {
         _counter += Time.deltaTime;
 
-        if (_counter >= 3f)
+        if (_counter >= 1f)
             View.GGContainer.Show();
     }
 
@@ -202,19 +202,48 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
+        //txtIndicator.Text = damage + "DMG " + BattleEngine.Current.Result.SkillName + " & " + dot + "DoT ->" + BattleEngine.Current.Result.SkillName + "<-";
+        GameObject target = FriendlyCreature;
+        GameObject caster = EnemyCreature;
         if (CurrentPlayer == FightRoundResult.Player.A)
         {
-            View.CreateDamageIndicator(EnemyCreature, Result.Damage, Result.DoT);
-            if (Result.HoT > 0)
-                View.CreateDamageIndicator(FriendlyCreature, Result.HoT, 0, true);
-        }
-        else
-        {
-            View.CreateDamageIndicator(FriendlyCreature, Result.Damage, Result.DoT);
-            if (Result.HoT > 0)
-                View.CreateDamageIndicator(EnemyCreature, Result.HoT, 0, true);
+            target = EnemyCreature;
+            caster = FriendlyCreature;
         }
 
+        var info = new List<GUIObjectBattleEngine.IndicatorContent>
+        {
+            new GUIObjectBattleEngine.IndicatorContent(caster, Result.SkillName, 0)
+        };
+
+        if (Result.Damage > 0)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(target, "DMG", Result.Damage));
+        if (Result.DotA && !View.MonsterADot.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Set on fire!", 0));
+        if (Result.DotB && !View.MonsterBDot.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Set on fire!", 0));
+        if (Result.DoT > 0)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(target, "Burn DMG", Result.DoT));
+        if (Result.HotA && !View.MonsterAHot.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Regenerating!", 0));
+        if (Result.HotB && !View.MonsterBHot.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Regenerating!", 0));
+        if (Result.HoT > 0)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(caster, "Heal", Result.HoT));
+        if (Result.ConA && !View.MonsterACon.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Confusion!", 0));
+        if (Result.ConB && !View.MonsterBCon.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Confusion!", 0));
+        if (Result.BuffA && !View.MonsterABuff.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Buffed!", 0));
+        if (Result.BuffB && !View.MonsterBBuff.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Buffed!", 0));
+        if (Result.BuffB && !View.MonsterBBuff.IsVisible)
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Buffed!", 0));
+
+        View.ShowDamageIndicators(info);
+
+        View.UpdateVisualsOnSkillHit();
         CurrentPlayer = Result.PlayerTurn;
         _results.Remove(Result);
     }

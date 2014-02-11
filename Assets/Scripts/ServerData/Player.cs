@@ -99,16 +99,26 @@ public class Player
     public FightRoundResult GetResult()
     {
 		if (CurFight == null)
-						return new FightRoundResult ();
-        FightRoundResult newResult = new FightRoundResult
+			return new FightRoundResult ();
+        var newResult = new FightRoundResult
         {
+            MonsterAHP = CurCreature.HP,
+            MonsterBHP = CurFight.EnemyCreature.HP,
             PlayerTurn = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B,
-            Turn = CurFight.Round
+            Turn = CurFight.Round,
+            ConA = (int)CurFight.Info["FighterA"]["Con"][0] > 0,
+            ConB = (int)CurFight.Info["FighterB"]["Con"][0] > 0,
+            BuffA = (int)CurFight.Info["FighterA"]["Def"][0] > 0,
+            BuffB = (int)CurFight.Info["FighterB"]["Def"][0] > 0,
+            DotA = (int)CurFight.Info["FighterA"]["Dot"][0] > 0,
+            DotB = (int)CurFight.Info["FighterB"]["Dot"][0] > 0,
+            HotA = (int)CurFight.Info["FighterA"]["Hot"][0] > 0,
+            HotB = (int)CurFight.Info["FighterB"]["Hot"][0] > 0
         };
 
         string[] lastResult = CurFight.LastResult.Split(' ');
 
-        if (lastResult.Length != 4)
+        if (lastResult.Length != 4) 
             return newResult;
 
         newResult.SkillName = lastResult[0];

@@ -3,35 +3,39 @@
 public class IndicatorController : MonoBehaviour
 {
 
-    private Animation _myAnim;
     private Vector3 _start;
     private float _length = -1f;
     private Vector3 _speed;
     private float _counter;
+    private float _delayCounter = 0f;
 
-	// Use this for initialization
-	void Start ()
-	{
-	    _myAnim = GetComponent<Animation>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    public bool IsPlaying
     {
-	    if (_counter > _length)
+        get { return _counter < _length; }
+    }
+
+    void Update ()
+    {
+	    if (_counter >= _length)
 	    {
             GetComponent<dfLabel>().Hide();
             return;
 	    }
-	    if (_counter == 0f)
+        if (_delayCounter > 0f)
+        {
+            _delayCounter -= Time.deltaTime;
+            return;
+        }
+        if (_counter == 0f)
             transform.position = _start;
         GetComponent<dfLabel>().Show();
 	    _counter += Time.deltaTime;
 	    transform.position += _speed;
     }
 
-    public void Play(Vector3 startPos, float length, Vector3 speed)
+    public void Play(Vector3 startPos, float length, Vector3 speed, float delay = 0f)
     {
+        _delayCounter = delay;
         _start = startPos;
         _length = length;
         _speed = speed;

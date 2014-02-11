@@ -12,11 +12,11 @@ public class Fight
 	public bool Turn;
     public bool Finished;
 
-    public JSONObject info;
+    public JSONObject Info;
 
     public void ReadJson(JSONObject json)
     {
-        info = json;
+        Info = json;
         LastResult = (string)json["LastResult"];
         Round = (int)json["Round"];
         EnemyCreature = new Creature();
@@ -29,8 +29,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterA"]["Con"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterA"]["Con"][1] > 0;
         }
     }
 
@@ -38,8 +38,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterB"]["Con"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterB"]["Con"][1] > 0;
         }
     }
 
@@ -47,8 +47,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterA"]["Def"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterA"]["Def"][1] > 0;
         }
     }
 
@@ -56,8 +56,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterB"]["Def"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterB"]["Def"][1] > 0;
         }
     }
 
@@ -65,8 +65,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterA"]["Dot"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterA"]["Dot"][1] > 0;
         }
     }
 
@@ -74,8 +74,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterB"]["Dot"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterB"]["Dot"][1] > 0;
         }
     }
 
@@ -83,8 +83,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterA"]["Hot"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterA"]["Hot"][1] > 0;
         }
     }
 
@@ -92,8 +92,8 @@ public class Fight
     {
         get
         {
-            if (info == null) return false;
-            return (int)info["FighterB"]["Hot"][1] > 0;
+			if (Info == null) return false;
+			return (int)Info["FighterB"]["Hot"][1] > 0;
         }
     }
 }
