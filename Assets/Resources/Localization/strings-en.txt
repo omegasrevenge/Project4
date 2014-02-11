@@ -35,7 +35,7 @@ screen_entername_text:
 	
 iris_01_text: 	
 "Greetings Agent,
-You are in the verge of becoming a part of VENGEA.
+You are on the verge of becoming a part of VENGEA.
 I am I.R.I.S., the virtual intelligence of VENGEA, and I will guide you on your way.",
 
 iris_02_01_text:
@@ -65,10 +65,10 @@ iris_05_01_text:
 "Initialising first training unit.",
 
 iris_05_02_text:
-"To perform a strike, wipe with your finger from the driode to the hostile creature.",
+"To perform a strike, swipe with your finger from the driode to the hostile creature.",
 
 iris_05_03_text:
-"Very well!
+"Very good!
 Now finish the fight.",
 
 iris_05_04_text:
@@ -118,7 +118,7 @@ iris_06_14_text:
 "Trade 10 storm biodes for 5 fire biodes.",
 
 iris_06_15_text:
-"Very well. You are now able to create driodes.",
+"Very good. You are now able to create driodes.",
 
 iris_06_16_text:
 "Magnificent, Agent.",
@@ -133,10 +133,10 @@ iris_07_02_text:
 "Brilliant. Keep on exploring the area.",
 
 iris_08_01_text:
-"Your Spectre has now two driodes. Wipe from one driode to the other and end on the hostile Spectre.",
+"Your Spectre now has two driodes. Swipe from one driode to the other and end on the hostile Spectre.",
 
 iris_08_02_text:
-"Very well. Now try to use the reverse order.",
+"Very good. Now try to use the reverse order.",
 
 iris_08_03_text:
 "Excellent. You may see successful combinations anytime you want by opening the information of your Spectre.",
@@ -145,13 +145,13 @@ iris_09_01_text:
 "Congratulations, Agent. Your Spectre reached a new level. You will recive a reward.",
 
 iris_09_02_text:
-"Everytime your spectre levels up, you either unlock a new slot or engrave a slot with the currently used element. Engraving a slot with an element enhances all driodes of the same type.",
+"Everytime your spectre levels up, you can either unlock a new slot or engrave a slot with the currently used element. Engraving a slot with an element enhances all driodes of the same type.",
 
 iris_10_01_text:
 "Create a rank 1 driode by combining 3 primitive driodes.",
 
 iris_10_02_text:
-"Very well! You are able to create driodes up to rank 5.",
+"Very good! You are able to create driodes up to rank 5.",
 
 iris_11_01_text:
 "Warning! Human interference located. Fight or retreat.",
@@ -166,6 +166,6 @@ iris_14_01_text:
 "Synchronising collected data with VENGEA. Due to unstable parameters do not cancel this progress.",
 
 iris_15_01_text:
-"Currently you are using a non authorised version of OCULUS. Reboot your system immediately via menu to delete malware. Contravention will lead to a permanent classification as a human interference.",
+"Currently you are using a non authorised version of OCULUS. Reboot your system immediately via menu to delete malware. Contravening will lead to a permanent classification as a human interference.",
 
 }
