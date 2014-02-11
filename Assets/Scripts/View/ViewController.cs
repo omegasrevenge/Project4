@@ -192,9 +192,9 @@ public class ViewController : MonoBehaviour
         return GUIObjectBattleEngine.Create(_gui);
     }
 
-    public GUIObjectResourceResult ShowResourceResult(string rsc, string count, string element)
+    public GUIObjectResourceResult ShowResourceResult(string[] count, string[] level, string[] element)
     {
-        return GUIObjectResourceResult.Create(_gui, "test_rsc_text", "ok", rsc, count, element);
+        return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", count, level, element);
     }
 
     public void ShowLoadingScreen(string text)

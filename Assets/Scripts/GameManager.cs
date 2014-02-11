@@ -621,7 +621,21 @@ public class GameManager : MonoBehaviour
         _lastOwnPlayerUpdate = -1000;
         Debug.Log(json);
         lastFarmResult = (string)json["data"];
-
+   
+        string[] results = data["Result"].ToString().Replace("\"", "").Split(';');
+        string[] element = new string[results.Length];
+        string[] level = new string[results.Length];
+        string[] count = new string[results.Length];
+        for (int i = 0; i < results.Length; i++)
+        {
+            string[] rsc = results[i].Split(' ');
+            int eIndex = Convert.ToInt32(rsc[0]);
+            element[i] = Resource.ResourceTypes[eIndex+1].ToLower();
+            level[i] = rsc[1];
+            count[i] = "1";
+        }
+        _view.AddPopup();
+        _view.ShowResourceResult(count, level, element);
     }
 
     /// <summary>
@@ -1041,9 +1055,12 @@ public class GameManager : MonoBehaviour
             }
         }
         _view.HideLoadingScreen();
-
+        // ♥ ♥ ♥ ♥ FOR TESTING ♥ ♥ ♥ ♥
         //_view.AddPopup();
-        //_view.ShowResourceResult("water", "1", "water");
+        //string[] count = {"1", "4", "3", "4", "3"};
+        //string[] level = { "3", "0", "2", "1", "0" };
+        //string[] element = {"energy", "fire", "storm", "nature", "water"};
+        //_view.ShowResourceResult(count, level, element);
     }
 
 	private void UpdateAllOwnCreatures(JSONObject json)

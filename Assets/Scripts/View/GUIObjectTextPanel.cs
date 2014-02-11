@@ -44,7 +44,6 @@ public class GUIObjectTextPanel : MonoBehaviour
                     _textLabel.Text = string.Format(textinfo, newText);
                 }        
             }
-
         }
     }
 

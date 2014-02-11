@@ -15,6 +15,23 @@ loadingscreen_login:
 loadingscreen_submitName:
 "Sende Profildaten an Server ...",
 
+energy:"Energie",
+fire:"Feuer",
+storm:"Sturm",
+nature:"Leben",
+water:"Wasser",
+
+0:"Biode/n", 
+1:"primitive Driode(n)"
+2:"Stufe 1 Driode(n)"
+3:"Stufe 2 Driode(n)"
+4:"Stufe 3 Driode(n)"
+5:"Stufe 4 Driode(n)"
+6:"Stufe 5 Driode(n)"
+
+farm_rsc_text:
+"{0} {1} vom Typ {2} gefunden.",
+
 screen_entername_title:
 "Ihr Profil",
 
@@ -167,7 +184,4 @@ iris_14_01_text:
 
 iris_15_01_text:
 "Sie nutzen gerade eine nicht autorisierte Version von OCULUS. Rebooten Sie Ihr System über das Menü neu, um Schadsoftware zu entfernen. Andernfalls bin ich gezwungen Sie dauerhaft als humanoides Störobjekt einzustufen.",
-
-test_rsc_text:
-"Sie haben {0} von {1} gefunden."
 }

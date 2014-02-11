@@ -18,7 +18,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 
     [SerializeField] private dfButton _button;
 
-    [SerializeField] private dfSprite _rsc;
+    [SerializeField] private dfSprite[] _rsc;
 
     [SerializeField] public string Text;
 
@@ -39,7 +39,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, string rsc, string count, string element)
+    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, string[] count, string[] level, string[] element)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
@@ -48,10 +48,17 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         obj._root = root;
 
         obj.Button = textKeyButton;
-        GUIObjectTextPanel panel = obj.GetComponent<GUIObjectTextPanel>();
-        panel.Text = textKeyText+"#"+count+"#"+element;
-
-        obj._rsc.SpriteName = Prefix + rsc.ToLower();
+        GUIObjectTextPanel[] panels = obj.GetComponentsInChildren<GUIObjectTextPanel>();
+        for (int i = 0; i < count.Length; i++)
+        {          
+            panels[i].Text = textKeyText + "#" + count[i] + "#" + Localization.GetText(level[i]) + "#" + Localization.GetText(element[i]);
+            obj._rsc[i].SpriteName = Prefix + element[i].ToLower();
+        }
+        for (int i = count.Length; i < panels.Length; i++)
+        {
+            Destroy(obj._rsc[i].gameObject);
+            Destroy(panels[i].gameObject);
+        }
         return obj;
     }
 }
