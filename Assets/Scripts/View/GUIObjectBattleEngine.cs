@@ -66,6 +66,31 @@ public class GUIObjectBattleEngine : MonoBehaviour
         }
     }
 
+    public Creature.Slot[] Slots
+    {
+        get { return GameManager.Singleton.Player.CurCreature.slots; }
+    }
+
+    public int PresentDriodsCount
+    {
+        get
+        {
+            int value = 0;
+            for (int i = 0; i < Driods.Count; i++)
+            {
+                if (GameManager.Singleton.Player.CurCreature.slots.Length > i)
+                    value++;
+            }
+            int max = value;
+            for (int i = 0; i < max; i++)
+            {
+                if (GameManager.Singleton.Player.CurCreature.slots[i].driodenElement == BattleEngine.ResourceElement.None)
+                    value--;
+            }
+            return value;
+        }
+    }
+
     public struct IndicatorContent
     {
         public GameObject target;
@@ -144,16 +169,13 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBHot = MonsterBContainer.transform.FindChild("HotIndicator").GetComponent<dfSprite>();
         MonsterABuff = MonsterAContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
         MonsterBBuff = MonsterBContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
-        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+        for (int i = 0; i < Slots.Length; i++)
             DriodImprint.Add(new List<BattleEngine.ResourceElement>());
-        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             DriodImprintVisuals.Add(new List<dfPanel>());
             for (int j = 0; j < 10; j++)
-            {
                 DriodImprintVisuals[i].Add(DriodSlots[i].transform.FindChild("Imprint" + (j + 1)).GetComponent<dfPanel>());
-                DriodImprintVisuals[i][j].Hide();
-            }
         }
 		GGContainer.MouseMove += OnMouseMove;
 		GGContainer.MouseDown += OnMouseMove;
@@ -223,22 +245,22 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public void UpdateImprints()
     {
 
-        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
+        for (int i = 0; i < Slots.Length; i++)
         {
             DriodImprint[i].Clear();
-            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].fire; j++)
+            for (int j = 0; j < Slots[i].fire; j++)
                 DriodImprint[i].Add(BattleEngine.ResourceElement.Fire);
-            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].energy; j++)
+            for (int j = 0; j < Slots[i].energy; j++)
                 DriodImprint[i].Add(BattleEngine.ResourceElement.Energy);
-            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].nature; j++)
+            for (int j = 0; j < Slots[i].nature; j++)
                 DriodImprint[i].Add(BattleEngine.ResourceElement.Nature);
-            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].water; j++)
+            for (int j = 0; j < Slots[i].water; j++)
                 DriodImprint[i].Add(BattleEngine.ResourceElement.Water);
-            for (int j = 0; j < GameManager.Singleton.Player.CurCreature.slots[i].storm; j++)
+            for (int j = 0; j < Slots[i].storm; j++)
                 DriodImprint[i].Add(BattleEngine.ResourceElement.Storm);
         }
 
-        for (int i = 0; i < DriodImprint.Count; i++)
+        for (int i = 0; i < PresentDriodsCount; i++)
         {
             for (int j = 0; j < DriodImprint[i].Count; j++)
             {
@@ -272,16 +294,21 @@ public class GUIObjectBattleEngine : MonoBehaviour
             for (int j = DriodImprint[i].Count; j < 10; j++)
                 DriodImprintVisuals[i][j].Hide();
         }
+
+        for (int i = Slots.Length; i < 4; i++)
+        {
+			for (int j = 0; j < 10; j++)
+				DriodImprintVisuals[i][j].Hide();
+        }
     }
 
     public void UpdateDriodHealth()
     {
-        for (int i = 0; i < GameManager.Singleton.Player.CurCreature.slots.Length; i++)
-        {
-            if (!Driods[i].IsVisible) continue;
+        for (int i = Slots.Length; i < 4; i++)
+            DriodsHealth[i].Hide();
 
-            DriodsHealth[i].FillAmount = 0.57f + GameManager.Singleton.Player.CurCreature.slots[i].driodenHealth * 0.36f;
-        }
+        for (int i = 0; i < PresentDriodsCount; i++)
+            DriodsHealth[i].FillAmount = 0.57f + Slots[i].driodenHealth * 0.36f;
     }
 
     public void UpdateMonsterElements()
@@ -342,39 +369,39 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateButtons()
     {
-        for (int i = 0; i < Driods.Count; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (GameManager.Singleton.Player.CurCreature.slots.Length > i)
+            Driods[i].Hide();
+            DriodSlots[i].Hide();
+            if (Slots.Length <= i) continue;
+            DriodSlots[i].Show();
+            Driods[i].Show();
+            switch (Slots[i].driodenElement)
             {
-                Driods[i].Show();
-                switch (GameManager.Singleton.Player.CurCreature.slots[i].driodenElement)
-                {
-                    case BattleEngine.ResourceElement.None:
-                        Driods[i].Hide();
-                        break;
+                case BattleEngine.ResourceElement.None:
+                    Driods[i].Hide();
+                    break;
 
-                    case BattleEngine.ResourceElement.Energy:
-                        Driods[i].BackgroundSprite = "combat_driod_energy";
-                        break;
+                case BattleEngine.ResourceElement.Energy:
+                    Driods[i].BackgroundSprite = "combat_driod_energy";
+                    break;
 
-                    case BattleEngine.ResourceElement.Fire:
-                        Driods[i].BackgroundSprite = "combat_driod_fire";
-                        break;
+                case BattleEngine.ResourceElement.Fire:
+                    Driods[i].BackgroundSprite = "combat_driod_fire";
+                    break;
 
-                    case BattleEngine.ResourceElement.Nature:
-                        Driods[i].BackgroundSprite = "combat_driod_life";
-                        break;
+                case BattleEngine.ResourceElement.Nature:
+                    Driods[i].BackgroundSprite = "combat_driod_life";
+                    break;
 
-                    case BattleEngine.ResourceElement.Storm:
-                        Driods[i].BackgroundSprite = "combat_driod_storm";
-                        break;
+                case BattleEngine.ResourceElement.Storm:
+                    Driods[i].BackgroundSprite = "combat_driod_storm";
+                    break;
 
-                    case BattleEngine.ResourceElement.Water:
-                        Driods[i].BackgroundSprite = "combat_driod_water";
-                        break;
-                }
+                case BattleEngine.ResourceElement.Water:
+                    Driods[i].BackgroundSprite = "combat_driod_water";
+                    break;
             }
-            else Driods[i].Hide();
         }
     }
 
@@ -501,7 +528,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     private void buttonKlick(int driod)
     {
-        if (GameManager.Singleton.Player.CurCreature.slots.Length-1 < driod) return;
+        if (Slots.Length-1 < driod) return;
 
 		int idx=InputText.IndexOf(driod);
 		//if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
