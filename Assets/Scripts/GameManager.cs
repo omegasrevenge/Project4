@@ -620,22 +620,25 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) yield break;
         _lastOwnPlayerUpdate = -1000;
         Debug.Log(json);
-        lastFarmResult = (string)json["data"];
-   
-        string[] results = data["Result"].ToString().Replace("\"", "").Split(';');
-        string[] element = new string[results.Length];
-        string[] level = new string[results.Length];
-        string[] count = new string[results.Length];
-        for (int i = 0; i < results.Length; i++)
+
+        Debug.Log(data["Result"]);
+        if (data["Result"].ToString() != "\"fight\"" && data["Result"].ToString() != "\"heal\"")
         {
-            string[] rsc = results[i].Split(' ');
-            int eIndex = Convert.ToInt32(rsc[0]);
-            element[i] = Resource.ResourceTypes[eIndex+1].ToLower();
-            level[i] = rsc[1];
-            count[i] = "1";
+            string[] results = data["Result"].ToString().Replace("\"", "").Split(';');
+            string[] element = new string[results.Length];
+            string[] level = new string[results.Length];
+            string[] count = new string[results.Length];
+            for (int i = 0; i < results.Length; i++)
+            {
+                string[] rsc = results[i].Split(' ');
+                int eIndex = Convert.ToInt32(rsc[0]);
+                element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
+                level[i] = rsc[1];
+                count[i] = "1";
+            }
+            _view.AddPopup();
+            _view.ShowResourceResult(count, level, element);
         }
-        _view.AddPopup();
-        _view.ShowResourceResult(count, level, element);
     }
 
     /// <summary>
