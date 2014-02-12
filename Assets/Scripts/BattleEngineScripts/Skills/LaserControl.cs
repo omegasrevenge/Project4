@@ -7,10 +7,12 @@ public class LaserControl : ActorControlls {
 	public float HeadScalingSpeed = 3f;
 	public float FadeOutTime = 2f;
 	public float LifeTime = 5f;
+    public float CastingDelay = 3f;
 
 	private float _counter = 0f;
 	private Transform _head;
 	private Transform _beam;
+	private bool _nowCasting = false;
 
 	// Use this for initialization
 	void Start () 
@@ -18,11 +20,38 @@ public class LaserControl : ActorControlls {
 		AnimationFinished = false;
 		_head = transform.FindChild("Head");
 		_beam = transform.FindChild("Beam");
+		_head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
+		                                                              _head.GetComponent<MeshRenderer>().material.color.g,
+		                                                              _head.GetComponent<MeshRenderer>().material.color.b,
+		                                                              0f);
+		
+		_beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
+		                                                              _beam.GetComponent<MeshRenderer>().material.color.g,
+		                                                              _beam.GetComponent<MeshRenderer>().material.color.b,
+		                                                              0f);
+	    _counter -= CastingDelay;
 	}
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 	void Update () 
 	{
+	    if (!_nowCasting && _counter >= 0f)
+        {
+            _nowCasting = true;
+            _head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
+                                                                          _head.GetComponent<MeshRenderer>().material.color.g,
+                                                                          _head.GetComponent<MeshRenderer>().material.color.b,
+                                                                          1f);
+
+            _beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
+                                                                          _beam.GetComponent<MeshRenderer>().material.color.g,
+                                                                          _beam.GetComponent<MeshRenderer>().material.color.b,
+                                                                          1f);
+	    }
+
+		_counter += Time.deltaTime;
+		if (!_nowCasting) return;
+
 		if(_head.localScale.x < FinalHeadScale*0.95)
 		{
 			_head.localScale = Vector3.Lerp(_head.localScale, Vector3.one*FinalHeadScale, HeadScalingSpeed*Time.deltaTime);
@@ -49,7 +78,6 @@ public class LaserControl : ActorControlls {
 			                                                              _beam.GetComponent<MeshRenderer>().material.color.a-(Time.deltaTime/FadeOutTime));
 		}
 
-		_counter += Time.deltaTime;
 		if(_counter >= LifeTime)
 		{
 			Owner.Actor = null;

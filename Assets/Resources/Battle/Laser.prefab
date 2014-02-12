@@ -195,6 +195,7 @@ MonoBehaviour:
   HeadScalingSpeed: 3
   FadeOutTime: 2
   LifeTime: 3.5
+  CastingDelay: 2
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -41,8 +41,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400014}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: GiantMonster
   m_TagString: Untagged
@@ -142,9 +142,6 @@ MonoBehaviour:
   AnimationFinished: 1
   Owner: {fileID: 0}
   AttackSpeed: 5
-  Health: 100
-  BgHealthbar: {fileID: 0}
-  Healthbar: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -157,10 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bf332aa99585d4db51d7898580427f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Element: 0
-  Name: 
-  Level: 0
-  HP: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

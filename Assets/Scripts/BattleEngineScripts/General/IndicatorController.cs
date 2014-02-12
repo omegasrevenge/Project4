@@ -29,6 +29,7 @@ public class IndicatorController : MonoBehaviour
         if (_counter == 0f)
             transform.position = _start;
         GetComponent<dfLabel>().Show();
+        transform.LookAt(BattleEngine.Current.Camera.transform.FindChild("TxtLook"));
 	    _counter += Time.deltaTime;
 	    transform.position += _speed;
     }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class BattleEngine : SceneRoot3D
@@ -117,6 +116,8 @@ public class BattleEngine : SceneRoot3D
     public static BattleEngine Create(BattleInit serverInfo)
     {
         CurrentGameObject = CreateObject(null, DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
+        CurrentGameObject.transform.FindChild("FriendlySpawnPos").LookAt(CurrentGameObject.transform.FindChild("EnemySpawnPos"));
+        CurrentGameObject.transform.FindChild("EnemySpawnPos").LookAt(CurrentGameObject.transform.FindChild("FriendlySpawnPos"));
         return CurrentGameObject.GetComponent<BattleEngine>();
     }
 
@@ -164,7 +165,7 @@ public class BattleEngine : SceneRoot3D
     {
         _counter += Time.deltaTime;
 
-        if (_counter >= 1f)
+        if (_counter >= 2f)
             View.GGContainer.Show();
     }
 
@@ -172,6 +173,16 @@ public class BattleEngine : SceneRoot3D
     {
         Turn = Result.Turn;
 
+        GameObject target = FriendlyCreature;
+        GameObject caster = EnemyCreature;
+        if (CurrentPlayer == FightRoundResult.Player.A)
+        {
+            target = EnemyCreature;
+            caster = FriendlyCreature;
+        }
+
+        if (caster.name.Contains("Wolf"))
+            caster.GetComponent<MonsterAnimationController>().DoAttackAnim();
         //actor -> monster
         //Execute casting animation
 
@@ -189,14 +200,23 @@ public class BattleEngine : SceneRoot3D
         _actor = CreateObject(transform, name, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         Actor.Owner = this;
+		
+		GameObject target = FriendlyCreature;
+		GameObject caster = EnemyCreature;
+		if (CurrentPlayer == FightRoundResult.Player.A)
+		{
+			target = EnemyCreature;
+			caster = FriendlyCreature;
+		}
+
         switch (CurrentPlayer)
         {
             case FightRoundResult.Player.A:
-                _actor.transform.position = FriendlyCreature.transform.position;
+			_actor.transform.position = name == "Laser" && caster.name.Contains("Wolf") ? FriendlyCreature.transform.FindChild("CastFromMouthPos").position : FriendlyCreature.transform.position;
                 _actor.transform.LookAt(EnemyCreature.transform);
                 break;
             case FightRoundResult.Player.B:
-                _actor.transform.position = EnemyCreature.transform.position;
+			_actor.transform.position = name == "Laser" && caster.name.Contains("Wolf") ? EnemyCreature.transform.FindChild("CastFromMouthPos").position : EnemyCreature.transform.position;
                 _actor.transform.LookAt(FriendlyCreature.transform);
                 break;
         }

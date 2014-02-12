@@ -25,6 +25,9 @@ public class MonsterStats : MonoBehaviour
 			color = Color.white;
 			break;
 		}
-		transform.FindChild("model").GetComponent<MeshRenderer>().material.color = color;
+		if(GetComponentInChildren<SkinnedMeshRenderer>() == null)
+			GetComponentInChildren<MeshRenderer>().material.color = color;
+		else
+			GetComponentInChildren<SkinnedMeshRenderer>().material.color = color;
 	}
 }
