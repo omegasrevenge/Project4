@@ -5,6 +5,7 @@ using System.Collections;
 public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 {
     private const string Prefab = "GUI/panel_rsc_result";
+    private const string Popup = "panel_popup(Clone)";
     private const string ButtonStr = "button_ok";
     private const string TextboxStr = "textbox_name";
     private const string ResourceStr = "sprite_rsc";
@@ -36,6 +37,18 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
             _textkeyButton = value;
             if (_button != null)
                 _button.Text = Localization.GetText(value);
+            _button.Click += (control, @event) =>
+                {
+                    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    if (ClosePopup != null)
+                    {
+                        ClosePopup();
+                        // TODO event ??
+                        if (transform.parent.FindChild(Popup))
+                            Destroy(transform.parent.FindChild(Popup).gameObject);
+                    }                 
+                    Destroy(gameObject);
+                };
         }
     }
 

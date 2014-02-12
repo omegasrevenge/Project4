@@ -621,7 +621,6 @@ public class GameManager : MonoBehaviour
         _lastOwnPlayerUpdate = -1000;
         Debug.Log(json);
 
-        Debug.Log(data["Result"]);
         if (data["Result"].ToString() != "\"fight\"" && data["Result"].ToString() != "\"heal\"")
         {
             string[] results = data["Result"].ToString().Replace("\"", "").Split(';');
