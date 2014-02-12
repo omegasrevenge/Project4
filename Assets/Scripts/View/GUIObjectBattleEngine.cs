@@ -36,6 +36,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public dfSprite MonsterBBuff;
     public dfSprite MonsterAElement;
     public dfSprite MonsterBElement;
+	public dfButton ButtonExecute;
     public List<dfSprite> ComboIndicators;
     public List<dfButton> DriodSlots;
     public List<dfButton> Driods;
@@ -97,6 +98,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         ComboIndicators = new List<dfSprite>();
         DriodSlots = new List<dfButton>();
         GGContainer = transform.FindChild("GGScreen").GetComponent<dfPanel>();
+		ButtonExecute = transform.FindChild("ExecuteButton").GetComponent<dfButton>();
         DriodContainer = transform.FindChild("ButtonContainer").FindChild("BG_Driods").gameObject;
         DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod1").GetComponent<dfButton>());
         DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod2").GetComponent<dfButton>());
@@ -153,9 +155,11 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 DriodImprintVisuals[i][j].Hide();
             }
         }
-        for (int i = 0; i < Driods.Count; i++)
-            Driods[i].MouseMove += OnMouseMove;
-    }
+		GGContainer.MouseMove += OnMouseMove;
+		GGContainer.MouseDown += OnMouseMove;
+		ButtonExecute.MouseEnter += ExecuteKlicked;
+		ButtonExecute.MouseDown += ExecuteKlicked;
+	}
 
     public void Init()
     {
@@ -499,7 +503,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (GameManager.Singleton.Player.CurCreature.slots.Length-1 < driod) return;
 
-        if (InputText.Count > 0 && InputText[InputText.Count - 1] == driod)
+		int idx=InputText.IndexOf(driod);
+		//if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
+		if (idx != -1) //remove from anywhere
         {
             InputText.Remove(driod);
             return;
@@ -514,18 +520,30 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void OnMouseMove(dfControl ctrl, dfMouseEventArgs args)
     {
-        int info = Driods.IndexOf(ctrl as dfButton);
+		int info = Driods.IndexOf(dfInputManager.ControlUnderMouse as dfButton);
+
+#if UNITY_EDITOR
+		if (args.Buttons==0) {info=-1;}
+#endif
+		//Debug.Log("mousemove " + info +" " + dfInputManager.ControlUnderMouse);
+
+
         if (info != _lastButton && info != -1)
         {
             buttonKlick(info);
-            Debug.LogError("I AM BEING USED " + ctrl + args);
+			Debug.Log("I AM BEING USED " + info +" " + dfInputManager.ControlUnderMouse);
         }
         _lastButton = info;
         args.Use();
     }
 
-    public void ExecuteKlicked()
+	public void ExecuteKlicked(dfControl ctrl, dfMouseEventArgs args)
     {
+		if (ctrl!=ButtonExecute as dfControl) {return;}
+#if UNITY_EDITOR
+		if (args.Buttons==0) {return;}
+#endif
+
         if (BattleEngine.Current.GetTurnState != BattleEngine.TurnState.Wait)
             return;
         switch (InputText.Count)
