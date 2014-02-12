@@ -12,6 +12,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     private Camera Camera { get { return ViewController.Singleton.Camera3D; } }
 
     private const string Prefab = "GUI/panel_battleui";
+    private int _lastButton = -1;
 
     public GameObject MonsterAContainer;
     public GameObject MonsterBContainer;
@@ -152,6 +153,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 DriodImprintVisuals[i][j].Hide();
             }
         }
+        for (int i = 0; i < Driods.Count; i++)
+            Driods[i].MouseMove += OnMouseMove;
     }
 
     public void Init()
@@ -509,24 +512,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
         // CHECK FOR WHAT SOUND TO PLAY ON BUTTON KLICK HERE!
     }
 
-    public void FirstDriodKlicked()
+    void OnMouseMove(dfControl ctrl, dfMouseEventArgs args)
     {
-        buttonKlick(0);
-    }
-
-    public void SecondDriodKlicked()
-    {
-        buttonKlick(1);
-    }
-
-    public void ThirdDriodKlicked()
-    {
-        buttonKlick(2);
-    }
-
-    public void FourthDriodKlicked()
-    {
-        buttonKlick(3);
+        int info = Driods.IndexOf(ctrl as dfButton);
+        if (info != _lastButton && info != -1)
+        {
+            buttonKlick(info);
+            Debug.LogError("I AM BEING USED " + ctrl + args);
+        }
+        _lastButton = info;
+        args.Use();
     }
 
     public void ExecuteKlicked()
