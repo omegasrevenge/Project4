@@ -6,7 +6,6 @@ public class BattleEngine : SceneRoot3D
 {
     //########## public #########
     public enum TurnState { Wait, Execute, Hit }
-    public enum ResourceElement { None = -1, Energy, Fire, Storm, Nature, Water };
 
 
     public ActorControlls Actor;
@@ -139,7 +138,11 @@ public class BattleEngine : SceneRoot3D
         if (!Fighting && !View.IndsArePlaying)
             enforceEnd();
 
-        if (GetTurnState == _currentStatus || _enactEndScreen || View.IndsArePlaying) return;
+        if (GetTurnState == _currentStatus 
+            || _enactEndScreen 
+            || View.IndsArePlaying) 
+            return;
+
         _currentStatus = GetTurnState; 
         switch (GetTurnState)
         {
@@ -155,7 +158,6 @@ public class BattleEngine : SceneRoot3D
                     _enactEndScreen = true;
                 break;
         }
-
     }
 
     private void enforceEnd()

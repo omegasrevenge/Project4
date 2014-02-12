@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BattleInit
 {
-    public BattleEngine.ResourceElement MonsterAElement = BattleEngine.ResourceElement.Nature; //default values. also used as a dirty testing method
-    public BattleEngine.ResourceElement MonsterBElement = BattleEngine.ResourceElement.Fire;	 //you can put in different values, but there HAVE to be default values
+	public GameManager.ResourceElement MonsterAElement = GameManager.ResourceElement.Nature; //default values. also used as a dirty testing method
+	public GameManager.ResourceElement MonsterBElement = GameManager.ResourceElement.Fire;	 //you can put in different values, but there HAVE to be default values
 	
 	public string MonsterAName = "Cthulhu";
 	public string MonsterBName = "Ragnaros";

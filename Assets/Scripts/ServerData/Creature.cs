@@ -16,7 +16,7 @@ public class Creature
 	public int Defense;
 	public int Dexterity;
 	public int Skillpoints;
-    public BattleEngine.ResourceElement BaseElement;
+	public GameManager.ResourceElement BaseElement;
 	public Slot[] slots;
 
 	public struct Slot
@@ -26,7 +26,7 @@ public class Creature
 		public int nature;
 		public int water;
 		public int storm;
-        public BattleEngine.ResourceElement driodenElement;
+		public GameManager.ResourceElement driodenElement;
 		public float driodenHealth;
 		public int driodenLevel;
 		public int slotId;
@@ -41,7 +41,7 @@ public class Creature
         }
 		//Debug.Log(json);
 		ModelID = (int)json["ModelId"];
-        BaseElement = (BattleEngine.ResourceElement)(int)json["Element"];
+		BaseElement = (GameManager.ResourceElement)(int)json["Element"];
 		CreatureID = (int)json["CId"];
         Name = (string)json["Name"];
 		XP = (int)json["XP"];
@@ -66,7 +66,7 @@ public class Creature
 			    nature = (int) jsonSlots[i]["Element2"],
 			    water = (int) jsonSlots[i]["Element3"],
 			    storm = (int) jsonSlots[i]["Element4"],
-                driodenElement = (BattleEngine.ResourceElement)(int)jsonSlots[i]["EquipElement"],
+				driodenElement = (GameManager.ResourceElement)(int)jsonSlots[i]["EquipElement"],
 			    driodenHealth = (float)jsonSlots[i]["EquipHealth"],
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"],
 				slotId = (int)jsonSlots[i]["SlotId"]

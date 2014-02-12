@@ -42,7 +42,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public List<dfButton> Driods;
     public List<dfLabel> TxtIndicators;
     public List<dfSprite> DriodsHealth;
-    public List<List<BattleEngine.ResourceElement>> DriodImprint;
+	public List<List<GameManager.ResourceElement>> DriodImprint;
     public List<List<dfPanel>> DriodImprintVisuals;
 
     public bool Initialized
@@ -84,7 +84,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             int max = value;
             for (int i = 0; i < max; i++)
             {
-                if (GameManager.Singleton.Player.CurCreature.slots[i].driodenElement == BattleEngine.ResourceElement.None)
+				if (GameManager.Singleton.Player.CurCreature.slots[i].driodenElement == GameManager.ResourceElement.None)
                     value--;
             }
             return value;
@@ -115,7 +115,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Awake()
     {
-        DriodImprint = new List<List<BattleEngine.ResourceElement>>();
+		DriodImprint = new List<List<GameManager.ResourceElement>>();
         DriodImprintVisuals = new List<List<dfPanel>>();
         DriodsHealth = new List<dfSprite>();
         TxtIndicators = new List<dfLabel>();
@@ -170,7 +170,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterABuff = MonsterAContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
         MonsterBBuff = MonsterBContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
         for (int i = 0; i < Slots.Length; i++)
-            DriodImprint.Add(new List<BattleEngine.ResourceElement>());
+			DriodImprint.Add(new List<GameManager.ResourceElement>());
         for (int i = 0; i < 4; i++)
         {
             DriodImprintVisuals.Add(new List<dfPanel>());
@@ -250,15 +250,15 @@ public class GUIObjectBattleEngine : MonoBehaviour
         {
             DriodImprint[i].Clear();
             for (int j = 0; j < Slots[i].fire; j++)
-                DriodImprint[i].Add(BattleEngine.ResourceElement.Fire);
+				DriodImprint[i].Add(GameManager.ResourceElement.Fire);
             for (int j = 0; j < Slots[i].energy; j++)
-                DriodImprint[i].Add(BattleEngine.ResourceElement.Energy);
+				DriodImprint[i].Add(GameManager.ResourceElement.Energy);
             for (int j = 0; j < Slots[i].nature; j++)
-                DriodImprint[i].Add(BattleEngine.ResourceElement.Nature);
+				DriodImprint[i].Add(GameManager.ResourceElement.Nature);
             for (int j = 0; j < Slots[i].water; j++)
-                DriodImprint[i].Add(BattleEngine.ResourceElement.Water);
+				DriodImprint[i].Add(GameManager.ResourceElement.Water);
             for (int j = 0; j < Slots[i].storm; j++)
-                DriodImprint[i].Add(BattleEngine.ResourceElement.Storm);
+				DriodImprint[i].Add(GameManager.ResourceElement.Storm);
         }
 
         for (int i = 0; i < PresentDriodsCount; i++)
@@ -274,19 +274,19 @@ public class GUIObjectBattleEngine : MonoBehaviour
                     number = "0" + (j + 1);
                 switch (DriodImprint[i][j])
                 {
-                    case BattleEngine.ResourceElement.Energy:
+				case GameManager.ResourceElement.Energy:
                         element = "energy";
                         break;
-                    case BattleEngine.ResourceElement.Fire:
+				case GameManager.ResourceElement.Fire:
                         element = "fire";
                         break;
-                    case BattleEngine.ResourceElement.Nature:
+				case GameManager.ResourceElement.Nature:
                         element = "life";
                         break;
-                    case BattleEngine.ResourceElement.Storm:
+				case GameManager.ResourceElement.Storm:
                         element = "storm";
                         break;
-                    case BattleEngine.ResourceElement.Water:
+				case GameManager.ResourceElement.Water:
                         element = "water";
                         break;
                 }
@@ -316,53 +316,53 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         switch (GameManager.Singleton.Player.CurCreature.BaseElement)
         {
-            case BattleEngine.ResourceElement.None:
+		case GameManager.ResourceElement.None:
                 MonsterAElement.Hide();
                 break;
 
-            case BattleEngine.ResourceElement.Energy:
+		case GameManager.ResourceElement.Energy:
                 MonsterAElement.SpriteName = "spectre_stats_element_energy";
                 break;
 
-            case BattleEngine.ResourceElement.Fire:
+		case GameManager.ResourceElement.Fire:
                 MonsterAElement.SpriteName = "spectre_stats_element_fire";
                 break;
 
-            case BattleEngine.ResourceElement.Nature:
+		case GameManager.ResourceElement.Nature:
                 MonsterAElement.SpriteName = "spectre_stats_element_life";
                 break;
 
-            case BattleEngine.ResourceElement.Storm:
+		case GameManager.ResourceElement.Storm:
                 MonsterAElement.SpriteName = "spectre_stats_element_storm";
                 break;
 
-            case BattleEngine.ResourceElement.Water:
+		case GameManager.ResourceElement.Water:
                 MonsterAElement.SpriteName = "spectre_stats_element_water";
                 break;
         }
         switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
         {
-            case BattleEngine.ResourceElement.None:
+		case GameManager.ResourceElement.None:
                 MonsterBElement.Hide();
                 break;
 
-            case BattleEngine.ResourceElement.Energy:
+		case GameManager.ResourceElement.Energy:
                 MonsterBElement.SpriteName = "spectre_stats_element_energy";
                 break;
 
-            case BattleEngine.ResourceElement.Fire:
+		case GameManager.ResourceElement.Fire:
                 MonsterBElement.SpriteName = "spectre_stats_element_fire";
                 break;
 
-            case BattleEngine.ResourceElement.Nature:
+		case GameManager.ResourceElement.Nature:
                 MonsterBElement.SpriteName = "spectre_stats_element_life";
                 break;
 
-            case BattleEngine.ResourceElement.Storm:
+		case GameManager.ResourceElement.Storm:
                 MonsterBElement.SpriteName = "spectre_stats_element_storm";
                 break;
 
-            case BattleEngine.ResourceElement.Water:
+		case GameManager.ResourceElement.Water:
                 MonsterBElement.SpriteName = "spectre_stats_element_water";
                 break;
         }
@@ -379,27 +379,27 @@ public class GUIObjectBattleEngine : MonoBehaviour
             Driods[i].Show();
             switch (Slots[i].driodenElement)
             {
-                case BattleEngine.ResourceElement.None:
+			case GameManager.ResourceElement.None:
                     Driods[i].Hide();
                     break;
 
-                case BattleEngine.ResourceElement.Energy:
+			case GameManager.ResourceElement.Energy:
                     Driods[i].BackgroundSprite = "combat_driod_energy";
                     break;
 
-                case BattleEngine.ResourceElement.Fire:
+			case GameManager.ResourceElement.Fire:
                     Driods[i].BackgroundSprite = "combat_driod_fire";
                     break;
 
-                case BattleEngine.ResourceElement.Nature:
+			case GameManager.ResourceElement.Nature:
                     Driods[i].BackgroundSprite = "combat_driod_life";
                     break;
 
-                case BattleEngine.ResourceElement.Storm:
+			case GameManager.ResourceElement.Storm:
                     Driods[i].BackgroundSprite = "combat_driod_storm";
                     break;
 
-                case BattleEngine.ResourceElement.Water:
+			case GameManager.ResourceElement.Water:
                     Driods[i].BackgroundSprite = "combat_driod_water";
                     break;
             }

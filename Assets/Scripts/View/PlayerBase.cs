@@ -11,7 +11,7 @@ public class PlayerBase : SceneRoot3D
 	public enum ResourceLevel { Bioden, DriodenLvl0, DriodenLvl1, DriodenLvl2, DriodenLvl3, DriodenLvl4, DriodenLvl5 };
 	public ResourceLevel curResourceLevel = ResourceLevel.Bioden;
 
-    public BattleEngine.ResourceElement CuResourceElement;
+	public GameManager.ResourceElement CuResourceElement;
 
 	private enum Windows { Crafting, Creature };
 	private Windows curWindow;
@@ -199,7 +199,7 @@ public class PlayerBase : SceneRoot3D
 					GameManager.Singleton.UpgradeCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement);
 				}
 
-				if (GUI.Button(curRect, "<color=white><size=20>" + ((BattleEngine.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
+				if (GUI.Button(curRect, "<color=white><size=20>" + ((GameManager.ResourceElement)curSlot.driodenElement) + "\n" + (curSlot.driodenLevel - 1) + "</size></color>"))
 				{
 					GameManager.Singleton.EquipCreatureSlot(curCreature.CreatureID, curCreature.slots[i].slotId, (int)CuResourceElement, (int)curResourceLevel);
 				}
@@ -227,25 +227,25 @@ public class PlayerBase : SceneRoot3D
 			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
 		}
 
-		if (GUI.Button(new Rect(80, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Energy.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(80, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Energy.ToString() + "</size></color>"))
 		{
-			CuResourceElement = BattleEngine.ResourceElement.Energy;
+			CuResourceElement = GameManager.ResourceElement.Energy;
 		}
-		if (GUI.Button(new Rect(170, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Fire.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(170, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Fire.ToString() + "</size></color>"))
 		{
-			CuResourceElement = BattleEngine.ResourceElement.Fire;
+			CuResourceElement = GameManager.ResourceElement.Fire;
 		}
-		if (GUI.Button(new Rect(260, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Storm.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(260, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Storm.ToString() + "</size></color>"))
 		{
-			CuResourceElement = BattleEngine.ResourceElement.Storm;
+			CuResourceElement = GameManager.ResourceElement.Storm;
 		}
-		if (GUI.Button(new Rect(350, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Nature.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(350, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Nature.ToString() + "</size></color>"))
 		{
-			CuResourceElement = BattleEngine.ResourceElement.Nature;
+			CuResourceElement = GameManager.ResourceElement.Nature;
 		}
-		if (GUI.Button(new Rect(440, 550, 80, 80), "<color=white><size=20>" + BattleEngine.ResourceElement.Water.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(440, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Water.ToString() + "</size></color>"))
 		{
-			CuResourceElement = BattleEngine.ResourceElement.Water;
+			CuResourceElement = GameManager.ResourceElement.Water;
 		}
 	}
 
@@ -305,25 +305,25 @@ public class PlayerBase : SceneRoot3D
 			curInput = curInputAsInt.ToString();
 		}
 
-        if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Energy.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Energy.ToString() + "</size></color>"))
 		{
-            CuResourceElement = BattleEngine.ResourceElement.Energy;
+			CuResourceElement = GameManager.ResourceElement.Energy;
 		}
-        if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Fire.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Fire.ToString() + "</size></color>"))
 		{
-            CuResourceElement = BattleEngine.ResourceElement.Fire;
+			CuResourceElement = GameManager.ResourceElement.Fire;
 		}
-        if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Storm.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Storm.ToString() + "</size></color>"))
 		{
-            CuResourceElement = BattleEngine.ResourceElement.Storm;
+			CuResourceElement = GameManager.ResourceElement.Storm;
 		}
-        if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Nature.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Nature.ToString() + "</size></color>"))
 		{
-            CuResourceElement = BattleEngine.ResourceElement.Nature;
+			CuResourceElement = GameManager.ResourceElement.Nature;
 		}
-        if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + BattleEngine.ResourceElement.Water.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Water.ToString() + "</size></color>"))
 		{
-            CuResourceElement = BattleEngine.ResourceElement.Water;
+			CuResourceElement = GameManager.ResourceElement.Water;
 		}
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))

@@ -4,24 +4,24 @@ using System.Collections;
 public class MonsterStats : MonoBehaviour 
 {
 
-    public void Init(BattleEngine.ResourceElement element)
+	public void Init(GameManager.ResourceElement element)
 	{
 		Color color = Color.grey;
 		switch(element)
 		{
-            case BattleEngine.ResourceElement.Fire:
+		case GameManager.ResourceElement.Fire:
 			color = Color.red;
 			break;
-            case BattleEngine.ResourceElement.Energy:
+		case GameManager.ResourceElement.Energy:
 			color = Color.black;
 			break;
-            case BattleEngine.ResourceElement.Nature:
+		case GameManager.ResourceElement.Nature:
 			color = Color.green;
 			break;
-            case BattleEngine.ResourceElement.Water:
+		case GameManager.ResourceElement.Water:
 			color = Color.blue;
 			break;
-            case BattleEngine.ResourceElement.Storm:
+		case GameManager.ResourceElement.Storm:
 			color = Color.white;
 			break;
 		}
