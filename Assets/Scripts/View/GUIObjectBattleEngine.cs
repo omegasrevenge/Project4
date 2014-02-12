@@ -179,8 +179,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
         }
 		GGContainer.MouseMove += OnMouseMove;
 		GGContainer.MouseDown += OnMouseMove;
-		ButtonExecute.MouseEnter += ExecuteKlicked;
-		ButtonExecute.MouseDown += ExecuteKlicked;
+		GGContainer.MouseUp += OnMouseUp;
+		//ButtonExecute.MouseEnter += ExecuteKlicked;
+		//ButtonExecute.MouseDown += ExecuteKlicked;
 	}
 
     public void Init()
@@ -563,14 +564,15 @@ public class GUIObjectBattleEngine : MonoBehaviour
         _lastButton = info;
         args.Use();
     }
+	void OnMouseUp(dfControl ctrl, dfMouseEventArgs args)
+	{
+		//Debug.Log("mouseup " + ctrl +" " + dfInputManager.ControlUnderMouse);
 
-	public void ExecuteKlicked(dfControl ctrl, dfMouseEventArgs args)
+		if (dfInputManager.ControlUnderMouse==ButtonExecute as dfControl) {ExecuteClicked();}
+	}
+
+	public void ExecuteClicked()
     {
-		if (ctrl!=ButtonExecute as dfControl) {return;}
-#if UNITY_EDITOR
-		if (args.Buttons==0) {return;}
-#endif
-
         if (BattleEngine.Current.GetTurnState != BattleEngine.TurnState.Wait)
             return;
         switch (InputText.Count)
