@@ -44,7 +44,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .352050781
-      y: .752929688
+      y: .627929688
       width: .09765625
       height: .189453125
     border:
@@ -61,7 +61,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .450195312
-      y: .752929688
+      y: .627929688
       width: .09765625
       height: .189453125
     border:
@@ -77,8 +77,8 @@ MonoBehaviour:
   - name: bar_empty
     region:
       serializedVersion: 2
-      x: .603027344
-      y: .250976562
+      x: .728515625
+      y: .444335938
       width: .204589844
       height: .0185546875
     border:
@@ -94,8 +94,8 @@ MonoBehaviour:
   - name: bar_filled
     region:
       serializedVersion: 2
-      x: .603027344
-      y: .270507812
+      x: .775878906
+      y: .41015625
       width: .204589844
       height: .0185546875
     border:
@@ -111,8 +111,8 @@ MonoBehaviour:
   - name: base
     region:
       serializedVersion: 2
-      x: .953125
-      y: .357421875
+      x: .657714844
+      y: .125976562
       width: .0400390625
       height: .104492188
     border:
@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .903808594
-      y: .190429688
+      x: .93359375
+      y: .4296875
       width: .015625
       height: .03125
     border:
@@ -162,8 +162,8 @@ MonoBehaviour:
   - name: bg-menu
     region:
       serializedVersion: 2
-      x: .958496094
-      y: .3046875
+      x: .777832031
+      y: .307617188
       width: .03125
       height: .03125
     border:
@@ -179,8 +179,8 @@ MonoBehaviour:
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .808105469
-      y: .250976562
+      x: .949707031
+      y: .4296875
       width: .015625
       height: .03125
     border:
@@ -196,7 +196,7 @@ MonoBehaviour:
   - name: Biod_Frame
     region:
       serializedVersion: 2
-      x: .352050781
+      x: .704101562
       y: 0
       width: .125
       height: .25
@@ -213,8 +213,8 @@ MonoBehaviour:
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: .919921875
-      y: .190429688
+      x: .698242188
+      y: .125976562
       width: .0048828125
       height: .009765625
     border:
@@ -230,8 +230,8 @@ MonoBehaviour:
   - name: bubble
     region:
       serializedVersion: 2
-      x: .830078125
-      y: .190429688
+      x: .704589844
+      y: .501953125
       width: .0732421875
       height: .1953125
     border:
@@ -247,8 +247,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .808105469
-      y: .283203125
+      x: .965820312
+      y: .4296875
       width: .015625
       height: .03125
     border:
@@ -264,8 +264,8 @@ MonoBehaviour:
   - name: circle
     region:
       serializedVersion: 2
-      x: .928222656
-      y: 0
+      x: .352050781
+      y: .818359375
       width: .0625
       height: .125
     border:
@@ -281,8 +281,8 @@ MonoBehaviour:
   - name: creatureavatar_giant
     region:
       serializedVersion: 2
-      x: .830078125
-      y: 0
+      x: .548339844
+      y: .752929688
       width: .09765625
       height: .189453125
     border:
@@ -298,7 +298,7 @@ MonoBehaviour:
   - name: creatureavatar_wolf
     region:
       serializedVersion: 2
-      x: .548339844
+      x: .646484375
       y: .752929688
       width: .09765625
       height: .189453125
@@ -315,8 +315,8 @@ MonoBehaviour:
   - name: cross
     region:
       serializedVersion: 2
-      x: .603027344
-      y: .38671875
+      x: .728515625
+      y: .349609375
       width: .046875
       height: .09375
     border:
@@ -332,8 +332,8 @@ MonoBehaviour:
   - name: element_default
     region:
       serializedVersion: 2
-      x: .352050781
-      y: .250976562
+      x: .829589844
+      y: 0
       width: .125
       height: .25
     border:
@@ -350,7 +350,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .352050781
-      y: .501953125
+      y: .125976562
       width: .125
       height: .25
     border:
@@ -367,7 +367,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: .477539062
-      y: 0
+      y: .125976562
       width: .125
       height: .25
     border:
@@ -383,7 +383,7 @@ MonoBehaviour:
   - name: element_nature
     region:
       serializedVersion: 2
-      x: .477539062
+      x: .603027344
       y: .250976562
       width: .125
       height: .25
@@ -400,8 +400,8 @@ MonoBehaviour:
   - name: element_storm
     region:
       serializedVersion: 2
-      x: .477539062
-      y: .501953125
+      x: .352050781
+      y: .376953125
       width: .125
       height: .25
     border:
@@ -417,8 +417,8 @@ MonoBehaviour:
   - name: element_water
     region:
       serializedVersion: 2
-      x: .603027344
-      y: 0
+      x: .477539062
+      y: .376953125
       width: .125
       height: .25
     border:
@@ -431,11 +431,28 @@ MonoBehaviour:
     textureGUID: f9ab59c33e419534fb3275597804debc
     deleted: 0
     texture: {fileID: 0}
+  - name: firewall_symbol
+    region:
+      serializedVersion: 2
+      x: .971191406
+      y: .229492188
+      width: .0190429688
+      height: .052734375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 39, y: 54}
+    textureGUID: 3009ee95bcdcee74a8b2aae834aadee4
+    deleted: 0
+    texture: {fileID: 0}
   - name: gradient
     region:
       serializedVersion: 2
-      x: .982910156
-      y: .125976562
+      x: .955078125
+      y: .184570312
       width: .015625
       height: .123046875
     border:
@@ -448,11 +465,28 @@ MonoBehaviour:
     textureGUID: 4cc5b543fdf016b4d815059794520c54
     deleted: 0
     texture: {fileID: 0}
+  - name: hr
+    region:
+      serializedVersion: 2
+      x: .728515625
+      y: .463867188
+      width: .256835938
+      height: .001953125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 526, y: 2}
+    textureGUID: 87cb93f70b2749d44b65ea87dcab6810
+    deleted: 0
+    texture: {fileID: 0}
   - name: interference
     region:
       serializedVersion: 2
-      x: .928222656
-      y: .125976562
+      x: .548339844
+      y: .627929688
       width: .0541992188
       height: .119140625
     border:
@@ -468,8 +502,8 @@ MonoBehaviour:
   - name: iris-logo
     region:
       serializedVersion: 2
-      x: .903808594
-      y: .357421875
+      x: .728515625
+      y: .250976562
       width: .048828125
       height: .09765625
     border:
@@ -482,11 +516,62 @@ MonoBehaviour:
     textureGUID: 4441e633762229f40ae03f8a109e0b1e
     deleted: 0
     texture: {fileID: 0}
+  - name: profile_bg
+    region:
+      serializedVersion: 2
+      x: .352050781
+      y: 0
+      width: .3515625
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 720, y: 128}
+    textureGUID: 61dae9400b9f36e48adeb104854a9805
+    deleted: 0
+    texture: {fileID: 0}
+  - name: profile_nce
+    region:
+      serializedVersion: 2
+      x: .415039062
+      y: .818359375
+      width: .0625
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: cf652b46603fc0c42871922a98d8e878
+    deleted: 0
+    texture: {fileID: 0}
+  - name: profile_vengea
+    region:
+      serializedVersion: 2
+      x: .478027344
+      y: .818359375
+      width: .0625
+      height: .125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 128}
+    textureGUID: c6e3a9394ad5b444bb14b344b91760d1
+    deleted: 0
+    texture: {fileID: 0}
   - name: repeat
     region:
       serializedVersion: 2
-      x: .958496094
-      y: .25
+      x: .777832031
+      y: .250976562
       width: .0307617188
       height: .0537109375
     border:
@@ -502,8 +587,8 @@ MonoBehaviour:
   - name: Specter_Marker
     region:
       serializedVersion: 2
-      x: .728515625
-      y: 0
+      x: .603027344
+      y: .501953125
       width: .101074219
       height: .25
     border:
@@ -516,11 +601,147 @@ MonoBehaviour:
     textureGUID: 271e5598af9aa2443a3fb9195620cb60
     deleted: 0
     texture: {fileID: 0}
+  - name: switch
+    region:
+      serializedVersion: 2
+      x: .955078125
+      y: 0
+      width: .037109375
+      height: .0595703125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 76, y: 61}
+    textureGUID: 35c9eb801cd02ed409ce57bea06b488b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: switch_bg
+    region:
+      serializedVersion: 2
+      x: .775878906
+      y: .349609375
+      width: .0717773438
+      height: .0595703125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 147, y: 61}
+    textureGUID: 477bb406c47524e4b8f8b5447710a343
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_driod
+    region:
+      serializedVersion: 2
+      x: .955078125
+      y: .127929688
+      width: .03515625
+      height: .0556640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 72, y: 57}
+    textureGUID: 6e9e6548ddbce3c468f819751ecdc44a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_fenris
+    region:
+      serializedVersion: 2
+      x: .848144531
+      y: .30859375
+      width: .03125
+      height: .0546875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 64, y: 56}
+    textureGUID: 1183a834efa32c24f907007b390d81a7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_giant
+    region:
+      serializedVersion: 2
+      x: .955078125
+      y: .060546875
+      width: .0302734375
+      height: .06640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 62, y: 68}
+    textureGUID: a73345fa1e758c34c964cc37fbc15540
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_logout
+    region:
+      serializedVersion: 2
+      x: .809082031
+      y: .250976562
+      width: .0234375
+      height: .0556640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 48, y: 57}
+    textureGUID: 76016b657c6781442ad6c2751c8042ec
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_reboot
+    region:
+      serializedVersion: 2
+      x: .971191406
+      y: .184570312
+      width: .0249023438
+      height: .0439453125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 51, y: 45}
+    textureGUID: 9f6fa487710d55c42a88f24d2f8bc7d9
+    deleted: 0
+    texture: {fileID: 0}
+  - name: symbol_sound
+    region:
+      serializedVersion: 2
+      x: .809570312
+      y: .307617188
+      width: .0244140625
+      height: .0380859375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 50, y: 39}
+    textureGUID: a5cd08119b050c34ab0010fc83f8408a
+    deleted: 0
+    texture: {fileID: 0}
   - name: vengeaagent
     region:
       serializedVersion: 2
-      x: .903808594
-      y: .24609375
+      x: .603027344
+      y: .125976562
       width: .0541992188
       height: .110351562
     border:
