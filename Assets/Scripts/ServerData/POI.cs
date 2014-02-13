@@ -24,6 +24,7 @@ public class POI
 	public DateTime NextFarm;
     public string ResourceType;
     public string RealType;
+	public string MapPos;
     public PointOfInterest View;
 
     public bool CanFarm { get { return GameManager.Singleton.GetServerTime() > NextFarm; } }
@@ -59,6 +60,7 @@ public class POI
         poi.RealType = (string)json["Type"];
 		//poi._canFarm = (bool)json["CanFarm"];
 		poi.NextFarm = (DateTime)json["NextFarm"];
+		poi.MapPos= (string)json["MapPos"];
 		//Debug.Log ("CanFarm:"+poi.CanFarm+" NextFarm:"+poi.NextFarm);
         return poi;
     }
@@ -77,9 +79,10 @@ public class POI
         }
     }
 
-	public string MapPos()
+	//sadly calculating this can be incorrect due tu rounding issues
+	/*public string MapPos()
 	{
 		MapUtils.ProjectedPos curProjectedPos = MapUtils.GeographicToProjection(Position, 17);
 		return ("" + curProjectedPos.X + "," + curProjectedPos.Y);
-	}
+	}*/
 }

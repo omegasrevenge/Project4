@@ -637,7 +637,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CPoiFarm(POI poi)
     {
-        WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos() + "&poiid=" + poi.POI_ID);
+        WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos + "&poiid=" + poi.POI_ID);
         //Debug.Log(request.url);
         yield return request;
 
