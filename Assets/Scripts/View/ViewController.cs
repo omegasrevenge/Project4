@@ -192,9 +192,9 @@ public class ViewController : MonoBehaviour
         return GUIObjectBattleEngine.Create(_gui);
     }
 
-    public GUIObjectChallenge ShowChallenge(string text, string title, string name)
+    public GUIObjectChallenge ShowChallenge(string text, string title, string name, string cancelbtn, string okbtn)
     {
-        return GUIObjectChallenge.Create(_gui, text, title, name);
+        return GUIObjectChallenge.Create(_gui, text, title, name, cancelbtn, okbtn);
     }
 
     public GUIObjectResourceResult ShowResourceResult(string[] count, string[] level, string[] element)

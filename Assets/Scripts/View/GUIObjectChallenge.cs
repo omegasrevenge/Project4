@@ -55,15 +55,18 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectChallenge Create(dfControl root, string textKeyText, string textKeyTitle, string name)
+    public static GUIObjectChallenge Create(dfControl root, string textKeyText, string textKeyTitle, string name, string cancel, string ok)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
         cntrl.RelativePosition = Vector2.zero;
         GUIObjectChallenge obj = cntrl.GetComponent<GUIObjectChallenge>();
         obj._root = root;
-        obj.ButtonAccept = "accept";
-        obj.ButtonDecline = "decline";
+        obj.ButtonAccept = ok;
+        obj.ButtonDecline = cancel;
+
+        if (ok == "") Destroy(obj._buttonAccept);
+        if (cancel == "") Destroy(obj._buttonDecline);
 
         GUIObjectTextPanel panel = obj.GetComponent<GUIObjectTextPanel>();
         panel.Text = textKeyText +"#"+name;
@@ -76,5 +79,11 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
     {
         Debug.Log("accepted");
         GameManager.Singleton.Accept();
+    }
+
+    public void Decline()
+    {
+        Debug.Log("declined");
+        GameManager.Singleton.Decline();
     }
 }
