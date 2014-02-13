@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WolfMonster
+  m_Name: GiantMonster
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Exhausted
@@ -143,7 +143,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400002, guid: 1b7293f10958996478e29f6a15a2e475, type: 3}
+  - {fileID: 7400000, guid: f8feb90d9ebf6d24c8dfda31e00f5336, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 24, y: 36, z: 0}
   m_IKOnFeet: 0
@@ -158,7 +158,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: bfeb3673711a4af49805b108629bab21, type: 3}
+  - {fileID: 7400000, guid: f8feb90d9ebf6d24c8dfda31e00f5336, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 264, y: 36, z: 0}
   m_IKOnFeet: 0
@@ -173,7 +173,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 7cabf04c665581c428ea7cc1602773c7, type: 3}
+  - {fileID: 7400000, guid: f8feb90d9ebf6d24c8dfda31e00f5336, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 132, y: -192, z: 0}
   m_IKOnFeet: 0
@@ -195,11 +195,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110217680}
-      second:
-      - {fileID: 110107268}
-      - {fileID: 110112016}
-    data:
       first: {fileID: 0}
       second: []
     data:
@@ -207,6 +202,11 @@ StateMachine:
       second:
       - {fileID: 110100000}
       - {fileID: 110104283}
+    data:
+      first: {fileID: 110217680}
+      second:
+      - {fileID: 110107268}
+      - {fileID: 110112016}
     data:
       first: {fileID: 110281671}
       second:

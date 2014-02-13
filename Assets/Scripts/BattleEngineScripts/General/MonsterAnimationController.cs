@@ -1,33 +1,71 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using UnityEngine;
 using System.Collections;
 
 public class MonsterAnimationController : MonoBehaviour
 {
-    public const float AnimationLength = 7f;
-
-    public Animator MyAnimator;
+    private const string Exhausted = "Exhausted";
+    private const string Bored = "Bored";
+    private const string Attack = "Attack";
+    private const string SpellRoarCast = "SpellRoarCast";
 
     private bool  _isPlaying = false;
-    private float _counter   = 0f;
+    private float _delay = 0f;
+    private string _animName = "";
+    private float _idleTime = 0f;
 
-    public void DoAttackAnim()
+    public void DoAnim(string animName, float delay = 0f)
     {
         _isPlaying = true;
-        _counter = AnimationLength;
-        MyAnimator.SetBool("Attack", true);
+        _delay = delay;
+        _animName = animName;
     }
-
-	void Start () { MyAnimator = GetComponent<Animator>(); }
 	
 	void Update ()
 	{
-	    if (_counter > 0f)
-	        _counter -= Time.deltaTime;
+        DifferentIdlesController();
 
-	    if (_isPlaying && _counter <= 0f)
+	    if (_delay > 0f)
 	    {
-	        _isPlaying = false;
-            MyAnimator.SetBool("Attack", false);
+	        _delay -= Time.deltaTime;
+	        return;
 	    }
+
+        if(!_isPlaying) return;
+
+	    _idleTime = 0f;
+        StartSkill();
+	    _isPlaying = false;
 	}
+
+    public void DifferentIdlesController()
+    {
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            _idleTime += Time.deltaTime;
+
+        if (_idleTime >= 5f)
+            if (Random.Range(0, 2) > 0) Trigger(Bored);
+
+        _idleTime = 0f;
+    }
+
+    public void StartSkill()
+    {
+        switch (_animName)
+        {
+            case "Default":
+                Trigger(SpellRoarCast);
+                break;
+            default:
+                Debug.LogError("MonsterAnimatorController of " + gameObject.name + " does not known how to animate " + _animName + ". Please implement it.");
+                break;
+        }
+    }
+
+    public void Trigger(string triggerName)
+    {
+        GetComponent<Animator>().SetTrigger(triggerName);
+    }
+
 }

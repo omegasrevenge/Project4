@@ -180,8 +180,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		GGContainer.MouseMove += OnMouseMove;
 		GGContainer.MouseDown += OnMouseMove;
 		GGContainer.MouseUp += OnMouseUp;
-		//ButtonExecute.MouseEnter += ExecuteKlicked;
-		//ButtonExecute.MouseDown += ExecuteKlicked;
 	}
 
     public void Init()
@@ -557,10 +555,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
 
         if (info != _lastButton && info != -1)
-        {
             buttonKlick(info);
-			Debug.Log("I AM BEING USED " + info +" " + dfInputManager.ControlUnderMouse);
-        }
         _lastButton = info;
         args.Use();
     }

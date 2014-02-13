@@ -111,6 +111,23 @@ public class BattleEngine : SceneRoot3D
             return TurnState.Execute;
         }
     }
+
+    public GameObject CurTarget
+    {
+        get
+        {
+            return CurrentPlayer == FightRoundResult.Player.A ? EnemyCreature : FriendlyCreature;
+        }
+    }
+
+    public GameObject CurCaster
+    {
+        get
+        {
+            return CurrentPlayer == FightRoundResult.Player.A ? FriendlyCreature : EnemyCreature;
+        }
+    }
+
     //########## getter ##################################################################
 
     public static BattleEngine Create(BattleInit serverInfo)
@@ -136,7 +153,7 @@ public class BattleEngine : SceneRoot3D
     void Update()
     {
 		if(!Initialized) return;
-        if (!Fighting && !View.IndsArePlaying)
+        if (!Fighting && !View.IndsArePlaying && (Actor == null || Actor.AnimationFinished))
             enforceEnd();
 
         if (GetTurnState == _currentStatus 
@@ -173,18 +190,7 @@ public class BattleEngine : SceneRoot3D
     {
         Turn = Result.Turn;
 
-        GameObject target = FriendlyCreature;
-        GameObject caster = EnemyCreature;
-        if (CurrentPlayer == FightRoundResult.Player.A)
-        {
-            target = EnemyCreature;
-            caster = FriendlyCreature;
-        }
-
-        if (caster.name.Contains("Wolf"))
-            caster.GetComponent<MonsterAnimationController>().DoAttackAnim();
-        //actor -> monster
-        //Execute casting animation
+        CurCaster.GetComponent<MonsterAnimationController>().DoAnim(Result.SkillName);
 
         if (Resources.Load("Battle/" + Result.SkillName) == null)
         {
@@ -200,23 +206,15 @@ public class BattleEngine : SceneRoot3D
         _actor = CreateObject(transform, name, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         Actor.Owner = this;
-		
-		GameObject target = FriendlyCreature;
-		GameObject caster = EnemyCreature;
-		if (CurrentPlayer == FightRoundResult.Player.A)
-		{
-			target = EnemyCreature;
-			caster = FriendlyCreature;
-		}
 
         switch (CurrentPlayer)
         {
             case FightRoundResult.Player.A:
-			_actor.transform.position = name == "Laser" && caster.name.Contains("Wolf") ? FriendlyCreature.transform.FindChild("CastFromMouthPos").position : FriendlyCreature.transform.position;
+                _actor.transform.position = FriendlyCreature.transform.FindChild("CastFromMouthPos").position;
                 _actor.transform.LookAt(EnemyCreature.transform);
                 break;
             case FightRoundResult.Player.B:
-			_actor.transform.position = name == "Laser" && caster.name.Contains("Wolf") ? EnemyCreature.transform.FindChild("CastFromMouthPos").position : EnemyCreature.transform.position;
+                _actor.transform.position = EnemyCreature.transform.FindChild("CastFromMouthPos").position;
                 _actor.transform.LookAt(FriendlyCreature.transform);
                 break;
         }
@@ -224,33 +222,25 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
-        GameObject target = FriendlyCreature;
-        GameObject caster = EnemyCreature;
-        if (CurrentPlayer == FightRoundResult.Player.A)
-        {
-            target = EnemyCreature;
-            caster = FriendlyCreature;
-        }
-
         var info = new List<GUIObjectBattleEngine.IndicatorContent>
         {
-            new GUIObjectBattleEngine.IndicatorContent(caster, Result.SkillName, 0)
+            new GUIObjectBattleEngine.IndicatorContent(CurCaster, Result.SkillName, 0)
         };
 
         if (Result.Damage > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(target, "DMG", Result.Damage));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, "DMG", Result.Damage));
         if (Result.DotA && !View.MonsterADot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Set on fire!", 0));
         if (Result.DotB && !View.MonsterBDot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Set on fire!", 0));
         if (Result.DoT > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(target, "Burn DMG", Result.DoT));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, "Burn DMG", Result.DoT));
         if (Result.HotA && !View.MonsterAHot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Regenerating!", 0));
         if (Result.HotB && !View.MonsterBHot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Regenerating!", 0));
         if (Result.HoT > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(caster, "Heal", Result.HoT));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurCaster, "Heal", Result.HoT));
         if (Result.ConA && !View.MonsterACon.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Confusion!", 0));
         if (Result.ConB && !View.MonsterBCon.IsVisible)

@@ -11,7 +11,7 @@ public class IndicatorController : MonoBehaviour
 
     public bool IsPlaying
     {
-        get { return _counter < _length; }
+        get { return GetComponent<dfLabel>().IsVisible; }
     }
 
     void Start()
@@ -34,7 +34,6 @@ public class IndicatorController : MonoBehaviour
         if (_counter == 0f)
             transform.position = _start;
         GetComponent<dfLabel>().Show();
-        //transform.LookAt(BattleEngine.Current.Camera.transform.FindChild("TxtLook"));
 	    _counter += Time.deltaTime;
 	    transform.position += _speed;
     }
