@@ -17,13 +17,8 @@ public class MonsterAnimationController : MonoBehaviour
         MyAnimator.SetBool("Attack", true);
     }
 
-    // Use this for initialization
-	void Start ()
-	{
-	    MyAnimator = GetComponent<Animator>();
-	}
+	void Start () { MyAnimator = GetComponent<Animator>(); }
 	
-	// Update is called once per frame
 	void Update ()
 	{
 	    if (_counter > 0f)

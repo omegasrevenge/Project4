@@ -14,39 +14,26 @@ public class LaserControl : ActorControlls {
 	private Transform _beam;
 	private bool _nowCasting = false;
 
-	// Use this for initialization
+    public float CurAlpha
+    {
+        get { return _beam.GetComponent<MeshRenderer>().material.color.a; }
+    }
+
 	void Start () 
 	{
 		AnimationFinished = false;
 		_head = transform.FindChild("Head");
 		_beam = transform.FindChild("Beam");
-		_head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
-		                                                              _head.GetComponent<MeshRenderer>().material.color.g,
-		                                                              _head.GetComponent<MeshRenderer>().material.color.b,
-		                                                              0f);
-		
-		_beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
-		                                                              _beam.GetComponent<MeshRenderer>().material.color.g,
-		                                                              _beam.GetComponent<MeshRenderer>().material.color.b,
-		                                                              0f);
+		SetNewAlpha(0f);
 	    _counter -= CastingDelay;
 	}
 
-    // Update is called once per frame
 	void Update () 
 	{
 	    if (!_nowCasting && _counter >= 0f)
         {
             _nowCasting = true;
-            _head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
-                                                                          _head.GetComponent<MeshRenderer>().material.color.g,
-                                                                          _head.GetComponent<MeshRenderer>().material.color.b,
-                                                                          1f);
-
-            _beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
-                                                                          _beam.GetComponent<MeshRenderer>().material.color.g,
-                                                                          _beam.GetComponent<MeshRenderer>().material.color.b,
-                                                                          1f);
+            SetNewAlpha(1f);
 	    }
 
 		_counter += Time.deltaTime;
@@ -66,17 +53,7 @@ public class LaserControl : ActorControlls {
 		}
 
 		if(_beam.gameObject.activeSelf)
-		{
-			_head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
-			                                                              _head.GetComponent<MeshRenderer>().material.color.g,
-			                                                              _head.GetComponent<MeshRenderer>().material.color.b,
-			                                                              _head.GetComponent<MeshRenderer>().material.color.a-(Time.deltaTime/FadeOutTime));
-			
-			_beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
-			                                                              _beam.GetComponent<MeshRenderer>().material.color.g,
-			                                                              _beam.GetComponent<MeshRenderer>().material.color.b,
-			                                                              _beam.GetComponent<MeshRenderer>().material.color.a-(Time.deltaTime/FadeOutTime));
-		}
+            SetNewAlpha(CurAlpha - (Time.deltaTime / FadeOutTime));
 
 		if(_counter >= LifeTime)
 		{
@@ -84,4 +61,17 @@ public class LaserControl : ActorControlls {
 			Destroy(gameObject);
 		}
 	}
+
+    public void SetNewAlpha(float value)
+    {
+        _head.GetComponent<MeshRenderer>().material.color = new Color(_head.GetComponent<MeshRenderer>().material.color.r,
+                                                                      _head.GetComponent<MeshRenderer>().material.color.g,
+                                                                      _head.GetComponent<MeshRenderer>().material.color.b,
+                                                                      value);
+
+        _beam.GetComponent<MeshRenderer>().material.color = new Color(_beam.GetComponent<MeshRenderer>().material.color.r,
+                                                                      _beam.GetComponent<MeshRenderer>().material.color.g,
+                                                                      _beam.GetComponent<MeshRenderer>().material.color.b,
+                                                                      value);
+    }
 }
