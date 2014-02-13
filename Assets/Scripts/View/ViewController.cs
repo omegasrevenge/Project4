@@ -98,10 +98,10 @@ public class ViewController : MonoBehaviour
         GameObject MenuRoot = GameObject.FindGameObjectWithTag(MenuRootTag);
 
         _gui = GUIRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
-        _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>(); 
+      //  _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>(); 
 
         _guiViewport = GUIRoot.transform.FindChild(CameraStr).GetComponent<MovableViewport>();
-        _menuViewport = _menu.GetComponent<MovableGUIViewport>();
+  //      _menuViewport = _menu.GetComponent<MovableGUIViewport>();
         
 
         ViewportScrollState = 0f;

@@ -1200,7 +1200,7 @@ public class GameManager : MonoBehaviour
 		_view.AddMaxScreen(GUIObjectMonsterNameInput.Create(
 					"screen_monsterentername_title",
 					"screen_monsterentername_text",
-					"continue", "default_monstername",
+					"continue",
 					Player.CurCreature,
 					GUISubmitSpectreName));
 	}

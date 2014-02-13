@@ -12,8 +12,6 @@
 	decline:			"Ablehnen",
 	
 	default_name:		"Nutzername",
-
-	default_monstername:		"Specter",
 	
 loadingscreen_login:
 "Verbinde mit Server ...",
@@ -60,13 +58,13 @@ screen_chooseelement_title:
 "Element",
 
 screen_chooseelement_text:
-"Bitte wählen Sie das Element ihres Specters.",
+"Bitte wählen Sie das Element ihres Spectres.",
 	
 screen_monsterentername_title:
-"Ihr Specter",
+"Ihr Spectre",
 
 screen_monsterentername_text:
-"Bitte wählen Sie einen Namen für ihren Specter.",
+"Bitte wählen Sie einen Namen für ihren Spectre.",
 
 iris_01_text: 	
 "Willkommen Agent,
@@ -90,7 +88,7 @@ iris_04_02_text:
 "Treffen Sie Ihre Wahl!",
 
 iris_04_03_text:
-"Der Specter wird an Sie übermittelt.",
+"Der Spectre wird an Sie übermittelt.",
 
 iris_04_04_text:
 "Übermittlung abgeschlossen.",

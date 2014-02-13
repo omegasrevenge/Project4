@@ -30,15 +30,6 @@ public class GUIObjectMonsterNameInput : MonoBehaviour
 
     [SerializeField] public string Text;
 
-    public string Default
-    {
-        get { return _textkeyDefault; }
-        set
-        {
-            _textkeyDefault = value;
-            Text = Localization.GetText(value);
-        }
-    }
 
     public string Button
     {
@@ -101,7 +92,7 @@ public class GUIObjectMonsterNameInput : MonoBehaviour
         }
     }
 
-    public static GameObject Create(string textKeyTitle, string textKeyText, string textKeyButton, string textKeyUsername, Creature creature, Action<string> callback)
+    public static GameObject Create(string textKeyTitle, string textKeyText, string textKeyButton, Creature creature, Action<string> callback)
     {
         GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
         GUIObjectMonsterNameInput input = go.GetComponent<GUIObjectMonsterNameInput>();
@@ -116,7 +107,7 @@ public class GUIObjectMonsterNameInput : MonoBehaviour
 		            callback(input.Text);
 	            }
             };
-        input.Default = textKeyUsername;
+        input.Text = creature.Name;
 
         GUIObjectTextPanel panel = go.GetComponent<GUIObjectTextPanel>();
         panel.Title = textKeyTitle;
