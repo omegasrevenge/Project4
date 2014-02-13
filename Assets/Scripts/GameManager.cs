@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json))
         {
-            if (callback != null) callback(false);
+            if (callback != null)            callback(false);
             yield break;
 		};
 		JSONObject data=json["data"];
@@ -396,11 +396,11 @@ public class GameManager : MonoBehaviour
                 }
 
                 challengePopup = _view.AddPopup();
-                if (Player.PlayerID == fight.FighterA.PId)
-                    challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name, "cancel", "").gameObject);
+                //if (Player.PlayerID == fight.FighterA.PId)
+                    //challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name, "cancel", "").gameObject);
 
-                else if (Singleton.GetPlayer(fight.FighterA.PId) != null)
-                    challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterA.Name, "decline", "accept").gameObject);
+                //else if (Singleton.GetPlayer(fight.FighterA.PId) != null)
+                challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterA.Name, "decline", "accept").gameObject);
             }
             return;
         }
