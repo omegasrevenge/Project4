@@ -326,6 +326,10 @@ public class GameManager : MonoBehaviour
 		string sSessUrl=GetSessionURL("pinfo");
 		if(version) {
 			sSessUrl+="&v=" + Player.Version;
+            if (Player.CurFight != null)
+            {
+                sSessUrl += "&fv=" + Player.CurFight.Version;
+            }
 		}
         WWW request = new WWW(sSessUrl);
 
@@ -334,16 +338,18 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json))
         {
-            callback(false);
+            if (callback != null) callback(false);
             yield break;
 		};
 		JSONObject data=json["data"];
 		if((string)data=="nochange")
 		{
+            Debug.Log("nochange");
 			yield break;
 		};
-        //Debug.Log(json["data"]);
+        Debug.Log(json["data"]);
 		ReadPlayerJSON(data);
+	    CheckStartFight();
         if (callback != null)
             callback(true);
     }
@@ -391,10 +397,10 @@ public class GameManager : MonoBehaviour
 
                 challengePopup = _view.AddPopup();
                 if (Player.PlayerID == fight.FighterA.PId)
-                    challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name).gameObject);
+                    challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name, "cancel", "").gameObject);
 
                 else if (Singleton.GetPlayer(fight.FighterA.PId) != null)
-                    challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterA.Name).gameObject);
+                    challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterA.Name, "decline", "accept").gameObject);
             }
             return;
         }
@@ -1119,12 +1125,6 @@ public class GameManager : MonoBehaviour
             }
         }
         _view.HideLoadingScreen();
-        // ♥ ♥ ♥ ♥ FOR TESTING ♥ ♥ ♥ ♥
-        //_view.AddPopup();
-        //string[] count = {"1", "4", "3", "4", "3"};
-        //string[] level = { "3", "0", "2", "1", "0" };
-        //string[] element = {"energy", "fire", "storm", "nature", "water"};
-        //_view.ShowResourceResult(count, level, element);
     }
 
 	private void UpdateAllOwnCreatures(JSONObject json)

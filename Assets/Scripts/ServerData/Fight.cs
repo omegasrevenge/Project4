@@ -9,6 +9,7 @@ public class Fight
     public Fighter FighterB = new Fighter();
     public int SkillID;
 	public int Round;
+    public int Version;
 	public string LastResult;
 	public Creature EnemyCreature;
 	public bool Turn;
@@ -59,6 +60,7 @@ public class Fight
         FighterB.ReadJson(json["FighterB"]);
         LastResult = (string)json["LastResult"];
         Round = (int)json["Round"];
+        Version = (int)json["Version"];
         EnemyCreature = new Creature();
         EnemyCreature.ReadJson(json["EnemyCreature"]);
         Turn = (bool)json["Turn"];
