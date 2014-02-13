@@ -192,6 +192,11 @@ public class ViewController : MonoBehaviour
         return GUIObjectBattleEngine.Create(_gui);
     }
 
+    public GUIObjectChallenge ShowChallenge(string text, string title, string name)
+    {
+        return GUIObjectChallenge.Create(_gui, text, title, name);
+    }
+
     public GUIObjectResourceResult ShowResourceResult(string[] count, string[] level, string[] element)
     {
         return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", count, level, element);

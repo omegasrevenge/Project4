@@ -9,6 +9,8 @@ public class GUIObjectPopup : MonoBehaviour
     private const string PopupStr = "sprite_popup";
     private const string MessageSound = "Oc_Audio_SFX_Vengea_Message_IRIS_LAYOUT";
 
+    private GameObject _content;
+    private dfControl _control;
     private dfControl _root;
     private float _delay = 1f;
     private bool _startedPlaying = false;
@@ -33,7 +35,40 @@ public class GUIObjectPopup : MonoBehaviour
         cntrl.RelativePosition = Vector2.zero;
         GUIObjectPopup obj = cntrl.GetComponent<GUIObjectPopup>();
         obj._root = root;
+        obj._control = cntrl;
+
+        obj._root.Click += (control, @event) =>
+            {
+                SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                if (obj.HidePopup != null) obj.HidePopup();
+            };
         return obj;
+    }
+
+    public GUIObjectPopup AddToPopup(GameObject content)
+    {
+        if (_content != null)
+            Destroy(_content);
+        if (content == null)
+            return this;
+
+        if (content.GetComponent<dfControl>() == null)
+        {
+            throw new InvalidCastException();
+        }
+        content.transform.parent = transform;
+        content.layer = gameObject.layer;
+
+        var child = content.GetComponent<dfControl>();
+        _control.AddControl(child);
+        child.Size = _control.Size;
+        child.RelativePosition = Vector2.zero;
+
+        child.BringToFront();
+
+        _content = content;
+
+        return this;
     }
 
     public GUIObjectPopup AddPopup()
@@ -74,6 +109,8 @@ public class GUIObjectPopup : MonoBehaviour
     public void OnPopupStart()
     {
         _startTime = Time.time;
+        if (_content != null) 
+            _content.GetComponent<dfControl>().Show();
         if (StartCallback != null)
             StartCallback();
     }

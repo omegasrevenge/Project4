@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
 
     public bool LoggedIn { get { return SessionID.Length != 0; } }
 
+    private GUIObjectPopup challengePopup;
+
     public static GameManager Singleton
     {
         get
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour
             //Request players around you
             if (Time.time >= PlayerQueryFreq + _lastPlayerQuery)
                 SearchForPlayers();
+            CheckStartFight();
         }
         else if (CurrentGameMode == GameMode.Base)
         {
@@ -180,6 +183,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePlayersOnMap()
     {
+        if (PlayerPositionsInRange == null) return;
         List<Player> tempPlayers = new List<Player>();
         foreach (ObjectPos pos in PlayerPositionsInRange)
         {
@@ -239,7 +243,7 @@ public class GameManager : MonoBehaviour
                 _view.Switch3DSceneRoot(_base);
                 break;
             case GameMode.Fight:
-				if(BattleEngine.CurrentGameObject == null)
+                if(BattleEngine.CurrentGameObject == null)
 				{
                     _fight = BattleEngine.Create(Player.GetBattleInit());
 					_fight.AttachGUI(_view.AddBattleUI());
@@ -248,7 +252,6 @@ public class GameManager : MonoBehaviour
 				_fight.StartFight(Player.GetBattleInit());
                 break;
         }
-
     }
 
     /// <summary>
@@ -261,7 +264,6 @@ public class GameManager : MonoBehaviour
 		long tcnow = (long)((DateTime.UtcNow-new DateTime (1970,1,1)).TotalMilliseconds);
 		return ServerURL + function + "?pid=" + Player.PlayerID + "&sid=" + SessionID+"&tc="+tcnow;
     }
-
 
     public void Login(string token, Action<bool> callback = null)
     {
@@ -297,9 +299,8 @@ public class GameManager : MonoBehaviour
         string url = ServerURL + "login_password?pid=" + playerID + "&pass=" + password;
         Debug.Log("URL: " + url);
         WWW request = new WWW(url);
-
         yield return request;
-
+        Debug.Log("Login: " + request.text);
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) yield break;
         SessionID = (string)json["data"];
@@ -343,8 +344,6 @@ public class GameManager : MonoBehaviour
 		};
         //Debug.Log(json["data"]);
 		ReadPlayerJSON(data);
-        if (Player.Fighting && CurrentGameMode != GameMode.Fight)
-            SwitchGameMode(GameMode.Fight);
         if (callback != null)
             callback(true);
     }
@@ -371,6 +370,39 @@ public class GameManager : MonoBehaviour
         if(_fight)
             _fight.Result = Player.GetResult();
     }
+
+    public void CheckStartFight()
+    {
+        Fight fight = Player.CurFight;
+        if (fight == null || fight.Finished)
+        {
+            return;
+        }
+        if (!fight.Started)
+        {
+            if (challengePopup == null || challengePopup.gameObject == null)
+            {
+                Player FighterA=GetPlayer(fight.FighterA.PId);
+                Player FighterB=GetPlayer(fight.FighterB.PId);
+                if (FighterA == null || FighterB == null)
+                {
+                    return;
+                }
+
+                challengePopup = _view.AddPopup();
+                if (Player.PlayerID == fight.FighterA.PId)
+                    challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name).gameObject);
+
+                else if (Singleton.GetPlayer(fight.FighterA.PId) != null)
+                    challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterA.Name).gameObject);
+            }
+            return;
+        }
+
+        if (Player.Fighting && CurrentGameMode != GameMode.Fight)
+            SwitchGameMode(GameMode.Fight);
+    }
+
 	public void CreateCreature(int element, Action<bool, string> callback)
 	{
 		StartCoroutine(CCreateCreature(element, callback));
@@ -620,7 +652,6 @@ public class GameManager : MonoBehaviour
 		}
         if (!CheckResult(json)) yield break;
         _lastOwnPlayerUpdate = -1000;
-        Debug.Log(json);
 
         if (data["Result"].ToString() != "\"fight\"" && data["Result"].ToString() != "\"heal\"")
         {
@@ -636,8 +667,7 @@ public class GameManager : MonoBehaviour
                 level[i] = rsc[1];
                 count[i] = "1";
             }
-            _view.AddPopup();
-            _view.ShowResourceResult(count, level, element);
+            _view.AddPopup().AddToPopup(_view.ShowResourceResult(count, level, element).gameObject);    
         }
     }
 
@@ -749,7 +779,6 @@ public class GameManager : MonoBehaviour
         if (!(bool)turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
         Debug.Log("!!!!!!!!!!!!!!b " + request.text);
-
     }
 
     public void FightDelete()
@@ -773,6 +802,11 @@ public class GameManager : MonoBehaviour
     public Player GetPlayer(string playerID)
     {
         if (!LoggedIn) return null;
+        if (playerID.Length != 21)
+        {
+            Debug.Log("!!!!!!!! Invalid PId" + playerID);
+            return null;
+        }
         Player player;
         if (_playerCache.TryGetValue(playerID, out player))
             return player;
@@ -785,7 +819,7 @@ public class GameManager : MonoBehaviour
     {
         _playerQueryActive = true;
         string[] requestedPIDs = _playerQueue.ToArray();
-        Debug.Log("Get Players: " + string.Join(",", requestedPIDs));
+        //Debug.Log("Get Players: " + string.Join(",", requestedPIDs));
         WWW request = new WWW(GetSessionURL("pinfo") + "&pinfo=" + string.Join(",", requestedPIDs));
 
         yield return request;
@@ -816,7 +850,6 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator CAddXP(string xp)
     {
-
         WWW request = new WWW(GetSessionURL("addxp") + "&xp=" + xp);
 
         yield return request;
@@ -825,7 +858,6 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) { yield break; }
 
         GetOwnPlayer();
-
     }
 
     public void Attack(string enemy)
@@ -835,7 +867,6 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator CAttack(string enemy)
     {
-
         WWW request = new WWW(GetSessionURL("fightcreate") + "&enemy=" + enemy);
 
         yield return request;
@@ -844,12 +875,44 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json)) { yield break; }
 
         GetOwnPlayer();
+    }
 
+    public void Accept()
+    {
+        StartCoroutine(CAccept());
+    }
+
+    public IEnumerator CAccept()
+    {
+        WWW request = new WWW(GetSessionURL("accepted"));
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+
+        GetOwnPlayer();
+    }
+
+    public void Decline()
+    {
+        StartCoroutine(CDecline());
+    }
+
+    public IEnumerator CDecline()
+    {
+        WWW request = new WWW(GetSessionURL("declined"));
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json)) { yield break; }
+
+        GetOwnPlayer();
     }
 
     public void SetInitSteps(int steps)
     {
-
         StartCoroutine(CSetInitSteps(steps));
     }
 
@@ -866,7 +929,6 @@ public class GameManager : MonoBehaviour
 
     public void SubmitPlayerName(string name, Action<bool, string> callback)
     {
-
         StartCoroutine(CSubmitPlayerName(name, callback));
     }
 
@@ -1008,7 +1070,6 @@ public class GameManager : MonoBehaviour
                 // Object.Destroy is delayed, and never completes in the editor, so use DestroyImmediate instead.
                 DestroyImmediate(o);
             }
-
         }
     }
 
@@ -1039,7 +1100,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (!Player.Fighting)
+        if (!Player.Fighting||CurrentGameMode==GameMode.Login)
         {
             switch (Player.InitSteps)
             {

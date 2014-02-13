@@ -34,9 +34,10 @@ public class Player
 		Version = (Int64)json["Version"];
         Resources = new int[7, 5];
 
-        if (GameManager.Singleton.Player.PlayerID != PlayerID)
-            return;
+        //if (GameManager.Singleton.Player.PlayerID != PlayerID) return;
         JSONObject res = json["Resources"];
+        if (res == null) return;
+
         for (int i = 0; i < res.Count; i++)
         {
             JSONObject element = res[i];
