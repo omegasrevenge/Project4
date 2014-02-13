@@ -27,7 +27,7 @@ public class ViewController : MonoBehaviour
 
     [SerializeField]
     private float _viewportScrollState = 0f;
-    public const float MaxViewportScroll = 0.7f;
+    public const float MaxViewportScroll = 0.9f;
 
     private GUIObjectMaxScreen _maxScreen;
     private GUIObjectLoadingScreen _loadingScreen;
@@ -62,7 +62,7 @@ public class ViewController : MonoBehaviour
         set
         {
             value = Mathf.Clamp(value, 0f, MaxViewportScroll);
-            _viewportScrollState = _menuViewport.phase = _guiViewport.phase = value;
+            _viewportScrollState  = _guiViewport.phase = value;
             if (_current3DRoot)
                 _current3DRoot.ViewportPhase = _viewportScrollState;
         }
