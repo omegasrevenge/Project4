@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 25;
         //Check for Singleton
         if (_instance == null)
             _instance = this;

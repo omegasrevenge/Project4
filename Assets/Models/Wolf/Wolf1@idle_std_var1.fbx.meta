@@ -93,7 +93,7 @@ ModelImporter:
     3300000: Eyes_Low
     4300000: Eyes_Low
     4300002: Body_Low001
-    7400000: Take 001
+    7400000: idle_std_var1
     9500000: //RootNode
     13700000: Body_Low001
   materials:
@@ -110,7 +110,119 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle_std_var1
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body_Low001
+        weight: 1
+      - path: Wolf_RiG
+        weight: 1
+      - path: Wolf_RiG/root
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_LeftUpLeg
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_LeftUpLeg/Character1_LeftLeg
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_LeftUpLeg/Character1_LeftLeg/Character1_LeftFoot
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_LeftUpLeg/Character1_LeftLeg/Character1_LeftFoot/Character1_LeftToeBase
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_LeftUpLeg/Character1_LeftLeg/Character1_LeftFoot/Character1_LeftToeBase/Character1_LeftClaw
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_RightUpLeg
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_RightUpLeg/Character1_RightLeg
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_RightUpLeg/Character1_RightLeg/Character1_RightFoot
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_RightUpLeg/Character1_RightLeg/Character1_RightFoot/Character1_RightToeBase
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_RightUpLeg/Character1_RightLeg/Character1_RightFoot/Character1_RightToeBase/Character1_RightClaw
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder/Character1_LeftUpperArm
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder/Character1_LeftUpperArm/Character1_LeftArm
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder/Character1_LeftUpperArm/Character1_LeftArm/Character1_LeftHand
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder/Character1_LeftUpperArm/Character1_LeftArm/Character1_LeftHand/Character1_LeftHandMiddle
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_LeftShoulder/Character1_LeftUpperArm/Character1_LeftArm/Character1_LeftHand/Character1_LeftHandMiddle/Character1_LeftHandClaw
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Character1_LeftEar
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Character1_LeftFlew
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Character1_LowerJaw
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Character1_RightEar
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Character1_RightFlew
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_Neck/Character1_Head/Eyes_Low
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightUpperArm
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightUpperArm/Character1_RightArm
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightUpperArm/Character1_RightArm/Character1_RightHand
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightUpperArm/Character1_RightArm/Character1_RightHand/Character1_RightHandMiddle
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightUpperArm/Character1_RightArm/Character1_RightHand/Character1_RightHandMiddle/Character1_RightHandClaw
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_TailBase
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_TailBase/Character1_Tail01
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_TailBase/Character1_Tail01/Character1_Tail02
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_TailBase/Character1_Tail01/Character1_Tail02/Character1_Tail03
+        weight: 1
+      - path: Wolf_RiG/root/Character1_Hips/Character1_TailBase/Character1_Tail01/Character1_Tail02/Character1_Tail03/Character1_Tail04
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

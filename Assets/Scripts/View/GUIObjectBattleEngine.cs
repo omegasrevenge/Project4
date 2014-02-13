@@ -9,8 +9,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public float GUIDistance = 1.5f;
     public float DamageIndicatorMoveUpSpeed = 0.1f;
 
-    private Camera Camera { get { return ViewController.Singleton.Camera3D; } }
-
     private const string Prefab = "GUI/panel_battleui";
     private int _lastButton = -1;
 
@@ -125,32 +123,22 @@ public class GUIObjectBattleEngine : MonoBehaviour
         GGContainer = transform.FindChild("GGScreen").GetComponent<dfPanel>();
 		ButtonExecute = transform.FindChild("ExecuteButton").GetComponent<dfButton>();
         DriodContainer = transform.FindChild("ButtonContainer").FindChild("BG_Driods").gameObject;
-        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod1").GetComponent<dfButton>());
-        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod2").GetComponent<dfButton>());
-        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod3").GetComponent<dfButton>());
-        DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod4").GetComponent<dfButton>());
+        for (int i = 0; i < 4; i++)
+            DriodSlots.Add(DriodContainer.transform.FindChild("Slot_Driod" + (i + 1)).GetComponent<dfButton>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_01").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_02").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_03").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_12").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_13").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_23").GetComponent<dfSprite>());
-        Driods.Add(DriodContainer.transform.FindChild("Driod1").GetComponent<dfButton>());
-        Driods.Add(DriodContainer.transform.FindChild("Driod2").GetComponent<dfButton>());
-        Driods.Add(DriodContainer.transform.FindChild("Driod3").GetComponent<dfButton>());
-        Driods.Add(DriodContainer.transform.FindChild("Driod4").GetComponent<dfButton>());
-        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod1").GetComponent<dfSprite>());
-        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod2").GetComponent<dfSprite>());
-        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod3").GetComponent<dfSprite>());
-        DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod4").GetComponent<dfSprite>());
+        for (int i = 0; i < 4; i++)
+            Driods.Add(DriodContainer.transform.FindChild("Driod" + (i + 1)).GetComponent<dfButton>());
+        for (int i = 0; i < 4; i++)
+            DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod" + (i + 1)).GetComponent<dfSprite>());
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
         MonsterBContainer = transform.FindChild("MonsterBInfo").gameObject;
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator1").GetComponent<dfLabel>());
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator2").GetComponent<dfLabel>());
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator3").GetComponent<dfLabel>());
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator4").GetComponent<dfLabel>());
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator5").GetComponent<dfLabel>());
-        TxtIndicators.Add(transform.FindChild("HappenstanceIndicator6").GetComponent<dfLabel>());
+        for (int i = 0; i < 7; i++)
+            TxtIndicators.Add(transform.FindChild("HappenstanceIndicator"+(i+1)).GetComponent<dfLabel>());
         MonsterAElement = MonsterAContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
         MonsterBElement = MonsterBContainer.transform.FindChild("MonsterElement").GetComponent<dfSprite>();
         MonsterALevel = MonsterAContainer.transform.FindChild("BG_MonsterLevel").FindChild("MonsterLevel").gameObject;
@@ -492,34 +480,34 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateHealth()
     {
-        int friendlyHP = GameManager.Singleton.Player.CurCreature.HP;
-        int friendlyMaxHP = GameManager.Singleton.Player.CurCreature.HPMax;
-        int enemyHP = GameManager.Singleton.Player.CurFight.EnemyCreature.HP;
-        int enemyMaxHP = GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
+        int friendlyHp = GameManager.Singleton.Player.CurCreature.HP;
+        int friendlyMaxHp = GameManager.Singleton.Player.CurCreature.HPMax;
+        int enemyHp = GameManager.Singleton.Player.CurFight.EnemyCreature.HP;
+        int enemyMaxHp = GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
 
-        if (friendlyHP > 0)
+        if (friendlyHp > 0)
         {
             MonsterAHealthText.GetComponent<dfLabel>().Text =
-                friendlyHP + "/" + friendlyMaxHP;
+                friendlyHp + "/" + friendlyMaxHp;
             MonsterAHealth.GetComponent<dfProgressBar>().Value = 
-                (float)friendlyHP / friendlyMaxHP;
+                (float)friendlyHp / friendlyMaxHp;
         }
         else
         {
-            MonsterAHealthText.GetComponent<dfLabel>().Text = "0/" + friendlyMaxHP;
+            MonsterAHealthText.GetComponent<dfLabel>().Text = "0/" + friendlyMaxHp;
             MonsterAHealth.GetComponent<dfProgressBar>().Value = 0;
         }
 
-        if (enemyHP > 0)
+        if (enemyHp > 0)
         {
             MonsterBHealthText.GetComponent<dfLabel>().Text =
-                enemyHP + "/" + enemyMaxHP;
+                enemyHp + "/" + enemyMaxHp;
             MonsterBHealth.GetComponent<dfProgressBar>().Value =
-                (float)enemyHP / enemyMaxHP;
+                (float)enemyHp / enemyMaxHp;
         }
         else
         {
-            MonsterBHealthText.GetComponent<dfLabel>().Text = "0/" + enemyMaxHP;
+            MonsterBHealthText.GetComponent<dfLabel>().Text = "0/" + enemyMaxHp;
             MonsterBHealth.GetComponent<dfProgressBar>().Value = 0;
         }
 

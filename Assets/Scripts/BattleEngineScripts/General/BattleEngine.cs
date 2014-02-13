@@ -211,11 +211,11 @@ public class BattleEngine : SceneRoot3D
         {
             case FightRoundResult.Player.A:
                 _actor.transform.position = FriendlyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.LookAt(EnemyCreature.transform);
+                _actor.transform.rotation = FriendlyCreature.transform.FindChild("CastFromMouthPos").rotation;
                 break;
             case FightRoundResult.Player.B:
                 _actor.transform.position = EnemyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.LookAt(FriendlyCreature.transform);
+                _actor.transform.rotation = EnemyCreature.transform.FindChild("CastFromMouthPos").rotation;
                 break;
         }
     }
