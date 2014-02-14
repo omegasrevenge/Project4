@@ -190,15 +190,23 @@ public class BattleEngine : SceneRoot3D
     {
         Turn = Result.Turn;
 
-        CurCaster.GetComponent<MonsterAnimationController>().DoAnim(Result.SkillName);
+        CurCaster.GetComponent<MonsterAnimationController>()
+            .DoAnim(Extract(Result.SkillName, "Animation"));
 
-        if (Resources.Load("Battle/" + Result.SkillName) == null)
+        if (Resources.Load("Battle/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
-            Debug.LogError("The skill >" + Result.SkillName + "< does not exist. Casting Laser instead.");
+            Debug.LogError("The skill >" + Result.SkillName + "< does not exist in Techtree. Casting Laser instead.");
             createSkillVisuals("Laser");
             return;
         }
-        createSkillVisuals(Result.SkillName);
+        createSkillVisuals(Extract(Result.SkillName, "Asset_Name"));
+    }
+
+    public string Extract(string skillName, string info)
+    {
+		if (GameManager.Singleton.Techtree [skillName] == null)
+		    return info.Equals("Animation") ? "atk_var_1" : "Laser";
+        return (string)GameManager.Singleton.Techtree[skillName][info];
     }
 
     private void createSkillVisuals(string name)
@@ -222,6 +230,9 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
+        if (Result.Damage > 0)
+            CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
+
         var info = new List<GUIObjectBattleEngine.IndicatorContent>
         {
             new GUIObjectBattleEngine.IndicatorContent(CurCaster, Result.SkillName, 0)

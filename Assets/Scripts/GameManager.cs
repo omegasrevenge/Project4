@@ -729,7 +729,7 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
         JSONObject turnJSON = json["data"];
-        if (!(bool)turnJSON) yield break;
+        if (!turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
         Debug.Log("!!!!!!!!!!!!!!a " + request.text);
     }
@@ -787,7 +787,7 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json)) { yield break; }
         JSONObject turnJSON = json["data"];
-        if (!(bool)turnJSON) yield break;
+        if (!turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
         Debug.Log("!!!!!!!!!!!!!!b " + request.text);
     }
@@ -802,7 +802,7 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("fightdelete"));
         yield return request;
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        CheckResult(json);
     }
 
     /// <summary>

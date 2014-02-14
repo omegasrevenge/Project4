@@ -23,6 +23,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public GameObject MonsterAHealthText;
     public GameObject MonsterBHealthText;
     public GameObject DriodContainer;
+    public dfProgressBar MonsterAHealthBg;
+    public dfProgressBar MonsterBHealthBg;
     public dfPanel GGContainer;
     public dfSprite MonsterACon;
     public dfSprite MonsterBCon;
@@ -145,8 +147,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBLevel = MonsterBContainer.transform.FindChild("BG_MonsterLevel").FindChild("MonsterLevel").gameObject;
         MonsterAName = MonsterAContainer.transform.FindChild("MonsterName").gameObject;
         MonsterBName = MonsterBContainer.transform.FindChild("MonsterName").gameObject;
-        MonsterAHealth = MonsterAContainer.transform.FindChild("MonsterHealthProgress").gameObject;
-        MonsterBHealth = MonsterBContainer.transform.FindChild("MonsterHealthProgress").gameObject;
+        MonsterAHealthBg = MonsterAContainer.transform.FindChild("MonsterHealth").GetComponent<dfProgressBar>();
+        MonsterBHealthBg = MonsterBContainer.transform.FindChild("MonsterHealth").GetComponent<dfProgressBar>();
+        MonsterAHealth = MonsterAHealthBg.transform.FindChild("MonsterHealthProgress").gameObject;
+        MonsterBHealth = MonsterBHealthBg.transform.FindChild("MonsterHealthProgress").gameObject;
         MonsterAHealthText = MonsterAHealth.transform.FindChild("MonsterHealthText").gameObject;
         MonsterBHealthText = MonsterBHealth.transform.FindChild("MonsterHealthText").gameObject;
         MonsterACon = MonsterAContainer.transform.FindChild("ConIndicator").GetComponent<dfSprite>();
@@ -480,9 +484,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateHealth()
     {
-        int friendlyHp = GameManager.Singleton.Player.CurCreature.HP;
+		int friendlyHp = BattleEngine.Current.Result != null ? BattleEngine.Current.Result.MonsterAHP : GameManager.Singleton.Player.CurCreature.HP;
         int friendlyMaxHp = GameManager.Singleton.Player.CurCreature.HPMax;
-        int enemyHp = GameManager.Singleton.Player.CurFight.EnemyCreature.HP;
+		int enemyHp = BattleEngine.Current.Result != null ? BattleEngine.Current.Result.MonsterBHP : GameManager.Singleton.Player.CurFight.EnemyCreature.HP;
         int enemyMaxHp = GameManager.Singleton.Player.CurFight.EnemyCreature.HPMax;
 
         if (friendlyHp > 0)

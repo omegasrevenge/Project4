@@ -1,27 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 public class MonsterAnimationController : MonoBehaviour
 {
-    private const string Exhausted = "Exhausted";
-    private const string Bored = "Bored";
-    private const string Attack = "Attack";
-    private const string SpellRoarCast = "SpellRoarCast";
-
-    private bool  _isPlaying = false;
-    private float _delay = 0f;
+    private bool  _isPlaying;
+    private float _delay;
     private string _animName = "";
-    private float _idleTime = 0f;
+    private float _idleTime;
 
     public void DoAnim(string animName, float delay = 0f)
     {
+        if (string.IsNullOrEmpty(animName))
+        {
+            Debug.LogError("string.IsNullOrEmpty(animName) == true!");
+            return;
+        }
+
         _isPlaying = true;
         _delay = delay;
         _animName = animName;
     }
 	
+// ReSharper disable once UnusedMember.Local
 	void Update ()
 	{
         DifferentIdlesController();
@@ -34,38 +34,25 @@ public class MonsterAnimationController : MonoBehaviour
 
         if(!_isPlaying) return;
 
-	    _idleTime = 0f;
-        StartSkill();
+        _idleTime = 0f;
+        Trigger(_animName);
 	    _isPlaying = false;
 	}
 
     public void DifferentIdlesController()
     {
-        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FightIdle"))
             _idleTime += Time.deltaTime;
 
-        if (_idleTime >= 5f)
-            if (Random.Range(0, 2) > 0) Trigger(Bored);
+        if (_idleTime < 5f) return;
 
+        if (Random.Range(0, 2) > 0) Trigger("FightIdle_to_Agitated");
         _idleTime = 0f;
-    }
-
-    public void StartSkill()
-    {
-        switch (_animName)
-        {
-            case "Default":
-                Trigger(SpellRoarCast);
-                break;
-            default:
-                Debug.LogError("MonsterAnimatorController of " + gameObject.name + " does not known how to animate " + _animName + ". Please implement it.");
-                break;
-        }
     }
 
     public void Trigger(string triggerName)
     {
-        GetComponent<Animator>().SetTrigger(triggerName);
+		GetComponent<Animator>().SetTrigger(triggerName);
     }
 
 }

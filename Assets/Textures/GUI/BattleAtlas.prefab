@@ -43,8 +43,8 @@ MonoBehaviour:
   - name: combat_catch_nce
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .481933594
+      x: .522216797
+      y: .198730469
       width: .0173339844
       height: .03515625
     border:
@@ -60,8 +60,8 @@ MonoBehaviour:
   - name: combat_catch_vengea
     region:
       serializedVersion: 2
-      x: .237548828
-      y: .481933594
+      x: .979736328
+      y: .17578125
       width: .0173339844
       height: .03515625
     border:
@@ -77,8 +77,8 @@ MonoBehaviour:
   - name: combat_driod_energy
     region:
       serializedVersion: 2
-      x: .847167969
-      y: .215820312
+      x: .957275391
+      y: 0
       width: .0361328125
       height: .078125
     border:
@@ -94,8 +94,8 @@ MonoBehaviour:
   - name: combat_driod_fire
     region:
       serializedVersion: 2
-      x: .883789062
-      y: .234375
+      x: .540283203
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -111,8 +111,8 @@ MonoBehaviour:
   - name: combat_driod_level_1
     region:
       serializedVersion: 2
-      x: .920410156
-      y: .234375
+      x: .448974609
+      y: .198730469
       width: .0361328125
       height: .078125
     border:
@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: combat_driod_level_2
     region:
       serializedVersion: 2
-      x: .95703125
-      y: .234375
+      x: .485595703
+      y: .198730469
       width: .0361328125
       height: .078125
     border:
@@ -145,8 +145,8 @@ MonoBehaviour:
   - name: combat_driod_level_3
     region:
       serializedVersion: 2
-      x: .299316406
-      y: .274414062
+      x: .576904297
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -162,8 +162,8 @@ MonoBehaviour:
   - name: combat_driod_level_4
     region:
       serializedVersion: 2
-      x: 0
-      y: .323730469
+      x: .613525391
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -179,8 +179,8 @@ MonoBehaviour:
   - name: combat_driod_level_5
     region:
       serializedVersion: 2
-      x: .0366210938
-      y: .323730469
+      x: .650146484
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -196,8 +196,8 @@ MonoBehaviour:
   - name: combat_driod_life
     region:
       serializedVersion: 2
-      x: .0732421875
-      y: .323730469
+      x: .686767578
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -213,8 +213,8 @@ MonoBehaviour:
   - name: combat_driod_storm
     region:
       serializedVersion: 2
-      x: .109863281
-      y: .323730469
+      x: .723388672
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -230,8 +230,8 @@ MonoBehaviour:
   - name: combat_driod_water
     region:
       serializedVersion: 2
-      x: .146484375
-      y: .323730469
+      x: .760009766
+      y: .166503906
       width: .0361328125
       height: .078125
     border:
@@ -247,8 +247,8 @@ MonoBehaviour:
   - name: combat_flee_nce
     region:
       serializedVersion: 2
-      x: .255371094
-      y: .481933594
+      x: .979736328
+      y: .211914062
       width: .0173339844
       height: .03515625
     border:
@@ -264,8 +264,8 @@ MonoBehaviour:
   - name: combat_flee_vengea
     region:
       serializedVersion: 2
-      x: .273193359
-      y: .481933594
+      x: .957275391
+      y: .0791015625
       width: .0173339844
       height: .03515625
     border:
@@ -282,7 +282,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: 0
+      y: .176757812
       width: .149169922
       height: .106933594
     border:
@@ -298,7 +298,7 @@ MonoBehaviour:
   - name: combat_panel_vengea
     region:
       serializedVersion: 2
-      x: .149658203
+      x: .117675781
       y: 0
       width: .149169922
       height: .106933594
@@ -315,8 +315,8 @@ MonoBehaviour:
   - name: combat_slot
     region:
       serializedVersion: 2
-      x: .183105469
-      y: .323730469
+      x: .796630859
+      y: .17578125
       width: .0361328125
       height: .078125
     border:
@@ -332,8 +332,8 @@ MonoBehaviour:
   - name: combat_slot_active_nce
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .323730469
+      x: .833251953
+      y: .17578125
       width: .0361328125
       height: .078125
     border:
@@ -349,8 +349,8 @@ MonoBehaviour:
   - name: combat_slot_active_vengea
     region:
       serializedVersion: 2
-      x: .256347656
-      y: .323730469
+      x: .869873047
+      y: .17578125
       width: .0361328125
       height: .078125
     border:
@@ -366,8 +366,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy01
     region:
       serializedVersion: 2
-      x: .3359375
-      y: .274414062
+      x: .906494141
+      y: .17578125
       width: .0361328125
       height: .078125
     border:
@@ -383,8 +383,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy02
     region:
       serializedVersion: 2
-      x: .372558594
-      y: .274414062
+      x: .943115234
+      y: .17578125
       width: .0361328125
       height: .078125
     border:
@@ -400,8 +400,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy03
     region:
       serializedVersion: 2
-      x: .409179688
-      y: .274414062
+      x: .522216797
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -417,8 +417,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy04
     region:
       serializedVersion: 2
-      x: .445800781
-      y: .274414062
+      x: .558837891
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -434,8 +434,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy05
     region:
       serializedVersion: 2
-      x: .482421875
-      y: .274414062
+      x: .595458984
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -451,8 +451,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy06
     region:
       serializedVersion: 2
-      x: .519042969
-      y: .274414062
+      x: .632080078
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -468,8 +468,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy07
     region:
       serializedVersion: 2
-      x: .555664062
-      y: .274414062
+      x: .668701172
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -485,8 +485,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy08
     region:
       serializedVersion: 2
-      x: .592285156
-      y: .274414062
+      x: .705322266
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -502,8 +502,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy09
     region:
       serializedVersion: 2
-      x: .62890625
-      y: .274414062
+      x: .741943359
+      y: .245605469
       width: .0361328125
       height: .078125
     border:
@@ -519,8 +519,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_energy10
     region:
       serializedVersion: 2
-      x: .665527344
-      y: .274414062
+      x: .778564453
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -536,8 +536,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire01
     region:
       serializedVersion: 2
-      x: .702148438
-      y: .274414062
+      x: .815185547
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -553,8 +553,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire02
     region:
       serializedVersion: 2
-      x: .738769531
-      y: .274414062
+      x: .851806641
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -570,8 +570,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire03
     region:
       serializedVersion: 2
-      x: .775390625
-      y: .274414062
+      x: .888427734
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -587,8 +587,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire04
     region:
       serializedVersion: 2
-      x: .812011719
-      y: .294921875
+      x: .925048828
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -604,8 +604,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire05
     region:
       serializedVersion: 2
-      x: .848632812
-      y: .313476562
+      x: .961669922
+      y: .254882812
       width: .0361328125
       height: .078125
     border:
@@ -621,8 +621,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire06
     region:
       serializedVersion: 2
-      x: .885253906
-      y: .313476562
+      x: .182617188
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -638,8 +638,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire07
     region:
       serializedVersion: 2
-      x: .921875
-      y: .313476562
+      x: .219238281
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -655,8 +655,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire08
     region:
       serializedVersion: 2
-      x: .958496094
-      y: .313476562
+      x: .255859375
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -672,8 +672,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire09
     region:
       serializedVersion: 2
-      x: .29296875
-      y: .353515625
+      x: .292480469
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -689,8 +689,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_fire10
     region:
       serializedVersion: 2
-      x: 0
-      y: .402832031
+      x: .329101562
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -706,8 +706,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life01
     region:
       serializedVersion: 2
-      x: .0366210938
-      y: .402832031
+      x: .365722656
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -723,8 +723,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life02
     region:
       serializedVersion: 2
-      x: .0732421875
-      y: .402832031
+      x: .40234375
+      y: .215820312
       width: .0361328125
       height: .078125
     border:
@@ -740,8 +740,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life03
     region:
       serializedVersion: 2
-      x: .109863281
-      y: .402832031
+      x: .438964844
+      y: .277832031
       width: .0361328125
       height: .078125
     border:
@@ -757,8 +757,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life04
     region:
       serializedVersion: 2
-      x: .146484375
-      y: .402832031
+      x: .475585938
+      y: .277832031
       width: .0361328125
       height: .078125
     border:
@@ -774,8 +774,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life05
     region:
       serializedVersion: 2
-      x: .183105469
-      y: .402832031
+      x: .512207031
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -791,8 +791,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life06
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .402832031
+      x: .548828125
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -808,8 +808,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life07
     region:
       serializedVersion: 2
-      x: .256347656
-      y: .402832031
+      x: .585449219
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -825,8 +825,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life08
     region:
       serializedVersion: 2
-      x: .329589844
-      y: .353515625
+      x: .622070312
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -842,8 +842,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life09
     region:
       serializedVersion: 2
-      x: .366210938
-      y: .353515625
+      x: .658691406
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -859,8 +859,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_life10
     region:
       serializedVersion: 2
-      x: .402832031
-      y: .353515625
+      x: .6953125
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -876,8 +876,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm01
     region:
       serializedVersion: 2
-      x: .439453125
-      y: .353515625
+      x: .731933594
+      y: .324707031
       width: .0361328125
       height: .078125
     border:
@@ -893,8 +893,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm02
     region:
       serializedVersion: 2
-      x: .476074219
-      y: .353515625
+      x: .768554688
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -910,8 +910,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm03
     region:
       serializedVersion: 2
-      x: .512695312
-      y: .353515625
+      x: .805175781
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -927,8 +927,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm04
     region:
       serializedVersion: 2
-      x: .549316406
-      y: .353515625
+      x: .841796875
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -944,8 +944,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm05
     region:
       serializedVersion: 2
-      x: .5859375
-      y: .353515625
+      x: .878417969
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -961,8 +961,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm06
     region:
       serializedVersion: 2
-      x: .622558594
-      y: .353515625
+      x: .915039062
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -978,8 +978,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm07
     region:
       serializedVersion: 2
-      x: .659179688
-      y: .353515625
+      x: .951660156
+      y: .333984375
       width: .0361328125
       height: .078125
     border:
@@ -995,8 +995,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm08
     region:
       serializedVersion: 2
-      x: .695800781
-      y: .353515625
+      x: .182617188
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1012,8 +1012,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm09
     region:
       serializedVersion: 2
-      x: .732421875
-      y: .353515625
+      x: .219238281
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1029,8 +1029,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_storm10
     region:
       serializedVersion: 2
-      x: .769042969
-      y: .353515625
+      x: .255859375
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1046,8 +1046,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water01
     region:
       serializedVersion: 2
-      x: .805664062
-      y: .374023438
+      x: .292480469
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1063,8 +1063,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water02
     region:
       serializedVersion: 2
-      x: .842285156
-      y: .392578125
+      x: .329101562
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1080,8 +1080,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water03
     region:
       serializedVersion: 2
-      x: .87890625
-      y: .392578125
+      x: .365722656
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1097,8 +1097,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water04
     region:
       serializedVersion: 2
-      x: .915527344
-      y: .392578125
+      x: .40234375
+      y: .294921875
       width: .0361328125
       height: .078125
     border:
@@ -1114,8 +1114,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water05
     region:
       serializedVersion: 2
-      x: .952148438
-      y: .392578125
+      x: .438964844
+      y: .356933594
       width: .0361328125
       height: .078125
     border:
@@ -1131,8 +1131,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water06
     region:
       serializedVersion: 2
-      x: .29296875
-      y: .432617188
+      x: .475585938
+      y: .356933594
       width: .0361328125
       height: .078125
     border:
@@ -1148,8 +1148,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water07
     region:
       serializedVersion: 2
-      x: 0
-      y: .481933594
+      x: .512207031
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1165,8 +1165,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water08
     region:
       serializedVersion: 2
-      x: .0366210938
-      y: .481933594
+      x: .548828125
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1182,8 +1182,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water09
     region:
       serializedVersion: 2
-      x: .0732421875
-      y: .481933594
+      x: .585449219
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1199,8 +1199,8 @@ MonoBehaviour:
   - name: combat_slot_imprint_water10
     region:
       serializedVersion: 2
-      x: .109863281
-      y: .481933594
+      x: .622070312
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1216,8 +1216,8 @@ MonoBehaviour:
   - name: combat_slot_status
     region:
       serializedVersion: 2
-      x: .146484375
-      y: .481933594
+      x: .658691406
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1233,8 +1233,8 @@ MonoBehaviour:
   - name: combat_slot_status_filled
     region:
       serializedVersion: 2
-      x: .183105469
-      y: .481933594
+      x: .6953125
+      y: .403808594
       width: .0361328125
       height: .078125
     border:
@@ -1250,8 +1250,8 @@ MonoBehaviour:
   - name: connection_nce_1to2
     region:
       serializedVersion: 2
-      x: .299316406
-      y: 0
+      x: 0
+      y: .284667969
       width: .149169922
       height: .106933594
     border:
@@ -1267,8 +1267,8 @@ MonoBehaviour:
   - name: connection_nce_1to3
     region:
       serializedVersion: 2
-      x: .448974609
-      y: 0
+      x: 0
+      y: .392578125
       width: .149169922
       height: .106933594
     border:
@@ -1284,8 +1284,8 @@ MonoBehaviour:
   - name: connection_nce_1to4
     region:
       serializedVersion: 2
-      x: .598632812
-      y: 0
+      x: 0
+      y: .500488281
       width: .149169922
       height: .106933594
     border:
@@ -1301,8 +1301,8 @@ MonoBehaviour:
   - name: connection_nce_2to3
     region:
       serializedVersion: 2
-      x: .748291016
-      y: 0
+      x: 0
+      y: .608398438
       width: .149169922
       height: .106933594
     border:
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     region:
       serializedVersion: 2
       x: 0
-      y: .107910156
+      y: .716308594
       width: .149169922
       height: .106933594
     border:
@@ -1335,8 +1335,8 @@ MonoBehaviour:
   - name: connection_nce_3to4
     region:
       serializedVersion: 2
-      x: .149658203
-      y: .107910156
+      x: 0
+      y: .82421875
       width: .149169922
       height: .106933594
     border:
@@ -1352,8 +1352,8 @@ MonoBehaviour:
   - name: connection_vengea_1to2
     region:
       serializedVersion: 2
-      x: .299316406
-      y: .107910156
+      x: .267333984
+      y: 0
       width: .149169922
       height: .106933594
     border:
@@ -1369,8 +1369,8 @@ MonoBehaviour:
   - name: connection_vengea_1to3
     region:
       serializedVersion: 2
-      x: .448974609
-      y: .107910156
+      x: .416992188
+      y: 0
       width: .149169922
       height: .106933594
     border:
@@ -1386,8 +1386,8 @@ MonoBehaviour:
   - name: connection_vengea_1to4
     region:
       serializedVersion: 2
-      x: .598632812
-      y: .107910156
+      x: .566650391
+      y: 0
       width: .149169922
       height: .106933594
     border:
@@ -1403,8 +1403,8 @@ MonoBehaviour:
   - name: connection_vengea_2to3
     region:
       serializedVersion: 2
-      x: .748291016
-      y: .107910156
+      x: .716308594
+      y: 0
       width: .149169922
       height: .106933594
     border:
@@ -1420,8 +1420,8 @@ MonoBehaviour:
   - name: connection_vengea_2to4
     region:
       serializedVersion: 2
-      x: 0
-      y: .215820312
+      x: .149658203
+      y: .107910156
       width: .149169922
       height: .106933594
     border:
@@ -1437,8 +1437,8 @@ MonoBehaviour:
   - name: connection_vengea_3to4
     region:
       serializedVersion: 2
-      x: .149658203
-      y: .215820312
+      x: .299316406
+      y: .107910156
       width: .149169922
       height: .106933594
     border:
@@ -1454,8 +1454,8 @@ MonoBehaviour:
   - name: spectre_stats_element_energy
     region:
       serializedVersion: 2
-      x: .897949219
-      y: 0
+      x: 0
+      y: .932128906
       width: .0908203125
       height: .0576171875
     border:
@@ -1471,8 +1471,8 @@ MonoBehaviour:
   - name: spectre_stats_element_fire
     region:
       serializedVersion: 2
-      x: .897949219
-      y: .05859375
+      x: .0913085938
+      y: .932128906
       width: .0908203125
       height: .0576171875
     border:
@@ -1488,8 +1488,8 @@ MonoBehaviour:
   - name: spectre_stats_element_life
     region:
       serializedVersion: 2
-      x: .897949219
-      y: .1171875
+      x: .865966797
+      y: 0
       width: .0908203125
       height: .0576171875
     border:
@@ -1505,8 +1505,8 @@ MonoBehaviour:
   - name: spectre_stats_element_storm
     region:
       serializedVersion: 2
-      x: .897949219
-      y: .17578125
+      x: .865966797
+      y: .05859375
       width: .0908203125
       height: .0576171875
     border:
@@ -1522,8 +1522,8 @@ MonoBehaviour:
   - name: spectre_stats_element_water
     region:
       serializedVersion: 2
-      x: .299316406
-      y: .215820312
+      x: .448974609
+      y: .107910156
       width: .0908203125
       height: .0576171875
     border:
@@ -1539,8 +1539,8 @@ MonoBehaviour:
   - name: spectre_stats_healthbar_empty
     region:
       serializedVersion: 2
-      x: .329589844
-      y: .432617188
+      x: 0
+      y: .990722656
       width: .0622558594
       height: .00537109375
     border:
@@ -1556,8 +1556,8 @@ MonoBehaviour:
   - name: spectre_stats_healthbar_full
     region:
       serializedVersion: 2
-      x: .392333984
-      y: .432617188
+      x: .0627441406
+      y: .990722656
       width: .0622558594
       height: .00537109375
     border:
@@ -1573,8 +1573,8 @@ MonoBehaviour:
   - name: spectre_stats_level
     region:
       serializedVersion: 2
-      x: .390625
-      y: .215820312
+      x: .540283203
+      y: .107910156
       width: .0908203125
       height: .0576171875
     border:
@@ -1590,8 +1590,8 @@ MonoBehaviour:
   - name: spectre_stats_status_boost
     region:
       serializedVersion: 2
-      x: .481933594
-      y: .215820312
+      x: .631591797
+      y: .107910156
       width: .0908203125
       height: .0576171875
     border:
@@ -1607,8 +1607,8 @@ MonoBehaviour:
   - name: spectre_stats_status_confused
     region:
       serializedVersion: 2
-      x: .573242188
-      y: .215820312
+      x: .722900391
+      y: .107910156
       width: .0908203125
       height: .0576171875
     border:
@@ -1624,8 +1624,8 @@ MonoBehaviour:
   - name: spectre_stats_status_dot
     region:
       serializedVersion: 2
-      x: .664550781
-      y: .215820312
+      x: .814208984
+      y: .1171875
       width: .0908203125
       height: .0576171875
     border:
@@ -1641,8 +1641,8 @@ MonoBehaviour:
   - name: spectre_stats_status_hot
     region:
       serializedVersion: 2
-      x: .755859375
-      y: .215820312
+      x: .905517578
+      y: .1171875
       width: .0908203125
       height: .0576171875
     border:
@@ -1653,6 +1653,40 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 372, y: 118}
     textureGUID: fb32348806153254fbb71d24ca8d70f7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: transparent
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .1171875
+      height: .17578125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 480, y: 360}
+    textureGUID: 2f0b64ac74107e0459ce29eba9d485ab
+    deleted: 0
+    texture: {fileID: 0}
+  - name: white
+    region:
+      serializedVersion: 2
+      x: .448974609
+      y: .166503906
+      width: .0908203125
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 372, y: 64}
+    textureGUID: efafc5b2d6f73d248bf8e062b4b2e528
     deleted: 0
     texture: {fileID: 0}
   generator: 0
