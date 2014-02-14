@@ -13,6 +13,7 @@ public class Creature
 	public int HP;
 	public int HPMax;
 	public int Damage;
+	public int Version;
 	public int Defense;
 	public int Dexterity;
 	public int Skillpoints;
@@ -47,6 +48,7 @@ public class Creature
 		XP = (int)json["XP"];
         Level = (int)json["Level"];
 		HP = (int)json["HP"];
+		Version = (int)json["Version"];
 		HPMax = (int)json["HPMax"];
 		Damage = (int)json["Damage"];
 		Defense = (int)json["Defense"];

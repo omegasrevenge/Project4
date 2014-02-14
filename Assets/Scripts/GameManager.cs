@@ -331,6 +331,10 @@ public class GameManager : MonoBehaviour
             {
                 sSessUrl += "&fv=" + Player.CurFight.Version;
             }
+			if (Player.CurCreature != null)
+			{
+				sSessUrl += "&cv=" + Player.CurCreature.Version;
+			}
 		}
         WWW request = new WWW(sSessUrl);
 
