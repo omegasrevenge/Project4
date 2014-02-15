@@ -2,10 +2,14 @@
 
 public class HealthBarController : MonoBehaviour
 {
-    public const float InterpolationSpeed = 0.05f;
+
+    public const float InterpolationSpeed = 0.035f;
 
     public dfProgressBar RedBar;
     public dfProgressBar GreenBar;
+
+	private bool _processing;
+	private float _delay = 0f;
 
 	void Start ()
     {
@@ -21,8 +25,23 @@ public class HealthBarController : MonoBehaviour
 	    if (Mathf.Abs(RedBar.Value - GreenBar.Value) < 0.02f)
         {
             RedBar.Value = GreenBar.Value;
+			_processing = false;
             return;
         }
-        RedBar.Value = RedBar.Value * (1-InterpolationSpeed) + GreenBar.Value * InterpolationSpeed;
+
+		if(!_processing && RedBar.Value != GreenBar.Value)
+		{
+			_processing = true;
+			_delay = 3f;
+		}
+
+		if (_processing && _delay > 0f) 
+		{
+			_delay -= Time.deltaTime;
+			return;
+		}
+
+		if(_processing && _delay <= 0f)
+        	RedBar.Value = RedBar.Value * (1-InterpolationSpeed) + GreenBar.Value * InterpolationSpeed;
 	}
 }
