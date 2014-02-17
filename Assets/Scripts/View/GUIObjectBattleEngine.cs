@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
 
 public class GUIObjectBattleEngine : MonoBehaviour
 {
     public List<int> InputText;
-    public float GUIDistance = 1.5f;
+    public float GUIDistance = 1.34f;
     public float DamageIndicatorMoveUpSpeed = 0.1f;
 
+    private float _buttonClickTimer = 0f;
     private const string Prefab = "GUI/panel_battleui";
     private int _lastButton = -1;
 
@@ -26,6 +28,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public dfProgressBar MonsterAHealthBg;
     public dfProgressBar MonsterBHealthBg;
     public dfPanel GGContainer;
+    public dfPanel CatchContainer;
+    public dfPanel CatchContainerVisual;
     public dfSprite MonsterACon;
     public dfSprite MonsterBCon;
     public dfSprite MonsterADot;
@@ -40,6 +44,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public List<dfSprite> ComboIndicators;
     public List<dfButton> DriodSlots;
     public List<dfButton> Driods;
+    public List<dfButton> CatchDriods;
+    public List<dfButton> CatchDriodsVisual;
+    public List<dfButton> CatchDriodPos; 
     public List<dfLabel> TxtIndicators;
     public List<dfSprite> DriodsHealth;
 	public List<List<GameManager.ResourceElement>> DriodImprint;
@@ -122,6 +129,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
         InputText = new List<int>();
         ComboIndicators = new List<dfSprite>();
         DriodSlots = new List<dfButton>();
+        CatchDriods = new List<dfButton>();
+        CatchDriodsVisual = new List<dfButton>();
+        CatchDriodPos = new List<dfButton>();
         GGContainer = transform.FindChild("GGScreen").GetComponent<dfPanel>();
 		ButtonExecute = transform.FindChild("ExecuteButton").GetComponent<dfButton>();
         DriodContainer = transform.FindChild("ButtonContainer").FindChild("BG_Driods").gameObject;
@@ -161,6 +171,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterBHot = MonsterBContainer.transform.FindChild("HotIndicator").GetComponent<dfSprite>();
         MonsterABuff = MonsterAContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
         MonsterBBuff = MonsterBContainer.transform.FindChild("DefIndicator").GetComponent<dfSprite>();
+        CatchContainer = transform.FindChild("CatchContainer").GetComponent<dfPanel>();
+        CatchContainerVisual = transform.FindChild("CatchContainerVisual").GetComponent<dfPanel>();
+        for (int i = 0; i < 6; i++)
+        {
+            CatchDriodPos.Add(CatchContainerVisual.transform.FindChild("level" + i + "_catch_driod_pos").GetComponent<dfButton>());
+            CatchDriods.Add(CatchContainer.transform.FindChild("ButtonContainer").FindChild("level" + i + "_catch_driod").GetComponent<dfButton>());
+            CatchDriodsVisual.Add(CatchContainerVisual.transform.FindChild("level" + i + "_catch_driod").GetComponent<dfButton>());
+        }
         for (int i = 0; i < Slots.Length; i++)
 			DriodImprint.Add(new List<GameManager.ResourceElement>());
         for (int i = 0; i < 4; i++)
@@ -190,12 +208,21 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     void Update()
     {
+        if (_buttonClickTimer > 0f)
+            _buttonClickTimer -= Time.deltaTime;
+
         if (BattleEngine.CurrentGameObject == null 
             || !BattleEngine.Current.Initialized 
             || !BattleEngine.Current.Fighting) 
             return;
 
         UpdateSelection();
+        if (CatchContainerVisual.IsVisible)
+        {
+            CatchContainerVisual.transform.position =
+                    (BattleEngine.Current.Camera.transform.FindChild("GUIPos").position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
+            CatchContainerVisual.transform.rotation = BattleEngine.Current.Camera.transform.rotation;
+        }
     }
 
     public void ShowDamageIndicators(List<IndicatorContent> info)
@@ -214,14 +241,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 content = info[i].value + " ";
 
             if (info[i].name.Length > 0)
-                content += info[i].name + "!";
+                content += info[i].name;
 
             TxtIndicators[i].Text = content;
 
             Vector3 startPos =
                 (info[i].target.transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
 
-            TxtIndicators[i].GetComponent<IndicatorController>().Play(startPos, 3f, new Vector3(0f, DamageIndicatorMoveUpSpeed * Time.deltaTime, 0f), 1f*i);
+            TxtIndicators[i].GetComponent<IndicatorController>().Play(startPos, 3f, Vector3.up * DamageIndicatorMoveUpSpeed * Time.deltaTime, 1f*i);
         }
     }
 
@@ -555,7 +582,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 	{
 		//Debug.Log("mouseup " + ctrl +" " + dfInputManager.ControlUnderMouse);
 
-		if (dfInputManager.ControlUnderMouse==ButtonExecute as dfControl) {ExecuteClicked();}
+		if (dfInputManager.ControlUnderMouse==ButtonExecute) {ExecuteClicked();}
 	}
 
 	public void ExecuteClicked()
@@ -591,8 +618,90 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void CatchKlicked()
     {
-        GameManager.Singleton.CatchAttempt();
+        if (GameManager.Singleton.Player.Resources == null) return;
+        CatchContainer.Show();
+        ButtonExecute.Hide();
+        MonsterAContainer.GetComponent<dfPanel>().Hide();
+        MonsterBContainer.GetComponent<dfPanel>().Hide();
+        DriodContainer.transform.parent.GetComponent<dfPanel>().Hide();
+        string element = "";
+        switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
+        {
+            case GameManager.ResourceElement.Energy:
+                element = "energy";
+                break;
+            case GameManager.ResourceElement.Fire:
+                element = "fire";
+                break;
+            case GameManager.ResourceElement.Nature:
+                element = "storm";
+                break;
+            case GameManager.ResourceElement.Storm:
+                element = "life";
+                break;
+            case GameManager.ResourceElement.Water:
+                element = "water";
+                break;
+        }
+        var enemyElement = (int) GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement;
+        for (int i = 0; i < CatchDriods.Count; i++)
+        {
+            CatchDriods[i].NormalBackgroundColor = GameManager.Singleton.Player.Resources[i + 1, enemyElement] > 0 ? Color.white : Color.gray;
+            CatchDriods[i].IsInteractive = GameManager.Singleton.Player.Resources[i + 1, enemyElement] > 0;
+            CatchDriods[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
+            CatchDriodsVisual[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
+        }
         DeleteSelection();
+    }
+
+    public void CatchAborted()
+    {
+        CatchContainer.Hide();
+        ButtonExecute.Show();
+        MonsterAContainer.GetComponent<dfPanel>().Show();
+		MonsterBContainer.GetComponent<dfPanel>().Show();
+        DriodContainer.transform.parent.GetComponent<dfPanel>().Show();
+    }
+
+    public void CatchButtonClick(int index)
+    {
+        if (_buttonClickTimer > 0f) return;
+        _buttonClickTimer = 1f;
+        if (GameManager.Singleton.Player.Resources[index, (int) GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement] < 1) return;
+        CatchDriodsVisual[index-1].transform.position = BattleEngine.Current.View.CatchDriodPos[index-1].transform.position;
+        CatchDriodsVisual[index-1].GetComponent<MoveTowards>().Play(BattleEngine.Current.EnemyCreature.transform.FindChild("MiddleOfBody"));
+        CatchAborted();
+        GameManager.Singleton.CatchAttempt(index);
+    }
+
+    public void FirstCatchButtonClicked()
+    {
+        CatchButtonClick(1);
+    }
+
+    public void SecondCatchButtonClicked()
+    {
+        CatchButtonClick(2);
+    }
+
+    public void ThirdCatchButtonClicked()
+    {
+        CatchButtonClick(3);
+    }
+
+    public void FourthCatchButtonClicked()
+    {
+        CatchButtonClick(4);
+    }
+
+    public void FifthCatchButtonClicked()
+    {
+        CatchButtonClick(5);
+    }
+
+    public void SixthCatchButtonClicked()
+    {
+        CatchButtonClick(6);
     }
 
     public void DeleteSelection()

@@ -62,12 +62,12 @@ public class Creature
 		for (int i = 0; i < jsonSlots.Count; i++)
 	    {
 		    slots[i] = new Slot()
-		    {
-			    fire = (int) jsonSlots[i]["Element0"],
-			    energy = (int) jsonSlots[i]["Element1"],
-			    nature = (int) jsonSlots[i]["Element2"],
-			    water = (int) jsonSlots[i]["Element3"],
-			    storm = (int) jsonSlots[i]["Element4"],
+            {
+                energy = (int)jsonSlots[i]["Element0"],
+                fire = (int)jsonSlots[i]["Element1"],
+                storm = (int)jsonSlots[i]["Element2"],
+			    nature = (int) jsonSlots[i]["Element3"],
+			    water = (int) jsonSlots[i]["Element4"],
 				driodenElement = (GameManager.ResourceElement)(int)jsonSlots[i]["EquipElement"],
 			    driodenHealth = (float)jsonSlots[i]["EquipHealth"],
 			    driodenLevel = (int) jsonSlots[i]["EquipLevel"],

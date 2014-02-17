@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public List<POI> POIs = new List<POI>();
     public float pois_timeQ;
     public bool pois_valid = false;
+    public bool BattleEngineSkipTurn = false;
     public string lastFarmResult = "";
 
     private List<Creature> _allOwnCreatures;
@@ -378,8 +379,12 @@ public class GameManager : MonoBehaviour
             }
         }
         //if (BattleEngine.CurrentGameObject != null && BattleEngine.CurrentGameObject.activeSelf) 
-        if(_fight)
+        if (_fight)
+        {
+            if (BattleEngineSkipTurn) BattleEngine.Current.SkipOneTurn = true;
+            BattleEngineSkipTurn = false;
             _fight.Result = Player.GetResult();
+        }
     }
 
     public void CheckStartFight()
@@ -749,20 +754,29 @@ public class GameManager : MonoBehaviour
         GetOwnPlayer();
     }
 
-    public void CatchAttempt()
+    public void CatchAttempt(int driodLevel)
     {
-        StartCoroutine(CCatchAttempt());
+        StartCoroutine(CCatchAttempt(driodLevel));
     }
 
-    private IEnumerator CCatchAttempt()
+    private IEnumerator CCatchAttempt(int driodLevel)
     {
-        Debug.Log("CATCH ATTEMPT");
-        WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + "&element="); //<---------------------------------
+        WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + driodLevel); //<---------------------------------
         yield return request;
         Debug.Log("CATCH ATTEMPT: " + request.text);
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        string message = "";
+        if ((bool)json["result"])
+            message = "Success!";
+        else
+            message = "Fail!";
+        BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
+        {
+            new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.EnemyCreature, message, 0)
+        });
+        //if (!CheckResult(json)) { yield break; }
+        BattleEngineSkipTurn = true;
         GetOwnPlayer();
     }
 

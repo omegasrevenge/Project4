@@ -13,7 +13,7 @@ public class BattleEngine : SceneRoot3D
 
 
     public int Turn = 0;
-
+    public bool SkipOneTurn = false;
 
     public GameObject FriendlyCreature;
     public GameObject EnemyCreature;
@@ -168,7 +168,14 @@ public class BattleEngine : SceneRoot3D
                 //
                 break;
             case TurnState.Execute:
-                turnInit();
+                if (SkipOneTurn)
+                {
+                    SkipOneTurn = false;
+                    Turn = Result.Turn;
+                    CurrentPlayer = Result.PlayerTurn;
+                    _results.Remove(Result);
+                    _currentStatus = TurnState.Wait;
+                } else turnInit();
                 break;
             case TurnState.Hit:
                 executeSkill();
@@ -202,16 +209,18 @@ public class BattleEngine : SceneRoot3D
         createSkillVisuals(Extract(Result.SkillName, "Asset_Name"));
     }
 
-    public string Extract(string skillName, string info)
+    public string Extract(string skillName, string extractionMode)
     {
-		if (GameManager.Singleton.Techtree [skillName] == null)
-		    return info.Equals("Animation") ? "atk_var_1" : "Laser";
-        return (string)GameManager.Singleton.Techtree[skillName][info];
+        if (GameManager.Singleton.Techtree[skillName] != null)
+            return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
+
+        Debug.LogError("Skill Name: "+skillName+" + Variable: "+extractionMode+" <- doesn't seem to be initialized.");
+        return extractionMode.Equals("Animation") ? "atk_var_1" : "Laser";
     }
 
-    private void createSkillVisuals(string name)
+    private void createSkillVisuals(string objName)
     {
-        _actor = CreateObject(transform, name, Vector3.zero, Quaternion.identity);
+        _actor = CreateObject(transform, objName, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         Actor.Owner = this;
 
