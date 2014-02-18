@@ -36,12 +36,6 @@ public class GUIObjectPopup : MonoBehaviour
         GUIObjectPopup obj = cntrl.GetComponent<GUIObjectPopup>();
         obj._root = root;
         obj._control = cntrl;
-
-        obj._root.Click += (control, @event) =>
-            {
-                SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-                if (obj.HidePopup != null) obj.HidePopup();
-            };
         return obj;
     }
 
@@ -108,7 +102,12 @@ public class GUIObjectPopup : MonoBehaviour
 
     public void OnPopupStart()
     {
-        _startTime = Time.time;
+        _root.Click += (control, @event) =>
+        {
+            SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+            if (HidePopup != null) HidePopup();
+        };
+        _startTime = Time.time;      
         if (_content != null) 
             _content.GetComponent<dfControl>().Show();
         if (StartCallback != null)

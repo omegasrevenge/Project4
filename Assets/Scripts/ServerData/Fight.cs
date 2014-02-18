@@ -29,6 +29,7 @@ public class Fight
         public int evade;
         public int weaken;
         public bool skip;
+        public bool challenger;
 
         public JSONObject Info;
 
@@ -49,6 +50,7 @@ public class Fight
             evade = (int) json["EVD"];
             weaken = (int)json["WEK"];
             skip = (bool)json["SKP"];
+            challenger = (bool) json["challenger"];
             //Debug.Log("FighterPid:" + PId);
         }
     }

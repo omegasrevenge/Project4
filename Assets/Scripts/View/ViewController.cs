@@ -202,6 +202,11 @@ public class ViewController : MonoBehaviour
         return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", count, level, element);
     }
 
+    public GUIObjectMessage ShowMessage()
+    {
+        return GUIObjectMessage.Create(_gui);
+    }
+
     public void ShowLoadingScreen(string text)
     {
         if (_loadingScreen == null)
