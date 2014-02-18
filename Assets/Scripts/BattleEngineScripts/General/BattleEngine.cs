@@ -200,9 +200,9 @@ public class BattleEngine : SceneRoot3D
         CurCaster.GetComponent<MonsterAnimationController>()
             .DoAnim(Extract(Result.SkillName, "Animation"));
 
-        if (Resources.Load("Battle/" + Extract(Result.SkillName, "Asset_Name")) == null)
+        if (Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
-            Debug.LogError("The skill >" + Result.SkillName + "< does not exist in Techtree. Casting Laser instead.");
+            Debug.LogWarning("The skill >" + Result.SkillName + "< does not exist in Techtree. Casting Laser instead.");
             createSkillVisuals("Laser");
             return;
         }
@@ -214,13 +214,13 @@ public class BattleEngine : SceneRoot3D
         if (GameManager.Singleton.Techtree[skillName] != null)
             return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
 
-        Debug.LogError("Skill Name: "+skillName+" + Variable: "+extractionMode+" <- doesn't seem to be initialized.");
+        Debug.LogWarning("Skill Name: "+skillName+" + Variable: "+extractionMode+" <- doesn't seem to be initialized.");
         return extractionMode.Equals("Animation") ? "atk_var_1" : "Laser";
     }
 
     private void createSkillVisuals(string objName)
     {
-        _actor = CreateObject(transform, objName, Vector3.zero, Quaternion.identity);
+        _actor = CreateObject(transform, "Skill/"+objName, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         Actor.Owner = this;
 
@@ -243,9 +243,7 @@ public class BattleEngine : SceneRoot3D
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
 
         var info = new List<GUIObjectBattleEngine.IndicatorContent>
-        {
-            new GUIObjectBattleEngine.IndicatorContent(CurCaster, Result.SkillName, 0)
-        };
+        { new GUIObjectBattleEngine.IndicatorContent(CurCaster, Result.SkillName, 0) };
 
         if (Result.Damage > 0)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, "DMG", Result.Damage));

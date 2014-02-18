@@ -782,17 +782,11 @@ public class GameManager : MonoBehaviour
         string message;
         float delay;
         if ((bool) json["result"])
-        {
-            delay = 0f;
             message = "Success!";
-        }
         else
-        {
-            delay = 0f;
             message = "Fail!";
-        }
         BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
-        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.FriendlyCreature, message, 0, 2f, delay) });
+        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.FriendlyCreature, message, 0, 2f) });
 		Debug.LogError (json);
         //if (!CheckResult(json)) { yield break; }
         BattleEngineSkipTurn = true;
