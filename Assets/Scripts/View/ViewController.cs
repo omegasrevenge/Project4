@@ -6,28 +6,18 @@ using UnityEngine;
 public class ViewController : MonoBehaviour
 {
     public const string UIRootTag = "GUI";
-    public const string MenuRootTag = "Menu";
     public const string RootPanelStr = "panel_root";
+    public const string MenuRootTag = "Menu";
     public const string CameraStr = "camera";
-
     public const string Blindtext = "blindtext";
+
+
 
     private static ViewController _instance;
 
-    private GameManager _gameManager;
-
     private dfControl _gui;
-    private dfControl _menu;
-
-    private MovableViewport     _guiViewport;
-    private MovableGUIViewport  _menuViewport;
-
     private List<SceneRoot3D> _3DRoots = new List<SceneRoot3D>();
     private SceneRoot3D _current3DRoot;
-
-    [SerializeField]
-    private float _viewportScrollState = 0f;
-    public const float MaxViewportScroll = 0.78f;
 
     private GUIObjectMaxScreen _maxScreen;
     private GUIObjectLoadingScreen _loadingScreen;
@@ -49,22 +39,6 @@ public class ViewController : MonoBehaviour
             if (_current3DRoot)
                 return _current3DRoot.Camera;
             return null;
-        }
-    }
-
-    public float ViewportScrollState
-    {
-        get
-        {
-            return _viewportScrollState;
-        }
-
-        set
-        {
-            value = Mathf.Clamp(value, 0f, MaxViewportScroll);
-            _viewportScrollState  = _guiViewport.phase = value;
-            if (_current3DRoot)
-                _current3DRoot.ViewportPhase = _viewportScrollState;
         }
     }
 
@@ -92,29 +66,15 @@ public class ViewController : MonoBehaviour
 
     private void Init()
     {
-        _gameManager = GameManager.Singleton;
         
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(UIRootTag);
-        GameObject MenuRoot = GameObject.FindGameObjectWithTag(MenuRootTag);
-
         _gui = GUIRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>();
-      //  _menu = MenuRoot.transform.FindChild(RootPanelStr).GetComponent<dfControl>(); 
-
-        _guiViewport = GUIRoot.transform.FindChild(CameraStr).GetComponent<MovableViewport>();
-  //      _menuViewport = _menu.GetComponent<MovableGUIViewport>();
-        
-
-        ViewportScrollState = 0f;
-
-        //AddIrisPopup("iris_01_text", "Bodo_Wartke_Ja_Schatz_Ich_schneide_Dir_ein_Ohr_ab-de");
-        //AddMaxScreen(GUIObjectNameInput.CreateObject("screen_entername_title", "screen_entername_text", "continue", "default_name", null));
-        //AddMaxScreen(null);
         ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
     }
 
     void Update () 
     {
-        //ViewportScrollState = 0.78f;
+
 	}
 
     public SceneRoot3D Switch3DSceneRoot(SceneRoot3D newRoot, bool destroyOld = false)
@@ -145,7 +105,6 @@ public class ViewController : MonoBehaviour
     {
         return _3DRoots.FirstOrDefault(r => r is TRoot);
     }
-
 
     public GUIObjectMaxScreen AddMaxScreen(GameObject content)
     {

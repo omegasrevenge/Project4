@@ -19,6 +19,9 @@ public class Map : SceneRoot3D
     private Dictionary<Player, PlayerOnMap> _playersOnMap = new Dictionary<Player, PlayerOnMap>();
     private BaseOnMap _base;
 
+    private MovableViewport _viewport;
+    private float _viewportScrollState;
+
     public bool init = false;
 
     private int pois_version = 0;
@@ -26,7 +29,6 @@ public class Map : SceneRoot3D
 
     public const float MoveSpeed = 1f;
     public const float MoveRadius = 1f;
-
     public const float RangeRadius = 0.5f;
 
     public GUIObjectMapUI View
@@ -55,6 +57,29 @@ public class Map : SceneRoot3D
         _radar = _mapRig.Find(RadarStr).GetComponent<Animator>();
         _base = BaseOnMap.Create(_grid, _mapRig);
         _base.Tap = OnTapShowMarker;
+    }
+
+    public float ViewportPhase
+    {
+        get
+        {
+            return _viewportScrollState;
+        }
+
+        set
+        {
+            if (_viewport == null && Camera)
+                _viewport = Camera.GetComponent<MovableViewport>();
+            if (_viewport == null) return;
+            value = Mathf.Clamp(value, 0f, GUIObjectMapUI.MaxViewportScroll);
+            _viewportScrollState = _viewport.phase = value;
+        }
+    }
+
+    public override void AttachGUI(Component gui)
+    {
+        base.AttachGUI(gui);
+        (gui as GUIObjectMapUI).Init(this);
     }
 
     public void UpdatePlayers()

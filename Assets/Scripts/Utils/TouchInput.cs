@@ -44,6 +44,10 @@ public class TouchInput : MonoBehaviour
     private TouchObject _solo;
     [SerializeField]
     private bool _enabled = true;
+    [SerializeField]
+    private List<object> _disabledBy = new List<object>();    
+
+    public event Action ClearAll;
 
     public float ZoomSpeed;
 
@@ -58,6 +62,12 @@ public class TouchInput : MonoBehaviour
             }
             return _instance;
         }
+    }
+
+    public static void OnClearAll()
+    {
+        if(Singleton.ClearAll != null)
+            Singleton.ClearAll();
     }
 
     public static bool SoloTouchInput
@@ -89,7 +99,7 @@ public class TouchInput : MonoBehaviour
 
     public static bool Enabled
     {
-        get { return Singleton._enabled; }
+        get { return Singleton._enabled && !Singleton._disabledBy.Any(); }
         set
         {
             //if (value == Singleton._enabled) return;
@@ -120,7 +130,7 @@ public class TouchInput : MonoBehaviour
 
     void Update()
     {
-        if (!_enabled)
+        if (!Enabled)
             return;
         ResetInput();
         if (!GetTouchInput())
@@ -130,7 +140,7 @@ public class TouchInput : MonoBehaviour
 
     public float GetRotation(float startAngle,Vector3 worldPos = default(Vector3), bool singleTouch = false, bool invertRotation = false)
     {
-        if (Input.touchCount < 1 || (Input.touchCount == 1 && !singleTouch))
+        if (Input.touchCount < 1 || (Input.touchCount == 1 && !singleTouch) || !Enabled)
         {
             if(Input.touchCount == 0) Rotating = false;
             _touch1 = -1;
@@ -217,16 +227,9 @@ public class TouchInput : MonoBehaviour
         return startAngle;
     }
 
-    public float GetZoom(float startScale)
-    {
-        if (Input.touchCount < 1)
-            return startScale;
-        return 0f;
-    }
-
     private bool GetTouchInput()
     {
-        if (Input.touchCount == 0)
+        if (Input.touchCount == 0 || !Enabled)
             return false;
 
         foreach (Touch touch in Input.touches)
@@ -272,7 +275,7 @@ public class TouchInput : MonoBehaviour
 
     private void AddMouseInput()
     {
-
+        if (!Enabled) return;
         if (Input.GetMouseButtonDown(0))
         {
             TouchObject[] obj = FindObject(Input.mousePosition);
@@ -364,7 +367,6 @@ public class TouchInput : MonoBehaviour
     {
         foreach (TouchObject touchObject in Singleton._rigisteredObjects.Where(o => o != obj))
         {
-            Debug.Log("AAAAAAAA");
             touchObject.DisableBy(obj);
         }
     }
@@ -373,8 +375,17 @@ public class TouchInput : MonoBehaviour
     {
         foreach (TouchObject touchObject in Singleton._rigisteredObjects.Where(o => o != obj))
         {
-            Debug.Log("DOOOO");
             touchObject.EnableBy(obj);
         }
+    }
+
+    public static void EnableBy(object obj)
+    {
+        Singleton._disabledBy.Remove(obj);
+    }
+    public static void DisableBy(object obj)
+    {
+        if (obj != null)
+            Singleton._disabledBy.Add(obj);
     }
 }

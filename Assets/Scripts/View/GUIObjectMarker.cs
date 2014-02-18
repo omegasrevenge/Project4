@@ -28,6 +28,7 @@ public class GUIObjectMarker : MonoBehaviour
     [SerializeField]
     private PoiMarkerCooldown[] _cooldowns;
     private bool _untouched;
+    private bool _removed;
 
     public static GUIObjectMarker Create(dfControl root, ObjectOnMap[] objects)
     {
@@ -48,6 +49,7 @@ public class GUIObjectMarker : MonoBehaviour
         _control = cntrl;
         _root = root;
         _root.Click += OnClickParent;
+        TouchInput.Singleton.ClearAll += Remove;
 
         _pos = new Vector2(Padding, Padding);
         _cooldowns = new PoiMarkerCooldown[objects.Length];
@@ -174,13 +176,15 @@ public class GUIObjectMarker : MonoBehaviour
         }
 
         Vector2 pos = ViewController.Singleton.Camera3D.WorldToScreenPoint(posOnMap);
-        pos.y = Screen.height - pos.y - (_control.Height) * _scale.y;
-        pos.x -= (_control.Width / 2f) * _scale.x;
+        pos.y = Screen.height - pos.y - (_control.Height)*_scale.y;
+        pos.x -= (_control.Width/2f)*_scale.x; // + (ViewController.Singleton.Camera3D.rect.x) * Screen.width; //Correct but at the moment not necessary
         _control.RelativePosition = pos;
     }
 
     public void Remove()
     {
+        if (_removed) return;
+        _removed = true;
         _root.Click -= OnClickParent; 
         StartCoroutine(CRemove());
     }

@@ -28,6 +28,8 @@ public class GUIObjectCreatureInfo : MonoBehaviour
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
         cntrl.RelativePosition = Vector2.zero;
+        cntrl.SendToBack();
+        cntrl.SuspendLayout();
         GUIObjectCreatureInfo obj = cntrl.GetComponent<GUIObjectCreatureInfo>();
         obj.Init(creature);
         return obj;
