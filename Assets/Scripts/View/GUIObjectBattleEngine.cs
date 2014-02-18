@@ -274,15 +274,15 @@ public class GUIObjectBattleEngine : MonoBehaviour
         {
             DriodImprint[i].Clear();
             for (int j = 0; j < Slots[i].fire; j++)
-				DriodImprint[i].Add(GameManager.ResourceElement.Fire);
+				DriodImprint[i].Add(GameManager.ResourceElement.fire);
             for (int j = 0; j < Slots[i].energy; j++)
-				DriodImprint[i].Add(GameManager.ResourceElement.Energy);
+				DriodImprint[i].Add(GameManager.ResourceElement.energy);
             for (int j = 0; j < Slots[i].nature; j++)
-				DriodImprint[i].Add(GameManager.ResourceElement.Nature);
+				DriodImprint[i].Add(GameManager.ResourceElement.life);
             for (int j = 0; j < Slots[i].water; j++)
-				DriodImprint[i].Add(GameManager.ResourceElement.Water);
+				DriodImprint[i].Add(GameManager.ResourceElement.water);
             for (int j = 0; j < Slots[i].storm; j++)
-				DriodImprint[i].Add(GameManager.ResourceElement.Storm);
+				DriodImprint[i].Add(GameManager.ResourceElement.storm);
         }
 
         for (int i = 0; i < PresentDriodsCount; i++)
@@ -298,19 +298,19 @@ public class GUIObjectBattleEngine : MonoBehaviour
                     number = "0" + (j + 1);
                 switch (DriodImprint[i][j])
                 {
-				case GameManager.ResourceElement.Energy:
+				case GameManager.ResourceElement.energy:
                         element = "energy";
                         break;
-				case GameManager.ResourceElement.Fire:
+				case GameManager.ResourceElement.fire:
                         element = "fire";
                         break;
-				case GameManager.ResourceElement.Nature:
+				case GameManager.ResourceElement.life:
                         element = "life";
                         break;
-				case GameManager.ResourceElement.Storm:
+				case GameManager.ResourceElement.storm:
                         element = "storm";
                         break;
-				case GameManager.ResourceElement.Water:
+				case GameManager.ResourceElement.water:
                         element = "water";
                         break;
                 }
@@ -344,23 +344,23 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 MonsterAElement.Hide();
                 break;
 
-		case GameManager.ResourceElement.Energy:
+		case GameManager.ResourceElement.energy:
                 MonsterAElement.SpriteName = "spectre_stats_element_energy";
                 break;
 
-		case GameManager.ResourceElement.Fire:
+		case GameManager.ResourceElement.fire:
                 MonsterAElement.SpriteName = "spectre_stats_element_fire";
                 break;
 
-		case GameManager.ResourceElement.Nature:
+		case GameManager.ResourceElement.life:
                 MonsterAElement.SpriteName = "spectre_stats_element_life";
                 break;
 
-		case GameManager.ResourceElement.Storm:
+		case GameManager.ResourceElement.storm:
                 MonsterAElement.SpriteName = "spectre_stats_element_storm";
                 break;
 
-		case GameManager.ResourceElement.Water:
+		case GameManager.ResourceElement.water:
                 MonsterAElement.SpriteName = "spectre_stats_element_water";
                 break;
         }
@@ -370,23 +370,23 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 MonsterBElement.Hide();
                 break;
 
-		case GameManager.ResourceElement.Energy:
+		case GameManager.ResourceElement.energy:
                 MonsterBElement.SpriteName = "spectre_stats_element_energy";
                 break;
 
-		case GameManager.ResourceElement.Fire:
+		case GameManager.ResourceElement.fire:
                 MonsterBElement.SpriteName = "spectre_stats_element_fire";
                 break;
 
-		case GameManager.ResourceElement.Nature:
+		case GameManager.ResourceElement.life:
                 MonsterBElement.SpriteName = "spectre_stats_element_life";
                 break;
 
-		case GameManager.ResourceElement.Storm:
+		case GameManager.ResourceElement.storm:
                 MonsterBElement.SpriteName = "spectre_stats_element_storm";
                 break;
 
-		case GameManager.ResourceElement.Water:
+		case GameManager.ResourceElement.water:
                 MonsterBElement.SpriteName = "spectre_stats_element_water";
                 break;
         }
@@ -407,23 +407,23 @@ public class GUIObjectBattleEngine : MonoBehaviour
                     Driods[i].Hide();
                     break;
 
-			case GameManager.ResourceElement.Energy:
+			case GameManager.ResourceElement.energy:
                     Driods[i].BackgroundSprite = "combat_driod_energy";
                     break;
 
-			case GameManager.ResourceElement.Fire:
+			case GameManager.ResourceElement.fire:
                     Driods[i].BackgroundSprite = "combat_driod_fire";
                     break;
 
-			case GameManager.ResourceElement.Nature:
+			case GameManager.ResourceElement.life:
                     Driods[i].BackgroundSprite = "combat_driod_life";
                     break;
 
-			case GameManager.ResourceElement.Storm:
+			case GameManager.ResourceElement.storm:
                     Driods[i].BackgroundSprite = "combat_driod_storm";
                     break;
 
-			case GameManager.ResourceElement.Water:
+			case GameManager.ResourceElement.water:
                     Driods[i].BackgroundSprite = "combat_driod_water";
                     break;
             }
@@ -636,19 +636,19 @@ public class GUIObjectBattleEngine : MonoBehaviour
         string element = "";
         switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
         {
-            case GameManager.ResourceElement.Energy:
+            case GameManager.ResourceElement.energy:
                 element = "energy";
                 break;
-            case GameManager.ResourceElement.Fire:
+            case GameManager.ResourceElement.fire:
                 element = "fire";
                 break;
-            case GameManager.ResourceElement.Nature:
+            case GameManager.ResourceElement.life:
                 element = "storm";
                 break;
-            case GameManager.ResourceElement.Storm:
+            case GameManager.ResourceElement.storm:
                 element = "life";
                 break;
-            case GameManager.ResourceElement.Water:
+            case GameManager.ResourceElement.water:
                 element = "water";
                 break;
         }

@@ -9,19 +9,19 @@ public class MonsterStats : MonoBehaviour
 		Color color = Color.grey;
 		switch(element)
 		{
-		case GameManager.ResourceElement.Fire:
+		case GameManager.ResourceElement.fire:
 			color = Color.red;
 			break;
-		case GameManager.ResourceElement.Energy:
+		case GameManager.ResourceElement.energy:
 			color = Color.black;
 			break;
-		case GameManager.ResourceElement.Nature:
+		case GameManager.ResourceElement.life:
 			color = Color.green;
 			break;
-		case GameManager.ResourceElement.Water:
+		case GameManager.ResourceElement.water:
 			color = Color.blue;
 			break;
-		case GameManager.ResourceElement.Storm:
+		case GameManager.ResourceElement.storm:
 			color = Color.white;
 			break;
 		}

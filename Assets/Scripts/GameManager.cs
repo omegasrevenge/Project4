@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public enum GameMode { Login, Map, Fight, Base };
     public enum ExchangeMode { Up, Down, Cricle };
-    public enum ResourceElement { None = -1, Energy, Fire, Storm, Nature, Water };
+    public enum ResourceElement { None = -1, energy, fire, storm, life, water };
 
     public static string DontSaveTag = "DontSave";
 

@@ -93,7 +93,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2

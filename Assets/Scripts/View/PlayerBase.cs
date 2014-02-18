@@ -27,7 +27,6 @@ public class PlayerBase : SceneRoot3D
 	private int creatureID = 1;
 	private int creatureIndex = 0;
 
-
     public static PlayerBase Create()
     {
         GameObject obj = (GameObject)Instantiate(Resources.Load<GameObject>(Prefab));
@@ -61,10 +60,10 @@ public class PlayerBase : SceneRoot3D
 			return;
 		}
 
-		if (GUI.Button(new Rect(320, 220, 120, 50), "<color=white><size=20>Leave Base</size></color>"))
-		{
-			GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
-		}
+		//if (GUI.Button(new Rect(320, 220, 120, 50), "<color=white><size=20>Leave Base</size></color>"))
+		//{
+		//	GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
+		//}
 
 		if (GUI.Button(new Rect(30, 380, 120, 50), "<color=white><size=20>" + "Crafting" + "</size></color>"))
 		{
@@ -98,6 +97,8 @@ public class PlayerBase : SceneRoot3D
 			}
 		}
 	}
+
+	#region Creature
 
 	private void CreatureWindow(int windowID)
 	{
@@ -227,36 +228,29 @@ public class PlayerBase : SceneRoot3D
 			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
 		}
 
-		if (GUI.Button(new Rect(80, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Energy.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(80, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.energy.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Energy;
+			CuResourceElement = GameManager.ResourceElement.energy;
 		}
-		if (GUI.Button(new Rect(170, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Fire.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(170, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.fire.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Fire;
+			CuResourceElement = GameManager.ResourceElement.fire;
 		}
-		if (GUI.Button(new Rect(260, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Storm.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(260, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.storm.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Storm;
+			CuResourceElement = GameManager.ResourceElement.storm;
 		}
-		if (GUI.Button(new Rect(350, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Nature.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(350, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.life.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Nature;
+			CuResourceElement = GameManager.ResourceElement.life;
 		}
-		if (GUI.Button(new Rect(440, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.Water.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect(440, 550, 80, 80), "<color=white><size=20>" + GameManager.ResourceElement.water.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Water;
+			CuResourceElement = GameManager.ResourceElement.water;
 		}
 	}
 
-	private bool CreateButton(Rect upgrade, string s)
-	{
-		if (GUI.Button(upgrade, "<color=white><size=20>" + s + "</size></color>"))
-		{
-			return true;
-		}
-		return false;
-	}
+	#endregion
 
 	#region Crafting
 
@@ -305,25 +299,25 @@ public class PlayerBase : SceneRoot3D
 			curInput = curInputAsInt.ToString();
 		}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Energy.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.energy.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Energy;
+			CuResourceElement = GameManager.ResourceElement.energy;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Fire.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.fire.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Fire;
+			CuResourceElement = GameManager.ResourceElement.fire;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Storm.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.storm.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Storm;
+			CuResourceElement = GameManager.ResourceElement.storm;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Nature.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.life.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Nature;
+			CuResourceElement = GameManager.ResourceElement.life;
 		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.Water.ToString() + "</size></color>"))
+		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.water.ToString() + "</size></color>"))
 		{
-			CuResourceElement = GameManager.ResourceElement.Water;
+			CuResourceElement = GameManager.ResourceElement.water;
 		}
 
 		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))
@@ -341,6 +335,15 @@ public class PlayerBase : SceneRoot3D
 	}
 	#endregion
 
+	private bool CreateButton(Rect upgrade, string s)
+	{
+		if (GUI.Button(upgrade, "<color=white><size=20>" + s + "</size></color>"))
+		{
+			return true;
+		}
+		return false;
+	}
+
 	private void ShowChart()
 	{
 
@@ -353,9 +356,5 @@ public class PlayerBase : SceneRoot3D
 			}
 			GUI.Label(new Rect((windowRect.width / 2) - 100, (windowRect.height - 70 - 40 * 7) + i * 40, 200, 20), z, textGuiStyle);
 		}
-	}
-
-	void Update () {
-		
 	}
 }
