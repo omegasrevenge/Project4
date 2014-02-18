@@ -1307,7 +1307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841321359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .000781250012, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .000781250012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1859583930}
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   zindex: 0
   color:
     serializedVersion: 2
-    rgba: 4282861383
+    rgba: 4294967295
   disabledColor:
     serializedVersion: 2
     rgba: 4282861383
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  spriteName: bg-menu
+  spriteName: menu_bg
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8123830e5c07a4babc114217150025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 1295
+  anchorStyle: 15
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -1883,12 +1883,12 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 1295
+    anchorStyle: 15
     margins:
       left: 0
       top: -0
-      right: 1
-      bottom: 1
+      right: 0
+      bottom: 0
     owner: {fileID: 1080048509}
   renderOrder: 3
   isLocalized: 0
@@ -2422,7 +2422,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1304823710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .000781250012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 517981212}
@@ -2481,6 +2481,7 @@ MonoBehaviour:
   DummyUI: 1
   pois_timeQ: 0
   pois_valid: 0
+  BattleEngineSkipTurn: 0
   lastFarmResult: 
   Player:
     CurrentFaction: 0
@@ -2503,6 +2504,7 @@ MonoBehaviour:
         HP: 0
         HPMax: 0
         Damage: 0
+        Version: 0
         Defense: 0
         Dexterity: 0
         Skillpoints: 0
@@ -2521,6 +2523,7 @@ MonoBehaviour:
       HP: 0
       HPMax: 0
       Damage: 0
+      Version: 0
       Defense: 0
       Dexterity: 0
       Skillpoints: 0
@@ -2588,7 +2591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 271
+  anchorStyle: 15
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -2608,12 +2611,12 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 271
+    anchorStyle: 15
     margins:
       left: 0
       top: 0
-      right: 1
-      bottom: 1
+      right: 0
+      bottom: 0
     owner: {fileID: 1347554404}
   renderOrder: 1
   isLocalized: 0
@@ -3683,7 +3686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1859583925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3735,7 +3738,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1859583924}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255

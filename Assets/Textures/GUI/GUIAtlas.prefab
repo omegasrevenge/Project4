@@ -128,8 +128,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .93359375
-      y: .4296875
+      x: .803222656
+      y: .250976562
       width: .015625
       height: .03125
     border:
@@ -159,28 +159,11 @@ MonoBehaviour:
     textureGUID: dbfa6688f1bb0f64788000942b7785a3
     deleted: 0
     texture: {fileID: 0}
-  - name: bg-menu
-    region:
-      serializedVersion: 2
-      x: .777832031
-      y: .307617188
-      width: .03125
-      height: .03125
-    border:
-      m_Left: 2
-      m_Right: 40
-      m_Top: 2
-      m_Bottom: 2
-    rotated: 0
-    sizeInPixels: {x: 64, y: 32}
-    textureGUID: cd10ad1463b7dfd419be6db2eaa79e13
-    deleted: 0
-    texture: {fileID: 0}
   - name: bg-transparent
     region:
       serializedVersion: 2
-      x: .949707031
-      y: .4296875
+      x: .819335938
+      y: .250976562
       width: .015625
       height: .03125
     border:
@@ -213,8 +196,8 @@ MonoBehaviour:
   - name: BLANK_TEXTURE
     region:
       serializedVersion: 2
-      x: .698242188
-      y: .125976562
+      x: .803222656
+      y: .283203125
       width: .0048828125
       height: .009765625
     border:
@@ -247,8 +230,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .965820312
-      y: .4296875
+      x: .822265625
+      y: .283203125
       width: .015625
       height: .03125
     border:
@@ -434,8 +417,8 @@ MonoBehaviour:
   - name: firewall_symbol
     region:
       serializedVersion: 2
-      x: .971191406
-      y: .229492188
+      x: .777832031
+      y: .295898438
       width: .0190429688
       height: .052734375
     border:
@@ -446,23 +429,6 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 39, y: 54}
     textureGUID: 3009ee95bcdcee74a8b2aae834aadee4
-    deleted: 0
-    texture: {fileID: 0}
-  - name: gradient
-    region:
-      serializedVersion: 2
-      x: .955078125
-      y: .184570312
-      width: .015625
-      height: .123046875
-    border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    rotated: 0
-    sizeInPixels: {x: 32, y: 126}
-    textureGUID: 4cc5b543fdf016b4d815059794520c54
     deleted: 0
     texture: {fileID: 0}
   - name: hr
@@ -514,6 +480,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 100, y: 100}
     textureGUID: 4441e633762229f40ae03f8a109e0b1e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: menu_bg
+    region:
+      serializedVersion: 2
+      x: .93359375
+      y: .4296875
+      width: .015625
+      height: .03125
+    border:
+      m_Left: 2
+      m_Right: 2
+      m_Top: 2
+      m_Bottom: 2
+    rotated: 0
+    sizeInPixels: {x: 32, y: 32}
+    textureGUID: 11435cd682d662a458e3afadf83e8223
     deleted: 0
     texture: {fileID: 0}
   - name: profile_bg
@@ -570,8 +553,8 @@ MonoBehaviour:
   - name: repeat
     region:
       serializedVersion: 2
-      x: .777832031
-      y: .250976562
+      x: .955078125
+      y: .240234375
       width: .0307617188
       height: .0537109375
     border:
@@ -655,8 +638,8 @@ MonoBehaviour:
   - name: symbol_fenris
     region:
       serializedVersion: 2
-      x: .848144531
-      y: .30859375
+      x: .955078125
+      y: .184570312
       width: .03125
       height: .0546875
     border:
@@ -689,7 +672,7 @@ MonoBehaviour:
   - name: symbol_logout
     region:
       serializedVersion: 2
-      x: .809082031
+      x: .848144531
       y: .250976562
       width: .0234375
       height: .0556640625
@@ -706,8 +689,8 @@ MonoBehaviour:
   - name: symbol_reboot
     region:
       serializedVersion: 2
-      x: .971191406
-      y: .184570312
+      x: .777832031
+      y: .250976562
       width: .0249023438
       height: .0439453125
     border:
@@ -723,8 +706,8 @@ MonoBehaviour:
   - name: symbol_sound
     region:
       serializedVersion: 2
-      x: .809570312
-      y: .307617188
+      x: .797363281
+      y: .295898438
       width: .0244140625
       height: .0380859375
     border:

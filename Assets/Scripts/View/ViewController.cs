@@ -27,7 +27,7 @@ public class ViewController : MonoBehaviour
 
     [SerializeField]
     private float _viewportScrollState = 0f;
-    public const float MaxViewportScroll = 0.9f;
+    public const float MaxViewportScroll = 0.78f;
 
     private GUIObjectMaxScreen _maxScreen;
     private GUIObjectLoadingScreen _loadingScreen;
@@ -114,7 +114,7 @@ public class ViewController : MonoBehaviour
 
     void Update () 
     {
-	
+        //ViewportScrollState = 0.78f;
 	}
 
     public SceneRoot3D Switch3DSceneRoot(SceneRoot3D newRoot, bool destroyOld = false)
