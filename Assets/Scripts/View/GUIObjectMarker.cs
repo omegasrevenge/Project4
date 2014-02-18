@@ -139,7 +139,7 @@ public class GUIObjectMarker : MonoBehaviour
                 return;
             }
 
-            SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
+            SoundController.PlaySound(SoundController.SoundMapClick, SoundController.ChannelSFX);
             if (hideCallback != null)
                 hideCallback();
             objectOnMap.Execute();

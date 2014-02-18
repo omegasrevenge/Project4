@@ -52,7 +52,7 @@ public class GUIObjectMessage : MonoBehaviour
             else Destroy(obj.gameObject);
             GameManager.Singleton.ClickMessage();
         };
-
+        SoundController.PlaySound(SoundController.SoundMessageEnemy, SoundController.ChannelSFX);
         return obj;
     }
 

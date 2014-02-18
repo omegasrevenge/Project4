@@ -12,8 +12,6 @@ public class GUIObjectIrisPopup : MonoBehaviour
     private const string OKButtonStr = "button_ok";
     private const string TextLabelStr = "label_text";
     private const string ContinueTextkey = "continue";
-    private const string MessageSound = "Oc_Audio_SFX_Vengea_Message_IRIS_LAYOUT";
-
 
 
     private string _textkeyText = "blindtext";
@@ -155,7 +153,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     public GUIObjectIrisPopup Show()
     {
         if (_playMessageSound)
-            SoundController.PlaySound(MessageSound, SoundController.ChannelSFX);
+            SoundController.PlaySound(SoundController.SoundMessageIRIS, SoundController.ChannelSFX);
         if (ShowPopup != null)
             ShowPopup();
         return this;

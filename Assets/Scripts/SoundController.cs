@@ -5,10 +5,14 @@ using System.Collections;
 public class SoundController : MonoBehaviour
 {
     public const string ChannelSFX = "channelSFX";
-    public const string SoundClick = "Oc_Audio_SFX_Vengea_Click_LAYOUT";
-    public const string SoundChoose = "Oc_Audio_SFX_Vengea_Choose_LAYOUT";
-    public const string SoundLocate = "Oc_Audio_SFX_Vengea_Locate_LAYOUT";
-
+    public const string SoundClick = "Oc_Audio_SFX_Vengea_Click";
+    public const string SoundChoose = "Oc_Audio_SFX_Vengea_Choose";
+    public const string SoundLocate = "Oc_Audio_SFX_Vengea_Locate";
+    public const string SoundError = "Oc_Audio_SFX_Vengea_Error";
+    public const string SoundMapClick = "Oc_Audio_SFX_Vengea_MapClick";
+    public const string SoundMessageIRIS = "Oc_Audio_SFX_Vengea_Message_IRIS";
+    public const string SoundMessageEnemy = "Oc_Audio_SFX_Vengea_Message_Enemy";
+    public const string SoundUpgrade = "Oc_Audio_SFX_Vengea_Upgrade";
 
     private const float LoadTimeOut = 2f;
     private static SoundController _instance;
