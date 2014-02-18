@@ -10,7 +10,7 @@ public class BattleEngine : SceneRoot3D
     public ActorControlls Actor;
     public FightRoundResult.Player CurrentPlayer;
     public BattleInit ServerInfo;
-
+    public bool CatchInProcess = false;
 
     public int Turn = 0;
     public bool SkipOneTurn = false;
@@ -155,7 +155,7 @@ public class BattleEngine : SceneRoot3D
 		if(!Initialized) return;
         if (!Fighting && !View.IndsArePlaying && (Actor == null || Actor.AnimationFinished))
             enforceEnd();
-
+        if (CatchInProcess) return;
         if (GetTurnState == _currentStatus 
             || _enactEndScreen 
             || View.IndsArePlaying) 

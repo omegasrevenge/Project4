@@ -2,6 +2,7 @@
 
 public class IndicatorController : MonoBehaviour
 {
+    public bool CatchResult = false;
 
     private Vector3 _start;
     private float _length = -1f;
@@ -23,6 +24,7 @@ public class IndicatorController : MonoBehaviour
     {
 	    if (_counter >= _length)
 	    {
+	        if (CatchResult) BattleEngine.Current.CatchInProcess = false;
             GetComponent<dfLabel>().Hide();
             return;
 	    }

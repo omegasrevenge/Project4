@@ -749,10 +749,28 @@ public class GameManager : MonoBehaviour
         Debug.Log("!!!!!!!!!!!!!!a " + request.text);
     }
 
-    public void EscapeAttempt()
+    public void CatchAttempt(int driodLevel) { StartCoroutine(CCatchAttempt(driodLevel)); }
+
+    private IEnumerator CCatchAttempt(int driodLevel)
     {
-        StartCoroutine(CEscapeAttempt());
+        WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + driodLevel); //<---------------------------------
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        string message;
+        if ((bool)json["result"])
+            message = "Success!";
+        else
+            message = "Fail!";
+        BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
+        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.EnemyCreature, message, 0, 1.5f, 3f) });
+        BattleEngine.Current.View.TxtIndicators[0].GetComponent<IndicatorController>().CatchResult = true;
+        //if (!CheckResult(json)) { yield break; }
+        BattleEngineSkipTurn = true;
+        GetOwnPlayer();
     }
+
+    public void EscapeAttempt() { StartCoroutine(CEscapeAttempt()); }
 
     private IEnumerator CEscapeAttempt()
     {
@@ -760,31 +778,22 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
-        GetOwnPlayer();
-    }
-
-    public void CatchAttempt(int driodLevel)
-    {
-        StartCoroutine(CCatchAttempt(driodLevel));
-    }
-
-    private IEnumerator CCatchAttempt(int driodLevel)
-    {
-        WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + driodLevel); //<---------------------------------
-        yield return request;
-        Debug.Log("CATCH ATTEMPT: " + request.text);
-
-        JSONObject json = JSONParser.parse(request.text);
-        string message = "";
-        if ((bool)json["result"])
-            message = "Success!";
-        else
-            message = "Fail!";
-        BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
+        if (!(bool)json["result"] && ((string)json["error"]).Equals("same_round")) { yield break; }
+        string message;
+        float delay;
+        if ((bool) json["result"])
         {
-            new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.EnemyCreature, message, 0)
-        });
+            delay = 0f;
+            message = "Success!";
+        }
+        else
+        {
+            delay = 0f;
+            message = "Fail!";
+        }
+        BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
+        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.FriendlyCreature, message, 0, 2f, delay) });
+		Debug.LogError (json);
         //if (!CheckResult(json)) { yield break; }
         BattleEngineSkipTurn = true;
         GetOwnPlayer();

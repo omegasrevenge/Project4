@@ -7,6 +7,7 @@ public class MoveTowards : MonoBehaviour
 
     public bool Playing = false;
     public Transform Target;
+    public bool AtTarget = false;
 	
 	void Update ()
 	{
@@ -22,6 +23,7 @@ public class MoveTowards : MonoBehaviour
 
     public void Play(Transform target)
     {
+        AtTarget = false;
         GetComponent<dfButton>().Show();
         Playing = true;
         Target = target;
@@ -29,6 +31,7 @@ public class MoveTowards : MonoBehaviour
 
     public void Stop()
     {
+        AtTarget = true;
         Playing = false;
         GetComponent<dfButton>().Hide();
     }

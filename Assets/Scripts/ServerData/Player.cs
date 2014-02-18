@@ -126,6 +126,7 @@ public class Player
         newResult.Damage = Convert.ToInt32(lastResult[1]);
         newResult.DoT = Convert.ToInt32(lastResult[2]);
         newResult.HoT = Convert.ToInt32(lastResult[3]);
+
         return newResult;
     }
 }

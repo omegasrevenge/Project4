@@ -11,6 +11,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     public float DamageIndicatorMoveUpSpeed = 0.1f;
 
     private float _buttonClickTimer = 0f;
+    private float _fleeCooldown = 0f;
     private const string Prefab = "GUI/panel_battleui";
     private int _lastButton = -1;
 
@@ -103,12 +104,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
         public GameObject target;
         public string name;
         public int value;
+        public float delay;
+        public float length;
 
-        public IndicatorContent(GameObject t, string n, int v)
+        public IndicatorContent(GameObject t, string n, int v, float l = 3f, float d = 0f)
         {
             target = t;
             name = n;
             value = v;
+            delay = d;
+            length = l;
         }
     }
 
@@ -210,6 +215,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (_buttonClickTimer > 0f)
             _buttonClickTimer -= Time.deltaTime;
+        if (_fleeCooldown > 0f)
+            _fleeCooldown -= Time.deltaTime;
 
         if (BattleEngine.CurrentGameObject == null 
             || !BattleEngine.Current.Initialized 
@@ -248,7 +255,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             Vector3 startPos =
                 (info[i].target.transform.position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
 
-            TxtIndicators[i].GetComponent<IndicatorController>().Play(startPos, 3f, Vector3.up * DamageIndicatorMoveUpSpeed * Time.deltaTime, 1f*i);
+            TxtIndicators[i].GetComponent<IndicatorController>().Play(startPos, info[i].length, Vector3.up * DamageIndicatorMoveUpSpeed * Time.deltaTime, info[i].delay > 0f ? info[i].delay : 1f*i);
         }
     }
 
@@ -612,6 +619,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void EscapeKlicked()
     {
+        if (BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.B) return;
+        _fleeCooldown = 10f;
         GameManager.Singleton.EscapeAttempt();
         DeleteSelection();
     }
@@ -671,6 +680,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         CatchDriodsVisual[index-1].transform.position = BattleEngine.Current.View.CatchDriodPos[index-1].transform.position;
         CatchDriodsVisual[index-1].GetComponent<MoveTowards>().Play(BattleEngine.Current.EnemyCreature.transform.FindChild("MiddleOfBody"));
         CatchAborted();
+        BattleEngine.Current.CatchInProcess = true;
         GameManager.Singleton.CatchAttempt(index);
     }
 
