@@ -14,6 +14,7 @@ public class BattleEngine : SceneRoot3D
 
     public int Turn = 0;
     public bool SkipOneTurn = false;
+    public bool FightIsOverOnce = false;
 
     public GameObject FriendlyCreature;
     public GameObject EnemyCreature;
@@ -32,6 +33,7 @@ public class BattleEngine : SceneRoot3D
     //########## const #########
 
     //########## private #########
+    private FightRoundResult _lastResult = new FightRoundResult();
     private TurnState _currentStatus = TurnState.Wait;
     private List<FightRoundResult> _results;
     private GameObject _actor;
@@ -140,6 +142,7 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
+        FightIsOverOnce = false;
         _counter = 0f;
         Turn = GameManager.Singleton.Player.CurFight.Round;
 		_results = new List<FightRoundResult>();
@@ -153,9 +156,12 @@ public class BattleEngine : SceneRoot3D
     void Update()
     {
 		if(!Initialized) return;
-        if (!Fighting && !View.IndsArePlaying && (Actor == null || Actor.AnimationFinished))
+
+        if (!Fighting && !View.IndsArePlaying && GetTurnState == TurnState.Wait)
             enforceEnd();
+
         if (CatchInProcess) return;
+
         if (GetTurnState == _currentStatus 
             || _enactEndScreen 
             || View.IndsArePlaying) 
@@ -165,7 +171,7 @@ public class BattleEngine : SceneRoot3D
         switch (GetTurnState)
         {
             case TurnState.Wait:
-                //
+                updateIdleAnim();
                 break;
             case TurnState.Execute:
                 if (SkipOneTurn)
@@ -185,20 +191,71 @@ public class BattleEngine : SceneRoot3D
         }
     }
 
+    private void updateIdleAnim()
+    {
+		float ahp = 0f;
+		float bhp = 0f;
+		float ahpmax = ServerInfo.MonsterAMaxHealth;
+		float bhpmax = ServerInfo.MonsterBMaxHealth;
+		if (_lastResult == null) 
+		{
+			ahp = ServerInfo.MonsterAHealth;
+			bhp = ServerInfo.MonsterBHealth;
+		} 
+		else 
+		{
+			ahp = _lastResult.MonsterAHP;
+			bhp = _lastResult.MonsterBHP;
+		}
+		if (ahp / ahpmax < 0.33f)
+            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
+        else
+            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
+
+		if (bhp / bhpmax < 0.33f)
+            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
+        else
+            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
+    }
+
     private void enforceEnd()
     {
+        if (!FightIsOverOnce)
+        {
+            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+            if (GameManager.Singleton.Player.CurFight == null ? 
+                (_lastResult == null ? ServerInfo.MonsterAHealth : _lastResult.MonsterAHP) > 0 
+                : 
+                GameManager.Singleton.Player.CurCreature.HP > 0)
+            {
+                FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
+                EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
+            }
+            else
+            {
+                FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
+                EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
+            }
+        }
+
+        FightIsOverOnce = true;
         _counter += Time.deltaTime;
 
-        if (_counter >= 2f)
+        if (_counter >= 5f)
             View.GGContainer.Show();
     }
 
     private void turnInit()
     {
+        _lastResult = Result;
         Turn = Result.Turn;
 
         CurCaster.GetComponent<MonsterAnimationController>()
             .DoAnim(Extract(Result.SkillName, "Animation"));
+
+        if (GameManager.Singleton.Techtree[Result.SkillName] == null)
+            Debug.LogWarning("Skill Name: " + Result.SkillName+ " <- doesn't seem to be initialized.");
 
         if (Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
@@ -214,7 +271,6 @@ public class BattleEngine : SceneRoot3D
         if (GameManager.Singleton.Techtree[skillName] != null)
             return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
 
-        Debug.LogWarning("Skill Name: "+skillName+" + Variable: "+extractionMode+" <- doesn't seem to be initialized.");
         return extractionMode.Equals("Animation") ? "atk_var_1" : "Laser";
     }
 
@@ -228,45 +284,51 @@ public class BattleEngine : SceneRoot3D
         {
             case FightRoundResult.Player.A:
                 _actor.transform.position = FriendlyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.rotation = FriendlyCreature.transform.FindChild("CastFromMouthPos").rotation;
+                _actor.transform.LookAt(EnemyCreature.transform.FindChild("MiddleOfBody"));
                 break;
             case FightRoundResult.Player.B:
                 _actor.transform.position = EnemyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.rotation = EnemyCreature.transform.FindChild("CastFromMouthPos").rotation;
+                _actor.transform.LookAt(FriendlyCreature.transform.FindChild("MiddleOfBody"));
                 break;
         }
     }
 
     private void executeSkill()
     {
-        if (Result.Damage > 0)
+
+        if (Result.Damage > 0 && Fighting)
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
+        if (Result.EVDA)
+            FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
+        if (Result.EVDB)
+            EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
+
 
         var info = new List<GUIObjectBattleEngine.IndicatorContent>
-        { new GUIObjectBattleEngine.IndicatorContent(CurCaster, Result.SkillName, 0) };
+        { new GUIObjectBattleEngine.IndicatorContent(CurCaster, Localization.GetText(Result.SkillName), 0) };
 
         if (Result.Damage > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, "DMG", Result.Damage));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, Localization.GetText("DMG"), Result.Damage));
         if (Result.DotA && !View.MonsterADot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Set on fire!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Set_On_Fire"), 0));
         if (Result.DotB && !View.MonsterBDot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Set on fire!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Set_On_Fire"), 0));
         if (Result.DoT > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, "Burn DMG", Result.DoT));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, Localization.GetText("Burn_DMG"), Result.DoT));
         if (Result.HotA && !View.MonsterAHot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Regenerating!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Regen"), 0));
         if (Result.HotB && !View.MonsterBHot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Regenerating!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Regen"), 0));
         if (Result.HoT > 0)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurCaster, "Heal", Result.HoT));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(CurCaster, Localization.GetText("Heal"), Result.HoT));
         if (Result.ConA && !View.MonsterACon.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Confusion!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Confusion"), 0));
         if (Result.ConB && !View.MonsterBCon.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Confusion!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Confusion"), 0));
         if (Result.BuffA && !View.MonsterABuff.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, "Buffed!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Buff"), 0));
         if (Result.BuffB && !View.MonsterBBuff.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, "Buffed!", 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Buff"), 0));
 
         View.ShowDamageIndicators(info);
 

@@ -722,6 +722,8 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
+        if (json["error"] != null && BattleEngine.CurrentGameObject != null && ((string)json["error"]).Equals("invalid_fight")) //<------------------------
+            Player.CurFight.Finished = true;
         if (!CheckResult(json,request.url)) { yield break; }
         JSONObject turnJSON = json["data"];
         if (!turnJSON) yield break;
@@ -738,10 +740,16 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         string message;
-        if ((bool)json["result"])
+        if ((bool) json["result"])
+        {
+            BattleEngine.Current.EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("tame_success");
             message = "Success!";
+        }
         else
+        {
+            BattleEngine.Current.EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("tame_fail");
             message = "Fail!";
+        }
         BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
         { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.EnemyCreature, message, 0, 1.5f, 3f) });
         BattleEngine.Current.View.TxtIndicators[0].GetComponent<IndicatorController>().CatchResult = true;
@@ -792,6 +800,8 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
+        if (json["error"] != null && BattleEngine.CurrentGameObject != null && ((string)json["error"]).Equals("invalid_fight")) //<------------------------
+            Player.CurFight.Finished = true;
         if (!CheckResult(json,request.url)) { yield break; }
         JSONObject turnJSON = json["data"];
         if (!turnJSON) yield break;

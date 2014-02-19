@@ -21,5 +21,6 @@ public class FightRoundResult
     public bool DotB = false;
     public bool HotA = false;
     public bool HotB = false;
-
+    public bool EVDA = false;
+    public bool EVDB = false;
 }

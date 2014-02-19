@@ -20,10 +20,15 @@ public class MonsterAnimationController : MonoBehaviour
         _delay = delay;
         _animName = animName;
     }
-	
+
+    public void SetState(string state, bool value = true)
+    {
+        GetComponent<Animator>().SetBool(state, value);
+    }
+
 // ReSharper disable once UnusedMember.Local
 	void Update ()
-	{
+    {
         DifferentIdlesController();
 
 	    if (_delay > 0f)
@@ -44,9 +49,10 @@ public class MonsterAnimationController : MonoBehaviour
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FightIdle"))
             _idleTime += Time.deltaTime;
 
-        if (_idleTime < 5f) return;
+        if (_idleTime < 20f) return;
 
-        if (Random.Range(0, 2) > 0) Trigger("FightIdle_to_Agitated");
+        if (Random.Range(0, 2) > 0) return;
+        Trigger(Random.Range(0, 2) > 0 ? "Idle_std_var1" : "idle_std_var2");
         _idleTime = 0f;
     }
 

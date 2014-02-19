@@ -15,6 +15,7 @@ public class Fight
 	public bool Turn;
     public bool Started;
     public bool Finished;
+    public bool Pvp;
 
     public JSONObject Info;
 
@@ -58,6 +59,7 @@ public class Fight
     public void ReadJson(JSONObject json)
     {
         Info = json;
+        Pvp = (bool)json["PvP"];
         FighterA.ReadJson(json["FighterA"]);
         FighterB.ReadJson(json["FighterB"]);
         LastResult = (string)json["LastResult"];

@@ -116,7 +116,10 @@ public class Player
             DotA = (int)CurFight.Info["FighterA"]["Dot"][0] > 0,
             DotB = (int)CurFight.Info["FighterB"]["Dot"][0] > 0,
             HotA = (int)CurFight.Info["FighterA"]["Hot"][0] > 0,
-            HotB = (int)CurFight.Info["FighterB"]["Hot"][0] > 0
+            HotB = (int)CurFight.Info["FighterB"]["Hot"][0] > 0,
+            EVDA = (bool)CurFight.Info["FighterA"]["evaded"],
+            EVDB = (bool)CurFight.Info["FighterB"]["evaded"]
+
         };
 
         string[] lastResult = CurFight.LastResult.Split(' ');

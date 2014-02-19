@@ -195,10 +195,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		GGContainer.MouseMove += OnMouseMove;
 		GGContainer.MouseDown += OnMouseMove;
 		GGContainer.MouseUp += OnMouseUp;
-	}
+    }
 
     public void Init()
     {
+        DriodContainer.transform.parent.FindChild("Catch").GetComponent<dfButton>().IsVisible = !GameManager.Singleton.Player.CurFight.Pvp;
+        DriodContainer.transform.parent.FindChild("Flee").GetComponent<dfButton>().IsVisible = !GameManager.Singleton.Player.CurFight.Pvp;
+        DriodContainer.transform.parent.FindChild("Catch").GetComponent<dfButton>().IsInteractive = !GameManager.Singleton.Player.CurFight.Pvp;
+        DriodContainer.transform.parent.FindChild("Flee").GetComponent<dfButton>().IsInteractive = !GameManager.Singleton.Player.CurFight.Pvp;
         UpdateMonsterElements();
         UpdateFaction();
         GGContainer.Hide();
@@ -224,12 +228,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
             return;
 
         UpdateSelection();
-        if (CatchContainerVisual.IsVisible)
-        {
-            CatchContainerVisual.transform.position =
-                    (BattleEngine.Current.Camera.transform.FindChild("GUIPos").position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
-            CatchContainerVisual.transform.rotation = BattleEngine.Current.Camera.transform.rotation;
-        }
+        if (!CatchContainerVisual.IsVisible) return;
+        CatchContainerVisual.transform.position =
+            (BattleEngine.Current.Camera.transform.FindChild("GUIPos").position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
+        CatchContainerVisual.transform.rotation = BattleEngine.Current.Camera.transform.rotation;
     }
 
     public void ShowDamageIndicators(List<IndicatorContent> info)
@@ -285,7 +287,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 				DriodImprint[i].Add(GameManager.ResourceElement.storm);
         }
 
-        for (int i = 0; i < PresentDriodsCount; i++)
+        for (int i = 0; i < Slots.Length; i++)
         {
             for (int j = 0; j < DriodImprint[i].Count; j++)
             {
@@ -329,7 +331,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateDriodHealth()
     {
-        for (int i = Slots.Length; i < 4; i++)
+        for (int i = PresentDriodsCount; i < 4; i++)
             DriodsHealth[i].Hide();
 
         for (int i = 0; i < PresentDriodsCount; i++)
