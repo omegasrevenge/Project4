@@ -288,7 +288,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         SessionID = (string)json["data"]["sid"];
         Player.PlayerID = (string)json["data"]["pid"];
         GetOwnPlayer(callback);
@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviour
         yield return request;
         Debug.Log("Login: " + request.text);
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         SessionID = (string)json["data"];
         Player.PlayerID = playerID;
         GetOwnPlayer(callback);
@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json))
+        if (!CheckResult(json,request.url))
         {
             if (callback != null)            callback(false);
             yield break;
@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour
 		yield return request;
 
 		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json))
+		if (!CheckResult(json,request.url))
 		{
 			if (callback != null)
 				callback(false, (string)json["error"]);
@@ -465,7 +465,7 @@ public class GameManager : MonoBehaviour
 		yield return request;
 
 		JSONObject json = JSONParser.parse(request.text);
-		if (!CheckResult(json))
+		if (!CheckResult(json,request.url))
 		{
 			if (callback != null)
 				callback(false, (string)json["error"]);
@@ -488,7 +488,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
 
         UpdateAllOwnCreatures(json["data"]);
 
@@ -507,7 +507,7 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         Debug.Log(json);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
 
         UpdateAllOwnCreatures(json["data"]);
 
@@ -526,7 +526,7 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
         Debug.Log(json);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
 
         UpdateAllOwnCreatures(json["data"]);
 
@@ -550,7 +550,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json))
+        if (!CheckResult(json,request.url))
         {
             _allOwnCreatures = null;
             yield break;
@@ -579,7 +579,7 @@ public class GameManager : MonoBehaviour
 
 		JSONObject json = JSONParser.parse(request.text);
 		Debug.Log(json);
-		if (!CheckResult(json)) yield break;
+		if (!CheckResult(json,request.url)) yield break;
 
 		GetOwnPlayer();
 	}
@@ -599,7 +599,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
 
         GetOwnPlayer();
     }
@@ -623,7 +623,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         Player.Position = pos;
     }
 
@@ -633,7 +633,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         Techtree = json["data"];
     }
 
@@ -651,7 +651,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         Player.BasePosition = pos;
     }
 
@@ -676,7 +676,7 @@ public class GameManager : MonoBehaviour
 			poi.NextFarm=nextFarm;
 			Debug.Log("NextFarm:"+nextFarm.ToLocalTime()+" in "+(nextFarm-GetServerTime()));
 		}
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
         _lastOwnPlayerUpdate = -1000;
 
         if (data["Result"].ToString() != "\"fight\"" && data["Result"].ToString() != "\"heal\"")
@@ -714,7 +714,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
         JSONObject playersJSON = json["data"];
         PlayerPositionsInRange = new ObjectPos[playersJSON.Count];
         for (int i = 0; i < PlayerPositionsInRange.Length; i++)
@@ -742,7 +742,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
         JSONObject turnJSON = json["data"];
         if (!turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
@@ -765,7 +765,7 @@ public class GameManager : MonoBehaviour
         BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
         { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.EnemyCreature, message, 0, 1.5f, 3f) });
         BattleEngine.Current.View.TxtIndicators[0].GetComponent<IndicatorController>().CatchResult = true;
-        //if (!CheckResult(json)) { yield break; }
+        //if (!CheckResult(json,request.url)) { yield break; }
         BattleEngineSkipTurn = true;
         GetOwnPlayer();
     }
@@ -788,7 +788,7 @@ public class GameManager : MonoBehaviour
         BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
         { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.FriendlyCreature, message, 0, 2f) });
 		Debug.LogError (json);
-        //if (!CheckResult(json)) { yield break; }
+        //if (!CheckResult(json,request.url)) { yield break; }
         BattleEngineSkipTurn = true;
         GetOwnPlayer();
     }
@@ -812,7 +812,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
         JSONObject turnJSON = json["data"];
         if (!turnJSON) yield break;
         ReadPlayerJSON(turnJSON);
@@ -829,7 +829,7 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("fightdelete"));
         yield return request;
         JSONObject json = JSONParser.parse(request.text);
-        CheckResult(json);
+        CheckResult(json,request.url);
     }
 
     /// <summary>
@@ -863,7 +863,7 @@ public class GameManager : MonoBehaviour
         yield return request;
         _playerQueryActive = false;
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
         JSONObject playersJSON = json["data"];
         for (int i = 0; i < playersJSON.Count; i++)
         {
@@ -893,7 +893,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
 
         GetOwnPlayer();
     }
@@ -910,7 +910,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
 
         GetOwnPlayer();
     }
@@ -927,7 +927,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
 
         GetOwnPlayer();
     }
@@ -944,7 +944,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
 
         GetOwnPlayer();
     }
@@ -962,7 +962,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) { yield break; }
+        if (!CheckResult(json,request.url)) { yield break; }
     }
 
     public void SubmitPlayerName(string name, Action<bool, string> callback)
@@ -978,7 +978,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json))
+        if (!CheckResult(json,request.url))
         {
             if (callback != null)
                 callback(false, (string)json["error"]);
@@ -998,7 +998,7 @@ public class GameManager : MonoBehaviour
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json)) yield break;
+        if (!CheckResult(json,request.url)) yield break;
 
         JSONObject data = json["data"];
         JSONObject pois = data["POIs"];
@@ -1021,7 +1021,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="json"></param>
     /// <returns></returns>
-    public bool CheckResult(JSONObject json)
+    public bool CheckResult(JSONObject json,string url)
     {
 		long tcnow = (long)((DateTime.UtcNow-new DateTime (1970,1,1)).TotalMilliseconds);
 		long tcold=(long)json["tc"];
@@ -1036,7 +1036,7 @@ public class GameManager : MonoBehaviour
 
         if ((bool)json["result"]) return true;
         string sErr = (string)json["error"];
-        Debug.LogError("RPC Fail: " + sErr);
+        Debug.LogError("RPC Fail: " + sErr + "@ "+url);
         if (sErr == "invalid_session")
         {
             SessionID = "";

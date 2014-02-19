@@ -25,6 +25,8 @@ public class Player
 
     public void ReadJson(JSONObject json)
     {
+		if(json==null||json["PId"]==null||((string)json["PId"]).Length<8) {return;} //not a player
+
         CurrentFaction = (Faction)(int)json["Faction"];
         PlayerID = (string)json["PId"];
         Name = (string)json["Name"];
