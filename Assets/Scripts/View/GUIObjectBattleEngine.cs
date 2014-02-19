@@ -556,8 +556,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
         if (Slots.Length-1 < driod) return;
 
 		int idx=InputText.IndexOf(driod);
-		//if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
-		if (idx != -1) //remove from anywhere
+		if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
+		//if (idx != -1) //remove from anywhere
         {
             InputText.Remove(driod);
             return;
@@ -589,7 +589,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 	{
 		//Debug.Log("mouseup " + ctrl +" " + dfInputManager.ControlUnderMouse);
 
-		if (dfInputManager.ControlUnderMouse==ButtonExecute) {ExecuteClicked();}
+		if (dfInputManager.ControlUnderMouse==ButtonExecute) {ExecuteClicked();} else {DeleteSelection();}
 	}
 
 	public void ExecuteClicked()
