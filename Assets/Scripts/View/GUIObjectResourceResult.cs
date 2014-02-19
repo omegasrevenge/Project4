@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.AccessControl;
 using UnityEngine;
 using System.Collections;
 
@@ -6,11 +7,11 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 {
     private const string Prefab = "GUI/panel_rsc_result";
     private const string ButtonStr = "button_ok";
-    private const string TextboxStr = "textbox_name";
-    private const string ResourceStr = "sprite_rsc";
+    private const string ScrollPanelStr = "scrollpanel";
     private const string Prefix = "element_";
 
     public event Action ClosePopup;
+    public GameObject ResultTemplate;
 
     private dfControl _root;
 
@@ -18,9 +19,9 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 
     [SerializeField] private dfButton _button;
 
-    [SerializeField] private dfSprite[] _rsc;
-
     [SerializeField] public string Text;
+
+    private dfScrollPanel _scrollpanel;
 
     public string Button
     {
@@ -39,7 +40,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, string[] count, string[] level, string[] element)
+    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, FarmResult result)
     {
         SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
@@ -47,19 +48,20 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         cntrl.RelativePosition = Vector2.zero;
         GUIObjectResourceResult obj = cntrl.GetComponent<GUIObjectResourceResult>();
         obj._root = root;
-
         obj.Button = textKeyButton;
-        GUIObjectTextPanel[] panels = obj.GetComponentsInChildren<GUIObjectTextPanel>();
-        for (int i = 0; i < count.Length; i++)
-        {          
-            panels[i].Text = textKeyText + "#" + count[i] + "#" + Localization.GetText(level[i]) + "#" + Localization.GetText(element[i]);
-            obj._rsc[i].SpriteName = Prefix + element[i].ToLower();
-        }
-        for (int i = count.Length; i < panels.Length; i++)
+        obj._scrollpanel = obj.transform.Find(ScrollPanelStr).GetComponent<dfScrollPanel>();
+
+        foreach (FarmResult.Driod driod in result.GetDriods())
         {
-            Destroy(obj._rsc[i].gameObject);
-            Destroy(panels[i].gameObject);
+            dfControl panelControl = obj._scrollpanel.AddPrefab(obj.ResultTemplate);
+            GUIObjectTextPanel panel = panelControl.GetComponent<GUIObjectTextPanel>();
+            dfSprite sprite = panelControl.transform.Find("sprite_rsc").GetComponent<dfSprite>();
+
+            panel.Text = textKeyText + "#" + driod.Count + "#" + Localization.GetText(driod.Level.ToString()) + "#" + Localization.GetText(Resource.ResourceTypes[driod.Element + 1].ToLower());
+            sprite.SpriteName = Prefix + Resource.ResourceTypes[driod.Element + 1].ToLower();
+
         }
+        obj.ResultTemplate.SetActive(false);
         return obj;
     }
 }

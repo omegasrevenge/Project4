@@ -666,32 +666,15 @@ public class GameManager : MonoBehaviour
 
         JSONObject json = JSONParser.parse(request.text);
 		//Debug.Log(json);
-		JSONObject data=json["data"];
-		bool bSuccess=(bool) data["Success"];
+		JSONObject data = json["data"];
+		bool succeeded = data["Success"];
 		if (data.HasField("NextFarm")) {
-			DateTime nextFarm=(DateTime)data["NextFarm"];
+			DateTime nextFarm = (DateTime)data["NextFarm"];
 			poi.NextFarm=nextFarm;
-			Debug.Log("NextFarm:"+nextFarm.ToLocalTime()+" in "+(nextFarm-GetServerTime()));
 		}
         if (!CheckResult(json,request.url)) yield break;
         _lastOwnPlayerUpdate = -1000;
-
-        if (data["Result"].ToString() != "\"fight\"" && data["Result"].ToString() != "\"heal\"")
-        {
-            string[] results = data["Result"].ToString().Replace("\"", "").Split(';');
-            string[] element = new string[results.Length];
-            string[] level = new string[results.Length];
-            string[] count = new string[results.Length];
-            for (int i = 0; i < results.Length; i++)
-            {
-                string[] rsc = results[i].Split(' ');
-                int eIndex = Convert.ToInt32(rsc[0]);
-                element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
-                level[i] = rsc[1];
-                count[i] = "1";
-            }
-            _view.AddPopup().AddToPopup(_view.ShowResourceResult(count, level, element).gameObject);    
-        }
+        GUIShowFarmResult(succeeded, data["Result"]);
     }
 
     /// <summary>
@@ -1253,6 +1236,25 @@ public class GameManager : MonoBehaviour
 		}
 		Debug.Log(error);
 	}
+
+    public void GUIShowFarmResult(bool succeeded, JSONObject result)
+    {
+        if (result.ToString() != "\"fight\"" && result.ToString() != "\"heal\"")
+        {
+            string[] results = result.ToString().Replace("\"", "").Split(';');
+            FarmResult resultObj = new FarmResult();
+            for (int i = 0; i < results.Length; i++)
+            {
+                string[] rsc = results[i].Split(' ');
+                int element = Convert.ToInt32(rsc[0]);
+                int level = Convert.ToInt32(rsc[1]);
+                resultObj.AddResult(element, level, 1);
+                //element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
+   
+            }
+            _view.AddPopup().AddToPopup(_view.ShowResourceResult(resultObj).gameObject);
+        }
+    }
 
     #endregion
 

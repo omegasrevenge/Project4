@@ -156,9 +156,9 @@ public class ViewController : MonoBehaviour
         return GUIObjectChallenge.Create(_gui, text, title, name, cancelbtn, okbtn);
     }
 
-    public GUIObjectResourceResult ShowResourceResult(string[] count, string[] level, string[] element)
+    public GUIObjectResourceResult ShowResourceResult(FarmResult result)
     {
-        return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", count, level, element);
+        return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", result);
     }
 
     public GUIObjectMessage ShowMessage()
