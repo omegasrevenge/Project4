@@ -1,13 +1,17 @@
-ï»¿{
-	blindtext: 			"This is a blÃ¼ndtext. If you can read this please contact the developers. Contravention will lead to a rain of dead rats.",
+{
+	blindtext: 			"This is a blündtext. If you can read this please contact the developers. Contravention will lead to a rain of dead rats.",
 	
 	ok:					"OK",
 	
 	continue:			"Continue",
+
+	cancel:				"Cancel",
+
+	accept:				"Accept",
+
+	decline:			"Decline",
 	
 	default_name:		"Username",
-
-	default_monstername:		"Specter",
 	
 loadingscreen_login:
 "Connecting to server ...",
@@ -15,8 +19,40 @@ loadingscreen_login:
 loadingscreen_submitName:
 "Sending profile data to server ...",
 
+energy:"Energy",
+fire:"Fire",
+storm:"Storm",
+nature:"Life",
+water:"Water",
+
+0:"Biode/s", 
+1:"primitive Driode(s)"
+2:"Rank 1 Driode(s)"
+3:"Rank 2 Driode(s)"
+4:"Rank 3 Driode(s)"
+5:"Rank 4 Driode(s)"
+6:"Rank 5 Driode(s)"
+
+farm_rsc_text:
+"{0} {1} of Type {2} found.",
+
+challenger_title:
+"Waiting for response...",
+
+challenger_text:
+"You challenge {0} to a fight",
+
+challenge_title:
+"You are being challenged!",
+
+challenge_text:
+"{0} challenged you to a fight."
+
 screen_entername_title:
 "Your profile",
+
+screen_entername_text:
+"Please choose a username. It will be visible for other VENGEA agents.",
 
 screen_chooseelement_title:
 "Element",
@@ -28,10 +64,7 @@ screen_monsterentername_title:
 "Your Specter",
 
 screen_monsterentername_text:
-"",
-
-screen_entername_text:
-"Please choose a username. It will be visible for other VENGEA agents.",
+"Please choose a name for your Spectre.",
 	
 iris_01_text: 	
 "Greetings Agent,
@@ -312,8 +345,8 @@ Lightning_Bolt:
 Shockwave:
 "Shockwave",
 
-MjÃ¶lnir:
-"MjÃ¶lnir",
+Mjölnir:
+"Mjölnir",
 
 Shape_of_Ymir:
 "Ymir's Shape",
