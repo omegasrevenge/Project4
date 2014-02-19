@@ -168,4 +168,153 @@ iris_14_01_text:
 iris_15_01_text:
 "Currently you are using a non authorised version of OCULUS. Reboot your system immediately via menu to delete malware. Contravening will lead to a permanent classification as a human interference.",
 
+Sulfurbreath:
+"Sulfurbreath",
+
+Fire_of_Loki:
+"Loki's Fire",
+
+Forest_Fire:
+"Forest Fire",
+
+Eruption:
+"Eruption",
+
+Flame_Wheel:
+"Flame Wheel",
+
+Meteor:
+"Meteor",
+
+Fireball:
+"Fireball",
+
+Burning_Man:
+"Burning Man",
+
+Surtalogi:
+"Surtalogi",
+
+Brand_of_Surtis:
+"Surti's Brand",
+
+Wall_of_Fog:
+"Wall of Fog",
+
+Cloud_of_Smoke:
+"Cloud of Smoke",
+
+Piercing_Wind:
+"Piercing Wind",
+
+Hurricane:
+"Hurricane",
+
+Tailwind:
+"Tailwind",
+
+Winter_Gale:
+"Winter Gale",
+
+Flying_Sparks:
+"Flying Sparks",
+
+Storm_Front:
+"Storm Front",
+
+Whirlwind:
+"Whirlwind",
+
+Force_of_Egdir:
+"Egdir's Force",
+
+Regeneration:
+"Regeneration",
+
+Blood_of_Loki:
+"Loki's Blood",
+
+Black_Death:
+"Black Death",
+
+Bite_of_Garm:
+"Garm's Bite",
+
+Evolution:
+"Evolution",
+
+Genesis:
+"Genesis",
+
+Spore_Strike:
+"Spore Strike",
+
+Symbiosis:
+"Symbiosis",
+
+Infection:
+"Infection",
+
+Mutation:
+"Mutation",
+
+Fluidification:
+"Fluidification",
+
+Allaying_Waves:
+"Allaying Waves",
+
+Raging_Torrent:
+"Raging Torrent",
+
+Tsunami:
+"Tsunami",
+
+Overwhelming_Force:
+"Overwhelming Force",
+
+Tide:
+"Tide",
+
+Storm_Flood:
+"Storm Flood",
+
+Avalanche:
+"Avalanche",
+
+Blood_of_Ymir:
+"Ymir's Blood",
+
+Realm_of_Ran:
+"Ran's Realm",
+
+Charge:
+"Charge",
+
+Gorge_of_Fenrir:
+"Fenrir's Gorge",
+
+Chain_Lightning:
+"Chain Lightning",
+
+Lightning_of_Thor:
+"Thor's Lightning",
+
+Overload:
+"Overload",
+
+Nuclear_Fusion:
+"Nuclear Fusion",
+
+Lightning_Bolt:
+"Lightning Bolt",
+
+Shockwave:
+"Shockwave",
+
+Mjölnir:
+"Mjölnir",
+
+Shape_of_Ymir:
+"Ymir's Shape",
 }

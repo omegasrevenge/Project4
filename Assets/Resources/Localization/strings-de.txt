@@ -200,4 +200,154 @@ iris_14_01_text:
 
 iris_15_01_text:
 "Sie nutzen gerade eine nicht autorisierte Version von OCULUS. Rebooten Sie Ihr System über das Menü neu, um Schadsoftware zu entfernen. Andernfalls bin ich gezwungen Sie dauerhaft als humanoides Störobjekt einzustufen.",
+
+Sulfurbreath:
+"Schwefel Atem",
+
+Fire_of_Loki:
+"Feuer des Loki",
+
+Forest_Fire:
+"Waldbrand",
+
+Eruption:
+"Eruption",
+
+Flame_Wheel:
+"Flammenrad",
+
+Meteor:
+"Meteor",
+
+Fireball:
+"Feuerkugel",
+
+Burning_Man:
+"Petersfeuer",
+
+Surtalogi:
+"Surtalogi",
+
+Brand_of_Surtis:
+"Surtis Brand",
+
+Wall_of_Fog:
+"Nebelwand",
+
+Cloud_of_Smoke:
+"Rauchwolke",
+
+Piercing_Wind:
+"Beißender Wind",
+
+Hurricane:
+"Hurrikan",
+
+Tailwind:
+"Rückenwind",
+
+Winter_Gale:
+"Orkan",
+
+Flying_Sparks:
+"Funkenflug",
+
+Storm_Front:
+"Gewitterfront",
+
+Whirlwind:
+"Wirbelsturm",
+
+Force_of_Egdir:
+"Egdirs Macht",
+
+Regeneration:
+"Regeneration",
+
+Blood_of_Loki:
+"Lokis Blut",
+
+Black_Death:
+"Pestwolke",
+
+Bite_of_Garm:
+"Garms Biss",
+
+Evolution:
+"Evolution",
+
+Genesis:
+"Genesis",
+
+Spore_Strike:
+"Sporenhieb",
+
+Symbiosis:
+"Symbiose",
+
+Infection:
+"Infekt",
+
+Mutation:
+"Mutation",
+
+Fluidification:
+"Verflüssigen",
+
+Allaying_Waves:
+"Lindernde Wogen",
+
+Raging_Torrent:
+"Reißende Flut",
+
+Tsunami:
+"Tsunami",
+
+Overwhelming_Force:
+"Unbändige Kraft",
+
+Tide:
+"Gezeit",
+
+Storm_Flood:
+"Sturmflut",
+
+Avalanche:
+"Lawine",
+
+Blood_of_Ymir:
+"Ymirs Blut",
+
+Realm_of_Ran:
+"Rans Reich",
+
+Charge:
+"Ladung",
+
+Gorge_of_Fenrir:
+"Fenrirs Schlund",
+
+Chain_Lightning:
+"Kettenblitz",
+
+Lightning_of_Thor:
+"Thors Blitze",
+
+Overload:
+"Überladung",
+
+Nuclear_Fusion:
+"Kernfusion",
+
+Lightning_Bolt:
+"Kugelblitz",
+
+Shockwave:
+"Schockwelle",
+
+Mjölnir:
+"Mjölnir",
+
+Shape_of_Ymir:
+"Ymirs Form",
 }
