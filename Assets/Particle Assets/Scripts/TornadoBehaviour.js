@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 var lastChange : float = 0;
-var changeInt : float = 1;
+var changeInt : float = 0.5;
 
 function Update () {
 	//for flat terrain, seems to work better
