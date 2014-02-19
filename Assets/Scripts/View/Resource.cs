@@ -6,7 +6,7 @@ public class Resource : PointOfInterest
     private const string Prefab = "POIs/resource";
     private const string InRangeStr = "InRange";
 
-    public static readonly string[] ResourceTypes = { "Default", "Energy", "Nature", "Fire", "Water", "Storm" };
+    public static readonly string[] ResourceTypes = { "Default", "Energy", "Fire", "Storm", "Nature" , "Water" };
 
     public static Resource Create(POI poi, MapGrid grid, Transform root)
     {
