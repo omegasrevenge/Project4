@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     private Map             _map;
     private PlayerBase      _base;
     private BattleEngine    _fight;
-    private string lastPlayerRequest;
+    public string lastPlayerRequest = "none";
 
     public bool DummyUI = true;
 
@@ -394,17 +394,14 @@ public class GameManager : MonoBehaviour
         {
             Player FighterA=GetPlayer(fight.FighterA.PId);
             Player FighterB=GetPlayer(fight.FighterB.PId);
-            if (FighterA == null || FighterB == null) return;               
-            if (FighterB.Name == lastPlayerRequest) return;
+            if (FighterA == null || FighterB == null) return; 
+            if (FighterB.PlayerID == lastPlayerRequest) return;
             // not for challenger !!!!!
             if (!fight.FighterA.challenger)
+            {
+                lastPlayerRequest = FighterB.PlayerID;
                 _view.ShowMessage();
-            //if (Player.PlayerID == fight.FighterA.PId)
-            //challengePopup.AddToPopup(_view.ShowChallenge("challenger_text", "challenger_title", FighterB.Name, "cancel", "").gameObject);
-
-            //else if (Singleton.GetPlayer(fight.FighterA.PId) != null)
-            lastPlayerRequest = FighterB.Name;
-  
+            }                
             return;
         }
 
@@ -417,7 +414,7 @@ public class GameManager : MonoBehaviour
         Fight fight = Player.CurFight;
         if (fight == null || fight.Finished) return;
         if (!fight.Started)
-        {
+        {         
             if (challengePopup == null || challengePopup.gameObject == null)
             {
                 Player FighterA = GetPlayer(fight.FighterA.PId);

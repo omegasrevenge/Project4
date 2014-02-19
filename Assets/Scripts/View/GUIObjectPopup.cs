@@ -116,6 +116,7 @@ public class GUIObjectPopup : MonoBehaviour
 
     public void OnPopupEnd()
     {
+        GameManager.Singleton.lastPlayerRequest = "none";
         Destroy(gameObject);
         if (_nextPopup != null)
             _nextPopup.Show();

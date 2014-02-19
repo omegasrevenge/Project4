@@ -78,12 +78,14 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
     public void Accept()
     {
         Debug.Log("accepted");
+        GameManager.Singleton.lastPlayerRequest = "none";
         GameManager.Singleton.Accept();
     }
 
     public void Decline()
     {
         Debug.Log("declined");
+        GameManager.Singleton.lastPlayerRequest = "none";
         GameManager.Singleton.Decline();
     }
 }
