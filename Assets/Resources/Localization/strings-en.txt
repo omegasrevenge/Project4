@@ -317,4 +317,25 @@ Mjölnir:
 
 Shape_of_Ymir:
 "Ymir's Shape",
+
+DMG:
+"Damage",
+
+Set_On_Fire:
+"Set on Fire!"
+
+Burn_DMG:
+"Burn Damage",
+
+Regen:
+"Regenerating Life!",
+
+Heal:
+"Heal",
+
+Confusion:
+"Confusion!",
+
+Buff:
+"Buffed!",
 }
