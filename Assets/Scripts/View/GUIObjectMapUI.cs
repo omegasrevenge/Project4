@@ -125,6 +125,14 @@ public class GUIObjectMapUI : MonoBehaviour
         tween.AutoRun = true;
     }
 
+    public void CloseMenuImmediate()
+    {
+        dfTweenFloat tween = GetComponent<dfTweenFloat>();
+        if (tween)
+            Destroy(tween);
+        ViewportScrollState = 0;
+    }
+
     public void AddMarker(TouchObject[] touches)
     {
         ObjectOnMap[] objects = Array.ConvertAll(touches, item => (ObjectOnMap)item);

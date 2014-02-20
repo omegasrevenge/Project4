@@ -206,4 +206,9 @@ public class Map : SceneRoot3D
         View.SetCreatureInfo(creature);
     }
 
+    public void HideMenu()
+    {
+        View.CloseMenuImmediate();
+    }
+
 }

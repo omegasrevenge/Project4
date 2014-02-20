@@ -80,6 +80,10 @@ menu_reboot: "System Reboot",
 
 menu_logout: "Abmelden",
 
+screen_login: "Sie müssen sich erst authentifizieren, um OCULUS zu nutzen.",
+
+screen_login_button: "Anmelden",
+
 iris_01_text: 	
 "Willkommen Agent,
 Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",

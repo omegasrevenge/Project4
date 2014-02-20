@@ -23,9 +23,14 @@ public class GUIObjectTextPanel : MonoBehaviour
         {
             if (_textLabel == null)
             {
-                GameObject obj = transform.FindChild(TextLabelStr).gameObject;
-                if (obj)
-                    _textLabel = obj.GetComponent<dfLabel>();
+                Transform trans = transform.FindChild(TextLabelStr);
+                GameObject obj;
+                if (trans)
+                {
+                    obj = trans.gameObject;
+                    if (obj)
+                        _textLabel = obj.GetComponent<dfLabel>();
+                }
             }
             string[] text = new string[] {value};
            

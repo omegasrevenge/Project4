@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 25;
-        //Check for Singleton
+
+
         if (_instance == null)
             _instance = this;
         else if (_instance != this)
@@ -118,12 +119,18 @@ public class GameManager : MonoBehaviour
         //_map.name = "Map";
         _allOwnCreatures = null;
 
+        StartOAuth();
+#if UNITY_EDITOR
+		PlayerID=PlayerPrefs.GetString("PlayerID");
+		Password=PlayerPrefs.GetString("Password");
+#endif
+    }
+
+    public void StartOAuth()
+    {
 #if !UNITY_EDITOR
         Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
         Social.localUser.Authenticate(OnAuthCB);
-#else
-		PlayerID=PlayerPrefs.GetString("PlayerID");
-		Password=PlayerPrefs.GetString("Password");
 #endif
     }
 
@@ -182,6 +189,8 @@ public class GameManager : MonoBehaviour
         pois_timeQ -= Time.deltaTime;
     }
 
+
+
     private void UpdatePlayersOnMap()
     {
         if (PlayerPositionsInRange == null) return;
@@ -226,6 +235,9 @@ public class GameManager : MonoBehaviour
         
         switch (newGameMode)
         {
+            case GameMode.Login:
+                _view.Switch3DSceneRoot(null);
+                break;
             case GameMode.Map:
                 if (!_map)
                 {
@@ -271,6 +283,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CLogin(token, callback));
     }
 
+    public void Logout()
+    {
+        SessionID = "";
+#if !UNITY_EDITOR
+        NerdGPG.Instance().signOut();
+#endif
+        _view.AddMaxScreen(GUIObjectLoginScreen.Create());
+        SwitchGameMode(GameMode.Login);
+        if(_map)
+            _map.HideMenu();
+    }
     /// <summary>
     /// Gets SessionID by PlayerID (Get from OAuth).
     /// </summary>
@@ -1266,6 +1289,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GUIHideLoginScreen()
+    {
+        _view.ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
+        _view.RemoveMaxScreen();
+        StartOAuth();
+    }
+
     #endregion
 
     //####################################  Editor Login ###################################
@@ -1296,4 +1326,7 @@ public class GameManager : MonoBehaviour
 
     }
 #endif
+
+
+
 }
