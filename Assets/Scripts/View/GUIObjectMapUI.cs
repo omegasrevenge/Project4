@@ -13,7 +13,7 @@ public class GUIObjectMapUI : MonoBehaviour
     private GameObject _menuRoot;
     private dfControl _menuButton;
     private dfControl _menuPanel;
-    private MovableViewport _guiViewport;
+    private MovableGUIPanel _guiViewport;
     private GUIObjectCreatureInfo _creatureInfo;
     private Map _root3D;
 
@@ -35,7 +35,7 @@ public class GUIObjectMapUI : MonoBehaviour
         _root3D = root;
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(ViewController.UIRootTag);
          _menuRoot = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag);
-        _guiViewport = GUIRoot.transform.FindChild(ViewController.CameraStr).GetComponent<MovableViewport>();
+        _guiViewport = GetComponent<MovableGUIPanel>();
         ViewportScrollState = 0f;
 
         _menuPanel = transform.FindChild(MenuPanelStr).GetComponent<dfControl>();
@@ -79,7 +79,7 @@ public class GUIObjectMapUI : MonoBehaviour
         set
         {
             value = Mathf.Clamp(value, 0f, MaxViewportScroll);
-            _viewportScrollState = _guiViewport.phase = value;
+            _viewportScrollState = _guiViewport.Phase = value;
             if (_root3D)
                 _root3D.ViewportPhase = _viewportScrollState;
             if (_viewportScrollState == 0f)
