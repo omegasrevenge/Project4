@@ -9,16 +9,19 @@ public class HandleDrag : MonoBehaviour
 	public bool inSlot = false;
 
 	private Vector2 rootPosition;
+	private GUIObjectCrafting _crafting;
 	private GameObject root;
 	private dfDragHandle dragHandle;
 	private bool clampY;
 
 	private bool init = false;
+	private bool eleUp = false;
+	private bool eleDown = false;
 
-
-	public static void AddHandleDrag(GameObject root, dfSprite sprite, bool addDragHandle, bool clampY = false)
+	public static void AddHandleDrag(GUIObjectCrafting crafting, GameObject root, dfSprite sprite, bool addDragHandle, bool clampY = false)
 	{
 		HandleDrag cntr = root.AddComponent<HandleDrag>();
+		cntr._crafting = crafting;
 		cntr.sprite = sprite;
 		cntr.root = root;
 		cntr.clampY = clampY;
@@ -36,7 +39,7 @@ public class HandleDrag : MonoBehaviour
 	{
 		if (init) return;
 
-		startPosition = root.transform.position;
+		startPosition = sprite.RelativePosition;
 		rootPosition = new Vector2(sprite.GetGUIScreenPos().x - sprite.Size.x, sprite.GetGUIScreenPos().y - sprite.Size.y);
 
 		dragHandle.Size = new Vector2(sprite.Size.x, sprite.Size.y);
@@ -53,6 +56,11 @@ public class HandleDrag : MonoBehaviour
 
 		sprite.BringToFront();
 
+		if (!clampY)
+		{
+			_crafting.ShowCraftingOptions(sprite.SpriteName);
+			_crafting.UpdaetView = false;
+		}
 		draged = true;
 	}
 
@@ -83,9 +91,14 @@ public class HandleDrag : MonoBehaviour
 	{
 		if (dragEvent.State == dfDragDropState.Denied)return;
 
-		gameObject.transform.position = startPosition;
+		sprite.RelativePosition = startPosition;
 		dragEvent.State = dfDragDropState.Denied;
 
+
+		sprite.Opacity = 1;
+		_crafting.UpdaetView = true;
+		eleUp = false;
+		eleDown = false;
 		draged = false;
 		inSlot = false;
 	}
@@ -101,9 +114,57 @@ public class HandleDrag : MonoBehaviour
 
 			if (clampY)
 			{
-				sprite.RelativePosition = new Vector2(position.x - sprite.Size.x * 0.5f, sprite.RelativePosition.y);
+				Vector2 curPosition = new Vector2(position.x - sprite.Size.x*0.5f, sprite.RelativePosition.y);
+
+				//float curOpecity = (Screen.width/curPosition.x) - 0.75f;
+				
+				//if (curOpecity >= 0)
+				//{
+				//	sprite.Opacity = curOpecity;
+				//}
+
+
+				sprite.RelativePosition = curPosition;
+
+				if (curPosition.x > startPosition.x + sprite.Size.x)
+				{
+					sprite.Opacity = (Screen.width/curPosition.x) - 0.75f;
+					if (eleUp) return;
+					_crafting.NextElement();
+					eleUp = true;
+					return;
+				}
+
+				if (curPosition.x < startPosition.x - sprite.Size.x)
+				{
+					float curOpecity = (curPosition.x / Screen.width) - 0.75f;
+
+					sprite.Opacity = 1.5f + curOpecity;
+
+					if (eleDown) return;
+					_crafting.PreviousElement();
+					eleDown = true;
+					return;
+				}
+				
+				if (eleUp)
+				{
+					_crafting.PreviousElement();
+					eleUp = false;
+					sprite.Opacity = 1;
+					return;
+				}
+
+				if (eleDown)
+				{
+					_crafting.NextElement();
+					eleDown = false;
+					sprite.Opacity = 1;
+				}
+
 				return;
 			}
+
 			sprite.RelativePosition = position - sprite.Size * 0.5f;
 		}
 	}

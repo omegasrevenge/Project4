@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting;
 using UnityEngine;
 
 public class GUIObjectCrafting : MonoBehaviour 
@@ -13,7 +15,11 @@ public class GUIObjectCrafting : MonoBehaviour
 	private const string NextElemtenStr = "sprite_nextElement";
 	private const string CurElementStr = "sprite_currentElement";
 	private const string NextElementPrefix = "crafting_change_element_";
-	
+	private const string CraftingElementPrefix = "crafting_element_";
+	private const float ToLessResources = 0.5f;
+	private static readonly Color32 Focused = new Color32(127, 127, 127, 255);
+	private static readonly Color32 Normal = new Color32(255, 255, 255, 255);
+
 	private dfButton _exitButton;
 	private dfControl _box;
 	private dfSprite _curElement;
@@ -29,6 +35,8 @@ public class GUIObjectCrafting : MonoBehaviour
 	[SerializeField]
 	private ResourceLevel curResourceLevel = ResourceLevel.biod;
 
+	public bool UpdaetView = true;
+
 	public void UpdateElement()
 	{
 		for (int i = 0; i < recourceSprites.Count; i++)
@@ -36,14 +44,95 @@ public class GUIObjectCrafting : MonoBehaviour
 			recourceSprites[i].SpriteName = "" + SpriteNamePrefix + (ResourceLevel) i + "_" + _curResourceElement;
 		}
 		_nextElement.SpriteName = "" + NextElementPrefix + _curResourceElement;
+		_curElement.SpriteName = "" + CraftingElementPrefix + _curResourceElement;
 	}
 
 	private void UpdateRecourceCount()
 	{
 		for (int i = 0; i < counterLabels.Count; i++)
 		{
-			counterLabels[i].Text = GameManager.Singleton.Player.Resources[i, (int) _curResourceElement].ToString();
+			int curCount = GameManager.Singleton.Player.Resources[i, (int) _curResourceElement];
+			counterLabels[i].Text = curCount.ToString();
+			if (curCount <= 0)
+			{
+				recourceSprites[i].IsInteractive = false;
+				recourceSprites[i].Opacity = ToLessResources;
+				continue;
+			}
+
+			recourceSprites[i].IsInteractive = true;
+			recourceSprites[i].Opacity = 1;
 		}
+	}
+
+	public void ShowCraftingOptions(string spriteName)
+	{
+		curResourceLevel = GetResourceLevel(spriteName);
+
+		switch (curResourceLevel)
+		{
+			case ResourceLevel.biod:
+			{
+				int curCount = GameManager.Singleton.Player.Resources[0, (int)_curResourceElement];
+				for (int i = 1; i <  recourceSprites.Count; i++)
+				{
+					if (curCount - (Math.Pow(3, i-1) * 10) < 0)
+					{
+						recourceSprites[i].IsInteractive = false;
+						recourceSprites[i].Opacity = ToLessResources;
+						continue;
+					} 
+					recourceSprites[i].IsInteractive = true;
+					recourceSprites[i].Opacity = 1;
+				}
+				break;
+			}
+
+			default:
+			{
+				int curCount = GameManager.Singleton.Player.Resources[(int)curResourceLevel, (int)_curResourceElement];
+				for (int i = (int)curResourceLevel+1; i < recourceSprites.Count; i++)
+				{
+					if (curCount - (Math.Pow(3, i - (int)curResourceLevel)) < 0)
+					{
+						recourceSprites[i].IsInteractive = false;
+						recourceSprites[i].Opacity = ToLessResources;
+						continue;
+					}
+					recourceSprites[i].IsInteractive = true;
+					recourceSprites[i].Opacity = 1;
+				}
+
+				break;
+			}
+		}
+	}
+
+	public void NextElement()
+	{
+		_curResourceElement = (GameManager.ResourceElement)(((int)_curResourceElement + 1) % 5);
+	}
+
+	public void PreviousElement()
+	{
+		_curResourceElement = (GameManager.ResourceElement)(((int)_curResourceElement - 1) == -1 ? 4 : ((int)_curResourceElement - 1));
+	}
+
+	private ResourceLevel GetResourceLevel(string spriteName)
+	{
+		spriteName = spriteName.Remove(0, SpriteNamePrefix.Length);
+		int startNumber = spriteName.Length - _curResourceElement.ToString().Length;
+		spriteName = spriteName.Remove(startNumber, _curResourceElement.ToString().Length);
+		spriteName = spriteName.Remove(spriteName.Length - 1);
+
+		for (int i = 0; i <= 6; i++)
+		{
+			if (spriteName.Equals("" + (ResourceLevel) i))
+			{
+				return (ResourceLevel) i;
+			}
+		}
+		return ResourceLevel.biod;
 	}
 
 	void Awake()
@@ -69,10 +158,10 @@ public class GUIObjectCrafting : MonoBehaviour
 		for (int i = 0; i <= 6; i++)
 		{
 			dfSprite curSprite = rootTransform.Find(SpritePrefix + ((ResourceLevel) i).ToString()).GetComponent<dfSprite>();
-			HandleDrag.AddHandleDrag(curSprite.gameObject, curSprite, true);
+			HandleDrag.AddHandleDrag(this, curSprite.gameObject, curSprite, true);
 			recourceSprites.Add(curSprite);
 		}
-		HandleDrag.AddHandleDrag(_curElement.gameObject, _curElement, true, true);
+		HandleDrag.AddHandleDrag(this, _curElement.gameObject, _curElement, true, true);
 	}
 
 	public static GUIObjectCrafting Create(dfControl root)
@@ -92,7 +181,7 @@ public class GUIObjectCrafting : MonoBehaviour
 
 	void Update()
 	{
-		if (_box.IsVisible)
+		if (_box.IsVisible && UpdaetView)
 		{
 			UpdateRecourceCount();	
 			UpdateElement();
