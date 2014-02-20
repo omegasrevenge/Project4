@@ -400,13 +400,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        //if (BattleEngine.CurrentGameObject != null && BattleEngine.CurrentGameObject.activeSelf) 
-        if (_fight)
-        {
-            if (BattleEngineSkipTurn) BattleEngine.Current.SkipOneTurn = true;
-            BattleEngineSkipTurn = false;
-            _fight.Result = Player.GetResult();
-        }
+
+        if (!_fight) return;
+        if (BattleEngineSkipTurn) BattleEngine.Current.SkipOneTurn = true;
+        BattleEngineSkipTurn = false;
+        _fight.Result = Player.GetResult();
     }
 
     public void CheckStartFight()

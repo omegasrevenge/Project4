@@ -660,7 +660,8 @@ public class dfScrollPanel : dfControl
 				var mainCamera = Camera.main;
 				if( mainCamera == null )
 				{
-					Debug.LogWarning( "No MainCamera could be found. This could cause issues with scrolling." );
+					// SEARCH FOR THIS IF YOU WANT TO CHANGE THIS BACK! Tag: Kirill Max Oculus
+					//Debug.LogWarning( "No MainCamera could be found. This could cause issues with scrolling." );
 					mainCamera = manager.RenderCamera;
 				}
 

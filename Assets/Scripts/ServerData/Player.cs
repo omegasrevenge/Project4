@@ -130,7 +130,6 @@ public class Player
 
         string[] lastResult = CurFight.LastResult.Split(' ');
 
-
         if (lastResult.Length < 4) 
             return newResult;
 

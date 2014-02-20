@@ -39,6 +39,7 @@ public class BattleEngine : SceneRoot3D
     //########## const #########
 
     //########## private #########
+    [SerializeField]
     private List<FightRoundResult> _results;
     private GameObject _actor;
     private float _counter;
@@ -101,7 +102,7 @@ public class BattleEngine : SceneRoot3D
         set
         {
             if (value == null) return;
-            if ((_results.Count > 1 && _results[_results.Count - 2].Turn >= _results[_results.Count - 1].Turn)) return;
+            if (_results.Count > 0 && _results[_results.Count - 1].Turn >= value.Turn) return;
             if (value.Turn <= Turn) return;
             _results.Add(value);
         }
