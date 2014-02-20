@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
         }
         else if (CurrentGameMode == GameMode.Fight)
         {
-            if (Player.Fighting && Player.CurFight != null && !Player.CurFight.Turn)
+            if (Player.Fighting && Player.CurFight != null /*&& !Player.CurFight.Turn*/)
             {
                 //Debug.Log("F:" + Player.CurFight.Turn);
                 if (Time.time >= EnemyTurnFreq + _lastEnemyTurn)

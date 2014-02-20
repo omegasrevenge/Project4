@@ -50,7 +50,7 @@ public class GUIObjectMenuBaseButton : GUIObjectMenuButton
         }
         int cooldown = (Mathf.FloorToInt(Mathf.Max(0,(float)(GameManager.Singleton.Player.BaseTime.AddHours(_respawnTime) -
                        GameManager.Singleton.GetServerTime()).TotalSeconds)));
-        Debug.Log(cooldown);
+        //Debug.Log(cooldown);
         Active = cooldown <= 0;
         if (!Active)
         {

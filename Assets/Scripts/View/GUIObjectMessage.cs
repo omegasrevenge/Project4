@@ -64,13 +64,9 @@ public class GUIObjectMessage : MonoBehaviour
     void Update()
     {
         if (!_startedPlaying)
-        {
             _startedPlaying = true;
-        }
-        else if (_startedPlaying)
-        {
-            //OnShowButtons();
-        }
+        if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map)
+            OnPopupEnd();
     }
 
     public void OnPopupStart()
