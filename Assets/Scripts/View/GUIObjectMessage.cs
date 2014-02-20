@@ -31,30 +31,42 @@ public class GUIObjectMessage : MonoBehaviour
 
     private float _startTime;
 
-    public static GUIObjectMessage Create(dfControl root)
+    void Awake()
     {
-        GUIObjectMessage message = root.transform.GetComponentInChildren<GUIObjectMessage>();
-        if (message != null)
-        {
-            message.IncreaseMessageCount();
-            return message;
-        }
-        dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
-        GUIObjectMessage obj = cntrl.GetComponent<GUIObjectMessage>();
-        obj._root = root;
-        obj._control = cntrl;
-        obj.button.Click += (control, @event) =>
+        button.Click += (control, @event) =>
         {
             SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-            if (obj.HidePopup != null) obj.HidePopup();
-            else Destroy(obj.gameObject);
+            if (HidePopup != null) HidePopup();
+            else GetComponent<dfPanel>().Hide();
             GameManager.Singleton.ClickMessage();
         };
         SoundController.PlaySound(SoundController.SoundMessageEnemy, SoundController.ChannelSFX);
-        return obj;
     }
+
+    //public static GUIObjectMessage Create(dfControl root)
+    //{
+    //    GUIObjectMessage message = root.transform.GetComponentInChildren<GUIObjectMessage>();
+    //    if (message != null)
+    //    {
+    //        message.IncreaseMessageCount();
+    //        return message;
+    //    }
+    //    dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
+    //    cntrl.Size = cntrl.Parent.Size;
+    //    cntrl.RelativePosition = Vector2.zero;
+    //    GUIObjectMessage obj = cntrl.GetComponent<GUIObjectMessage>();
+    //    obj._root = root;
+    //    obj._control = cntrl;
+    //    obj.button.Click += (control, @event) =>
+    //    {
+    //        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+    //        if (obj.HidePopup != null) obj.HidePopup();
+    //        else Destroy(obj.gameObject);
+    //        GameManager.Singleton.ClickMessage();
+    //    };
+    //    SoundController.PlaySound(SoundController.SoundMessageEnemy, SoundController.ChannelSFX);
+    //    return obj;
+    //}
 
     public GUIObjectMessage Show()
     {
@@ -66,30 +78,30 @@ public class GUIObjectMessage : MonoBehaviour
         if (!_startedPlaying)
             _startedPlaying = true;
         if (GameManager.Singleton.CurrentGameMode != GameManager.GameMode.Map)
-            OnPopupEnd();
+            GetComponent<dfPanel>().Hide();
     }
 
-    public void OnPopupStart()
-    {
-        _startTime = Time.time;
-        if (_content != null)
-            _content.GetComponent<dfControl>().Show();
-        if (StartCallback != null)
-            StartCallback();
-    }
+    //public void OnPopupStart()
+    //{
+    //    _startTime = Time.time;
+    //    if (_content != null)
+    //        _content.GetComponent<dfControl>().Show();
+    //    if (StartCallback != null)
+    //        StartCallback();
+    //}
 
-    public void OnPopupEnd()
-    {
-        Destroy(gameObject);
-    }
+    //public void OnPopupEnd()
+    //{
+    //    Destroy(gameObject);
+    //}
 
-    public void IncreaseMessageCount()
-    {
-        count++;
-        if (messageCountSprite == null || messageCounter == null)
-           return;
-        messageCountSprite.Show();
-        messageCounter.Show();
-        messageCounter.Text = count.ToString();
-    }
+    //public void IncreaseMessageCount()
+    //{
+    //    count++;
+    //    if (messageCountSprite == null || messageCounter == null)
+    //       return;
+    //    messageCountSprite.Show();
+    //    messageCounter.Show();
+    //    messageCounter.Text = count.ToString();
+    //}
 }
