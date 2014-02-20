@@ -608,14 +608,14 @@ public class GameManager : MonoBehaviour
     /// Exchange of resources.
     /// </summary>
 
-    public void Exchange(int element, int level, int count, ExchangeMode exchangeMode)
+	public void Exchange(int element, int level, int count, ExchangeMode exchangeMode, int lvldiff)
     {
-        StartCoroutine(CExchange(element, level, count, (int)exchangeMode));
+		StartCoroutine(CExchange(element, level, count, (int)exchangeMode, lvldiff));
     }
 
-    private IEnumerator CExchange(int element, int level, int count, int exchangeMode)
+    private IEnumerator CExchange(int element, int level, int count, int exchangeMode, int lvldiff)
     {
-        WWW request = new WWW(GetSessionURL("exchange") + "&element=" + element + "&level=" + level + "&count=" + count + "&exchangeMode=" + exchangeMode);
+		WWW request = new WWW(GetSessionURL("exchange") + "&element=" + element + "&level=" + level + "&count=" + count + "&exchangeMode=" + exchangeMode + "&lvldiff=" + lvldiff);
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);

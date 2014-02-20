@@ -66,20 +66,6 @@ public class HandleDrag : MonoBehaviour
 
 	public void OnDragDrop(dfControl source, dfDragEventArgs args)
 	{
-		//HandleDrag curHandleDrag = (HandleDrag)args.Data;
-		//dfSprite curSprite = curHandleDrag.sprite;
-
-		//if (!curHandleDrag.draged) return;
-
-		//if (sprite.SpriteName != "")
-		//{
-		//	Debug.Log(sprite.SpriteName);
-		//	gameController.HandleDrag(gameController.spriteToElement[sprite.SpriteName], 1);
-		//}
-		//curHandleDrag.inSlot = true;
-		//sprite.SpriteName = curSprite.SpriteName;
-
-		//combine.FillSlot();
 
 		args.State = dfDragDropState.Dropped;
 		args.Use();
@@ -94,6 +80,7 @@ public class HandleDrag : MonoBehaviour
 		sprite.RelativePosition = startPosition;
 		dragEvent.State = dfDragDropState.Denied;
 
+		_crafting.Craft();
 
 		sprite.Opacity = 1;
 		_crafting.UpdaetView = true;
@@ -101,6 +88,45 @@ public class HandleDrag : MonoBehaviour
 		eleDown = false;
 		draged = false;
 		inSlot = false;
+	}
+
+	private void ElementHandling(Vector2 curPosition)
+	{
+		if (curPosition.x > startPosition.x + sprite.Size.x)
+		{
+			sprite.Opacity = (Screen.width / curPosition.x) - 0.75f;
+			if (eleUp) return;
+			_crafting.NextElement();
+			eleUp = true;
+			return;
+		}
+
+		if (curPosition.x < startPosition.x - sprite.Size.x)
+		{
+			float curOpecity = (curPosition.x / Screen.width) - 0.75f;
+
+			sprite.Opacity = 1.5f + curOpecity;
+
+			if (eleDown) return;
+			_crafting.PreviousElement();
+			eleDown = true;
+			return;
+		}
+
+		if (eleUp)
+		{
+			_crafting.PreviousElement();
+			eleUp = false;
+			sprite.Opacity = 1;
+			return;
+		}
+
+		if (eleDown)
+		{
+			_crafting.NextElement();
+			eleDown = false;
+			sprite.Opacity = 1;
+		}
 	}
 	
 	void Update() 
@@ -110,62 +136,24 @@ public class HandleDrag : MonoBehaviour
 		if (draged)
 		{
 			Vector2 position = sprite.GetManager().ScreenToGui(Input.mousePosition);
-			//Debug.Log("position " + position + " rootposition " + rootPosition + " MousePosition " + sprite.GetManager().ScreenToGui(Input.mousePosition));
+
+			Vector2 curPosition;
 
 			if (clampY)
 			{
-				Vector2 curPosition = new Vector2(position.x - sprite.Size.x*0.5f, sprite.RelativePosition.y);
-
-				//float curOpecity = (Screen.width/curPosition.x) - 0.75f;
+				curPosition = new Vector2(position.x - sprite.Size.x*0.5f, sprite.RelativePosition.y);
 				
-				//if (curOpecity >= 0)
-				//{
-				//	sprite.Opacity = curOpecity;
-				//}
-
-
 				sprite.RelativePosition = curPosition;
 
-				if (curPosition.x > startPosition.x + sprite.Size.x)
-				{
-					sprite.Opacity = (Screen.width/curPosition.x) - 0.75f;
-					if (eleUp) return;
-					_crafting.NextElement();
-					eleUp = true;
-					return;
-				}
-
-				if (curPosition.x < startPosition.x - sprite.Size.x)
-				{
-					float curOpecity = (curPosition.x / Screen.width) - 0.75f;
-
-					sprite.Opacity = 1.5f + curOpecity;
-
-					if (eleDown) return;
-					_crafting.PreviousElement();
-					eleDown = true;
-					return;
-				}
-				
-				if (eleUp)
-				{
-					_crafting.PreviousElement();
-					eleUp = false;
-					sprite.Opacity = 1;
-					return;
-				}
-
-				if (eleDown)
-				{
-					_crafting.NextElement();
-					eleDown = false;
-					sprite.Opacity = 1;
-				}
+				ElementHandling(curPosition);
 
 				return;
 			}
 
-			sprite.RelativePosition = position - sprite.Size * 0.5f;
+			curPosition = position - sprite.Size*0.5f;
+			sprite.RelativePosition = curPosition;
+
+			_crafting.MarkForCrafting(sprite);
 		}
 	}
 }

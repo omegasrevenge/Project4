@@ -24,11 +24,12 @@ public class GUIObjectCrafting : MonoBehaviour
 	private dfControl _box;
 	private dfSprite _curElement;
 	private dfSprite _nextElement;
+	private dfSprite _focusedComponent;
 
 	private enum ResourceLevel { biod, driod_lvl0, driod_lvl1, driod_lvl2, driod_lvl3, driod_lvl4, driod_lvl5 };
 	
 	private List<dfLabel> counterLabels = new List<dfLabel>();
-	private List<dfSprite> recourceSprites = new List<dfSprite>();
+	public List<dfSprite> recourceSprites = new List<dfSprite>();
 
 	[SerializeField]
 	private GameManager.ResourceElement _curResourceElement = GameManager.ResourceElement.energy;
@@ -62,12 +63,89 @@ public class GUIObjectCrafting : MonoBehaviour
 
 			recourceSprites[i].IsInteractive = true;
 			recourceSprites[i].Opacity = 1;
+			_nextElement.IsInteractive = true;
+			_nextElement.Opacity = 1;
 		}
+	}
+
+	public void MarkForCrafting(dfSprite sprite)
+	{
+		_nextElement.Color = Normal; 
+		foreach (dfSprite s in recourceSprites)
+		{
+			s.Color = Normal;
+		}
+		Vector2 spriteCenter = new Vector3(sprite.RelativePosition.x + sprite.Size.x / 2, sprite.RelativePosition.y + sprite.Size.y / 2, 0);
+		float dist;
+		foreach (dfSprite recourceSprite in recourceSprites)
+		{
+			if (recourceSprite != sprite && recourceSprite.IsInteractive)
+			{
+				Vector2 curSpriteCenter = new Vector3(recourceSprite.RelativePosition.x + recourceSprite.Size.x / 2, recourceSprite.RelativePosition.y + recourceSprite.Size.y / 2);
+				
+				dist = (spriteCenter - curSpriteCenter).magnitude;
+
+				if (dist < sprite.Size.x / 2)
+				{
+					recourceSprite.Color = Focused;
+					_focusedComponent = recourceSprite;
+					return;
+				}
+			}
+		}
+		Vector2 nextElementCenter = new Vector3(_nextElement.RelativePosition.x + _nextElement.Size.x / 2, _nextElement.RelativePosition.y + _nextElement.Size.y / 2);
+		dist = (spriteCenter - nextElementCenter).magnitude;
+
+		if (dist < sprite.Size.x / 2)
+		{
+			_nextElement.Color = Focused;
+			_focusedComponent = _nextElement;
+			return;
+		}
+		_focusedComponent = null;
+	}
+
+	public void Craft()
+	{
+		if (_focusedComponent == null) return;
+		_focusedComponent.Color = Normal;
+		if (_focusedComponent != _nextElement)
+		{
+			int craftingLvl = (int) GetResourceLevel(_focusedComponent.SpriteName);
+			int diff;
+			
+			if (craftingLvl > (int)curResourceLevel)
+			{
+				diff = craftingLvl - (int) curResourceLevel;
+				int exchangeAmount;
+				if (curResourceLevel == ResourceLevel.biod)
+				{
+					exchangeAmount = (int)Math.Pow(3, diff-1)*10;
+				}
+				else
+				{
+					exchangeAmount = (int)Math.Pow(3, diff);
+				}
+				GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, exchangeAmount, GameManager.ExchangeMode.Up, diff);
+				return;
+			}
+
+			diff = (int) curResourceLevel - craftingLvl;
+			GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 1, GameManager.ExchangeMode.Down, diff);
+			return;
+		}
+
+		GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 10, GameManager.ExchangeMode.Cricle, 0);
 	}
 
 	public void ShowCraftingOptions(string spriteName)
 	{
 		curResourceLevel = GetResourceLevel(spriteName);
+		foreach (dfSprite recourceSprite in recourceSprites)
+		{
+			recourceSprite.IsInteractive = true;
+			recourceSprite.Opacity = 1;
+		}
 
 		switch (curResourceLevel)
 		{
@@ -85,11 +163,23 @@ public class GUIObjectCrafting : MonoBehaviour
 					recourceSprites[i].IsInteractive = true;
 					recourceSprites[i].Opacity = 1;
 				}
+
+				if (curCount < 10)
+				{
+					_nextElement.IsInteractive = false;
+					_nextElement.Opacity = ToLessResources;
+					break;
+				}
+				_nextElement.IsInteractive = true;
+				_nextElement.Opacity = 1;
 				break;
 			}
 
 			default:
 			{
+				_nextElement.IsInteractive = false;
+				_nextElement.Opacity = ToLessResources;
+
 				int curCount = GameManager.Singleton.Player.Resources[(int)curResourceLevel, (int)_curResourceElement];
 				for (int i = (int)curResourceLevel+1; i < recourceSprites.Count; i++)
 				{
@@ -102,7 +192,6 @@ public class GUIObjectCrafting : MonoBehaviour
 					recourceSprites[i].IsInteractive = true;
 					recourceSprites[i].Opacity = 1;
 				}
-
 				break;
 			}
 		}

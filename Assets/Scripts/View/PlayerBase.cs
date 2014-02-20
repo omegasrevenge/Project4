@@ -65,10 +65,10 @@ public class PlayerBase : SceneRoot3D
 		//	GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 		//}
 
-		if (GUI.Button(new Rect(30, 380, 120, 50), "<color=white><size=20>" + "Crafting" + "</size></color>"))
-		{
-			ShowWindow(Windows.Crafting);
-		}
+		//if (GUI.Button(new Rect(30, 380, 120, 50), "<color=white><size=20>" + "Crafting" + "</size></color>"))
+		//{
+		//	ShowWindow(Windows.Crafting);
+		//}
 
 		if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
 		{
@@ -85,11 +85,11 @@ public class PlayerBase : SceneRoot3D
 		GUI.color = Color.black;
 		switch (windowName)
 		{
-			case Windows.Crafting:
-			{
-				GUI.Window(0, windowRect, CraftingWindow, windowName.ToString());
-				break;
-			}
+			//case Windows.Crafting:
+			//{
+			//	GUI.Window(0, windowRect, CraftingWindow, windowName.ToString());
+			//	break;
+			//}
 			case Windows.Creature:
 			{
 				GUI.Window(1, windowRect, CreatureWindow, windowName.ToString());
@@ -252,88 +252,88 @@ public class PlayerBase : SceneRoot3D
 
 	#endregion
 
-	#region Crafting
+	//#region Crafting
 
-	private void CraftingWindow(int windowID)
-	{
-		GUI.Label(new Rect(60, 30, 200, 50), curResourceLevel.ToString(), textGuiStyle);
+	//private void CraftingWindow(int windowID)
+	//{
+	//	GUI.Label(new Rect(60, 30, 200, 50), curResourceLevel.ToString(), textGuiStyle);
 
-		GUI.Label(new Rect((windowRect.width-220), 30, 200, 50), CuResourceElement.ToString(), textGuiStyle);
+	//	GUI.Label(new Rect((windowRect.width-220), 30, 200, 50), CuResourceElement.ToString(), textGuiStyle);
 		
-		if (GUI.Button(new Rect(20,30,40,40),Resources.Load<Texture>("GUITextures/Previous")))
-		{
-			curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == -1 ? 6 : ((int)curResourceLevel - 1));
-		}
-		if (GUI.Button(new Rect(250, 30, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
-		{
-			curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
-		}
+	//	if (GUI.Button(new Rect(20,30,40,40),Resources.Load<Texture>("GUITextures/Previous")))
+	//	{
+	//		curResourceLevel = (ResourceLevel)(((int)curResourceLevel - 1) == -1 ? 6 : ((int)curResourceLevel - 1));
+	//	}
+	//	if (GUI.Button(new Rect(250, 30, 40, 40), Resources.Load<Texture>("GUITextures/Next")))
+	//	{
+	//		curResourceLevel = (ResourceLevel)(((int)curResourceLevel + 1) % 7);
+	//	}
 
-		ResourcesExchange();
+	//	ResourcesExchange();
 
-		ShowChart();
+	//	ShowChart();
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
-		{
-			showWindow = false;
-		}
-	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 100, windowRect.height - 70, 200, 50), "<color=white><size=20>Close Window</size></color>"))
+	//	{
+	//		showWindow = false;
+	//	}
+	//}
 
-	private void ResourcesExchange()
-	{
-		GUIStyle textFieldStyle = textGuiStyle;
+	//private void ResourcesExchange()
+	//{
+	//	GUIStyle textFieldStyle = textGuiStyle;
 
-		curInput = GUI.TextField(new Rect((windowRect.width / 2) - 20, 270, 50, 50), curInput, 3, textFieldStyle);
+	//	curInput = GUI.TextField(new Rect((windowRect.width / 2) - 20, 270, 50, 50), curInput, 3, textFieldStyle);
 
-		if (Int32.TryParse(curInput, out curInputAsInt))
-		{
-			if (GUI.Button(new Rect((windowRect.width / 2) - 70, 270, 40, 40), "<color=white><size=30>-</size></color>"))
-			{
-				curInputAsInt = curInputAsInt == 1 ? 1 : curInputAsInt - 1;
-			}
-			if (GUI.Button(new Rect((windowRect.width / 2) + 40, 270, 40, 40), "<color=white><size=30>+</size></color>"))
-			{
-				curInputAsInt++;
-			}
+	//	if (Int32.TryParse(curInput, out curInputAsInt))
+	//	{
+	//		if (GUI.Button(new Rect((windowRect.width / 2) - 70, 270, 40, 40), "<color=white><size=30>-</size></color>"))
+	//		{
+	//			curInputAsInt = curInputAsInt == 1 ? 1 : curInputAsInt - 1;
+	//		}
+	//		if (GUI.Button(new Rect((windowRect.width / 2) + 40, 270, 40, 40), "<color=white><size=30>+</size></color>"))
+	//		{
+	//			curInputAsInt++;
+	//		}
 
-			curInput = curInputAsInt.ToString();
-		}
+	//		curInput = curInputAsInt.ToString();
+	//	}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.energy.ToString() + "</size></color>"))
-		{
-			CuResourceElement = GameManager.ResourceElement.energy;
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.fire.ToString() + "</size></color>"))
-		{
-			CuResourceElement = GameManager.ResourceElement.fire;
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.storm.ToString() + "</size></color>"))
-		{
-			CuResourceElement = GameManager.ResourceElement.storm;
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.life.ToString() + "</size></color>"))
-		{
-			CuResourceElement = GameManager.ResourceElement.life;
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.water.ToString() + "</size></color>"))
-		{
-			CuResourceElement = GameManager.ResourceElement.water;
-		}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 50, 120, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.energy.ToString() + "</size></color>"))
+	//	{
+	//		CuResourceElement = GameManager.ResourceElement.energy;
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) + 120, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.fire.ToString() + "</size></color>"))
+	//	{
+	//		CuResourceElement = GameManager.ResourceElement.fire;
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) + 50, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.storm.ToString() + "</size></color>"))
+	//	{
+	//		CuResourceElement = GameManager.ResourceElement.storm;
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 150, 400, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.life.ToString() + "</size></color>"))
+	//	{
+	//		CuResourceElement = GameManager.ResourceElement.life;
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 220, 250, 100, 50), "<color=white><size=20>" + GameManager.ResourceElement.water.ToString() + "</size></color>"))
+	//	{
+	//		CuResourceElement = GameManager.ResourceElement.water;
+	//	}
 
-		if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))
-		{
-			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * 2, GameManager.ExchangeMode.Cricle);
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) - 190, 500, 100, 50), "<color=white><size=20>Up</size></color>"))
-		{
-			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * (curResourceLevel == ResourceLevel.Bioden ? 10 : 3), GameManager.ExchangeMode.Up);
-		}
-		if (GUI.Button(new Rect((windowRect.width / 2) + 90, 500, 100, 50), "<color=white><size=20>Down</size></color>"))
-		{
-			GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt, GameManager.ExchangeMode.Down);
-		}
-	}
-	#endregion
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 50, 500, 100, 50), "<color=white><size=20>Circle</size></color>"))
+	//	{
+	//		GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * 2, GameManager.ExchangeMode.Cricle);
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) - 190, 500, 100, 50), "<color=white><size=20>Up</size></color>"))
+	//	{
+	//		GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt * (curResourceLevel == ResourceLevel.Bioden ? 10 : 3), GameManager.ExchangeMode.Up);
+	//	}
+	//	if (GUI.Button(new Rect((windowRect.width / 2) + 90, 500, 100, 50), "<color=white><size=20>Down</size></color>"))
+	//	{
+	//		GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt, GameManager.ExchangeMode.Down);
+	//	}
+	//}
+	//#endregion
 
 	private bool CreateButton(Rect upgrade, string s)
 	{
