@@ -1317,7 +1317,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400174}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400004}
   m_Layer: 0
@@ -2516,22 +2515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bf332aa99585d4db51d7898580427f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd715018eca6f144a4f7012d24bdc1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanShowDamage: 0
-  AnimationFinished: 1
-  Owner: {fileID: 0}
-  AttackSpeed: 5
-  StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

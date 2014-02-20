@@ -46,6 +46,11 @@ public class MonsterAnimationController : MonoBehaviour
 
     public void DifferentIdlesController()
     {
+		if (GetComponent<Animator> ().layerCount == 0) 
+		{
+			Debug.LogError("UNITY ANIMATOR COMPILE ERROR!");
+			return;	
+		}
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FightIdle"))
             _idleTime += Time.deltaTime;
 

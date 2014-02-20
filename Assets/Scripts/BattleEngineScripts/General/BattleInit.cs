@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BattleInit
+public class BattleInit:MonoBehaviour
 {
 	public GameManager.ResourceElement MonsterAElement = GameManager.ResourceElement.life; //default values. also used as a dirty testing method
 	public GameManager.ResourceElement MonsterBElement = GameManager.ResourceElement.fire;	 //you can put in different values, but there HAVE to be default values
@@ -23,4 +23,9 @@ public class BattleInit
 	public int BaseMeshA = 0;
 	public int BaseMeshB = 0;
 
+    void Update()
+    {
+        if (BattleEngine.CurrentGameObject != null && transform.parent == null)
+            transform.parent = BattleEngine.CurrentGameObject.transform;
+    }
 }

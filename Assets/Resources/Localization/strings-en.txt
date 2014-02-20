@@ -371,4 +371,7 @@ Confusion:
 
 Buff:
 "Buffed!",
+
+Default:
+"Normal Attack",
 }

@@ -79,52 +79,59 @@ public class Player
 
     public BattleInit GetBattleInit()
     {
-        BattleInit newBattle = new BattleInit
-        {
-            MonsterAElement = CurCreature.BaseElement,
-            MonsterBElement = CurFight.EnemyCreature.BaseElement,
-            MonsterAName = CurCreature.Name,
-            MonsterBName = CurFight.EnemyCreature.Name,
-            MonsterAHealth = CurCreature.HP,
-            MonsterBHealth = CurFight.EnemyCreature.HP,
-            MonsterAMaxHealth = CurCreature.HPMax,
-            MonsterBMaxHealth = CurFight.EnemyCreature.HPMax,
-            MonsterALevel = CurCreature.Level,
-            MonsterBLevel = CurFight.EnemyCreature.Level,
-            BaseMeshA = CurCreature.ModelID,
-            BaseMeshB = CurFight.EnemyCreature.ModelID
-        };
+		GameObject nB = GameObject.Find ("BattleInit");
+		if (nB != null)
+			return nB.GetComponent<BattleInit> ();
 
+        nB = new GameObject("BattleInit");
+
+        BattleInit newBattle = nB.AddComponent<BattleInit>();
+
+        newBattle.MonsterAElement = CurCreature.BaseElement;
+        newBattle.MonsterBElement = CurFight.EnemyCreature.BaseElement;
+        newBattle.MonsterAName = CurCreature.Name;
+        newBattle.MonsterBName = CurFight.EnemyCreature.Name;
+        newBattle.MonsterAHealth = CurCreature.HP;
+        newBattle.MonsterBHealth = CurFight.EnemyCreature.HP;
+        newBattle.MonsterAMaxHealth = CurCreature.HPMax;
+        newBattle.MonsterBMaxHealth = CurFight.EnemyCreature.HPMax;
+        newBattle.MonsterALevel = CurCreature.Level;
+        newBattle.MonsterBLevel = CurFight.EnemyCreature.Level;
+        newBattle.BaseMeshA = CurCreature.ModelID;
+        newBattle.BaseMeshB = CurFight.EnemyCreature.ModelID;
         newBattle.FirstTurnIsPlayer = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B;
+
         return newBattle;
     }
 
     public FightRoundResult GetResult()
     {
-		if (CurFight == null)
-			return new FightRoundResult ();
-        var newResult = new FightRoundResult
-        {
-            MonsterAHP = CurCreature.HP,
-            MonsterBHP = CurFight.EnemyCreature.HP,
-            PlayerTurn = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B,
-            Turn = CurFight.Round,
-            ConA = (int)CurFight.Info["FighterA"]["Con"][0] > 0,
-            ConB = (int)CurFight.Info["FighterB"]["Con"][0] > 0,
-            BuffA = (int)CurFight.Info["FighterA"]["Def"][0] > 0,
-            BuffB = (int)CurFight.Info["FighterB"]["Def"][0] > 0,
-            DotA = (int)CurFight.Info["FighterA"]["Dot"][0] > 0,
-            DotB = (int)CurFight.Info["FighterB"]["Dot"][0] > 0,
-            HotA = (int)CurFight.Info["FighterA"]["Hot"][0] > 0,
-            HotB = (int)CurFight.Info["FighterB"]["Hot"][0] > 0,
-            EVDA = (bool)CurFight.Info["FighterA"]["evaded"],
-            EVDB = (bool)CurFight.Info["FighterB"]["evaded"]
+        GameObject nR = new GameObject("FightRoundResult @ Time = "+GameManager.Singleton.GetServerTime().ToLocalTime());
 
-        };
+        FightRoundResult newResult = nR.AddComponent<FightRoundResult>();
+
+		if (CurFight == null)
+			return newResult;
+
+        newResult.MonsterAHP = CurCreature.HP;
+        newResult.MonsterBHP = CurFight.EnemyCreature.HP;
+        newResult.PlayerTurn = CurFight.Turn ? FightRoundResult.Player.A : FightRoundResult.Player.B;
+        newResult.Turn = CurFight.Round;
+        newResult.ConA = (int) CurFight.Info["FighterA"]["Con"][0] > 0;
+        newResult.ConB = (int) CurFight.Info["FighterB"]["Con"][0] > 0;
+        newResult.BuffA = (int) CurFight.Info["FighterA"]["Def"][0] > 0;
+        newResult.BuffB = (int) CurFight.Info["FighterB"]["Def"][0] > 0;
+        newResult.DotA = (int) CurFight.Info["FighterA"]["Dot"][0] > 0;
+        newResult.DotB = (int) CurFight.Info["FighterB"]["Dot"][0] > 0;
+        newResult.HotA = (int) CurFight.Info["FighterA"]["Hot"][0] > 0;
+        newResult.HotB = (int) CurFight.Info["FighterB"]["Hot"][0] > 0;
+        newResult.EVDA = (bool) CurFight.Info["FighterA"]["evaded"];
+        newResult.EVDB = (bool) CurFight.Info["FighterB"]["evaded"];
 
         string[] lastResult = CurFight.LastResult.Split(' ');
 
-        if (lastResult.Length != 4) 
+
+        if (lastResult.Length < 4) 
             return newResult;
 
         newResult.SkillName = lastResult[0];

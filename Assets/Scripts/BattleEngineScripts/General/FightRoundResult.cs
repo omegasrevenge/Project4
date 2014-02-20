@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FightRoundResult 
+public class FightRoundResult:MonoBehaviour
 {
 	public enum Player{A, B};
 
@@ -23,4 +23,12 @@ public class FightRoundResult
     public bool HotB = false;
     public bool EVDA = false;
     public bool EVDB = false;
+
+    void Update()
+    {
+        if (BattleEngine.CurrentGameObject != null && transform.parent == null)
+            transform.parent = BattleEngine.CurrentGameObject.transform;
+        if (BattleEngine.CurrentGameObject == null || (!BattleEngine.Current.Results.Contains(this) && BattleEngine.Current.LastResult != this))
+            Destroy(gameObject);
+    }
 }

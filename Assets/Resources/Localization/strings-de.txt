@@ -256,13 +256,13 @@ Cloud_of_Smoke:
 "Rauchwolke",
 
 Piercing_Wind:
-"Beißender Wind",
+"Beissender Wind",
 
 Hurricane:
 "Hurrikan",
 
 Tailwind:
-"Rückenwind",
+"Rueckenwind",
 
 Winter_Gale:
 "Orkan",
@@ -310,19 +310,19 @@ Mutation:
 "Mutation",
 
 Fluidification:
-"Verflüssigen",
+"Verfluessigen",
 
 Allaying_Waves:
 "Lindernde Wogen",
 
 Raging_Torrent:
-"Reißende Flut",
+"Reissende Flut",
 
 Tsunami:
 "Tsunami",
 
 Overwhelming_Force:
-"Unbändige Kraft",
+"Unbaendige Kraft",
 
 Tide:
 "Gezeit",
@@ -352,7 +352,7 @@ Lightning_of_Thor:
 "Thors Blitze",
 
 Overload:
-"Überladung",
+"Ueberladung",
 
 Nuclear_Fusion:
 "Kernfusion",
@@ -364,7 +364,7 @@ Shockwave:
 "Schockwelle",
 
 Mjölnir:
-"Mjölnir",
+"Mjoelnir",
 
 Shape_of_Ymir:
 "Ymirs Form",
@@ -388,5 +388,8 @@ Confusion:
 "Verwirrung!",
 
 Buff:
-"Verstärkt!",
+"Verstaerkt!",
+
+Default:
+"Normaler Angriff",
 }

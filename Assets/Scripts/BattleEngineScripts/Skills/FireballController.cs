@@ -13,37 +13,29 @@ public class FireballController : ActorControlls
     {
         if(_curDir == To.None)
         {
-            if(Owner.CurrentPlayer == FightRoundResult.Player.A)
-                _curDir = To.B;
-            else
-                _curDir = To.A;
+            _curDir = BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.A ? To.B : To.A;
         }
-        if(_curDir == To.A)
-            transform.position = Vector3.Lerp(transform.position, Owner.FriendlyCreature.transform.position, Speed);
-        else
-            transform.position = Vector3.Lerp(transform.position, Owner.EnemyCreature.transform.position, Speed);
+	    transform.position = Vector3.Lerp(transform.position, _curDir == To.A ? 
+            BattleEngine.Current.FriendlyCreature.transform.position : BattleEngine.Current.EnemyCreature.transform.position, Speed);
 
-        if (_curDir == To.A)
+	    if (_curDir == To.A)
         {
-            if (reached(Owner.FriendlyCreature))
+            if (reached(BattleEngine.Current.FriendlyCreature))
                 CanShowDamage = true;
         }
         else
         {
-            if (reached(Owner.EnemyCreature))
+            if (reached(BattleEngine.Current.EnemyCreature))
                 CanShowDamage = true;
         }
 
-        if(CanShowDamage)
-        {
-            _counter += Time.deltaTime;
-            if(_counter >= 1f)
-            {
-                Owner.Actor = null;
-                Destroy(gameObject);
-            }
-        }
-	}
+	    if (!CanShowDamage) return;
+	    _counter += Time.deltaTime;
+
+	    if (!(_counter >= 1f)) return;
+	    BattleEngine.Current.Actor = null;
+	    Destroy(gameObject);
+    }
 
     private bool reached(GameObject target) 
     {

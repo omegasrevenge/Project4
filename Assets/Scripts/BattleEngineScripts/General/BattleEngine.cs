@@ -4,16 +4,22 @@ using System.Collections.Generic;
 public class BattleEngine : SceneRoot3D
 {
     //########## public #########
-    public enum TurnState { Wait, Execute, Hit }
+    public enum TurnState { None, Wait, Execute, Hit }
 
+    public string TestSkillName = "Energy_Beam_Skill_Wolf";
 
     public ActorControlls Actor;
     public FightRoundResult.Player CurrentPlayer;
     public BattleInit ServerInfo;
+    [HideInInspector]
     public bool CatchInProcess = false;
+    public FightRoundResult LastResult;
+    public TurnState CurrentStatus = TurnState.None;
 
     public int Turn = 0;
+    [HideInInspector]
     public bool SkipOneTurn = false;
+    [HideInInspector]
     public bool FightIsOverOnce = false;
 
     public GameObject FriendlyCreature;
@@ -25,7 +31,7 @@ public class BattleEngine : SceneRoot3D
     //########## static #########
 
     //########## const #########
-    public const string DefaultArena = "DefaultArena";
+    public const string ArenaName = "BattleArena";
     public const string DefaultFriendlySpawnPos = "FriendlySpawnPos";
     public const string DefaultEnemySpawnPos = "EnemySpawnPos";
     public const string WolfMonster = "WolfMonster";
@@ -33,12 +39,9 @@ public class BattleEngine : SceneRoot3D
     //########## const #########
 
     //########## private #########
-    private FightRoundResult _lastResult = new FightRoundResult();
-    private TurnState _currentStatus = TurnState.Wait;
     private List<FightRoundResult> _results;
     private GameObject _actor;
     private float _counter;
-    private bool _enactEndScreen = false;
     private GameObject _gg;
     private bool _initialized = false;
     //########## private #########
@@ -108,7 +111,7 @@ public class BattleEngine : SceneRoot3D
     {
         get
         {
-            if (_results.Count == 0 && (Actor == null || Actor.AnimationFinished)) return TurnState.Wait;
+            if (_results.Count == 0 && Actor == null) return TurnState.Wait;
             if (Actor != null && Actor.CanShowDamage) return TurnState.Hit;
             return TurnState.Execute;
         }
@@ -134,7 +137,7 @@ public class BattleEngine : SceneRoot3D
 
     public static BattleEngine Create(BattleInit serverInfo)
     {
-        CurrentGameObject = CreateObject(null, DefaultArena, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
+        CurrentGameObject = CreateObject(null, ArenaName, new Vector3(0f, 1000f, 1000f), Quaternion.identity);
         CurrentGameObject.transform.FindChild("FriendlySpawnPos").LookAt(CurrentGameObject.transform.FindChild("EnemySpawnPos"));
         CurrentGameObject.transform.FindChild("EnemySpawnPos").LookAt(CurrentGameObject.transform.FindChild("FriendlySpawnPos"));
         return CurrentGameObject.GetComponent<BattleEngine>();
@@ -161,17 +164,16 @@ public class BattleEngine : SceneRoot3D
             enforceEnd();
 
         if (CatchInProcess) return;
-
-        if (GetTurnState == _currentStatus 
-            || _enactEndScreen 
+        updateIdleAnim();
+        if (GetTurnState == CurrentStatus
             || View.IndsArePlaying) 
             return;
 
-        _currentStatus = GetTurnState; 
+        CurrentStatus = GetTurnState; 
         switch (GetTurnState)
         {
             case TurnState.Wait:
-                updateIdleAnim();
+                //
                 break;
             case TurnState.Execute:
                 if (SkipOneTurn)
@@ -180,13 +182,11 @@ public class BattleEngine : SceneRoot3D
                     Turn = Result.Turn;
                     CurrentPlayer = Result.PlayerTurn;
                     _results.Remove(Result);
-                    _currentStatus = TurnState.Wait;
+                    CurrentStatus = TurnState.Wait;
                 } else turnInit();
                 break;
             case TurnState.Hit:
                 executeSkill();
-                if (!Fighting)
-                    _enactEndScreen = true;
                 break;
         }
     }
@@ -197,16 +197,17 @@ public class BattleEngine : SceneRoot3D
 		float bhp = 0f;
 		float ahpmax = ServerInfo.MonsterAMaxHealth;
 		float bhpmax = ServerInfo.MonsterBMaxHealth;
-		if (_lastResult == null) 
+		if (LastResult == null) 
 		{
 			ahp = ServerInfo.MonsterAHealth;
 			bhp = ServerInfo.MonsterBHealth;
 		} 
 		else 
 		{
-			ahp = _lastResult.MonsterAHP;
-			bhp = _lastResult.MonsterBHP;
-		}
+            ahp = LastResult.MonsterAHP;
+            bhp = LastResult.MonsterBHP;
+        }
+
 		if (ahp / ahpmax < 0.33f)
             FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
         else
@@ -224,8 +225,8 @@ public class BattleEngine : SceneRoot3D
         {
             FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
             EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
-            if (GameManager.Singleton.Player.CurFight == null ? 
-                (_lastResult == null ? ServerInfo.MonsterAHealth : _lastResult.MonsterAHP) > 0 
+            if (GameManager.Singleton.Player.CurFight == null ?
+                (LastResult == null ? ServerInfo.MonsterAHealth : LastResult.MonsterAHP) > 0 
                 : 
                 GameManager.Singleton.Player.CurCreature.HP > 0)
             {
@@ -248,14 +249,14 @@ public class BattleEngine : SceneRoot3D
 
     private void turnInit()
     {
-        _lastResult = Result;
+        LastResult = Result;
         Turn = Result.Turn;
 
         CurCaster.GetComponent<MonsterAnimationController>()
             .DoAnim(Extract(Result.SkillName, "Animation"));
 
         if (GameManager.Singleton.Techtree[Result.SkillName] == null)
-            Debug.LogWarning("Skill Name: " + Result.SkillName+ " <- doesn't seem to be initialized.");
+            Debug.LogWarning("Skill Name: " + Result.SkillName+ " <- doesn't seem to be initialized. Using "+TestSkillName+" instead.");
 
         if (Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
@@ -271,14 +272,13 @@ public class BattleEngine : SceneRoot3D
         if (GameManager.Singleton.Techtree[skillName] != null)
             return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
 
-        return extractionMode.Equals("Animation") ? "atk_var_1" : "Laser";
+        return extractionMode.Equals("Animation") ? "atk_var_1" : TestSkillName;
     }
 
     private void createSkillVisuals(string objName)
     {
         _actor = CreateObject(transform, "Skill/"+objName, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
-        Actor.Owner = this;
 
         switch (CurrentPlayer)
         {
@@ -339,6 +339,7 @@ public class BattleEngine : SceneRoot3D
 
     public void InitCreatures(BattleInit serverInfo)
     {
+        ////////////////////////////// init Friendly Creature //////////////////////////////////////////////////////////////////////////////////////////
         string prefabName = "";
         switch (serverInfo.BaseMeshA)
         {
@@ -353,10 +354,7 @@ public class BattleEngine : SceneRoot3D
                                   transform.FindChild(DefaultFriendlySpawnPos).position,
                                   transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
-        FriendlyCreature.GetComponent<MonsterController>().StartPosition = transform.FindChild(DefaultFriendlySpawnPos).position;
-        FriendlyCreature.GetComponent<MonsterController>().Owner = this;
         FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
         prefabName = "";
@@ -373,14 +371,12 @@ public class BattleEngine : SceneRoot3D
                                 transform.FindChild(DefaultEnemySpawnPos).position,
                                 transform.FindChild(DefaultEnemySpawnPos).rotation);
 
-        EnemyCreature.GetComponent<MonsterController>().StartPosition = transform.FindChild(DefaultEnemySpawnPos).position;
-        EnemyCreature.GetComponent<MonsterController>().Owner = this;
         EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement);
     }
 
     public void EndBattle()
     {
-        _enactEndScreen = false;
+        Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();
         if (!RenderSettings.fog)

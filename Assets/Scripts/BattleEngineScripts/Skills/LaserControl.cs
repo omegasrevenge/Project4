@@ -21,7 +21,6 @@ public class LaserControl : ActorControlls {
 
 	void Start () 
 	{
-		AnimationFinished = false;
 		_head = transform.FindChild("Head");
 		_beam = transform.FindChild("Beam");
 		SetNewAlpha(0f);
@@ -55,11 +54,9 @@ public class LaserControl : ActorControlls {
 		if(_beam.gameObject.activeSelf)
             SetNewAlpha(CurAlpha - (Time.deltaTime / FadeOutTime));
 
-		if(_counter >= LifeTime)
-		{
-			Owner.Actor = null;
-			Destroy(gameObject);
-		}
+	    if (!(_counter >= LifeTime)) return;
+	    BattleEngine.Current.Actor = null;
+	    Destroy(gameObject);
 	}
 
     public void SetNewAlpha(float value)
