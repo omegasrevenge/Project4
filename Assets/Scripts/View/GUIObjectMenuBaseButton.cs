@@ -80,8 +80,10 @@ public class GUIObjectMenuBaseButton : GUIObjectMenuButton
 
     void OnClick(dfControl control, dfMouseEventArgs args)
     {
+        Debug.Log(_active);
         if (args.Used || !_active) return;
         args.Use();
+        Debug.Log("SET BASE");
         GameManager.Singleton.SendBasePosition();
         Active = false;
     }

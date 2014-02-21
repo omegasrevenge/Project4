@@ -669,7 +669,12 @@ public class GameManager : MonoBehaviour
 
     public void SendBasePosition()
     {
-        if (!LoggedIn) return;
+        if (!LoggedIn)
+        {
+            return;
+        }
+
+        Player.BaseTime = GetServerTime();
         StartCoroutine(CSendBasePosition());
     }
 
