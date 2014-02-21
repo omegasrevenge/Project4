@@ -70,11 +70,11 @@ public class PlayerBase : SceneRoot3D
 		//	ShowWindow(Windows.Crafting);
 		//}
 
-		if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
-		{
-			creatureID = equiptCreature.CreatureID;
-			ShowWindow(Windows.Creature);
-		}
+		//if (GUI.Button(new Rect(330, 500, 140, 50), "<color=white><size=20>" + "Creature Lab" + "</size></color>"))
+		//{
+		//	creatureID = equiptCreature.CreatureID;
+		//	ShowWindow(Windows.Creature);
+		//}
 	}
 
 	private void ShowWindow(Windows windowName)

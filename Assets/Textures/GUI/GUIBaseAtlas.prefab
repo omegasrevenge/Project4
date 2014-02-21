@@ -43,8 +43,8 @@ MonoBehaviour:
   - name: bg
     region:
       serializedVersion: 2
-      x: .452148438
-      y: .965820312
+      x: .1640625
+      y: .678710938
       width: .015625
       height: .03125
     border:
@@ -60,8 +60,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .46875
-      y: .965820312
+      x: .59765625
+      y: .5078125
       width: .015625
       height: .03125
     border:
@@ -74,11 +74,28 @@ MonoBehaviour:
     textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
     deleted: 0
     texture: {fileID: 0}
+  - name: combat_panel_vengea
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .298339844
+      height: .213867188
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: 20d6feadde5ffe244b4bc46bdf6cf71b
+    deleted: 0
+    texture: {fileID: 0}
   - name: crafting_arrow_change
     region:
       serializedVersion: 2
-      x: .676757812
-      y: .203125
+      x: .618652344
+      y: .924804688
       width: .0317382812
       height: .0458984375
     border:
@@ -94,7 +111,7 @@ MonoBehaviour:
   - name: crafting_arrows_bg
     region:
       serializedVersion: 2
-      x: .07421875
+      x: .373535156
       y: 0
       width: .0336914062
       height: .971679688
@@ -111,8 +128,8 @@ MonoBehaviour:
   - name: crafting_biod_energy
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .904296875
+      x: .725097656
+      y: .1015625
       width: .0444335938
       height: .0888671875
     border:
@@ -128,8 +145,8 @@ MonoBehaviour:
   - name: crafting_biod_fire
     region:
       serializedVersion: 2
-      x: .361328125
-      y: .904296875
+      x: .731445312
+      y: 0
       width: .0444335938
       height: .0888671875
     border:
@@ -145,8 +162,8 @@ MonoBehaviour:
   - name: crafting_biod_life
     region:
       serializedVersion: 2
-      x: .406738281
-      y: .904296875
+      x: .663574219
+      y: .326171875
       width: .0444335938
       height: .0888671875
     border:
@@ -162,8 +179,8 @@ MonoBehaviour:
   - name: crafting_biod_storm
     region:
       serializedVersion: 2
-      x: .631347656
-      y: .203125
+      x: .663574219
+      y: .416992188
       width: .0444335938
       height: .0888671875
     border:
@@ -179,8 +196,8 @@ MonoBehaviour:
   - name: crafting_biod_water
     region:
       serializedVersion: 2
-      x: .569824219
-      y: .470703125
+      x: .669921875
+      y: .5078125
       width: .0444335938
       height: .0888671875
     border:
@@ -196,8 +213,8 @@ MonoBehaviour:
   - name: crafting_change_element_energy
     region:
       serializedVersion: 2
-      x: .505371094
-      y: 0
+      x: .661132812
+      y: .8125
       width: .060546875
       height: .12109375
     border:
@@ -213,8 +230,8 @@ MonoBehaviour:
   - name: crafting_change_element_fire
     region:
       serializedVersion: 2
-      x: .505371094
-      y: .123046875
+      x: .668945312
+      y: .689453125
       width: .060546875
       height: .12109375
     border:
@@ -230,8 +247,8 @@ MonoBehaviour:
   - name: crafting_change_element_life
     region:
       serializedVersion: 2
-      x: .566894531
-      y: 0
+      x: .72265625
+      y: .8125
       width: .060546875
       height: .12109375
     border:
@@ -247,8 +264,8 @@ MonoBehaviour:
   - name: crafting_change_element_storm
     region:
       serializedVersion: 2
-      x: .566894531
-      y: .123046875
+      x: .59765625
+      y: .153320312
       width: .060546875
       height: .12109375
     border:
@@ -264,8 +281,8 @@ MonoBehaviour:
   - name: crafting_change_element_water
     region:
       serializedVersion: 2
-      x: .569824219
-      y: .24609375
+      x: .604003906
+      y: 0
       width: .060546875
       height: .12109375
     border:
@@ -281,8 +298,8 @@ MonoBehaviour:
   - name: crafting_closebutton
     region:
       serializedVersion: 2
-      x: .452148438
-      y: .904296875
+      x: .587890625
+      y: .924804688
       width: .0297851562
       height: .0595703125
     border:
@@ -298,8 +315,8 @@ MonoBehaviour:
   - name: crafting_counterlabel_single
     region:
       serializedVersion: 2
-      x: .631347656
-      y: .293945312
+      x: .110839844
+      y: .678710938
       width: .0522460938
       height: .044921875
     border:
@@ -315,7 +332,7 @@ MonoBehaviour:
   - name: crafting_counterlabels
     region:
       serializedVersion: 2
-      x: 0
+      x: .299316406
       y: 0
       width: .0732421875
       height: .850585938
@@ -332,8 +349,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_energy
     region:
       serializedVersion: 2
-      x: .495605469
-      y: .890625
+      x: .59765625
+      y: .276367188
       width: .0649414062
       height: .099609375
     border:
@@ -343,14 +360,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 133, y: 102}
-    textureGUID: 5b8e2426778bdc24a82e4b5a86424472
+    textureGUID: 1217ba638ab792c4683a1ba8de460a0f
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl0_fire
     region:
       serializedVersion: 2
-      x: .561523438
-      y: .890625
+      x: .659179688
+      y: .123046875
       width: .0649414062
       height: .099609375
     border:
@@ -360,13 +377,13 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 133, y: 102}
-    textureGUID: ec5e78a335444294f92d7ad889c750d4
+    textureGUID: 7be942428dea5ac4f9b9f9e7b5332dc1
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl0_life
     region:
       serializedVersion: 2
-      x: .628417969
+      x: .665527344
       y: 0
       width: .0649414062
       height: .099609375
@@ -377,14 +394,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 133, y: 102}
-    textureGUID: 483b5ff0eae78914eb3c0c28e8a571e7
+    textureGUID: ad76ba87a538faa4bb649b8ef39c2e9a
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl0_storm
     region:
       serializedVersion: 2
-      x: .628417969
-      y: .1015625
+      x: .59765625
+      y: .377929688
       width: .0649414062
       height: .099609375
     border:
@@ -394,14 +411,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 133, y: 102}
-    textureGUID: 825e297a3cda1fd4bacde8cce57903b2
+    textureGUID: e225680675e7c6b44b3a30428f11a452
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl0_water
     region:
       serializedVersion: 2
-      x: .569824219
-      y: .369140625
+      x: .663574219
+      y: .224609375
       width: .0649414062
       height: .099609375
     border:
@@ -411,14 +428,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 133, y: 102}
-    textureGUID: 85e40b3f9f509ee42b14779533697b4f
+    textureGUID: a29431841d1f5fb448a3b3c7b0eb63c3
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl1_energy
     region:
       serializedVersion: 2
-      x: .415527344
-      y: .64453125
+      x: .5078125
+      y: .689453125
       width: .072265625
       height: .110351562
     border:
@@ -428,14 +445,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 148, y: 113}
-    textureGUID: d9e38d7ba2f718845ae321920a82a33c
+    textureGUID: 0bbe20f6e3f374749b5b7126db8c914c
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl1_fire
     region:
       serializedVersion: 2
-      x: 0
-      y: .852539062
+      x: .221679688
+      y: .215820312
       width: .072265625
       height: .110351562
     border:
@@ -445,14 +462,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 148, y: 113}
-    textureGUID: cab6ef3b148dc954b83e0772c3c627b9
+    textureGUID: c4f535f7d6e997645b0975afb0e125e4
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl1_life
     region:
       serializedVersion: 2
-      x: .496582031
-      y: .275390625
+      x: .221679688
+      y: .328125
       width: .072265625
       height: .110351562
     border:
@@ -462,14 +479,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 148, y: 113}
-    textureGUID: 1706dafafa881f3488e0b8721fc753d3
+    textureGUID: 14be1dbcfb8fd4c458b105f3b98d2b4b
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl1_storm
     region:
       serializedVersion: 2
-      x: .496582031
-      y: .387695312
+      x: .221679688
+      y: .440429688
       width: .072265625
       height: .110351562
     border:
@@ -479,14 +496,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 148, y: 113}
-    textureGUID: be2f55f5f96c0b643931671560b0f416
+    textureGUID: 7486bbae68d22694dbca6f56e485eb39
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl1_water
     region:
       serializedVersion: 2
-      x: .496582031
-      y: .5
+      x: .587890625
+      y: .8125
       width: .072265625
       height: .110351562
     border:
@@ -496,14 +513,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 148, y: 113}
-    textureGUID: 53ba2ea048100f44897e352b1ec89fae
+    textureGUID: 00c8990cdeb353d47b08b1c5d03d659d
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl2_energy
     region:
       serializedVersion: 2
-      x: .415527344
-      y: .275390625
+      x: .288574219
+      y: .852539062
       width: .080078125
       height: .12109375
     border:
@@ -513,14 +530,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 164, y: 124}
-    textureGUID: 93c8053aec649b64984a6f7c8be21dd0
+    textureGUID: 6b98c7e4c725b134d9739466e60c5947
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl2_fire
     region:
       serializedVersion: 2
-      x: .415527344
-      y: .3984375
+      x: .110839844
+      y: .555664062
       width: .080078125
       height: .12109375
     border:
@@ -530,14 +547,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 164, y: 124}
-    textureGUID: 27b91f6cf4697904693935073d6c377f
+    textureGUID: d468951baeac8254499f2299aa66ac30
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl2_life
     region:
       serializedVersion: 2
-      x: .415527344
-      y: .521484375
+      x: .5078125
+      y: .56640625
       width: .080078125
       height: .12109375
     border:
@@ -547,14 +564,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 164, y: 124}
-    textureGUID: 32ca45b9ccb3277488c853f7d3456ca4
+    textureGUID: 20c06f7774f9099429d0ff3e51b9914e
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl2_storm
     region:
       serializedVersion: 2
-      x: .495605469
-      y: .64453125
+      x: .587890625
+      y: .689453125
       width: .080078125
       height: .12109375
     border:
@@ -564,14 +581,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 164, y: 124}
-    textureGUID: e8f08b96ef9ac4841b1710a703197816
+    textureGUID: cf21755dc9bcd3943ad9ebb815df3f7f
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl2_water
     region:
       serializedVersion: 2
-      x: .495605469
-      y: .767578125
+      x: .588867188
+      y: .56640625
       width: .080078125
       height: .12109375
     border:
@@ -581,14 +598,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 164, y: 124}
-    textureGUID: 4890f98b809efad4786cdb3322515d04
+    textureGUID: 15ae4aa55da01fe4db826a8136a0cdb2
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl3_energy
     region:
       serializedVersion: 2
-      x: .108886719
-      y: .849609375
+      x: .408203125
+      y: .806640625
       width: .0888671875
       height: .135742188
     border:
@@ -598,14 +615,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 182, y: 139}
-    textureGUID: e0496c847dd10d047b6d50cb25feb992
+    textureGUID: de144b61210d51749b5e8187975a298c
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl3_fire
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .766601562
+      x: .498046875
+      y: .806640625
       width: .0888671875
       height: .135742188
     border:
@@ -615,14 +632,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 182, y: 139}
-    textureGUID: 02e983f99daea9646a59878fe6af72c8
+    textureGUID: 56d6264c3e3900b4dbb26e40ff2ac23b
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl3_life
     region:
       serializedVersion: 2
-      x: .405761719
-      y: .766601562
+      x: .5078125
+      y: .153320312
       width: .0888671875
       height: .135742188
     border:
@@ -632,14 +649,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 182, y: 139}
-    textureGUID: 8b67a08736022564997923210b806152
+    textureGUID: 5eb0b6bd0becac947ba5779343fe70e1
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl3_storm
     region:
       serializedVersion: 2
-      x: .415527344
-      y: 0
+      x: .5078125
+      y: .291015625
       width: .0888671875
       height: .135742188
     border:
@@ -649,14 +666,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 182, y: 139}
-    textureGUID: 23dbd9b154efdf445b503556cb96be90
+    textureGUID: ced86cf2d4e515545b61d4469278722a
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl3_water
     region:
       serializedVersion: 2
-      x: .415527344
-      y: .137695312
+      x: .5078125
+      y: .428710938
       width: .0888671875
       height: .135742188
     border:
@@ -666,14 +683,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 182, y: 139}
-    textureGUID: 4b5243dd4f020fa489cce070520f04e4
+    textureGUID: 5bd2bd99221a82a42bef70262ca2e83f
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl4_energy
     region:
       serializedVersion: 2
-      x: .315917969
-      y: 0
+      x: .408203125
+      y: .193359375
       width: .0986328125
       height: .151367188
     border:
@@ -683,14 +700,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 202, y: 155}
-    textureGUID: aa2027b930d19bb44a8534ef1e8170f6
+    textureGUID: 40ecb25e4ca0c5f4eb99470457974ed8
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl4_fire
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .153320312
+      x: .504394531
+      y: 0
       width: .0986328125
       height: .151367188
     border:
@@ -700,14 +717,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 202, y: 155}
-    textureGUID: 5885f9e5da98ed743827f79c267215ee
+    textureGUID: 32ab33a881cedd24ba851278f313662d
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl4_life
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .306640625
+      x: .408203125
+      y: .346679688
       width: .0986328125
       height: .151367188
     border:
@@ -717,14 +734,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 202, y: 155}
-    textureGUID: cb01be9dcfd5c5e47b4895887ee1149c
+    textureGUID: 03017bb39d6a20f488fe8442e1796042
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl4_storm
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .459960938
+      x: .408203125
+      y: .5
       width: .0986328125
       height: .151367188
     border:
@@ -734,14 +751,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 202, y: 155}
-    textureGUID: 7f0449c06b6ac854d8c0a69c17c845dc
+    textureGUID: 756f7efa1944f0f40a278b13b613cd8d
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl4_water
     region:
       serializedVersion: 2
-      x: .315917969
-      y: .61328125
+      x: .408203125
+      y: .653320312
       width: .0986328125
       height: .151367188
     border:
@@ -751,14 +768,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 202, y: 155}
-    textureGUID: 47d56c42737b28f4dad5879d04b7c980
+    textureGUID: 3ac3566e80d91ec4484897a94afd90df
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl5_energy
     region:
       serializedVersion: 2
-      x: .108886719
-      y: 0
+      x: 0
+      y: .215820312
       width: .109863281
       height: .16796875
     border:
@@ -768,14 +785,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 225, y: 172}
-    textureGUID: 82360929fff122247b980f62550a227b
+    textureGUID: 2574b48d63264fa4a8645af8f423a6e6
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl5_fire
     region:
       serializedVersion: 2
-      x: .108886719
-      y: .169921875
+      x: .110839844
+      y: .215820312
       width: .109863281
       height: .16796875
     border:
@@ -785,14 +802,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 225, y: 172}
-    textureGUID: 69cf2e26bfa3e5b47917559d47347d9c
+    textureGUID: 6fb4f2f5e6df72f42a464053035ba5e9
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl5_life
     region:
       serializedVersion: 2
-      x: .108886719
-      y: .33984375
+      x: 0
+      y: .385742188
       width: .109863281
       height: .16796875
     border:
@@ -802,14 +819,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 225, y: 172}
-    textureGUID: 20a7bd3d008696a478687dcf60f2ce3b
+    textureGUID: 64539bf76c2087b4c8bd6593875420e1
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl5_storm
     region:
       serializedVersion: 2
-      x: .108886719
-      y: .509765625
+      x: .110839844
+      y: .385742188
       width: .109863281
       height: .16796875
     border:
@@ -819,14 +836,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 225, y: 172}
-    textureGUID: 1d384aeb6e52f62458dce4b6fa213693
+    textureGUID: 08e94a3ad86729844858b29dc67df3b3
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_driod_lvl5_water
     region:
       serializedVersion: 2
-      x: .108886719
-      y: .6796875
+      x: 0
+      y: .555664062
       width: .109863281
       height: .16796875
     border:
@@ -836,14 +853,14 @@ MonoBehaviour:
       m_Bottom: 0
     rotated: 0
     sizeInPixels: {x: 225, y: 172}
-    textureGUID: e7f9b7a2b4b748f4bac69bcf42e92991
+    textureGUID: c213ba94746631543bbc0d534b902c0f
     deleted: 0
     texture: {fileID: 0}
   - name: crafting_element_energy
     region:
       serializedVersion: 2
-      x: .219726562
-      y: 0
+      x: 0
+      y: .725585938
       width: .0952148438
       height: .19140625
     border:
@@ -859,8 +876,8 @@ MonoBehaviour:
   - name: crafting_element_fire
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .193359375
+      x: .0961914062
+      y: .725585938
       width: .0952148438
       height: .19140625
     border:
@@ -876,8 +893,8 @@ MonoBehaviour:
   - name: crafting_element_life
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .38671875
+      x: .192382812
+      y: .555664062
       width: .0952148438
       height: .19140625
     border:
@@ -893,8 +910,8 @@ MonoBehaviour:
   - name: crafting_element_storm
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .580078125
+      x: .192382812
+      y: .749023438
       width: .0952148438
       height: .19140625
     border:
@@ -910,8 +927,8 @@ MonoBehaviour:
   - name: crafting_element_water
     region:
       serializedVersion: 2
-      x: .219726562
-      y: .7734375
+      x: .408203125
+      y: 0
       width: .0952148438
       height: .19140625
     border:
