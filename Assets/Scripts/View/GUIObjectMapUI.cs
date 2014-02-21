@@ -5,14 +5,15 @@ public class GUIObjectMapUI : MonoBehaviour
 {
     private const string Prefab = "GUI/panel_mapui";
     private const string MenuPanelStr = "panel_menu";
+    private const string RootPanelStr = "panel_root";
     private const string MenuButtonStr = "panel_menu_button";
     public const float MaxViewportScroll = 0.78f;
     public const float MenuSpeed = 1f;
 
     private dfControl _guiRoot;
-    private GameObject _menuRoot;
     private dfControl _menuButton;
     private dfControl _menuPanel;
+    private MovableGUIPanel _menuViewport;
     private MovableGUIPanel _guiViewport;
     private GUIObjectCreatureInfo _creatureInfo;
     private Map _root3D;
@@ -34,7 +35,7 @@ public class GUIObjectMapUI : MonoBehaviour
     {
         _root3D = root;
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(ViewController.UIRootTag);
-         _menuRoot = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag);
+        _menuViewport = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag).transform.Find(RootPanelStr).GetComponent<MovableGUIPanel>();
         _guiViewport = GetComponent<MovableGUIPanel>();
         ViewportScrollState = 0f;
 
@@ -79,13 +80,9 @@ public class GUIObjectMapUI : MonoBehaviour
         set
         {
             value = Mathf.Clamp(value, 0f, MaxViewportScroll);
-            _viewportScrollState = _guiViewport.Phase = value;
+            _viewportScrollState = _menuViewport.Phase = _guiViewport.Phase = value;
             if (_root3D)
                 _root3D.ViewportPhase = _viewportScrollState;
-            if (_viewportScrollState == 0f)
-                _menuRoot.SetActive(false);
-            else
-                _menuRoot.SetActive(true);
         }
     }
 

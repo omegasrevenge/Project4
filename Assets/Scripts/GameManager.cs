@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GooglePlayGames;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -129,7 +130,8 @@ public class GameManager : MonoBehaviour
     public void StartOAuth()
     {
 #if !UNITY_EDITOR
-        Social.Active = new UnityEngine.SocialPlatforms.GPGSocial();
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
         Social.localUser.Authenticate(OnAuthCB);
 #endif
     }
@@ -287,7 +289,7 @@ public class GameManager : MonoBehaviour
     {
         SessionID = "";
 #if !UNITY_EDITOR
-        NerdGPG.Instance().signOut();
+        ((PlayGamesPlatform) Social.Active).SignOut();
 #endif
         _view.AddMaxScreen(GUIObjectLoginScreen.Create());
         SwitchGameMode(GameMode.Login);
@@ -1129,15 +1131,35 @@ public class GameManager : MonoBehaviour
             //@To-do: Do something!
         }
 
-        string token = NerdGPG.Instance().GetToken();
-        if (string.IsNullOrEmpty(token))
+        
+        //if (string.IsNullOrEmpty(token))
+        //{
+        //    //@To-do: Do something!
+        //    return;
+        //}
+        StartCoroutine(RequestToken());
+        //Debug.Log("Token: " + token);
+        // Login(token, OnPlayerLoaded);
+
+    }
+
+    private IEnumerator RequestToken()
+    {
+        string token = null;
+        string error = null;
+        while (string.IsNullOrEmpty(error))
         {
-            //@To-do: Do something!
-            return;
-        }
-        Debug.Log("GPG: Got Login Response: " + result);
-        Debug.Log("Token: " + token);
-        Login(token, OnPlayerLoaded);
+            token = ((PlayGamesPlatform)Social.Active).GetToken();
+            if (!string.IsNullOrEmpty(token))
+            {
+                Login(token, OnPlayerLoaded);
+                yield break;
+            }
+            yield return new WaitForEndOfFrame();
+            error = ((PlayGamesPlatform) Social.Active).GetRequestError();
+        }    
+        Debug.Log("Cannot get Token: "+error);
+
 
     }
 

@@ -5,6 +5,7 @@ public class MovableGUIPanel : MonoBehaviour
 {
 
     public float Phase = 0f;
+    public bool Pinned = true;
 
     private dfControl _control;
 
@@ -15,8 +16,21 @@ public class MovableGUIPanel : MonoBehaviour
 
     private void Update()
     {
-            Vector2 offset = new Vector2(Phase*_control.Size.x,0);
+        if (Pinned)
+        {
+            Vector2 offset = new Vector2(Phase*_control.Size.x, 0);
             _control.RelativePosition = offset;
-
+        }
+        else
+        {
+            if(Phase == 0f)
+                _control.Hide();
+            else
+            {
+                _control.Show();
+                _control.Width = Phase*Screen.width;
+            }
+            
+        }
     }
 }

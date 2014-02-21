@@ -1,0 +1,2 @@
+proj.AppId=1002351733701
+android.SetupDone=true
