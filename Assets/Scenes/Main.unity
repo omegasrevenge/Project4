@@ -2935,7 +2935,7 @@ MonoBehaviour:
   rawValue: 1
   minValue: 0
   maxValue: 1
-  stepSize: .00999999978
+  stepSize: 1
   scrollSize: 36
   thumb: {fileID: 1831022492}
   fillIndicator: {fileID: 0}
@@ -4571,7 +4571,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1831022490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .118743896, y: -.048435986, z: 0}
+  m_LocalPosition: {x: .118751526, y: -.0476577878, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1156588707}
@@ -5030,7 +5030,7 @@ MonoBehaviour:
   rawValue: 1
   minValue: 0
   maxValue: 1
-  stepSize: .00999999978
+  stepSize: 1
   scrollSize: 36
   thumb: {fileID: 1216813333}
   fillIndicator: {fileID: 0}
