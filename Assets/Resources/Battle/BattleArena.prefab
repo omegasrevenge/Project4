@@ -276,15 +276,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1579e7a3e560954dbd3aeb43125049a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestSkillName: Energy_Beam_Skill_Wolf
+  TestAnimation: atk_var_3
+  TestSkillName: Fire_Bite_Skill_Wolf
   Actor: {fileID: 0}
   CurrentPlayer: 0
+  ServerInfo: {fileID: 0}
   CatchInProcess: 0
+  LastResult: {fileID: 0}
+  CurrentStatus: 0
   Turn: 0
   SkipOneTurn: 0
   FightIsOverOnce: 0
   FriendlyCreature: {fileID: 0}
   EnemyCreature: {fileID: 0}
+  _results: []
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

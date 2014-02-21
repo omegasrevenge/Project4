@@ -833,6 +833,9 @@ public class GameManager : MonoBehaviour
     public void FightEnemyTurn()
     {
         if (!LoggedIn) return;
+        if (Player.CurFight == null) return;
+        if (Player.CurFight.Finished) return;
+
         _lastEnemyTurn = Time.time;
         StartCoroutine(CFightEnemyTurn());
     }

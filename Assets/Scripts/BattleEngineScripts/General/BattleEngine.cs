@@ -6,7 +6,8 @@ public class BattleEngine : SceneRoot3D
     //########## public #########
     public enum TurnState { None, Wait, Execute, Hit }
 
-    public string TestSkillName = "Energy_Beam_Skill_Wolf";
+    public string TestAnimation = "atk_var_3";
+    public string TestSkillName = "Fire_Bite_Skill_Wolf";
 
     public ActorControlls Actor;
     public FightRoundResult.Player CurrentPlayer;
@@ -31,6 +32,8 @@ public class BattleEngine : SceneRoot3D
     //########## static #########
 
     //########## const #########
+    public const string DefaultSkillOrigin = "CastFromMouthPos";
+    public const string DefaultSkillTarget = "MiddleOfBody";
     public const string ArenaName = "BattleArena";
     public const string DefaultFriendlySpawnPos = "FriendlySpawnPos";
     public const string DefaultEnemySpawnPos = "EnemySpawnPos";
@@ -224,8 +227,6 @@ public class BattleEngine : SceneRoot3D
     {
         if (!FightIsOverOnce)
         {
-            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
-            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
             if (GameManager.Singleton.Player.CurFight == null ?
                 (LastResult == null ? ServerInfo.MonsterAHealth : LastResult.MonsterAHP) > 0 
                 : 
@@ -273,23 +274,39 @@ public class BattleEngine : SceneRoot3D
         if (GameManager.Singleton.Techtree[skillName] != null)
             return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
 
-        return extractionMode.Equals("Animation") ? "atk_var_1" : TestSkillName;
+        return extractionMode.Equals("Animation") ? TestAnimation : TestSkillName;
     }
 
     private void createSkillVisuals(string objName)
     {
         _actor = CreateObject(transform, "Skill/"+objName, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
-
+        bool conjuration = _actor.name.Contains("Conjuration");
         switch (CurrentPlayer)
         {
             case FightRoundResult.Player.A:
-                _actor.transform.position = FriendlyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.LookAt(EnemyCreature.transform.FindChild("MiddleOfBody"));
+                if (!conjuration)
+                {
+                    _actor.transform.position = FriendlyCreature.transform.FindChild(DefaultSkillOrigin).position;
+                    _actor.transform.LookAt(EnemyCreature.transform.FindChild(DefaultSkillTarget));
+                }
+                else
+                {
+                    _actor.transform.rotation = EnemyCreature.transform.rotation;
+                    _actor.transform.position = EnemyCreature.transform.position;
+                }
                 break;
             case FightRoundResult.Player.B:
-                _actor.transform.position = EnemyCreature.transform.FindChild("CastFromMouthPos").position;
-                _actor.transform.LookAt(FriendlyCreature.transform.FindChild("MiddleOfBody"));
+                if (!conjuration)
+                {
+                    _actor.transform.position = EnemyCreature.transform.FindChild(DefaultSkillOrigin).position;
+                    _actor.transform.LookAt(FriendlyCreature.transform.FindChild(DefaultSkillTarget));
+                }
+                else
+                {
+                    _actor.transform.rotation = FriendlyCreature.transform.rotation;
+                    _actor.transform.position = FriendlyCreature.transform.position;
+                }
                 break;
         }
     }
@@ -297,8 +314,14 @@ public class BattleEngine : SceneRoot3D
     private void executeSkill()
     {
 
-        if (Result.Damage > 0 && Fighting)
+        if (Result.Damage > 0 && Fighting && !Result.EVDA && !Result.EVDB)
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
+
+        if (!Fighting && Results.Count == 1)
+        {
+            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+        }
         if (Result.EVDA)
             FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
         if (Result.EVDB)

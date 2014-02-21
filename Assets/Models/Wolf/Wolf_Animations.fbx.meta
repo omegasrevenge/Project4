@@ -234,7 +234,7 @@ ModelImporter:
       name: stance to idle
       takeName: stance to idle
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 103
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -452,7 +452,7 @@ ModelImporter:
       name: idle_std_var1
       takeName: idle_std_var1
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -670,7 +670,7 @@ ModelImporter:
       name: idle_std_var2
       takeName: idle_std_var2
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -888,7 +888,7 @@ ModelImporter:
       name: idle_std_var3
       takeName: idle_std_var3
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1105,7 +1105,7 @@ ModelImporter:
     - serializedVersion: 16
       name: atk_var1
       takeName: atk_var1
-      firstFrame: 1
+      firstFrame: 41
       lastFrame: 150
       wrapMode: 0
       orientationOffsetY: 0
@@ -2414,7 +2414,7 @@ ModelImporter:
       name: hit_var1
       takeName: hit_var1
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 128
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2632,7 +2632,7 @@ ModelImporter:
       name: idle to agitated
       takeName: idle to agitated
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 68
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2849,8 +2849,8 @@ ModelImporter:
     - serializedVersion: 16
       name: agitated
       takeName: agitated
-      firstFrame: 0
-      lastFrame: 300
+      firstFrame: 68
+      lastFrame: 275
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -3068,7 +3068,7 @@ ModelImporter:
       name: agitated to idle
       takeName: agitated to idle
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 68
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Water_Scratch_Skill_Wolf
   m_TagString: Untagged
@@ -944,6 +945,24 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920343c64d8983348be31038adacd514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanShowDamage: 0
+  Origin: {fileID: 0}
+  Delay: 1
+  LifeTime: 2
+  FadeTime: .100000001
+  TravelDistance: 20
+  YStartOffset: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

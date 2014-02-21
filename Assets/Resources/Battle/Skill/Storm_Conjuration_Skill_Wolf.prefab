@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Storm_Conjuration_Skill_Wolf
   m_TagString: Untagged
@@ -40,8 +41,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: .191441268, y: -.209837839, z: .0419373065, w: -.957893312}
+  m_LocalPosition: {x: 37.3185768, y: 986.366089, z: 1014.26733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.60869122, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -126,7 +127,7 @@ ParticleRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4923ce81261374d48906f13ba96de625, type: 2}
+  - {fileID: 2100000, guid: 4ea78eeb97323c54eba783a65edfba4d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -158,6 +159,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastChange: 0
   changeInt: .5
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24d81489f9cdfc4facac0f88a7fd3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanShowDamage: 0
+  Delay: 1.10000002
+  EmitTime: 5
+  FadeTime: 6
+  Emitters: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

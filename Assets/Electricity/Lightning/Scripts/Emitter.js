@@ -22,16 +22,16 @@ function Start (){
 
 function EmitLightning() {
 	while(run == true){
-		transform.BroadcastMessage("DestroySpark", SendMessageOptions.DontRequireReceiver);
-		for (var i=0;i<baseVertices.Length;i++){
-			if(Random.Range(-1.0, spread) > 0.0){
-				var sub : Transform = Instantiate(spark, transform.position, Random.rotation) as Transform;
-				var script : BendyLightning = sub.GetComponent(BendyLightning) as BendyLightning;
-				sub.parent = transform;
-				sub.transform.localPosition = baseVertices[i];
-				script.SetStats(color, width, dis, jump); 
+			transform.BroadcastMessage("DestroySpark", SendMessageOptions.DontRequireReceiver);
+			for (var i=0;i<baseVertices.Length;i++){
+				if(Random.Range(-1.0, spread) > 0.0){
+					var sub : Transform = Instantiate(spark, transform.position, Random.rotation) as Transform;
+					var script : BendyLightning = sub.GetComponent(BendyLightning) as BendyLightning;
+					sub.parent = transform;
+					sub.transform.localPosition = baseVertices[i];
+					script.SetStats(color, width, dis, jump); 
+				}
 			}
-		}
 		yield WaitForSeconds(rate);
 	}
 }
@@ -41,10 +41,12 @@ function OnBecameVisible() {
 	run = true;
 	EmitLightning();
 }
-//why go though the hassel if we cant be seen.  Inless we want to that is.
+//why go though the hassle if we can't be seen.  Unless we want to, that is.
 function OnBecameInvisible () {
 	if(runWhileOutOfSight == false){
 		run = false;
+		try{
 		EmitLightning();
+		} catch(e){}
 	}
 }
