@@ -56,6 +56,7 @@ public class GUIObjectMapUI : MonoBehaviour
         ViewportScrollState = 0.001f;
         OpenMenu();
         _menuButton.Click -= OnOpen;
+        _menuPanel.BringToFront();
         _menuPanel.Click += OnClose;
         TouchInput.DisableBy(this);
     }
