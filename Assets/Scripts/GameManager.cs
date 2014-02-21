@@ -81,7 +81,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _lastEnemyTurn = -1000;
 
-    public bool LoggedIn { get { return SessionID.Length != 0; } }
+    public bool LoggedIn
+    {
+        get
+        {
+            bool socialActive = true;
+            
+#if !UNITY_EDITOR
+            socialActive = (Social.Active is PlayGamesPlatform) && ((PlayGamesPlatform) Social.Active).IsAuthenticated();
+#endif
+            return SessionID.Length != 0 && socialActive;
+        }
+    }
 
     private GUIObjectPopup challengePopup;
 
@@ -288,13 +299,19 @@ public class GameManager : MonoBehaviour
     public void Logout()
     {
         SessionID = "";
+        Player = new Player();
 #if !UNITY_EDITOR
         ((PlayGamesPlatform) Social.Active).SignOut();
 #endif
         _view.AddMaxScreen(GUIObjectLoginScreen.Create());
+        _view.HideLoadingScreen();
         SwitchGameMode(GameMode.Login);
         if(_map)
             _map.HideMenu();
+        else
+        {
+            Debug.Log("NoMap");
+        }
     }
     /// <summary>
     /// Gets SessionID by PlayerID (Get from OAuth).
@@ -328,7 +345,11 @@ public class GameManager : MonoBehaviour
         yield return request;
         Debug.Log("Login: " + request.text);
         JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json,request.url)) yield break;
+        if (!CheckResult(json, request.url))
+        {
+            Logout();
+            yield break;
+        }
         SessionID = (string)json["data"];
         Player.PlayerID = playerID;
         GetOwnPlayer(callback);
@@ -1103,12 +1124,12 @@ public class GameManager : MonoBehaviour
 		return UnixStartDate;
 	}
 
-#if !UNITY_EDITOR
+
     void OnApplicationFocus(bool focusStatus)
     {
-        (new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
+        //(new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
     }
-#endif
+
 
 
     void OnDisable()
@@ -1127,29 +1148,16 @@ public class GameManager : MonoBehaviour
     void OnAuthCB(bool result)
     {
         if (!result)
-        {
-            //@To-do: Do something!
-        }
-
-        
-        //if (string.IsNullOrEmpty(token))
-        //{
-        //    //@To-do: Do something!
-        //    return;
-        //}
+            Logout();
         StartCoroutine(RequestToken());
-        //Debug.Log("Token: " + token);
-        // Login(token, OnPlayerLoaded);
-
     }
 
     private IEnumerator RequestToken()
     {
-        string token = null;
         string error = null;
         while (string.IsNullOrEmpty(error))
         {
-            token = ((PlayGamesPlatform)Social.Active).GetToken();
+            string token = ((PlayGamesPlatform)Social.Active).GetToken();
             if (!string.IsNullOrEmpty(token))
             {
                 Login(token, OnPlayerLoaded);

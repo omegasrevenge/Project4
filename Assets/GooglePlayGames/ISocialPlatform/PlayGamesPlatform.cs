@@ -594,7 +594,8 @@ namespace GooglePlayGames {
         {
             string token = "";
 #if UNITY_ANDROID
-            token = (mClient as AndroidClient).GetToken();
+            if(mClient != null)
+                token = (mClient as AndroidClient).GetToken();
 #endif
             return token;
         }
@@ -603,7 +604,8 @@ namespace GooglePlayGames {
         {
             string error = "";
 #if UNITY_ANDROID
-            error = (mClient as AndroidClient).GetRequestError();
+            if (mClient != null)
+                error = (mClient as AndroidClient).GetRequestError();
 #endif
             return error;
         }

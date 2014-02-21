@@ -18,6 +18,7 @@ public class GUIObjectMapUI : MonoBehaviour
     private GUIObjectCreatureInfo _creatureInfo;
     private Map _root3D;
 
+    [SerializeField]
     private float _viewportScrollState;
 
 
@@ -42,7 +43,6 @@ public class GUIObjectMapUI : MonoBehaviour
         _menuPanel = transform.FindChild(MenuPanelStr).GetComponent<dfControl>();
         _menuPanel.BringToFront();
         _menuButton = _menuPanel.transform.FindChild(MenuButtonStr).GetComponent<dfControl>();
-        Debug.Log(_menuButton);
         _menuButton.Click += OnOpen;
 
 
@@ -90,7 +90,10 @@ public class GUIObjectMapUI : MonoBehaviour
     {
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
         if (tween)
+        {
+            tween.Stop();
             Destroy(tween);
+        }
         tween = gameObject.AddComponent<dfTweenFloat>();
         tween.Target = new dfComponentMemberInfo()
         {
@@ -108,7 +111,10 @@ public class GUIObjectMapUI : MonoBehaviour
     {
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
         if (tween)
+        {
+            tween.Stop();
             Destroy(tween);
+        }
         tween = gameObject.AddComponent<dfTweenFloat>();
         tween.Target = new dfComponentMemberInfo()
         {
@@ -126,8 +132,16 @@ public class GUIObjectMapUI : MonoBehaviour
     {
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
         if (tween)
+        {
+            tween.Stop();
             Destroy(tween);
+        }
         ViewportScrollState = 0;
+        _menuButton.Click += OnOpen;
+        _menuPanel.Click -= OnClose;
+        TouchInput.EnableBy(this);
+
+        Debug.Log("ScrollState: "+ViewportScrollState);
     }
 
     public void AddMarker(TouchObject[] touches)

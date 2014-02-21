@@ -189,7 +189,6 @@ namespace GooglePlayGames.Android {
                 //{
                 //    mToken = JavaUtil.GetGmsClass("auth.GoogleAuthUtil").CallStatic<string>("getToken", GetActivity(), mAccountName, "audience:server:client_id:1002351733701");
                 //});
-
                 AndroidJavaClass GoogleAuthPlugin = new AndroidJavaClass("de.mediadesign.gd1011.project4.GoogleAuthPlugin");
                 GoogleAuthPlugin.CallStatic("requestToken", GetActivity(), mAccountName,
                     "audience:server:client_id:1002351733701-ppn9cqsqmd31mjrnd02v80bob7c43m10.apps.googleusercontent.com");
