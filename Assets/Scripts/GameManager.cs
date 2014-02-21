@@ -433,7 +433,12 @@ public class GameManager : MonoBehaviour
     public void CheckStartFight()
     {
         Fight fight = Player.CurFight;
-        if (fight == null || fight.Finished) return;
+        if (fight == null || fight.Finished)
+        {
+            if(_map)
+                _map.HideFightInvation();
+            return;
+        }
         if (!fight.Started)
         {
             Player FighterA=GetPlayer(fight.FighterA.PId);
@@ -444,30 +449,14 @@ public class GameManager : MonoBehaviour
             if (!fight.FighterA.challenger)
             {
                 lastPlayerRequest = FighterB.PlayerID;
-                _view.ShowMessage();
+                if (_map)
+                    _map.ShowFightInvation();
             }                
             return;
         }
 
         if (Player.Fighting && CurrentGameMode != GameMode.Fight)
             SwitchGameMode(GameMode.Fight);
-    }
-
-    public void ClickMessage()
-    {
-        Fight fight = Player.CurFight;
-        if (fight == null || fight.Finished) return;
-        if (!fight.Started)
-        {         
-            if (challengePopup == null || challengePopup.gameObject == null)
-            {
-                Player FighterA = GetPlayer(fight.FighterA.PId);
-                Player FighterB = GetPlayer(fight.FighterB.PId);
-                if (FighterA == null || FighterB == null) return;
-                challengePopup = _view.AddPopup();
-                challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterB.Name, "decline", "accept").gameObject);
-            }
-        }
     }
 
 	public void CreateCreature(int element, Action<bool, string> callback)
@@ -1325,6 +1314,24 @@ public class GameManager : MonoBehaviour
         _view.ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
         _view.RemoveMaxScreen();
         StartOAuth();
+    }
+
+
+    public void GUIClickMessage()
+    {
+        Fight fight = Player.CurFight;
+        if (fight == null || fight.Finished) return;
+        if (!fight.Started)
+        {
+            if (challengePopup == null || challengePopup.gameObject == null)
+            {
+                Player FighterA = GetPlayer(fight.FighterA.PId);
+                Player FighterB = GetPlayer(fight.FighterB.PId);
+                if (FighterA == null || FighterB == null) return;
+                challengePopup = _view.AddPopup();
+                challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterB.Name, "decline", "accept").gameObject);
+            }
+        }
     }
 
     #endregion

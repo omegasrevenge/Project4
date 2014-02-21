@@ -211,4 +211,15 @@ public class Map : SceneRoot3D
         View.CloseMenuImmediate();
     }
 
+    public void ShowFightInvation()
+    {
+        if(View)
+            View.ShowFightInvation();
+    }
+
+    public void HideFightInvation()
+    {
+        if (View)
+            View.HideFightInvation();
+    }
 }

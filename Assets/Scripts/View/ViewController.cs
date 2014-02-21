@@ -161,11 +161,6 @@ public class ViewController : MonoBehaviour
         return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", result);
     }
 
-    public void ShowMessage()
-    {
-        GameObject.Find("panel_message").GetComponent<dfPanel>().Show();
-    }
-
     public void ShowLoadingScreen(string text)
     {
         if (_loadingScreen == null)

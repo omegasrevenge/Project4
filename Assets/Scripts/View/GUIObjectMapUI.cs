@@ -5,6 +5,7 @@ public class GUIObjectMapUI : MonoBehaviour
 {
     private const string Prefab = "GUI/panel_mapui";
     private const string MenuPanelStr = "panel_menu";
+    private const string MessagePanelStr = "panel_message";
     private const string RootPanelStr = "panel_root";
     private const string MenuButtonStr = "panel_menu_button";
     public const float MaxViewportScroll = 0.78f;
@@ -16,6 +17,7 @@ public class GUIObjectMapUI : MonoBehaviour
     private MovableGUIPanel _menuViewport;
     private MovableGUIPanel _guiViewport;
     private GUIObjectCreatureInfo _creatureInfo;
+    private GUIObjectMessage _fightInvation;
     private Map _root3D;
 
     [SerializeField]
@@ -39,36 +41,27 @@ public class GUIObjectMapUI : MonoBehaviour
         _menuViewport = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag).transform.Find(RootPanelStr).GetComponent<MovableGUIPanel>();
         _guiViewport = GetComponent<MovableGUIPanel>();
         ViewportScrollState = 0f;
-
-        _menuPanel = transform.FindChild(MenuPanelStr).GetComponent<dfControl>();
+        _fightInvation = transform.Find(MessagePanelStr).GetComponent<GUIObjectMessage>();
+        _menuPanel = transform.Find(MenuPanelStr).GetComponent<dfControl>();
         _menuPanel.BringToFront();
-        _menuButton = _menuPanel.transform.FindChild(MenuButtonStr).GetComponent<dfControl>();
+        _menuButton = _menuPanel.transform.Find(MenuButtonStr).GetComponent<dfControl>();
         _menuButton.Click += OnOpen;
 
 
     }
 
-    public void OnOpen(dfControl control, dfMouseEventArgs args)
+    private void OnOpen(dfControl control, dfMouseEventArgs args)
     {
         if (args.Used) return;
         args.Use();
-        TouchInput.OnClearAll();
-        ViewportScrollState = 0.001f;
         OpenMenu();
-        _menuButton.Click -= OnOpen;
-        _menuPanel.BringToFront();
-        _menuPanel.Click += OnClose;
-        TouchInput.DisableBy(this);
     }
 
-    public void OnClose(dfControl control, dfMouseEventArgs args)
+    private void OnClose(dfControl control, dfMouseEventArgs args)
     {
         if (args.Used) return;
         args.Use();
         CloseMenu();
-        _menuButton.Click += OnOpen;
-        _menuPanel.Click -= OnClose;
-        TouchInput.EnableBy(this);
     }
 
     public float ViewportScrollState
@@ -89,6 +82,13 @@ public class GUIObjectMapUI : MonoBehaviour
 
     public void OpenMenu()
     {
+        TouchInput.OnClearAll();
+        Debug.Log("sort back button to front");
+        _menuButton.Click -= OnOpen;
+        _menuPanel.Click += OnClose;
+        _menuPanel.BringToFront();
+        TouchInput.DisableBy(this);
+
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
         if (tween)
         {
@@ -110,6 +110,10 @@ public class GUIObjectMapUI : MonoBehaviour
 
     public void CloseMenu()
     {
+        _menuButton.Click += OnOpen;
+        _menuPanel.Click -= OnClose;
+        TouchInput.EnableBy(this);
+
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
         if (tween)
         {
@@ -138,6 +142,7 @@ public class GUIObjectMapUI : MonoBehaviour
             Destroy(tween);
         }
         ViewportScrollState = 0;
+
         _menuButton.Click += OnOpen;
         _menuPanel.Click -= OnClose;
         TouchInput.EnableBy(this);
@@ -158,5 +163,17 @@ public class GUIObjectMapUI : MonoBehaviour
         else
             _creatureInfo.SetCreature(creature);
 
+    }
+
+    public void ShowFightInvation()
+    {
+        if (_fightInvation)
+            _fightInvation.Show();
+    }
+
+    public void HideFightInvation()
+    {
+        if (_fightInvation)
+            _fightInvation.Hide();
     }
 }
