@@ -127,15 +127,18 @@ public class GUIObjectCrafting : MonoBehaviour
 					exchangeAmount = (int)Math.Pow(3, diff);
 				}
 				GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, exchangeAmount, GameManager.ExchangeMode.Up, diff);
+				_focusedComponent = null;
 				return;
 			}
 
 			diff = (int) curResourceLevel - craftingLvl;
 			GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 1, GameManager.ExchangeMode.Down, diff);
+			_focusedComponent = null;
 			return;
 		}
 
 		GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 10, GameManager.ExchangeMode.Cricle, 0);
+		_focusedComponent = null;
 	}
 
 	public void ShowCraftingOptions(string spriteName)
