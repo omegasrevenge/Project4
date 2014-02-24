@@ -49,6 +49,11 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         GUIObjectResourceResult obj = cntrl.GetComponent<GUIObjectResourceResult>();
         obj._root = root;
         obj.Button = textKeyButton;
+        // VENGEA - NCE
+        Color bgcolor = Color.black;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
+        obj._button.NormalBackgroundColor = bgcolor;
+
         obj._scrollpanel = obj.transform.Find(ScrollPanelStr).GetComponent<dfScrollPanel>();
 
         foreach (FarmResult.Driod driod in result.GetDriods())

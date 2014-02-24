@@ -19,6 +19,7 @@ public class GUIObjectMarker : MonoBehaviour
     private const float Padding = 11f;
     private const float PanelHeight = 128f;
 
+    public dfSprite background;
 
     private dfControl _control;
     private dfControl _root;
@@ -40,6 +41,11 @@ public class GUIObjectMarker : MonoBehaviour
 
     private void Init(dfControl root, dfControl cntrl, ObjectOnMap[] objects)
     {
+        // VENGEA - NCE
+        Color bgcolor = Color.black;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
+        background.Color = bgcolor;
+        
         SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         _scale = cntrl.transform.localScale;
         _scale *= (Screen.height / ReferenceHeight);

@@ -8,6 +8,8 @@ public class GUIObjectPopup : MonoBehaviour
     private const string PopupStr = "sprite_popup";
     private const string MessageSound = "Oc_Audio_SFX_Vengea_Message_IRIS_LAYOUT";
 
+    [SerializeField] public dfSprite popup;
+    
     private GameObject _content;
     private dfControl _control;
     private dfControl _root;
@@ -36,6 +38,10 @@ public class GUIObjectPopup : MonoBehaviour
         GUIObjectPopup obj = cntrl.GetComponent<GUIObjectPopup>();
         obj._root = root;
         obj._control = cntrl;
+
+        Color bgcolor = Color.black;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
+        obj.popup.Color = bgcolor;
         return obj;
     }
 
