@@ -39,9 +39,8 @@ public class GUIObjectPopup : MonoBehaviour
         obj._root = root;
         obj._control = cntrl;
 
-        Color bgcolor = Color.black;
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
-        obj.popup.Color = bgcolor;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE) 
+            obj.popup.Color = new Color(0.2f, 0.2f, 0.2f);
         return obj;
     }
 

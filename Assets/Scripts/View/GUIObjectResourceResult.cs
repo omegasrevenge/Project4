@@ -50,9 +50,11 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         obj._root = root;
         obj.Button = textKeyButton;
         // VENGEA - NCE
-        Color bgcolor = Color.black;
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
-        obj._button.NormalBackgroundColor = bgcolor;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+        {
+            obj._button.NormalBackgroundColor = new Color(0.2f, 0.2f, 0.2f);
+            obj._button.PressedBackgroundColor = new Color(0.2f, 0.2f, 0.2f);
+        }
 
         obj._scrollpanel = obj.transform.Find(ScrollPanelStr).GetComponent<dfScrollPanel>();
 

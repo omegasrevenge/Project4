@@ -674,10 +674,7 @@ public class GameManager : MonoBehaviour
 
     public void SendBasePosition()
     {
-        if (!LoggedIn)
-        {
-            return;
-        }
+        if (!LoggedIn) return;
 
         Player.BaseTime = GetServerTime();
         StartCoroutine(CSendBasePosition());
@@ -693,6 +690,7 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
         Player.BasePosition = pos;
+        BaseOnMap.Singleton.SetProjPos();
     }
 
     public void PoiFarm(POI poi)

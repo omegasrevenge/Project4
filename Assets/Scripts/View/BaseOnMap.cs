@@ -6,6 +6,7 @@ public class BaseOnMap : ObjectOnMap
     private const string Prefab = "POIs/base";
     private const string InRangeStr = "InRange";
 
+    private static BaseOnMap _instance;
     private Animator _animator;
     private MapGrid _grid;
     private bool _inRange;
@@ -25,6 +26,16 @@ public class BaseOnMap : ObjectOnMap
         }
     }
 
+    public static BaseOnMap Singleton
+    {
+        get
+        {
+            if (_instance != null)
+                return _instance;
+            return null;
+        }
+    }
+
     public static BaseOnMap Create(MapGrid grid, Transform root)
     {
         BaseOnMap baseOnMap;
@@ -37,6 +48,7 @@ public class BaseOnMap : ObjectOnMap
         baseOnMap._animator = baseOnMap.GetComponent<Animator>();
         baseOnMap.Enabled = false;
         baseOnMap.SetPositionOnMap();
+        _instance = baseOnMap;
         return baseOnMap;
     }
 
@@ -45,18 +57,21 @@ public class BaseOnMap : ObjectOnMap
         SetPositionOnMap();
     }
 
+    public void SetProjPos()
+    {
+        ProjPos = MapUtils.GeographicToProjection(GameManager.Singleton.Player.BasePosition, _grid.ZoomLevel);
+    }
+
     private void SetPositionOnMap()
     {
         Vector2 pos = _grid.GetPosition(ProjPos);
         transform.localPosition = new Vector3(pos.x, 0.001f, pos.y);
     }
 
-
     protected override void EnterRange()
     {
         base.EnterRange();
         _animator.SetBool(InRangeStr, InRange);
-
     }
 
     protected override void LeaveRange()

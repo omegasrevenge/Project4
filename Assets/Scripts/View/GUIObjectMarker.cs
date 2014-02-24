@@ -42,9 +42,8 @@ public class GUIObjectMarker : MonoBehaviour
     private void Init(dfControl root, dfControl cntrl, ObjectOnMap[] objects)
     {
         // VENGEA - NCE
-        Color bgcolor = Color.black;
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA) bgcolor = Color.white;
-        background.Color = bgcolor;
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE) 
+            background.Color = new Color(0.2f, 0.2f, 0.2f);
         
         SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         _scale = cntrl.transform.localScale;
@@ -70,8 +69,7 @@ public class GUIObjectMarker : MonoBehaviour
             if (trans)
             {
                 _cooldowns[i] = trans.GetComponent<PoiMarkerCooldown>();
-            }
-            
+            }         
         }
         _objectsOnMap = objects;
 
