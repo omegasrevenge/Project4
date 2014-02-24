@@ -53,9 +53,8 @@ public class ScratchController : ActorControlls
 
     public void SetChildrenActive(bool value)
     {
-        if (transform.GetChild(0) != null 
-            && transform.GetChild(0).gameObject.activeSelf == value) 
-            return;
+        if (transform.GetChild(0) == null) return;
+        if(transform.GetChild(0).gameObject.activeSelf == value) return;
         for (int i = 0; i < transform.childCount; i++)
             transform.GetChild(i).gameObject.SetActive(value);
     }

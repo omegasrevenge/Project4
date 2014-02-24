@@ -23,6 +23,8 @@ public class FightRoundResult:MonoBehaviour
     public bool HotB = false;
     public bool EVDA = false;
     public bool EVDB = false;
+    public GameManager.ResourceElement DefaultAttackElement1;
+    public GameManager.ResourceElement DefaultAttackElement2;
 
     void Update()
     {

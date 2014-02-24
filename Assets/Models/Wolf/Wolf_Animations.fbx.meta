@@ -3316,7 +3316,7 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d3a171a5307ac114e875030b53543585,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 95d7bd49ce1f7aa4f8c9837475151e6b,
     type: 3}
   animationType: 2
   additionalBone: 0

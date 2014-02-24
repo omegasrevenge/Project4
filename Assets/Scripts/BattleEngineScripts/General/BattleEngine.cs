@@ -6,8 +6,10 @@ public class BattleEngine : SceneRoot3D
     //########## public #########
     public enum TurnState { None, Wait, Execute, Hit }
 
-    public string TestAnimation = "atk_var_3";
-    public string TestSkillName = "Fire_Bite_Skill_Wolf";
+    public string TestAnimation = "";
+    public string TestSkillName = "";
+
+    public bool UseTestEntries = false;
 
     public ActorControlls Actor;
     public FightRoundResult.Player CurrentPlayer;
@@ -25,10 +27,13 @@ public class BattleEngine : SceneRoot3D
 
     public GameObject FriendlyCreature;
     public GameObject EnemyCreature;
+
+    public AudioSource BackgroundMusic;
     //########## public #########
 
     //########## static #########
     public static GameObject CurrentGameObject;
+    public static string SoundChannel = "Battle";
     //########## static #########
 
     //########## const #########
@@ -48,6 +53,7 @@ public class BattleEngine : SceneRoot3D
     private float _counter;
     private GameObject _gg;
     private bool _initialized = false;
+    private float _delay = 0f;
     //########## private #########
 
     //########## getter #########
@@ -149,6 +155,11 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
+        _delay = 5.3f;
+        BackgroundMusic = SoundController.PlaySound(
+            GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? 
+            "Music_Vengea_Fight_LAYOUT1" : "Oc_Audio_Music_NCE_Fight_V02", SoundChannel);
+        BackgroundMusic.loop = true;
         FightIsOverOnce = false;
         _counter = 0f;
         Turn = GameManager.Singleton.Player.CurFight.Round;
@@ -166,6 +177,12 @@ public class BattleEngine : SceneRoot3D
 
         if (!Fighting && !View.IndsArePlaying && GetTurnState == TurnState.Wait)
             enforceEnd();
+
+        if (_delay > 0f)
+        {
+            _delay -= Time.deltaTime;
+            return;
+        }
 
         if (CatchInProcess) return;
         updateIdleAnim();
@@ -254,11 +271,70 @@ public class BattleEngine : SceneRoot3D
         LastResult = Result;
         Turn = Result.Turn;
 
+        if (UseTestEntries)
+        {
+            CurCaster.GetComponent<MonsterAnimationController>().DoAnim(TestAnimation);
+            createSkillVisuals(TestSkillName);
+            return;
+        }
+
+        if (Result.SkillName.Equals("Default"))
+        {
+            string element = "";
+// ReSharper disable once ConditionalTernaryEqualBranch
+            string model = CurCaster.name.Contains("Wolf") ? "_Scratch_Skill_Wolf" : "_Scratch_Skill_Wolf"; //<<<<<////////////////////////////////////////////////////////////
+            int anim = 1;
+            switch (Result.DefaultAttackElement2)
+            {
+                case GameManager.ResourceElement.energy:
+                    anim = 2;
+                    break;
+                case GameManager.ResourceElement.fire:
+                    anim = 3;
+                    break;
+                case GameManager.ResourceElement.life:
+                    anim = 3;
+                    break;
+                case GameManager.ResourceElement.storm:
+                    anim = 2;
+                    break;
+                case GameManager.ResourceElement.water:
+                    anim = 2;
+                    break;
+            }
+            CurCaster.GetComponent<MonsterAnimationController>().DoAnim("atk_var_" + anim);
+            switch (Result.DefaultAttackElement1)
+            {
+                case GameManager.ResourceElement.energy:
+                    element = "Energy";
+                    break;
+                case GameManager.ResourceElement.fire:
+                    element = "Fire";
+                    break;
+                case GameManager.ResourceElement.life:
+                    element = "Life";
+                    break;
+                case GameManager.ResourceElement.storm:
+                    element = "Storm";
+                    break;
+                case GameManager.ResourceElement.water:
+                    element = "Water";
+                    break;
+            }
+            createSkillVisuals(element+model);
+            return;
+        }
+
         CurCaster.GetComponent<MonsterAnimationController>()
             .DoAnim(Extract(Result.SkillName, "Animation"));
 
         if (GameManager.Singleton.Techtree[Result.SkillName] == null)
-            Debug.LogWarning("Skill Name: " + Result.SkillName+ " <- doesn't seem to be initialized. Using "+TestSkillName+" instead.");
+        {
+            Debug.LogWarning("Skill Name: " + Result.SkillName + " <- doesn't seem to be initialized. Using Fire_Scratch_Skill_Wolf instead.");
+            CurCaster.GetComponent<MonsterAnimationController>().DoAnim("atk_var_1");
+            createSkillVisuals("Fire_Scratch_Skill_Wolf");
+            return;
+        }
 
         if (Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
@@ -271,10 +347,7 @@ public class BattleEngine : SceneRoot3D
 
     public string Extract(string skillName, string extractionMode)
     {
-        if (GameManager.Singleton.Techtree[skillName] != null)
-            return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
-
-        return extractionMode.Equals("Animation") ? TestAnimation : TestSkillName;
+        return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
     }
 
     private void createSkillVisuals(string objName)
@@ -400,6 +473,8 @@ public class BattleEngine : SceneRoot3D
 
     public void EndBattle()
     {
+        BackgroundMusic.Stop();
+        SoundController.RemoveChannel(SoundChannel);
         Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();

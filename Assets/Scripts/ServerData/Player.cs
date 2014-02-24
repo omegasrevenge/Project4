@@ -130,14 +130,15 @@ public class Player
 
         string[] lastResult = CurFight.LastResult.Split(' ');
 
-        if (lastResult.Length < 4) 
+        if (lastResult.Length < 6) 
             return newResult;
 
         newResult.SkillName = lastResult[0];
         newResult.Damage = Convert.ToInt32(lastResult[1]);
         newResult.DoT = Convert.ToInt32(lastResult[2]);
         newResult.HoT = Convert.ToInt32(lastResult[3]);
-
+        newResult.DefaultAttackElement1 = (GameManager.ResourceElement)Convert.ToInt32(lastResult[4]);
+        newResult.DefaultAttackElement2 = (GameManager.ResourceElement)Convert.ToInt32(lastResult[5]);
         return newResult;
     }
 }
