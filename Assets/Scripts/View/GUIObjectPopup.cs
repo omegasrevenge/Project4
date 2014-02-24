@@ -30,8 +30,9 @@ public class GUIObjectPopup : MonoBehaviour
     public static GUIObjectPopup Create(dfControl root)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
+        //cntrl.Size = cntrl.Parent.Size;
+        cntrl.Width = cntrl.Parent.Width*0.95f;
+        cntrl.RelativePosition = new Vector3(root.Width / 2 - cntrl.Width / 2, root.Height / 2 - cntrl.Height / 2);
         GUIObjectPopup obj = cntrl.GetComponent<GUIObjectPopup>();
         obj._root = root;
         obj._control = cntrl;

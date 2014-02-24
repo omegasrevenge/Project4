@@ -61,7 +61,7 @@ public class Creature
 
 		for (int i = 0; i < jsonSlots.Count; i++)
 	    {
-		    slots[i] = new Slot()
+            slots[i] = new Slot()
             {
                 energy = (int)jsonSlots[i]["Element0"],
                 fire = (int)jsonSlots[i]["Element1"],

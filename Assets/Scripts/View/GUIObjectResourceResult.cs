@@ -44,8 +44,8 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
     {
         SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
+        //cntrl.Size = cntrl.Parent.Size;
+        //cntrl.RelativePosition = Vector2.zero;
         GUIObjectResourceResult obj = cntrl.GetComponent<GUIObjectResourceResult>();
         obj._root = root;
         obj.Button = textKeyButton;
