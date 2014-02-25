@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f5964ee31076940ba004cb9e1dc986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 11400032}
+  _cooldowns: []
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
