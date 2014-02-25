@@ -53,25 +53,23 @@ public class BattleEngine : SceneRoot3D
     private float _counter;
     private GameObject _gg;
     private bool _initialized = false;
+<<<<<<< Updated upstream
     private float _delay = 0f;
+=======
+    private int lvl;
+>>>>>>> Stashed changes
     //########## private #########
 
     //########## getter #########
 
 	public bool Initialized
 	{
-		get
-		{
-			return (FriendlyCreature != null && EnemyCreature != null && _results != null);
-		}
+		get { return (FriendlyCreature != null && EnemyCreature != null && _results != null); }
 	}
 
     public GUIObjectBattleEngine View
     {
-        get
-        {
-            return _gui as GUIObjectBattleEngine;
-        }
+        get { return _gui as GUIObjectBattleEngine; }
     }
 
     public bool Fighting
@@ -95,10 +93,7 @@ public class BattleEngine : SceneRoot3D
 
     public List<FightRoundResult> Results
     {
-        get
-        {
-            return _results;
-        }
+        get { return _results; }
     }
 
     public FightRoundResult Result
@@ -129,18 +124,12 @@ public class BattleEngine : SceneRoot3D
 
     public GameObject CurTarget
     {
-        get
-        {
-            return CurrentPlayer == FightRoundResult.Player.A ? EnemyCreature : FriendlyCreature;
-        }
+        get { return CurrentPlayer == FightRoundResult.Player.A ? EnemyCreature : FriendlyCreature; }
     }
 
     public GameObject CurCaster
     {
-        get
-        {
-            return CurrentPlayer == FightRoundResult.Player.A ? FriendlyCreature : EnemyCreature;
-        }
+        get { return CurrentPlayer == FightRoundResult.Player.A ? FriendlyCreature : EnemyCreature; }
     }
 
     //########## getter ##################################################################
@@ -169,6 +158,7 @@ public class BattleEngine : SceneRoot3D
         InitCreatures(serverInfo);
         CurrentPlayer = serverInfo.FirstTurnIsPlayer;
         if (RenderSettings.fog) RenderSettings.fog = false;
+        lvl = GameManager.Singleton.Player.CurCreature.Level;
     }
 
     void Update()
@@ -473,8 +463,13 @@ public class BattleEngine : SceneRoot3D
 
     public void EndBattle()
     {
+<<<<<<< Updated upstream
         BackgroundMusic.Stop();
         SoundController.RemoveChannel(SoundChannel);
+=======
+        if (lvl != GameManager.Singleton.Player.CurCreature.Level)
+            GameManager.Singleton.LevelUp();
+>>>>>>> Stashed changes
         Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();

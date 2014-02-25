@@ -404,10 +404,11 @@ public class GameManager : MonoBehaviour
 	    CheckStartFight();
         if (callback != null)
             callback(true);
+    }
 
-
-        //♥♥♥♥ TESTING
-        //_view.AddPopup().AddToPopup(_view.AddLvlUp());
+    public void LevelUp()
+    {
+        _view.AddPopup().AddToPopup(_view.AddLvlUp());
     }
 
     public void ReadPlayerJSON(JSONObject jsonPlayer)
