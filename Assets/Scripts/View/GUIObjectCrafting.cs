@@ -25,16 +25,16 @@ public class GUIObjectCrafting : MonoBehaviour
 	private dfSprite _curElement;
 	private dfSprite _nextElement;
 	private dfSprite _focusedComponent;
+	private Player.Faction _curFaction;
 
-	private enum ResourceLevel { biod, driod_lvl0, driod_lvl1, driod_lvl2, driod_lvl3, driod_lvl4, driod_lvl5 };
-	
 	private List<dfLabel> counterLabels = new List<dfLabel>();
 	public List<dfSprite> recourceSprites = new List<dfSprite>();
+	private List<Color32> factionColors = new List<Color32>();
 
 	[SerializeField]
 	private GameManager.ResourceElement _curResourceElement = GameManager.ResourceElement.energy;
 	[SerializeField]
-	private ResourceLevel curResourceLevel = ResourceLevel.biod;
+	private GameManager.ResourceLevel curResourceLevel = GameManager.ResourceLevel.biod;
 
 	public bool UpdaetView = true;
 
@@ -42,7 +42,7 @@ public class GUIObjectCrafting : MonoBehaviour
 	{
 		for (int i = 0; i < recourceSprites.Count; i++)
 		{
-			recourceSprites[i].SpriteName = "" + SpriteNamePrefix + (ResourceLevel) i + "_" + _curResourceElement;
+			recourceSprites[i].SpriteName = "" + SpriteNamePrefix + (GameManager.ResourceLevel) i + "_" + _curResourceElement;
 		}
 		_nextElement.SpriteName = "" + NextElementPrefix + _curResourceElement;
 		_curElement.SpriteName = "" + CraftingElementPrefix + _curResourceElement;
@@ -118,7 +118,7 @@ public class GUIObjectCrafting : MonoBehaviour
 			{
 				diff = craftingLvl - (int) curResourceLevel;
 				int exchangeAmount;
-				if (curResourceLevel == ResourceLevel.biod)
+				if (curResourceLevel == GameManager.ResourceLevel.biod)
 				{
 					exchangeAmount = (int)Math.Pow(3, diff-1)*10;
 				}
@@ -152,7 +152,7 @@ public class GUIObjectCrafting : MonoBehaviour
 
 		switch (curResourceLevel)
 		{
-			case ResourceLevel.biod:
+			case GameManager.ResourceLevel.biod:
 			{
 				int curCount = GameManager.Singleton.Player.Resources[0, (int)_curResourceElement];
 				for (int i = 1; i <  recourceSprites.Count; i++)
@@ -210,7 +210,7 @@ public class GUIObjectCrafting : MonoBehaviour
 		_curResourceElement = (GameManager.ResourceElement)(((int)_curResourceElement - 1) == -1 ? 4 : ((int)_curResourceElement - 1));
 	}
 
-	private ResourceLevel GetResourceLevel(string spriteName)
+	private GameManager.ResourceLevel GetResourceLevel(string spriteName)
 	{
 		spriteName = spriteName.Remove(0, SpriteNamePrefix.Length);
 		int startNumber = spriteName.Length - _curResourceElement.ToString().Length;
@@ -219,16 +219,19 @@ public class GUIObjectCrafting : MonoBehaviour
 
 		for (int i = 0; i <= 6; i++)
 		{
-			if (spriteName.Equals("" + (ResourceLevel) i))
+			if (spriteName.Equals("" + (GameManager.ResourceLevel) i))
 			{
-				return (ResourceLevel) i;
+				return (GameManager.ResourceLevel) i;
 			}
 		}
-		return ResourceLevel.biod;
+		return GameManager.ResourceLevel.biod;
 	}
 
 	void Awake()
 	{
+		factionColors.Add(GameManager.Withe);
+		factionColors.Add(GameManager.Black);
+
 		_exitButton = transform.Find(ExitButtonStr).GetComponent<dfButton>();
 		_exitButton.Click +=
 				(control, @event) =>
@@ -244,16 +247,21 @@ public class GUIObjectCrafting : MonoBehaviour
 
 		for (int i = 0; i <= 6; i++)
 		{
-			counterLabels.Add(rootTransform.Find(LabelPrefix + ((ResourceLevel)i).ToString() + LabelSufix).GetComponent<dfLabel>());
+			counterLabels.Add(rootTransform.Find(LabelPrefix + ((GameManager.ResourceLevel)i).ToString() + LabelSufix).GetComponent<dfLabel>());
 		}
 
 		for (int i = 0; i <= 6; i++)
 		{
-			dfSprite curSprite = rootTransform.Find(SpritePrefix + ((ResourceLevel) i).ToString()).GetComponent<dfSprite>();
+			dfSprite curSprite = rootTransform.Find(SpritePrefix + ((GameManager.ResourceLevel) i).ToString()).GetComponent<dfSprite>();
 			HandleDrag.AddHandleDrag(this, curSprite.gameObject, curSprite, true);
 			recourceSprites.Add(curSprite);
 		}
 		HandleDrag.AddHandleDrag(this, _curElement.gameObject, _curElement, true, true);
+	}
+
+	private void SetColor(dfPanel guiComponent)
+	{
+		guiComponent.BackgroundColor = factionColors[(int)_curFaction];
 	}
 
 	public static GUIObjectCrafting Create(dfControl root)
@@ -262,6 +270,8 @@ public class GUIObjectCrafting : MonoBehaviour
         cntrl.Size = cntrl.Parent.Size;
         cntrl.RelativePosition = Vector2.zero;
 		GUIObjectCrafting obj = cntrl.GetComponent<GUIObjectCrafting>();
+		obj._curFaction = GameManager.Singleton.Player.CurrentFaction;
+		obj.SetColor((dfPanel)cntrl);
         return obj;
     }
 

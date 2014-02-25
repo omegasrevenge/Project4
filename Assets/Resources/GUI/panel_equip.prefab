@@ -2,16 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &100000
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: sprite_driod_lvl5
+  m_Name: sprite_bgblack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19,7 +19,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -28,7 +28,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500002}
   m_Layer: 8
-  m_Name: sprite_driod_lvl4
+  m_Name: panel_equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 65: {fileID: 6500004}
   m_Layer: 8
-  m_Name: sprite_driod_lvl3
+  m_Name: button_fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 65: {fileID: 6500006}
   m_Layer: 8
-  m_Name: sprite_driod_lvl2
+  m_Name: label_driod_lvl5_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 65: {fileID: 6500008}
   m_Layer: 8
-  m_Name: sprite_driod_lvl1
+  m_Name: label_driod_lvl4_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ GameObject:
   - 114: {fileID: 11400010}
   - 65: {fileID: 6500010}
   m_Layer: 8
-  m_Name: sprite_driod_lvl0
+  m_Name: label_driod_lvl0_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ GameObject:
   - 114: {fileID: 11400012}
   - 65: {fileID: 6500012}
   m_Layer: 8
-  m_Name: sprite_biod
+  m_Name: button_driod_lvl2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ GameObject:
   - 114: {fileID: 11400014}
   - 65: {fileID: 6500014}
   m_Layer: 8
-  m_Name: label_driod_lvl5_counter
+  m_Name: label_driod_lvl1_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - 114: {fileID: 11400016}
   - 65: {fileID: 6500016}
   m_Layer: 8
-  m_Name: label_driod_lvl4_counter
+  m_Name: button_driod_lvl0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   - 114: {fileID: 11400018}
   - 65: {fileID: 6500018}
   m_Layer: 8
-  m_Name: label_driod_lvl3_counter
+  m_Name: button_driod_lvl4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ GameObject:
   - 114: {fileID: 11400020}
   - 65: {fileID: 6500020}
   m_Layer: 8
-  m_Name: label_driod_lvl2_counter
+  m_Name: button_life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ GameObject:
   - 114: {fileID: 11400022}
   - 65: {fileID: 6500022}
   m_Layer: 8
-  m_Name: label_driod_lvl1_counter
+  m_Name: button_energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ GameObject:
   - 114: {fileID: 11400024}
   - 65: {fileID: 6500024}
   m_Layer: 8
-  m_Name: label_driod_lvl0_counter
+  m_Name: button_exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,7 +232,7 @@ GameObject:
   - 114: {fileID: 11400026}
   - 65: {fileID: 6500026}
   m_Layer: 8
-  m_Name: label_biod_counter
+  m_Name: label_driod_lvl2_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   - 114: {fileID: 11400028}
   - 65: {fileID: 6500028}
   m_Layer: 8
-  m_Name: sprite_nextElement
+  m_Name: panel_elementbg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ GameObject:
   - 114: {fileID: 11400030}
   - 65: {fileID: 6500030}
   m_Layer: 8
-  m_Name: arrow
+  m_Name: button_storm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100032
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -283,7 +283,7 @@ GameObject:
   - 114: {fileID: 11400032}
   - 65: {fileID: 6500032}
   m_Layer: 8
-  m_Name: exchangeArrows
+  m_Name: button_driod_lvl3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100034
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -300,7 +300,7 @@ GameObject:
   - 114: {fileID: 11400034}
   - 65: {fileID: 6500034}
   m_Layer: 8
-  m_Name: sprite_currentElement
+  m_Name: label_driod_lvl3_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,16 +308,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100036
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400036}
-  - 114: {fileID: 11400038}
+  - 114: {fileID: 11400036}
   - 65: {fileID: 6500036}
   m_Layer: 8
-  m_Name: box_crafting
+  m_Name: button_driod_lvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,17 +325,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100038
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400038}
-  - 114: {fileID: 11400040}
+  - 114: {fileID: 11400038}
   - 65: {fileID: 6500038}
-  - 114: {fileID: 11400036}
   m_Layer: 8
-  m_Name: panel_crafting
+  m_Name: button_water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,16 +342,33 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100040
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400040}
-  - 114: {fileID: 11400042}
+  - 114: {fileID: 11400040}
   - 65: {fileID: 6500040}
   m_Layer: 8
-  m_Name: button_exit
+  m_Name: button_driod_lvl5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400042}
+  - 114: {fileID: 11400042}
+  - 65: {fileID: 6500042}
+  m_Layer: 8
+  m_Name: box_equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,10 +381,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .360939026, y: -.393745422, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400002}
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -376,10 +392,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .379684448, y: -.6875, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400036}
+  m_Children:
+  - {fileID: 400042}
+  - {fileID: 400000}
+  m_Father: {fileID: 0}
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -387,10 +405,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .393745422, y: -.954689026, z: 0}
+  m_LocalPosition: {x: .203125, y: -.0390625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -398,10 +416,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .409370422, y: -1.203125, z: 0}
+  m_LocalPosition: {x: .7421875, y: -.870307922, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -409,10 +427,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .420310974, y: -1.421875, z: 0}
+  m_LocalPosition: {x: .267189026, y: -.870307922, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400010
 Transform:
   m_ObjectHideFlags: 1
@@ -420,10 +438,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .432807922, y: -1.62187195, z: 0}
+  m_LocalPosition: {x: .267189026, y: -.384376526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400012
 Transform:
   m_ObjectHideFlags: 1
@@ -431,10 +449,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .467185974, y: -1.80937195, z: 0}
+  m_LocalPosition: {x: .03125, y: -.478126526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400014
 Transform:
   m_ObjectHideFlags: 1
@@ -442,10 +460,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .660934448, y: -.590621948, z: 0}
+  m_LocalPosition: {x: .7421875, y: -.384376526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400016
 Transform:
   m_ObjectHideFlags: 1
@@ -453,10 +471,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .646873474, y: -.857810974, z: 0}
+  m_LocalPosition: {x: .03125, y: -.234375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400018
 Transform:
   m_ObjectHideFlags: 1
@@ -464,10 +482,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .6328125, y: -1.09999847, z: 0}
+  m_LocalPosition: {x: .03125, y: -.723434448, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400020
 Transform:
   m_ObjectHideFlags: 1
@@ -475,10 +493,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .620307922, y: -1.32343292, z: 0}
+  m_LocalPosition: {x: .53125, y: -.0390625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400022
 Transform:
   m_ObjectHideFlags: 1
@@ -486,10 +504,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .609375, y: -1.52500153, z: 0}
+  m_LocalPosition: {x: .0390625, y: -.0390625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400024
 Transform:
   m_ObjectHideFlags: 1
@@ -497,10 +515,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .6015625, y: -1.70937347, z: 0}
+  m_LocalPosition: {x: .893745422, y: -.03125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400026
 Transform:
   m_ObjectHideFlags: 1
@@ -508,10 +526,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .59375, y: -1.87968445, z: 0}
+  m_LocalPosition: {x: .267189026, y: -.628120422, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
@@ -519,10 +537,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .887496948, y: -1.76874542, z: 0}
+  m_LocalPosition: {x: .03125, y: -.03125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400030
 Transform:
   m_ObjectHideFlags: 1
@@ -530,10 +548,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .768745422, y: -1.83124542, z: 0}
+  m_LocalPosition: {x: .3671875, y: -.0390625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400036}
+  m_Father: {fileID: 400042}
 --- !u!4 &400032
 Transform:
   m_ObjectHideFlags: 1
@@ -541,10 +559,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .1953125, y: -.40625, z: 0}
+  m_LocalPosition: {x: .5078125, y: -.478126526, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400038}
+  m_Father: {fileID: 400042}
 --- !u!4 &400034
 Transform:
   m_ObjectHideFlags: 1
@@ -552,10 +570,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .3828125, y: -.0640640259, z: 0}
+  m_LocalPosition: {x: .7421875, y: -.628120422, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400038}
+  m_Father: {fileID: 400042}
 --- !u!4 &400036
 Transform:
   m_ObjectHideFlags: 1
@@ -563,26 +581,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .5078125, y: -.234375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400030}
-  - {fileID: 400026}
-  - {fileID: 400024}
-  - {fileID: 400022}
-  - {fileID: 400020}
-  - {fileID: 400018}
-  - {fileID: 400016}
-  - {fileID: 400014}
-  - {fileID: 400012}
-  - {fileID: 400010}
-  - {fileID: 400008}
-  - {fileID: 400006}
-  - {fileID: 400004}
-  - {fileID: 400002}
-  - {fileID: 400000}
-  - {fileID: 400028}
-  m_Father: {fileID: 400038}
+  m_Children: []
+  m_Father: {fileID: 400042}
 --- !u!4 &400038
 Transform:
   m_ObjectHideFlags: 1
@@ -590,14 +592,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .6953125, y: -.0390625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400036}
-  - {fileID: 400040}
-  - {fileID: 400032}
-  - {fileID: 400034}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 400042}
 --- !u!4 &400040
 Transform:
   m_ObjectHideFlags: 1
@@ -605,10 +603,40 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .993751526, y: -.0484390259, z: 0}
+  m_LocalPosition: {x: .5078125, y: -.723434448, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400038}
+  m_Father: {fileID: 400042}
+--- !u!4 &400042
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0546875, y: -.546875, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400016}
+  - {fileID: 400036}
+  - {fileID: 400012}
+  - {fileID: 400032}
+  - {fileID: 400018}
+  - {fileID: 400040}
+  - {fileID: 400022}
+  - {fileID: 400024}
+  - {fileID: 400004}
+  - {fileID: 400020}
+  - {fileID: 400030}
+  - {fileID: 400038}
+  - {fileID: 400010}
+  - {fileID: 400014}
+  - {fileID: 400026}
+  - {fileID: 400034}
+  - {fileID: 400008}
+  - {fileID: 400006}
+  - {fileID: 400028}
+  m_Father: {fileID: 400002}
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -619,8 +647,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .3515625, y: .268750012, z: .00100000005}
-  m_Center: {x: .17578125, y: -.134375006, z: 0}
+  m_Size: {x: 1.125, y: 2, z: .00100000005}
+  m_Center: {x: .5625, y: -1, z: 0}
 --- !u!65 &6500002
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -631,8 +659,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .315625012, y: .2421875, z: .00100000005}
-  m_Center: {x: .157812506, y: -.12109375, z: 0}
+  m_Size: {x: 1.125, y: 2, z: .00100000005}
+  m_Center: {x: .5625, y: -1, z: 0}
 --- !u!65 &6500004
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -643,8 +671,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .284375012, y: .217187509, z: .00100000005}
-  m_Center: {x: .142187506, y: -.108593754, z: 0}
+  m_Size: {x: .15625, y: .15625, z: .00100000005}
+  m_Center: {x: .078125, y: -.078125, z: 0}
 --- !u!65 &6500006
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -655,8 +683,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .256249994, y: .193750009, z: .00100000005}
-  m_Center: {x: .128124997, y: -.0968750045, z: 0}
+  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
+  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
 --- !u!65 &6500008
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -667,8 +695,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .231250003, y: .176562503, z: .00100000005}
-  m_Center: {x: .115625001, y: -.0882812515, z: 0}
+  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
+  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
 --- !u!65 &6500010
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -679,8 +707,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .207812503, y: .159374997, z: .00100000005}
-  m_Center: {x: .103906251, y: -.0796874985, z: 0}
+  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
+  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
 --- !u!65 &6500012
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -691,8 +719,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .142187506, y: .142187506, z: .00100000005}
-  m_Center: {x: .071093753, y: -.071093753, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
 --- !u!65 &6500014
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -715,8 +743,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
-  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
 --- !u!65 &6500018
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -727,8 +755,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
-  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
 --- !u!65 &6500020
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -739,8 +767,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
-  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
+  m_Size: {x: .15625, y: .15625, z: .00100000005}
+  m_Center: {x: .078125, y: -.078125, z: 0}
 --- !u!65 &6500022
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -751,8 +779,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .167187497, y: .0531250015, z: .00100000005}
-  m_Center: {x: .0835937485, y: -.0265625007, z: 0}
+  m_Size: {x: .15625, y: .15625, z: .00100000005}
+  m_Center: {x: .078125, y: -.078125, z: 0}
 --- !u!65 &6500024
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -763,8 +791,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
-  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
+  m_Size: {x: .0953124985, y: .0953124985, z: .00100000005}
+  m_Center: {x: .0476562493, y: -.0476562493, z: 0}
 --- !u!65 &6500026
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -787,8 +815,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .193750009, y: .193750009, z: .00100000005}
-  m_Center: {x: .0968750045, y: -.0968750045, z: 0}
+  m_Size: {x: .828125, y: .171875, z: .00100000005}
+  m_Center: {x: .4140625, y: -.0859375, z: 0}
 --- !u!65 &6500030
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -799,8 +827,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .1015625, y: .0734375045, z: .00100000005}
-  m_Center: {x: .05078125, y: -.0367187522, z: 0}
+  m_Size: {x: .15625, y: .15625, z: .00100000005}
+  m_Center: {x: .078125, y: -.078125, z: 0}
 --- !u!65 &6500032
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -811,8 +839,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .107812501, y: 1.5546875, z: .00100000005}
-  m_Center: {x: .0539062507, y: -.77734375, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
 --- !u!65 &6500034
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -823,8 +851,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .3046875, y: .306250006, z: .00100000005}
-  m_Center: {x: .15234375, y: -.153125003, z: 0}
+  m_Size: {x: .167187497, y: .0718749985, z: .00100000005}
+  m_Center: {x: .0835937485, y: -.0359374993, z: 0}
 --- !u!65 &6500036
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -835,8 +863,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.125, y: 2, z: .00100000005}
-  m_Center: {x: .5625, y: -1, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
 --- !u!65 &6500038
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -847,8 +875,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.125, y: 2, z: .00100000005}
-  m_Center: {x: .5625, y: -1, z: 0}
+  m_Size: {x: .15625, y: .15625, z: .00100000005}
+  m_Center: {x: .078125, y: -.078125, z: 0}
 --- !u!65 &6500040
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -859,8 +887,20 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .0953124985, y: .0953124985, z: .00100000005}
-  m_Center: {x: .0476562493, y: -.0476562493, z: 0}
+  m_Size: {x: .290625006, y: .223437503, z: .00100000005}
+  m_Center: {x: .145312503, y: -.111718751, z: 0}
+--- !u!65 &6500042
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.015625, y: .9609375, z: .00100000005}
+  m_Center: {x: .5078125, y: -.48046875, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -869,41 +909,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Script: {fileID: 11500000, guid: a89bcc79f0282bd408fde445bb1b05a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 783
+  anchorStyle: 271
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 15
+  zindex: 0
   color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 3623878656
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 225, y: 172}
+  size: {x: 720, y: 1280}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 783
+    anchorStyle: 271
     margins:
-      left: .321278214
-      top: .197189331
-      right: .633778214
-      bottom: .331564337
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400000}
-  renderOrder: 85
+  renderOrder: 69
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl5_energy
+  atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
+  spriteName: bg
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -916,45 +956,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 783
+  anchorStyle: 1295
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 14
+  zindex: 2
   color:
     serializedVersion: 2
     rgba: 4294967295
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 202, y: 155}
+  size: {x: 720, y: 1280}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 783
+    anchorStyle: 1295
     margins:
-      left: .337944865
-      top: .344064325
-      right: .618500412
-      bottom: .465158075
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400002}
-  renderOrder: 84
+  renderOrder: 68
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl4_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
+  atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
+  backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -963,101 +1007,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 13
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 182, y: 139}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .350444883
-      top: .477612317
-      right: .603222668
-      bottom: .586206079
-    owner: {fileID: 11400004}
-  renderOrder: 83
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl3_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 12
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 164, y: 124}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .363812923
-      top: .601336658
-      right: .591590703
-      bottom: .69821167
-    owner: {fileID: 11400006}
-  renderOrder: 82
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl2_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anchorStyle: 783
@@ -1073,7 +1023,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 148, y: 113}
+  size: {x: 100, y: 100}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -1082,199 +1032,74 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .374153644
-      top: .710797131
-      right: .579709172
-      bottom: .799078345
-    owner: {fileID: 11400008}
-  renderOrder: 81
+      left: .19942908
+      top: .0400470011
+      right: .353275239
+      bottom: .202648625
+    owner: {fileID: 11400004}
+  renderOrder: 82
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl1_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 10
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 133, y: 102}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .38525933
-      top: .810794055
-      right: .569981575
-      bottom: .890481591
-    owner: {fileID: 11400010}
-  renderOrder: 80
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_driod_lvl0_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 9
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 91, y: 91}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .414610445
-      top: .904763818
-      right: .540999353
-      bottom: .975857556
-    owner: {fileID: 11400012}
-  renderOrder: 79
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_biod_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4281874488
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 107, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .587049723
-      top: .295642078
-      right: .735660791
-      bottom: .331579596
-    owner: {fileID: 11400014}
-  renderOrder: 70
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
-  backgroundSprite: crafting_counterlabel_single
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  autoSize: 0
-  autoHeight: 0
-  wordWrap: 0
-  text: 10000
-  bottomColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  align: 2
+  backgroundSprite: crafting_element_fire
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
   vertAlign: 1
-  textScale: 1.875
-  textScaleMode: 1
-  charSpacing: 0
-  colorizeSymbols: 0
-  processMarkup: 0
-  outline: 0
-  outlineWidth: 1
-  enableGradient: 0
-  outlineColor:
+  normalColor:
     serializedVersion: 2
-    rgba: 4278190080
-  shadow: 0
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
   shadowColor:
     serializedVersion: 2
     rgba: 4278190080
   shadowOffset: {x: 1, y: -1}
-  padding:
-    m_Left: 0
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  tabSize: 48
-  tabStops: 
---- !u!114 &11400016
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100016}
+  m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
@@ -1302,327 +1127,11 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .574549675
-      top: .429025263
-      right: .723160803
-      bottom: .46496278
-    owner: {fileID: 11400016}
-  renderOrder: 71
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
-  backgroundSprite: crafting_counterlabel_single
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  autoSize: 0
-  autoHeight: 0
-  wordWrap: 0
-  text: 10000
-  bottomColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  align: 2
-  vertAlign: 1
-  textScale: 1.875
-  textScaleMode: 1
-  charSpacing: 0
-  colorizeSymbols: 0
-  processMarkup: 0
-  outline: 0
-  outlineWidth: 1
-  enableGradient: 0
-  outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadow: 0
-  shadowColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadowOffset: {x: 1, y: -1}
-  padding:
-    m_Left: 0
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  tabSize: 48
-  tabStops: 
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 8
-  color:
-    serializedVersion: 2
-    rgba: 4281874488
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 107, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .562055111
-      top: .550256371
-      right: .710666239
-      bottom: .58619386
-    owner: {fileID: 11400018}
-  renderOrder: 78
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
-  backgroundSprite: crafting_counterlabel_single
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  autoSize: 0
-  autoHeight: 0
-  wordWrap: 0
-  text: 10000
-  bottomColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  align: 2
-  vertAlign: 1
-  textScale: 1.875
-  textScaleMode: 1
-  charSpacing: 0
-  colorizeSymbols: 0
-  processMarkup: 0
-  outline: 0
-  outlineWidth: 1
-  enableGradient: 0
-  outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadow: 0
-  shadowColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadowOffset: {x: 1, y: -1}
-  padding:
-    m_Left: 0
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  tabSize: 48
-  tabStops: 
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 5
-  color:
-    serializedVersion: 2
-    rgba: 4281874488
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 107, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .55094403
-      top: .661691308
-      right: .699555099
-      bottom: .697628796
-    owner: {fileID: 11400020}
-  renderOrder: 75
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
-  backgroundSprite: crafting_counterlabel_single
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  autoSize: 0
-  autoHeight: 0
-  wordWrap: 0
-  text: 10000
-  bottomColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  align: 2
-  vertAlign: 1
-  textScale: 1.875
-  textScaleMode: 1
-  charSpacing: 0
-  colorizeSymbols: 0
-  processMarkup: 0
-  outline: 0
-  outlineWidth: 1
-  enableGradient: 0
-  outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadow: 0
-  shadowColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadowOffset: {x: 1, y: -1}
-  padding:
-    m_Left: 0
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  tabSize: 48
-  tabStops: 
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 3
-  color:
-    serializedVersion: 2
-    rgba: 4281874488
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 107, y: 34}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .541221797
-      top: .762826562
-      right: .689832926
-      bottom: .789389014
-    owner: {fileID: 11400022}
-  renderOrder: 73
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
-  backgroundSprite: crafting_counterlabel_single
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  autoSize: 0
-  autoHeight: 0
-  wordWrap: 0
-  text: 10000
-  bottomColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  align: 2
-  vertAlign: 1
-  textScale: 1.875
-  textScaleMode: 1
-  charSpacing: 0
-  colorizeSymbols: 0
-  processMarkup: 0
-  outline: 0
-  outlineWidth: 1
-  enableGradient: 0
-  outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadow: 0
-  shadowColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadowOffset: {x: 1, y: -1}
-  padding:
-    m_Left: 0
-    m_Right: 5
-    m_Top: 0
-    m_Bottom: 0
-  tabSize: 48
-  tabStops: 
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4281874488
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 107, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .53427732
-      top: .854641736
-      right: .682888448
-      bottom: .890579224
-    owner: {fileID: 11400024}
+      left: .730769217
+      top: .905710101
+      right: .89538461
+      bottom: .980506837
+    owner: {fileID: 11400006}
   renderOrder: 72
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
@@ -1664,12 +1173,12 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
---- !u!114 &11400026
+--- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
+  m_GameObject: {fileID: 100008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
@@ -1681,7 +1190,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 4
+  zindex: 5
   color:
     serializedVersion: 2
     rgba: 4281874488
@@ -1697,12 +1206,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .527332902
-      top: .94014281
-      right: .67594403
-      bottom: .976080298
-    owner: {fileID: 11400026}
-  renderOrder: 74
+      left: .263076931
+      top: .905710101
+      right: .427692294
+      bottom: .980506837
+    owner: {fileID: 11400008}
+  renderOrder: 76
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
@@ -1743,15 +1252,458 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
---- !u!114 &11400028
+--- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100028}
+  m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4281874488
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 107, y: 46}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .263076931
+      top: .399460107
+      right: .427692294
+      bottom: .474256873
+    owner: {fileID: 11400010}
+  renderOrder: 71
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
+  backgroundSprite: crafting_counterlabel_single
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  autoSize: 0
+  autoHeight: 0
+  wordWrap: 0
+  text: 10000
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 2
+  vertAlign: 1
+  textScale: 1.875
+  textScaleMode: 1
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 5
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 16
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0309975967
+      top: .497541934
+      right: .317151457
+      bottom: .729487598
+    owner: {fileID: 11400012}
+  renderOrder: 87
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl2_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 2
+  color:
+    serializedVersion: 2
+    rgba: 4281874488
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 107, y: 46}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .730769217
+      top: .399460107
+      right: .89538461
+      bottom: .474256873
+    owner: {fileID: 11400014}
+  renderOrder: 73
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
+  backgroundSprite: crafting_counterlabel_single
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294901502
+  autoSize: 0
+  autoHeight: 0
+  wordWrap: 0
+  text: 10000
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 2
+  vertAlign: 1
+  textScale: 1.875
+  textScaleMode: 1
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 5
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 18
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0309975967
+      top: .244277179
+      right: .317151457
+      bottom: .476222873
+    owner: {fileID: 11400016}
+  renderOrder: 89
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl0_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 14
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0309975967
+      top: .752972543
+      right: .317151457
+      bottom: .984918237
+    owner: {fileID: 11400018}
+  renderOrder: 85
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl4_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anchorStyle: 783
@@ -1767,7 +1719,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 124, y: 124}
+  size: {x: 100, y: 100}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -1776,284 +1728,74 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .789404273
-      top: .884750366
-      right: .96162653
-      bottom: .981625378
-    owner: {fileID: 11400028}
-  renderOrder: 77
+      left: .523467541
+      top: .0400470011
+      right: .677313685
+      bottom: .202648625
+    owner: {fileID: 11400020}
+  renderOrder: 78
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_change_element_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400030
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 6
-  color:
+  backgroundSprite: crafting_element_life
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
     serializedVersion: 2
     rgba: 4294967295
-  disabledColor:
+  textColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 65, y: 47}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .683002412
-      top: .915850818
-      right: .773280144
-      bottom: .952569604
-    owner: {fileID: 11400030}
-  renderOrder: 76
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_arrow_change
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
+  hoverText:
     serializedVersion: 2
     rgba: 4294967295
-  disabledColor:
+  pressedText:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 69, y: 995}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .173291013
-      top: .203121945
-      right: .269124359
-      bottom: .98046571
-    owner: {fileID: 11400032}
-  renderOrder: 87
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_arrows_bg
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 1
-  color:
+  focusText:
     serializedVersion: 2
     rgba: 4294967295
-  disabledColor:
+  disabledText:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 195, y: 196}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: .340928823
-      top: .0320922844
-      right: .611762166
-      bottom: .185217291
-    owner: {fileID: 11400034}
-  renderOrder: 86
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  spriteName: crafting_element_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca8f068ba69234640b2a1acc76a70a0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recourceSprites: []
-  _curResourceElement: 0
-  curResourceLevel: 0
-  UpdaetView: 1
---- !u!114 &11400038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 783
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
+  hoverColor:
     serializedVersion: 2
     rgba: 4294967295
-  disabledColor:
+  pressedColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 720, y: 1280}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 783
-    margins:
-      left: 0
-      top: -0
-      right: 1
-      bottom: 1
-    owner: {fileID: 11400038}
-  renderOrder: 69
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  backgroundSprite: 
-  backgroundColor:
+  focusColor:
     serializedVersion: 2
     rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
   padding:
     m_Left: 0
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
---- !u!114 &11400040
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 1295
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 1
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 720, y: 1280}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 1295
-    margins:
-      left: 0
-      top: -0
-      right: 1
-      bottom: 1
-    owner: {fileID: 11400040}
-  renderOrder: 68
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
-  backgroundSprite: bg
-  backgroundColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
---- !u!114 &11400042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100040}
+  m_GameObject: {fileID: 100022}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
@@ -2065,7 +1807,102 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 3
+  zindex: 8
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 100, y: 100}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0378906243
+      top: .0400470011
+      right: .191736773
+      bottom: .202648625
+    owner: {fileID: 11400022}
+  renderOrder: 79
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_element_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 9
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -2081,12 +1918,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .883333325
-      top: .0242187493
-      right: .968055546
-      bottom: .0718749985
-    owner: {fileID: 11400042}
-  renderOrder: 88
+      left: .880006015
+      top: .032520324
+      right: .973852158
+      bottom: .131707311
+    owner: {fileID: 11400024}
+  renderOrder: 80
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
@@ -2143,6 +1980,741 @@ MonoBehaviour:
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
   clickWhenSpacePressed: 1
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 4
+  color:
+    serializedVersion: 2
+    rgba: 4281874488
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 107, y: 46}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .263076931
+      top: .653124988
+      right: .427692294
+      bottom: .727921724
+    owner: {fileID: 11400026}
+  renderOrder: 75
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
+  backgroundSprite: crafting_counterlabel_single
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  autoSize: 0
+  autoHeight: 0
+  wordWrap: 0
+  text: 10000
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 2
+  vertAlign: 1
+  textScale: 1.875
+  textScaleMode: 1
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 5
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 6
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 530, y: 110}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0307692308
+      top: .032520324
+      right: .846153855
+      bottom: .211382121
+    owner: {fileID: 11400028}
+  renderOrder: 77
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: button
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4291611852
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 10
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 100, y: 100}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .361929089
+      top: .0400470011
+      right: .515775263
+      bottom: .202648625
+    owner: {fileID: 11400030}
+  renderOrder: 81
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_element_storm
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 15
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .50000602
+      top: .497541934
+      right: .786159873
+      bottom: .729487598
+    owner: {fileID: 11400032}
+  renderOrder: 86
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl3_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 3
+  color:
+    serializedVersion: 2
+    rgba: 4281874488
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 107, y: 46}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .730769217
+      top: .653124988
+      right: .89538461
+      bottom: .727921724
+    owner: {fileID: 11400034}
+  renderOrder: 74
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
+  backgroundSprite: crafting_counterlabel_single
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  autoSize: 0
+  autoHeight: 0
+  wordWrap: 0
+  text: 10000
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 2
+  vertAlign: 1
+  textScale: 1.875
+  textScaleMode: 1
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 5
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
+--- !u!114 &11400036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 17
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .50000602
+      top: .244277179
+      right: .786159873
+      bottom: .476222873
+    owner: {fileID: 11400036}
+  renderOrder: 88
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl1_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 12
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 100, y: 100}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .683864176
+      top: .0400470011
+      right: .837710321
+      bottom: .202648625
+    owner: {fileID: 11400038}
+  renderOrder: 83
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_element_water
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 13
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 186, y: 143}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .50000602
+      top: .752972543
+      right: .786159873
+      bottom: .984918237
+    owner: {fileID: 11400040}
+  renderOrder: 84
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: crafting_driod_lvl5_energy
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: 
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 650, y: 615}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: .0486111119
+      top: .2734375
+      right: .951388896
+      bottom: .75390625
+    owner: {fileID: 11400042}
+  renderOrder: 70
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: 49ef7316fe6661d449ec7d034299dbf1, type: 2}
+  backgroundSprite: bg
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -2152,6 +2724,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 100038}
+  m_RootGameObject: {fileID: 100002}
   m_IsPrefabParent: 1
   m_IsExploded: 1

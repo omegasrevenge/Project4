@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public enum GameMode { Login, Map, Fight, Base };
     public enum ExchangeMode { Up, Down, Cricle };
     public enum ResourceElement { None = -1, energy, fire, storm, life, water };
+	public enum ResourceLevel { biod, driod_lvl0, driod_lvl1, driod_lvl2, driod_lvl3, driod_lvl4, driod_lvl5 };
+
+	public static readonly Color32 Black = new Color32(0, 0, 0, 255);
+	public static readonly Color32 Withe = new Color32(255, 255, 255, 255);
 
     public static string DontSaveTag = "DontSave";
 

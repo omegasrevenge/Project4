@@ -26,9 +26,4 @@ public class GUIObjectBaseUI : MonoBehaviour
 	{
 		GUIObjectCrafting.Create(_root);
 	}
-
-	public void AddCreatureLab()
-	{
-		
-	}
 }

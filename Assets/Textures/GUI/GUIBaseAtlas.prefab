@@ -40,11 +40,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ec64740458cba8a41bb34a4c87d03963, type: 2}
   items:
+  - name: Base_Interface_CraftingButton_nce
+    region:
+      serializedVersion: 2
+      x: .929199219
+      y: 0
+      width: .0419921875
+      height: .212890625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 86, y: 218}
+    textureGUID: 46b4390521a15b9468081cc881454944
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Base_Interface_CraftingButton_vengea
+    region:
+      serializedVersion: 2
+      x: .099609375
+      y: .215820312
+      width: .0419921875
+      height: .212890625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 86, y: 218}
+    textureGUID: bd072915d33578541b14139ac6491bd3
+    deleted: 0
+    texture: {fileID: 0}
   - name: bg
     region:
       serializedVersion: 2
-      x: .1640625
-      y: .678710938
+      x: .142578125
+      y: .328125
       width: .015625
       height: .03125
     border:
@@ -60,8 +94,8 @@ MonoBehaviour:
   - name: button
     region:
       serializedVersion: 2
-      x: .59765625
-      y: .5078125
+      x: .142578125
+      y: .361328125
       width: .015625
       height: .03125
     border:
@@ -72,6 +106,23 @@ MonoBehaviour:
     rotated: 0
     sizeInPixels: {x: 32, y: 32}
     textureGUID: 07fae6c0cc67a2546b9a38d940ce174c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: combat_panel_nce
+    region:
+      serializedVersion: 2
+      x: .299316406
+      y: 0
+      width: .298339844
+      height: .213867188
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 611, y: 219}
+    textureGUID: b1bd64827850f734cac714e37f91779c
     deleted: 0
     texture: {fileID: 0}
   - name: combat_panel_vengea
@@ -94,8 +145,8 @@ MonoBehaviour:
   - name: crafting_arrow_change
     region:
       serializedVersion: 2
-      x: .618652344
-      y: .924804688
+      x: .099609375
+      y: .767578125
       width: .0317382812
       height: .0458984375
     border:
@@ -111,7 +162,7 @@ MonoBehaviour:
   - name: crafting_arrows_bg
     region:
       serializedVersion: 2
-      x: .373535156
+      x: .672851562
       y: 0
       width: .0336914062
       height: .971679688
@@ -128,8 +179,8 @@ MonoBehaviour:
   - name: crafting_biod_energy
     region:
       serializedVersion: 2
-      x: .725097656
-      y: .1015625
+      x: .234375
+      y: .418945312
       width: .0444335938
       height: .0888671875
     border:
@@ -145,8 +196,8 @@ MonoBehaviour:
   - name: crafting_biod_fire
     region:
       serializedVersion: 2
-      x: .731445312
-      y: 0
+      x: .234375
+      y: .509765625
       width: .0444335938
       height: .0888671875
     border:
@@ -162,8 +213,8 @@ MonoBehaviour:
   - name: crafting_biod_life
     region:
       serializedVersion: 2
-      x: .663574219
-      y: .326171875
+      x: .234375
+      y: .600585938
       width: .0444335938
       height: .0888671875
     border:
@@ -179,8 +230,8 @@ MonoBehaviour:
   - name: crafting_biod_storm
     region:
       serializedVersion: 2
-      x: .663574219
-      y: .416992188
+      x: .238769531
+      y: .69140625
       width: .0444335938
       height: .0888671875
     border:
@@ -196,8 +247,8 @@ MonoBehaviour:
   - name: crafting_biod_water
     region:
       serializedVersion: 2
-      x: .669921875
-      y: .5078125
+      x: .279785156
+      y: .418945312
       width: .0444335938
       height: .0888671875
     border:
@@ -213,8 +264,8 @@ MonoBehaviour:
   - name: crafting_change_element_energy
     region:
       serializedVersion: 2
-      x: .661132812
-      y: .8125
+      x: .929199219
+      y: .21484375
       width: .060546875
       height: .12109375
     border:
@@ -230,8 +281,8 @@ MonoBehaviour:
   - name: crafting_change_element_fire
     region:
       serializedVersion: 2
-      x: .668945312
-      y: .689453125
+      x: .602539062
+      y: .852539062
       width: .060546875
       height: .12109375
     border:
@@ -247,8 +298,8 @@ MonoBehaviour:
   - name: crafting_change_element_life
     region:
       serializedVersion: 2
-      x: .72265625
-      y: .8125
+      x: .172851562
+      y: .328125
       width: .060546875
       height: .12109375
     border:
@@ -264,8 +315,8 @@ MonoBehaviour:
   - name: crafting_change_element_storm
     region:
       serializedVersion: 2
-      x: .59765625
-      y: .153320312
+      x: .172851562
+      y: .451171875
       width: .060546875
       height: .12109375
     border:
@@ -281,8 +332,8 @@ MonoBehaviour:
   - name: crafting_change_element_water
     region:
       serializedVersion: 2
-      x: .604003906
-      y: 0
+      x: .172851562
+      y: .57421875
       width: .060546875
       height: .12109375
     border:
@@ -298,8 +349,8 @@ MonoBehaviour:
   - name: crafting_closebutton
     region:
       serializedVersion: 2
-      x: .587890625
-      y: .924804688
+      x: .967773438
+      y: .462890625
       width: .0297851562
       height: .0595703125
     border:
@@ -315,8 +366,8 @@ MonoBehaviour:
   - name: crafting_counterlabel_single
     region:
       serializedVersion: 2
-      x: .110839844
-      y: .678710938
+      x: .914550781
+      y: .462890625
       width: .0522460938
       height: .044921875
     border:
@@ -332,7 +383,7 @@ MonoBehaviour:
   - name: crafting_counterlabels
     region:
       serializedVersion: 2
-      x: .299316406
+      x: .598632812
       y: 0
       width: .0732421875
       height: .850585938
@@ -349,8 +400,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_energy
     region:
       serializedVersion: 2
-      x: .59765625
-      y: .276367188
+      x: .707519531
+      y: .896484375
       width: .0649414062
       height: .099609375
     border:
@@ -366,8 +417,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_fire
     region:
       serializedVersion: 2
-      x: .659179688
-      y: .123046875
+      x: .215820312
+      y: .215820312
       width: .0649414062
       height: .099609375
     border:
@@ -383,8 +434,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_life
     region:
       serializedVersion: 2
-      x: .665527344
-      y: 0
+      x: .172851562
+      y: .697265625
       width: .0649414062
       height: .099609375
     border:
@@ -400,8 +451,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_storm
     region:
       serializedVersion: 2
-      x: .59765625
-      y: .377929688
+      x: .234375
+      y: .317382812
       width: .0649414062
       height: .099609375
     border:
@@ -417,8 +468,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl0_water
     region:
       serializedVersion: 2
-      x: .663574219
-      y: .224609375
+      x: .281738281
+      y: .215820312
       width: .0649414062
       height: .099609375
     border:
@@ -434,8 +485,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl1_energy
     region:
       serializedVersion: 2
-      x: .5078125
-      y: .689453125
+      x: .803710938
+      y: .879882812
       width: .072265625
       height: .110351562
     border:
@@ -451,8 +502,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl1_fire
     region:
       serializedVersion: 2
-      x: .221679688
-      y: .215820312
+      x: .099609375
+      y: .430664062
       width: .072265625
       height: .110351562
     border:
@@ -468,8 +519,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl1_life
     region:
       serializedVersion: 2
-      x: .221679688
-      y: .328125
+      x: .142578125
+      y: .215820312
       width: .072265625
       height: .110351562
     border:
@@ -485,8 +536,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl1_storm
     region:
       serializedVersion: 2
-      x: .221679688
-      y: .440429688
+      x: .099609375
+      y: .54296875
       width: .072265625
       height: .110351562
     border:
@@ -502,8 +553,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl1_water
     region:
       serializedVersion: 2
-      x: .587890625
-      y: .8125
+      x: .099609375
+      y: .655273438
       width: .072265625
       height: .110351562
     border:
@@ -519,8 +570,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl2_energy
     region:
       serializedVersion: 2
-      x: .288574219
-      y: .852539062
+      x: .903320312
+      y: .864257812
       width: .080078125
       height: .12109375
     border:
@@ -536,8 +587,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl2_fire
     region:
       serializedVersion: 2
-      x: .110839844
-      y: .555664062
+      x: .914550781
+      y: .33984375
       width: .080078125
       height: .12109375
     border:
@@ -553,8 +604,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl2_life
     region:
       serializedVersion: 2
-      x: .5078125
-      y: .56640625
+      x: .359375
+      y: .852539062
       width: .080078125
       height: .12109375
     border:
@@ -570,8 +621,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl2_storm
     region:
       serializedVersion: 2
-      x: .587890625
-      y: .689453125
+      x: .440429688
+      y: .852539062
       width: .080078125
       height: .12109375
     border:
@@ -587,8 +638,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl2_water
     region:
       serializedVersion: 2
-      x: .588867188
-      y: .56640625
+      x: .521484375
+      y: .852539062
       width: .080078125
       height: .12109375
     border:
@@ -604,8 +655,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl3_energy
     region:
       serializedVersion: 2
-      x: .408203125
-      y: .806640625
+      x: .903320312
+      y: .7265625
       width: .0888671875
       height: .135742188
     border:
@@ -621,8 +672,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl3_fire
     region:
       serializedVersion: 2
-      x: .498046875
-      y: .806640625
+      x: 0
+      y: .852539062
       width: .0888671875
       height: .135742188
     border:
@@ -638,8 +689,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl3_life
     region:
       serializedVersion: 2
-      x: .5078125
-      y: .153320312
+      x: .08984375
+      y: .852539062
       width: .0888671875
       height: .135742188
     border:
@@ -655,8 +706,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl3_storm
     region:
       serializedVersion: 2
-      x: .5078125
-      y: .291015625
+      x: .1796875
+      y: .852539062
       width: .0888671875
       height: .135742188
     border:
@@ -672,8 +723,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl3_water
     region:
       serializedVersion: 2
-      x: .5078125
-      y: .428710938
+      x: .26953125
+      y: .852539062
       width: .0888671875
       height: .135742188
     border:
@@ -689,8 +740,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl4_energy
     region:
       serializedVersion: 2
-      x: .408203125
-      y: .193359375
+      x: .803710938
+      y: .7265625
       width: .0986328125
       height: .151367188
     border:
@@ -706,8 +757,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl4_fire
     region:
       serializedVersion: 2
-      x: .504394531
-      y: 0
+      x: 0
+      y: .215820312
       width: .0986328125
       height: .151367188
     border:
@@ -723,8 +774,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl4_life
     region:
       serializedVersion: 2
-      x: .408203125
-      y: .346679688
+      x: 0
+      y: .369140625
       width: .0986328125
       height: .151367188
     border:
@@ -740,8 +791,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl4_storm
     region:
       serializedVersion: 2
-      x: .408203125
-      y: .5
+      x: 0
+      y: .522460938
       width: .0986328125
       height: .151367188
     border:
@@ -757,8 +808,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl4_water
     region:
       serializedVersion: 2
-      x: .408203125
-      y: .653320312
+      x: 0
+      y: .67578125
       width: .0986328125
       height: .151367188
     border:
@@ -774,8 +825,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl5_energy
     region:
       serializedVersion: 2
-      x: 0
-      y: .215820312
+      x: .707519531
+      y: 0
       width: .109863281
       height: .16796875
     border:
@@ -791,8 +842,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl5_fire
     region:
       serializedVersion: 2
-      x: .110839844
-      y: .215820312
+      x: .818359375
+      y: 0
       width: .109863281
       height: .16796875
     border:
@@ -808,8 +859,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl5_life
     region:
       serializedVersion: 2
-      x: 0
-      y: .385742188
+      x: .707519531
+      y: .169921875
       width: .109863281
       height: .16796875
     border:
@@ -825,8 +876,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl5_storm
     region:
       serializedVersion: 2
-      x: .110839844
-      y: .385742188
+      x: .818359375
+      y: .169921875
       width: .109863281
       height: .16796875
     border:
@@ -842,8 +893,8 @@ MonoBehaviour:
   - name: crafting_driod_lvl5_water
     region:
       serializedVersion: 2
-      x: 0
-      y: .555664062
+      x: .707519531
+      y: .33984375
       width: .109863281
       height: .16796875
     border:
@@ -859,8 +910,8 @@ MonoBehaviour:
   - name: crafting_element_energy
     region:
       serializedVersion: 2
-      x: 0
-      y: .725585938
+      x: .818359375
+      y: .33984375
       width: .0952148438
       height: .19140625
     border:
@@ -876,8 +927,8 @@ MonoBehaviour:
   - name: crafting_element_fire
     region:
       serializedVersion: 2
-      x: .0961914062
-      y: .725585938
+      x: .707519531
+      y: .509765625
       width: .0952148438
       height: .19140625
     border:
@@ -893,8 +944,8 @@ MonoBehaviour:
   - name: crafting_element_life
     region:
       serializedVersion: 2
-      x: .192382812
-      y: .555664062
+      x: .707519531
+      y: .703125
       width: .0952148438
       height: .19140625
     border:
@@ -910,8 +961,8 @@ MonoBehaviour:
   - name: crafting_element_storm
     region:
       serializedVersion: 2
-      x: .192382812
-      y: .749023438
+      x: .803710938
+      y: .533203125
       width: .0952148438
       height: .19140625
     border:
@@ -927,8 +978,8 @@ MonoBehaviour:
   - name: crafting_element_water
     region:
       serializedVersion: 2
-      x: .408203125
-      y: 0
+      x: .899902344
+      y: .533203125
       width: .0952148438
       height: .19140625
     border:
