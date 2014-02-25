@@ -1028,13 +1028,13 @@ public class GameManager : MonoBehaviour
     public IEnumerator CSetFaction(Player.Faction faction)
     {
         WWW request = new WWW(GetSessionURL("setfaction") + "&fac=" + (int)faction);
-        Player.CurrentFaction = faction;
+        //Player.CurrentFaction = faction;
 
         yield return request;
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) { yield break; }
-        Application.Quit();
+        gameObject.AddComponent<GUIObjectReboot>();
     }
 
     public void SubmitPlayerName(string name, Action<bool, string> callback)
@@ -1360,6 +1360,16 @@ public class GameManager : MonoBehaviour
         _view.ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
         _view.RemoveMaxScreen();
         StartOAuth();
+    }
+
+    public void GUIShowLoadingScreen(string textKey)
+    {
+        _view.ShowLoadingScreen(Localization.GetText(textKey));
+    }
+
+    public void HideLoadingScreen(string textKey)
+    {
+        _view.HideLoadingScreen();
     }
 
 

@@ -1,4 +1,4 @@
-﻿{
+{
 	blindtext: 			"Das ist ein Blindtext. Sollte Sie das lesen können, verständigen Sie bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen.",
 	
 	ok:					"OK",
@@ -15,6 +15,15 @@
 	
 loadingscreen_login:
 "Verbinde mit Server ...",
+
+loadingscreen_reboot:
+"Setze das System zurück ...",
+
+loadingscreen_close:
+"Beende Anwendung ...",
+
+loadingscreen_restart:
+"Bitte starten Sie das System neu!",
 
 loadingscreen_submitName:
 "Sende Profildaten an Server ...",

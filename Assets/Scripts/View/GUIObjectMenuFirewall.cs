@@ -5,10 +5,18 @@ public class GUIObjectMenuFirewall : MonoBehaviour
     private bool _initialized;
     private void Update()
     {
-        if (_initialized || GameManager.Singleton.Player == null) return;
-        GUIObjectSwitch guiSwitch = GetComponent<GUIObjectSwitch>();
-        guiSwitch.Switch += OnSwitch;
-        guiSwitch.Active = GameManager.Singleton.Player.Firewall;
+        if (GameManager.Singleton.Player == null || GameManager.Singleton.Player.InitSteps == 0) return;
+        if (!_initialized)
+        {
+            if(GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                GetComponent<dfControl>().Parent.Hide();
+            GUIObjectSwitch guiSwitch = GetComponent<GUIObjectSwitch>();
+            guiSwitch.Switch += OnSwitch;
+            guiSwitch.Active = GameManager.Singleton.Player.Firewall;
+
+        }
+
+
     }
 
     private void OnSwitch(bool b)
