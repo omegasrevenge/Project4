@@ -148,9 +148,9 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
-        if (_wolfAttackSounds == null)
+        if (_wolfAttackSounds == null || _wolfAttackSounds.Count != 4)
             _wolfAttackSounds = new List<string> { BattleSounds.WolfAttack1, BattleSounds.WolfAttack2, BattleSounds.WolfAttack3, BattleSounds.WolfAttack4 };
-        if (_giantAttackSounds == null)
+        if (_giantAttackSounds == null || _giantAttackSounds.Count != 4)
             _giantAttackSounds = new List<string> { BattleSounds.GiantAttack1, BattleSounds.GiantAttack2, BattleSounds.GiantAttack3, BattleSounds.GiantAttack4 };
         _delay = 5.3f;
         BackgroundMusic = SoundController.PlaySound(
