@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: .195980877, y: -7.47930713e-08, z: -1.68327901e-07, w: -.980607808}
-  m_LocalPosition: {x: 10.2647591, y: 998.910645, z: 976.969543}
+  m_LocalPosition: {x: -89.7142181, y: 1098.90686, z: 976.969543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.40284705, y: 1.27562535e-05, z: -14.1184702}
+  m_LocalPosition: {x: -1.68454623, y: 1.09734592e-05, z: -15.0431385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -156,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.69139433, y: 1.00283032e-05, z: 4.1982336}
+  m_LocalPosition: {x: 2.46511149, y: -3.61722814e-05, z: -9.06402111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: -.264373928, y: 8.64315624e-08, z: 1.62658765e-07, w: -.964420319}
-  m_LocalPosition: {x: -.294912577, y: 9.30156898, z: -26.4212399}
+  m_LocalPosition: {x: -.294917822, y: 6.43178749, z: -21.5800591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestAnimation: atk_var_3
   TestSkillName: Fire_Bite_Skill_Wolf
+  UseTestEntries: 0
   Actor: {fileID: 0}
   CurrentPlayer: 0
   ServerInfo: {fileID: 0}
@@ -287,8 +288,12 @@ MonoBehaviour:
   Turn: 0
   SkipOneTurn: 0
   FightIsOverOnce: 0
+  CanShowDamage: 0
   FriendlyCreature: {fileID: 0}
   EnemyCreature: {fileID: 0}
+  BackgroundMusic: {fileID: 0}
+  _wolfAttackSounds: []
+  _giantAttackSounds: []
   _results: []
 --- !u!124 &12400000
 Behaviour:
