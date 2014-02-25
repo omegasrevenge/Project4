@@ -18,7 +18,8 @@ public class SoundController : MonoBehaviour
     private static SoundController _instance;
 
     [SerializeField]
-    private Dictionary<string, AudioSource> _audio; 
+    private Dictionary<string, AudioSource> _audio;
+
 
     public static SoundController Singleton
     {
@@ -27,6 +28,27 @@ public class SoundController : MonoBehaviour
             if (_instance != null)
                 return _instance;
             return null;
+        }
+    }
+
+    public static bool Enabled
+    {
+        get
+        {
+            return AudioListener.volume >= 0.5f;
+        }
+        set
+        {
+            if (value)
+            {
+                AudioListener.volume = 1f;
+                PlayerPrefs.SetFloat("Sound",1f);
+            }
+            else
+            {
+                AudioListener.volume = 0f;
+                PlayerPrefs.SetFloat("Sound", 0f);
+            }
         }
     }
 
@@ -47,6 +69,7 @@ public class SoundController : MonoBehaviour
     {
         _audio = new Dictionary<string, AudioSource>();
         gameObject.AddComponent<AudioListener>();
+        AudioListener.volume = PlayerPrefs.GetFloat("Sound", 1f);
 
         AudioSource source;
         foreach (string sound in preloadedSounds)

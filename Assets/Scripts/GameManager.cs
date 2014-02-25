@@ -876,7 +876,7 @@ public class GameManager : MonoBehaviour
     public Player GetPlayer(string playerID)
     {
         if (!LoggedIn) return null;
-        if (playerID.Length != 21)
+        if (playerID == null || playerID.Length != 21)
         {
             Debug.Log("!!!!!!!! Invalid PId" + playerID);
             return null;
