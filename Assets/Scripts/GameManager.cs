@@ -1002,6 +1002,41 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json,request.url)) { yield break; }
     }
 
+    public void SetFirewall(bool firewall)
+    {
+        if (firewall == Player.Firewall) return;
+        StartCoroutine(CSetFirewall(firewall));
+    }
+
+    public IEnumerator CSetFirewall(bool firewall)
+    {
+        WWW request = new WWW(GetSessionURL("setFirewall") + "&fiwa=" + firewall);
+        Player.Firewall = firewall;
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json, request.url)) { yield break; }
+    }
+
+    public void SetFaction(Player.Faction faction)
+    {
+        if (faction == Player.CurrentFaction) return;
+        StartCoroutine(CSetFaction(faction));
+    }
+
+    public IEnumerator CSetFaction(Player.Faction faction)
+    {
+        WWW request = new WWW(GetSessionURL("setfaction") + "&fac=" + (int)faction);
+        Player.CurrentFaction = faction;
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json, request.url)) { yield break; }
+        Application.Quit();
+    }
+
     public void SubmitPlayerName(string name, Action<bool, string> callback)
     {
         StartCoroutine(CSubmitPlayerName(name, callback));
@@ -1347,6 +1382,23 @@ public class GameManager : MonoBehaviour
     public void GUILevelUp()
     {
         _view.ShowPopup(GUIObjectLevelUp.Create());
+    }
+
+    public void GUIFirewallWarning()
+    {
+        _view.ShowPopup(GUIObjectIconPopupContent.Create("popup_warning_firewall_text", "popup_warning_firewall_title", "accept", "symbol_reboot"));
+    }
+
+    public void GUIEnableMenu()
+    {
+        if (_map)
+            _map.MenuControlsEnabled = true;
+    }
+
+    public void GUIDisableMenu()
+    {
+        if (_map)
+            _map.MenuControlsEnabled = false;
     }
 
     #endregion

@@ -17,6 +17,7 @@ public class Player
 	public Int64 Version;
 
     public bool Fighting;
+    public bool Firewall;
     public Fight CurFight;
 
     public int InitSteps;
@@ -57,7 +58,7 @@ public class Player
         }
 
         InitSteps = (int)json["InitSteps"];
-
+        Firewall = (bool) json["Firewall"];
 		CurCreature = new Creature();
         if(InitSteps >= 2) CurCreature.ReadJson(json["CurrentCreature"]);
 

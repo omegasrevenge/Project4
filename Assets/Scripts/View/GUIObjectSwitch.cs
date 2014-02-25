@@ -39,7 +39,6 @@ public class GUIObjectSwitch : MonoBehaviour
     {
         if (Switch != null)
             Switch(Active);
-        Debug.Log("Switch " + Active);
     }
 
     private void OnClick(dfControl control, dfMouseEventArgs args)

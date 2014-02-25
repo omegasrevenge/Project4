@@ -21,8 +21,8 @@ public class GUIObjectIconPopupContent : GUIObjectDefaultPopupContent
         dfSprite sprite = control.transform.Find(SpriteStr).GetComponent<dfSprite>();
         sprite.SpriteName = icon;
 
-        float scale = sprite.SpriteInfo.sizeInPixels.y/control.Size.y;
-        Vector2 size = sprite.Size;
+        float scale = control.Size.y/sprite.SpriteInfo.sizeInPixels.y;
+        Vector2 size = sprite.SpriteInfo.sizeInPixels;
         size *= scale;
         sprite.Size = size;
         sprite.RelativePosition = new Vector3((control.Size.x - sprite.Size.x)/2f,0f,0f);

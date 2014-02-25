@@ -20,6 +20,7 @@ public class IntroScreen : MonoBehaviour
     void Awake()
     {
         _sound = GetComponent<AudioSource>();
+        AudioListener.volume = PlayerPrefs.GetFloat("Sound", 1f);
     }
 
     public void PlaySound()

@@ -222,4 +222,19 @@ public class Map : SceneRoot3D
         if (View)
             View.HideFightInvation();
     }
+
+    public bool MenuControlsEnabled
+    {
+        get
+        {
+            if (View)
+                return View.MenuControlsEnabled;
+            return false;
+        }
+        set
+        {
+            if (View)
+                View.MenuControlsEnabled = value;
+        }
+    }
 }

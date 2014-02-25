@@ -126,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .03125, y: -.221878052, z: 0}
+  m_LocalPosition: {x: .0875015259, y: -.221878052, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -137,7 +137,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .237495422, y: -.0359420776, z: 0}
+  m_LocalPosition: {x: .265625, y: -.0390701294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0359344482, y: -.0359420776, z: 0}
+  m_LocalPosition: {x: .0875015259, y: -.0640716553, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0140686035, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -197,8 +197,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .953125, y: .28125, z: .00100000005}
-  m_Center: {x: .4765625, y: -.140625, z: 0}
+  m_Size: {x: .840624988, y: .321875006, z: .00100000005}
+  m_Center: {x: .420312494, y: -.160937503, z: 0}
 --- !u!65 &6500004
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -209,8 +209,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .703125, y: .165625006, z: .00100000005}
-  m_Center: {x: .3515625, y: -.082812503, z: 0}
+  m_Size: {x: .675000012, y: .165625006, z: .00100000005}
+  m_Center: {x: .337500006, y: -.082812503, z: 0}
 --- !u!65 &6500006
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -233,8 +233,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .165625006, y: .165625006, z: .00100000005}
-  m_Center: {x: .082812503, y: -.082812503, z: 0}
+  m_Size: {x: .106250003, y: .106250003, z: .00100000005}
+  m_Center: {x: .0531250015, y: -.0531250015, z: 0}
 --- !u!65 &6500010
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -245,8 +245,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 0, z: .00100000005}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: .1328125, y: .104687504, z: .00100000005}
+  m_Center: {x: .06640625, y: -.0523437522, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -271,25 +271,25 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 0, y: 0}
+  size: {x: 85, y: 67}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
-      left: 0
+      left: -.132075474
       top: -0
-      right: 106
-      bottom: 106
+      right: 1.12264156
+      bottom: .990566015
     owner: {fileID: 11400000}
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  spriteName: 
+  spriteName: symbol_driod
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -369,7 +369,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 610, y: 180}
+  size: {x: 538, y: 206}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -378,10 +378,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .0307692308
+      left: .0861538425
       top: .334905654
-      right: .969230771
-      bottom: .759433985
+      right: .913846135
+      bottom: .820754707
     owner: {fileID: 11400004}
   renderOrder: 7
   isLocalized: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
-  align: 1
+  align: 0
   vertAlign: 0
   textScale: 2.6875
   textScaleMode: 1
@@ -449,7 +449,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 450, y: 106}
+  size: {x: 432, y: 106}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -458,10 +458,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .233840138
-      top: .0542544946
-      right: .926147819
-      bottom: .304254502
+      left: .261538476
+      top: .0584739819
+      right: .926153839
+      bottom: .308473974
     owner: {fileID: 11400006}
   renderOrder: 6
   isLocalized: 0
@@ -475,14 +475,13 @@ MonoBehaviour:
   autoSize: 0
   autoHeight: 0
   wordWrap: 1
-  text: "Das ist ein Blindtext. Sollte Sie das lesen k\xF6nnen, verst\xE4ndigen Sie
-    bitte einen der Entwickler. Wenn nicht, wird es tote Pestratten regnen."
+  text: Akzeptieren
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
   align: 0
   vertAlign: 1
-  textScale: 2.625
+  textScale: 3
   textScaleMode: 1
   charSpacing: 0
   colorizeSymbols: 0
@@ -517,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textkeyText: blindtext
-  _textkeyTitle: blindtext
+  _textkeyTitle: accept
   _textLabel: {fileID: 11400004}
   _titleLabel: {fileID: 11400006}
 --- !u!114 &11400010
@@ -651,7 +650,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 106, y: 106}
+  size: {x: 68, y: 68}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -660,10 +659,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 783
     margins:
-      left: .035384614
-      top: .0542360693
-      right: .198461533
-      bottom: .304236084
+      left: .0861238018
+      top: .0976654664
+      right: .190739185
+      bottom: .258042812
     owner: {fileID: 11400014}
   renderOrder: 9
   isLocalized: 0

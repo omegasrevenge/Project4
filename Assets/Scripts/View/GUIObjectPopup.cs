@@ -129,7 +129,10 @@ public class GUIObjectPopup : MonoBehaviour
     private void Show()
     {
         if (ShowPopup != null)
+        {
+            GameManager.Singleton.GUIDisableMenu();
             ShowPopup();
+        }
     }
 
     private void Hide()
@@ -152,6 +155,7 @@ public class GUIObjectPopup : MonoBehaviour
     /// </summary>
     public void OnPopupEnd()
     {
+        GameManager.Singleton.GUIEnableMenu();
         Action callback;
         if (_immediateCallbacks.TryGetValue(_currentContent, out callback))
         {

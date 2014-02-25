@@ -14,6 +14,7 @@ public class GUIObjectMapUI : MonoBehaviour
     private dfControl _guiRoot;
     private dfControl _menuButton;
     private dfControl _menuPanel;
+    private dfControl _menuRoot;
     private MovableGUIPanel _menuViewport;
     private MovableGUIPanel _guiViewport;
     private GUIObjectCreatureInfo _creatureInfo;
@@ -34,11 +35,29 @@ public class GUIObjectMapUI : MonoBehaviour
         return obj;
     }
 
+    public bool MenuControlsEnabled 
+    {
+        get
+        {
+            if (!_menuRoot) return false;
+            return _menuRoot.IsEnabled;
+        }
+        set
+        {
+            if (_menuRoot)
+            {
+                Debug.Log("Menu-Panel: " + value);
+                _menuRoot.IsEnabled = value;
+            }
+        }
+    }
+
     public void Init(Map root)
     {
         _root3D = root;
         GameObject GUIRoot = GameObject.FindGameObjectWithTag(ViewController.UIRootTag);
-        _menuViewport = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag).transform.Find(RootPanelStr).GetComponent<MovableGUIPanel>();
+        _menuRoot = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag).transform.Find(RootPanelStr).GetComponent<dfControl>();
+        _menuViewport = _menuRoot.GetComponent<MovableGUIPanel>();
         _guiViewport = GetComponent<MovableGUIPanel>();
         ViewportScrollState = 0f;
         _fightInvation = transform.Find(MessagePanelStr).GetComponent<GUIObjectMessage>();

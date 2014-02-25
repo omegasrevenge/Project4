@@ -84,6 +84,11 @@ screen_login: "Sie müssen sich erst authentifizieren, um OCULUS zu nutzen.",
 
 screen_login_button: "Anmelden",
 
+popup_warning_firewall_title: "Warnung!",
+
+popup_warning_firewall_text: "Sie haben den Sicherheits-Service von VENGEA ausgeschaltet. Dies kann zu ungewollten Verhalten führen.",
+
+
 iris_01_text: 	
 "Willkommen Agent,
 Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",
