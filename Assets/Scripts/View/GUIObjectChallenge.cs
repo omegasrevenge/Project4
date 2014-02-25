@@ -7,7 +7,6 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
     private const string Prefab = "GUI/panel_challengepanel";
     private const string ButtonStr = "button_accept";
     private const string ButtonStrCncl = "button_decline";
-    private const string TextboxStr = "textbox_name";
 
     public event Action ClosePopup;
 
@@ -43,7 +42,7 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
         {
             if (_buttonDecline == null)
             {
-                GameObject obj = transform.FindChild(ButtonStr).gameObject;
+                GameObject obj = transform.FindChild(ButtonStrCncl).gameObject;
                 if (obj)
                     _buttonDecline = obj.GetComponent<dfButton>();
             }
