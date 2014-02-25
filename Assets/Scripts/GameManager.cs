@@ -785,6 +785,7 @@ public class GameManager : MonoBehaviour
         string message;
         if ((bool) json["result"])
         {
+            SoundController.PlaySound(BattleSounds.TameSuccess, BattleSounds.MiscSoundChannel);
             BattleEngine.Current.EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("tame_success");
             message = "Success!";
         }

@@ -247,11 +247,17 @@ public class BattleEngine : SceneRoot3D
                 : 
                 GameManager.Singleton.Player.CurCreature.HP > 0)
             {
+                SoundController.PlaySound(
+                    View.Faction == Player.Faction.VENGEA ? BattleSounds.VictoryVengea : BattleSounds.VictoryNce,
+                    BattleSounds.MiscSoundChannel);
                 FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
                 EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
             }
             else
             {
+                SoundController.PlaySound(
+                    View.Faction == Player.Faction.VENGEA ? BattleSounds.DefeatVengea : BattleSounds.DefeatNce,
+                    BattleSounds.MiscSoundChannel);
                 FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
                 EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
             }
@@ -283,14 +289,14 @@ public class BattleEngine : SceneRoot3D
 
         if (UseTestEntries)
         {
-            int a = Convert.ToInt32(TestAnimation[TestAnimation.Length - 1]);
+			int a = Convert.ToInt32(TestAnimation[TestAnimation.Length - 1].ToString());
             if(!(a == 0 || a == 1 || a == 2 || a == 3))
             {
                 Debug.LogWarning("Using Test Entries: Cannot use information provided "+TestAnimation+", "+TestSkillName+". Skipping.");
                 CanShowDamage = true;
                 return;
             }
-            MonsterDoFullAction(CurCaster, TestAnimation, Convert.ToInt32(TestAnimation[TestAnimation.Length - 1]) - 1, TestSkillName);
+			MonsterDoFullAction(CurCaster, TestAnimation, Convert.ToInt32(TestAnimation[TestAnimation.Length - 1].ToString()) - 1, TestSkillName);
             return;
         }
 
@@ -317,6 +323,9 @@ public class BattleEngine : SceneRoot3D
                 case GameManager.ResourceElement.water:
                     anim = 2;
                     break;
+                default:
+                    anim = 4;
+                    break;
             }
             switch (Result.DefaultAttackElement1)
             {
@@ -335,22 +344,25 @@ public class BattleEngine : SceneRoot3D
                 case GameManager.ResourceElement.water:
                     element = "Water";
                     break;
+                default:
+                    element = "Storm";
+                    break;
             }
             MonsterDoFullAction(CurCaster, "atk_var_" + anim, anim - 1, element + model);
             return;
-        }
+		}
 
         string animContent = Extract(Result.SkillName, "Animation");
         string skillContent = Extract(Result.SkillName, "Asset_Name");
 
-        if (GameManager.Singleton.Techtree[Result.SkillName] == null ||
+		if (GameManager.Singleton.Techtree["Combos"][Result.SkillName] == null ||
             Resources.Load("Battle/Skill/" + skillContent) == null)
         {
             Debug.LogWarning("Skill Name: " + Result.SkillName + " <- doesn't seem to be initialized. Skipping.");
             CanShowDamage = true;
             return;
         }
-        MonsterDoFullAction(CurCaster, animContent, Convert.ToInt32(animContent[animContent.Length - 1]) - 1, skillContent);
+		MonsterDoFullAction(CurCaster, animContent, Convert.ToInt32(animContent[animContent.Length - 1].ToString()) - 1, skillContent);
     }
 
     public void MonsterDoFullAction(GameObject target, string animationName, int attackSoundIndex, string skillName)
@@ -361,7 +373,7 @@ public class BattleEngine : SceneRoot3D
     }
 
     public string Extract(string skillName, string extractionMode)
-    { return (string) GameManager.Singleton.Techtree[skillName][extractionMode]; }
+    { return (string) GameManager.Singleton.Techtree["Combos"][skillName][extractionMode]; }
 
     private void createSkillVisuals(string objName)
     {
@@ -492,6 +504,7 @@ public class BattleEngine : SceneRoot3D
         SoundController.RemoveChannel(BattleSounds.BattleSoundChannel);
         SoundController.RemoveChannel(BattleSounds.EnemySoundChannel);
         SoundController.RemoveChannel(BattleSounds.FriendlySoundChannel);
+        SoundController.RemoveChannel(BattleSounds.MiscSoundChannel);
         Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();
