@@ -302,10 +302,10 @@ public class BattleEngine : SceneRoot3D
 
         if (Result.SkillName.Equals("Default"))
         {
-            string element = "";
+            string element = "Storm";
 // ReSharper disable once ConditionalTernaryEqualBranch
             string model = CurCaster.name.Contains("Wolf") ? "_Scratch_Skill_Wolf" : "_Scratch_Skill_Wolf"; //<<<<<////////////////////////////////////////////////////////////
-            int anim = 1;
+            int anim = 4;
             switch (Result.DefaultAttackElement2)
             {
                 case GameManager.ResourceElement.energy:
@@ -322,9 +322,6 @@ public class BattleEngine : SceneRoot3D
                     break;
                 case GameManager.ResourceElement.water:
                     anim = 2;
-                    break;
-                default:
-                    anim = 4;
                     break;
             }
             switch (Result.DefaultAttackElement1)
@@ -343,9 +340,6 @@ public class BattleEngine : SceneRoot3D
                     break;
                 case GameManager.ResourceElement.water:
                     element = "Water";
-                    break;
-                default:
-                    element = "Storm";
                     break;
             }
             MonsterDoFullAction(CurCaster, "atk_var_" + anim, anim - 1, element + model);
