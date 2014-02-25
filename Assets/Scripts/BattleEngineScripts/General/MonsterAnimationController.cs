@@ -54,9 +54,14 @@ public class MonsterAnimationController : MonoBehaviour
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FightIdle"))
             _idleTime += Time.deltaTime;
 
-        if (_idleTime < 20f) return;
+        if (_idleTime < 10f) return;
 
         if (Random.Range(0, 2) > 0) return;
+
+        string curChannel = BattleEngine.Current.FriendlyCreature == gameObject ? BattleSounds.FriendlySoundChannel : BattleSounds.EnemySoundChannel;
+        if (SoundController.GetChannel(curChannel) == null || !SoundController.GetChannel(curChannel).isPlaying)
+            SoundController.PlaySound(gameObject.name.Contains("Wolf") ? BattleSounds.WolfIdle : BattleSounds.GiantIdle, curChannel);
+
         Trigger(Random.Range(0, 2) > 0 ? "Idle_std_var1" : "idle_std_var2");
         _idleTime = 0f;
     }

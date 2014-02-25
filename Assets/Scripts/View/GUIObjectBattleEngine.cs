@@ -149,7 +149,13 @@ public class GUIObjectBattleEngine : MonoBehaviour
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_13").GetComponent<dfSprite>());
         ComboIndicators.Add(DriodContainer.transform.FindChild("Combo_23").GetComponent<dfSprite>());
         for (int i = 0; i < 4; i++)
-            Driods.Add(DriodContainer.transform.FindChild("Driod" + (i + 1)).GetComponent<dfButton>());
+        {
+            dfButton curButton = DriodContainer.transform.FindChild("Driod" + (i + 1)).GetComponent<dfButton>();
+            Driods.Add(curButton);
+            //curButton.Padding = new RectOffset(0, 0, 115, 0);
+            //curButton.Font = Resources.Load<GameObject>("Fonts/Huggable (Dynamic)").GetComponent<dfDynamicFont>();
+            //curButton.Font.FontSize = 40;
+        }
         for (int i = 0; i < 4; i++)
             DriodsHealth.Add(DriodContainer.transform.FindChild("Health_Driod" + (i + 1)).GetComponent<dfSprite>());
         MonsterAContainer = transform.FindChild("MonsterAInfo").gameObject;
@@ -331,6 +337,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateDriodHealth()
     {
+        //for (int i = 0; i < PresentDriodsCount; i++) Driods[i].Text = Slots[i].driodenLevel.ToString();
+
         for (int i = PresentDriodsCount; i < 4; i++)
             DriodsHealth[i].Hide();
 
@@ -560,16 +568,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		int idx=InputText.IndexOf(driod);
 		if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
 		//if (idx != -1) //remove from anywhere
-        {
+		{
+		    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
             InputText.Remove(driod);
             return;
         }
 
         if (InputText.Contains(driod)) return;
 
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         InputText.Add(driod);
-        //InputText is a List<int> filled with the indexes of the selected driods
-        // CHECK FOR WHAT SOUND TO PLAY ON BUTTON KLICK HERE!
     }
 
     void OnMouseMove(dfControl ctrl, dfMouseEventArgs args)
@@ -579,8 +587,6 @@ public class GUIObjectBattleEngine : MonoBehaviour
 #if UNITY_EDITOR
 		if (args.Buttons==0) {info=-1;}
 #endif
-		//Debug.Log("mousemove " + info +" " + dfInputManager.ControlUnderMouse);
-
 
         if (info != _lastButton && info != -1)
             buttonKlick(info);
@@ -588,11 +594,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         args.Use();
     }
 	void OnMouseUp(dfControl ctrl, dfMouseEventArgs args)
-	{
-		//Debug.Log("mouseup " + ctrl +" " + dfInputManager.ControlUnderMouse);
-
-		if (dfInputManager.ControlUnderMouse==ButtonExecute) {ExecuteClicked();} else {DeleteSelection();}
-	}
+	{ if (dfInputManager.ControlUnderMouse==ButtonExecute) {ExecuteClicked();} else {DeleteSelection();} }
 
 	public void ExecuteClicked()
     {
@@ -623,6 +625,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.B) return;
         _fleeCooldown = 10f;
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         GameManager.Singleton.EscapeAttempt();
         DeleteSelection();
     }
@@ -662,6 +665,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             CatchDriods[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
             CatchDriodsVisual[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
         }
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         DeleteSelection();
     }
 
@@ -672,6 +676,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterAContainer.GetComponent<dfPanel>().Show();
 		MonsterBContainer.GetComponent<dfPanel>().Show();
         DriodContainer.transform.parent.GetComponent<dfPanel>().Show();
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
     }
 
     public void CatchButtonClick(int index)
@@ -680,7 +685,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         _buttonClickTimer = 1f;
         if (GameManager.Singleton.Player.Resources[index, (int) GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement] < 1) return;
         CatchDriodsVisual[index-1].transform.position = BattleEngine.Current.View.CatchDriodPos[index-1].transform.position;
-        CatchDriodsVisual[index-1].GetComponent<MoveTowards>().Play(BattleEngine.Current.EnemyCreature.transform.FindChild("MiddleOfBody"));
+        CatchDriodsVisual[index - 1].GetComponent<MoveTowards>().Play(BattleEngine.Current.EnemyCreature.transform.FindChild("MiddleOfBody"));
         CatchAborted();
         BattleEngine.Current.CatchInProcess = true;
         GameManager.Singleton.CatchAttempt(index);

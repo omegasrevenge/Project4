@@ -339,20 +339,18 @@ public class BattleEngine : SceneRoot3D
             MonsterDoFullAction(CurCaster, "atk_var_" + anim, anim - 1, element + model);
             return;
         }
-        string animContent = Extract(Result.SkillName, "Animation");
-        CurCaster.GetComponent<MonsterAnimationController>()
-            .DoAnim(animContent);
-        monsterPlayAttackSound(Convert.ToInt32(animContent[animContent.Length - 1]) - 1);
 
-        if (GameManager.Singleton.Techtree[Result.SkillName] == null || 
-            Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
+        string animContent = Extract(Result.SkillName, "Animation");
+        string skillContent = Extract(Result.SkillName, "Asset_Name");
+
+        if (GameManager.Singleton.Techtree[Result.SkillName] == null ||
+            Resources.Load("Battle/Skill/" + skillContent) == null)
         {
-            Debug.LogWarning("Skill Name: " + Result.SkillName + " <- doesn't seem to be initialized. Using Fire_Scratch_Skill_Wolf instead.");
-            MonsterDoFullAction(CurCaster, "atk_var_1", 0, "Fire_Scratch_Skill_Wolf");
+            Debug.LogWarning("Skill Name: " + Result.SkillName + " <- doesn't seem to be initialized. Skipping.");
+            CanShowDamage = true;
             return;
         }
-
-        createSkillVisuals(Extract(Result.SkillName, "Asset_Name"));
+        MonsterDoFullAction(CurCaster, animContent, Convert.ToInt32(animContent[animContent.Length - 1]) - 1, skillContent);
     }
 
     public void MonsterDoFullAction(GameObject target, string animationName, int attackSoundIndex, string skillName)
