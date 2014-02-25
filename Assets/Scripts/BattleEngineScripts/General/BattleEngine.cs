@@ -53,11 +53,8 @@ public class BattleEngine : SceneRoot3D
     private float _counter;
     private GameObject _gg;
     private bool _initialized = false;
-<<<<<<< Updated upstream
     private float _delay = 0f;
-=======
     private int lvl;
->>>>>>> Stashed changes
     //########## private #########
 
     //########## getter #########
@@ -463,13 +460,10 @@ public class BattleEngine : SceneRoot3D
 
     public void EndBattle()
     {
-<<<<<<< Updated upstream
         BackgroundMusic.Stop();
         SoundController.RemoveChannel(SoundChannel);
-=======
         if (lvl != GameManager.Singleton.Player.CurCreature.Level)
             GameManager.Singleton.LevelUp();
->>>>>>> Stashed changes
         Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();
