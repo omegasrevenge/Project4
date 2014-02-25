@@ -122,11 +122,6 @@ public class ViewController : MonoBehaviour
             _maxScreen.Remove();
     }
 
-    public GameObject AddLvlUp()
-    {
-        return GUIObjectLevelUp.Create(_gui);
-    }
-
     public GUIObjectIrisPopup AddIrisPopup(string textKeyText = Blindtext, string audio = "")
     {
         return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();

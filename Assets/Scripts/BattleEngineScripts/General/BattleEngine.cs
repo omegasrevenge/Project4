@@ -490,7 +490,7 @@ public class BattleEngine : SceneRoot3D
     {
         BackgroundMusic.Stop();
         if (lvl != GameManager.Singleton.Player.CurCreature.Level)
-            GameManager.Singleton.LevelUp();
+            GameManager.Singleton.GUILevelUp();
         SoundController.RemoveChannel(BattleSounds.BattleSoundChannel);
         SoundController.RemoveChannel(BattleSounds.EnemySoundChannel);
         SoundController.RemoveChannel(BattleSounds.FriendlySoundChannel);

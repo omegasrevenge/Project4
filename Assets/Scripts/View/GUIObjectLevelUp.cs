@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 using UnityEngine;
-using System.Collections;
 
 public class GUIObjectLevelUp : MonoBehaviour, IPopupContent
 {
@@ -12,28 +10,23 @@ public class GUIObjectLevelUp : MonoBehaviour, IPopupContent
     public event Action ClosePopup;
     //public GameObject ResultTemplate;
 
-    private dfControl _root;
 
     [SerializeField] public dfSprite Background;
     [SerializeField] public List<dfButton> slots; 
 
 
-    public static GameObject Create(dfControl root)
+    public static GameObject Create()
     {
-        //SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
-        dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        GUIObjectLevelUp obj = cntrl.GetComponent<GUIObjectLevelUp>();
-        Debug.Log(obj);
-        obj._root = root;
-        cntrl.BringToFront();
+        GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
+        GUIObjectLevelUp levelUpContent = go.GetComponent<GUIObjectLevelUp>();
 
-        //obj.ResultTemplate.SetActive(false);
-        obj.Init();    
-        return obj.gameObject;
+        levelUpContent.Init();
+        return go;
     }
 
     public void Init()
     {
+
         Background.SpriteName = background + GameManager.Singleton.Player.CurrentFaction.ToString().ToLower();
         Creature creature = GameManager.Singleton.Player.CurCreature;
         GUIObjectSlotState currentSlot;

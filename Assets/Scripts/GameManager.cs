@@ -406,10 +406,7 @@ public class GameManager : MonoBehaviour
             callback(true);
     }
 
-    public void LevelUp()
-    {
-        _view.AddPopup().AddToPopup(_view.AddLvlUp());
-    }
+
 
     public void ReadPlayerJSON(JSONObject jsonPlayer)
     {
@@ -1340,6 +1337,11 @@ public class GameManager : MonoBehaviour
                 _view.ShowPopup(GUIObjectChallenge.Create("challenge_text", "challenge_title", FighterB.Name, "decline", "accept"));
             }
         }
+    }
+
+    public void GUILevelUp()
+    {
+        _view.ShowPopup(GUIObjectLevelUp.Create());
     }
 
     #endregion
