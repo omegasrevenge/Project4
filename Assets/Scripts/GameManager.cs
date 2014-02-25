@@ -1424,21 +1424,41 @@ public class GameManager : MonoBehaviour
         {
             PlayerID = GUI.TextField(new Rect(10, 10, 200, 20), PlayerID, 100);
             Password = GUI.TextField(new Rect(10, 40, 200, 20), Password, 100);
-            if (GUI.Button(new Rect(10, 70, 100, 20), "Login"))
+            if (GUI.Button(new Rect(10, 70, 200, 20), "Login"))
             {
                 Login(PlayerID, Password, false, OnPlayerLoaded);
 				PlayerPrefs.SetString("PlayerID",PlayerID);
 				PlayerPrefs.SetString("Password",Password);
             }
 
-            if (GUI.Button(new Rect(210, 70, 100, 20), " >>> Local <<<"))
+            if (GUI.Button(new Rect(10, 100, 200, 20), "Local Login"))
             {
                 Login(PlayerID, Password, true, OnPlayerLoaded);
 				PlayerPrefs.SetString("PlayerID",PlayerID);
 				PlayerPrefs.SetString("Password",Password);
 			}
+
+            if (GUI.Button(new Rect(10, 130, 200, 20), "Login and Reset"))
+            {
+                Login(PlayerID, Password, false, EditorResetPlayer);
+                PlayerPrefs.SetString("PlayerID", PlayerID);
+                PlayerPrefs.SetString("Password", Password);
+            }
         }
 
+    }
+
+    void EditorResetPlayer(bool result)
+    {
+        if (result)
+        {
+            SetInitSteps(0);
+            OnPlayerLoaded(true);
+        }
+        else
+        {
+            OnPlayerLoaded(false);
+        }
     }
 #endif
 
