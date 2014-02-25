@@ -16,6 +16,9 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	private dfButton _exitButton;
 	private dfPanel _slotBox;
 	private Player.Faction _curFaction;
+	private Creature _curCreature;
+
+	private bool init = false;
 
 	private List<dfButton> driodSlots = new List<dfButton>();
 	private List<Color32> factionColors = new List<Color32>();
@@ -27,6 +30,12 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	{
 		factionColors.Add(GameManager.Withe);
 		factionColors.Add(GameManager.Black);
+	}
+
+	private void Init()
+	{
+		if(init) return;
+		init = true;
 
 		Transform slotTransform = transform.Find(BoxStr);
 		_slotBox = slotTransform.GetComponent<dfPanel>();
@@ -35,20 +44,19 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		{
 			dfButton curButton = slotTransform.Find(DriodSlotStr + i).GetComponent<dfButton>();
 
-			if (i > GameManager.Singleton.Player.CurCreature.slots.Length)
+			if (i > _curCreature.slots.Length)
 			{
 				curButton.gameObject.SetActive(false);
 				continue;
 			}
-
-			GUIObjectSlotHandling curSlotHandling = GUIObjectSlotHandling.AddSlotHandling(curButton.gameObject, GameManager.Singleton.Player.CurCreature.slots[i - 1]);
-
+			GUIObjectSlotHandling.AddSlotHandling(curButton.gameObject, _curCreature.slots[i - 1]);
 			curButton.FocusSprite = SlotButtonFocusStr + _curFaction.ToString().ToLower();
 			curButton.Click +=
-				 (control, @event) =>
-				 {
-					 SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-				 };
+				(control, @event) =>
+				{
+					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
+				};
 
 
 			driodSlots.Add(curButton);
@@ -67,6 +75,9 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 				};
+
+
+		SetColor(gameObject.GetComponent<dfControl>());
 	}
 
 	private void SetColor(dfControl guiComponent)
@@ -74,6 +85,10 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		guiComponent.Color = factionColors[(int) _curFaction];
 		_craftingButton.BackgroundSprite = CraftingSpriteStr + _curFaction.ToString().ToLower();
 		_slotBox.BackgroundSprite = EquipSlotSpriteStr + _curFaction.ToString().ToLower();
+		foreach (dfButton driodSlot in driodSlots)
+		{
+			driodSlot.FocusSprite = SlotButtonFocusStr + _curFaction.ToString().ToLower();
+		}
 	}
 
 	public static GUIObjectBaseMenue Create(dfControl root)
@@ -83,7 +98,12 @@ public class GUIObjectBaseMenue : MonoBehaviour
         cntrl.RelativePosition = Vector2.zero;
 		GUIObjectBaseMenue obj = cntrl.GetComponent<GUIObjectBaseMenue>();
 		obj._curFaction = GameManager.Singleton.Player.CurrentFaction;
-		obj.SetColor(cntrl);
+		obj._curCreature = GameManager.Singleton.Player.CurCreature;
 		return obj;
     }
+
+	void Update()
+	{
+		Init();
+	}
 }
