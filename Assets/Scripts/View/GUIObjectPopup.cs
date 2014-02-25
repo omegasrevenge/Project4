@@ -1,131 +1,246 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GUIObjectPopup : MonoBehaviour
 {
-    private const string Prefab = "GUI/panel_popup"; // should be implemented, if does not exist
-
+    private const string Prefab = "GUI/panel_popup";
     private const string PopupStr = "sprite_popup";
-    private const string MessageSound = "Oc_Audio_SFX_Vengea_Message_IRIS_LAYOUT";
 
-    [SerializeField] public dfSprite popup;
+    private static readonly Vector3 HiddenScale = new Vector3(0.2f,0.2f,0.2f);
+    private static readonly Vector3 DefaultScale = new Vector3(1f,1f,1f);
+    private const float AnimationTime = 0.3f;
+
+    private dfSprite _popupRoot;
     
-    private GameObject _content;
-    private dfControl _control;
-    private dfControl _root;
-    private float _delay = 1f;
-    private bool _startedPlaying = false;
-
-    private GUIObjectPopup _nextPopup;
-    private bool _playMessageSound = true;
+    private List<GameObject> _content;
+    private Dictionary<GameObject, Action> _immediateCallbacks;
+    private List<Action> _callbacks;
+    private GameObject _currentContent;
+  
 
     public event Action ShowPopup;
     public event Action HidePopup;
     public event Action ShowButtons;
     public event Action HideButtons;
 
-    public Action Callback;
-    public Action StartCallback;
+    private bool _visible;
+    private bool _active;
 
-    private float _startTime;
-
-    public static GUIObjectPopup Create(dfControl root)
+    public static GUIObjectPopup Create(dfControl root, GameObject content, bool stack = false, Action callback = null, bool startCallbackImmediatly = false)
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        //cntrl.Size = cntrl.Parent.Size;
-        cntrl.Width = cntrl.Parent.Width*0.95f;
-        cntrl.RelativePosition = new Vector3(root.Width / 2 - cntrl.Width / 2, root.Height / 2 - cntrl.Height / 2);
+        cntrl.Size = cntrl.Parent.Size;
+        cntrl.RelativePosition = Vector3.zero;
         GUIObjectPopup obj = cntrl.GetComponent<GUIObjectPopup>();
-        obj._root = root;
-        obj._control = cntrl;
-
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE) 
-            obj.popup.Color = new Color(0.2f, 0.2f, 0.2f);
+        obj.Init();
+        obj.AddContent(content, stack, callback, startCallbackImmediatly);
         return obj;
     }
 
-    public GUIObjectPopup AddToPopup(GameObject content)
+    private void Init()
     {
-        if (_content != null)
-            Destroy(_content);
-        if (content == null)
-            return this;
+        _content = new List<GameObject>();
+        _immediateCallbacks = new Dictionary<GameObject, Action>();
+        _callbacks = new List<Action>();
 
-        if (content.GetComponent<dfControl>() == null)
+        _popupRoot = transform.Find(PopupStr).GetComponent<dfSprite>();
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+            _popupRoot.Color = new Color(0.2f, 0.2f, 0.2f);
+    }
+
+    public void AddContent(GameObject content, bool stack = false, Action callback = null, bool startCallbackImmediatly = false)
+    {
+        if(content == null) return;
+        if(stack)
+            _content.Insert(0,content);
+        else
+            _content.Add(content);
+
+        if (callback != null)
+        {
+            if(startCallbackImmediatly)
+                _immediateCallbacks.Add(content, callback);
+            else
+                _callbacks.Add(callback);
+        }
+
+        if (_content.Count > 0)
+        {
+            if(stack && _content.Count>1)
+                PlayContentHideAnimation(false);
+            else
+            {
+                ShowContent(_content[0]);
+            }
+        }
+    }
+
+    private void ShowContent(GameObject content)
+    {
+        if (content == null || content == _currentContent)
+            return;
+
+        dfControl child = content.GetComponent<dfControl>();
+        if (child == null)
         {
             throw new InvalidCastException();
         }
-        content.transform.parent = transform;
-        content.layer = gameObject.layer;
+        content.transform.parent = _popupRoot.transform;
+        content.layer = _popupRoot.gameObject.layer;
 
-        var child = content.GetComponent<dfControl>();
-        _control.AddControl(child);
-        child.Size = _control.Size;
+        _popupRoot.AddControl(child);
+        child.Size = _popupRoot.Size;
         child.RelativePosition = Vector2.zero;
 
         child.BringToFront();
-
-        _content = content;
-
-        return this;
+        _currentContent = content;
+        if (!_visible)
+        {
+            _visible = true;
+            Show();
+        }
+        else
+        {
+            PlayContentShowAnimation();
+        }
     }
 
-    public GUIObjectPopup AddPopup()
+    void OnClick(dfControl control, dfMouseEventArgs args)
     {
-        _nextPopup = Create(_root);
-        _nextPopup._playMessageSound = false;
-        _nextPopup._delay = 0.1f;
-        return _nextPopup;
+        if (!_active || args.Used) return;
+        args.Use();
+
+        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+
+        if (_content.Count > 1)
+        {
+            PlayContentHideAnimation();
+        }
+        else
+        {
+            Hide();
+        }
     }
 
-    private void Awake()
+    /// <summary>
+    /// Shows popup
+    /// </summary>
+    private void Show()
     {
-        Transform popUpTrnsf = transform.FindChild(PopupStr);
-    }
-
-    public GUIObjectPopup Show()
-    {
-        if (_playMessageSound)
-            SoundController.PlaySound(MessageSound, SoundController.ChannelSFX);
         if (ShowPopup != null)
             ShowPopup();
-        return this;
     }
 
-    void Update()
+    private void Hide()
     {
-        if (!_startedPlaying)
-        {
-            _startedPlaying = true;
-        }
-
-        else if (_startedPlaying)
-        {
-            //OnShowButtons();
-        }
+        _active = false;
+        if (HidePopup != null)
+            HidePopup();
     }
 
+    /// <summary>
+    /// Executed when popup is shown in full size and opacity
+    /// </summary>
     public void OnPopupStart()
     {
-        _root.Click += (control, @event) =>
-        {
-            SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-            if (HidePopup != null) HidePopup();
-        };
-        _startTime = Time.time;      
-        if (_content != null) 
-            _content.GetComponent<dfControl>().Show();
-        if (StartCallback != null)
-            StartCallback();
+        _active = true;
     }
 
+    /// <summary>
+    /// Executed when popup is completly hidden
+    /// </summary>
     public void OnPopupEnd()
     {
-        GameManager.Singleton.lastPlayerRequest = "none";
+        Action callback;
+        if (_immediateCallbacks.TryGetValue(_currentContent, out callback))
+        {
+            if (callback != null)
+                callback();
+            _immediateCallbacks.Remove(_currentContent);
+        }
+        foreach (Action action in _callbacks)
+        {
+            if (action != null)
+                action();
+        }
         Destroy(gameObject);
-        if (_nextPopup != null)
-            _nextPopup.Show();
-        if (Callback != null)
-            Callback();
+    }
+
+    private void PlayContentShowAnimation()
+    {
+        if (!_currentContent)
+            return;
+
+        dfTweenVector3 tween = _currentContent.GetComponent<dfTweenVector3>();
+        if (tween)
+        {
+            tween.Stop();
+            Destroy(tween);
+        }
+        tween = _currentContent.AddComponent<dfTweenVector3>();
+        tween.Target = new dfComponentMemberInfo()
+        {
+            Component = _currentContent.transform,
+            MemberName = "localScale"
+        };
+        tween.StartValue = HiddenScale;
+        tween.EndValue = DefaultScale;
+        tween.Length = AnimationTime;
+        tween.AutoRun = true;
+        tween.TweenCompleted += OnContentShown;
+    }
+
+
+    private void PlayContentHideAnimation(bool remove = true)
+    {
+        if (!_currentContent)
+            return;
+        _active = false;
+        dfTweenVector3 tween = _currentContent.GetComponent<dfTweenVector3>();
+        if (tween)
+        {
+            tween.Stop();
+            Destroy(tween);
+        }
+        tween = _currentContent.AddComponent<dfTweenVector3>();
+        tween.Target = new dfComponentMemberInfo()
+        {
+            Component = _currentContent.transform,
+            MemberName = "localScale"
+        };
+        tween.StartValue = DefaultScale;
+        tween.EndValue = HiddenScale;
+        tween.Length = AnimationTime;
+        tween.AutoRun = true;
+        if(remove)
+            tween.TweenCompleted += OnRemoveContent;
+        else
+        {
+            tween.TweenCompleted += OnHideContent;
+        }
+    }
+    private void OnContentShown(dfTweenPlayableBase sender)
+    {
+        _active = true;
+    }
+
+    private void OnRemoveContent(dfTweenPlayableBase sender)
+    {
+        _content.Remove(_currentContent);
+        Action callback;
+        if (_immediateCallbacks.TryGetValue(_currentContent,out callback))
+        {
+            if (callback != null)
+                callback();
+            _immediateCallbacks.Remove(_currentContent);
+        }
+        Destroy(_currentContent);
+        ShowContent(_content[0]);
+    }
+
+    private void OnHideContent(dfTweenPlayableBase sender)
+    {
+        ShowContent(_content[0]);
     }
 }

@@ -20,6 +20,7 @@ public class ViewController : MonoBehaviour
     private SceneRoot3D _current3DRoot;
 
     private GUIObjectMaxScreen _maxScreen;
+    private GUIObjectPopup _popup;
     private GUIObjectLoadingScreen _loadingScreen;
 
     public static ViewController Singleton
@@ -131,9 +132,14 @@ public class ViewController : MonoBehaviour
         return GUIObjectIrisPopup.Create(_gui,textKeyText,audio).Show();
     }
 
-    public GUIObjectPopup AddPopup()
+    public void ShowPopup(GameObject content, bool stack = false, Action callback = null, bool immediateCallback = false)
     {
-        return GUIObjectPopup.Create(_gui).Show();
+        if (_popup)
+            _popup.AddContent(content, stack, callback, immediateCallback);
+        else
+        {
+            _popup = GUIObjectPopup.Create(_gui, content, stack, callback, immediateCallback);
+        }
     }
 
     public GUIObjectSpectresIntro AddSpectresIntro(string textKeyText)
@@ -154,16 +160,6 @@ public class ViewController : MonoBehaviour
     public GUIObjectBattleEngine AddBattleUI()
     {
         return GUIObjectBattleEngine.Create(_gui);
-    }
-
-    public GUIObjectChallenge ShowChallenge(string text, string title, string name, string cancelbtn, string okbtn)
-    {
-        return GUIObjectChallenge.Create(_gui, text, title, name, cancelbtn, okbtn);
-    }
-
-    public GUIObjectResourceResult ShowResourceResult(FarmResult result)
-    {
-        return GUIObjectResourceResult.Create(_gui, "farm_rsc_text", "ok", result);
     }
 
     public void ShowLoadingScreen(string text)

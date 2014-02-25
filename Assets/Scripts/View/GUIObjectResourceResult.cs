@@ -13,8 +13,6 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
     public event Action ClosePopup;
     public GameObject ResultTemplate;
 
-    private dfControl _root;
-
     [SerializeField] private string _textkeyButton = "blindtext";
 
     [SerializeField] private dfButton _button;
@@ -40,27 +38,19 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectResourceResult Create(dfControl root, string textKeyText, string textKeyButton, FarmResult result)
+    public static GameObject Create(string textKeyText, string textKeyButton, FarmResult result)
     {
         SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
-        dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        //cntrl.Size = cntrl.Parent.Size;
-        //cntrl.RelativePosition = Vector2.zero;
-        GUIObjectResourceResult obj = cntrl.GetComponent<GUIObjectResourceResult>();
-        obj._root = root;
-        obj.Button = textKeyButton;
-        // VENGEA - NCE
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
-        {
-            obj._button.NormalBackgroundColor = new Color(0.2f, 0.2f, 0.2f);
-            obj._button.PressedBackgroundColor = new Color(0.2f, 0.2f, 0.2f);
-        }
 
-        obj._scrollpanel = obj.transform.Find(ScrollPanelStr).GetComponent<dfScrollPanel>();
+        GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
+        GUIObjectResourceResult resourceContent = go.GetComponent<GUIObjectResourceResult>();
+        resourceContent.Button = textKeyButton;
+
+        resourceContent._scrollpanel = resourceContent.transform.Find(ScrollPanelStr).GetComponent<dfScrollPanel>();
 
         foreach (FarmResult.Driod driod in result.GetDriods())
         {
-            dfControl panelControl = obj._scrollpanel.AddPrefab(obj.ResultTemplate);
+            dfControl panelControl = resourceContent._scrollpanel.AddPrefab(resourceContent.ResultTemplate);
             GUIObjectTextPanel panel = panelControl.GetComponent<GUIObjectTextPanel>();
             dfSprite sprite = panelControl.transform.Find("sprite_rsc").GetComponent<dfSprite>();
 
@@ -68,7 +58,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
             sprite.SpriteName = Prefix + Resource.ResourceTypes[driod.Element + 1].ToLower();
 
         }
-        obj.ResultTemplate.SetActive(false);
-        return obj;
+        resourceContent.ResultTemplate.SetActive(false);
+        return go;
     }
 }

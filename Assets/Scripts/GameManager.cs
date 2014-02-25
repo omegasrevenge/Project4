@@ -1314,7 +1314,7 @@ public class GameManager : MonoBehaviour
                 //element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
    
             }
-            _view.AddPopup().AddToPopup(_view.ShowResourceResult(resultObj).gameObject);
+            _view.ShowPopup(GUIObjectResourceResult.Create("farm_rsc_text", "ok", resultObj));
         }
     }
 
@@ -1337,8 +1337,7 @@ public class GameManager : MonoBehaviour
                 Player FighterA = GetPlayer(fight.FighterA.PId);
                 Player FighterB = GetPlayer(fight.FighterB.PId);
                 if (FighterA == null || FighterB == null) return;
-                challengePopup = _view.AddPopup();
-                challengePopup.AddToPopup(_view.ShowChallenge("challenge_text", "challenge_title", FighterB.Name, "decline", "accept").gameObject);
+                _view.ShowPopup(GUIObjectChallenge.Create("challenge_text", "challenge_title", FighterB.Name, "decline", "accept"));
             }
         }
     }

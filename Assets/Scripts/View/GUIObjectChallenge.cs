@@ -11,8 +11,6 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
 
     public event Action ClosePopup;
 
-    private dfControl _root;
-
     [SerializeField] private string _textkeyButtonA = "blindtext";
     [SerializeField] private string _textkeyButtonD = "blindtext";
 
@@ -55,34 +53,32 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
         }
     }
 
-    public static GUIObjectChallenge Create(dfControl root, string textKeyText, string textKeyTitle, string name, string cancel, string ok)
+    public static GameObject Create(string textKeyText, string textKeyTitle, string name, string cancel, string ok)
     {
-        dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
-        cntrl.Size = cntrl.Parent.Size;
-        cntrl.RelativePosition = Vector2.zero;
-        GUIObjectChallenge obj = cntrl.GetComponent<GUIObjectChallenge>();
-        obj._root = root;
-        obj.ButtonAccept = ok;
-        obj.ButtonDecline = cancel;
+        GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
+        GUIObjectChallenge challengeContent = go.GetComponent<GUIObjectChallenge>();
 
-        if (ok == "") Destroy(obj._buttonAccept);
-        if (cancel == "") Destroy(obj._buttonDecline);
+        challengeContent.ButtonAccept = ok;
+        challengeContent.ButtonDecline = cancel;
 
-        GUIObjectTextPanel panel = obj.GetComponent<GUIObjectTextPanel>();
+        if (ok == "") Destroy(challengeContent._buttonAccept);
+        if (cancel == "") Destroy(challengeContent._buttonDecline);
+
+        GUIObjectTextPanel panel = challengeContent.GetComponent<GUIObjectTextPanel>();
         panel.Text = textKeyText +"#"+name;
         panel.Title = textKeyTitle;
 
-        return obj;
+        return go;
     }
 
-    public void Accept()
+    public void Accept(dfControl control, dfMouseEventArgs args)
     {
         Debug.Log("accepted");
         GameManager.Singleton.lastPlayerRequest = "none";
         GameManager.Singleton.Accept();
     }
 
-    public void Decline()
+    public void Decline(dfControl control, dfMouseEventArgs args)
     {
         Debug.Log("declined");
         GameManager.Singleton.lastPlayerRequest = "none";
