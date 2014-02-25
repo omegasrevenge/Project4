@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class BattleEngine : SceneRoot3D
 {
@@ -25,6 +27,8 @@ public class BattleEngine : SceneRoot3D
     [HideInInspector]
     public bool FightIsOverOnce = false;
 
+    public bool CanShowDamage = false;
+
     public GameObject FriendlyCreature;
     public GameObject EnemyCreature;
 
@@ -33,7 +37,6 @@ public class BattleEngine : SceneRoot3D
 
     //########## static #########
     public static GameObject CurrentGameObject;
-    public static string SoundChannel = "Battle";
     //########## static #########
 
     //########## const #########
@@ -47,6 +50,10 @@ public class BattleEngine : SceneRoot3D
     //########## const #########
 
     //########## private #########
+    [SerializeField]
+    private List<string> _wolfAttackSounds;
+    [SerializeField]
+    private List<string> _giantAttackSounds;
     [SerializeField]
     private List<FightRoundResult> _results;
     private GameObject _actor;
@@ -114,7 +121,7 @@ public class BattleEngine : SceneRoot3D
         get
         {
             if (_results.Count == 0 && Actor == null) return TurnState.Wait;
-            if (Actor != null && Actor.CanShowDamage) return TurnState.Hit;
+            if ((Actor != null && Actor.CanShowDamage) || CanShowDamage) return TurnState.Hit;
             return TurnState.Execute;
         }
     }
@@ -141,10 +148,14 @@ public class BattleEngine : SceneRoot3D
 
     public void StartFight(BattleInit serverInfo)
     {
+        if (_wolfAttackSounds == null)
+            _wolfAttackSounds = new List<string> { BattleSounds.WolfAttack1, BattleSounds.WolfAttack2, BattleSounds.WolfAttack3, BattleSounds.WolfAttack4 };
+        if (_giantAttackSounds == null)
+            _giantAttackSounds = new List<string> { BattleSounds.GiantAttack1, BattleSounds.GiantAttack2, BattleSounds.GiantAttack3, BattleSounds.GiantAttack4 };
         _delay = 5.3f;
         BackgroundMusic = SoundController.PlaySound(
             GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? 
-            "Music_Vengea_Fight_LAYOUT1" : "Oc_Audio_Music_NCE_Fight_V02", SoundChannel);
+            BattleSounds.BackgroundVengea : BattleSounds.BackgroundNce, BattleSounds.BattleSoundChannel);
         BackgroundMusic.loop = true;
         FightIsOverOnce = false;
         _counter = 0f;
@@ -253,6 +264,18 @@ public class BattleEngine : SceneRoot3D
             View.GGContainer.Show();
     }
 
+    private void monsterPlayAttackSound(int index)
+    {
+        SoundController.PlaySound(
+            CurCaster.name.Contains("Wolf") ?
+            _wolfAttackSounds[index] :
+            _giantAttackSounds[index]
+            ,
+            CurCaster == FriendlyCreature ?
+            BattleSounds.FriendlySoundChannel :
+            BattleSounds.EnemySoundChannel);
+    }
+
     private void turnInit()
     {
         LastResult = Result;
@@ -260,8 +283,14 @@ public class BattleEngine : SceneRoot3D
 
         if (UseTestEntries)
         {
-            CurCaster.GetComponent<MonsterAnimationController>().DoAnim(TestAnimation);
-            createSkillVisuals(TestSkillName);
+            int a = Convert.ToInt32(TestAnimation[TestAnimation.Length - 1]);
+            if(!(a == 0 || a == 1 || a == 2 || a == 3))
+            {
+                Debug.LogWarning("Using Test Entries: Cannot use information provided "+TestAnimation+", "+TestSkillName+". Skipping.");
+                CanShowDamage = true;
+                return;
+            }
+            MonsterDoFullAction(CurCaster, TestAnimation, Convert.ToInt32(TestAnimation[TestAnimation.Length - 1]) - 1, TestSkillName);
             return;
         }
 
@@ -289,7 +318,6 @@ public class BattleEngine : SceneRoot3D
                     anim = 2;
                     break;
             }
-            CurCaster.GetComponent<MonsterAnimationController>().DoAnim("atk_var_" + anim);
             switch (Result.DefaultAttackElement1)
             {
                 case GameManager.ResourceElement.energy:
@@ -308,34 +336,34 @@ public class BattleEngine : SceneRoot3D
                     element = "Water";
                     break;
             }
-            createSkillVisuals(element+model);
+            MonsterDoFullAction(CurCaster, "atk_var_" + anim, anim - 1, element + model);
             return;
         }
-
+        string animContent = Extract(Result.SkillName, "Animation");
         CurCaster.GetComponent<MonsterAnimationController>()
-            .DoAnim(Extract(Result.SkillName, "Animation"));
+            .DoAnim(animContent);
+        monsterPlayAttackSound(Convert.ToInt32(animContent[animContent.Length - 1]) - 1);
 
-        if (GameManager.Singleton.Techtree[Result.SkillName] == null)
+        if (GameManager.Singleton.Techtree[Result.SkillName] == null || 
+            Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
         {
             Debug.LogWarning("Skill Name: " + Result.SkillName + " <- doesn't seem to be initialized. Using Fire_Scratch_Skill_Wolf instead.");
-            CurCaster.GetComponent<MonsterAnimationController>().DoAnim("atk_var_1");
-            createSkillVisuals("Fire_Scratch_Skill_Wolf");
+            MonsterDoFullAction(CurCaster, "atk_var_1", 0, "Fire_Scratch_Skill_Wolf");
             return;
         }
 
-        if (Resources.Load("Battle/Skill/" + Extract(Result.SkillName, "Asset_Name")) == null)
-        {
-            Debug.LogWarning("The skill >" + Result.SkillName + "< does not exist in Techtree. Casting Laser instead.");
-            createSkillVisuals("Laser");
-            return;
-        }
         createSkillVisuals(Extract(Result.SkillName, "Asset_Name"));
     }
 
-    public string Extract(string skillName, string extractionMode)
+    public void MonsterDoFullAction(GameObject target, string animationName, int attackSoundIndex, string skillName)
     {
-        return (string) GameManager.Singleton.Techtree[skillName][extractionMode];
+        target.GetComponent<MonsterAnimationController>().DoAnim(animationName);
+        monsterPlayAttackSound(attackSoundIndex);
+        createSkillVisuals(skillName);
     }
+
+    public string Extract(string skillName, string extractionMode)
+    { return (string) GameManager.Singleton.Techtree[skillName][extractionMode]; }
 
     private void createSkillVisuals(string objName)
     {
@@ -373,7 +401,7 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
-
+        CanShowDamage = false;
         if (Result.Damage > 0 && Fighting && !Result.EVDA && !Result.EVDB)
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
 
@@ -461,9 +489,9 @@ public class BattleEngine : SceneRoot3D
     public void EndBattle()
     {
         BackgroundMusic.Stop();
-        SoundController.RemoveChannel(SoundChannel);
-        if (lvl != GameManager.Singleton.Player.CurCreature.Level)
-            GameManager.Singleton.LevelUp();
+        SoundController.RemoveChannel(BattleSounds.BattleSoundChannel);
+        SoundController.RemoveChannel(BattleSounds.EnemySoundChannel);
+        SoundController.RemoveChannel(BattleSounds.FriendlySoundChannel);
         Destroy(ServerInfo.gameObject);
         _results.Clear();
         View.GGContainer.Hide();
