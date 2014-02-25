@@ -2147,7 +2147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .367317766, y: .0294511225, z: 0}
+  m_LocalPosition: {x: .365900993, y: .0288869254, z: 0}
   m_LocalScale: {x: .999998927, y: .999998927, z: .999998927}
   m_Children: []
   m_Father: {fileID: 400090}
@@ -2408,7 +2408,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .380300581, y: .0355383307, z: 0}
+  m_LocalPosition: {x: .378739625, y: .0353064351, z: 0}
   m_LocalScale: {x: .999998927, y: .999998927, z: .999998927}
   m_Children: []
   m_Father: {fileID: 400192}
@@ -2667,7 +2667,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .135942072, y: -.506248474, z: 0}
+  m_LocalPosition: {x: .135937497, y: -.506249964, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400094}
@@ -3551,8 +3551,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500008
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3623,8 +3623,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500020
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3635,8 +3635,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500022
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3647,8 +3647,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500024
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3659,8 +3659,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500026
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3827,8 +3827,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0703125, y: .346875012, z: .00100000005}
-  m_Center: {x: .53515625, y: -.173437506, z: 0}
+  m_Size: {x: 1.06875002, y: .346875012, z: .00100000005}
+  m_Center: {x: .534375012, y: -.173437506, z: 0}
 --- !u!65 &6500054
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3839,8 +3839,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0703125, y: .346875012, z: .00100000005}
-  m_Center: {x: .53515625, y: -.173437506, z: 0}
+  m_Size: {x: 1.06875002, y: .346875012, z: .00100000005}
+  m_Center: {x: .534375012, y: -.173437506, z: 0}
 --- !u!65 &6500056
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3851,8 +3851,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0703125, y: .346875012, z: .00100000005}
-  m_Center: {x: .53515625, y: -.173437506, z: 0}
+  m_Size: {x: 1.06875002, y: .346875012, z: .00100000005}
+  m_Center: {x: .534375012, y: -.173437506, z: 0}
 --- !u!65 &6500058
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3863,8 +3863,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0703125, y: .346875012, z: .00100000005}
-  m_Center: {x: .53515625, y: -.173437506, z: 0}
+  m_Size: {x: 1.06875002, y: .346875012, z: .00100000005}
+  m_Center: {x: .534375012, y: -.173437506, z: 0}
 --- !u!65 &6500060
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3875,8 +3875,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0703125, y: .346875012, z: .00100000005}
-  m_Center: {x: .53515625, y: -.173437506, z: 0}
+  m_Size: {x: 1.06875002, y: .346875012, z: .00100000005}
+  m_Center: {x: .534375012, y: -.173437506, z: 0}
 --- !u!65 &6500062
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4043,8 +4043,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.078125, y: .346875012, z: .00100000005}
-  m_Center: {x: .5390625, y: -.173437506, z: 0}
+  m_Size: {x: 1.07656252, y: .346875012, z: .00100000005}
+  m_Center: {x: .538281262, y: -.173437506, z: 0}
 --- !u!65 &6500090
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -5128,7 +5128,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -5574,7 +5574,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -5621,7 +5621,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -5668,7 +5668,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -5715,7 +5715,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -6512,7 +6512,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -6603,7 +6603,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -6733,7 +6733,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 685, y: 222}
+  size: {x: 684, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -6780,7 +6780,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 685, y: 222}
+  size: {x: 684, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -6827,7 +6827,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 685, y: 222}
+  size: {x: 684, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -6874,7 +6874,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 685, y: 222}
+  size: {x: 684, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -6921,7 +6921,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 685, y: 222}
+  size: {x: 684, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -7831,7 +7831,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -7910,7 +7910,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -7983,7 +7983,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 690, y: 222}
+  size: {x: 689, y: 222}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -8286,7 +8286,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -8365,7 +8365,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2
@@ -8672,7 +8672,7 @@ MonoBehaviour:
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
-  font: {fileID: 11400000, guid: 6dfcc86da4f8a1342bafc7f42c9643bd, type: 2}
+  font: {fileID: 11400000, guid: efcc7fe9da5c1c340b9bc5b3759f29ea, type: 2}
   backgroundSprite: 
   backgroundColor:
     serializedVersion: 2

@@ -11,6 +11,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400120}
   m_Layer: 8
   m_Name: panel_levelslot
   m_TagString: Untagged
@@ -37,16 +38,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100004
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   - 65: {fileID: 6500004}
   m_Layer: 8
-  m_Name: driodslot
+  m_Name: sprite_imprint_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +61,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
-  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   - 65: {fileID: 6500006}
   m_Layer: 8
   m_Name: sprite_element
@@ -77,10 +78,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
-  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400012}
   - 65: {fileID: 6500008}
   m_Layer: 8
-  m_Name: sprite_imprint_01
+  m_Name: sprite_imprint_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,10 +95,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400010}
-  - 114: {fileID: 11400012}
+  - 114: {fileID: 11400014}
   - 65: {fileID: 6500010}
   m_Layer: 8
-  m_Name: sprite_imprint_02
+  m_Name: sprite_imprint_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,10 +112,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
-  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   - 65: {fileID: 6500012}
   m_Layer: 8
-  m_Name: sprite_imprint_03
+  m_Name: sprite_imprint_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,10 +129,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400014}
-  - 114: {fileID: 11400016}
+  - 114: {fileID: 11400018}
   - 65: {fileID: 6500014}
   m_Layer: 8
-  m_Name: sprite_imprint_04
+  m_Name: sprite_imprint_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +146,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400016}
-  - 114: {fileID: 11400018}
+  - 114: {fileID: 11400020}
   - 65: {fileID: 6500016}
   m_Layer: 8
   m_Name: sprite_imprint_05
@@ -162,10 +163,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400018}
-  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400022}
   - 65: {fileID: 6500018}
   m_Layer: 8
-  m_Name: sprite_imprint_06
+  m_Name: sprite_imprint_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,10 +180,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400020}
-  - 114: {fileID: 11400022}
+  - 114: {fileID: 11400024}
   - 65: {fileID: 6500020}
   m_Layer: 8
-  m_Name: sprite_imprint_07
+  m_Name: sprite_imprint_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,10 +197,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400022}
-  - 114: {fileID: 11400024}
+  - 114: {fileID: 11400026}
   - 65: {fileID: 6500022}
   m_Layer: 8
-  m_Name: sprite_imprint_08
+  m_Name: sprite_imprint_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,11 +213,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400024}
-  - 114: {fileID: 11400026}
-  - 65: {fileID: 6500024}
+  - 4: {fileID: 400026}
+  - 114: {fileID: 11400032}
+  - 65: {fileID: 6500026}
   m_Layer: 8
-  m_Name: sprite_imprint_09
+  m_Name: sprite_imprint_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,11 +230,12 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400026}
+  - 4: {fileID: 400024}
   - 114: {fileID: 11400028}
-  - 65: {fileID: 6500026}
+  - 65: {fileID: 6500024}
+  - 114: {fileID: 11400006}
   m_Layer: 8
-  m_Name: sprite_imprint_10
+  m_Name: driodslot_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +243,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100028
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -250,7 +252,7 @@ GameObject:
   - 114: {fileID: 11400030}
   - 65: {fileID: 6500028}
   m_Layer: 8
-  m_Name: sprite_droid_health
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,11 +265,12 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400030}
-  - 114: {fileID: 11400032}
-  - 65: {fileID: 6500030}
+  - 4: {fileID: 400032}
+  - 114: {fileID: 11400036}
+  - 65: {fileID: 6500032}
+  - 114: {fileID: 11400058}
   m_Layer: 8
-  m_Name: sprite_level
+  m_Name: driodslot_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,16 +278,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100032
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400032}
+  - 4: {fileID: 400030}
   - 114: {fileID: 11400034}
-  - 65: {fileID: 6500032}
+  - 65: {fileID: 6500030}
   m_Layer: 8
-  m_Name: driodslot
+  m_Name: sprite_imprint_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,10 +301,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400034}
-  - 114: {fileID: 11400036}
+  - 114: {fileID: 11400038}
   - 65: {fileID: 6500034}
   m_Layer: 8
-  m_Name: sprite_element
+  m_Name: sprite_imprint_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,10 +318,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400036}
-  - 114: {fileID: 11400038}
+  - 114: {fileID: 11400040}
   - 65: {fileID: 6500036}
   m_Layer: 8
-  m_Name: sprite_imprint_01
+  m_Name: sprite_imprint_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,10 +335,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400038}
-  - 114: {fileID: 11400040}
+  - 114: {fileID: 11400042}
   - 65: {fileID: 6500038}
   m_Layer: 8
-  m_Name: sprite_imprint_02
+  m_Name: sprite_imprint_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,10 +352,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400040}
-  - 114: {fileID: 11400042}
+  - 114: {fileID: 11400044}
   - 65: {fileID: 6500040}
   m_Layer: 8
-  m_Name: sprite_imprint_03
+  m_Name: sprite_imprint_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,10 +369,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400042}
-  - 114: {fileID: 11400044}
+  - 114: {fileID: 11400046}
   - 65: {fileID: 6500042}
   m_Layer: 8
-  m_Name: sprite_imprint_04
+  m_Name: sprite_imprint_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,10 +386,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400044}
-  - 114: {fileID: 11400046}
+  - 114: {fileID: 11400048}
   - 65: {fileID: 6500044}
   m_Layer: 8
-  m_Name: sprite_imprint_05
+  m_Name: sprite_imprint_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,10 +403,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400046}
-  - 114: {fileID: 11400048}
+  - 114: {fileID: 11400050}
   - 65: {fileID: 6500046}
   m_Layer: 8
-  m_Name: sprite_imprint_06
+  m_Name: sprite_imprint_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,10 +420,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400048}
-  - 114: {fileID: 11400050}
+  - 114: {fileID: 11400052}
   - 65: {fileID: 6500048}
   m_Layer: 8
-  m_Name: sprite_imprint_07
+  m_Name: sprite_imprint_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,10 +437,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400050}
-  - 114: {fileID: 11400052}
+  - 114: {fileID: 11400054}
   - 65: {fileID: 6500050}
   m_Layer: 8
-  m_Name: sprite_imprint_08
+  m_Name: sprite_element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,10 +454,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400052}
-  - 114: {fileID: 11400054}
+  - 114: {fileID: 11400056}
   - 65: {fileID: 6500052}
   m_Layer: 8
-  m_Name: sprite_imprint_09
+  m_Name: sprite_imprint_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,10 +471,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400054}
-  - 114: {fileID: 11400056}
+  - 114: {fileID: 11400064}
   - 65: {fileID: 6500054}
   m_Layer: 8
-  m_Name: sprite_imprint_10
+  m_Name: sprite_imprint_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,10 +488,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400056}
-  - 114: {fileID: 11400058}
+  - 114: {fileID: 11400066}
   - 65: {fileID: 6500056}
   m_Layer: 8
-  m_Name: sprite_droid_health
+  m_Name: sprite_element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,10 +505,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400058}
-  - 114: {fileID: 11400060}
+  - 114: {fileID: 11400068}
   - 65: {fileID: 6500058}
   m_Layer: 8
-  m_Name: sprite_level
+  m_Name: sprite_imprint_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,10 +522,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400060}
-  - 114: {fileID: 11400062}
+  - 114: {fileID: 11400070}
   - 65: {fileID: 6500060}
   m_Layer: 8
-  m_Name: sprite_level
+  m_Name: sprite_imprint_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,10 +539,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400062}
-  - 114: {fileID: 11400064}
+  - 114: {fileID: 11400072}
   - 65: {fileID: 6500062}
   m_Layer: 8
-  m_Name: sprite_droid_health
+  m_Name: sprite_imprint_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,10 +556,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400064}
-  - 114: {fileID: 11400066}
+  - 114: {fileID: 11400074}
   - 65: {fileID: 6500064}
   m_Layer: 8
-  m_Name: sprite_imprint_10
+  m_Name: sprite_imprint_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -570,10 +573,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400066}
-  - 114: {fileID: 11400068}
+  - 114: {fileID: 11400076}
   - 65: {fileID: 6500066}
   m_Layer: 8
-  m_Name: sprite_imprint_09
+  m_Name: sprite_imprint_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,10 +590,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400068}
-  - 114: {fileID: 11400070}
+  - 114: {fileID: 11400078}
   - 65: {fileID: 6500068}
   m_Layer: 8
-  m_Name: sprite_imprint_08
+  m_Name: sprite_imprint_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,10 +607,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400070}
-  - 114: {fileID: 11400072}
+  - 114: {fileID: 11400080}
   - 65: {fileID: 6500070}
   m_Layer: 8
-  m_Name: sprite_imprint_07
+  m_Name: sprite_imprint_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,10 +624,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400072}
-  - 114: {fileID: 11400074}
+  - 114: {fileID: 11400082}
   - 65: {fileID: 6500072}
   m_Layer: 8
-  m_Name: sprite_imprint_06
+  m_Name: sprite_imprint_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -637,11 +640,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400074}
-  - 114: {fileID: 11400076}
-  - 65: {fileID: 6500074}
+  - 4: {fileID: 400076}
+  - 114: {fileID: 11400086}
+  - 65: {fileID: 6500076}
   m_Layer: 8
-  m_Name: sprite_imprint_05
+  m_Name: sprite_imprint_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,11 +657,12 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400076}
-  - 114: {fileID: 11400078}
-  - 65: {fileID: 6500076}
+  - 4: {fileID: 400074}
+  - 114: {fileID: 11400084}
+  - 65: {fileID: 6500074}
+  - 114: {fileID: 11400062}
   m_Layer: 8
-  m_Name: sprite_imprint_04
+  m_Name: driodslot_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,10 +676,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400078}
-  - 114: {fileID: 11400080}
+  - 114: {fileID: 11400088}
   - 65: {fileID: 6500078}
   m_Layer: 8
-  m_Name: sprite_imprint_03
+  m_Name: sprite_imprint_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -689,10 +693,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400080}
-  - 114: {fileID: 11400082}
+  - 114: {fileID: 11400090}
   - 65: {fileID: 6500080}
   m_Layer: 8
-  m_Name: sprite_imprint_02
+  m_Name: sprite_element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,10 +710,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400082}
-  - 114: {fileID: 11400084}
+  - 114: {fileID: 11400092}
   - 65: {fileID: 6500082}
   m_Layer: 8
-  m_Name: sprite_imprint_01
+  m_Name: sprite_imprint_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,10 +727,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400084}
-  - 114: {fileID: 11400086}
+  - 114: {fileID: 11400094}
   - 65: {fileID: 6500084}
   m_Layer: 8
-  m_Name: sprite_element
+  m_Name: sprite_imprint_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -734,16 +738,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100086
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400086}
-  - 114: {fileID: 11400088}
+  - 114: {fileID: 11400096}
   - 65: {fileID: 6500086}
   m_Layer: 8
-  m_Name: driodslot
+  m_Name: sprite_imprint_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -751,16 +755,16 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100088
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400088}
-  - 114: {fileID: 11400090}
+  - 114: {fileID: 11400098}
   - 65: {fileID: 6500088}
   m_Layer: 8
-  m_Name: driodslot
+  m_Name: sprite_imprint_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -774,10 +778,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400090}
-  - 114: {fileID: 11400092}
+  - 114: {fileID: 11400100}
   - 65: {fileID: 6500090}
   m_Layer: 8
-  m_Name: sprite_element
+  m_Name: sprite_imprint_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -791,10 +795,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400092}
-  - 114: {fileID: 11400094}
+  - 114: {fileID: 11400102}
   - 65: {fileID: 6500092}
   m_Layer: 8
-  m_Name: sprite_imprint_01
+  m_Name: sprite_imprint_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -808,10 +812,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400094}
-  - 114: {fileID: 11400096}
+  - 114: {fileID: 11400104}
   - 65: {fileID: 6500094}
   m_Layer: 8
-  m_Name: sprite_imprint_02
+  m_Name: sprite_imprint_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,7 +829,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400096}
-  - 114: {fileID: 11400098}
+  - 114: {fileID: 11400106}
   - 65: {fileID: 6500096}
   m_Layer: 8
   m_Name: sprite_imprint_03
@@ -841,9 +845,9 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400098}
-  - 114: {fileID: 11400100}
-  - 65: {fileID: 6500098}
+  - 4: {fileID: 400100}
+  - 114: {fileID: 11400110}
+  - 65: {fileID: 6500100}
   m_Layer: 8
   m_Name: sprite_imprint_04
   m_TagString: Untagged
@@ -858,130 +862,12 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400100}
-  - 114: {fileID: 11400102}
-  - 65: {fileID: 6500100}
-  m_Layer: 8
-  m_Name: sprite_imprint_05
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100102
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400102}
-  - 114: {fileID: 11400104}
-  - 65: {fileID: 6500102}
-  m_Layer: 8
-  m_Name: sprite_imprint_06
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100104
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400104}
-  - 114: {fileID: 11400106}
-  - 65: {fileID: 6500104}
-  m_Layer: 8
-  m_Name: sprite_imprint_07
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100106
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400106}
+  - 4: {fileID: 400098}
   - 114: {fileID: 11400108}
-  - 65: {fileID: 6500106}
+  - 65: {fileID: 6500098}
+  - 114: {fileID: 11400060}
   m_Layer: 8
-  m_Name: sprite_imprint_08
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100108
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400108}
-  - 114: {fileID: 11400110}
-  - 65: {fileID: 6500108}
-  m_Layer: 8
-  m_Name: sprite_imprint_09
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100110
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400110}
-  - 114: {fileID: 11400112}
-  - 65: {fileID: 6500110}
-  m_Layer: 8
-  m_Name: sprite_imprint_10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100112
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400112}
-  - 114: {fileID: 11400114}
-  - 65: {fileID: 6500112}
-  m_Layer: 8
-  m_Name: sprite_droid_health
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100114
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400114}
-  - 114: {fileID: 11400116}
-  - 65: {fileID: 6500114}
-  m_Layer: 8
-  m_Name: sprite_level
+  m_Name: driodslot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,10 +900,7 @@ Transform:
   m_LocalPosition: {x: .0546875, y: -.5859375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400088}
-  - {fileID: 400086}
-  - {fileID: 400032}
-  - {fileID: 400004}
+  - {fileID: 400028}
   - {fileID: 400002}
   - {fileID: 400116}
   m_Father: {fileID: 0}
@@ -1028,7 +911,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0328140259, y: -.165626526, z: 0}
+  m_LocalPosition: {x: .0328140259, y: -.159370422, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -1039,23 +922,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .756866455, y: -.380767822, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400028}
-  - {fileID: 400006}
-  - {fileID: 400008}
-  - {fileID: 400010}
-  - {fileID: 400012}
-  - {fileID: 400014}
-  - {fileID: 400016}
-  - {fileID: 400018}
-  - {fileID: 400020}
-  - {fileID: 400022}
-  - {fileID: 400024}
-  - {fileID: 400026}
-  - {fileID: 400030}
-  m_Father: {fileID: 400000}
+  m_Children: []
+  m_Father: {fileID: 400024}
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -1066,7 +936,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -1077,7 +947,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400010
 Transform:
   m_ObjectHideFlags: 1
@@ -1088,7 +958,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400012
 Transform:
   m_ObjectHideFlags: 1
@@ -1099,7 +969,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400014
 Transform:
   m_ObjectHideFlags: 1
@@ -1110,7 +980,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400016
 Transform:
   m_ObjectHideFlags: 1
@@ -1121,7 +991,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400018
 Transform:
   m_ObjectHideFlags: 1
@@ -1132,7 +1002,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400020
 Transform:
   m_ObjectHideFlags: 1
@@ -1143,7 +1013,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400022
 Transform:
   m_ObjectHideFlags: 1
@@ -1154,8 +1024,30 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .714065552, y: -.0453109741, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400006}
+  - {fileID: 400010}
+  - {fileID: 400008}
+  - {fileID: 400022}
+  - {fileID: 400026}
+  - {fileID: 400016}
+  - {fileID: 400014}
+  - {fileID: 400004}
+  - {fileID: 400020}
+  - {fileID: 400012}
+  - {fileID: 400018}
+  m_Father: {fileID: 400028}
+--- !u!4 &400026
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1165,18 +1057,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400004}
---- !u!4 &400026
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400004}
+  m_Father: {fileID: 400024}
 --- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
@@ -1184,45 +1065,47 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .0265579224, y: -.3125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400004}
+  m_Children:
+  - {fileID: 400098}
+  - {fileID: 400074}
+  - {fileID: 400032}
+  - {fileID: 400024}
+  m_Father: {fileID: 400000}
 --- !u!4 &400030
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400004}
---- !u!4 &400032
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .513122559, y: -.380767822, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400032}
+--- !u!4 &400032
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .246879578, y: -.0453109741, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400056}
-  - {fileID: 400034}
-  - {fileID: 400036}
-  - {fileID: 400038}
-  - {fileID: 400040}
-  - {fileID: 400042}
-  - {fileID: 400044}
+  - {fileID: 400050}
   - {fileID: 400046}
   - {fileID: 400048}
-  - {fileID: 400050}
+  - {fileID: 400034}
+  - {fileID: 400030}
+  - {fileID: 400040}
+  - {fileID: 400042}
   - {fileID: 400052}
-  - {fileID: 400054}
-  - {fileID: 400058}
-  m_Father: {fileID: 400000}
+  - {fileID: 400036}
+  - {fileID: 400044}
+  - {fileID: 400038}
+  m_Father: {fileID: 400028}
 --- !u!4 &400034
 Transform:
   m_ObjectHideFlags: 1
@@ -1340,10 +1223,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400032}
+  m_Father: {fileID: 400074}
 --- !u!4 &400056
 Transform:
   m_ObjectHideFlags: 1
@@ -1351,10 +1234,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400032}
+  m_Father: {fileID: 400074}
 --- !u!4 &400058
 Transform:
   m_ObjectHideFlags: 1
@@ -1362,10 +1245,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400032}
+  m_Father: {fileID: 400074}
 --- !u!4 &400060
 Transform:
   m_ObjectHideFlags: 1
@@ -1373,10 +1256,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400062
 Transform:
   m_ObjectHideFlags: 1
@@ -1384,10 +1267,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400064
 Transform:
   m_ObjectHideFlags: 1
@@ -1395,10 +1278,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400066
 Transform:
   m_ObjectHideFlags: 1
@@ -1406,10 +1289,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400068
 Transform:
   m_ObjectHideFlags: 1
@@ -1417,10 +1300,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400070
 Transform:
   m_ObjectHideFlags: 1
@@ -1428,10 +1311,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400072
 Transform:
   m_ObjectHideFlags: 1
@@ -1439,11 +1322,33 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0004760921, y: 1.52736902e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400074
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .479019165, y: -.0453109741, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400056}
+  - {fileID: 400060}
+  - {fileID: 400058}
+  - {fileID: 400072}
+  - {fileID: 400076}
+  - {fileID: 400066}
+  - {fileID: 400064}
+  - {fileID: 400054}
+  - {fileID: 400070}
+  - {fileID: 400062}
+  - {fileID: 400068}
+  m_Father: {fileID: 400028}
+--- !u!4 &400076
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1453,18 +1358,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
---- !u!4 &400076
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400074}
 --- !u!4 &400078
 Transform:
   m_ObjectHideFlags: 1
@@ -1475,7 +1369,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400098}
 --- !u!4 &400080
 Transform:
   m_ObjectHideFlags: 1
@@ -1486,7 +1380,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400098}
 --- !u!4 &400082
 Transform:
   m_ObjectHideFlags: 1
@@ -1497,7 +1391,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400098}
 --- !u!4 &400084
 Transform:
   m_ObjectHideFlags: 1
@@ -1508,7 +1402,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400086}
+  m_Father: {fileID: 400098}
 --- !u!4 &400086
 Transform:
   m_ObjectHideFlags: 1
@@ -1516,23 +1410,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .263549805, y: -.380767822, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400062}
-  - {fileID: 400084}
-  - {fileID: 400082}
-  - {fileID: 400080}
-  - {fileID: 400078}
-  - {fileID: 400076}
-  - {fileID: 400074}
-  - {fileID: 400072}
-  - {fileID: 400070}
-  - {fileID: 400068}
-  - {fileID: 400066}
-  - {fileID: 400064}
-  - {fileID: 400060}
-  m_Father: {fileID: 400000}
+  m_Children: []
+  m_Father: {fileID: 400098}
 --- !u!4 &400088
 Transform:
   m_ObjectHideFlags: 1
@@ -1540,23 +1421,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0159606934, y: -.380767822, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 400112}
-  - {fileID: 400090}
-  - {fileID: 400092}
-  - {fileID: 400094}
-  - {fileID: 400096}
-  - {fileID: 400098}
-  - {fileID: 400100}
-  - {fileID: 400102}
-  - {fileID: 400104}
-  - {fileID: 400106}
-  - {fileID: 400108}
-  - {fileID: 400110}
-  - {fileID: 400114}
-  m_Father: {fileID: 400000}
+  m_Children: []
+  m_Father: {fileID: 400098}
 --- !u!4 &400090
 Transform:
   m_ObjectHideFlags: 1
@@ -1567,7 +1435,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400088}
+  m_Father: {fileID: 400098}
 --- !u!4 &400092
 Transform:
   m_ObjectHideFlags: 1
@@ -1578,7 +1446,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400088}
+  m_Father: {fileID: 400098}
 --- !u!4 &400094
 Transform:
   m_ObjectHideFlags: 1
@@ -1589,7 +1457,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400088}
+  m_Father: {fileID: 400098}
 --- !u!4 &400096
 Transform:
   m_ObjectHideFlags: 1
@@ -1600,8 +1468,30 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400088}
+  m_Father: {fileID: 400098}
 --- !u!4 &400098
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0118331909, y: -.0453109741, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400080}
+  - {fileID: 400084}
+  - {fileID: 400082}
+  - {fileID: 400096}
+  - {fileID: 400100}
+  - {fileID: 400090}
+  - {fileID: 400088}
+  - {fileID: 400078}
+  - {fileID: 400094}
+  - {fileID: 400086}
+  - {fileID: 400092}
+  m_Father: {fileID: 400028}
+--- !u!4 &400100
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1611,95 +1501,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400100
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100100}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400102
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400104
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400106
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100106}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400108
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100108}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400110
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400112
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100112}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
---- !u!4 &400114
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100114}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400088}
+  m_Father: {fileID: 400098}
 --- !u!4 &400116
 Transform:
   m_ObjectHideFlags: 1
@@ -1860,7 +1662,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
+  m_GameObject: {fileID: 100026}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -1872,7 +1674,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
+  m_GameObject: {fileID: 100024}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -1889,14 +1691,14 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
+  m_Size: {x: .954687536, y: .342187494, z: .00100000005}
+  m_Center: {x: .477343768, y: -.171093747, z: 0}
 --- !u!65 &6500030
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
+  m_GameObject: {fileID: 100032}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -1908,7 +1710,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100032}
+  m_GameObject: {fileID: 100030}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2160,7 +1962,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100074}
+  m_GameObject: {fileID: 100076}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2172,7 +1974,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
+  m_GameObject: {fileID: 100074}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2304,7 +2106,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100098}
+  m_GameObject: {fileID: 100100}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2316,91 +2118,7 @@ BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100100}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500102
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100102}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500104
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100104}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500106
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500108
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100108}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500110
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100110}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500112
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .231250003, y: .25, z: .00100000005}
-  m_Center: {x: .115625001, y: -.125, z: 0}
---- !u!65 &6500114
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100114}
+  m_GameObject: {fileID: 100098}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -2457,7 +2175,7 @@ MonoBehaviour:
       right: .94861114
       bottom: .623437524
     owner: {fileID: 11400000}
-  renderOrder: 5
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -2502,7 +2220,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 5
+  zindex: 2
   color:
     serializedVersion: 2
     rgba: 4282861383
@@ -2519,11 +2237,11 @@ MonoBehaviour:
     anchorStyle: 783
     margins:
       left: .0324074067
-      top: .25059101
+      top: .240571439
       right: .955246925
-      bottom: .53191489
+      bottom: .521895289
     owner: {fileID: 11400004}
-  renderOrder: 63
+  renderOrder: 53
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -2570,13 +2288,459 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902498fc324d8c54188fb6a449d7527d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imprints:
+  - {fileID: 11400014}
+  - {fileID: 11400012}
+  - {fileID: 11400026}
+  - {fileID: 11400032}
+  - {fileID: 11400020}
+  - {fileID: 11400018}
+  - {fileID: 11400008}
+  - {fileID: 11400024}
+  - {fileID: 11400016}
+  - {fileID: 11400022}
+  element: {fileID: 11400010}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 8
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400008}
+  renderOrder: 49
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy07
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400010}
+  renderOrder: 41
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_driod_energy
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 2
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400012}
+  renderOrder: 43
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy02
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400014}
+  renderOrder: 42
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy01
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 9
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400016}
+  renderOrder: 50
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy09
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 6
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400018}
+  renderOrder: 47
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy06
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 5
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400020}
+  renderOrder: 46
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy05
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 10
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400022}
+  renderOrder: 51
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy10
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 7
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400024}
+  renderOrder: 48
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy08
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -2596,14 +2760,61 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
-      left: 484.394531
-      top: 243.691406
-      right: 15.6054688
-      bottom: 19.3085938
-    owner: {fileID: 11400006}
-  renderOrder: 48
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400026}
+  renderOrder: 44
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy03
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 271
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 3
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 271
+    margins:
+      left: .748465657
+      top: .132420093
+      right: .990691483
+      bottom: .863013685
+    owner: {fileID: 11400028}
+  renderOrder: 40
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
@@ -2660,430 +2871,54 @@ MonoBehaviour:
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
   clickWhenSpacePressed: 1
---- !u!114 &11400008
+--- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
+  m_GameObject: {fileID: 100028}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 271
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 1
+  zindex: 0
   color:
     serializedVersion: 2
     rgba: 4294967295
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 148, y: 160}
+  size: {x: 611, y: 219}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 271
     margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400008}
-  renderOrder: 50
+      left: .0262285396
+      top: .472813249
+      right: .969129801
+      bottom: .990543723
+    owner: {fileID: 11400030}
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_energy
+  spriteName: combat_panel_vengea
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400010}
-  renderOrder: 51
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy01
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 3
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400012}
-  renderOrder: 52
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy02
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 4
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400014}
-  renderOrder: 53
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy03
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 5
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400016}
-  renderOrder: 54
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy04
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 6
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400018}
-  renderOrder: 55
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy05
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 7
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400020}
-  renderOrder: 56
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy06
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 9
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400022}
-  renderOrder: 58
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy07
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 8
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400024}
-  renderOrder: 57
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy08
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400026
+--- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3100,149 +2935,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 10
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400026}
-  renderOrder: 59
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy09
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 11
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400028}
-  renderOrder: 60
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy10
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400030
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11351ba65b127a14e9696ff88d30e7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400030}
-  renderOrder: 49
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_status_filled
-  flip: 0
-  fillDirection: 1
-  fillAmount: 1
-  invertFill: 0
-  fillOrigin: 4
---- !u!114 &11400032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 12
+  zindex: 4
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3263,11 +2956,11 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400032}
-  renderOrder: 61
+  renderOrder: 45
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_level_1
+  spriteName: combat_slot_imprint_energy04
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -3280,10 +2973,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 100032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anchorStyle: 5
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 4
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 5
+    margins:
+      left: 0
+      top: -0
+      right: 0
+      bottom: 0
+    owner: {fileID: 11400034}
+  renderOrder: 33
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy04
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 271
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -3303,14 +3043,14 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 271
     margins:
-      left: 328.398438
-      top: 243.691406
-      right: 171.601562
-      bottom: 19.3085938
-    owner: {fileID: 11400034}
-  renderOrder: 34
+      left: .258605272
+      top: .132420093
+      right: .500831127
+      bottom: .863013685
+    owner: {fileID: 11400036}
+  renderOrder: 28
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
@@ -3367,7 +3107,7 @@ MonoBehaviour:
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
   clickWhenSpacePressed: 1
---- !u!114 &11400036
+--- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3378,101 +3118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 1
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400036}
-  renderOrder: 36
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400038}
-  renderOrder: 37
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy01
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -3492,40 +3138,40 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400040}
-  renderOrder: 38
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400038}
+  renderOrder: 32
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy02
+  spriteName: combat_slot_imprint_energy03
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400042
+--- !u!114 &11400040
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100040}
+  m_GameObject: {fileID: 100036}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 4
+  zindex: 7
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3539,18 +3185,65 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400040}
+  renderOrder: 36
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy08
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 10
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400042}
   renderOrder: 39
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy03
+  spriteName: combat_slot_imprint_energy10
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -3560,13 +3253,13 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
+  m_GameObject: {fileID: 100040}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -3586,18 +3279,18 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400044}
-  renderOrder: 40
+  renderOrder: 34
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy04
+  spriteName: combat_slot_imprint_energy05
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -3607,13 +3300,13 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100044}
+  m_GameObject: {fileID: 100042}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -3633,23 +3326,70 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400046}
-  renderOrder: 41
+  renderOrder: 35
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy05
+  spriteName: combat_slot_imprint_energy06
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
 --- !u!114 &11400048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 9
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400048}
+  renderOrder: 38
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy09
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3660,13 +3400,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 7
+  zindex: 1
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3680,23 +3420,23 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400048}
-  renderOrder: 42
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400050}
+  renderOrder: 30
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy06
+  spriteName: combat_slot_imprint_energy01
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400050
+--- !u!114 &11400052
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3707,13 +3447,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 9
+  zindex: 2
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3727,23 +3467,23 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400050}
-  renderOrder: 44
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400052}
+  renderOrder: 31
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy07
+  spriteName: combat_slot_imprint_energy02
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400052
+--- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3754,13 +3494,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 8
+  zindex: 0
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -3774,23 +3514,23 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400052}
-  renderOrder: 43
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400054}
+  renderOrder: 29
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy08
+  spriteName: combat_driod_energy
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400054
+--- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3801,385 +3541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 10
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400054}
-  renderOrder: 45
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy09
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400056
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 11
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400056}
-  renderOrder: 46
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy10
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400058
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11351ba65b127a14e9696ff88d30e7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400058}
-  renderOrder: 35
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_status_filled
-  flip: 0
-  fillDirection: 1
-  fillAmount: 1
-  invertFill: 0
-  fillOrigin: 4
---- !u!114 &11400060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 12
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400060}
-  renderOrder: 47
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_level_1
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 12
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400062}
-  renderOrder: 33
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_level_1
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400064
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11351ba65b127a14e9696ff88d30e7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400064}
-  renderOrder: 21
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_status_filled
-  flip: 0
-  fillDirection: 1
-  fillAmount: 1
-  invertFill: 0
-  fillOrigin: 4
---- !u!114 &11400066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 11
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400066}
-  renderOrder: 32
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy10
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400068
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 10
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400068}
-  renderOrder: 31
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy09
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400070
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -4199,18 +3561,275 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400070}
-  renderOrder: 29
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400056}
+  renderOrder: 37
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy08
+  spriteName: combat_slot_imprint_energy07
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902498fc324d8c54188fb6a449d7527d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imprints:
+  - {fileID: 11400050}
+  - {fileID: 11400052}
+  - {fileID: 11400038}
+  - {fileID: 11400034}
+  - {fileID: 11400044}
+  - {fileID: 11400046}
+  - {fileID: 11400056}
+  - {fileID: 11400040}
+  - {fileID: 11400048}
+  - {fileID: 11400042}
+  element: {fileID: 11400054}
+--- !u!114 &11400060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902498fc324d8c54188fb6a449d7527d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imprints:
+  - {fileID: 11400094}
+  - {fileID: 11400092}
+  - {fileID: 11400106}
+  - {fileID: 11400110}
+  - {fileID: 11400100}
+  - {fileID: 11400098}
+  - {fileID: 11400088}
+  - {fileID: 11400104}
+  - {fileID: 11400096}
+  - {fileID: 11400102}
+  element: {fileID: 11400090}
+--- !u!114 &11400062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902498fc324d8c54188fb6a449d7527d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imprints:
+  - {fileID: 11400070}
+  - {fileID: 11400068}
+  - {fileID: 11400082}
+  - {fileID: 11400086}
+  - {fileID: 11400076}
+  - {fileID: 11400074}
+  - {fileID: 11400064}
+  - {fileID: 11400080}
+  - {fileID: 11400072}
+  - {fileID: 11400078}
+  element: {fileID: 11400066}
+--- !u!114 &11400064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 8
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400064}
+  renderOrder: 25
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy07
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400066}
+  renderOrder: 17
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_driod_energy
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 2
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400068}
+  renderOrder: 19
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy02
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400070}
+  renderOrder: 18
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy01
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -4220,13 +3839,13 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100070}
+  m_GameObject: {fileID: 100062}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -4246,18 +3865,18 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400072}
-  renderOrder: 30
+  renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy07
+  spriteName: combat_slot_imprint_energy09
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -4267,13 +3886,154 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
+  m_GameObject: {fileID: 100064}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 6
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400074}
+  renderOrder: 23
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy06
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 5
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400076}
+  renderOrder: 22
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy05
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 10
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400078}
+  renderOrder: 27
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy10
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -4293,23 +4053,165 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
       left: 0
       top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400074}
-  renderOrder: 28
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400080}
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy06
+  spriteName: combat_slot_imprint_energy08
   flip: 0
   fillDirection: 0
   fillAmount: 1
   invertFill: 0
---- !u!114 &11400076
+--- !u!114 &11400082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 3
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400082}
+  renderOrder: 20
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy03
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 271
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 271
+    margins:
+      left: .501758158
+      top: .132420093
+      right: .743983984
+      bottom: .863013685
+    owner: {fileID: 11400084}
+  renderOrder: 16
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  backgroundSprite: combat_slot
+  hoverSprite: 
+  disabledSprite: 
+  focusSprite: combat_slot_active_vengea
+  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
+  pressedSprite: 
+  state: 0
+  group: {fileID: 0}
+  text: 
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: 1
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
+--- !u!114 &11400086
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -4326,242 +4228,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 6
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400076}
-  renderOrder: 27
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy05
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400078
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 5
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400078}
-  renderOrder: 26
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy04
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400080
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
   zindex: 4
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400080}
-  renderOrder: 25
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy03
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400082
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 3
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400082}
-  renderOrder: 24
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy02
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400084}
-  renderOrder: 23
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy01
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400086
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 1
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -4582,11 +4249,11 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400086}
-  renderOrder: 22
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_energy
+  spriteName: combat_slot_imprint_energy04
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -4596,19 +4263,19 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100086}
+  m_GameObject: {fileID: 100078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 1
+  zindex: 8
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -4622,82 +4289,34 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
-      left: 168.671875
-      top: 243.691406
-      right: 331.328125
-      bottom: 19.3085938
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400088}
-  renderOrder: 20
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  backgroundSprite: combat_slot
-  hoverSprite: 
-  disabledSprite: 
-  focusSprite: combat_slot_active_vengea
-  font: {fileID: 11400000, guid: 710519973ae58414fadb9e9c0b8d5d0e, type: 2}
-  pressedSprite: 
-  state: 0
-  group: {fileID: 0}
-  text: 
-  textAlign: 1
-  vertAlign: 1
-  normalColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  textColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  hoverText:
-    serializedVersion: 2
-    rgba: 4294967295
-  pressedText:
-    serializedVersion: 2
-    rgba: 4294967295
-  focusText:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledText:
-    serializedVersion: 2
-    rgba: 4294967295
-  hoverColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  pressedColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  focusColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  textScale: 1
-  textScaleMode: 0
-  wordWrap: 0
-  padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  textShadow: 0
-  shadowColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  shadowOffset: {x: 1, y: -1}
-  autoSize: 0
-  clickWhenSpacePressed: 1
+  spriteName: combat_slot_imprint_energy07
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100088}
+  m_GameObject: {fileID: 100080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 783
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -4717,14 +4336,437 @@ MonoBehaviour:
   tabIndex: -1
   canFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 783
     margins:
-      left: 10.2148438
-      top: 243.691406
-      right: 489.785156
-      bottom: 19.3085938
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
     owner: {fileID: 11400090}
+  renderOrder: 5
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_driod_energy
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 2
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400092}
+  renderOrder: 7
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy02
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400094}
   renderOrder: 6
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy01
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 9
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400096}
+  renderOrder: 14
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy09
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 6
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400098}
+  renderOrder: 11
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy06
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 5
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400100}
+  renderOrder: 10
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy05
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 10
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400102}
+  renderOrder: 15
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy10
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 7
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400104}
+  renderOrder: 12
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy08
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 783
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 3
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 783
+    margins:
+      left: 0
+      top: -0
+      right: 1
+      bottom: 1
+    owner: {fileID: 11400106}
+  renderOrder: 8
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
+  spriteName: combat_slot_imprint_energy03
+  flip: 0
+  fillDirection: 0
+  fillAmount: 1
+  invertFill: 0
+--- !u!114 &11400108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 271
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 148, y: 160}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  layout:
+    anchorStyle: 271
+    margins:
+      left: .0123964297
+      top: .132420093
+      right: .254622281
+      bottom: .863013685
+    owner: {fileID: 11400108}
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
@@ -4781,153 +4823,12 @@ MonoBehaviour:
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
   clickWhenSpacePressed: 1
---- !u!114 &11400092
+--- !u!114 &11400110
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 1
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400092}
-  renderOrder: 8
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_energy
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400094}
-  renderOrder: 9
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy01
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400096
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 3
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400096}
-  renderOrder: 10
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy02
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100096}
+  m_GameObject: {fileID: 100098}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
@@ -4959,436 +4860,12 @@ MonoBehaviour:
       top: -0
       right: 0
       bottom: 0
-    owner: {fileID: 11400098}
-  renderOrder: 11
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy03
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400100
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 5
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400100}
-  renderOrder: 12
+    owner: {fileID: 11400110}
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
   spriteName: combat_slot_imprint_energy04
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 6
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400102}
-  renderOrder: 13
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy05
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 7
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400104}
-  renderOrder: 14
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy06
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400106
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 9
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400106}
-  renderOrder: 16
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy07
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 8
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400108}
-  renderOrder: 15
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy08
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 10
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400110}
-  renderOrder: 17
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy09
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400112
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 11
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400112}
-  renderOrder: 18
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_imprint_energy10
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!114 &11400114
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11351ba65b127a14e9696ff88d30e7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400114}
-  renderOrder: 7
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_slot_status_filled
-  flip: 0
-  fillDirection: 1
-  fillAmount: 1
-  invertFill: 0
-  fillOrigin: 4
---- !u!114 &11400116
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 12
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 148, y: 160}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: -0
-      right: 0
-      bottom: 0
-    owner: {fileID: 11400116}
-  renderOrder: 19
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: cfcb6333d78c0514f9a326c6819380aa, type: 2}
-  spriteName: combat_driod_level_1
   flip: 0
   fillDirection: 0
   fillAmount: 1
@@ -5410,7 +4887,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 4
+  zindex: 1
   color:
     serializedVersion: 2
     rgba: 4282861383
@@ -5431,7 +4908,7 @@ MonoBehaviour:
       right: .88271004
       bottom: .25059101
     owner: {fileID: 11400118}
-  renderOrder: 62
+  renderOrder: 52
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   atlas: {fileID: 11400000, guid: fe3b7a04d3d90e54faf137ab3e4eb712, type: 2}
@@ -5472,6 +4949,23 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!114 &11400120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab60544ec266fbe45825e66ce73bb386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Background: {fileID: 11400030}
+  slots:
+  - {fileID: 11400108}
+  - {fileID: 11400036}
+  - {fileID: 11400084}
+  - {fileID: 11400028}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
