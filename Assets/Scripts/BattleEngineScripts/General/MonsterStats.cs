@@ -13,7 +13,7 @@ public class MonsterStats : MonoBehaviour
 			color = Color.red;
 			break;
 		case GameManager.ResourceElement.energy:
-			color = Color.black;
+			color = Color.yellow;
 			break;
 		case GameManager.ResourceElement.life:
 			color = Color.green;
