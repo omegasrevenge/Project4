@@ -91,6 +91,7 @@ public class GUIObjectSlotHandling : MonoBehaviour
 		GUIObjectSlotHandling cntr = root.AddComponent<GUIObjectSlotHandling>();
 		cntr.root = root;
 		cntr.slot = slot;
+		return cntr;
 	}
 
 	void Update()
