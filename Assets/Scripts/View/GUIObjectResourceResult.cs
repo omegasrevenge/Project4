@@ -34,7 +34,12 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
             }
             _textkeyButton = value;
             if (_button != null)
+            {
                 _button.Text = Localization.GetText(value);
+                if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                    _button.TextColor = GameManager.Black;
+            }
+                
         }
     }
 
@@ -52,6 +57,8 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
         {
             dfControl panelControl = resourceContent._scrollpanel.AddPrefab(resourceContent.ResultTemplate);
             GUIObjectTextPanel panel = panelControl.GetComponent<GUIObjectTextPanel>();
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                panel.transform.FindChild("label_text").GetComponent<dfLabel>().Color = GameManager.Black;
             dfSprite sprite = panelControl.transform.Find("sprite_rsc").GetComponent<dfSprite>();
 
             panel.Text = textKeyText + "#" + driod.Count + "#" + Localization.GetText(driod.Level.ToString()) + "#" + Localization.GetText(Resource.ResourceTypes[driod.Element + 1].ToLower());

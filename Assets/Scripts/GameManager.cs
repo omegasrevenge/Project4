@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
 	public static readonly Color32 Black = new Color32(0, 0, 0, 255);
 	public static readonly Color32 Withe = new Color32(255, 255, 255, 255);
+    public static readonly Color32 NCERed  = new Color32(120, 40, 40, 255);
+    public static readonly Color32 NCEGrey = new Color32(50, 50, 50, 255);
 
     public static string DontSaveTag = "DontSave";
 

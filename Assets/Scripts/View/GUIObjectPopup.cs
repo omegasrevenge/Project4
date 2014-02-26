@@ -46,7 +46,7 @@ public class GUIObjectPopup : MonoBehaviour
 
         _popupRoot = transform.Find(PopupStr).GetComponent<dfSprite>();
         if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
-            _popupRoot.Color = new Color(0.2f, 0.2f, 0.2f);
+            _popupRoot.Color = GameManager.NCERed;
     }
 
     public void AddContent(GameObject content, bool stack = false, Action callback = null, bool startCallbackImmediatly = false)

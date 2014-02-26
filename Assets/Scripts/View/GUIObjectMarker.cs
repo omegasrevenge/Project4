@@ -42,8 +42,8 @@ public class GUIObjectMarker : MonoBehaviour
     private void Init(dfControl root, dfControl cntrl, ObjectOnMap[] objects)
     {
         // VENGEA - NCE
-        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE) 
-            background.Color = new Color(0.2f, 0.2f, 0.2f);
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+            background.Color = GameManager.NCERed;
         
         SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
         _scale = cntrl.transform.localScale;

@@ -88,8 +88,9 @@ public class BattleEngine : SceneRoot3D
 
     public static BattleEngine Current
     {
-        get 
+        get
         {
+            if (GameManager.Singleton.CurrentGameMode == GameManager.GameMode.Base) return null;
             if (CurrentGameObject == null) Debug.LogError("BattleEngine GameObject null, although in use!");
             return CurrentGameObject.GetComponent<BattleEngine>();
         }

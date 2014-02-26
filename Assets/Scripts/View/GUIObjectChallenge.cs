@@ -32,6 +32,9 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
             _textkeyButtonA = value;
             if (_buttonAccept != null)
                 _buttonAccept.Text = Localization.GetText(value);
+
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                _buttonAccept.TextColor = GameManager.Black;
         }
     }
 
@@ -49,6 +52,9 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
             _textkeyButtonD = value;
             if (_buttonDecline != null)
                 _buttonDecline.Text = Localization.GetText(value);
+
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                _buttonDecline.TextColor = GameManager.Black;
         }
     }
 

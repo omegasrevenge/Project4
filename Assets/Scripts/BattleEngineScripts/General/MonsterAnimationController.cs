@@ -57,7 +57,7 @@ public class MonsterAnimationController : MonoBehaviour
         if (_idleTime < 10f) return;
 
         if (Random.Range(0, 2) > 0) return;
-
+        if (GameManager.Singleton.Player.CurFight == null) return;
         string curChannel = BattleEngine.Current.FriendlyCreature == gameObject ? BattleSounds.FriendlySoundChannel : BattleSounds.EnemySoundChannel;
         if (SoundController.GetChannel(curChannel) == null || !SoundController.GetChannel(curChannel).isPlaying)
             SoundController.PlaySound(gameObject.name.Contains("Wolf") ? BattleSounds.WolfIdle : BattleSounds.GiantIdle, curChannel);

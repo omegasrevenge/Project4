@@ -30,8 +30,10 @@ public class GUIObjectTextPanel : MonoBehaviour
                     obj = trans.gameObject;
                     if (obj)
                         _textLabel = obj.GetComponent<dfLabel>();
-                }
+                }     
             }
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                _textLabel.Color = GameManager.Black;
             string[] text = new string[] {value};
            
             if (value.Contains("#"))
@@ -65,11 +67,11 @@ public class GUIObjectTextPanel : MonoBehaviour
                 {
                     obj = trans.gameObject;
                     if (obj)
-                    _titleLabel = obj.GetComponent<dfLabel>();
-                }
-                
+                        _titleLabel = obj.GetComponent<dfLabel>();
+                }      
             }
-    
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                _titleLabel.Color = GameManager.Black;
             _textkeyTitle = value;
             if (_titleLabel != null)
                 _titleLabel.Text = Localization.GetText(value);
