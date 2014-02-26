@@ -37,6 +37,6 @@ public class PlayerBase : SceneRoot3D
         
         crtrMsh = CreatureMeshes[creature.ModelID];
         crtrMsh.SetActive(true);
-		crtrMsh.GetComponent<MonsterStats>().Init(creature.BaseElement, creature.ModelID == 0, GameManager.Singleton.Player.CurFight.Pvp);
+		crtrMsh.GetComponent<MonsterStats>().Init(creature.BaseElement, creature.ModelID == 0, true);
     }
 }
