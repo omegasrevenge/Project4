@@ -60,10 +60,18 @@ public class LocationManager : MonoBehaviour {
         
         _direction = Mathf.LerpAngle(_direction, Input.compass.trueHeading, Time.deltaTime*MoveSpeed);
 #else
-        _longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
-        _latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
-
         _direction += Input.GetAxis("Mouse ScrollWheel")*100;
+
+        Vector2 moveDirection = new Vector2(Input.GetAxis("Horizontal")*Time.deltaTime*0.001f,Input.GetAxis("Vertical") * Time.deltaTime *0.001f);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(0f, 0f, -_direction);
+
+        moveDirection = rotation*moveDirection;
+
+        _longitude += moveDirection.x;
+        _latitude += moveDirection.y;
+
+
 #endif
 
     }
