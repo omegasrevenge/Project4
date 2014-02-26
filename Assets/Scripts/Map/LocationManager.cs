@@ -62,8 +62,10 @@ public class LocationManager : MonoBehaviour {
 #else
         _longitude += Input.GetAxis("Horizontal")*Time.deltaTime*0.001f;
         _latitude += Input.GetAxis("Vertical") * Time.deltaTime *0.001f;
+
+        _direction += Input.GetAxis("Mouse ScrollWheel")*100;
 #endif
-        
+
     }
 
 

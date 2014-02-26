@@ -140,6 +140,13 @@ public class TouchInput : MonoBehaviour
 
     public float GetRotation(float startAngle,Vector3 worldPos = default(Vector3), bool singleTouch = false, bool invertRotation = false)
     {
+#if UNITY_EDITOR
+        if (Input.GetMouseButton(0))
+            _rotationSpeed += Input.GetAxis("Mouse X")*1.5f;
+        return _rotationSpeed;
+
+#else
+
         if (Input.touchCount < 1 || (Input.touchCount == 1 && !singleTouch) || !Enabled)
         {
             if(Input.touchCount == 0) Rotating = false;
@@ -225,6 +232,7 @@ public class TouchInput : MonoBehaviour
             return newRotation;
         }
         return startAngle;
+        #endif
     }
 
     private bool GetTouchInput()
