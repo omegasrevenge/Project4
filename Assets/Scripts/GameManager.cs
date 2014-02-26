@@ -1430,10 +1430,16 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Unity Editor
     //####################################  Editor Login ###################################
 #if UNITY_EDITOR
     public string PlayerID = "PlayerID";
     public string Password = "Password";
+
+    private string _crElement = "Element (int)";
+    private string _crType =  "Type (int)";
+    private bool _cr;
+    private bool _keyUp = true;
 
     void OnGUI()
     {
@@ -1463,6 +1469,49 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape) && _keyUp)
+        {
+            Debug.Log("Expand");
+            _keyUp = false;
+            _cr = !_cr;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape) && !_keyUp)
+        {
+            Debug.Log("Expand");
+            _keyUp = true;
+        }
+        //Debug.Log(_cr);
+        if (_cr && LoggedIn)
+        {
+
+            _crElement = GUI.TextField(new Rect(10, 10, 200, 20), _crElement, 100);
+            _crType = GUI.TextField(new Rect(10, 40, 200, 20), _crType, 100);
+            if (GUI.Button(new Rect(10, 70, 200, 20), "StartFight"))
+            {
+                _cr = false;
+                StartSpecialFight(Convert.ToInt32(_crElement), Convert.ToInt32(_crType));
+            }
+        }
+
+    }
+
+    public void StartSpecialFight(int elemnt, int type)
+    {
+        if (!LoggedIn) return;
+
+        StartCoroutine(CStartSpecialFight(elemnt,type));
+    }
+
+    private IEnumerator CStartSpecialFight(int element, int type)
+    {
+        WWW request = new WWW(GetSessionURL("startspecialfight") + "&xp=" + Player.CurCreature.XP + "&element=" + element + "&mid"+type);
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        JSONObject data = json["data"];
+        if (!CheckResult(json, request.url)) yield break;
+        _lastOwnPlayerUpdate = -1000;
     }
 
     void EditorResetPlayer(bool result)
@@ -1478,7 +1527,7 @@ public class GameManager : MonoBehaviour
         }
     }
 #endif
-
+    #endregion
 
 
 }

@@ -6,9 +6,9 @@ public class LocationManager : MonoBehaviour {
     //Latitude = 52.50451
     //Longitude = 13.39699
     [SerializeField]
-	private float _latitude = 52.50599f;
+    private float _latitude = 52.50385f;
     [SerializeField]
-	private float _longitude = 13.39407f;
+    private float _longitude = 13.39669f;
     [SerializeField]
     private float _direction = 0f;
 
