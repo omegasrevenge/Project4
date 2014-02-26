@@ -1416,6 +1416,7 @@ GameObject:
   - 4: {fileID: 400186}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: Cylinder001
   m_TagString: Untagged
@@ -3531,6 +3532,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498245b58b52ca842bd6c8457e6c6fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15bab9de8647f4684358ed2c7a015a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vengea: {fileID: 2800000, guid: 70c07440ed164fa4e999eb9b5d2d9288, type: 3}
+  VengeaNormal: {fileID: 2800000, guid: 4de81893b7e846b4da9541288e67d21c, type: 3}
+  Nce: {fileID: 2800000, guid: 7bc88c38b5585b748a8cc133a6b9d53a, type: 3}
+  NceNormal: {fileID: 2800000, guid: 6ddd734af92c22d47910ac5747a8d8aa, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
