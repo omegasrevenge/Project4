@@ -342,12 +342,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         for (int i = 0; i < PresentDriodsCount; i++)
         {
-            if (DriodsHealth[i].FillAmount - (0.57f + Slots[i].driodenHealth*0.36f) < 0.001f ||
-                PresentDriodsCount < _lastDriodCount)
-            {
-                Debug.Log("Playing sound break now. Info = DriodsHealth[i].FillAmount: " + DriodsHealth[i].FillAmount + ", (0.57f + Slots[i].driodenHealth*0.36f): " + (0.57f + Slots[i].driodenHealth * 0.36f) + ", PresentDriodsCount: " + PresentDriodsCount + ", _lastDriodCount" + _lastDriodCount);
+            if ((Mathf.Abs(DriodsHealth[i].FillAmount - (0.57f + Slots[i].driodenHealth*0.36f)) > 0.001f
+                && DriodsHealth[i].FillAmount < (0.57f + Slots[i].driodenHealth * 0.36f))
+                || PresentDriodsCount < _lastDriodCount)
                 SoundController.PlaySound(BattleSounds.DriodBreak, BattleSounds.MiscSoundChannel);
-            }
         }
 
         for (int i = PresentDriodsCount; i < 4; i++)
