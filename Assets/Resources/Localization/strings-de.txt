@@ -12,7 +12,23 @@
 	decline:			"Ablehnen",
 	
 	default_name:		"Nutzername",
-	
+
+
+spectre_life_text:
+"Leben"
+
+spectre_extradamage_text:
+"Bonusschaden"
+
+spectre_dexterity_text:
+"Geschick"
+
+spectre_defence_text:
+"Defensive"
+
+spectre_regeneration_text:
+"Regeneration"
+
 loadingscreen_login:
 "Verbinde mit Server ...",
 

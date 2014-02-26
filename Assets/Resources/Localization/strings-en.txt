@@ -13,6 +13,22 @@
 	
 	default_name:		"Username",
 	
+	
+spectre_life_text:
+"Life"
+
+spectre_extradamage_text:
+"Extra Damage"
+
+spectre_dexterity_text:
+"Dextertity"
+
+spectre_defence_text:
+"Defence"
+
+spectre_regeneration_text:
+"Regeneration"
+
 loadingscreen_login:
 "Connecting to server ...",
 
