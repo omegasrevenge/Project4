@@ -1413,6 +1413,12 @@ public class GameManager : MonoBehaviour
             _map.MenuControlsEnabled = false;
     }
 
+	public void GUIUpdateSpectre(Creature creature)
+	{
+		if (_base)
+			_base.UpdateCreatute(creature);
+	}
+
     #endregion
 
     //####################################  Editor Login ###################################

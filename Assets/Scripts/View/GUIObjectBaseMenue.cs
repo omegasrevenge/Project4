@@ -135,12 +135,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	{
 		creatureIndex = creatureIndex >= (creatureIDs.Length - 1) ? 0 : creatureIndex + 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+		GameManager.Singleton.GUIUpdateSpectre(_curCreature);
 	}
 
 	public void PreviousSpectre()
 	{
 		creatureIndex = creatureIndex <= 0 ? (creatureIDs.Length - 1) : creatureIndex - 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+		GameManager.Singleton.GUIUpdateSpectre(_curCreature);
 	}
 
 	private void SetStatNames()
