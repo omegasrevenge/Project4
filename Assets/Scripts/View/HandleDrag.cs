@@ -60,6 +60,7 @@ public class HandleDrag : MonoBehaviour
 			dragHandle.Size = new Vector2(Sprite.Size.x, Sprite.Size.y);
 			return;
 		}
+
 		startPosition = Panel.RelativePosition;
 		dragHandle.Size = new Vector2(Panel.Size.x, Panel.Size.y);
 	}
@@ -105,8 +106,8 @@ public class HandleDrag : MonoBehaviour
 			Sprite.Opacity = 1;
 			_crafting.UpdaetView = true;
 		}
-
-		Panel.RelativePosition = startPosition;
+        else
+		    Panel.RelativePosition = startPosition;
 
 		eleUp = false;
 		eleDown = false;
