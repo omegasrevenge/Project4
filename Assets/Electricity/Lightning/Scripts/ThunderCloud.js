@@ -1,8 +1,8 @@
 #pragma strict
 var frequency = 10.0;
-var range = 100.0;
+var range = 0.3;
 var thunderbolt : Transform;
-var color : Color = Color.white;
+var color : Color = Color.cyan;
 var width = 6.0;
 var jump = 5.0;
 var maxDistance = 120;
@@ -21,7 +21,7 @@ function MakeThunder(){
     var a = true;
     while(a == true){
     	delay = Random.Range(0.0, frequency);
-    	var pos : Vector3 = Vector3(Random.Range(-range, range), transform.position.y, Random.Range(-range, range));
+    	var pos : Vector3 = Vector3(Random.Range(-range, range)+transform.position.x, transform.position.y, Random.Range(-range, range)+transform.position.z);
     	var bolt : Transform = Instantiate(thunderbolt, pos, transform.rotation) as Transform;
     	var script : Thunderbolt = bolt.GetComponent(Thunderbolt) as Thunderbolt;
     	script.SetStats(color, width, jump, maxDistance, sparks, spread, timeOut, glow, createLight);

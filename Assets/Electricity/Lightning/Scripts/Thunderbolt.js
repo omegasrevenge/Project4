@@ -1,4 +1,4 @@
-var color : Color = Color.white;
+var color : Color = Color.cyan;
 var width = 6.0;
 var lineRenderer : LineRenderer;
 var jump = 5.0;

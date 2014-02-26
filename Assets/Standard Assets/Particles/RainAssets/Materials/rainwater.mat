@@ -32,12 +32,12 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _TintColor
-        second: {r: 0, g: 1, b: .0896551609, a: .501960814}
-      data:
-        first:
           name: _MainTex_ST
         second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _TintColor
+        second: {r: .16933392, g: .852941155, b: .852941155, a: .501960814}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

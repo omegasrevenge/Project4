@@ -283,6 +283,11 @@ public class BattleEngine : SceneRoot3D
             BattleSounds.EnemySoundChannel);
     }
 
+    private string lastChar(string content)
+    {
+        return content.Length == 0 ? "" : content[content.Length - 1].ToString();
+    }
+
     private void turnInit()
     {
         LastResult = Result;
@@ -290,14 +295,14 @@ public class BattleEngine : SceneRoot3D
 
         if (UseTestEntries)
         {
-			int a = Convert.ToInt32(TestAnimation[TestAnimation.Length - 1].ToString());
-            if(!(a == 0 || a == 1 || a == 2 || a == 3))
+			int number = Convert.ToInt32(lastChar(TestAnimation));
+            if (!(number > 0 && number < 5))
             {
                 Debug.LogWarning("Using Test Entries: Cannot use information provided "+TestAnimation+", "+TestSkillName+". Skipping.");
                 CanShowDamage = true;
                 return;
             }
-			MonsterDoFullAction(CurCaster, TestAnimation, Convert.ToInt32(TestAnimation[TestAnimation.Length - 1].ToString()) - 1, TestSkillName);
+            MonsterDoFullAction(CurCaster, TestAnimation, number - 1, TestSkillName);
             return;
         }
 
@@ -305,7 +310,7 @@ public class BattleEngine : SceneRoot3D
         {
             string element = "Storm";
 // ReSharper disable once ConditionalTernaryEqualBranch
-            string model = CurCaster.name.Contains("Wolf") ? "_Scratch_Skill_Wolf" : "_Scratch_Skill_Wolf"; //<<<<<////////////////////////////////////////////////////////////
+            string model = CurCaster.name.Contains("Wolf") ? "_Scratch_Skill_Wolf" : "_Kick_Skill_Giant"; //<<<<<////////////////////////////////////////////////////////////
             int anim = 4;
             switch (Result.DefaultAttackElement2)
             {
@@ -357,7 +362,7 @@ public class BattleEngine : SceneRoot3D
             CanShowDamage = true;
             return;
         }
-		MonsterDoFullAction(CurCaster, animContent, Convert.ToInt32(animContent[animContent.Length - 1].ToString()) - 1, skillContent);
+		MonsterDoFullAction(CurCaster, animContent, Convert.ToInt32(lastChar(animContent)) - 1, skillContent);
     }
 
     public void MonsterDoFullAction(GameObject target, string animationName, int attackSoundIndex, string skillName)
@@ -375,13 +380,23 @@ public class BattleEngine : SceneRoot3D
         _actor = CreateObject(transform, "Skill/"+objName, Vector3.zero, Quaternion.identity);
         Actor = _actor.GetComponent<ActorControlls>();
         bool conjuration = _actor.name.Contains("Conjuration");
+        bool kick = _actor.name.Contains("Kick");
+        bool jumpHit = _actor.name.Contains("JumpHit");
         switch (CurrentPlayer)
         {
             case FightRoundResult.Player.A:
                 if (!conjuration)
                 {
-                    _actor.transform.position = FriendlyCreature.transform.FindChild(DefaultSkillOrigin).position;
-                    _actor.transform.LookAt(EnemyCreature.transform.FindChild(DefaultSkillTarget));
+                    if (kick)
+                    {
+                        _actor.transform.rotation = EnemyCreature.transform.rotation;
+                        _actor.transform.position = EnemyCreature.transform.FindChild(DefaultSkillTarget).position;
+                    }
+                    else
+                    {
+                        _actor.transform.position = jumpHit ? FriendlyCreature.transform.position : FriendlyCreature.transform.FindChild(DefaultSkillOrigin).position;
+                        _actor.transform.LookAt(jumpHit ? EnemyCreature.transform : EnemyCreature.transform.FindChild(DefaultSkillTarget));
+                    }
                 }
                 else
                 {
@@ -392,8 +407,16 @@ public class BattleEngine : SceneRoot3D
             case FightRoundResult.Player.B:
                 if (!conjuration)
                 {
-                    _actor.transform.position = EnemyCreature.transform.FindChild(DefaultSkillOrigin).position;
-                    _actor.transform.LookAt(FriendlyCreature.transform.FindChild(DefaultSkillTarget));
+                    if (kick)
+                    {
+                        _actor.transform.rotation = FriendlyCreature.transform.rotation;
+                        _actor.transform.position = FriendlyCreature.transform.FindChild(DefaultSkillTarget).position;
+                    }
+                    else
+                    {
+                        _actor.transform.position = jumpHit ? EnemyCreature.transform.position : EnemyCreature.transform.FindChild(DefaultSkillOrigin).position;
+                        _actor.transform.LookAt(jumpHit ? FriendlyCreature.transform : FriendlyCreature.transform.FindChild(DefaultSkillTarget));
+                    }
                 }
                 else
                 {
@@ -471,7 +494,7 @@ public class BattleEngine : SceneRoot3D
                                   transform.FindChild(DefaultFriendlySpawnPos).position,
                                   transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
-        FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement);
+        FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.BaseMeshA == 0, true);
         
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
         prefabName = "";
@@ -484,11 +507,11 @@ public class BattleEngine : SceneRoot3D
                 prefabName = GiantMonster;
                 break;
         }
-        EnemyCreature = CreateObject(transform, prefabName,
+        EnemyCreature = CreateObject(transform, GameManager.Singleton.Player.CurFight.Pvp ? prefabName : "Wild"+prefabName,
                                 transform.FindChild(DefaultEnemySpawnPos).position,
                                 transform.FindChild(DefaultEnemySpawnPos).rotation);
 
-        EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement);
+        EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.BaseMeshB == 0, GameManager.Singleton.Player.CurFight.Pvp);
     }
 
     public void EndBattle()

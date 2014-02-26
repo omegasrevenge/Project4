@@ -144,7 +144,7 @@ function MakeLights(){
 			aLight.light.color = color;
 			lights.Add(aLight);
 		}
-		(lights[l - 1] as GameObject).transform.localPosition = curPos[l * 5];
+		if(lights && lights.length > 0 && (lights[l - 1] as GameObject) && (lights[l - 1] as GameObject).transform) (lights[l - 1] as GameObject).transform.localPosition = curPos[l * 5];
 	}
 }
 function Glow(){

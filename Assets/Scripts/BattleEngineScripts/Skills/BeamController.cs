@@ -7,30 +7,26 @@ public class BeamController : ActorControlls
     public float Delay = 3f;
     public float EmitTime = 1f;
     public float FadeTime = 3f;
-    public List<GameObject> Register; 
+    public float MovementSpeed = 1f;
+    public List<GameObject> Register;
 
-    private bool _energy = false;
+    public List<ParticleEmitter> Emitters;
 
-    public List<ParticleEmitter> Emitters; 
+    private bool _jumpGiantAttackWithMovement = false;
 
 	void Start ()
 	{
-	    if (gameObject.name.Contains("Energy_Beam"))
-        {
-            _energy = true;
-            Register = new List<GameObject>();
-	        foreach (var reg in GetComponentsInChildren<RegisterGameObjects>())
-	        {
-                reg.gameObject.SetActive(false);
-                Register.Add(reg.gameObject);
-	        }
-	    }
+	    _jumpGiantAttackWithMovement = gameObject.name.Contains("Fire_Jump") || gameObject.name.Contains("Water_Jump");
+
+        Register = new List<GameObject>();
         Emitters = new List<ParticleEmitter>();
+
 	    foreach (var emitter in GetComponentsInChildren<ParticleEmitter>())
-        {
             Emitters.Add(emitter);
-            emitter.emit = false;
-        }
+        foreach (var reg in GetComponentsInChildren<RegisterGameObjects>())
+            Register.Add(reg.gameObject);
+
+        SetEmit(false);
 	}
 	
 	void Update () 
@@ -42,19 +38,17 @@ public class BeamController : ActorControlls
 	    }
 
 	    if (EmitTime > 0f)
-        {
-            if (_energy)
-                foreach (GameObject reg in Register)
-                    reg.SetActive(true);
-	        foreach (ParticleEmitter emitter in Emitters)
-                emitter.emit = true;
+	    {
+	        if (_jumpGiantAttackWithMovement)
+	            Register[0].transform.position =
+	                Register[0].transform.TransformPoint(new Vector3(0f, 0f, MovementSpeed*Time.deltaTime));
+            SetEmit(true);
 	        EmitTime -= Time.deltaTime;
 	        return;
 	    }
 
         CanShowDamage = true;
-        foreach (ParticleEmitter emitter in Emitters)
-            emitter.emit = false;
+        SetEmit(false);
 
         if (FadeTime > 0f)
         {
@@ -64,5 +58,14 @@ public class BeamController : ActorControlls
 
 	    BattleEngine.Current.Actor = null;
         Destroy(gameObject);
+    }
+
+    public void SetEmit(bool value)
+    {
+        if(!_jumpGiantAttackWithMovement)
+            foreach (GameObject reg in Register)
+                reg.SetActive(value);
+        foreach (ParticleEmitter emitter in Emitters)
+            emitter.emit = value;
     }
 }
