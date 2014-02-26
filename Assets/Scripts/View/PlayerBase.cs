@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class PlayerBase : SceneRoot3D
 {
@@ -27,14 +24,14 @@ public class PlayerBase : SceneRoot3D
 
     private void Init()
     {
-        UpdateCreatute(GameManager.Singleton.Player.CurCreature);
+        UpdateCreature(GameManager.Singleton.Player.CurCreature);
     }
 
-    public void UpdateCreatute(Creature creature)
+    public void UpdateCreature(Creature creature)
     {
         if (crtrMsh != null)
             crtrMsh.SetActive(false);
-        
+
         crtrMsh = CreatureMeshes[creature.ModelID];
         crtrMsh.SetActive(true);
 		crtrMsh.GetComponent<MonsterStats>().Init(creature.BaseElement, creature.ModelID == 0, true);

@@ -273,6 +273,7 @@ public class GameManager : MonoBehaviour
                     _base.AttachGUI(_view.AddBaseUI());
                 }
                 _view.Switch3DSceneRoot(_base);
+                playBaseBackgroundMusic();
                 break;
             case GameMode.Fight:
                 if(BattleEngine.CurrentGameObject == null)
@@ -284,6 +285,13 @@ public class GameManager : MonoBehaviour
 				_fight.StartFight(Player.GetBattleInit());
                 break;
         }
+    }
+
+    private void playBaseBackgroundMusic()
+    {
+        SoundController.PlaySound(Player.CurrentFaction == Player.Faction.VENGEA
+            ? BaseSounds.BackgroundVengea
+            : BaseSounds.BackgroundNce, BaseSounds.BackgroundChannel).loop = true;
     }
 
     /// <summary>
@@ -1417,7 +1425,7 @@ public class GameManager : MonoBehaviour
 	public void GUIUpdateSpectre(Creature creature)
 	{
 		if (_base)
-			_base.UpdateCreatute(creature);
+			_base.UpdateCreature(creature);
 	}
 
     #endregion
