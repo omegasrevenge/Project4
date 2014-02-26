@@ -37,6 +37,6 @@ public class PlayerBase : SceneRoot3D
         
         crtrMsh = CreatureMeshes[creature.ModelID];
         crtrMsh.SetActive(true);
-        crtrMsh.GetComponent<MonsterStats>().Init(GameManager.Singleton.Player.CurCreature.BaseElement);
+        crtrMsh.GetComponent<MonsterStats>().Init(creature.BaseElement);
     }
 }
