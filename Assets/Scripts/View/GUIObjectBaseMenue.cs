@@ -121,6 +121,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_exitButton.Click +=
 				(control, @event) =>
 				{
+					SoundController.RemoveChannel(BaseSounds.BackgroundChannel);
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 				};

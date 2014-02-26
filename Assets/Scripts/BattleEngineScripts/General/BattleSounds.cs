@@ -11,7 +11,7 @@ public class BattleSounds : MonoBehaviour
     public const string ClickNce = "Oc_Audio_SFX_NCE_Click";
     public const string DriodBreak = "Oc_Audio_SFX_Fight_Driode_Break";
 
-    public const string BackgroundVengea = "Music_Vengea_Fight_LAYOUT1";
+    public const string BackgroundVengea = "Oc_Audio_Music_Vengea_Fight_LAYOUT";
     public const string BackgroundNce = "Oc_Audio_Music_NCE_Fight_V02";
 
     public const string VictoryVengea = "Oc_Audio_SFX_Vengea_Fight_Victory_LAYOUT";
