@@ -187,8 +187,7 @@ public class Map : SceneRoot3D
 
         MapUtils.ProjectedPos newPosition = LocationManager.GetCurrentProjectedPos(_grid.ZoomLevel);
         if ((newPosition - _grid.CurrentPosition).Magnitude < MoveRadius)
-            _grid.CurrentPosition = MapUtils.ProjectedPos.Lerp(_grid.CurrentPosition, newPosition,
-                Time.deltaTime * MoveSpeed);
+            _grid.CurrentPosition = newPosition;
         else
         {
             _grid.CurrentPosition = newPosition;
