@@ -15,30 +15,57 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	private const string CraftingSpriteStr = "Base_Interface_CraftingButton_";
 	private const string CraftingButtonStr = "button_crafting";
 	private const string ExitButtonStr = "button_exit";
-	
+	private const string SwitchSpectre = "switch_spectre";
+	private const string SpectreElementStr = "sprite_element";
+	private const string SpectreElementSprite = "crafting_element_";
+
+	private GUIObjectEquip _equip;
+
 	private dfButton _craftingButton;
 	private dfButton _exitButton;
+	private dfSprite _spectreElement;
 	private dfLabel _spectreLevel;
 	private dfLabel _spectreName;
 	private dfLabel _spectreStatsNames;
 	private dfLabel _spectreStatsNumbers;
 	private dfPanel _slotBox;
+	private dfPanel _switchSpectre;
 	private Player.Faction _curFaction;
 	private Creature _curCreature;
 
 	private bool init = false;
+	private int creatureIndex = 0;
 
 	private List<dfButton> driodSlots = new List<dfButton>();
 	private List<Color32> factionColors = new List<Color32>();
+	private int[] creatureIDs;
 
 	[SerializeField]
 	private GameManager.ResourceLevel _curResourceLevel = GameManager.ResourceLevel.biod;
 
-	private void UpdateSpecter()
+	public void UpdateSpecter()
 	{
 		_spectreLevel.Text = _curCreature.Level.ToString();
 		_spectreName.Text = _curCreature.Name;
 		_spectreStatsNumbers.Text = "" + _curCreature.HP + "\n" + _curCreature.ExtraDamage + "\n" + _curCreature.Dexterity + "\n" + _curCreature.Defense + "\n" + _curCreature.HPReg;
+		_spectreElement.SpriteName = SpectreElementSprite + _curCreature.BaseElement;
+
+		if (init)
+		{
+			for (int i = 0; i < driodSlots.Count; i++)
+			{
+				if (i >= _curCreature.slots.Length)
+				{
+					driodSlots[i].gameObject.SetActive(false);
+					continue;
+				}
+				driodSlots[i].gameObject.SetActive(true);
+				Debug.Log("Update Slots");
+				GUIObjectSlotHandling eqipSlot = driodSlots[i].GetComponent<GUIObjectSlotHandling>();
+				eqipSlot.slot = _curCreature.slots[i];
+				eqipSlot.RefreshView();
+			}
+		}
 	}
 
 	void Awake()
@@ -50,25 +77,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreName = transform.Find(LabelSpecterName).GetComponent<dfLabel>();
 		_spectreStatsNames = transform.Find(LabelSpecterStatNames).GetComponent<dfLabel>();
 		_spectreStatsNumbers = transform.Find(LabelSpecterStatNumbers).GetComponent<dfLabel>();
+		_spectreElement = transform.Find(SpectreElementStr).GetComponent<dfSprite>();
 
 		SetStatNames();
-	}
-
-	private void SetStatNames()
-	{
-		string life = Localization.GetText("spectre_life_text");
-		string exdmg = Localization.GetText("spectre_extradamage_text");
-		string dex = Localization.GetText("spectre_dexterity_text");
-		string def = Localization.GetText("spectre_defence_text");
-		string reg = Localization.GetText("spectre_regeneration_text");
-
-		_spectreStatsNames.Text = life + "\n" + exdmg + "\n" + dex + "\n" + def + "\n" + reg;
 	}
 
 	private void Init()
 	{
 		if(init) return;
-		init = true;
 
 		Transform slotTransform = transform.Find(BoxStr);
 		_slotBox = slotTransform.GetComponent<dfPanel>();
@@ -88,9 +104,8 @@ public class GUIObjectBaseMenue : MonoBehaviour
 				(control, @event) =>
 				{
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
+					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)], this);
 				};
-
 
 			driodSlots.Add(curButton);
 		}
@@ -108,9 +123,37 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 				};
-
+		_switchSpectre = transform.Find(SwitchSpectre).GetComponent<dfPanel>();
+		HandleDrag.AddHandleDrag(this, _switchSpectre.gameObject, _switchSpectre);
 
 		SetColor(gameObject.GetComponent<dfControl>());
+		UpdateSpecter();
+		init = true;
+	}
+
+	public void NextSpectre()
+	{
+		creatureIndex = creatureIndex >= (creatureIDs.Length - 1) ? 0 : creatureIndex + 1;
+		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+		UpdateSpecter();
+	}
+
+	public void PreviousSpectre()
+	{
+		creatureIndex = creatureIndex <= 0 ? (creatureIDs.Length - 1) : creatureIndex - 1;
+		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+		UpdateSpecter();
+	}
+
+	private void SetStatNames()
+	{
+		string life = Localization.GetText("spectre_life_text");
+		string exdmg = Localization.GetText("spectre_extradamage_text");
+		string dex = Localization.GetText("spectre_dexterity_text");
+		string def = Localization.GetText("spectre_defence_text");
+		string reg = Localization.GetText("spectre_regeneration_text");
+
+		_spectreStatsNames.Text = life + "\n" + exdmg + "\n" + dex + "\n" + def + "\n" + reg;
 	}
 
 	private void SetColor(dfControl guiComponent)
@@ -132,12 +175,12 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		GUIObjectBaseMenue obj = cntrl.GetComponent<GUIObjectBaseMenue>();
 		obj._curFaction = GameManager.Singleton.Player.CurrentFaction;
 		obj._curCreature = GameManager.Singleton.Player.CurCreature;
+		obj.creatureIDs = GameManager.Singleton.Player.creatureIDs;
 		return obj;
     }
 
 	void Update()
 	{
 		Init();
-		UpdateSpecter();
 	}
 }

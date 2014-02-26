@@ -15,10 +15,9 @@ public class GUIObjectSlotHandling : MonoBehaviour
 	private dfSprite _driodHealth;
 	private dfSprite _driodElement;
 	private dfSprite _driodLevel;
-	private int imprintedSlots = 0;
 	
 	private GameObject root;
-	private Creature.Slot slot;
+	public Creature.Slot slot;
 	private List<dfSprite> imprints = new List<dfSprite>();
 
 	private bool init = false;
@@ -42,6 +41,7 @@ public class GUIObjectSlotHandling : MonoBehaviour
 
 	public void RefreshView()
 	{
+		_driodLevel.Show();
 		_driodHealth.FillAmount = 0.57f + slot.driodenHealth * 0.36f;
 		_driodElement.SpriteName = ElementSpritePrefix + slot.driodenElement.ToString();
 		if (slot.driodenLevel > 1)
@@ -57,6 +57,7 @@ public class GUIObjectSlotHandling : MonoBehaviour
 
 		for (int i = 0; i < imprints.Count; i++)
 		{
+			imprints[i].Show();
 			if (e < slot.energy)
 			{
 				imprints[i].SpriteName = ImprintSpritePrefix + GameManager.ResourceElement.energy + (i == 9 ? "" : "0") + (i + 1);

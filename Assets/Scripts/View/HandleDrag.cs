@@ -4,13 +4,13 @@ using System.Collections;
 public class HandleDrag : MonoBehaviour
 {
 	public Vector3 startPosition;
-	public dfSprite sprite;
+	public dfSprite Sprite;
+	public dfPanel Panel;
 	public bool draged = false;
 	public bool inSlot = false;
 
-	private Vector2 rootPosition;
 	private GUIObjectCrafting _crafting;
-	private GameObject root;
+	private GUIObjectBaseMenue _baseMenue;
 	private dfDragHandle dragHandle;
 	private bool clampY;
 
@@ -22,8 +22,7 @@ public class HandleDrag : MonoBehaviour
 	{
 		HandleDrag cntr = root.AddComponent<HandleDrag>();
 		cntr._crafting = crafting;
-		cntr.sprite = sprite;
-		cntr.root = root;
+		cntr.Sprite = sprite;
 		cntr.clampY = clampY;
 
 		if (addDragHandle)
@@ -35,16 +34,34 @@ public class HandleDrag : MonoBehaviour
 		}
 	}
 
+	public static void AddHandleDrag(GUIObjectBaseMenue baseMenue, GameObject root, dfPanel panel, bool clampY = true)
+	{
+		HandleDrag cntr = root.AddComponent<HandleDrag>();
+		cntr._baseMenue = baseMenue;
+		cntr.Panel = panel;
+		cntr.clampY = clampY;
+
+		
+		GameObject dragHandle = new GameObject("dragHandle");
+		dragHandle.transform.parent = root.transform;
+		cntr.dragHandle = dragHandle.AddComponent<dfDragHandle>();
+		cntr.dragHandle.Position = new Vector3(0, 0, 0);
+		
+	}
+
 	private void Init()
 	{
 		if (init) return;
-
-		startPosition = sprite.RelativePosition;
-		rootPosition = new Vector2(sprite.GetGUIScreenPos().x - sprite.Size.x, sprite.GetGUIScreenPos().y - sprite.Size.y);
-
-		dragHandle.Size = new Vector2(sprite.Size.x, sprite.Size.y);
-
 		init = true;
+
+		if (_crafting)
+		{
+			startPosition = Sprite.RelativePosition;
+			dragHandle.Size = new Vector2(Sprite.Size.x, Sprite.Size.y);
+			return;
+		}
+		startPosition = Panel.RelativePosition;
+		dragHandle.Size = new Vector2(Panel.Size.x, Panel.Size.y);
 	}
 
 	public void OnDragStart(dfControl control, dfDragEventArgs dragEvent)
@@ -53,20 +70,21 @@ public class HandleDrag : MonoBehaviour
 		dragEvent.Data = this;
 		dragEvent.State = dfDragDropState.Dragging;
 		dragEvent.Use();
-
-		sprite.BringToFront();
-
-		if (!clampY)
-		{
-			_crafting.ShowCraftingOptions(sprite.SpriteName);
-			_crafting.UpdaetView = false;
-		}
 		draged = true;
+
+		if (_crafting)
+		{
+			Sprite.BringToFront();
+			if (!clampY)
+			{
+				_crafting.ShowCraftingOptions(Sprite.SpriteName);
+				_crafting.UpdaetView = false;
+			}
+		}
 	}
 
 	public void OnDragDrop(dfControl source, dfDragEventArgs args)
 	{
-
 		args.State = dfDragDropState.Dropped;
 		args.Use();
 	}
@@ -76,56 +94,96 @@ public class HandleDrag : MonoBehaviour
 	public void OnDragEnd(dfControl control, dfDragEventArgs dragEvent)
 	{
 		if (dragEvent.State == dfDragDropState.Denied)return;
-
-		sprite.RelativePosition = startPosition;
 		dragEvent.State = dfDragDropState.Denied;
 
-		_crafting.Craft();
 
-		sprite.Opacity = 1;
-		_crafting.UpdaetView = true;
+		if (_crafting)
+		{
+			Sprite.RelativePosition = startPosition;
+
+			_crafting.Craft();
+			Sprite.Opacity = 1;
+			_crafting.UpdaetView = true;
+		}
+
+		Panel.RelativePosition = startPosition;
+
 		eleUp = false;
 		eleDown = false;
 		draged = false;
 		inSlot = false;
 	}
 
-	private void ElementHandling(Vector2 curPosition)
+	private void ElementHandling(Vector2 curPosition, dfControl cntr)
 	{
-		if (curPosition.x > startPosition.x + sprite.Size.x)
+		if (curPosition.x > startPosition.x + cntr.Size.x)
 		{
-			sprite.Opacity = (Screen.width / curPosition.x) - 0.75f;
+			cntr.Opacity = (Screen.width / curPosition.x) - 0.75f;
 			if (eleUp) return;
-			_crafting.NextElement();
+
+			if (_crafting)
+			{
+				_crafting.NextElement();
+			}
+			else
+			{
+				_baseMenue.NextSpectre();
+			}
+
 			eleUp = true;
 			return;
 		}
 
-		if (curPosition.x < startPosition.x - sprite.Size.x)
+		if (curPosition.x < startPosition.x - cntr.Size.x)
 		{
 			float curOpecity = (curPosition.x / Screen.width) - 0.75f;
 
-			sprite.Opacity = 1.5f + curOpecity;
+			cntr.Opacity = 1.5f + curOpecity;
 
 			if (eleDown) return;
-			_crafting.PreviousElement();
+
+			if (_crafting)
+			{
+				_crafting.PreviousElement();
+			}
+			else
+			{
+				_baseMenue.PreviousSpectre();
+			}
+
 			eleDown = true;
 			return;
 		}
 
 		if (eleUp)
 		{
-			_crafting.PreviousElement();
+			if (_crafting)
+			{
+				_crafting.PreviousElement();
+			}
+			else
+			{
+				_baseMenue.PreviousSpectre();
+			}
+
 			eleUp = false;
-			sprite.Opacity = 1;
+			cntr.Opacity = 1;
 			return;
 		}
 
 		if (eleDown)
 		{
-			_crafting.NextElement();
+			if (_crafting)
+			{
+				_crafting.NextElement();
+			}
+			else
+			{
+				_baseMenue.NextSpectre();
+			}
+
 			eleDown = false;
-			sprite.Opacity = 1;
+			cntr.Opacity = 1;
 		}
 	}
 	
@@ -135,25 +193,36 @@ public class HandleDrag : MonoBehaviour
 
 		if (draged)
 		{
-			Vector2 position = sprite.GetManager().ScreenToGui(Input.mousePosition);
-
-			Vector2 curPosition;
-
-			if (clampY)
+			if (_crafting)
 			{
-				curPosition = new Vector2(position.x - sprite.Size.x*0.5f, sprite.RelativePosition.y);
-				
-				sprite.RelativePosition = curPosition;
-
-				ElementHandling(curPosition);
-
+				SetPosition(Sprite);
+				_crafting.MarkForCrafting(Sprite);
 				return;
 			}
 
-			curPosition = position - sprite.Size*0.5f;
-			sprite.RelativePosition = curPosition;
-
-			_crafting.MarkForCrafting(sprite);
+			SetPosition(Panel);
 		}
+	}
+
+	private void SetPosition(dfControl cntr)
+	{
+		Vector2 position = cntr.GetManager().ScreenToGui(Input.mousePosition);
+
+		Vector2 curPosition;
+
+		if (clampY)
+		{
+			curPosition = new Vector2(position.x - cntr.Size.x * 0.5f, cntr.RelativePosition.y);
+
+			cntr.RelativePosition = curPosition;
+
+			ElementHandling(curPosition, cntr);
+
+			return;
+		}
+
+		curPosition = position - cntr.Size * 0.5f;
+		cntr.RelativePosition = curPosition;
+
 	}
 }

@@ -26,8 +26,9 @@ public class GUIObjectBaseUI : MonoBehaviour
 	{
 		GUIObjectCrafting.Create(_root);
 	}
-	public void AddEquip(Creature curCreature, Creature.Slot slot)
+
+	public void AddEquip(Creature curCreature, Creature.Slot slot, GUIObjectBaseMenue menue)
 	{
-		GUIObjectEquip.Create(_root,curCreature ,slot);
+		GUIObjectEquip.Create(_root, curCreature, slot, menue);
 	}
 }
