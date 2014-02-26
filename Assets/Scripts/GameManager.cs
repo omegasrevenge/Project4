@@ -793,6 +793,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SoundController.PlaySound(BattleSounds.TameFail, BattleSounds.MiscSoundChannel);
             BattleEngine.Current.EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("tame_fail");
             message = "Fail!";
         }

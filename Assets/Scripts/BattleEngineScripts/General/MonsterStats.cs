@@ -31,9 +31,7 @@ public class MonsterStats : MonoBehaviour
             Debug.LogError(gameObject.name+" is getting a NONE-MonsterElement input!");
 		    break;
 		}
-        Debug.Log("Loading Texture at = " + location + model + elementString + tamed);
         Texture look = Resources.Load<Texture>(location + model + elementString + tamed);
-        Debug.Log("Loaded. Result = "+look);
 	    for (int index = 0; index < GetComponentsInChildren<SkinnedMeshRenderer>().Length; index++)
 	        GetComponentsInChildren<SkinnedMeshRenderer>()[index].material.mainTexture = look;
 	}

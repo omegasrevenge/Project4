@@ -14,6 +14,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     private float _fleeCooldown = 0f;
     private const string Prefab = "GUI/panel_battleui";
     private int _lastButton = -1;
+    private int _lastDriodCount = 0;
 
     public GameObject MonsterAContainer;
     public GameObject MonsterBContainer;
@@ -200,7 +201,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
         }
 		GGContainer.MouseMove += OnMouseMove;
 		GGContainer.MouseDown += OnMouseMove;
-		GGContainer.MouseUp += OnMouseUp;
+        GGContainer.MouseUp += OnMouseUp;
+        for (int i = 0; i < PresentDriodsCount; i++)
+            DriodsHealth[i].FillAmount = 1;
     }
 
     public void Init()
@@ -337,13 +340,23 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateDriodHealth()
     {
-        //for (int i = 0; i < PresentDriodsCount; i++) Driods[i].Text = Slots[i].driodenLevel.ToString();
+        for (int i = 0; i < PresentDriodsCount; i++)
+        {
+            if (DriodsHealth[i].FillAmount - (0.57f + Slots[i].driodenHealth*0.36f) < 0.001f ||
+                PresentDriodsCount < _lastDriodCount)
+            {
+                Debug.Log("Playing sound break now. Info = DriodsHealth[i].FillAmount: " + DriodsHealth[i].FillAmount + ", (0.57f + Slots[i].driodenHealth*0.36f): " + (0.57f + Slots[i].driodenHealth * 0.36f) + ", PresentDriodsCount: " + PresentDriodsCount + ", _lastDriodCount" + _lastDriodCount);
+                SoundController.PlaySound(BattleSounds.DriodBreak, BattleSounds.MiscSoundChannel);
+            }
+        }
 
         for (int i = PresentDriodsCount; i < 4; i++)
             DriodsHealth[i].Hide();
 
         for (int i = 0; i < PresentDriodsCount; i++)
             DriodsHealth[i].FillAmount = 0.57f + Slots[i].driodenHealth * 0.36f;
+
+        _lastDriodCount = PresentDriodsCount;
     }
 
     public void UpdateMonsterElements()
@@ -569,14 +582,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
 		//if (idx != -1) //remove from anywhere
 		{
-		    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+		    SoundController.PlaySound(BattleSounds.DriodDeselect, BattleSounds.MiscSoundChannel);
             InputText.Remove(driod);
             return;
         }
 
         if (InputText.Contains(driod)) return;
 
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
         InputText.Add(driod);
     }
 
@@ -625,7 +638,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.B) return;
         _fleeCooldown = 10f;
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
         GameManager.Singleton.EscapeAttempt();
         DeleteSelection();
     }
@@ -665,7 +678,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             CatchDriods[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
             CatchDriodsVisual[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
         }
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
         DeleteSelection();
     }
 
@@ -676,7 +689,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterAContainer.GetComponent<dfPanel>().Show();
 		MonsterBContainer.GetComponent<dfPanel>().Show();
         DriodContainer.transform.parent.GetComponent<dfPanel>().Show();
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
     }
 
     public void CatchButtonClick(int index)

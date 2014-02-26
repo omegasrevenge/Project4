@@ -348,7 +348,7 @@ public class BattleEngine : SceneRoot3D
                     element = "Water";
                     break;
             }
-            MonsterDoFullAction(CurCaster, "atk_var_" + (CurCaster.name.Contains("Giant") ? 2 : anim), anim - 1, element + model);
+            MonsterDoFullAction(CurCaster, "atk_var_" + (CurCaster.name.Contains("Giant") ? 2 : anim), (CurCaster.name.Contains("Giant") ? 1 : anim - 1), element + model);
             return;
 		}
 
