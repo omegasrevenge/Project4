@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100100
 GameObject:
   m_ObjectHideFlags: 1
@@ -1432,6 +1432,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400188}
   - 95: {fileID: 9500004}
+  - 111: {fileID: 11100000}
   m_Layer: 0
   m_Name: Pedestal_Basemesh_VENGEA
   m_TagString: Untagged
@@ -1853,7 +1854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -3418,7 +3419,7 @@ Animator:
   m_GameObject: {fileID: 100188}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e61ca661a8cf2ef4abc8a5c37c0a8953, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2530bc8f4dfd7ec4d82226fbd29d5c22, type: 2}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
@@ -3458,6 +3459,20 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &11100000
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100188}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 635e7c180ec1e324080595697a0b97f5, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
