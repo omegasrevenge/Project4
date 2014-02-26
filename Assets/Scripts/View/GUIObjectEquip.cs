@@ -17,7 +17,6 @@ public class GUIObjectEquip : MonoBehaviour
 	private Player.Faction _curFaction;
 	private Creature _curCreature;
 	private Creature.Slot _slot;
-	private GUIObjectBaseMenue _menue;
 
 	private List<dfLabel> counterLabels = new List<dfLabel>();
 	private List<dfButton> elementButtons = new List<dfButton>();
@@ -86,7 +85,6 @@ public class GUIObjectEquip : MonoBehaviour
 					 SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					 _curResourceLevel = (GameManager.ResourceLevel)(driodButtons.IndexOf((dfButton)control) + 1);
 					 GameManager.Singleton.EquipCreatureSlot(_curCreature.CreatureID, _slot.slotId, (int)_curResourceElement, (int)_curResourceLevel);
-					 _menue.UpdateSpecter();
 					 Remove();
 				 };
 			driodButtons.Add(curButton);
@@ -110,7 +108,7 @@ public class GUIObjectEquip : MonoBehaviour
 		_equipBox.BackgroundColor = factionColors[(int)_curFaction];
 	}
 
-	public static GUIObjectEquip Create(dfControl root, Creature curCreature, Creature.Slot slot, GUIObjectBaseMenue menue)
+	public static GUIObjectEquip Create(dfControl root, Creature curCreature, Creature.Slot slot)
 	{
 		dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
@@ -120,7 +118,6 @@ public class GUIObjectEquip : MonoBehaviour
 		obj.SetColor();
 		obj._curCreature = curCreature;
 		obj._slot = slot;
-		obj._menue = menue;
 		return obj;
     }
 

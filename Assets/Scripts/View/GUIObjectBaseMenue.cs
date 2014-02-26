@@ -52,6 +52,8 @@ public class GUIObjectBaseMenue : MonoBehaviour
 
 		if (init)
 		{
+			if (GameManager.Singleton.AllOwnCreatures.Count > 0) _curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+
 			for (int i = 0; i < driodSlots.Count; i++)
 			{
 				if (i >= _curCreature.slots.Length)
@@ -60,7 +62,6 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					continue;
 				}
 				driodSlots[i].gameObject.SetActive(true);
-				Debug.Log("Update Slots");
 				GUIObjectSlotHandling eqipSlot = driodSlots[i].GetComponent<GUIObjectSlotHandling>();
 				eqipSlot.slot = _curCreature.slots[i];
 				eqipSlot.RefreshView();
@@ -104,7 +105,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 				(control, @event) =>
 				{
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
-					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)], this);
+					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
 				};
 
 			driodSlots.Add(curButton);
@@ -127,7 +128,6 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		HandleDrag.AddHandleDrag(this, _switchSpectre.gameObject, _switchSpectre);
 
 		SetColor(gameObject.GetComponent<dfControl>());
-		UpdateSpecter();
 		init = true;
 	}
 
@@ -135,14 +135,12 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	{
 		creatureIndex = creatureIndex >= (creatureIDs.Length - 1) ? 0 : creatureIndex + 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
-		UpdateSpecter();
 	}
 
 	public void PreviousSpectre()
 	{
 		creatureIndex = creatureIndex <= 0 ? (creatureIDs.Length - 1) : creatureIndex - 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
-		UpdateSpecter();
 	}
 
 	private void SetStatNames()
@@ -182,5 +180,6 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	void Update()
 	{
 		Init();
+		UpdateSpecter();
 	}
 }
