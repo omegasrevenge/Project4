@@ -12,6 +12,7 @@ public class PlayerBase : SceneRoot3D
 	public ResourceLevel curResourceLevel = ResourceLevel.Bioden;
 
 	public GameManager.ResourceElement CuResourceElement;
+    public List<GameObject> CreatureMeshes;
 
 	private enum Windows { Crafting, Creature };
 	private Windows curWindow;
@@ -45,6 +46,11 @@ public class PlayerBase : SceneRoot3D
 		textGuiStyle = new GUIStyle { fontSize = 30 };
 		textGuiStyle.normal.textColor = Color.white;
 		textGuiStyle.alignment = TextAnchor.MiddleCenter;
+
+	    GameObject crtrMsh = CreatureMeshes[GameManager.Singleton.Player.CurCreature.ModelID];
+        crtrMsh.SetActive(true);
+        crtrMsh.GetComponent<MonsterStats>().Init(GameManager.Singleton.Player.CurCreature.BaseElement);
+
 	}
 	
 	void OnGUI()
@@ -252,7 +258,7 @@ public class PlayerBase : SceneRoot3D
 
 	#endregion
 
-	//#region Crafting
+	#region Crafting
 
 	//private void CraftingWindow(int windowID)
 	//{
@@ -333,7 +339,7 @@ public class PlayerBase : SceneRoot3D
 	//		GameManager.Singleton.Exchange((int)CuResourceElement, (int)curResourceLevel, curInputAsInt, GameManager.ExchangeMode.Down);
 	//	}
 	//}
-	//#endregion
+	#endregion
 
 	private bool CreateButton(Rect upgrade, string s)
 	{
