@@ -32,6 +32,15 @@ spectre_regeneration_text:
 loadingscreen_login:
 "Connecting to server ...",
 
+loadingscreen_reboot:
+"Rebooting system ...",
+
+loadingscreen_close:
+"Shut down ...",
+
+loadingscreen_restart:
+"Please restart your system!",
+
 loadingscreen_submitName:
 "Sending profile data to server ...",
 
@@ -81,6 +90,28 @@ screen_monsterentername_title:
 
 screen_monsterentername_text:
 "Please choose a name for your Spectre.",
+
+menu_resources: "Ressources",
+
+menu_sound: "Sound",
+
+menu_firewall: "Firewall",
+
+menu_setbase: "Set base",
+
+menu_basecooldown: "(available in {0}h {1}min)",
+
+menu_reboot: "Reboot system",
+
+menu_logout: "Logout",
+
+screen_login: "Using OCULUS requires you to authenticate.",
+
+screen_login_button: "Login",
+
+popup_warning_firewall_title: "Warning!",
+
+popup_warning_firewall_text: "You turned off the Security Service of VENGEA. Unintended consequences can occur.",
 	
 iris_01_text: 	
 "Greetings Agent,
@@ -121,7 +152,8 @@ iris_05_03_text:
 Now finish the fight.",
 
 iris_05_04_text:
-"Excellent. You will recive rewards from VENGEA for successful fights. These are biodes, primitive ressources out of the spectral world. You can use them to create driodes improving your control over a Spectre.",
+"Excellent. You will recive rewards from VENGEA for successful fights.
+These are biodes, primitive ressources out of the spectral world. You can use them to create driodes improving your control over a Spectre.",
 
 iris_06_01_text:
 "Gather biodes from your surrounding area!",
@@ -371,10 +403,10 @@ DMG:
 "Damage",
 
 Set_On_Fire:
-"Set on Fire!"
+"Damage over time!"
 
 Burn_DMG:
-"Burn Damage",
+"Damage over time",
 
 Regen:
 "Regenerating Life!",

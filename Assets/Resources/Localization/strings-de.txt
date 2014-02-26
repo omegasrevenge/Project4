@@ -111,12 +111,12 @@ screen_login_button: "Anmelden",
 
 popup_warning_firewall_title: "Warnung!",
 
-popup_warning_firewall_text: "Sie haben den Sicherheits-Service von VENGEA ausgeschaltet. Dies kann zu ungewollten Verhalten führen.",
-
+popup_warning_firewall_text: "Sie haben den Sicherheits-Service von VENGEA ausgeschaltet. Dies kann ungewollte Folgen nach sich ziehen.",
 
 iris_01_text: 	
 "Willkommen Agent,
-Sie sind kurz davor ein Teil von VENGEA zu werden. Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",
+Sie sind kurz davor ein Teil von VENGEA zu werden.
+Ich bin I.R.I.S., die künstliche Intelligenz von VENGEA, und werde Sie auf Ihren Wegen begleiten.",
 
 iris_02_01_text:
 "Um die Registrierung in unserem System abzuschließen, erstellen Sie sich bitte einen Nutzernamen. Dieser wird auch anderen VENGEA Agents angezeigt.",
@@ -403,10 +403,10 @@ DMG:
 "Schaden",
 
 Set_On_Fire:
-"In Brand gesetzt!"
+"Andauernder Schaden!"
 
 Burn_DMG:
-"Brandschaden",
+"Andauernder Schaden",
 
 Regen:
 "Regeneriere Leben!",
