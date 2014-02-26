@@ -2269,7 +2269,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841321359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .000781250012, y: .000781250012, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1859583930}
@@ -4110,7 +4110,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1304823710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .000781250012, y: .000781250012, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 517981212}
@@ -4514,8 +4514,10 @@ MonoBehaviour:
         XP: 0
         Level: 0
         HP: 0
+        HPReg: 0
         HPMax: 0
         Damage: 0
+        ExtraDamage: 0
         Version: 0
         Defense: 0
         Dexterity: 0
@@ -4534,8 +4536,10 @@ MonoBehaviour:
       XP: 0
       Level: 0
       HP: 0
+      HPReg: 0
       HPMax: 0
       Damage: 0
+      ExtraDamage: 0
       Version: 0
       Defense: 0
       Dexterity: 0
@@ -5371,6 +5375,7 @@ GameObject:
   - 4: {fileID: 1645823920}
   - 114: {fileID: 1645823922}
   - 65: {fileID: 1645823921}
+  - 114: {fileID: 1645823923}
   m_Layer: 9
   m_Name: Label
   m_TagString: Untagged
@@ -5480,6 +5485,19 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!114 &1645823923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1645823919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28c210acf9381248a00d3484d62bda5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: {fileID: 1645823922}
+  UserPicture: {fileID: 1766820559}
 --- !u!1 &1652001114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5879,6 +5897,7 @@ GameObject:
   - 4: {fileID: 1757634965}
   - 114: {fileID: 1757634967}
   - 65: {fileID: 1757634966}
+  - 114: {fileID: 1757634968}
   m_Layer: 9
   m_Name: panel_spectre
   m_TagString: Untagged
@@ -5963,6 +5982,19 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
+--- !u!114 &1757634968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1757634964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25a4352049415045928d12a4afab949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: {fileID: 1644664437}
+  SpectreSymbol: {fileID: 1147079010}
 --- !u!1 &1766820556
 GameObject:
   m_ObjectHideFlags: 0
