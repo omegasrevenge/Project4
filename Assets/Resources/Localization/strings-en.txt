@@ -418,7 +418,7 @@ Confusion:
 "Confusion!",
 
 Buff:
-"Buffed!",
+"Strengthened!",
 
 Default:
 "Normal Attack",
