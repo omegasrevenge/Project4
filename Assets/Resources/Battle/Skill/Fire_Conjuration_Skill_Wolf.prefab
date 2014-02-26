@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -97.2428665, y: 98.7848587, z: 4.73953915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -287,8 +287,8 @@ MeshParticleEmitter:
   maxSize: .150000006
   minEnergy: 3
   maxEnergy: 4
-  minEmission: 100
-  maxEmission: 200
+  minEmission: 200
+  maxEmission: 400
   worldVelocity: {x: 3, y: -100, z: 3}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}

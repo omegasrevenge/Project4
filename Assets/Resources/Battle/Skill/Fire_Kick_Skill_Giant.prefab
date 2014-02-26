@@ -719,7 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanShowDamage: 0
-  Delay: .200000003
+  Delay: .300000012
   EmitTime: 2
   FadeTime: 2
   Emitters: []

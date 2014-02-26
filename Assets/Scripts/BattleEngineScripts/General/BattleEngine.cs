@@ -348,7 +348,7 @@ public class BattleEngine : SceneRoot3D
                     element = "Water";
                     break;
             }
-            MonsterDoFullAction(CurCaster, "atk_var_" + anim, anim - 1, element + model);
+            MonsterDoFullAction(CurCaster, "atk_var_" + (CurCaster.name.Contains("Giant") ? 2 : anim), anim - 1, element + model);
             return;
 		}
 
@@ -373,7 +373,11 @@ public class BattleEngine : SceneRoot3D
     }
 
     public string Extract(string skillName, string extractionMode)
-    { return (string) GameManager.Singleton.Techtree["Combos"][skillName][extractionMode]; }
+    {
+        if ((string)GameManager.Singleton.Techtree["Combos"][skillName]["Monster"] == "All" && extractionMode == "Asset_Name")
+            return CurCaster.name.Contains("Wolf") ? (string)GameManager.Singleton.Techtree["Combos"][skillName][extractionMode][0] : (string)GameManager.Singleton.Techtree["Combos"][skillName][extractionMode][1];
+        return (string) GameManager.Singleton.Techtree["Combos"][skillName][extractionMode];
+    }
 
     private void createSkillVisuals(string objName)
     {

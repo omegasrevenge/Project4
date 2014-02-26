@@ -157,9 +157,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanShowDamage: 0
-  Delay: 2.70000005
-  EmitTime: 1.79999995
+  WolfDelay: 1.5
+  GiantDelay: 1
+  WolfEmitTime: .800000012
+  GiantEmitTime: 1
   FadeTime: 3
+  MovementSpeed: 1
   Register: []
   Emitters: []
 --- !u!1001 &100100000

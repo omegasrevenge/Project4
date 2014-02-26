@@ -572,7 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanShowDamage: 0
   Delay: .800000012
-  EmitTime: 1
+  EmitTime: 2
   FadeTime: 3
   MovementSpeed: 1
   Register: []

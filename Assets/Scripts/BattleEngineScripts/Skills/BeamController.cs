@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class BeamController : ActorControlls
 {
-    public float Delay = 3f;
-    public float EmitTime = 1f;
+    public float WolfDelay = 3f;
+    public float GiantDelay = 3f;
+    public float WolfEmitTime = 1f;
+    public float GiantEmitTime = 1f;
     public float FadeTime = 3f;
     public float MovementSpeed = 1f;
     public List<GameObject> Register;
@@ -16,6 +17,8 @@ public class BeamController : ActorControlls
 
 	void Start ()
 	{
+        if(gameObject.name.Contains("Jump"))
+            transform.position = transform.TransformPoint(new Vector3(0f, 0f, 2f));
 	    _jumpGiantAttackWithMovement = gameObject.name.Contains("Fire_Jump") || gameObject.name.Contains("Water_Jump");
 
         Register = new List<GameObject>();
@@ -31,20 +34,44 @@ public class BeamController : ActorControlls
 	
 	void Update () 
     {
-	    if (Delay > 0f)
-	    {
-	        Delay -= Time.deltaTime;
-	        return;
-	    }
+	    if (!CanShowDamage)
+        {
+            if (BattleEngine.Current.CurCaster.name.Contains("Wolf"))
+            {
+                if (WolfDelay > 0f)
+                {
+                    WolfDelay -= Time.deltaTime;
+                    return;
+                }
 
-	    if (EmitTime > 0f)
-	    {
-	        if (_jumpGiantAttackWithMovement)
-	            Register[0].transform.position =
-	                Register[0].transform.TransformPoint(new Vector3(0f, 0f, MovementSpeed*Time.deltaTime));
-            SetEmit(true);
-	        EmitTime -= Time.deltaTime;
-	        return;
+                if (WolfEmitTime > 0f)
+                {
+                    if (_jumpGiantAttackWithMovement)
+                        Register[0].transform.position =
+                            Register[0].transform.TransformPoint(new Vector3(0f, 0f, MovementSpeed * Time.deltaTime));
+                    SetEmit(true);
+                    WolfEmitTime -= Time.deltaTime;
+                    return;
+                }
+            }
+            else
+            {
+                if (GiantDelay > 0f)
+                {
+                    GiantDelay -= Time.deltaTime;
+                    return;
+                }
+
+                if (GiantEmitTime > 0f)
+                {
+                    if (_jumpGiantAttackWithMovement)
+                        Register[0].transform.position =
+                            Register[0].transform.TransformPoint(new Vector3(0f, 0f, MovementSpeed * Time.deltaTime));
+                    SetEmit(true);
+                    GiantEmitTime -= Time.deltaTime;
+                    return;
+                }
+            }
 	    }
 
         CanShowDamage = true;
