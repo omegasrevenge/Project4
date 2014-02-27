@@ -8,7 +8,7 @@ public class LocationManager : MonoBehaviour {
     [SerializeField]
     private float _latitude = 52.50385f;
     [SerializeField]
-    private float _longitude = 13.39669f;
+    private float _longitude = 13.39669f ;
     [SerializeField]
     private float _direction = 0f;
 
@@ -42,10 +42,12 @@ public class LocationManager : MonoBehaviour {
 
     private void Init()
     {
+        _latitude = PlayerPrefs.GetFloat("Latitude", 52.50385f);
+        _longitude = PlayerPrefs.GetFloat("Longitude", 13.39669f);
         Input.location.Start();
         Input.compass.enabled = true;
 
-        
+
     }
 
     private void Update()
@@ -70,7 +72,8 @@ public class LocationManager : MonoBehaviour {
 
         _longitude += moveDirection.x;
         _latitude += moveDirection.y;
-
+        PlayerPrefs.SetFloat("Latitude", _latitude);
+        PlayerPrefs.SetFloat("Longitude", _longitude);
 
 #endif
 

@@ -206,6 +206,12 @@ public class GameManager : MonoBehaviour
             StartCoroutine(GetPois());
 
         pois_timeQ -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_view)
+                _view.AddIrisPopup("iris_11_01_text", "iris_11");
+        }
     }
 
 
