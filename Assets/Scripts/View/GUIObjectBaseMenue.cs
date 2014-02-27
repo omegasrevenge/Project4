@@ -18,11 +18,13 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	private const string SwitchSpectre = "switch_spectre";
 	private const string SpectreElementStr = "sprite_element";
 	private const string SpectreElementSprite = "crafting_element_";
+	private const string EquipButtonStr = "button_equip_spectre";
 
 	private GUIObjectEquip _equip;
 
 	private dfButton _craftingButton;
 	private dfButton _exitButton;
+	private dfButton _equipButton;
 	private dfSprite _spectreElement;
 	private dfLabel _spectreLevel;
 	private dfLabel _spectreName;
@@ -49,6 +51,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreName.Text = _curCreature.Name;
 		_spectreStatsNumbers.Text = "" + _curCreature.HP + "\n" + _curCreature.ExtraDamage + "\n" + _curCreature.Dexterity + "\n" + _curCreature.Defense + "\n" + _curCreature.HPReg;
 		_spectreElement.SpriteName = SpectreElementSprite + _curCreature.BaseElement;
+		
+		if (_curCreature.CreatureID == GameManager.Singleton.Player.CurCreature.CreatureID)
+		{
+			_equipButton.Hide();
+		}
+		else
+			_equipButton.Show();
+
 
 		if (init)
 		{
@@ -79,6 +89,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreStatsNames = transform.Find(LabelSpecterStatNames).GetComponent<dfLabel>();
 		_spectreStatsNumbers = transform.Find(LabelSpecterStatNumbers).GetComponent<dfLabel>();
 		_spectreElement = transform.Find(SpectreElementStr).GetComponent<dfSprite>();
+		_equipButton = transform.Find(EquipButtonStr).GetComponent<dfButton>();
 
 		SetStatNames();
 	}
@@ -118,6 +129,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					transform.parent.GetComponent<GUIObjectBaseUI>().AddCrafting();
 				};
+
 		_exitButton.Click +=
 				(control, @event) =>
 				{
@@ -125,6 +137,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
 				};
+
+		_equipButton.Click +=
+				(control, @event) =>
+				{
+					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+					GameManager.Singleton.SwitchCurrentCreature(_curCreature.CreatureID);
+				};
+
 		_switchSpectre = transform.Find(SwitchSpectre).GetComponent<dfPanel>();
 		HandleDrag.AddHandleDrag(this, _switchSpectre.gameObject, _switchSpectre);
 
@@ -155,6 +175,8 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		string reg = Localization.GetText("spectre_regeneration_text");
 
 		_spectreStatsNames.Text = life + "\n" + exdmg + "\n" + dex + "\n" + def + "\n" + reg;
+
+		_equipButton.Text = Localization.GetText("equip_button_text");
 	}
 
 	private void SetColor(dfControl guiComponent)

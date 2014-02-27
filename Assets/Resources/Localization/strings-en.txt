@@ -13,7 +13,9 @@
 	
 	default_name:		"Username",
 	
-	
+equip_button_text:
+"Equip"	
+
 spectre_life_text:
 "Life"
 

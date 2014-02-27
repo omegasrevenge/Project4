@@ -117,7 +117,18 @@ public class HandleDrag : MonoBehaviour
 
 	private void ElementHandling(Vector2 curPosition, dfControl cntr)
 	{
-		if (curPosition.x > startPosition.x + cntr.Size.x)
+		float cntrSize;
+
+		if (_crafting)
+		{
+			cntrSize = cntr.Size.x;
+		}
+		else
+		{
+			cntrSize = cntr.Size.x/3;
+		}
+
+		if (curPosition.x > startPosition.x + cntrSize)
 		{
 			cntr.Opacity = (Screen.width / curPosition.x) - 0.75f;
 			if (eleUp) return;
@@ -135,7 +146,7 @@ public class HandleDrag : MonoBehaviour
 			return;
 		}
 
-		if (curPosition.x < startPosition.x - cntr.Size.x)
+		if (curPosition.x < startPosition.x - cntrSize)
 		{
 			float curOpecity = (curPosition.x / Screen.width) - 0.75f;
 

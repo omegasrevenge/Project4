@@ -13,6 +13,8 @@
 	
 	default_name:		"Nutzername",
 
+equip_button_text:
+"Ausrüsten"
 
 spectre_life_text:
 "Leben"
