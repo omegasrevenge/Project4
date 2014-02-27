@@ -212,6 +212,12 @@ public class GameManager : MonoBehaviour
             if (_view)
                 _view.AddIrisPopup("iris_11_01_text", "iris_11");
         }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (_view)
+                _view.ShowLoadingScreen("Technische Störung. \nBitte haben Sie einen Augenblick Geduld!");
+        }
     }
 
 
