@@ -31,14 +31,17 @@ public class MonsterStats : MonoBehaviour
             Debug.LogError(gameObject.name+" is getting a NONE-MonsterElement input!");
 		    break;
 		}
-        Debug.Log(location + model + elementString + tamed);
-        Texture look = Resources.Load<Texture>(location + model + elementString + tamed);
+        Texture diff = Resources.Load<Texture>(location + model + elementString + tamed);
+	    Texture spec = Resources.Load<Texture>(location + model + "_Spec");
         for (int index = 0; index < GetComponentsInChildren<SkinnedMeshRenderer>().Length; index++)
         {
             if (GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials.Length > 1)
-                GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials[1].mainTexture = look;
+            {
+                GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials[1].mainTexture = diff;
+                GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials[0].mainTexture = spec;
+            }       
             else
-                GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials[0].mainTexture = look;
+                GetComponentsInChildren<SkinnedMeshRenderer>()[index].materials[0].mainTexture = diff;
         }     
 	}
 }

@@ -281,6 +281,7 @@ public class GameManager : MonoBehaviour
             case GameMode.Base:
                 if (!_base)
                 {
+                    EnterBase();
                     _base = PlayerBase.Create();
                     _base.AttachGUI(_view.AddBaseUI());
                 }
@@ -694,6 +695,23 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
         Techtree = json["data"];
+    }
+
+    public void EnterBase()
+    {
+        if (!LoggedIn) return;
+        StartCoroutine(CEnterBase());
+    }
+
+    private IEnumerator CEnterBase()
+    {
+        WWW request = new WWW(GetSessionURL("base"));
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json,request.url)) yield break;
+        GetOwnPlayer();
     }
 
     public void SendBasePosition()

@@ -23,6 +23,7 @@ public class Map : SceneRoot3D
     private float _viewportScrollState;
 
     public bool init = false;
+    private Tower tower;
 
     private int pois_version = 0;
     private int grid_version = 0;
@@ -128,6 +129,10 @@ public class Map : SceneRoot3D
             {
                 HealStation heal = HealStation.Create(poi, _grid, _mapRig);
                 heal.Tap = OnTapShowMarker;
+            }
+            if (poi.Type == POI.POIType.Tower && tower == null)
+            {
+                tower = Tower.Create(poi, _grid, _mapRig);
             }
         }
     }
