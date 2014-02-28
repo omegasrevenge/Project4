@@ -1856,6 +1856,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100244
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400244}
+  - 33: {fileID: 3300000}
+  - 23: {fileID: 2300000}
+  - 95: {fileID: 9500006}
+  - 114: {fileID: 11400012}
+  m_Layer: 0
+  m_Name: Pedestal_Basemesh_VENGEA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -3000,6 +3019,7 @@ Transform:
   - {fileID: 400012}
   - {fileID: 400186}
   - {fileID: 400184}
+  - {fileID: 400244}
   m_Father: {fileID: 400002}
 --- !u!4 &400190
 Transform:
@@ -3319,6 +3339,17 @@ Transform:
   m_LocalScale: {x: 1.00000036, y: 1.00000048, z: 1.0000006}
   m_Children: []
   m_Father: {fileID: 400240}
+--- !u!4 &400244
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100244}
+  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400188}
 --- !u!20 &2000000
 Camera:
   m_ObjectHideFlags: 1
@@ -3348,6 +3379,27 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
+--- !u!23 &2300000
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100244}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 126cbf0e9b2ceb6458e084afbdacab9a, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!23 &2300004
 Renderer:
   m_ObjectHideFlags: 1
@@ -3369,6 +3421,13 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
+--- !u!33 &3300000
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100244}
+  m_Mesh: {fileID: 4300002, guid: e61ca661a8cf2ef4abc8a5c37c0a8953, type: 3}
 --- !u!33 &3300004
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -3421,6 +3480,20 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e61ca661a8cf2ef4abc8a5c37c0a8953, type: 3}
   m_Controller: {fileID: 9100000, guid: 2530bc8f4dfd7ec4d82226fbd29d5c22, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
+--- !u!95 &9500006
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e61ca661a8cf2ef4abc8a5c37c0a8953, type: 3}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
@@ -3538,6 +3611,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15bab9de8647f4684358ed2c7a015a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Vengea: {fileID: 2800000, guid: 70c07440ed164fa4e999eb9b5d2d9288, type: 3}
+  VengeaNormal: {fileID: 2800000, guid: 4de81893b7e846b4da9541288e67d21c, type: 3}
+  Nce: {fileID: 2800000, guid: 7bc88c38b5585b748a8cc133a6b9d53a, type: 3}
+  NceNormal: {fileID: 2800000, guid: 6ddd734af92c22d47910ac5747a8d8aa, type: 3}
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100244}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf15bab9de8647f4684358ed2c7a015a, type: 3}

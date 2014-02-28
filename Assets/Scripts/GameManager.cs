@@ -206,6 +206,18 @@ public class GameManager : MonoBehaviour
             StartCoroutine(GetPois());
 
         pois_timeQ -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_view)
+                _view.AddIrisPopup("iris_11_01_text", "iris_11");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (_view)
+                _view.ShowLoadingScreen("Technische Störung. \nBitte haben Sie einen Augenblick Geduld!");
+        }
     }
 
 
@@ -269,6 +281,7 @@ public class GameManager : MonoBehaviour
             case GameMode.Base:
                 if (!_base)
                 {
+                    EnterBase();
                     _base = PlayerBase.Create();
                     _base.AttachGUI(_view.AddBaseUI());
                 }
@@ -682,6 +695,23 @@ public class GameManager : MonoBehaviour
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
         Techtree = json["data"];
+    }
+
+    public void EnterBase()
+    {
+        if (!LoggedIn) return;
+        StartCoroutine(CEnterBase());
+    }
+
+    private IEnumerator CEnterBase()
+    {
+        WWW request = new WWW(GetSessionURL("base"));
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json,request.url)) yield break;
+        GetOwnPlayer();
     }
 
     public void SendBasePosition()
@@ -1430,10 +1460,16 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Unity Editor
     //####################################  Editor Login ###################################
 #if UNITY_EDITOR
     public string PlayerID = "PlayerID";
     public string Password = "Password";
+
+    private string _crElement = "Element (int)";
+    private string _crType =  "Type (int)";
+    private bool _cr;
+    private bool _keyUp = true;
 
     void OnGUI()
     {
@@ -1463,6 +1499,49 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape) && _keyUp)
+        {
+            Debug.Log("Expand");
+            _keyUp = false;
+            _cr = !_cr;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape) && !_keyUp)
+        {
+            Debug.Log("Expand");
+            _keyUp = true;
+        }
+        //Debug.Log(_cr);
+        if (_cr && LoggedIn)
+        {
+
+            _crElement = GUI.TextField(new Rect(10, 10, 200, 20), _crElement, 100);
+            _crType = GUI.TextField(new Rect(10, 40, 200, 20), _crType, 100);
+            if (GUI.Button(new Rect(10, 70, 200, 20), "StartFight"))
+            {
+                _cr = false;
+                StartSpecialFight(Convert.ToInt32(_crElement), Convert.ToInt32(_crType));
+            }
+        }
+
+    }
+
+    public void StartSpecialFight(int elemnt, int type)
+    {
+        if (!LoggedIn) return;
+
+        StartCoroutine(CStartSpecialFight(elemnt,type));
+    }
+
+    private IEnumerator CStartSpecialFight(int element, int type)
+    {
+        WWW request = new WWW(GetSessionURL("startspecialfight") + "&xp=" + Player.CurCreature.XP + "&element=" + element + "&mid"+type);
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        JSONObject data = json["data"];
+        if (!CheckResult(json, request.url)) yield break;
+        _lastOwnPlayerUpdate = -1000;
     }
 
     void EditorResetPlayer(bool result)
@@ -1478,7 +1557,7 @@ public class GameManager : MonoBehaviour
         }
     }
 #endif
-
+    #endregion
 
 
 }

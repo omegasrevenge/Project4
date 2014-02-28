@@ -10,10 +10,12 @@ public class POI
         Unexpected,
         Resource,
         Fight,
-        Heal
+        Heal,
+        Tower
     }
     private const string FightStr = "Fight";
     private const string HealStr = "Heal";
+    private const string TowerStr = "Tower";
 
 
     public string POI_ID;
@@ -75,6 +77,8 @@ public class POI
                 return POIType.Fight;
             if (ResourceType == HealStr)
                 return POIType.Heal;
+            if (ResourceType == TowerStr)
+                return  POIType.Tower;
             return POIType.Unexpected;
         }
     }
