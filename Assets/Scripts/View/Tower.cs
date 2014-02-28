@@ -8,6 +8,7 @@ public class Tower : PointOfInterest
 
     public static Tower Create(POI poi, MapGrid grid, Transform root)
     {
+        if (poi.Name != "Sony Center") return null;
         if (poi.View != null)
             return poi.View as Tower;
         Tower res;
