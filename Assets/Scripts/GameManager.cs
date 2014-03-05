@@ -1285,7 +1285,7 @@ public class GameManager : MonoBehaviour
         // ♥♥♥ TESTING
         //SetInitSteps(4);
         // ♥♥♥
-        if (!Player.Fighting||CurrentGameMode==GameMode.Login)
+        if (!Player.Fighting||CurrentGameMode==GameMode.Login||Player.CurrentFaction==Player.Faction.NCE)
         {
             switch (Player.InitSteps)
             {
@@ -1529,6 +1529,7 @@ public class GameManager : MonoBehaviour
 
     public void Upload()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         StartCoroutine(CUploadData());
     }
 
