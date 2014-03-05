@@ -78,14 +78,12 @@ public class GUIObjectChallenge : MonoBehaviour, IPopupContent
 
     public void Accept(dfControl control, dfMouseEventArgs args)
     {
-        Debug.Log("accepted");
         GameManager.Singleton.lastPlayerRequest = "none";
         GameManager.Singleton.Accept();
     }
 
     public void Decline(dfControl control, dfMouseEventArgs args)
     {
-        Debug.Log("declined");
         GameManager.Singleton.lastPlayerRequest = "none";
         GameManager.Singleton.Decline();
     }

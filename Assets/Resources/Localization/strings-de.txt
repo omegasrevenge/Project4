@@ -60,6 +60,18 @@ water:"Wasser",
 5:"Stufe 4 Driode(n)"
 6:"Stufe 5 Driode(n)"
 
+level_up_text:
+"{0} ist aufgestiegen",
+
+level_up_title:
+"Level Up",
+
+upload_text:
+"Daten werden an VENGEA übermittelt. Bitte brechen Sie den Vorgang nicht ab",
+
+upload_title:
+"Daten werden hochgeladen",
+
 farm_rsc_text:
 "{0} {1} vom Typ {2} gefunden.",
 

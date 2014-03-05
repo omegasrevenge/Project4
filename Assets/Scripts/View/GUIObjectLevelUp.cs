@@ -26,6 +26,9 @@ public class GUIObjectLevelUp : MonoBehaviour, IPopupContent
 
     public void Init()
     {
+        GetComponent<GUIObjectTextPanel>().Title = "level_up_title";
+        GetComponent<GUIObjectTextPanel>().Text = "level_up_text"+"#"+GameManager.Singleton.Player.CurCreature.Name;
+
 
         Background.SpriteName = background + GameManager.Singleton.Player.CurrentFaction.ToString().ToLower();
         Creature creature = GameManager.Singleton.Player.CurCreature;

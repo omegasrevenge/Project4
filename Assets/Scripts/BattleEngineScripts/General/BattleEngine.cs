@@ -433,6 +433,10 @@ public class BattleEngine : SceneRoot3D
 
     private void executeSkill()
     {
+        // tutorial
+        if (GameManager.Singleton.Player.InitSteps == 3 && CurrentPlayer == FightRoundResult.Player.A && LastResult.Turn < 2)
+            GameManager.Singleton.GUIFirstResult();
+
         CanShowDamage = false;
         if (Result.Damage > 0 && Fighting && !Result.EVDA && !Result.EVDB)
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
@@ -520,9 +524,9 @@ public class BattleEngine : SceneRoot3D
 
     public void EndBattle()
     {
-        BackgroundMusic.Stop();
+        BackgroundMusic.Stop();     
         if (lvl != GameManager.Singleton.Player.CurCreature.Level)
-            GameManager.Singleton.GUILevelUp();
+            StartCoroutine(GameManager.Singleton.CLevelUp());
         SoundController.RemoveChannel(BattleSounds.BattleSoundChannel);
         SoundController.RemoveChannel(BattleSounds.EnemySoundChannel);
         SoundController.RemoveChannel(BattleSounds.FriendlySoundChannel);

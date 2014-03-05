@@ -279,11 +279,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMode.Base:
                 if (!_base)
-                {
-                    EnterBase();
+                { 
                     _base = PlayerBase.Create();
                     _base.AttachGUI(_view.AddBaseUI());
                 }
+                EnterBase();
                 _view.Switch3DSceneRoot(_base);
                 playBaseBackgroundMusic();
                 break;
@@ -1128,6 +1128,32 @@ public class GameManager : MonoBehaviour
         POIs = tmpPOIs;
     }
 
+    public void StartSpecialFight(bool tutorial)
+    {
+        Creature cr = Player.CurCreature;
+        int element = ((int)cr.BaseElement + 2)%5;
+        StartCoroutine(CStartSpecialFight(cr.XP, element, cr.ModelID, tutorial));
+    }
+
+    public IEnumerator CStartSpecialFight(int xp, int element, int mid, bool tutorial)
+    {
+        WWW request = new WWW(GetSessionURL("startspecialfight") + "&xp=" + xp + "&element="+ element + "&mid=" + mid);
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json, request.url)) yield break;
+        GetOwnPlayer();
+
+        if (tutorial)
+            StartCoroutine(WaitForIt(3));
+    }
+
+    private IEnumerator WaitForIt(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        GUIFirstAttack();
+    }
+
     /// <summary>
     /// Checks if the request was successful.
     /// </summary>
@@ -1256,7 +1282,9 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Couldn't load Player Data!");
             return;
         }
-
+        // ♥♥♥ TESTING
+        //SetInitSteps(4);
+        // ♥♥♥
         if (!Player.Fighting||CurrentGameMode==GameMode.Login)
         {
             switch (Player.InitSteps)
@@ -1270,6 +1298,13 @@ public class GameManager : MonoBehaviour
 				case (2):
 					GUIShowSpectreName();
 					break;
+                case (3):
+                    GUIStartFight();
+                    break;
+                    // ♥ ♥ ♥
+                //case (4):
+                //    GUICollectBiods_1();
+                //    break;
                 default:
                     SwitchGameMode(GameMode.Map);
                     break;
@@ -1288,6 +1323,12 @@ public class GameManager : MonoBehaviour
 			if (curCreature.CreatureID == CId) curCreature.ReadJson(json);
 		}
 	}
+
+    public IEnumerator MapLoaded(Action<bool> success)
+    {
+        yield return new WaitForSeconds(1f);
+        success(CurrentGameMode == GameMode.Map);
+    }
 
     #region GUI methods
 
@@ -1310,6 +1351,7 @@ public class GameManager : MonoBehaviour
         //_view.HideLoadingScreen();
         if (result)
         {
+            SetInitSteps(1);
             _view.AddIrisPopup("iris_02_02_text", "iris_02_02").Callback = () =>
             {
                 _view.RemoveMaxScreen();
@@ -1357,8 +1399,7 @@ public class GameManager : MonoBehaviour
 
 	public void GUISubmitSpectreName(string monsterName)
 	{
-		NameCreature(Player.CurCreature.CreatureID, monsterName, GUISpectreNameSubmitted);
-		
+		NameCreature(Player.CurCreature.CreatureID, monsterName, GUISpectreNameSubmitted);	
 	}
 
 	public void GUISpectreNameSubmitted(bool result, string error)
@@ -1369,12 +1410,39 @@ public class GameManager : MonoBehaviour
 			{
 				SetInitSteps(3);
 				_view.RemoveMaxScreen();
-				SwitchGameMode(GameMode.Map);
+				GUIStartFight();
 			};
 			return;
 		}
 		Debug.Log(error);
 	}
+
+    public void GUIStartFight()
+    {
+        _view.AddIrisPopup("iris_05_01_text", "iris_05_01").Callback = GUIStartFight_2;
+    }
+
+    public void GUIStartFight_2()
+    {
+        StartSpecialFight(true);
+    }
+
+    public void GUIFirstAttack()
+    {
+        _view.AddIrisPopup("iris_05_02_text", "iris_05_02");
+        //SetInitSteps(4);
+    }
+
+    public void GUIFirstResult()
+    {
+        _view.AddIrisPopup("iris_05_03_text", "iris_05_03");
+    }
+
+    public void GUIFirstFightEnd()
+    {
+        _view.AddIrisPopup("iris_05_04_text", "iris_05_04");
+        SetInitSteps(4);
+    }
 
     public void GUIShowFarmResult(bool succeeded, JSONObject result)
     {
@@ -1431,7 +1499,61 @@ public class GameManager : MonoBehaviour
 
     public void GUILevelUp()
     {
-        _view.ShowPopup(GUIObjectLevelUp.Create());
+        // tutorial
+        if (Player.InitSteps == 3)
+        {
+            _view.AddIrisPopup("iris_05_04_text", "iris_05_04").Callback = GUITutLevelUp_1;
+            SetInitSteps(4);
+        }
+        else
+            _view.ShowPopup(GUIObjectLevelUp.Create(), true, Upload);
+    }
+
+    public IEnumerator CLevelUp()
+    {
+        yield return StartCoroutine(MapLoaded(success =>
+            {
+                if (success) GUILevelUp();
+            }));
+    }
+
+    public void GUITutLevelUp_1()
+    {
+        _view.AddIrisPopup("iris_09_01_text", "iris_09_01").Callback = GUITutLevelUp_2;
+    }
+
+    public void GUITutLevelUp_2()
+    {
+        _view.AddIrisPopup("iris_09_02_text", "iris_09_02").Callback = GUILevelUp;
+    }
+
+    public void Upload()
+    {
+        StartCoroutine(CUploadData());
+    }
+
+    public IEnumerator CUploadData()
+    {
+        yield return StartCoroutine(MapLoaded(success =>
+        {
+            if (success) GUIUploadData();
+        }));
+    }
+
+    public void GUIUploadData()
+    {
+        _view.ShowPopup(GUIObjectUploadData.Create("upload_text", "upload_title", "cancel"));
+    }
+
+    public void GUICollectBiods_1()
+    {
+        SwitchGameMode(GameMode.Map);
+        _view.AddIrisPopup("iris_06_01_text", "iris_06_01");
+    }
+
+    public void GUICollectBiods_2()
+    {
+        _view.AddIrisPopup("iris_06_02_text", "iris_06_02");
     }
 
     public void GUIFirewallWarning()

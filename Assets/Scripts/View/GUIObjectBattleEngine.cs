@@ -241,6 +241,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
         CatchContainerVisual.transform.position =
             (BattleEngine.Current.Camera.transform.FindChild("GUIPos").position - BattleEngine.Current.Camera.transform.position).normalized * GUIDistance + BattleEngine.Current.Camera.transform.position;
         CatchContainerVisual.transform.rotation = BattleEngine.Current.Camera.transform.rotation;
+
+        DriodContainer.GetComponent<dfPanel>().Opacity = BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.A ? 1 : 0;
+
     }
 
     public void ShowDamageIndicators(List<IndicatorContent> info)

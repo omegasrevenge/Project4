@@ -132,9 +132,7 @@ public class ViewController : MonoBehaviour
         if (_popup)
             _popup.AddContent(content, stack, callback, immediateCallback);
         else
-        {
             _popup = GUIObjectPopup.Create(_gui, content, stack, callback, immediateCallback);
-        }
     }
 
     public GUIObjectSpectresIntro AddSpectresIntro(string textKeyText)
