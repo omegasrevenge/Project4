@@ -4,21 +4,27 @@ using UnityEngine;
 public class GUIObjectMapUI : MonoBehaviour 
 {
     private const string Prefab = "GUI/panel_mapui";
-    private const string MenuPanelStr = "panel_menu";
-    private const string MessagePanelStr = "panel_message";
-    private const string RootPanelStr = "panel_root";
-    private const string MenuButtonStr = "panel_menu_button";
+    private const string ContentPanelStr    = "panel_content";
+    private const string MenuPanelStr       = "panel_menu";
+    private const string MessagePanelStr    = "panel_message";
+    private const string MenuButtonStr      = "panel_menu_button";
     public const float MaxViewportScroll = 0.78f;
     public const float MenuSpeed = 1f;
 
     private dfControl _guiRoot;
-    private dfControl _menuButton;
-    private dfControl _menuPanel;
-    private dfControl _menuRoot;
+    //_guiRoot contains _contentRoot and _menuRoot
+    private dfControl       _contentRoot;
+    private MovableGUIPanel _contentViewport;
+    private dfControl       _menuRoot;
     private MovableGUIPanel _menuViewport;
-    private MovableGUIPanel _guiViewport;
+
+    //_contentRoot contains _menuButtonPanel and _menuButtonPanel contains _menuButton
+    private dfControl _menuButtonPanel;
+    private dfControl _menuButton;
+    //_contentRoot also contains _creatureInfo and _fightInvation
     private GUIObjectCreatureInfo _creatureInfo;
     private GUIObjectMessage _fightInvation;
+
     private Map _root3D;
 
     [SerializeField]
@@ -55,18 +61,20 @@ public class GUIObjectMapUI : MonoBehaviour
     public void Init(Map root)
     {
         _root3D = root;
-        GameObject GUIRoot = GameObject.FindGameObjectWithTag(ViewController.UIRootTag);
-        _menuRoot = GameObject.FindGameObjectWithTag(ViewController.MenuRootTag).transform.Find(RootPanelStr).GetComponent<dfControl>();
-        _menuViewport = _menuRoot.GetComponent<MovableGUIPanel>();
-        _guiViewport = GetComponent<MovableGUIPanel>();
+
+        _contentRoot    = transform.Find(ContentPanelStr).GetComponent<dfControl>();
+        _menuRoot       = transform.Find(MenuPanelStr).GetComponent<dfControl>();
+
+        _contentViewport    = _contentRoot.GetComponent<MovableGUIPanel>();
+        _menuViewport       = _menuRoot.GetComponent<MovableGUIPanel>();
         ViewportScrollState = 0f;
-        _fightInvation = transform.Find(MessagePanelStr).GetComponent<GUIObjectMessage>();
-        _menuPanel = transform.Find(MenuPanelStr).GetComponent<dfControl>();
-        _menuPanel.BringToFront();
-        _menuButton = _menuPanel.transform.Find(MenuButtonStr).GetComponent<dfControl>();
+
+        _fightInvation = _contentRoot.transform.Find(MessagePanelStr).GetComponent<GUIObjectMessage>();
+        _menuButtonPanel = _contentRoot.transform.Find(MenuButtonStr).GetComponent<dfControl>();
+        _menuButtonPanel.BringToFront();
+
+        _menuButton = _menuButtonPanel.transform.Find(MenuButtonStr).GetComponent<dfControl>();
         _menuButton.Click += OnOpen;
-
-
     }
 
     private void OnOpen(dfControl control, dfMouseEventArgs args)
@@ -93,7 +101,7 @@ public class GUIObjectMapUI : MonoBehaviour
         set
         {
             value = Mathf.Clamp(value, 0f, MaxViewportScroll);
-            _viewportScrollState = _menuViewport.Phase = _guiViewport.Phase = value;
+            _viewportScrollState = _menuViewport.Phase = _contentViewport.Phase = value;
             if (_root3D)
                 _root3D.ViewportPhase = _viewportScrollState;
         }
@@ -102,10 +110,9 @@ public class GUIObjectMapUI : MonoBehaviour
     public void OpenMenu()
     {   
         TouchInput.OnClearAll();
-        Debug.Log("sort back button to front");
         _menuButton.Click -= OnOpen;
-        _menuPanel.Click += OnClose;
-        _menuPanel.BringToFront();
+        _menuButtonPanel.Click += OnClose;
+        _menuButtonPanel.BringToFront();
         TouchInput.DisableBy(this);
 
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
@@ -130,7 +137,7 @@ public class GUIObjectMapUI : MonoBehaviour
     public void CloseMenu()
     {
         _menuButton.Click += OnOpen;
-        _menuPanel.Click -= OnClose;
+        _menuButtonPanel.Click -= OnClose;
         TouchInput.EnableBy(this);
 
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
@@ -163,7 +170,7 @@ public class GUIObjectMapUI : MonoBehaviour
         ViewportScrollState = 0;
 
         _menuButton.Click += OnOpen;
-        _menuPanel.Click -= OnClose;
+        _menuButtonPanel.Click -= OnClose;
         TouchInput.EnableBy(this);
 
         Debug.Log("ScrollState: "+ViewportScrollState);
@@ -172,13 +179,13 @@ public class GUIObjectMapUI : MonoBehaviour
     public void AddMarker(TouchObject[] touches)
     {
         ObjectOnMap[] objects = Array.ConvertAll(touches, item => (ObjectOnMap)item);
-        GUIObjectMarker.Create(_guiRoot,objects);
+        GUIObjectMarker.Create(_contentRoot,objects);
     }
 
     public void SetCreatureInfo(Creature creature)
     {
         if (!_creatureInfo)
-            _creatureInfo = GUIObjectCreatureInfo.Create(_guiRoot, creature);
+            _creatureInfo = GUIObjectCreatureInfo.Create(_contentRoot, creature);
         else
             _creatureInfo.SetCreature(creature);
 
