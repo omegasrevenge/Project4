@@ -132,6 +132,4 @@ public class MapGrid : SceneRoot3D
         float y = -((float)(pos.Y + pos.LocalY) * UnitsPerTile) + _position.y;
         return new Vector2(x, y);
     }
-
-
 }

@@ -84,6 +84,10 @@ public class GUIObjectMenuBaseButton : GUIObjectMenuButton
         if (args.Used || !_active) return;
         args.Use();
         Debug.Log("SET BASE");
+        // tutorial
+        if (GameManager.Singleton.Player.InitSteps == 4)
+            GameManager.Singleton.GUIEnterBase();
+
         GameManager.Singleton.SendBasePosition();
         Active = false;
     }

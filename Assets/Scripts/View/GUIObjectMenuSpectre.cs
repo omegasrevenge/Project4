@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GUIObjectMenuSpectre : MonoBehaviour
+public class GUIObjectMenuSpectre : GUIObjectMenuButton
 {
     public dfLabel Name;
     public dfSprite SpectreSymbol;
@@ -25,4 +25,10 @@ public class GUIObjectMenuSpectre : MonoBehaviour
             _initialized = true;
         }
 	}
+
+    void OnClick(dfControl control, dfMouseEventArgs args)
+    {
+        //TODO Hide Menu
+        GameManager.Singleton.GUIShowSpectreName();
+    }
 }

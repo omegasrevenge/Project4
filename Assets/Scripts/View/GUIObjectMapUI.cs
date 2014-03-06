@@ -100,7 +100,7 @@ public class GUIObjectMapUI : MonoBehaviour
     }
 
     public void OpenMenu()
-    {
+    {   
         TouchInput.OnClearAll();
         Debug.Log("sort back button to front");
         _menuButton.Click -= OnOpen;

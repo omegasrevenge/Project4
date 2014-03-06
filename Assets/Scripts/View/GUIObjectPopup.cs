@@ -157,10 +157,11 @@ public class GUIObjectPopup : MonoBehaviour
     {
         GameManager.Singleton.GUIEnableMenu();
         Action callback;
+        IrisMessage();
         if (_immediateCallbacks.TryGetValue(_currentContent, out callback))
         {
             if (callback != null)
-                callback();
+                callback(); 
             _immediateCallbacks.Remove(_currentContent);
         }
         foreach (Action action in _callbacks)
@@ -169,6 +170,16 @@ public class GUIObjectPopup : MonoBehaviour
                 action();
         }
         Destroy(gameObject);
+    }
+
+    private void IrisMessage()
+    {
+        if (_currentContent.GetComponent<GUIObjectResourceResult>() != null &&
+            GameManager.Singleton.Player.InitSteps == 4)
+        {
+            GameManager.Singleton.GUICollectBiods_2();
+            return;
+        }
     }
 
     private void PlayContentShowAnimation()

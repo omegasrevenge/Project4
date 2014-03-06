@@ -112,11 +112,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         Application.targetFrameRate = 25;
-
 
         if (_instance == null)
             _instance = this;
@@ -252,7 +250,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchGameMode(GameMode newGameMode)
     {
-        if (newGameMode == CurrentGameMode) { return; };
+        if (newGameMode == CurrentGameMode) return;
 
         Debug.Log("SwitchGameMode:" + CurrentGameMode + " -> " + newGameMode);
 
@@ -293,6 +291,8 @@ public class GameManager : MonoBehaviour
                     _fight = BattleEngine.Create(Player.GetBattleInit());
 					_fight.AttachGUI(_view.AddBattleUI());
 				}
+                //TODO get tutorial
+                StartCoroutine(CTutorialFight());
 				_view.Switch3DSceneRoot(_fight);
 				_fight.StartFight(Player.GetBattleInit());
                 break;
@@ -431,8 +431,6 @@ public class GameManager : MonoBehaviour
         if (callback != null)
             callback(true);
     }
-
-
 
     public void ReadPlayerJSON(JSONObject jsonPlayer)
     {
@@ -597,7 +595,6 @@ public class GameManager : MonoBehaviour
         if (_allOwnCreatures == null)
         {
             _allOwnCreatures = new List<Creature>();
-
         }
         StartCoroutine(CGetCreatures());
     }
@@ -1042,6 +1039,22 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json,request.url)) { yield break; }
     }
 
+    public void SetTutuorial(int tut)
+    {
+        StartCoroutine(CSetTutuorial(tut));
+    }
+
+    public IEnumerator CSetTutuorial(int tut)
+    {
+        WWW request = new WWW(GetSessionURL("settutorial") + "&tut=" + tut);
+        Player.Tutorial = tut;
+
+        yield return request;
+
+        JSONObject json = JSONParser.parse(request.text);
+        if (!CheckResult(json, request.url)) { yield break; }
+    }
+
     public void SetFirewall(bool firewall)
     {
         if (firewall == Player.Firewall) return;
@@ -1228,13 +1241,10 @@ public class GameManager : MonoBehaviour
 		return UnixStartDate;
 	}
 
-
     void OnApplicationFocus(bool focusStatus)
     {
         //(new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
     }
-
-
 
     void OnDisable()
     {
@@ -1271,8 +1281,6 @@ public class GameManager : MonoBehaviour
             error = ((PlayGamesPlatform) Social.Active).GetRequestError();
         }    
         Debug.Log("Cannot get Token: "+error);
-
-
     }
 
     private void OnPlayerLoaded(bool result)
@@ -1283,28 +1291,33 @@ public class GameManager : MonoBehaviour
             return;
         }
         // ♥♥♥ TESTING
-        //SetInitSteps(4);
+        SetInitSteps(4);
         // ♥♥♥
-        if (!Player.Fighting||CurrentGameMode==GameMode.Login||Player.CurrentFaction==Player.Faction.NCE)
+        if (Player.CurrentFaction == Player.Faction.NCE)
+        {
+            //TODO get tutorial
+            StartCoroutine(CNCEStart());
+            SwitchGameMode(GameMode.Map);
+        }
+        else if (!Player.Fighting || CurrentGameMode == GameMode.Login)
         {
             switch (Player.InitSteps)
             {
                 case (0):
                     GUIStartIRISinstructions();
                     break;
-				case(1):
-					GUIShowSpectreChoice();
-					break;
-				case (2):
-					GUIShowSpectreName();
-					break;
+                case (1):
+                    GUIShowSpectreChoice();
+                    break;
+                case (2):
+                    GUIShowSpectreName();
+                    break;
                 case (3):
                     GUIStartFight();
                     break;
-                    // ♥ ♥ ♥
-                //case (4):
-                //    GUICollectBiods_1();
-                //    break;
+                case (4):
+                    GUICollectBiods_1();
+                    break;
                 default:
                     SwitchGameMode(GameMode.Map);
                     break;
@@ -1330,7 +1343,15 @@ public class GameManager : MonoBehaviour
         success(CurrentGameMode == GameMode.Map);
     }
 
+    public IEnumerator BattleLoaded(Action<bool> success)
+    {
+        yield return new WaitForSeconds(1f);
+        success(CurrentGameMode == GameMode.Fight);
+    }
+
     #region GUI methods
+
+    // INIT STEPS
 
     public void GUIStartIRISinstructions()
     {
@@ -1408,9 +1429,12 @@ public class GameManager : MonoBehaviour
 		{
 			_view.AddIrisPopup("iris_04_04_text", "iris_04_04").Callback = () =>
 			{
-				SetInitSteps(3);
 				_view.RemoveMaxScreen();
-				GUIStartFight();
+                if (Player.InitSteps < 3)
+                {
+                    SetInitSteps(3);
+                    GUIStartFight();
+                }
 			};
 			return;
 		}
@@ -1421,116 +1445,39 @@ public class GameManager : MonoBehaviour
     {
         _view.AddIrisPopup("iris_05_01_text", "iris_05_01").Callback = GUIStartFight_2;
     }
-
     public void GUIStartFight_2()
     {
         StartSpecialFight(true);
     }
-
     public void GUIFirstAttack()
     {
         _view.AddIrisPopup("iris_05_02_text", "iris_05_02");
-        //SetInitSteps(4);
     }
-
     public void GUIFirstResult()
     {
         _view.AddIrisPopup("iris_05_03_text", "iris_05_03");
     }
-
     public void GUIFirstFightEnd()
     {
         _view.AddIrisPopup("iris_05_04_text", "iris_05_04");
         SetInitSteps(4);
-    }
-
-    public void GUIShowFarmResult(bool succeeded, JSONObject result)
-    {
-        if (result.ToString() != "\"fight\"" && result.ToString() != "\"heal\"")
-        {
-            string[] results = result.ToString().Replace("\"", "").Split(';');
-            FarmResult resultObj = new FarmResult();
-            for (int i = 0; i < results.Length; i++)
-            {
-                string[] rsc = results[i].Split(' ');
-                int element = Convert.ToInt32(rsc[0]);
-                int level = Convert.ToInt32(rsc[1]);
-                resultObj.AddResult(element, level, 1);
-                //element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
-   
-            }
-            _view.ShowPopup(GUIObjectResourceResult.Create("farm_rsc_text", "ok", resultObj));
-        }
-    }
-
-    public void GUIHideLoginScreen()
-    {
-        _view.ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
-        _view.RemoveMaxScreen();
-        StartOAuth();
-    }
-
-    public void GUIShowLoadingScreen(string textKey)
-    {
-        _view.ShowLoadingScreen(Localization.GetText(textKey));
-    }
-
-    public void HideLoadingScreen(string textKey)
-    {
-        _view.HideLoadingScreen();
-    }
-
-
-    public void GUIClickMessage()
-    {
-        Fight fight = Player.CurFight;
-        if (fight == null || fight.Finished) return;
-        if (!fight.Started)
-        {
-            if (challengePopup == null || challengePopup.gameObject == null)
-            {
-                Player FighterA = GetPlayer(fight.FighterA.PId);
-                Player FighterB = GetPlayer(fight.FighterB.PId);
-                if (FighterA == null || FighterB == null) return;
-                _view.ShowPopup(GUIObjectChallenge.Create("challenge_text", "challenge_title", FighterB.Name, "decline", "accept"));
-            }
-        }
-    }
-
-    public void GUILevelUp()
-    {
-        // tutorial
-        if (Player.InitSteps == 3)
-        {
-            _view.AddIrisPopup("iris_05_04_text", "iris_05_04").Callback = GUITutLevelUp_1;
-            SetInitSteps(4);
-        }
-        else
-            _view.ShowPopup(GUIObjectLevelUp.Create(), true, Upload);
-    }
+    } 
 
     public IEnumerator CLevelUp()
     {
         yield return StartCoroutine(MapLoaded(success =>
-            {
-                if (success) GUILevelUp();
-            }));
+        {
+            if (success) GUILevelUp();
+        }));
     }
 
     public void GUITutLevelUp_1()
     {
         _view.AddIrisPopup("iris_09_01_text", "iris_09_01").Callback = GUITutLevelUp_2;
     }
-
     public void GUITutLevelUp_2()
     {
         _view.AddIrisPopup("iris_09_02_text", "iris_09_02").Callback = GUILevelUp;
-    }
-
-    public void Upload()
-    {
-        if (Player.CurrentFaction == Player.Faction.NCE) return;
-        StartCoroutine(CUploadData());
     }
 
     public IEnumerator CUploadData()
@@ -1551,10 +1498,162 @@ public class GameManager : MonoBehaviour
         SwitchGameMode(GameMode.Map);
         _view.AddIrisPopup("iris_06_01_text", "iris_06_01");
     }
-
     public void GUICollectBiods_2()
     {
-        _view.AddIrisPopup("iris_06_02_text", "iris_06_02");
+        _view.AddIrisPopup("iris_06_02_text", "iris_06_02").Callback = GUIOpenMenu;
+    }
+    public void GUIOpenMenu()
+    {
+        _view.AddIrisPopup("iris_06_03_text", "iris_06_03");
+    }
+    public void GUIEnterBase()
+    {
+        _view.AddIrisPopup("iris_06_04_text", "iris_06_04");
+    }
+    public void GUILeaveBase()
+    {
+        _view.AddIrisPopup("iris_06_17_text", "iris_06_17");
+        SetInitSteps(5);
+    }
+
+    // TUTORIAL
+
+    public IEnumerator CTutorialFight()
+    {
+        yield return StartCoroutine(BattleLoaded(success =>
+        {
+            if (success) GUITutorial_SecondSlot();
+        }));
+    }
+    public void GUITutorial_SecondSlot()
+    {
+        _view.AddIrisPopup("iris_08_01_text", "iris_08_01");
+    }
+    public void GUITutorial_SecondSlot_2()
+    {
+        //TODO set tutorial
+        _view.AddIrisPopup("iris_08_02_text", "iris_08_02");
+    }
+
+    public void GUITutorial_DriodLevel()
+    {
+        _view.AddIrisPopup("iris_10_01_text", "iris_10_01").Callback = GUITutorialDriodLevel_2;
+    }
+    public void GUITutorialDriodLevel_2()
+    {
+        //TODO set tutorial
+        _view.AddIrisPopup("iris_10_02_text", "iris_10_02");
+    }
+
+    public void GUITutorial_AgentNCE()
+    {
+        //TODO set tutorial
+        _view.AddIrisPopup("iris_11_01_text", "iris_11_01");
+    }
+
+    public void GUITutorial_BrokenDriod()
+    {
+        //TODO set tutorial
+        _view.AddIrisPopup("iris_13_01_text", "iris_13_01");
+    }
+
+    public void GUITutorial_Upload()
+    {
+        //TODO set tutorial
+        Player.Tutorial = 1;
+        _view.AddIrisPopup("iris_14_01_text", "iris_14_01").Callback = Upload;
+    }
+
+    public IEnumerator CNCEStart()
+    {
+        yield return StartCoroutine(MapLoaded(success =>
+        {
+            if (success) GUITutorial_NCE();
+        }));
+    }
+
+    public void GUITutorial_NCE()
+    {
+        //TODO set tutorial
+        _view.AddIrisPopup("iris_15_01_text", "iris_15_01");
+    }
+
+    // GUI
+
+    public void GUIShowFarmResult(bool succeeded, JSONObject result)
+    {
+        if (result.ToString() != "\"fight\"" && result.ToString() != "\"heal\"")
+        {
+            string[] results = result.ToString().Replace("\"", "").Split(';');
+            FarmResult resultObj = new FarmResult();
+            for (int i = 0; i < results.Length; i++)
+            {
+                string[] rsc = results[i].Split(' ');
+                int element = Convert.ToInt32(rsc[0]);
+                int level = Convert.ToInt32(rsc[1]);
+                resultObj.AddResult(element, level, 1);
+                //element[i] = Resource.ResourceTypes[eIndex + 1].ToLower();
+   
+            }
+            _view.ShowPopup(GUIObjectResourceResult.Create("farm_rsc_text", "ok", resultObj));
+        }
+    }
+
+    public void GUILevelUp()
+    {
+        // tutorial
+        if (Player.InitSteps == 3)
+        {
+            _view.AddIrisPopup("iris_05_04_text", "iris_05_04").Callback = GUITutLevelUp_1;
+            SetInitSteps(4);
+        }
+        else
+            _view.ShowPopup(GUIObjectLevelUp.Create(), true, Upload);
+    }
+
+    public void GUIHideLoginScreen()
+    {
+        _view.ShowLoadingScreen(Localization.GetText("loadingscreen_login"));
+        _view.RemoveMaxScreen();
+        StartOAuth();
+    }
+
+    public void GUIShowLoadingScreen(string textKey)
+    {
+        _view.ShowLoadingScreen(Localization.GetText(textKey));
+    }
+
+    public void HideLoadingScreen(string textKey)
+    {
+        _view.HideLoadingScreen();
+    }
+
+    public void GUIClickMessage()
+    {
+        Fight fight = Player.CurFight;
+        if (fight == null || fight.Finished) return;
+        if (!fight.Started)
+        {
+            if (challengePopup == null || challengePopup.gameObject == null)
+            {
+                Player FighterA = GetPlayer(fight.FighterA.PId);
+                Player FighterB = GetPlayer(fight.FighterB.PId);
+                if (FighterA == null || FighterB == null) return;
+                _view.ShowPopup(GUIObjectChallenge.Create("challenge_text", "challenge_title", FighterB.Name, "decline", "accept"));
+            }
+        }
+    }
+
+    public void Upload()
+    {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
+        //TODO get tutorrial
+        if (Player.Tutorial == 0)
+        {
+            GUITutorial_Upload();
+            return;
+        }
+        StartCoroutine(CUploadData());
     }
 
     public void GUIFirewallWarning()
