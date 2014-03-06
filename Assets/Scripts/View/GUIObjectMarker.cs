@@ -53,9 +53,7 @@ public class GUIObjectMarker : MonoBehaviour
         cntrl.Size = size;
         _control = cntrl;
         _root = root;
-        Debug.Log("Add Click Marker Return");
         _root.Click += OnClickParent;
-        _root.BringToFront();
         TouchInput.Singleton.ClearAll += Remove;
 
         _pos = new Vector2(Padding, Padding);
@@ -80,7 +78,6 @@ public class GUIObjectMarker : MonoBehaviour
 
     private void OnClickParent(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Debug.Log("Click Marker Return");
         if(mouseEvent.Used) return;
         mouseEvent.Use();
         SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
@@ -191,7 +188,6 @@ public class GUIObjectMarker : MonoBehaviour
     public void Remove()
     {
         TouchInput.Singleton.ClearAll -= Remove;
-        Debug.Log("Remove Click Marker Return");
         if (_removed) return;
         _removed = true;
         _root.Click -= OnClickParent;

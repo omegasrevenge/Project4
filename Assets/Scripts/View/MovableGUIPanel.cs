@@ -23,11 +23,12 @@ public class MovableGUIPanel : MonoBehaviour
         }
         else
         {
-            if(Phase == 0f)
+            if(Phase == 0f && _control.IsVisible)
                 _control.Hide();
             else
             {
-                _control.Show();
+                if(!_control.IsVisible)
+                    _control.Show();
                 _control.Width = Phase*Screen.width;
             }
             

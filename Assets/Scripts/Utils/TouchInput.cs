@@ -122,7 +122,7 @@ public class TouchInput : MonoBehaviour
 
     private void Init()
     {
-        Input.simulateMouseWithTouches = false;
+        //Input.simulateMouseWithTouches = false;
         _rigisteredObjects = new List<TouchObject>();
         _touches = new List<Touch2D>();
         _tempTouches = new List<Touch2D>();

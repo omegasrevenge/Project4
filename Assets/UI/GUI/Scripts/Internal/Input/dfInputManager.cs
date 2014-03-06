@@ -719,7 +719,6 @@ public class dfInputManager : MonoBehaviour
 
 		internal void Process( Transform transform, Camera renderCamera, IDFTouchInputSource input, bool retainFocus )
 		{
-
 			var touches = input.Touches;
 			for( int i = 0; i < touches.Count; i++ )
 			{
@@ -1080,9 +1079,10 @@ public class dfInputManager : MonoBehaviour
 
 							if( canFireClickEvent( info, touch ) )
 							{
-
+                                Debug.Log("info: " + info.control +" this.control: "+ this.control);
 								if( info.control == this.control )
 								{
+                                    Debug.Log("Count: " + info.touch.tapCount);
 									if( info.touch.tapCount > 1 )
 										control.OnDoubleClick( info );
 									else
@@ -1209,15 +1209,14 @@ public class dfInputManager : MonoBehaviour
 
 			private bool canFireClickEvent( TouchRaycast info, TouchRaycast touch )
 			{
-
 				#region Should not fire click event if control has been moved 
 
 				var p2u = control.PixelsToUnits();
 				var startPosition = controlStartPosition / p2u;
 				var currentPosition = control.transform.position / p2u;
 
-				if( Vector3.Distance( startPosition, currentPosition ) > 1f )
-					return false;
+                //if( Vector3.Distance( startPosition, currentPosition ) > 1f )
+                //    return false;
 
 				#endregion 
 
@@ -1225,7 +1224,6 @@ public class dfInputManager : MonoBehaviour
 					return true;
 
 				var distanceFromStart = Vector2.Distance( info.position, touch.position );
-
 				return distanceFromStart < manager.TouchClickRadius;
 
 			}

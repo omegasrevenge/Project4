@@ -19,7 +19,6 @@ public class GUIObjectMapUI : MonoBehaviour
     private MovableGUIPanel _menuViewport;
 
     //_contentRoot contains _menuButtonPanel and _menuButtonPanel contains _menuButton
-    private dfControl _menuButtonPanel;
     private dfControl _menuButton;
     //_contentRoot also contains _creatureInfo and _fightInvation
     private GUIObjectCreatureInfo _creatureInfo;
@@ -70,10 +69,7 @@ public class GUIObjectMapUI : MonoBehaviour
         ViewportScrollState = 0f;
 
         _fightInvation = _contentRoot.transform.Find(MessagePanelStr).GetComponent<GUIObjectMessage>();
-        _menuButtonPanel = _contentRoot.transform.Find(MenuButtonStr).GetComponent<dfControl>();
-        _menuButtonPanel.BringToFront();
-
-        _menuButton = _menuButtonPanel.transform.Find(MenuButtonStr).GetComponent<dfControl>();
+        _menuButton = _contentRoot.transform.Find(MenuButtonStr).Find(MenuButtonStr).GetComponent<dfControl>();
         _menuButton.Click += OnOpen;
     }
 
@@ -111,8 +107,7 @@ public class GUIObjectMapUI : MonoBehaviour
     {   
         TouchInput.OnClearAll();
         _menuButton.Click -= OnOpen;
-        _menuButtonPanel.Click += OnClose;
-        _menuButtonPanel.BringToFront();
+        _contentRoot.Click += OnClose;
         TouchInput.DisableBy(this);
 
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
@@ -137,7 +132,7 @@ public class GUIObjectMapUI : MonoBehaviour
     public void CloseMenu()
     {
         _menuButton.Click += OnOpen;
-        _menuButtonPanel.Click -= OnClose;
+        _contentRoot.Click -= OnClose;
         TouchInput.EnableBy(this);
 
         dfTweenFloat tween = GetComponent<dfTweenFloat>();
@@ -170,7 +165,7 @@ public class GUIObjectMapUI : MonoBehaviour
         ViewportScrollState = 0;
 
         _menuButton.Click += OnOpen;
-        _menuButtonPanel.Click -= OnClose;
+        _contentRoot.Click -= OnClose;
         TouchInput.EnableBy(this);
 
         Debug.Log("ScrollState: "+ViewportScrollState);

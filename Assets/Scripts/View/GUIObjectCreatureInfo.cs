@@ -14,6 +14,7 @@ public class GUIObjectCreatureInfo : MonoBehaviour
     private const string CreaturePrefix = "creatureavatar_";
     private static readonly string[] CreatureStrings = new []{"wolf", "giant"};
 
+    private dfControl _control; //For Debugging
     private Creature _creature;
     private dfControl _box;
     private dfLabel _nameLabel;
@@ -32,6 +33,7 @@ public class GUIObjectCreatureInfo : MonoBehaviour
         cntrl.SuspendLayout();
         GUIObjectCreatureInfo obj = cntrl.GetComponent<GUIObjectCreatureInfo>();
         obj.Init(creature);
+        obj._control = cntrl; //For Debugging
         return obj;
     }
 
