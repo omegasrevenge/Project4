@@ -25,6 +25,9 @@ public class GUIObjectBaseUI : MonoBehaviour
 	public void AddCrafting()
 	{
 		GUIObjectCrafting.Create(_root);
+        //tutorial
+        if (GameManager.Singleton.Player.InitSteps == 4)
+            GameManager.Singleton.GUICrafting_1();
 	}
 
 	public void AddEquip(Creature curCreature, Creature.Slot slot)

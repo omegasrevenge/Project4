@@ -137,7 +137,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
                     //tutorial
-                    if (GameManager.Singleton.Player.InitSteps == 4)
+                    if (GameManager.Singleton.Player.InitSteps < 8)
                         GameManager.Singleton.GUILeaveBase();
 				};
 

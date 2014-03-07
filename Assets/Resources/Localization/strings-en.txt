@@ -171,34 +171,34 @@ iris_06_04_text:
 "Mavellous! Now enter your base.",
 
 iris_06_05_text:
-"Create a water driode.",
+"Create an energy driode.",
 
 iris_06_06_text:
 "Create a fire driode.",
 
 iris_06_07_text:
-"Create an energy driode.",
-
-iris_06_08_text:
 "Create a storm driode.",
 
-iris_06_09_text:
+iris_06_08_text:
 "Create a life driode.",
 
-iris_06_10_text:
-"Trade 10 fire biodes for 5 energy biode.",
+iris_06_09_text:
+"Create a water driode.",
 
-iris_06_11_text:
+iris_06_10_text:
 "Trade 10 energy biodes for 5 life biodes.",
 
+iris_06_11_text:
+"Trade 10 fire biodes for 5 energy biode.",
+
 iris_06_12_text:
-"Trade 10 life biodes for 5 water biodes.",
+"Trade 10 storm biodes for 5 fire biodes.",
 
 iris_06_13_text:
-"Trade 10 water biodes for 5 storm biodes.",
+"Trade 10 life biodes for 5 water biodes.",
 
 iris_06_14_text:
-"Trade 10 storm biodes for 5 fire biodes.",
+"Trade 10 water biodes for 5 storm biodes.",
 
 iris_06_15_text:
 "Very good. You are now able to create driodes.",
