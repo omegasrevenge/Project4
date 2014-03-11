@@ -641,6 +641,35 @@ public class GameManager : MonoBehaviour
 		GetOwnPlayer();
 	}
 
+    public void SendCreatureToVengea(int creatureID)
+    {
+        if (Player.creatureIDs.Length < 2) return;
+        StartCoroutine(CSendCreatureToVengea(creatureID));
+    }
+
+    public IEnumerator CSendCreatureToVengea(int creatureID)
+    {
+        WWW request = new WWW(GetSessionURL("crtoven") + "&cid=" + creatureID);
+		yield return request;
+
+		JSONObject json = JSONParser.parse(request.text);
+		Debug.Log(json);
+		if (!CheckResult(json,request.url)) yield break;
+
+        if (creatureID == Player.CurCreature.CreatureID)
+            for (int i = 0; i < Player.creatureIDs.Length; i++)
+            {
+                if (creatureID != Player.creatureIDs[i])
+                {
+                    SwitchCurrentCreature(Player.creatureIDs[i]);
+                    break;
+                }
+            }
+        else
+            GetOwnPlayer();     
+		
+    }
+
     ///<summary>
     /// Exchange of resources.
     /// </summary>
@@ -1302,7 +1331,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         // ♥♥♥ TESTING
-        SetInitSteps(6);
+        //SetInitSteps(6);
         // ♥♥♥
         if (Player.CurrentFaction == Player.Faction.NCE)
         {

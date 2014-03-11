@@ -3,28 +3,30 @@ using UnityEngine;
 
 public class GUIObjectBaseMenue : MonoBehaviour 
 {
-	private const string Prefab = "GUI/panel_basemenue";
-	private const string BoxStr = "slot_box";
-	private const string LabelSpecterLevel = "label_spectre_level";
-	private const string LabelSpecterName = "label_spectre_name";
-	private const string LabelSpecterStatNames = "label_spectre_stats_names";
+	private const string Prefab                  = "GUI/panel_basemenue";
+	private const string BoxStr                  = "slot_box";
+	private const string LabelSpecterLevel       = "label_spectre_level";
+	private const string LabelSpecterName        = "label_spectre_name";
+	private const string LabelSpecterStatNames   = "label_spectre_stats_names";
 	private const string LabelSpecterStatNumbers = "label_spectre_stats_numbers";
-	private const string DriodSlotStr = "driodslot_";
-	private const string EquipSlotSpriteStr = "combat_panel_";
-	private const string SlotButtonFocusStr = "combat_slot_active_";
-	private const string CraftingSpriteStr = "Base_Interface_CraftingButton_";
-	private const string CraftingButtonStr = "button_crafting";
-	private const string ExitButtonStr = "button_exit";
-	private const string SwitchSpectre = "switch_spectre";
-	private const string SpectreElementStr = "sprite_element";
-	private const string SpectreElementSprite = "crafting_element_";
-	private const string EquipButtonStr = "button_equip_spectre";
+	private const string DriodSlotStr            = "driodslot_";
+	private const string EquipSlotSpriteStr      = "combat_panel_";
+	private const string SlotButtonFocusStr      = "combat_slot_active_";
+	private const string CraftingSpriteStr       = "Base_Interface_CraftingButton_";
+	private const string CraftingButtonStr       = "button_crafting";
+	private const string ExitButtonStr           = "button_exit";
+	private const string SwitchSpectre           = "switch_spectre";
+	private const string SpectreElementStr       = "sprite_element";
+	private const string SpectreElementSprite    = "crafting_element_";
+	private const string EquipButtonStr          = "button_equip_spectre";
+    private const string SendButtonStr           = "button_send_spectre";
 
 	private GUIObjectEquip _equip;
 
 	private dfButton _craftingButton;
 	private dfButton _exitButton;
 	private dfButton _equipButton;
+    private dfButton _sendButton;
 	private dfSprite _spectreElement;
 	private dfLabel _spectreLevel;
 	private dfLabel _spectreName;
@@ -45,7 +47,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	[SerializeField]
 	private GameManager.ResourceLevel _curResourceLevel = GameManager.ResourceLevel.biod;
 
-	public void UpdateSpecter()
+	public void UpdateSpectre()
 	{
 		_spectreLevel.Text = _curCreature.Level.ToString();
 		_spectreName.Text = _curCreature.Name;
@@ -53,12 +55,17 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreElement.SpriteName = SpectreElementSprite + _curCreature.BaseElement;
 		
 		if (_curCreature.CreatureID == GameManager.Singleton.Player.CurCreature.CreatureID)
-		{
 			_equipButton.Hide();
-		}
 		else
 			_equipButton.Show();
+        
+        if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+            _sendButton.Hide();
 
+        if (GameManager.Singleton.Player.creatureIDs.Length < 2)
+            _sendButton.Hide();
+        else
+            _sendButton.Show();
 
 		if (init)
 		{
@@ -90,6 +97,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreStatsNumbers = transform.Find(LabelSpecterStatNumbers).GetComponent<dfLabel>();
 		_spectreElement = transform.Find(SpectreElementStr).GetComponent<dfSprite>();
 		_equipButton = transform.Find(EquipButtonStr).GetComponent<dfButton>();
+	    _sendButton = transform.FindChild(SendButtonStr).GetComponent<dfButton>();
 
 		SetStatNames();
 	}
@@ -148,6 +156,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 					GameManager.Singleton.SwitchCurrentCreature(_curCreature.CreatureID);
 				};
 
+        _sendButton.Click +=
+                (control, @event) =>
+                {
+                    NextSpectre();
+                    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    GameManager.Singleton.SendCreatureToVengea(_curCreature.CreatureID);
+                };
+
 		_switchSpectre = transform.Find(SwitchSpectre).GetComponent<dfPanel>();
 		HandleDrag.AddHandleDrag(this, _switchSpectre.gameObject, _switchSpectre);
 
@@ -180,6 +196,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_spectreStatsNames.Text = life + "\n" + exdmg + "\n" + dex + "\n" + def + "\n" + reg;
 
 		_equipButton.Text = Localization.GetText("equip_button_text");
+        _sendButton.Text = Localization.GetText("send_button_text");
 	}
 
 	private void SetColor(dfControl guiComponent)
@@ -208,6 +225,6 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	void Update()
 	{
 		Init();
-		UpdateSpecter();
+		UpdateSpectre();
 	}
 }

@@ -16,6 +16,9 @@
 equip_button_text:
 "Equip"	
 
+send_button_text:
+"Send"
+
 spectre_life_text:
 "Life"
 
@@ -186,19 +189,19 @@ iris_06_09_text:
 "Create a water driode.",
 
 iris_06_10_text:
-"Trade 10 energy biodes for 5 life biodes.",
+"Trade 10 energy biodes for 5 fire biodes.",
 
 iris_06_11_text:
-"Trade 10 fire biodes for 5 energy biode.",
+"Trade 10 fire biodes for 5 storm biode.",
 
 iris_06_12_text:
-"Trade 10 storm biodes for 5 fire biodes.",
+"Trade 10 storm biodes for 5 life biodes.",
 
 iris_06_13_text:
 "Trade 10 life biodes for 5 water biodes.",
 
 iris_06_14_text:
-"Trade 10 water biodes for 5 storm biodes.",
+"Trade 10 water biodes for 5 energy biodes.",
 
 iris_06_15_text:
 "Very good. You are now able to create driodes.",

@@ -16,6 +16,9 @@
 equip_button_text:
 "Ausrüsten"
 
+send_button_text:
+"Senden"
+
 spectre_life_text:
 "Leben"
 
@@ -198,19 +201,19 @@ iris_06_09_text:
 "Stellen Sie nun eine Wasser-Driode her.",
 
 iris_06_10_text:
-"Tauschen Sie dazu 10 Energie-Bioden in 5 Lebens-Bioden.",
+"Tauschen Sie dazu 10 Energie-Bioden in 5 Feuer-Bioden.",
 
 iris_06_11_text:
-"Tauschen Sie dazu 10 Feuer-Bioden in 5 Energie-Bioden.",
+"Tauschen Sie dazu 10 Feuer-Bioden in 5 Sturm-Bioden.",
 
 iris_06_12_text:
-"Tauschen Sie dazu 10 Sturm-Bioden in 5 Feuer-Bioden.",
+"Tauschen Sie dazu 10 Sturm-Bioden in 5 Lebens-Bioden.",
 
 iris_06_13_text:
 "Tauschen Sie dazu 10 Lebens-Bioden in 5 Wasser-Bioden.",
 
 iris_06_14_text:
-"Tauschen Sie dazu 10 Wasser-Bioden in 5 Sturm-Bioden.",
+"Tauschen Sie dazu 10 Wasser-Bioden in 5 Energie-Bioden.",
 
 iris_06_15_text:
 "Sehr gut. Nun können Sie die Driode herstellen.",
