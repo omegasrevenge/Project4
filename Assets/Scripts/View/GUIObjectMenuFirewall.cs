@@ -24,7 +24,7 @@ public class GUIObjectMenuFirewall : MonoBehaviour
         if (_initialized)
         {
             GameManager.Singleton.SetFirewall(b);
-            SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+            SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
             if(!b)
                 GameManager.Singleton.GUIFirewallWarning();
         }

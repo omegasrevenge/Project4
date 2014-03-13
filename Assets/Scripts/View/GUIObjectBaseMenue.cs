@@ -123,7 +123,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 			curButton.Click +=
 				(control, @event) =>
 				{
-					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
 					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
 				};
 
@@ -134,7 +134,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_craftingButton.Click +=
 				(control, @event) =>
 				{
-					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
 					transform.parent.GetComponent<GUIObjectBaseUI>().AddCrafting();
 				};
 
@@ -142,7 +142,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 				(control, @event) =>
 				{
 					SoundController.RemoveChannel(BaseSounds.BackgroundChannel);
-					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchGameMode(GameManager.GameMode.Map);
                     //tutorial
                     if (GameManager.Singleton.Player.InitSteps < 8)
@@ -152,7 +152,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_equipButton.Click +=
 				(control, @event) =>
 				{
-					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
 					GameManager.Singleton.SwitchCurrentCreature(_curCreature.CreatureID);
 				};
 
@@ -160,7 +160,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
                 (control, @event) =>
                 {
                     NextSpectre();
-                    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
                     GameManager.Singleton.SendCreatureToVengea(_curCreature.CreatureID);
                 };
 

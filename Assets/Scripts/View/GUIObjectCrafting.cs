@@ -126,17 +126,19 @@ public class GUIObjectCrafting : MonoBehaviour
 				{
 					exchangeAmount = (int)Math.Pow(3, diff);
 				}
+			    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftCombine, SoundController.ChannelSFX);
 				GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, exchangeAmount, GameManager.ExchangeMode.Up, diff);
 				_focusedComponent = null;
 				return;
 			}
 
 			diff = (int) curResourceLevel - craftingLvl;
+		    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftSplit, SoundController.ChannelSFX);
 			GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 1, GameManager.ExchangeMode.Down, diff);
 			_focusedComponent = null;
 			return;
 		}
-
+	    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftExchange, SoundController.ChannelSFX);
 		GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 10, GameManager.ExchangeMode.Cricle, 0);
 		_focusedComponent = null;
 	}
@@ -236,7 +238,7 @@ public class GUIObjectCrafting : MonoBehaviour
 		_exitButton.Click +=
 				(control, @event) =>
 				{
-					SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
 					Remove();
 				};
 

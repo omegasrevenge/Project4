@@ -7,6 +7,7 @@ public class Localization
 
     private static Localization _instance;
     private string _language = "de";
+    private string _location = "Iris/";
     private JSONObject _strings;
 
     public static Localization Singleton
@@ -67,15 +68,15 @@ public class Localization
 
     public static AudioSource GetSound(string soundKey, string channel = "none")
     {
-        AudioSource source = SoundController.LoadAudioClip(soundKey + "_" + Singleton._language, channel);
+        AudioSource source = SoundController.LoadAudioClip(Singleton._location + soundKey + "_" + Singleton._language, channel);
         if (source != null)
             return source;
-        source = SoundController.LoadAudioClip(soundKey + "_en", channel);
+        source = SoundController.LoadAudioClip(Singleton._location + soundKey + "_en", channel);
         if (source != null)
             return source;
-        source = SoundController.LoadAudioClip(soundKey + "_de", channel);
+        source = SoundController.LoadAudioClip(Singleton._location + soundKey + "_de", channel);
         if (source != null)
             return source;
-        return SoundController.LoadAudioClip(soundKey, channel);
+        return SoundController.LoadAudioClip(Singleton._location + soundKey, channel);
     }
 }

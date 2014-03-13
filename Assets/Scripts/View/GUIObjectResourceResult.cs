@@ -45,7 +45,7 @@ public class GUIObjectResourceResult : MonoBehaviour, IPopupContent
 
     public static GameObject Create(string textKeyText, string textKeyButton, FarmResult result)
     {
-        SoundController.PlaySound(SoundController.SoundChoose, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation+SoundController.Faction+SoundController.SoundFacChoose, SoundController.ChannelSFX);
 
         GameObject go = Instantiate(Resources.Load<GameObject>(Prefab)) as GameObject;
         GUIObjectResourceResult resourceContent = go.GetComponent<GUIObjectResourceResult>();

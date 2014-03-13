@@ -44,8 +44,8 @@ public class GUIObjectMarker : MonoBehaviour
         // VENGEA - NCE
         if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
             background.Color = GameManager.NCERed;
-        
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
         _scale = cntrl.transform.localScale;
         _scale *= (Screen.height / ReferenceHeight);
         Vector3 size = cntrl.Size;
@@ -80,7 +80,7 @@ public class GUIObjectMarker : MonoBehaviour
     {
         if(mouseEvent.Used) return;
         mouseEvent.Use();
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
         Remove();
     }
 
@@ -137,13 +137,13 @@ public class GUIObjectMarker : MonoBehaviour
             args.Use();
             if (objectOnMap.GetCooldownProgress() > 0)
             {
-                SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
                 if (hideCallback != null)
                     hideCallback();
                 return;
             }
 
-            SoundController.PlaySound(SoundController.SoundMapClick, SoundController.ChannelSFX);
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacMapClick, SoundController.ChannelSFX);
             if (hideCallback != null)
                 hideCallback();
             objectOnMap.Execute();

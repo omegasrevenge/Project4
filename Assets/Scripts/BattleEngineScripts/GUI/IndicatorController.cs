@@ -24,7 +24,8 @@ public class IndicatorController : MonoBehaviour
     {
 	    if (_counter >= _length)
 	    {
-	        if (CatchResult) BattleEngine.Current.CatchInProcess = false;
+            if (BattleEngine.Current == null) return;
+            if (CatchResult) BattleEngine.Current.CatchInProcess = false;
             GetComponent<dfLabel>().Hide();
             return;
 	    }

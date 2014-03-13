@@ -231,6 +231,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         if (_fleeCooldown > 0f)
             _fleeCooldown -= Time.deltaTime;
 
+        if (BattleEngine.Current == null) return;
         if (BattleEngine.CurrentGameObject == null 
             || !BattleEngine.Current.Initialized 
             || !BattleEngine.Current.Fighting) 
@@ -362,6 +363,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
 
     public void UpdateMonsterElements()
     {
+        if (GameManager.Singleton.Player.CurCreature.BaseElement == GameManager.ResourceElement.None)
+            MonsterAElement.Hide();
+        else
+            MonsterAElement.SpriteName = "spectre_stats_element_" + GameManager.Singleton.Player.CurCreature.BaseElement;
+        if (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement == GameManager.ResourceElement.None)
+            MonsterBElement.Hide();
+        else
+            MonsterBElement.SpriteName = "spectre_stats_element_" + GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement.ToString();
+        #region bullshit
+        /*
         switch (GameManager.Singleton.Player.CurCreature.BaseElement)
         {
 		case GameManager.ResourceElement.None:
@@ -414,6 +425,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
                 MonsterBElement.SpriteName = "spectre_stats_element_water";
                 break;
         }
+        */
+        #endregion
+        
     }
 
     public void UpdateButtons()
@@ -425,32 +439,40 @@ public class GUIObjectBattleEngine : MonoBehaviour
             if (Slots.Length <= i) continue;
             DriodSlots[i].Show();
             Driods[i].Show();
+
+            if (Slots[i].driodenElement == GameManager.ResourceElement.None)
+                Driods[i].Hide();
+            else
+                Driods[i].BackgroundSprite = "combat_driod_" + Slots[i].driodenElement.ToString();
+            #region bullshit
+            /*
             switch (Slots[i].driodenElement)
             {
-			case GameManager.ResourceElement.None:
+                case GameManager.ResourceElement.None:
                     Driods[i].Hide();
                     break;
 
-			case GameManager.ResourceElement.energy:
+                case GameManager.ResourceElement.energy:
                     Driods[i].BackgroundSprite = "combat_driod_energy";
                     break;
 
-			case GameManager.ResourceElement.fire:
+                case GameManager.ResourceElement.fire:
                     Driods[i].BackgroundSprite = "combat_driod_fire";
                     break;
 
-			case GameManager.ResourceElement.life:
+                case GameManager.ResourceElement.life:
                     Driods[i].BackgroundSprite = "combat_driod_life";
                     break;
 
-			case GameManager.ResourceElement.storm:
+                case GameManager.ResourceElement.storm:
                     Driods[i].BackgroundSprite = "combat_driod_storm";
                     break;
 
-			case GameManager.ResourceElement.water:
+                case GameManager.ResourceElement.water:
                     Driods[i].BackgroundSprite = "combat_driod_water";
                     break;
-            }
+            }*/
+            #endregion           
         }
     }
 
@@ -583,14 +605,14 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
 		//if (idx != -1) //remove from anywhere
 		{
-		    SoundController.PlaySound(BattleSounds.DriodDeselect, BattleSounds.MiscSoundChannel);
+		    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDeselect, BattleSounds.MiscSoundChannel);
             InputText.Remove(driod);
             return;
         }
 
         if (InputText.Contains(driod)) return;
 
-        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDriod+InputText.Count, SoundController.ChannelSFX);
         InputText.Add(driod);
     }
 
@@ -639,7 +661,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.B) return;
         _fleeCooldown = 10f;
-        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
         GameManager.Singleton.EscapeAttempt();
         DeleteSelection();
     }
@@ -679,7 +701,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             CatchDriods[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
             CatchDriodsVisual[i].BackgroundSprite = "crafting_driod_lvl" + i + "_" + element;
         }
-        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
         DeleteSelection();
     }
 
@@ -690,7 +712,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterAContainer.GetComponent<dfPanel>().Show();
 		MonsterBContainer.GetComponent<dfPanel>().Show();
         DriodContainer.transform.parent.GetComponent<dfPanel>().Show();
-        SoundController.PlaySound(GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? SoundController.SoundClick : BattleSounds.ClickNce, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
     }
 
     public void CatchButtonClick(int index)

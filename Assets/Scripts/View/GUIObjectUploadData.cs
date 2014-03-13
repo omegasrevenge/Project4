@@ -53,6 +53,7 @@ public class GUIObjectUploadData : MonoBehaviour, IPopupContent
 
     public void Decline(dfControl control, dfMouseEventArgs args)
     {
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundReboot, SoundController.ChannelSFX);
         GameManager.Singleton.SetFaction(Player.Faction.NCE);
     }
 

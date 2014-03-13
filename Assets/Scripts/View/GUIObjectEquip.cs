@@ -67,7 +67,7 @@ public class GUIObjectEquip : MonoBehaviour
 		_exitButton.Click +=
 				 (control, @event) =>
 				 {
-					 SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+					 SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
 					 Remove();
 				 };
 
@@ -82,7 +82,7 @@ public class GUIObjectEquip : MonoBehaviour
 			curButton.Click +=
 				 (control, @event) =>
 				 {
-					 SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+					 SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
 					 _curResourceLevel = (GameManager.ResourceLevel)(driodButtons.IndexOf((dfButton)control) + 1);
 					 GameManager.Singleton.EquipCreatureSlot(_curCreature.CreatureID, _slot.slotId, (int)_curResourceElement, (int)_curResourceLevel);
 					 Remove();
@@ -96,7 +96,7 @@ public class GUIObjectEquip : MonoBehaviour
 			curButton.Click +=
 				 (control, @event) =>
 				 {
-					 SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+					 SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
 					 _curResourceElement = (GameManager.ResourceElement)elementButtons.IndexOf((dfButton) control);
 				 };
 			elementButtons.Add(curButton);

@@ -73,7 +73,6 @@ public class GUIObjectIrisPopup : MonoBehaviour
         }
     }
 
-
     public static GUIObjectIrisPopup Create(dfControl root, string textKeyText, string audioKey, string textKeyButton ="ok")
     {
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
@@ -121,7 +120,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
                 {
                     if (mouseEvent.Used) return;
                     mouseEvent.Use();
-                    SoundController.PlaySound(SoundController.SoundClick,SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
                     PlaySound();
                     
                     OnHideButtons();
@@ -138,7 +137,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
                 {
                     if (mouseEvent.Used) return;
                     mouseEvent.Use();
-                    SoundController.PlaySound(SoundController.SoundClick,SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
                     if (HidePopup != null)
                         HidePopup();
 
@@ -153,7 +152,7 @@ public class GUIObjectIrisPopup : MonoBehaviour
     public GUIObjectIrisPopup Show()
     {
         if (_playMessageSound)
-            SoundController.PlaySound(SoundController.SoundMessageIRIS, SoundController.ChannelSFX);
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacMessageIRIS, SoundController.ChannelSFX);
         if (ShowPopup != null)
             ShowPopup();
         return this;

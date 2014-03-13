@@ -111,7 +111,7 @@ public class GUIObjectPopup : MonoBehaviour
         if (!_active || args.Used) return;
         args.Use();
 
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
 
         if (_content.Count > 1)
         {

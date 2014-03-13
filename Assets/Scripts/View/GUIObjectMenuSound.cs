@@ -13,6 +13,6 @@ public class GUIObjectMenuSound : MonoBehaviour
     private void OnSwitch(bool b)
     {
         SoundController.Enabled = b;
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
     }
 }

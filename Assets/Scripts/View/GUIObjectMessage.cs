@@ -14,7 +14,7 @@ public class GUIObjectMessage : MonoBehaviour
         if (@event.Used) return;
         @event.Use();
 
-        SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
         GetComponent<dfPanel>().Hide();
         GameManager.Singleton.GUIClickMessage();
     }

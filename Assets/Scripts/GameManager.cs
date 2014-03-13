@@ -56,12 +56,16 @@ public class GameManager : MonoBehaviour
     public bool BattleEngineSkipTurn = false;
     public string lastFarmResult = "";
 
+    // WHY ??????
+
     private List<Creature> _allOwnCreatures;
 
     public List<Creature> AllOwnCreatures
     {
         get { return _allOwnCreatures; }
     }
+
+    //
 
     [SerializeField]
     public Player Player = new Player();
@@ -205,6 +209,7 @@ public class GameManager : MonoBehaviour
 
         pois_timeQ -= Time.deltaTime;
 
+        #region old stuff
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
         //    if (_view)
@@ -216,6 +221,8 @@ public class GameManager : MonoBehaviour
         //    if (_view)
         //        _view.ShowLoadingScreen("Technische Störung. \nBitte haben Sie einen Augenblick Geduld!");
         //}
+        #endregion
+        
     }
 
 
@@ -436,6 +443,12 @@ public class GameManager : MonoBehaviour
         if (Player.CurCreature != null  && _map)
         {
             _map.SetCreatureInfo(Player.CurCreature);
+        }
+
+        if (AllOwnCreatures != null && AllOwnCreatures.Count != Player.creatureIDs.Length)
+        {
+            AllOwnCreatures.Clear();
+            GetCreatures();
         }
 
         if (Player.CurCreature != null && _allOwnCreatures != null)

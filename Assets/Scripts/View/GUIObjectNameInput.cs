@@ -54,7 +54,7 @@ public class GUIObjectNameInput : MonoBehaviour
             box.Click +=
                 (control, @event) =>
                 {
-                    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
                 };
         }
 
@@ -71,7 +71,7 @@ public class GUIObjectNameInput : MonoBehaviour
             _button.Click +=
                 (control, @event) =>
                 {
-                    SoundController.PlaySound(SoundController.SoundClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SoundFacClick, SoundController.ChannelSFX);
                 };
         }
     }

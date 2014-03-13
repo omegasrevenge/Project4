@@ -4,22 +4,46 @@ using System.Collections;
 
 public class SoundController : MonoBehaviour
 {
-    public const string ChannelSFX = "channelSFX";
-    public const string SoundClick = "Oc_Audio_SFX_Vengea_Click";
-    public const string SoundChoose = "Oc_Audio_SFX_Vengea_Choose";
-    public const string SoundLocate = "Oc_Audio_SFX_Vengea_Locate";
-    public const string SoundError = "Oc_Audio_SFX_Vengea_Error";
-    public const string SoundMapClick = "Oc_Audio_SFX_Vengea_MapClick";
-    public const string SoundMessageIRIS = "Oc_Audio_SFX_Vengea_Message_IRIS";
-    public const string SoundMessageEnemy = "Oc_Audio_SFX_Vengea_Message_Enemy";
-    public const string SoundUpgrade = "Oc_Audio_SFX_Vengea_Upgrade";
+    public const string ChannelSFX          = "channelSFX";
+    public const string SFXlocation         = "SFX/Oc_Audio_SFX_";
+
+    private const string Vengea              = "Vengea_";
+    private const string NCE                 = "NCE_";
+
+    // depends on faction
+    public const string SoundFacChoose          = "Choose";
+    public const string SoundFacClick           = "Click";
+    public const string SoundFacError           = "Error";
+
+    // fight --> BattleSounds ??
+    public const string SoundFacFightCatch      = "Fight_Catch";
+    public const string SoundFacFightDriod      = "Fight_Driode_"; //+number
+    public const string SoundFacFightDeselect   = "Fight_Driode_Deselect"; 
+    public const string SoundFacFightLose       = "Fight_Lose";
+    public const string SoundFacFightVictory    = "Fight_Victory";
+    
+    public const string SoundFacLocate          = "Locate";
+    public const string SoundFacMapClick        = "MapClick";
+    public const string SoundFacMessageIRIS     = "Message_IRIS";
+    public const string SoundFacMessageEnemy    = "Message_Enemy";
+    public const string SoundFacUpgrade         = "Upgrade";
+
+    // without faction
+    public const string SoundCraftCombine = "Craft_Combine";
+    public const string SoundCraftExchange = "Craft_Exchange";
+    public const string SoundCraftPlace = "Craft_Place";
+    public const string SoundCraftSplit= "Craft_Split";
+    public const string SoundCraftTake = "Craft_Take";
+    public const string SoundReboot = "Reboot";
+    public const string SoundLogo = "Logo";
 
     private const float LoadTimeOut = 2f;
     private static SoundController _instance;
 
+    private string _faction;
+
     [SerializeField]
     private Dictionary<string, AudioSource> _audio;
-
 
     public static SoundController Singleton
     {
@@ -28,6 +52,18 @@ public class SoundController : MonoBehaviour
             if (_instance != null)
                 return _instance;
             return null;
+        }
+    }
+
+    public static string Faction
+    {
+        get
+        {
+            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+                Singleton._faction = NCE;
+            else
+                Singleton._faction = Vengea;
+            return Singleton._faction;
         }
     }
 
@@ -75,7 +111,7 @@ public class SoundController : MonoBehaviour
         foreach (string sound in preloadedSounds)
         {
             source = _audio[sound] = gameObject.AddComponent<AudioSource>();
-            source.clip = Resources.Load<AudioClip>("Sounds/" + sound);
+            source.clip = Resources.Load<AudioClip>(sound);
         }
     }
 
@@ -98,7 +134,7 @@ public class SoundController : MonoBehaviour
         else
         {
             if (loadClip || source.clip == null)
-                source.clip = Resources.Load<AudioClip>("Sounds/"+filename);
+                source.clip = Resources.Load<AudioClip>("Sounds/" + filename);
             if(delay>0)
                 source.PlayDelayed(delay);
             else
@@ -149,7 +185,7 @@ public class SoundController : MonoBehaviour
     private IEnumerator StreamSound(string filename, AudioSource source)
     {
 
-        string url = Application.streamingAssetsPath + "/Sounds/" + filename + ".mp3";
+        string url = Application.streamingAssetsPath + "Sounds/" + filename + ".mp3";
         WWW file = new WWW(url);
         yield return file;
         AudioClip audio = file.GetAudioClip(false, true);
