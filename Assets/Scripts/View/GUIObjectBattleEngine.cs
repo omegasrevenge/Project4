@@ -605,7 +605,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
 		if (InputText.Count > 0 && InputText.Count-1 == idx) //only remove last
 		//if (idx != -1) //remove from anywhere
 		{
-		    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDeselect, BattleSounds.MiscSoundChannel);
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDriod + InputText.Count, BattleSounds.MiscSoundChannel);
             InputText.Remove(driod);
             return;
         }

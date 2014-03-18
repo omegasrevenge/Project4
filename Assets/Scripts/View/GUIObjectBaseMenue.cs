@@ -61,11 +61,10 @@ public class GUIObjectBaseMenue : MonoBehaviour
         
         if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
             _sendButton.Hide();
-
-        if (GameManager.Singleton.Player.creatureIDs.Length < 2)
+        else if (GameManager.Singleton.Player.creatureIDs.Length < 2)
             _sendButton.Hide();
         else
-            _sendButton.Show();
+            _sendButton.Show();    
 
 		if (init)
 		{
@@ -158,10 +157,10 @@ public class GUIObjectBaseMenue : MonoBehaviour
 
         _sendButton.Click +=
                 (control, @event) =>
-                {
-                    NextSpectre();
+                {                   
                     SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
-                    GameManager.Singleton.SendCreatureToVengea(_curCreature.CreatureID);
+                    GameManager.Singleton.GUISendCreatureWarning(_curCreature);
+                    NextSpectre();
                 };
 
 		_switchSpectre = transform.Find(SwitchSpectre).GetComponent<dfPanel>();

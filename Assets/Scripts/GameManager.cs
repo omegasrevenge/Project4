@@ -656,7 +656,6 @@ public class GameManager : MonoBehaviour
 
     public void SendCreatureToVengea(int creatureID)
     {
-        if (Player.creatureIDs.Length < 2) return;
         StartCoroutine(CSendCreatureToVengea(creatureID));
     }
 
@@ -1752,6 +1751,11 @@ public class GameManager : MonoBehaviour
             return;
         }
         StartCoroutine(CUploadData());
+    }
+
+    public void GUISendCreatureWarning(Creature creature)
+    {
+        _view.ShowPopup(GUIObjectAcceptSendCreature.Create("warning_send_text", "warning_send_title", creature, "cancel", "ok"));
     }
 
     public void GUIFirewallWarning()

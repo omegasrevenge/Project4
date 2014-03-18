@@ -78,6 +78,12 @@ upload_title:
 farm_rsc_text:
 "{0} {1} vom Typ {2} gefunden.",
 
+warning_send_title:
+"Achtung",
+
+warning_send_text:
+"Möchten Sie {0} wirklich zu Vengea schicken ? Dieser Vorgang kann nicht rückgängig gemacht werden.",
+
 challenger_title:
 "Warte auf Antwort...",
 
