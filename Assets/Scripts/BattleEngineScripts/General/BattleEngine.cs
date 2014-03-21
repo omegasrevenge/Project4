@@ -159,7 +159,7 @@ public class BattleEngine : SceneRoot3D
             BattleSounds.BackgroundVengea : BattleSounds.BackgroundNce, BattleSounds.BattleSoundChannel);
         BackgroundMusic.loop = true;
         // VOLUME
-        BackgroundMusic.volume = 0.7f;
+        BackgroundMusic.volume = 0.5f;
         // VOLUME
         FightIsOverOnce = false;
         _counter = 0f;

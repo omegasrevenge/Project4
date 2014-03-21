@@ -312,7 +312,7 @@ public class GameManager : MonoBehaviour
                                                                 ? BaseSounds.BackgroundVengea
                                                                 : BaseSounds.BackgroundNce, BaseSounds.BackgroundChannel);
         bgMusic.loop = true;
-        bgMusic.volume = 0.7f;
+        bgMusic.volume = 0.5f;
     }
 
     /// <summary>
