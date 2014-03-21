@@ -308,9 +308,11 @@ public class GameManager : MonoBehaviour
 
     private void playBaseBackgroundMusic()
     {
-        SoundController.PlaySound(Player.CurrentFaction == Player.Faction.VENGEA
-            ? BaseSounds.BackgroundVengea
-            : BaseSounds.BackgroundNce, BaseSounds.BackgroundChannel).loop = true;
+        AudioSource bgMusic = SoundController.PlaySound(Player.CurrentFaction == Player.Faction.VENGEA
+                                                                ? BaseSounds.BackgroundVengea
+                                                                : BaseSounds.BackgroundNce, BaseSounds.BackgroundChannel);
+        bgMusic.loop = true;
+        bgMusic.volume = 0.7f;
     }
 
     /// <summary>

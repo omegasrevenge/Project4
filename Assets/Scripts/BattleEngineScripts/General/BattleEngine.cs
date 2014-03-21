@@ -158,6 +158,9 @@ public class BattleEngine : SceneRoot3D
             GameManager.Singleton.Player.CurrentFaction == Player.Faction.VENGEA ? 
             BattleSounds.BackgroundVengea : BattleSounds.BackgroundNce, BattleSounds.BattleSoundChannel);
         BackgroundMusic.loop = true;
+        // VOLUME
+        BackgroundMusic.volume = 0.7f;
+        // VOLUME
         FightIsOverOnce = false;
         _counter = 0f;
         Turn = GameManager.Singleton.Player.CurFight.Round;
