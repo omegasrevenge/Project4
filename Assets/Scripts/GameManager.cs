@@ -298,7 +298,8 @@ public class GameManager : MonoBehaviour
                     _fight = BattleEngine.Create(Player.GetBattleInit());
 					_fight.AttachGUI(_view.AddBattleUI());
 				}
-                StartCoroutine(CTutorialFight());
+                if (Player.CurCreature.slots.Length >= 2)
+                    StartCoroutine(CTutorialFight());
 				_view.Switch3DSceneRoot(_fight);
 				_fight.StartFight(Player.GetBattleInit());
                 break;
