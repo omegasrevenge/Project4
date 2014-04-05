@@ -87,7 +87,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 
 	void Awake()
 	{
-		factionColors.Add(GameManager.Withe);
+		factionColors.Add(GameManager.White);
 		factionColors.Add(GameManager.Black);
 
 		_spectreLevel = transform.Find(LabelSpecterLevel).GetComponent<dfLabel>();

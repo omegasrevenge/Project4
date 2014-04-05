@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 	public enum ResourceLevel { biod, driod_lvl0, driod_lvl1, driod_lvl2, driod_lvl3, driod_lvl4, driod_lvl5 };
 
 	public static readonly Color32 Black = new Color32(0, 0, 0, 255);
-	public static readonly Color32 Withe = new Color32(255, 255, 255, 255);
+	public static readonly Color32 White = new Color32(255, 255, 255, 255);
     public static readonly Color32 NCERed  = new Color32(120, 40, 40, 255);
     public static readonly Color32 NCEGrey = new Color32(50, 50, 50, 255);
 
@@ -298,7 +298,6 @@ public class GameManager : MonoBehaviour
                     _fight = BattleEngine.Create(Player.GetBattleInit());
 					_fight.AttachGUI(_view.AddBattleUI());
 				}
-                //TODO get tutorial
                 StartCoroutine(CTutorialFight());
 				_view.Switch3DSceneRoot(_fight);
 				_fight.StartFight(Player.GetBattleInit());
@@ -1093,18 +1092,22 @@ public class GameManager : MonoBehaviour
         if (!CheckResult(json,request.url)) { yield break; }
     }
 
-    public void SetTutuorial(int tut)
+    public void SetTutorial(TutorialStep tut)
     {
-        StartCoroutine(CSetTutuorial(tut));
+        Debug.Log("Set "+(int)tut);
+        Player.Tutorial = Player.Tutorial.SetFlag(tut);
+        Debug.Log(Player.Tutorial);
+        Debug.Log("IsSet " + Player.Tutorial.IsFlagSet(tut));
+        Debug.Log("Send " + (int)Player.Tutorial);
+        StartCoroutine(CSetTutuorial((int)Player.Tutorial));
+        
     }
 
     public IEnumerator CSetTutuorial(int tut)
     {
-        WWW request = new WWW(GetSessionURL("settutorial") + "&tut=" + tut);
-        Player.Tutorial = tut;
+        WWW request = new WWW(GetSessionURL("settutorial") + "&tut=" + tut);      
 
         yield return request;
-
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) { yield break; }
     }
@@ -1295,11 +1298,6 @@ public class GameManager : MonoBehaviour
 		return UnixStartDate;
 	}
 
-    void OnApplicationFocus(bool focusStatus)
-    {
-        //(new AndroidJavaClass("com.nerdiacs.nerdgpgplugin.NerdGPG")).CallStatic("HideNavigationBar");
-    }
-
     void OnDisable()
     {
         if (Application.isEditor)
@@ -1344,12 +1342,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Couldn't load Player Data!");
             return;
         }
-        // ♥♥♥ TESTING
-        //SetInitSteps(6);
-        // ♥♥♥
-        if (Player.CurrentFaction == Player.Faction.NCE)
+        if (Player.CurrentFaction == Player.Faction.NCE || Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
-            //TODO get tutorial
             StartCoroutine(CNCEStart());
             SwitchGameMode(GameMode.Map);
         }
@@ -1378,11 +1372,11 @@ public class GameManager : MonoBehaviour
                     GUIOpenMenu();
                     break;
                 case (6):
-                    SwitchGameMode(GameMode.Map);
+                    SwitchGameMode(GameMode.Base);
                     GUICrafting_1();
                     break;
                 case (7):
-                    SwitchGameMode(GameMode.Map);
+                    SwitchGameMode(GameMode.Base);
                     GUIEquipDriod();
                     break;
                 default:
@@ -1524,27 +1518,7 @@ public class GameManager : MonoBehaviour
     {
         _view.AddIrisPopup("iris_05_03_text", "iris_05_03");
     }
-    public void GUIFirstFightEnd()
-    {
-        _view.AddIrisPopup("iris_05_04_text", "iris_05_04");
-        SetInitSteps(4);
-    } 
     // ---- UPLOAD ---- LEVEL UP ------
-    public IEnumerator CLevelUp()
-    {
-        yield return StartCoroutine(MapLoaded(success =>
-        {
-            if (success) GUILevelUp();
-        }));
-    }
-    public void GUITutLevelUp_1()
-    {
-        _view.AddIrisPopup("iris_09_01_text", "iris_09_01").Callback = GUITutLevelUp_2;
-    }
-    public void GUITutLevelUp_2()
-    {
-        _view.AddIrisPopup("iris_09_02_text", "iris_09_02").Callback = GUILevelUp;
-    }
     public IEnumerator CUploadData()
     {
         yield return StartCoroutine(MapLoaded(success =>
@@ -1581,6 +1555,8 @@ public class GameManager : MonoBehaviour
     public void GUICrafting_1()
     {
         int e = (int)Player.CurCreature.BaseElement;
+        if(Player.InitSteps == 6)
+            SetInitSteps(7);
         _view.AddIrisPopup("iris_06_0" + (e + 5) + "_text", "iris_06_0" + (e + 5));
     }
     public void GUICrafting_2()
@@ -1607,16 +1583,19 @@ public class GameManager : MonoBehaviour
     public void GUIEquipDriod()
     {
         _view.AddIrisPopup("iris_07_01_text", "iris_07_01");
+        if (Player.InitSteps == 7)
+        {
+            SetInitSteps(8);
+            SetTutorial(TutorialStep.InitGame);
+        }
     }
     public void GUIEquipDriod_2()
     {
         _view.AddIrisPopup("iris_07_02_text", "iris_07_02");
-        if (CurrentGameMode == GameMode.Map)
-            SetInitSteps(8);
     }
 
-    // TUTORIAL
-
+    // TUTORIAL STEPS
+    // 8) Next Fight Flag(2)
     public IEnumerator CTutorialFight()
     {
         yield return StartCoroutine(BattleLoaded(success =>
@@ -1626,55 +1605,114 @@ public class GameManager : MonoBehaviour
     }
     public void GUITutorial_SecondSlot()
     {
-        _view.AddIrisPopup("iris_08_01_text", "iris_08_01");
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.NextFight) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            _view.AddIrisPopup("iris_08_01_text", "iris_08_01");
+        }
     }
     public void GUITutorial_SecondSlot_2()
     {
-        //TODO set tutorial
-        _view.AddIrisPopup("iris_08_02_text", "iris_08_02");
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.NextFight) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.NextFight);
+            _view.AddIrisPopup("iris_08_02_text", "iris_08_02");
+        }
     }
 
-    public void GUITutorial_DriodLevel()
+    //9) First LevelUp Flag(4)
+    public IEnumerator CLevelUp()
     {
-        _view.AddIrisPopup("iris_10_01_text", "iris_10_01").Callback = GUITutorialDriodLevel_2;
+        yield return StartCoroutine(MapLoaded(success =>
+        {
+            if (success) GUILevelUp();
+        }));
     }
-    public void GUITutorialDriodLevel_2()
+    public void GUITutLevelUp_1()
     {
-        //TODO set tutorial
-        _view.AddIrisPopup("iris_10_02_text", "iris_10_02");
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstLevelUp))
+        {
+            _view.AddIrisPopup("iris_09_01_text", "iris_09_01").Callback = GUITutLevelUp_2;
+        }
     }
-
-    public void GUITutorial_AgentNCE()
+    public void GUITutLevelUp_2()
     {
-        //TODO set tutorial
-        _view.AddIrisPopup("iris_11_01_text", "iris_11_01");
-    }
-
-    public void GUITutorial_BrokenDriod()
-    {
-        //TODO set tutorial
-        _view.AddIrisPopup("iris_13_01_text", "iris_13_01");
-    }
-
-    public void GUITutorial_Upload()
-    {
-        //TODO set tutorial
-        Player.Tutorial = 1;
-        _view.AddIrisPopup("iris_14_01_text", "iris_14_01").Callback = Upload;
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstLevelUp))
+        {
+            SetTutorial(TutorialStep.FirstLevelUp);
+            _view.AddIrisPopup("iris_09_02_text", "iris_09_02").Callback = GUILevelUp;
+        }
     }
 
+    //10) Next Crafting Flag(8)
+    public void GUICheckIrisSecondCrafting()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondCrafting) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            _view.AddIrisPopup("iris_10_01_text", "iris_10_01");
+        }
+    }
+    public void GUICheckIrisSecondCraftingSuccess()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondCrafting) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.SecondCrafting);
+            _view.AddIrisPopup("iris_10_02_text", "iris_10_02");
+        }
+    }
+
+    //11) First NCE Player Flag(16)
+    public void GUICheckIrisFirstNCEAgent()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstNCEPlayer) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.FirstNCEPlayer);
+            _view.AddIrisPopup("iris_11_01_text", "iris_11_01");
+        }
+    }
+    //12) First VENGEA Agent Flag(32)
+    public void GUICheckIrisFirstVENGEAAgent()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstVENGEAPlayer) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.FirstVENGEAPlayer);
+            _view.AddIrisPopup("iris_12_01_text", "iris_12_01");
+        }
+    }
+    //13) Used Driod Flag(64)
+    public void GUICheckIrisBrokenDriod()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.UsedDriod) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.UsedDriod);
+            _view.AddIrisPopup("iris_13_01_text", "iris_13_01");
+        }
+    }
+    //14) Second LevelUp Flag(128)
+    public void GUICheckIrirsLevelUpWarning()
+    {
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondLevelUp) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        {
+            SetTutorial(TutorialStep.SecondLevelUp);
+            _view.AddIrisPopup("iris_14_01_text", "iris_14_01").Callback = Upload;
+        }
+    }
+
+    //15) First Time NCE Flag(256)
     public IEnumerator CNCEStart()
     {
         yield return StartCoroutine(MapLoaded(success =>
         {
-            if (success) GUITutorial_NCE();
+            if (success) GUICheckIrisFirstTimeNCE();
         }));
     }
 
-    public void GUITutorial_NCE()
+    public void GUICheckIrisFirstTimeNCE()
     {
-        //TODO set tutorial
-        _view.AddIrisPopup("iris_15_01_text", "iris_15_01");
+        if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstTimeNCE))
+        {
+            SetTutorial(TutorialStep.FirstTimeNCE);
+            _view.AddIrisPopup("iris_15_01_text", "iris_15_01");
+        }
     }
 
     // GUI
@@ -1701,7 +1739,7 @@ public class GameManager : MonoBehaviour
     public void GUILevelUp()
     {
         // tutorial
-        if (Player.InitSteps == 3)
+        if (Player.InitSteps <= 3)
         {
             _view.AddIrisPopup("iris_05_04_text", "iris_05_04").Callback = GUITutLevelUp_1;
             SetInitSteps(4);
@@ -1746,12 +1784,7 @@ public class GameManager : MonoBehaviour
     public void Upload()
     {
         if (Player.CurrentFaction == Player.Faction.NCE) return;
-        //TODO get tutorrial
-        if (Player.Tutorial == 0)
-        {
-            GUITutorial_Upload();
-            return;
-        }
+        GUICheckIrirsLevelUpWarning();
         StartCoroutine(CUploadData());
     }
 

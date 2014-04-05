@@ -231,7 +231,8 @@ public class GUIObjectCrafting : MonoBehaviour
 
 	void Awake()
 	{
-		factionColors.Add(GameManager.Withe);
+        GameManager.Singleton.GUICheckIrisSecondCrafting();
+		factionColors.Add(GameManager.White);
 		factionColors.Add(GameManager.Black);
 
 		_exitButton = transform.Find(ExitButtonStr).GetComponent<dfButton>();

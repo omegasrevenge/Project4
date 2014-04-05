@@ -57,7 +57,7 @@ public class GUIObjectEquip : MonoBehaviour
 
 	void Awake()
 	{
-		factionColors.Add(GameManager.Withe);
+		factionColors.Add(GameManager.White);
 		factionColors.Add(GameManager.Black);
 
 		Transform equipTransform = transform.Find(BoxStr);
