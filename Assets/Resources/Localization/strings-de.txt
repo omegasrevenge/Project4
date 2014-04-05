@@ -13,26 +13,29 @@
 	
 	default_name:		"Nutzername",
 
+end_fight_text:
+"Kampf beendet.",
+
 equip_button_text:
-"Ausrüsten"
+"Ausrüsten",
 
 send_button_text:
-"Senden"
+"Senden",
 
 spectre_life_text:
-"Leben"
+"Leben",
 
 spectre_extradamage_text:
-"Bonusschaden"
+"Bonusschaden",
 
 spectre_dexterity_text:
-"Geschick"
+"Geschick",
 
 spectre_defence_text:
-"Defensive"
+"Defensive",
 
 spectre_regeneration_text:
-"Regeneration"
+"Regeneration",
 
 loadingscreen_login:
 "Verbinde mit Server ...",

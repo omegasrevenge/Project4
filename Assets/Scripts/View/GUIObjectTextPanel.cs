@@ -32,7 +32,7 @@ public class GUIObjectTextPanel : MonoBehaviour
                         _textLabel = obj.GetComponent<dfLabel>();
                 }     
             }
-            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+            if (GameManager.Singleton != null && GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
                 _textLabel.Color = GameManager.Black;
             string[] text = new string[] {value};
            
@@ -70,7 +70,7 @@ public class GUIObjectTextPanel : MonoBehaviour
                         _titleLabel = obj.GetComponent<dfLabel>();
                 }      
             }
-            if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
+            if (GameManager.Singleton != null &&GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
                 _titleLabel.Color = GameManager.Black;
             _textkeyTitle = value;
             if (_titleLabel != null)
