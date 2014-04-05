@@ -32,6 +32,9 @@ public class BattleEngine : SceneRoot3D
     public GameObject OwnCreature;
     public GameObject EnemyCreature;
 
+    private MonsterAnimationController OwnAnimationController;
+    private MonsterAnimationController EnemyAnimationController;
+
     public AudioSource BackgroundMusic;
     //########## public #########
 
@@ -232,14 +235,14 @@ public class BattleEngine : SceneRoot3D
         }
 
         if (ahp/ahpmax < 0.33f)
-            OwnCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
+            OwnAnimationController.SetState("Hurt");
         else
-            OwnCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
+            OwnAnimationController.SetState("Hurt", false);
 
         if (bhp/bhpmax < 0.33f)
-            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
+            EnemyAnimationController.SetState("Hurt");
         else
-            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
+            EnemyAnimationController.SetState("Hurt", false);
     }
 
     private void enforceEnd()
@@ -254,16 +257,16 @@ public class BattleEngine : SceneRoot3D
                 SoundController.PlaySound(
                     View.Faction == Player.Faction.VENGEA ? BattleSounds.VictoryVengea : BattleSounds.VictoryNce,
                     BattleSounds.MiscSoundChannel);
-                OwnCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
-                EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
+                OwnAnimationController.DoAnim("Victory");
+                EnemyAnimationController.DoAnim("Defeat");
             }
             else
             {
                 SoundController.PlaySound(
                     View.Faction == Player.Faction.VENGEA ? BattleSounds.DefeatVengea : BattleSounds.DefeatNce,
                     BattleSounds.MiscSoundChannel);
-                OwnCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
-                EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
+                OwnAnimationController.DoAnim("Defeat");
+                EnemyAnimationController.DoAnim("Victory");
             }
         }
 
@@ -457,14 +460,13 @@ public class BattleEngine : SceneRoot3D
         }
         if (!Fighting && Results.Count == 1)
         {
-            OwnCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
-            EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+            OwnAnimationController.SetState("GameOver");
+            EnemyAnimationController.SetState("GameOver");
         }
         if (Result.EVDA)
-            OwnCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
+           OwnAnimationController.DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
         if (Result.EVDB)
-            EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
-
+           EnemyAnimationController.DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
 
         var info = new List<GUIObjectBattleEngine.IndicatorContent>
         { new GUIObjectBattleEngine.IndicatorContent(CurCaster, Localization.GetText(Result.SkillName), 0) };
@@ -517,6 +519,7 @@ public class BattleEngine : SceneRoot3D
                                   transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
         OwnCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.BaseMeshA == 0, true);
+        OwnAnimationController = OwnCreature.GetComponent<MonsterAnimationController>();
         
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
         prefabName = "";
@@ -534,6 +537,7 @@ public class BattleEngine : SceneRoot3D
                                 transform.FindChild(DefaultEnemySpawnPos).rotation);
 
         EnemyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterBElement, serverInfo.BaseMeshB == 0, GameManager.Singleton.Player.CurFight.Pvp);
+        EnemyAnimationController = EnemyCreature.GetComponent<MonsterAnimationController>();
     }
 
     public void EndBattle()

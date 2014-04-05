@@ -304,14 +304,16 @@ public class GUIObjectBattleEngine : MonoBehaviour
         {
             for (int j = 0; j < DriodImprint[i].Count; j++)
             {
-                DriodImprintVisuals[i][j].Show();
-                string element = "";
+                DriodImprintVisuals[i][j].Show();         
                 string number;
                 if (j == 9)
                     number = "10";
                 else
                     number = "0" + (j + 1);
-                switch (DriodImprint[i][j])
+                // no bullshit
+                string element = DriodImprint[i][j].ToString();
+                #region bullshit
+                /*switch (DriodImprint[i][j])
                 {
 				case GameManager.ResourceElement.energy:
                         element = "energy";
@@ -328,7 +330,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
 				case GameManager.ResourceElement.water:
                         element = "water";
                         break;
-                }
+                }*/
+                #endregion
+               
                 DriodImprintVisuals[i][j].BackgroundSprite = "combat_slot_imprint_" + element + number;
             }
             for (int j = DriodImprint[i].Count; j < 10; j++)
@@ -439,7 +443,7 @@ public class GUIObjectBattleEngine : MonoBehaviour
             if (Slots.Length <= i) continue;
             DriodSlots[i].Show();
             Driods[i].Show();
-
+            // no bullshit
             if (Slots[i].driodenElement == GameManager.ResourceElement.None)
                 Driods[i].Hide();
             else
@@ -636,6 +640,8 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         if (BattleEngine.Current.GetTurnState != BattleEngine.TurnState.Wait)
             return;
+        // best implementation ever -.- .....
+        if (InputText.Count >= 2) GameManager.Singleton.GUITutorial_SecondSlot_2();
         switch (InputText.Count)
         {
             case 0:
@@ -674,8 +680,10 @@ public class GUIObjectBattleEngine : MonoBehaviour
         MonsterAContainer.GetComponent<dfPanel>().Hide();
         MonsterBContainer.GetComponent<dfPanel>().Hide();
         DriodContainer.transform.parent.GetComponent<dfPanel>().Hide();
-        string element = "";
-        switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
+        // no bullshit
+        string element = GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement.ToString();
+        #region bullshit
+        /*switch (GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement)
         {
             case GameManager.ResourceElement.energy:
                 element = "energy";
@@ -692,7 +700,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
             case GameManager.ResourceElement.water:
                 element = "water";
                 break;
-        }
+        }*/
+        #endregion
+       
         var enemyElement = (int) GameManager.Singleton.Player.CurFight.EnemyCreature.BaseElement;
         for (int i = 0; i < CatchDriods.Count; i++)
         {

@@ -117,7 +117,8 @@ public class HandleDrag : MonoBehaviour
 
 	private void ElementHandling(Vector2 curPosition, dfControl cntr)
 	{
-		float cntrSize;
+		//TODO improve it ;)
+        float cntrSize;
 
 		if (_crafting)
 		{

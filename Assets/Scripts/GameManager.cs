@@ -1343,47 +1343,52 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Couldn't load Player Data!");
             return;
         }
-        if (Player.CurrentFaction == Player.Faction.NCE || Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
+        
+        if (!Player.Fighting || CurrentGameMode == GameMode.Login)
         {
-            StartCoroutine(CNCEStart());
-            SwitchGameMode(GameMode.Map);
-        }
-        else if (!Player.Fighting || CurrentGameMode == GameMode.Login)
-        {
-            switch (Player.InitSteps)
+            if (Player.CurrentFaction == Player.Faction.NCE || Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
             {
-                case (0):
-                    GUIStartIRISinstructions();
-                    break;
-                case (1):
-                    GUIShowSpectreChoice();
-                    break;
-                case (2):
-                    GUIShowSpectreName();
-                    break;
-                case (3):
-                    GUIStartFight();
-                    break;
-                case (4):
-                    SwitchGameMode(GameMode.Map);
-                    GUICollectBiods_1();                   
-                    break;
-                case (5):
-                    SwitchGameMode(GameMode.Map);
-                    GUIOpenMenu();
-                    break;
-                case (6):
-                    SwitchGameMode(GameMode.Base);
-                    GUICrafting_1();
-                    break;
-                case (7):
-                    SwitchGameMode(GameMode.Base);
-                    GUIEquipDriod();
-                    break;
-                default:
-                    SwitchGameMode(GameMode.Map);
-                    break;
+                StartCoroutine(CNCEStart());
+                SwitchGameMode(GameMode.Map);    
             }
+            else
+            {
+                switch (Player.InitSteps)
+                {
+                    case (0):
+                        GUIStartIRISinstructions();
+                        break;
+                    case (1):
+                        GUIShowSpectreChoice();
+                        break;
+                    case (2):
+                        GUIShowSpectreName();
+                        break;
+                    case (3):
+                        GUIStartFight();
+                        break;
+                    case (4):
+                        SwitchGameMode(GameMode.Map);
+                        GUICollectBiods_1();
+                        break;
+                    case (5):
+                        SwitchGameMode(GameMode.Map);
+                        GUIOpenMenu();
+                        break;
+                    case (6):
+                        SwitchGameMode(GameMode.Base);
+                        GUICrafting_1();
+                        break;
+                    case (7):
+                        SwitchGameMode(GameMode.Base);
+                        GUIEquipDriod();
+                        break;
+                    default:
+                        SwitchGameMode(GameMode.Map);
+                        break;
+                }
+            }
+            
         }
         _view.HideLoadingScreen();
     }
