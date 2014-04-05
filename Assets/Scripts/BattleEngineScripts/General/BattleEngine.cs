@@ -29,7 +29,7 @@ public class BattleEngine : SceneRoot3D
 
     public bool CanShowDamage = false;
 
-    public GameObject FriendlyCreature;
+    public GameObject OwnCreature;
     public GameObject EnemyCreature;
 
     public AudioSource BackgroundMusic;
@@ -68,7 +68,7 @@ public class BattleEngine : SceneRoot3D
 
 	public bool Initialized
 	{
-		get { return (FriendlyCreature != null && EnemyCreature != null && _results != null); }
+		get { return (OwnCreature != null && EnemyCreature != null && _results != null); }
 	}
 
     public GUIObjectBattleEngine View
@@ -129,12 +129,12 @@ public class BattleEngine : SceneRoot3D
 
     public GameObject CurTarget
     {
-        get { return CurrentPlayer == FightRoundResult.Player.A ? EnemyCreature : FriendlyCreature; }
+        get { return CurrentPlayer == FightRoundResult.Player.A ? EnemyCreature : OwnCreature; }
     }
 
     public GameObject CurCaster
     {
-        get { return CurrentPlayer == FightRoundResult.Player.A ? FriendlyCreature : EnemyCreature; }
+        get { return CurrentPlayer == FightRoundResult.Player.A ? OwnCreature : EnemyCreature; }
     }
 
     //########## getter ##################################################################
@@ -231,12 +231,12 @@ public class BattleEngine : SceneRoot3D
             bhp = LastResult.MonsterBHP;
         }
 
-		if (ahp / ahpmax < 0.33f)
-            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
+        if (ahp/ahpmax < 0.33f)
+            OwnCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
         else
-            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
+            OwnCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
 
-		if (bhp / bhpmax < 0.33f)
+        if (bhp/bhpmax < 0.33f)
             EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt");
         else
             EnemyCreature.GetComponent<MonsterAnimationController>().SetState("Hurt", false);
@@ -254,7 +254,7 @@ public class BattleEngine : SceneRoot3D
                 SoundController.PlaySound(
                     View.Faction == Player.Faction.VENGEA ? BattleSounds.VictoryVengea : BattleSounds.VictoryNce,
                     BattleSounds.MiscSoundChannel);
-                FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
+                OwnCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
                 EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
             }
             else
@@ -262,7 +262,7 @@ public class BattleEngine : SceneRoot3D
                 SoundController.PlaySound(
                     View.Faction == Player.Faction.VENGEA ? BattleSounds.DefeatVengea : BattleSounds.DefeatNce,
                     BattleSounds.MiscSoundChannel);
-                FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
+                OwnCreature.GetComponent<MonsterAnimationController>().DoAnim("Defeat");
                 EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("Victory");
             }
         }
@@ -281,7 +281,7 @@ public class BattleEngine : SceneRoot3D
             _wolfAttackSounds[index] :
             _giantAttackSounds[index]
             ,
-            CurCaster == FriendlyCreature ?
+            CurCaster == OwnCreature ?
             BattleSounds.FriendlySoundChannel :
             BattleSounds.EnemySoundChannel);
     }
@@ -333,7 +333,11 @@ public class BattleEngine : SceneRoot3D
                     anim = 2;
                     break;
             }
-            switch (Result.DefaultAttackElement1)
+            element = Result.DefaultAttackElement1.ToString();
+            element = char.ToUpper(element[0]) + element.Substring(1);
+
+            #region bullshit
+            /*switch (Result.DefaultAttackElement1)
             {
                 case GameManager.ResourceElement.energy:
                     element = "Energy";
@@ -350,7 +354,8 @@ public class BattleEngine : SceneRoot3D
                 case GameManager.ResourceElement.water:
                     element = "Water";
                     break;
-            }
+            }*/
+            #endregion
             MonsterDoFullAction(CurCaster, "atk_var_" + (CurCaster.name.Contains("Giant") ? 2 : anim), (CurCaster.name.Contains("Giant") ? 1 : anim - 1), element + model);
             return;
 		}
@@ -401,7 +406,7 @@ public class BattleEngine : SceneRoot3D
                     }
                     else
                     {
-                        _actor.transform.position = jumpHit ? FriendlyCreature.transform.position : FriendlyCreature.transform.FindChild(DefaultSkillOrigin).position;
+                        _actor.transform.position = jumpHit ? OwnCreature.transform.position : OwnCreature.transform.FindChild(DefaultSkillOrigin).position;
                         _actor.transform.LookAt(jumpHit ? EnemyCreature.transform : EnemyCreature.transform.FindChild(DefaultSkillTarget));
                     }
                 }
@@ -416,19 +421,19 @@ public class BattleEngine : SceneRoot3D
                 {
                     if (kick)
                     {
-                        _actor.transform.rotation = FriendlyCreature.transform.rotation;
-                        _actor.transform.position = FriendlyCreature.transform.FindChild(DefaultSkillTarget).position;
+                        _actor.transform.rotation = OwnCreature.transform.rotation;
+                        _actor.transform.position = OwnCreature.transform.FindChild(DefaultSkillTarget).position;
                     }
                     else
                     {
                         _actor.transform.position = jumpHit ? EnemyCreature.transform.position : EnemyCreature.transform.FindChild(DefaultSkillOrigin).position;
-                        _actor.transform.LookAt(jumpHit ? FriendlyCreature.transform : FriendlyCreature.transform.FindChild(DefaultSkillTarget));
+                        _actor.transform.LookAt(jumpHit ? OwnCreature.transform : OwnCreature.transform.FindChild(DefaultSkillTarget));
                     }
                 }
                 else
                 {
-                    _actor.transform.rotation = FriendlyCreature.transform.rotation;
-                    _actor.transform.position = FriendlyCreature.transform.position;
+                    _actor.transform.rotation = OwnCreature.transform.rotation;
+                    _actor.transform.position = OwnCreature.transform.position;
                 }
                 break;
         }
@@ -442,15 +447,21 @@ public class BattleEngine : SceneRoot3D
 
         CanShowDamage = false;
         if (Result.Damage > 0 && Fighting && !Result.EVDA && !Result.EVDB)
+        {
             CurTarget.GetComponent<MonsterAnimationController>().DoAnim("Hit");
+            if (CurTarget == OwnCreature)
+                SoundController.PlaySound(BattleSounds.PlayerDef, BattleSounds.FriendlySoundChannel);
+            else
+                SoundController.PlaySound(BattleSounds.EnemyDef, BattleSounds.EnemySoundChannel);
 
+        }
         if (!Fighting && Results.Count == 1)
         {
-            FriendlyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
+            OwnCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
             EnemyCreature.GetComponent<MonsterAnimationController>().SetState("GameOver");
         }
         if (Result.EVDA)
-            FriendlyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
+            OwnCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
         if (Result.EVDB)
             EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim(Random.Range(0, 2) > 0 ? "evd_var1" : "evd_var2");
 
@@ -461,23 +472,23 @@ public class BattleEngine : SceneRoot3D
         if (Result.Damage > 0)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, Localization.GetText("DMG"), Result.Damage));
         if (Result.DotA && !View.MonsterADot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Set_On_Fire"), 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(OwnCreature, Localization.GetText("Set_On_Fire"), 0));
         if (Result.DotB && !View.MonsterBDot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Set_On_Fire"), 0));
         if (Result.DoT > 0)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(CurTarget, Localization.GetText("Burn_DMG"), Result.DoT));
         if (Result.HotA && !View.MonsterAHot.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Regen"), 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(OwnCreature, Localization.GetText("Regen"), 0));
         if (Result.HotB && !View.MonsterBHot.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Regen"), 0));
         if (Result.HoT > 0)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(CurCaster, Localization.GetText("Heal"), Result.HoT));
         if (Result.ConA && !View.MonsterACon.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Confusion"), 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(OwnCreature, Localization.GetText("Confusion"), 0));
         if (Result.ConB && !View.MonsterBCon.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Confusion"), 0));
         if (Result.BuffA && !View.MonsterABuff.IsVisible)
-            info.Add(new GUIObjectBattleEngine.IndicatorContent(FriendlyCreature, Localization.GetText("Buff"), 0));
+            info.Add(new GUIObjectBattleEngine.IndicatorContent(OwnCreature, Localization.GetText("Buff"), 0));
         if (Result.BuffB && !View.MonsterBBuff.IsVisible)
             info.Add(new GUIObjectBattleEngine.IndicatorContent(EnemyCreature, Localization.GetText("Buff"), 0));
 
@@ -501,11 +512,11 @@ public class BattleEngine : SceneRoot3D
                 prefabName = GiantMonster;
                 break;
         }
-        FriendlyCreature = CreateObject(transform, prefabName,
+        OwnCreature = CreateObject(transform, prefabName,
                                   transform.FindChild(DefaultFriendlySpawnPos).position,
                                   transform.FindChild(DefaultFriendlySpawnPos).rotation);
 
-        FriendlyCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.BaseMeshA == 0, true);
+        OwnCreature.GetComponent<MonsterStats>().Init(serverInfo.MonsterAElement, serverInfo.BaseMeshA == 0, true);
         
         ////////////////////////////// init Enemy Creature //////////////////////////////////////////////////////////////////////////////////////////
         prefabName = "";
@@ -539,7 +550,7 @@ public class BattleEngine : SceneRoot3D
         View.GGContainer.Hide();
         if (!RenderSettings.fog)
             RenderSettings.fog = true;
-        Destroy(FriendlyCreature);
+        Destroy(OwnCreature);
         Destroy(EnemyCreature);
     }
 

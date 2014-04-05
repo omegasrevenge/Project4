@@ -875,7 +875,7 @@ public class GameManager : MonoBehaviour
         string message;
         if ((bool) json["result"])
         {
-            SoundController.PlaySound(BattleSounds.TameSuccess, BattleSounds.MiscSoundChannel);
+            SoundController.PlaySound(Player.CurrentFaction == Player.Faction.NCE ? BattleSounds.CatchSuccessNCE : BattleSounds.CatchSuccessVengea, BattleSounds.MiscSoundChannel);
             BattleEngine.Current.EnemyCreature.GetComponent<MonsterAnimationController>().DoAnim("tame_success");
             message = "Success!";
         }
@@ -909,7 +909,7 @@ public class GameManager : MonoBehaviour
         else
             message = "Fail!";
         BattleEngine.Current.View.ShowDamageIndicators(new List<GUIObjectBattleEngine.IndicatorContent>
-        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.FriendlyCreature, message, 0, 2f) });
+        { new GUIObjectBattleEngine.IndicatorContent(BattleEngine.Current.OwnCreature, message, 0, 2f) });
 		Debug.LogError (json);
         //if (!CheckResult(json,request.url)) { yield break; }
         BattleEngineSkipTurn = true;

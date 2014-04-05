@@ -16,11 +16,11 @@ public class FireballController : ActorControlls
             _curDir = BattleEngine.Current.CurrentPlayer == FightRoundResult.Player.A ? To.B : To.A;
         }
 	    transform.position = Vector3.Lerp(transform.position, _curDir == To.A ? 
-            BattleEngine.Current.FriendlyCreature.transform.position : BattleEngine.Current.EnemyCreature.transform.position, Speed);
+            BattleEngine.Current.OwnCreature.transform.position : BattleEngine.Current.EnemyCreature.transform.position, Speed);
 
 	    if (_curDir == To.A)
         {
-            if (reached(BattleEngine.Current.FriendlyCreature))
+            if (reached(BattleEngine.Current.OwnCreature))
                 CanShowDamage = true;
         }
         else

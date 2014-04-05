@@ -14,10 +14,16 @@ public class BattleSounds : MonoBehaviour
     public const string BackgroundNce = "Music/Music_NCE_Fight";
 
     public const string VictoryVengea = "SFX/Oc_Audio_SFX_Vengea_Fight_Victory";
-    public const string VictoryNce = "SFX/Oc_Audio_SFX_Vengea_Fight_Victory";
+    public const string VictoryNce = "SFX/Oc_Audio_SFX_NCE_Fight_Victory";
 
     public const string DefeatVengea = "SFX/Oc_Audio_SFX_Vengea_Fight_Lose";
-    public const string DefeatNce = "SFX/Oc_Audio_SFX_Vengea_Fight_Lose";
+    public const string DefeatNce = "SFX/Oc_Audio_SFX_NCE_Fight_Lose";
+
+    public const string DefenseVengea = "SFX/Oc_Audio_SFX_Vengea_Fight_Def";
+    public const string DefenseNCE = "SFX/Oc_Audio_SFX_NCE_Fight_Def";
+
+    public const string PlayerDef = "SFX/Oc_Audio_SFX_Fight_Player_Def";
+    public const string EnemyDef = "SFX/Oc_Audio_SFX_Fight_Enemy_Def";
 
     public const string WolfAttack1 = "SFX/Oc_Audio_SFX_Fight_Wolf_Attack_Special_1";
     public const string WolfAttack2 = "SFX/Oc_Audio_SFX_Fight_Wolf_Attack_Basic_1";
@@ -33,6 +39,7 @@ public class BattleSounds : MonoBehaviour
 
     public const string GiantIdle = "SFX/Oc_Audio_SFX_Fight_Giant_Idle";
 
-    public const string TameSuccess = "SFX/Oc_Audio_SFX_Vengea_Fight_Catch";
+    public const string CatchSuccessVengea = "SFX/Oc_Audio_SFX_Vengea_Fight_Catch";
+    public const string CatchSuccessNCE = "SFX/Oc_Audio_SFX_NCE_Fight_Catch";
     public const string TameFail = "SFX/Oc_Audio_SFX_Fight_TameFail";
 }

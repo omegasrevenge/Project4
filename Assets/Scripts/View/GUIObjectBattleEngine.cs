@@ -611,9 +611,9 @@ public class GUIObjectBattleEngine : MonoBehaviour
         }
 
         if (InputText.Contains(driod)) return;
-
-        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDriod+InputText.Count, SoundController.ChannelSFX);
+        
         InputText.Add(driod);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacFightDriod + InputText.Count, SoundController.ChannelSFX);
     }
 
     void OnMouseMove(dfControl ctrl, dfMouseEventArgs args)

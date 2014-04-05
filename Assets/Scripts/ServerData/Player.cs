@@ -52,10 +52,19 @@ public class Player
         }
 
         JSONObject jcids = json["CreatureIds"];
-        creatureIDs = new int[jcids.Count];
+        int unused = 0;
+        for (int i = 0; i < jcids.Count; i++)
+            if ((int) jcids[i] == 0) unused++;
+        creatureIDs = new int[jcids.Count-unused];
+        unused = 0;
         for (int i = 0; i < jcids.Count; i++)
         {
-            creatureIDs[i] = (int)jcids[i];
+            if ((int) jcids[i] == 0)
+            {
+                unused++;
+                continue;
+            }
+            creatureIDs[i+unused] = (int)jcids[i];
         }
 
         InitSteps = (int)json["InitSteps"];

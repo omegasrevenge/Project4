@@ -122,7 +122,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 			curButton.Click +=
 				(control, @event) =>
 				{
-                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
 					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
 				};
 
