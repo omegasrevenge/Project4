@@ -350,6 +350,11 @@ public class GUIObjectBattleEngine : MonoBehaviour
     {
         for (int i = 0; i < PresentDriodsCount; i++)
         {
+            Debug.Log(Slots[i].driodenHealth);
+            if (Slots[i].driodenHealth < 0.25f)
+            {
+                GameManager.Singleton.GUICheckIrisBrokenDriod();
+            }
             if ((Mathf.Abs(DriodsHealth[i].FillAmount - (0.57f + Slots[i].driodenHealth*0.36f)) > 0.001f
                 && DriodsHealth[i].FillAmount < (0.57f + Slots[i].driodenHealth * 0.36f))
                 || PresentDriodsCount < _lastDriodCount)
