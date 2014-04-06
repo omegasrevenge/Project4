@@ -27,4 +27,10 @@ public class GUIObjectMessage : MonoBehaviour
     {
         _control.Hide();
     }
+
+    void LateUpdate()
+    {
+        if(_control.IsVisible)
+            _control.BringToFront();
+    }
 }
