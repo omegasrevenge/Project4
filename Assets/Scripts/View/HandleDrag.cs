@@ -114,6 +114,7 @@ public class HandleDrag : MonoBehaviour
 		eleDown = false;
 		draged = false;
 		inSlot = false;
+	       
 	}
 
 	private void ElementHandling(Vector2 curPosition, dfControl cntr)

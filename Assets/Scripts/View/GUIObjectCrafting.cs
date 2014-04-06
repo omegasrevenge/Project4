@@ -107,7 +107,12 @@ public class GUIObjectCrafting : MonoBehaviour
 
 	public void Craft()
 	{
-		if (_focusedComponent == null) return;
+	    if (_focusedComponent == null)
+	    {;
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftPlace,
+               SoundController.ChannelSFX);
+            return;
+	    }
 		_focusedComponent.Color = Normal;
 		if (_focusedComponent != _nextElement)
 		{
@@ -140,8 +145,16 @@ public class GUIObjectCrafting : MonoBehaviour
 			_focusedComponent = null;
 			return;
 		}
-	    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftExchange, SoundController.ChannelSFX);
-		GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 10, GameManager.ExchangeMode.Cricle, 0);
+	    if (GameManager.Singleton.Player.Resources[(int) curResourceLevel, (int) _curResourceElement] >= 10)
+	    {
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftExchange, SoundController.ChannelSFX);
+            GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, 10, GameManager.ExchangeMode.Cricle, 0);
+	    }
+	    else
+	    {
+            SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftPlace,
+               SoundController.ChannelSFX);
+	    }
 		_focusedComponent = null;
 	}
 
