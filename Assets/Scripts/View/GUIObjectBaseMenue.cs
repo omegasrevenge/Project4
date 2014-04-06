@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GUIObjectBaseMenue : MonoBehaviour 
@@ -38,11 +39,11 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	private Creature _curCreature;
 
 	private bool init = false;
-	private int creatureIndex = 0;
+	private int creatureIndex = -1;
 
 	private List<dfButton> driodSlots = new List<dfButton>();
 	private List<Color32> factionColors = new List<Color32>();
-	private int[] creatureIDs;
+	//private int[] creatureIDs;
 
 	[SerializeField]
 	private GameManager.ResourceLevel _curResourceLevel = GameManager.ResourceLevel.biod;
@@ -64,17 +65,39 @@ public class GUIObjectBaseMenue : MonoBehaviour
         else if (GameManager.Singleton.Player.creatureIDs.Length < 2)
             _sendButton.Hide();
         else
-            _sendButton.Show();    
+            _sendButton.Show();
 
+        driodSlots = new List<dfButton>();
+        Transform slotTransform = transform.Find(BoxStr);
+        for (int i = 1; i <= 4; i++)
+        {
+            dfButton curButton = slotTransform.Find(DriodSlotStr + i).GetComponent<dfButton>();
+
+            if (i > _curCreature.slots.Length)
+            {
+                curButton.gameObject.SetActive(false);
+                continue;
+            }
+            GUIObjectSlotHandling.AddSlotHandling(curButton.gameObject, _curCreature.slots[i - 1]);
+            curButton.FocusSprite = SlotButtonFocusStr + _curFaction.ToString().ToLower();
+            curButton.Click +=
+                (control, @event) =>
+                {
+                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
+                    transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
+                };
+
+            driodSlots.Add(curButton);
+        }
 		if (init)
 		{
-			if (GameManager.Singleton.AllOwnCreatures.Count > 0) _curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
+            if (GameManager.Singleton.AllOwnCreatures.Count > 0) _curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
 
 			for (int i = 0; i < driodSlots.Count; i++)
-			{
-				if (i >= _curCreature.slots.Length)
-				{
-					driodSlots[i].gameObject.SetActive(false);
+			{    
+                if (i >= _curCreature.slots.Length)
+                {
+                    driodSlots[i].gameObject.SetActive(false);
 					continue;
 				}
 				driodSlots[i].gameObject.SetActive(true);
@@ -82,7 +105,7 @@ public class GUIObjectBaseMenue : MonoBehaviour
 				eqipSlot.slot = _curCreature.slots[i];
 				eqipSlot.RefreshView();
 			}
-		}
+		}  
 	}
 
 	void Awake()
@@ -104,30 +127,14 @@ public class GUIObjectBaseMenue : MonoBehaviour
 	private void Init()
 	{
 		if(init) return;
+        if(GameManager.Singleton.AllOwnCreatures.Count == 0) return;
+
+        UpdateSpectre();
 
 		Transform slotTransform = transform.Find(BoxStr);
 		_slotBox = slotTransform.GetComponent<dfPanel>();
 		_craftingButton = slotTransform.Find(CraftingButtonStr).GetComponent<dfButton>();
-		for (int i = 1; i <= 4; i++)
-		{
-			dfButton curButton = slotTransform.Find(DriodSlotStr + i).GetComponent<dfButton>();
-
-			if (i > _curCreature.slots.Length)
-			{
-				curButton.gameObject.SetActive(false);
-				continue;
-			}
-			GUIObjectSlotHandling.AddSlotHandling(curButton.gameObject, _curCreature.slots[i - 1]);
-			curButton.FocusSprite = SlotButtonFocusStr + _curFaction.ToString().ToLower();
-			curButton.Click +=
-				(control, @event) =>
-				{
-                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
-					transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
-				};
-
-			driodSlots.Add(curButton);
-		}
+		
 		_exitButton = transform.Find(ExitButtonStr).GetComponent<dfButton>();
 
 		_craftingButton.Click +=
@@ -166,22 +173,40 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		_switchSpectre = transform.Find(SwitchSpectre).GetComponent<dfPanel>();
 		HandleDrag.AddHandleDrag(this, _switchSpectre.gameObject, _switchSpectre);
 
+        for (int i = 0; i < GameManager.Singleton.AllOwnCreatures.Count; i++)
+        {
+            if (GameManager.Singleton.AllOwnCreatures[i].CreatureID == GameManager.Singleton.Player.CurCreature.CreatureID)
+                creatureIndex = i;
+        }
+        
+        //creatureIndex = GameManager.Singleton.AllOwnCreatures.IndexOf(GameManager.Singleton.AllOwnCreatures.FirstOrDefault(c => c.CreatureID == _curCreature.CreatureID));
+
+	    if (creatureIndex < 0)
+	    {
+	        Debug.LogWarning("Creature not found");
+            creatureIndex = 0;
+	    }
+
 		SetColor(gameObject.GetComponent<dfControl>());
 		init = true;
 	}
 
 	public void NextSpectre()
 	{
-		creatureIndex = creatureIndex >= (creatureIDs.Length - 1) ? 0 : creatureIndex + 1;
+		creatureIndex = creatureIndex >= (GameManager.Singleton.Player.creatureIDs.Length - 1) ? 0 : creatureIndex + 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
 		GameManager.Singleton.GUIUpdateSpectre(_curCreature);
+
+        UpdateSpectre();
 	}
 
 	public void PreviousSpectre()
 	{
-		creatureIndex = creatureIndex <= 0 ? (creatureIDs.Length - 1) : creatureIndex - 1;
+        creatureIndex = creatureIndex <= 0 ? (GameManager.Singleton.Player.creatureIDs.Length - 1) : creatureIndex - 1;
 		_curCreature = GameManager.Singleton.AllOwnCreatures[creatureIndex];
 		GameManager.Singleton.GUIUpdateSpectre(_curCreature);
+
+        UpdateSpectre();
 	}
 
 	private void SetStatNames()
@@ -217,13 +242,12 @@ public class GUIObjectBaseMenue : MonoBehaviour
 		GUIObjectBaseMenue obj = cntrl.GetComponent<GUIObjectBaseMenue>();
 		obj._curFaction = GameManager.Singleton.Player.CurrentFaction;
 		obj._curCreature = GameManager.Singleton.Player.CurCreature;
-		obj.creatureIDs = GameManager.Singleton.Player.creatureIDs;
 		return obj;
     }
 
 	void Update()
 	{
 		Init();
-		UpdateSpectre();
+		//UpdateSpectre();
 	}
 }

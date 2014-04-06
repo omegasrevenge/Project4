@@ -667,6 +667,10 @@ public class GameManager : MonoBehaviour
             Creature curCreature = new Creature();
             curCreature.ReadJson(creatureJson[i]);
             _allOwnCreatures.Add(curCreature);
+            //for (int j = 0; j < curCreature.slots.Length; j++)
+            //{
+            //    Debug.Log(AllOwnCreatures[i].slots[j].driodenElement);
+            //}
         }
     }
 

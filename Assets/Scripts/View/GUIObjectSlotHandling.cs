@@ -41,7 +41,7 @@ public class GUIObjectSlotHandling : MonoBehaviour
 
 	public void RefreshView()
 	{
-		if (!init)return;
+        if (!init)return;
 		_driodLevel.Show();
 		_driodHealth.FillAmount = 0.57f + slot.driodenHealth * 0.36f;
 		_driodElement.SpriteName = ElementSpritePrefix + slot.driodenElement.ToString();
