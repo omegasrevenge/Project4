@@ -114,7 +114,7 @@ public class MapGrid : SceneRoot3D
         //AssetLoader.Loader.Enqueue(string.Format("http://mts1.google.com/vt/lyrs=m@245168067&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cp.il%3Atrue%7Cp.w%3A2.4%7Cp.h%3A%2300f6ff%7Cp.s%3A54%2Cs.t%3A6%7Cp.c%3A%23ff92c2d6&style=47,37%7Csmartmaps%20(256x256)", x, y, ZoomLevel), sprite.SetSprite);
         if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
         {
-            AssetLoader.Loader.Enqueue(string.Format("http://mt0.googleapis.com/vt?lyrs=m@249474655&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=s.e%3Al%7Cp.v%3Aoff%2Cp.il%3Atrue%7Cp.h%3A%23ff3300%7Cp.l%3A-3%7Cp.g%3A0.88%7Cp.s%3A-49%2Cs.t%3A6%7Cp.c%3A%23ff9fa6b1%7Cp.l%3A19&style=47,37%7Csmartmaps", x, y, ZoomLevel), sprite.SetSprite);
+            AssetLoader.Loader.Enqueue(string.Format("http://mt0.googleapis.com/vt?lyrs=m@258014715&src=apiv3&hl=de&x={0}&y={1}&z={2}&apistyle=p.v%3Aon%2Cs.e%3Al%7Cp.v%3Aoff%2Cp.il%3Atrue%7Cp.s%3A1%7Cp.h%3A%23ff0000%7Cp.g%3A1.69%7Cp.l%3A20%2Cs.t%3A6%7Cp.il%3Atrue%7Cp.s%3A-100%7Cp.w%3A2.1%7Cp.c%3A%23ff68a3ad%7Cp.l%3A17&style=47,37%7Csmartmaps", x, y, ZoomLevel), sprite.SetSprite);
         }
         else
         {
