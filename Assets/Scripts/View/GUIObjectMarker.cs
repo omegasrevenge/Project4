@@ -45,7 +45,7 @@ public class GUIObjectMarker : MonoBehaviour
         if (GameManager.Singleton.Player.CurrentFaction == Player.Faction.NCE)
             background.Color = GameManager.NCERed;
 
-        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacClick, SoundController.ChannelSFX);
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacChoose, SoundController.ChannelSFX);
         _scale = cntrl.transform.localScale;
         _scale *= (Screen.height / ReferenceHeight);
         Vector3 size = cntrl.Size;

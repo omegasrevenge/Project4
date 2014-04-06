@@ -1386,8 +1386,7 @@ public class GameManager : MonoBehaviour
                         SwitchGameMode(GameMode.Map);
                         break;
                 }
-            }
-            
+            }          
         }
         _view.HideLoadingScreen();
     }

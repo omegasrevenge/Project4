@@ -128,6 +128,8 @@ public class GUIObjectCrafting : MonoBehaviour
 				}
 			    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftCombine, SoundController.ChannelSFX);
 				GameManager.Singleton.Exchange((int)_curResourceElement, (int)curResourceLevel, exchangeAmount, GameManager.ExchangeMode.Up, diff);
+			    if (curResourceLevel == GameManager.ResourceLevel.driod_lvl0)
+                    GameManager.Singleton.GUICheckIrisSecondCraftingSuccess();
 				_focusedComponent = null;
 				return;
 			}

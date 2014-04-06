@@ -68,6 +68,7 @@ public class HandleDrag : MonoBehaviour
 	public void OnDragStart(dfControl control, dfDragEventArgs dragEvent)
 	{
 		Init();
+	    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
 		dragEvent.Data = this;
 		dragEvent.State = dfDragDropState.Dragging;
 		dragEvent.Use();
