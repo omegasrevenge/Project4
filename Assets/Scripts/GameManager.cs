@@ -447,6 +447,12 @@ public class GameManager : MonoBehaviour
         Debug.Log(json["data"]);
 		ReadPlayerJSON(data);
 	    CheckStartFight();
+
+	    if (CurrentGameMode == GameMode.Base && _base != null)
+	    {
+            _base.UpdateSpectre();
+	    }
+
         if (callback != null)
             callback(true);
     }
@@ -610,7 +616,6 @@ public class GameManager : MonoBehaviour
 
         if (Player.InitSteps == 7)
             GUIEquipDriod_2();
-
         GetOwnPlayer();
     }
 

@@ -5,6 +5,7 @@ public class GUIObjectBaseUI : MonoBehaviour
     private const string Prefab = "GUI/panel_baseui";
 
 	private dfControl _root;
+    private GUIObjectBaseMenue _menue;
 
     public static GUIObjectBaseUI Create(dfControl root)
     {
@@ -19,7 +20,7 @@ public class GUIObjectBaseUI : MonoBehaviour
 
 	public void AddMenue()
 	{
-		GUIObjectBaseMenue.Create(_root);
+		_menue = GUIObjectBaseMenue.Create(_root);
 	}
 
 	public void AddCrafting()
@@ -34,4 +35,9 @@ public class GUIObjectBaseUI : MonoBehaviour
 	{
 		GUIObjectEquip.Create(_root, curCreature, slot);
 	}
+
+    public void UpdateSpectre()
+    {
+        _menue.UpdateSpectre();
+    }
 }

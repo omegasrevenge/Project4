@@ -129,7 +129,6 @@ public class GUIObjectEquip : MonoBehaviour
 
 	private void Remove()
 	{
-		Debug.Log("remove");
 		Destroy(gameObject);
 	}
 }

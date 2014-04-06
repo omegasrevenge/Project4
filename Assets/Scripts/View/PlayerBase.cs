@@ -36,4 +36,9 @@ public class PlayerBase : SceneRoot3D
         crtrMsh.SetActive(true);
 		crtrMsh.GetComponent<MonsterStats>().Init(creature.BaseElement, creature.ModelID == 0, true);
     }
+
+    public void UpdateSpectre()
+    {
+        (_gui as GUIObjectBaseUI).UpdateSpectre();
+    }
 }

@@ -67,7 +67,11 @@ public class GUIObjectBaseMenue : MonoBehaviour
         else
             _sendButton.Show();
 
-        driodSlots = new List<dfButton>();
+	    foreach (dfButton driodSlot in driodSlots)
+	    {
+	        driodSlot.Click -= OnSlotClick;
+	    }
+	    driodSlots.Clear();
         Transform slotTransform = transform.Find(BoxStr);
         for (int i = 1; i <= 4; i++)
         {
@@ -80,12 +84,8 @@ public class GUIObjectBaseMenue : MonoBehaviour
             }
             GUIObjectSlotHandling.AddSlotHandling(curButton.gameObject, _curCreature.slots[i - 1]);
             curButton.FocusSprite = SlotButtonFocusStr + _curFaction.ToString().ToLower();
-            curButton.Click +=
-                (control, @event) =>
-                {
-                    SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
-                    transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
-                };
+            curButton.Click += OnSlotClick;
+                
 
             driodSlots.Add(curButton);
         }
@@ -107,7 +107,11 @@ public class GUIObjectBaseMenue : MonoBehaviour
 			}
 		}  
 	}
-
+    void OnSlotClick(dfControl control,dfMouseEventArgs @event)
+    {
+        SoundController.PlaySound(SoundController.SFXlocation + SoundController.SoundCraftTake, SoundController.ChannelSFX);
+        transform.parent.GetComponent<GUIObjectBaseUI>().AddEquip(_curCreature, _curCreature.slots[driodSlots.IndexOf((dfButton)control)]);
+    }
 	void Awake()
 	{
 		factionColors.Add(GameManager.White);

@@ -26,6 +26,9 @@ public class GUIObjectLevelUp : MonoBehaviour, IPopupContent
 
     public void Init()
     {
+        SoundController.PlaySound(
+            SoundController.SFXlocation + SoundController.Faction + SoundController.SoundFacUpgrade,
+            SoundController.ChannelSFX);
         GetComponent<GUIObjectTextPanel>().Title = "level_up_title";
         GetComponent<GUIObjectTextPanel>().Text = "level_up_text"+"#"+GameManager.Singleton.Player.CurCreature.Name;
 
