@@ -132,7 +132,7 @@ public class HandleDrag : MonoBehaviour
 
 		if (curPosition.x > startPosition.x + cntrSize)
 		{
-			cntr.Opacity = (Screen.width / curPosition.x) - 0.75f;
+			cntr.Opacity = Mathf.Max((Screen.width / curPosition.x) - 0.75f,0.02f);
 			if (eleUp) return;
 
 			if (_crafting)
@@ -152,7 +152,7 @@ public class HandleDrag : MonoBehaviour
 		{
 			float curOpecity = (curPosition.x / Screen.width) - 0.75f;
 
-			cntr.Opacity = 1.5f + curOpecity;
+			cntr.Opacity = Mathf.Max(1.5f + curOpecity,0.02f);
 
 			if (eleDown) return;
 
@@ -211,10 +211,13 @@ public class HandleDrag : MonoBehaviour
 			{
 				SetPosition(Sprite);
 				_crafting.MarkForCrafting(Sprite);
-				return;
-			}
 
-			SetPosition(Panel);
+			}
+			else
+			{
+                SetPosition(Panel);
+			}
+			
 		}
 	}
 
