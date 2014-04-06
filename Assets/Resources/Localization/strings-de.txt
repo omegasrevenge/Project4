@@ -14,7 +14,7 @@
 	default_name:		"Nutzername",
 
 end_fight_text:
-"Kampf beendet.",
+"Kampf beendet",
 
 equip_button_text:
 "Ausrüsten",
@@ -73,7 +73,7 @@ level_up_title:
 "Level Up",
 
 upload_text:
-"Daten werden an VENGEA übermittelt. Bitte brechen Sie den Vorgang nicht ab",
+"Daten werden an VENGEA übermittelt. Bitte brechen Sie den Vorgang nicht ab.",
 
 upload_title:
 "Daten werden hochgeladen",

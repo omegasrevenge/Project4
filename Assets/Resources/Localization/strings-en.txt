@@ -13,6 +13,9 @@
 	
 	default_name:		"Username",
 	
+end_fight_text:
+"Fight finished",
+
 equip_button_text:
 "Equip"	
 
@@ -55,16 +58,34 @@ storm:"Storm",
 nature:"Life",
 water:"Water",
 
-0:"Biode/s", 
-1:"primitive Driode(s)"
-2:"Rank 1 Driode(s)"
-3:"Rank 2 Driode(s)"
-4:"Rank 3 Driode(s)"
-5:"Rank 4 Driode(s)"
-6:"Rank 5 Driode(s)"
+0:"Biod/es", 
+1:"primitive Driod(es)"
+2:"Rank 1 Driod(es)"
+3:"Rank 2 Driod(es)"
+4:"Rank 3 Driod(es)"
+5:"Rank 4 Driod(es)"
+6:"Rank 5 Driod(es)"
+
+level_up_text:
+"{0} leveled up",
+
+level_up_title:
+"Level Up",
+
+upload_text:
+"Data will be submitted to VENGEA. Please do not cancel this process.",
+
+upload_title:
+"Upload Data",
 
 farm_rsc_text:
 "{0} {1} of Type {2} found.",
+
+warning_send_title:
+"Warning",
+
+warning_send_text:
+"Do you really want to send {0} to Vengea ? You can not undo this process.",
 
 challenger_title:
 "Waiting for response...",
@@ -88,10 +109,10 @@ screen_chooseelement_title:
 "Element",
 
 screen_chooseelement_text:
-"Choose the Elemten of your Specter.",
+"Choose the Elemten of your Spectre.",
 
 screen_monsterentername_title:
-"Your Specter",
+"Your Spectre",
 
 screen_monsterentername_text:
 "Please choose a name for your Spectre.",
