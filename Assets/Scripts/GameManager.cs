@@ -918,12 +918,20 @@ public class GameManager : MonoBehaviour
         Debug.Log("!!!!!!!!!!!!!!a " + request.text);
     }
 
-    public void CatchAttempt(int driodLevel) { StartCoroutine(CCatchAttempt(driodLevel)); }
+    public void CatchAttempt(int driodLevel)
+    {
+        StartCoroutine(CCatchAttempt(driodLevel));
+    }
 
     private IEnumerator CCatchAttempt(int driodLevel)
     {
         WWW request = new WWW(GetSessionURL("catchcr") + "&level=" + driodLevel); //<---------------------------------
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int>(CatchAttempt), driodLevel);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         string message;
@@ -947,12 +955,20 @@ public class GameManager : MonoBehaviour
         GetOwnPlayer();
     }
 
-    public void EscapeAttempt() { StartCoroutine(CEscapeAttempt()); }
+    public void EscapeAttempt()
+    {
+        StartCoroutine(CEscapeAttempt());
+    }
 
     private IEnumerator CEscapeAttempt()
     {
         WWW request = new WWW(GetSessionURL("escape"));
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action(EscapeAttempt));
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!(bool)json["result"] && ((string)json["error"]).Equals("same_round")) { yield break; }
@@ -1063,23 +1079,6 @@ public class GameManager : MonoBehaviour
         _playersUpdated = true;
     }
 
-    public void AddXP(string xp)
-    {
-        StartCoroutine(CAddXP(xp));
-    }
-
-    public IEnumerator CAddXP(string xp)
-    {
-        WWW request = new WWW(GetSessionURL("addxp") + "&xp=" + xp);
-
-        yield return request;
-
-        JSONObject json = JSONParser.parse(request.text);
-        if (!CheckResult(json,request.url)) { yield break; }
-
-        GetOwnPlayer();
-    }
-
     public void Attack(string enemy)
     {
         StartCoroutine(CAttack(enemy));
@@ -1090,6 +1089,11 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("fightcreate") + "&enemy=" + enemy);
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<string>(Attack), enemy);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) { yield break; }
@@ -1108,6 +1112,11 @@ public class GameManager : MonoBehaviour
 
         yield return request;
 
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action(Accept));
+        }
+
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) { yield break; }
 
@@ -1124,6 +1133,11 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("declined"));
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action(Decline));
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) { yield break; }
@@ -1142,6 +1156,11 @@ public class GameManager : MonoBehaviour
         Player.InitSteps = steps;
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int>(SetInitSteps), steps);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) { yield break; }
@@ -1163,6 +1182,12 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("settutorial") + "&tut=" + tut);      
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<TutorialStep>(SetTutorial), tut);
+        }
+
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) { yield break; }
     }
@@ -1179,6 +1204,11 @@ public class GameManager : MonoBehaviour
         Player.Firewall = firewall;
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<bool>(SetFirewall), firewall);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) { yield break; }
@@ -1197,6 +1227,11 @@ public class GameManager : MonoBehaviour
 
         yield return request;
 
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<Player.Faction>(SetFaction), faction);
+        }
+
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) { yield break; }
         gameObject.AddComponent<GUIObjectReboot>();
@@ -1213,6 +1248,11 @@ public class GameManager : MonoBehaviour
         Player.Name = name;
 
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<string, Action<bool, string>>(SubmitPlayerName), name, callback);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url))
@@ -1264,6 +1304,11 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("startspecialfight") + "&xp=" + xp + "&element="+ element + "&mid=" + mid);
         yield return request;
+
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<bool>(StartSpecialFight), tutorial);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url)) yield break;
