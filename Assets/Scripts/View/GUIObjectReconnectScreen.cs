@@ -18,6 +18,7 @@ public class GUIObjectReconnectScreen : MonoBehaviour
         dfControl cntrl = root.AddPrefab(Resources.Load<GameObject>(Prefab));
         cntrl.Size = cntrl.Parent.Size;
         cntrl.RelativePosition = Vector2.zero;
+        cntrl.BringToFront();
         GUIObjectReconnectScreen obj = cntrl.GetComponent<GUIObjectReconnectScreen>();
         obj.Init(serverRequest, @params);
         return obj;

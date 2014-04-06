@@ -22,6 +22,7 @@ public class ViewController : MonoBehaviour
     private GUIObjectMaxScreen _maxScreen;
     private GUIObjectPopup _popup;
     private GUIObjectLoadingScreen _loadingScreen;
+    private GUIObjectReconnectScreen _reconnectScreen;
 
     public static ViewController Singleton
     {
@@ -157,7 +158,9 @@ public class ViewController : MonoBehaviour
 
     public GUIObjectReconnectScreen AddReconnectScreen(Delegate serverRequest, params object[] @params)
     {
-        return GUIObjectReconnectScreen.Create(_gui,serverRequest, @params);
+        if(_reconnectScreen == null)
+            _reconnectScreen = GUIObjectReconnectScreen.Create(_gui,serverRequest, @params);
+        return _reconnectScreen;
     }
 
     public void ShowLoadingScreen(string text)
