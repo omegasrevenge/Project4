@@ -32,7 +32,7 @@ public class GUIObjectReboot : MonoBehaviour
         }
         else if (screen == 2 && Time.time - _startTime > Reboot)
         {
-            Application.Quit();
+            Application.LoadLevel(1);
         }
 	}
 }

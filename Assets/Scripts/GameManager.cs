@@ -429,7 +429,6 @@ public class GameManager : MonoBehaviour
 		JSONObject data=json["data"];
 		if((string)data=="nochange")
 		{
-            Debug.Log("nochange");
 			yield break;
 		};
         Debug.Log(json["data"]);
@@ -1611,6 +1610,7 @@ public class GameManager : MonoBehaviour
     }
     public void GUITutorial_SecondSlot()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.NextFight) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             _view.AddIrisPopup("iris_08_01_text", "iris_08_01");
@@ -1618,6 +1618,7 @@ public class GameManager : MonoBehaviour
     }
     public void GUITutorial_SecondSlot_2()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.NextFight) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.NextFight);
@@ -1635,6 +1636,7 @@ public class GameManager : MonoBehaviour
     }
     public void GUITutLevelUp_1()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstLevelUp))
         {
             _view.AddIrisPopup("iris_09_01_text", "iris_09_01").Callback = GUITutLevelUp_2;
@@ -1642,6 +1644,7 @@ public class GameManager : MonoBehaviour
     }
     public void GUITutLevelUp_2()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstLevelUp))
         {
             SetTutorial(TutorialStep.FirstLevelUp);
@@ -1652,6 +1655,7 @@ public class GameManager : MonoBehaviour
     //10) Next Crafting Flag(8)
     public void GUICheckIrisSecondCrafting()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondCrafting) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             _view.AddIrisPopup("iris_10_01_text", "iris_10_01");
@@ -1659,6 +1663,7 @@ public class GameManager : MonoBehaviour
     }
     public void GUICheckIrisSecondCraftingSuccess()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondCrafting) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.SecondCrafting);
@@ -1669,6 +1674,7 @@ public class GameManager : MonoBehaviour
     //11) First NCE Player Flag(16)
     public void GUICheckIrisFirstNCEAgent()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstNCEPlayer) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.FirstNCEPlayer);
@@ -1678,6 +1684,7 @@ public class GameManager : MonoBehaviour
     //12) First VENGEA Agent Flag(32)
     public void GUICheckIrisFirstVENGEAAgent()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.FirstVENGEAPlayer) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.FirstVENGEAPlayer);
@@ -1687,6 +1694,7 @@ public class GameManager : MonoBehaviour
     //13) Used Driod Flag(64)
     public void GUICheckIrisBrokenDriod()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.UsedDriod) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.UsedDriod);
@@ -1696,6 +1704,7 @@ public class GameManager : MonoBehaviour
     //14) Second LevelUp Flag(128)
     public void GUICheckIrirsLevelUpWarning()
     {
+        if (Player.CurrentFaction == Player.Faction.NCE) return;
         if (!Player.Tutorial.IsFlagSet(TutorialStep.SecondLevelUp) && Player.Tutorial.IsFlagSet(TutorialStep.InitGame))
         {
             SetTutorial(TutorialStep.SecondLevelUp);

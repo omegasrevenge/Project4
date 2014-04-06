@@ -58,6 +58,14 @@ public class PlayerOnMap : ObjectOnMap
     protected override void EnterRange()
     {
         base.EnterRange();
+        if (playerData.CurrentFaction == Player.Faction.VENGEA)
+        {
+            GameManager.Singleton.GUICheckIrisFirstVENGEAAgent();
+        }
+        else
+        {
+            GameManager.Singleton.GUICheckIrisFirstNCEAgent();
+        }
         _animator.SetBool(InRangeStr, InRange);
     }
 
