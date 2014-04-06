@@ -383,6 +383,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("URL: " + url);
         WWW request = new WWW(url);
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<string, string, bool, Action<bool>>(Login), playerID, password, (ServerURL == Localhost), callback);
+        }
         Debug.Log("Login: " + request.text);
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json, request.url))
@@ -424,6 +428,10 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(sSessUrl);
 
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<Action<bool>, bool>(GetOwnPlayer), callback, version);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url))
@@ -513,6 +521,10 @@ public class GameManager : MonoBehaviour
 		WWW request = new WWW(GetSessionURL("crcr") + "&element=" + element);
 
 		yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int, Action<bool, string>>(CreateCreature), element, callback);
+        }
 
 		JSONObject json = JSONParser.parse(request.text);
 		if (!CheckResult(json,request.url))
@@ -537,7 +549,10 @@ public class GameManager : MonoBehaviour
 		WWW request = new WWW(GetSessionURL("namecr") + "&cid=" + creatureID + "&name=" + name);
 
 		yield return request;
-
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int, string, Action<bool, string>>(NameCreature), creatureID, name, callback);
+        }
 		JSONObject json = JSONParser.parse(request.text);
 		if (!CheckResult(json,request.url))
 		{
@@ -560,6 +575,10 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("addcrsl") + "&cid=" + creatureID);
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int>(AddCreatureEQSlot), creatureID);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
@@ -578,6 +597,10 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("equipcrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement + "&level=" + driodenLevel);
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int, int, int, int>(EquipCreatureSlot), creatureID, slotId, driodenElement, driodenLevel);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         Debug.Log(json);
@@ -600,6 +623,10 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("upgradecrsl") + "&cid=" + creatureID + "&slotid=" + slotId + "&element=" + driodenElement);
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int, int, int>(UpgradeCreatureSlot), creatureID, slotId, driodenElement);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         Debug.Log(json);
@@ -652,6 +679,10 @@ public class GameManager : MonoBehaviour
 	{
 		WWW request = new WWW(GetSessionURL("switchcurcr") + "&cid=" + creatureID);
 		yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int>(SwitchCurrentCreature), creatureID);
+        }
 
 		JSONObject json = JSONParser.parse(request.text);
 		Debug.Log(json);
@@ -669,6 +700,10 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("crtoven") + "&cid=" + creatureID);
 		yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int>(SendCreatureToVengea), creatureID);
+        }
 
 		JSONObject json = JSONParser.parse(request.text);
 		Debug.Log(json);
@@ -762,6 +797,10 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("base"));
 
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action(EnterBase));
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
@@ -782,6 +821,10 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("setbasepos") + "&lon=" + pos.x + "&lat=" + pos.y);
 
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action(SendBasePosition));
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
@@ -800,7 +843,10 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(GetSessionURL("poifarm") + "&mappos=" + poi.MapPos + "&poiid=" + poi.POI_ID);
         //Debug.Log(request.url);
         yield return request;
-
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<POI>(PoiFarm), poi);
+        }
         JSONObject json = JSONParser.parse(request.text);
 		//Debug.Log(json);
 		JSONObject data = json["data"];
@@ -857,6 +903,10 @@ public class GameManager : MonoBehaviour
     {
         WWW request = new WWW(GetSessionURL("fightplayerturn") + "&s0=" + s0 + "&s1=" + s1 + "&s2=" + s2 + "&s3=" + s3);
         yield return request;
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<int, int, int, int>(FightPlayerTurn), s0, s1, s2, s3);
+        }
 
         JSONObject json = JSONParser.parse(request.text);
         if (json["error"] != null && BattleEngine.CurrentGameObject != null && ((string)json["error"]).Equals("invalid_fight")) //<------------------------
