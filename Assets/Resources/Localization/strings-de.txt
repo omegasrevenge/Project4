@@ -13,6 +13,11 @@
 	
 	default_name:		"Nutzername",
 
+	retry:				"Wiederholen",
+
+lost_connection_title:
+"Verbindungsfehler",
+
 end_fight_text:
 "Kampf beendet",
 

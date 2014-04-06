@@ -12,7 +12,12 @@
 	decline:			"Decline",
 	
 	default_name:		"Username",
+
+	retry:				"Retry",
 	
+lost_connection_title:
+"Connection lost.",
+
 end_fight_text:
 "Fight finished",
 
