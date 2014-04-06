@@ -364,6 +364,11 @@ public class GameManager : MonoBehaviour
         WWW request = new WWW(ServerURL + "login_google?token=" + token);
         yield return request;
 
+        if (!string.IsNullOrEmpty(request.error))
+        {
+            _view.AddReconnectScreen(new Action<string, Action<bool>>(Login), token, callback);
+        }
+
         JSONObject json = JSONParser.parse(request.text);
         if (!CheckResult(json,request.url)) yield break;
         SessionID = (string)json["data"]["sid"];

@@ -155,6 +155,11 @@ public class ViewController : MonoBehaviour
         return GUIObjectBattleEngine.Create(_gui);
     }
 
+    public GUIObjectReconnectScreen AddReconnectScreen(Delegate serverRequest, params object[] @params)
+    {
+        return GUIObjectReconnectScreen.Create(_gui,serverRequest, @params);
+    }
+
     public void ShowLoadingScreen(string text)
     {
         if (_loadingScreen == null)
